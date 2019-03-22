@@ -6871,7 +6871,7 @@ public class MainActivity2 extends AppCompatActivity {
                 dialog.cancel();
             }
         }).setTitle("Сохранить расписание по четным неделям?");
-
+//загрузка коммита
         return builder.create();}
 
 
