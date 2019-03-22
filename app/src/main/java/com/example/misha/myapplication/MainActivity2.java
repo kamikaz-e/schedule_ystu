@@ -6461,7 +6461,7 @@ public class MainActivity2 extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 if (flag_autosave==1){
-                    saveschedule();
+                    saveschedule(position_week);
                 }
                 position_week = position;
                 update_data();
@@ -6748,7 +6748,7 @@ public class MainActivity2 extends AppCompatActivity {
         }).setNegativeButton("Отключить", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                switcher_save.setChecked(false);
-               saveschedule();
+               saveschedule(position_week);
             }
         }).setTitle("В данный момент активирована функция автосохранения?");
         return builder.create();}
@@ -6829,7 +6829,7 @@ public class MainActivity2 extends AppCompatActivity {
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                saveschedule();
+                saveschedule(position_week);
                 finish();
             }
         }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
@@ -6846,14 +6846,21 @@ public class MainActivity2 extends AppCompatActivity {
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-
-                finish();
+        saveschedule(0);
+        saveschedule(2);
+        saveschedule(4);
+        saveschedule(6);
+        saveschedule(8);
+        saveschedule(10);
+        saveschedule(12);
+        saveschedule(14);
+        saveschedule(16);
             }
         }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                finish();
+                dialog.cancel();
             }
-        }).setTitle("Сохранить расписание?");
+        }).setTitle("Сохранить расписание по нечетным неделям?");
         return builder.create();}
 
 
@@ -6862,17 +6869,21 @@ public class MainActivity2 extends AppCompatActivity {
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-
-                finish();
+                saveschedule(1);
+                saveschedule(3);
+                saveschedule(5);
+                saveschedule(7);
+                saveschedule(9);
+                saveschedule(11);
+                saveschedule(13);
+                saveschedule(15);
             }
         }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                finish();
+                dialog.cancel();
             }
-        }).setTitle("Сохранить расписание?");
+        }).setTitle("Сохранить расписание по четным неделям?");
         return builder.create();}
-
-
 
 
     @Override
@@ -6890,7 +6901,7 @@ public class MainActivity2 extends AppCompatActivity {
                         onCreateDialogSaveOnExit().show();
                         return true;
                     case 1:
-                        saveschedule();
+                        saveschedule(position_week);
                         Intent intent = new Intent(MainActivity2.this, MainActivity.class);
                         startActivity(intent);
                         return true;
@@ -6902,7 +6913,7 @@ public class MainActivity2 extends AppCompatActivity {
             case R.id.save_schedule:
                 switch(flag_autosave) {
                     case 0:
-                        saveschedule();
+                        saveschedule(position_week);
                         return true;
                     case 1:
                         onCreateDialogSaveSchedule().show();
@@ -6934,7 +6945,7 @@ public class MainActivity2 extends AppCompatActivity {
                 onCreateDialogSaveOnExit().show();
                 return;
             case 1:
-                saveschedule();
+                saveschedule(position_week);
                 finish();
                 return;
         }
@@ -7304,10 +7315,10 @@ public class MainActivity2 extends AppCompatActivity {
         }
     }
 
-    public void saveschedule() {
+    public void saveschedule(Integer number_week) {
 
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-
+        position_week=number_week;
         radiobutton_class();
         DataMonday();
         try {
