@@ -47,6 +47,9 @@ import com.example.misha.myapplication.data.ScheduleClass.subjects;
 import com.example.misha.myapplication.data.ScheduleDB;
 import java.util.ArrayList;
 import java.util.List;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -6369,6 +6372,8 @@ public class MainActivity2 extends AppCompatActivity {
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_editor_menu);
         toolbar.setOverflowIcon(drawable);
 
+
+
         viewPager = findViewById(R.id.viewpager);
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(), MainActivity2.this);
         viewPager.setAdapter(pagerAdapter);
@@ -6395,6 +6400,26 @@ public class MainActivity2 extends AppCompatActivity {
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
+        new MaterialTapTargetPrompt.Builder(this)
+            .setTarget(spinner)
+            .setPrimaryText("Это кнопка)")
+            .setSecondaryText("Тут должна быть кнопка")
+            .setBackButtonDismissEnabled(true)
+            .setPromptBackground(new RectanglePromptBackground())
+            .setPromptFocal(new RectanglePromptFocal())
+
+            .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
+            {
+                @Override
+                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state)
+                {
+                    if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
+                    {
+                        // User has pressed the prompt target
+                    }
+                }
+            })
+            .show();
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
 
            TabLayout.Tab tab = tabLayout.getTabAt(i);

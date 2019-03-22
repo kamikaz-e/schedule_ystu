@@ -14,6 +14,10 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
     <activity
+      android:label="@string/title_activity_welcom_activity"
+      android:name=".welcome_activity">
+    </activity>
+    <activity
       android:label="@string/title_activity_settings"
       android:name=".Settings">
     </activity>

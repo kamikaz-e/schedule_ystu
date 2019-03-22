@@ -23,7 +23,8 @@
           android:entries="@array/weeks"
           android:background="#0000"
           tools:layout_editor_absoluteX="17dp"
-          tools:layout_editor_absoluteY="17dp"/>
+          tools:layout_editor_absoluteY="17dp"
+          />
 
     </android.support.v7.widget.Toolbar>
 

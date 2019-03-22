@@ -21,10 +21,11 @@
   </android.support.v7.widget.Toolbar>
 
   <RelativeLayout
+    android:id="@+id/oneitem"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dip">
+    android:padding="3dip">
 
       <ImageView
         android:id="@+id/ic_current_week"
@@ -64,11 +65,11 @@
     android:background="#FFFFFF" />
 
   <RelativeLayout
-
+    android:id="@+id/twoitem"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dip">
+    android:padding="3dip">
 
       <ImageView
         android:id="@+id/image_import"
@@ -109,11 +110,11 @@
     android:background="#FFFFFF" />
 
   <RelativeLayout
-
+    android:id="@+id/threeitem"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dip">
+    android:padding="3dip">
 
       <ImageView
         android:id="@+id/image_export"

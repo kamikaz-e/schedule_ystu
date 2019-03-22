@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         displayView(R.id.rasp_day);
 
-       /* SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
+      SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
             Context.MODE_PRIVATE);
         boolean hasVisited = sp.getBoolean("hasVisited", false);
         if (!hasVisited) {
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
             Editor e = sp.edit();
             e.putBoolean("hasVisited", true);
             e.commit();
-        }*/
+        }
         Calendar today = Calendar.getInstance();
         SharedPreferences settings = getSharedPreferences("week", 0);
         current_week = (settings.getLong("current_week", today.getTimeInMillis()));

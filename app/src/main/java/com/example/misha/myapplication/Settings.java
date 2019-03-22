@@ -10,9 +10,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.graphics.RectF;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Size;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -44,9 +51,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.FullscreenPromptBackground;
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.CirclePromptFocal;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 public class Settings extends AppCompatActivity {
 
@@ -87,6 +100,13 @@ public class Settings extends AppCompatActivity {
   final Context context = this;
   public ArrayAdapter<String> adapter;
   String  current_date;
+  Paint mBoundsPaint;
+  RectF mBounds, mBaseBounds;
+  Paint mPaint;
+  int mBaseColourAlpha;
+  float mRx, mRy;
+  PointF mFocalCentre;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     ScheduleDB = new ScheduleDB(this);
@@ -96,6 +116,7 @@ public class Settings extends AppCompatActivity {
     setSupportActionBar(toolbar);
     ActionBar actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
+
     SQLiteDatabase db = ScheduleDB.getReadableDatabase();
     db.isOpen();
     requestQueue = Volley.newRequestQueue(Settings.this);
@@ -107,8 +128,58 @@ public class Settings extends AppCompatActivity {
     TextView import_schedule = findViewById(R.id.text_import);
     TextView export_schedule = findViewById(R.id.text_export);
 
+    new MaterialTapTargetPrompt.Builder(Settings.this)
+        .setTarget(R.id.oneitem)
+        .setPromptBackground(new RectanglePromptBackground())
+        .setPromptFocal(new RectanglePromptFocal())
+        .setPrimaryText("Это кнопка)")
+        .setSecondaryText("Тут должна быть кнопка фывфыв  фыв ыфв выаы чсм см ")
+        .setBackButtonDismissEnabled(true).setFocalColour(Color.TRANSPARENT)
+        .setBackgroundColour(Color.rgb(100,100,255))
+        .setPrimaryTextColour(Color.rgb(255,255,255))
+        .setSecondaryTextColour(Color.rgb(255,255,255))
+        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
+        {
+          public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state)
+          {
+            if (state==MaterialTapTargetPrompt.STATE_DISMISSED){
 
-    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
+              new MaterialTapTargetPrompt.Builder(Settings.this)
+                  .setTarget(R.id.twoitem)
+                  .setPromptBackground(new RectanglePromptBackground())
+                  .setPromptFocal(new RectanglePromptFocal())
+                  .setPrimaryText("Это кнопка)")
+                  .setSecondaryText("Тут должна быть кнопк фывыфвыфв  фывфывыфв вфыв фыывфа")
+                  .setBackButtonDismissEnabled(true).setFocalColour(Color.TRANSPARENT)
+                  .setBackgroundColour(Color.rgb(100, 100, 255))
+                  .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                  .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                  .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+
+
+                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                      if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                        new MaterialTapTargetPrompt.Builder(Settings.this)
+                            .setTarget(R.id.threeitem)
+                            .setPromptBackground(new RectanglePromptBackground())
+                            .setPromptFocal(new RectanglePromptFocal())
+                            .setPrimaryText("Это кнопка)")
+                            .setSecondaryText("Тут должна быть кнопк фывыфвыфв  фывфывыфв вфыв фыывфа")
+                            .setBackButtonDismissEnabled(true).setFocalColour(Color.TRANSPARENT)
+                            .setBackgroundColour(Color.rgb(100, 100, 255))
+                            .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                            .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                            .show();
+                      }
+                    }
+                  })
+                  .show();
+                      }
+                    }
+                  })
+                  .show();
+
+      getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
 
 
     image_current_week.setOnClickListener(new OnClickListener() {
@@ -148,6 +219,7 @@ public class Settings extends AppCompatActivity {
     });
   }
 
+
   void get_current_week(){
     new DatePickerDialog(Settings.this, dateone,
         Date.get(Calendar.YEAR),
@@ -165,6 +237,10 @@ public class Settings extends AppCompatActivity {
       db.execSQL("update " + date_start.TABLE_NAME + " set " + date_start.date + " = '" +
         current_date  + "' where " + date_start.id_date + " = " + 1);
      // Toast.makeText(context, String.valueOf(today.getTimeInMillis()), Toast.LENGTH_SHORT).show();
+
+
+
+
 
       SharedPreferences settings = getSharedPreferences("week", 0);
       SharedPreferences.Editor editor = settings.edit();
