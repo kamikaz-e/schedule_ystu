@@ -7905,7 +7905,6 @@ public class MainActivity2 extends AppCompatActivity {
 
             ContentValues values = new ContentValues();
 
-//коммит
             try {
                 values.put(ScheduleClass.typelessons.typelesson, MondayStringTypeLessonEditOne);
             } catch (NullPointerException e) {
