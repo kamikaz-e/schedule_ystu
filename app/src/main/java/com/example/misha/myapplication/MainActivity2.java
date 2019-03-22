@@ -35,6 +35,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.misha.myapplication.data.ScheduleClass;
@@ -6870,6 +6871,7 @@ public class MainActivity2 extends AppCompatActivity {
                 dialog.cancel();
             }
         }).setTitle("Сохранить расписание по четным неделям?");
+        Toast.makeText(context, "Проверка", Toast.LENGTH_SHORT).show();
         return builder.create();}
 
 
