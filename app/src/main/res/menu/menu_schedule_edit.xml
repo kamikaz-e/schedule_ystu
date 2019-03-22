@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/save_schedule" android:title="Сохранить"/>
+    <item android:id="@+id/save_uneven_weeks" android:title="Сохранить в нечетные недели"/>
+    <item android:id="@+id/save_even_weeks" android:title="Сохранить в четные недели"/>
+    <item android:id="@+id/clear_day" android:title="Очистить день" />
+    <item android:id="@+id/clear_week" android:title="Очистить неделю" />
+    <item android:id="@+id/clear_full" android:title="Очистить полностью" />
+</menu>

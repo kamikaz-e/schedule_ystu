@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity2">
+
+    <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:background="?attr/colorPrimary"
+      app:popupTheme="@style/AppCompatAlertDialogStyle">
+        <Spinner
+          android:id="@+id/rasp_weeks"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:paddingTop="1dp"
+          android:dropDownWidth="100dp"
+          android:entries="@array/weeks"
+          android:background="#0000"
+          tools:layout_editor_absoluteX="17dp"
+          tools:layout_editor_absoluteY="17dp"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.design.widget.TabLayout
+      android:id="@+id/tab_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:elevation="8dp"
+      app:layout_constraintBottom_toTopOf="@+id/viewpager"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar"
+      app:tabGravity="center"
+      app:tabIndicatorColor="#FFA500"
+      app:tabMinWidth="62dp"
+      app:tabSelectedTextColor="#FF9800"
+      app:tabTextColor="#d3d3d3"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:animationCache="true"
+        android:fadingEdgeLength="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tab_layout"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout">
+
+    </android.support.v4.view.ViewPager>
+    <Switch
+      android:id="@+id/switcher_save"
+      android:layout_width="80dp"
+      android:layout_height="27dp"
+      android:layout_marginTop="15dp"
+      android:layout_marginEnd="80dp"
+      android:layout_alignParentTop="true"
+      android:text=""
+      android:drawableLeft="@drawable/ic_save"
+      android:textColor="#FFFFFF"
+      android:textSize="17dp"
+      android:theme="@style/AppCompatAlertDialogStyle"
+      app:layout_constraintEnd_toEndOf="@+id/toolbar"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+
+</android.support.constraint.ConstraintLayout>

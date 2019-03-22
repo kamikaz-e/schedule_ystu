@@ -1,0 +1,809 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/cards_view"
+  android:layout_width="match_parent"
+  android:layout_height="1005dp"
+  android:descendantFocusability="beforeDescendants"
+  android:focusableInTouchMode="true">
+
+    <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+              android:id="@+id/card_viewOne"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginTop="15dp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginStart="10dp"
+              android:layout_marginEnd="10dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              card_view:cardCornerRadius="4dp"
+              card_view:elevation="14dp">
+
+                <RelativeLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="150dp">
+
+                    <TextView
+                      android:id="@+id/number_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="match_parent"
+                      android:gravity="center_vertical|center_horizontal|center"
+                      android:textAlignment="center"
+                      android:textSize="19sp"/>
+
+
+                    <TextView
+                      android:id="@+id/time_friday"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:layout_marginStart="3dp"
+                      android:layout_alignParentTop="true"
+                      android:layout_toEndOf="@+id/number_friday"
+                      android:text="Время"
+                      android:textSize="18sp"/>
+
+                    <RadioGroup
+                      android:id="@+id/typeEdit_friday"
+                      android:layout_width="337dp"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="9dp"
+                      android:layout_marginLeft="3dp"
+                      android:layout_alignParentBottom="true"
+                      android:layout_alignParentEnd="true"
+                      android:orientation="horizontal">
+
+                        <RadioButton
+                          android:id="@+id/rb_lecture_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:text="Лекция"/>
+
+                        <RadioButton
+                          android:id="@+id/rb_labwork_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Лаб./раб."/>
+
+                        <RadioButton
+                          android:id="@+id/rb_practice_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Практика"/>
+
+                    </RadioGroup>
+
+                    <Spinner
+                      android:id="@+id/subject_edit_friday"
+                      android:layout_width="305dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="28dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/time_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/audience_edit_friday"
+                      android:layout_width="140dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/subject_edit_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/educator_edit_friday"
+                      android:layout_width="170dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="135dp"
+                      android:layout_alignStart="@+id/subject_edit_friday"
+                      android:layout_alignTop="@+id/subject_edit_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <TextView
+                      android:id="@+id/clear_cardOne_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="30dp"
+                      android:layout_marginTop="3dp"
+                      android:layout_marginRight="3dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableBottom="@drawable/ic_clear_card"/>
+                    <TextView
+                      android:id="@+id/copy_downOne_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="35dp"
+                      android:layout_marginTop="115dp"
+                      android:layout_marginRight="4dp"
+                      android:clickable="true"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableTop="@drawable/ic_copy_down"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+              android:id="@+id/card_viewTwo"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginTop="15dp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginStart="10dp"
+              android:layout_marginEnd="10dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              card_view:cardCornerRadius="4dp"
+              card_view:elevation="14dp">
+
+                <RelativeLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="150dp">
+
+                    <TextView
+                      android:id="@+id/numberTwo_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="match_parent"
+                      android:gravity="center_vertical|center_horizontal|center"
+                      android:textAlignment="center"
+                      android:textSize="19sp"/>
+
+
+                    <TextView
+                      android:id="@+id/timeTwo_friday"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:layout_marginStart="3dp"
+                      android:layout_alignParentTop="true"
+                      android:layout_toEndOf="@+id/numberTwo_friday"
+                      android:text="Время"
+                      android:textSize="18sp"/>
+
+                    <RadioGroup
+                      android:id="@+id/typeEditTwo_friday"
+                      android:layout_width="337dp"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="9dp"
+                      android:layout_marginLeft="3dp"
+                      android:layout_alignParentBottom="true"
+                      android:layout_alignParentEnd="true"
+                      android:orientation="horizontal">
+
+                        <RadioButton
+                          android:id="@+id/rb_lectureTwo_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:text="Лекция"/>
+
+                        <RadioButton
+                          android:id="@+id/rb_labworkTwo_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Лаб./раб."/>
+
+                        <RadioButton
+                          android:id="@+id/rb_practiceTwo_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Практика"/>
+
+                    </RadioGroup>
+
+                    <Spinner
+                      android:id="@+id/subject_editTwo_friday"
+                      android:layout_width="305dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="28dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/timeTwo_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/audience_editTwo_friday"
+                      android:layout_width="140dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/subject_editTwo_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/educator_editTwo_friday"
+                      android:layout_width="170dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="135dp"
+                      android:layout_alignStart="@+id/subject_editTwo_friday"
+                      android:layout_alignTop="@+id/subject_editTwo_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <TextView
+                      android:id="@+id/clear_cardTwo_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="30dp"
+                      android:layout_marginTop="3dp"
+                      android:layout_marginRight="3dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableBottom="@drawable/ic_clear_card"/>
+                    <TextView
+                      android:id="@+id/copy_upTwo_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="35dp"
+                      android:layout_marginTop="70dp"
+                      android:layout_marginRight="4dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableBottom="@drawable/ic_copy_up"/>
+                    <TextView
+                      android:id="@+id/copy_downTwo_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="35dp"
+                      android:layout_marginTop="115dp"
+                      android:layout_marginRight="4dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableTop="@drawable/ic_copy_down"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+              android:id="@+id/card_viewThree"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginTop="15dp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginStart="10dp"
+              android:layout_marginEnd="10dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              card_view:cardCornerRadius="4dp"
+              card_view:elevation="14dp">
+
+                <RelativeLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="150dp">
+
+                    <TextView
+                      android:id="@+id/numberThree_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="match_parent"
+                      android:gravity="center_vertical|center_horizontal|center"
+                      android:textAlignment="center"
+                      android:textSize="19sp"/>
+
+
+                    <TextView
+                      android:id="@+id/timeThree_friday"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:layout_marginStart="3dp"
+                      android:layout_alignParentTop="true"
+                      android:layout_toEndOf="@+id/numberThree_friday"
+                      android:text="Время"
+                      android:textSize="18sp"/>
+
+                    <RadioGroup
+                      android:id="@+id/typeEditThree_friday"
+                      android:layout_width="337dp"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="9dp"
+                      android:layout_marginLeft="3dp"
+                      android:layout_alignParentBottom="true"
+                      android:layout_alignParentEnd="true"
+                      android:orientation="horizontal">
+
+                        <RadioButton
+                          android:id="@+id/rb_lectureThree_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:text="Лекция"/>
+
+                        <RadioButton
+                          android:id="@+id/rb_labworkThree_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Лаб./раб."/>
+
+                        <RadioButton
+                          android:id="@+id/rb_practiceThree_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Практика"/>
+
+                    </RadioGroup>
+
+                    <Spinner
+                      android:id="@+id/subject_editThree_friday"
+                      android:layout_width="305dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="28dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/timeThree_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/audience_editThree_friday"
+                      android:layout_width="140dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/subject_editThree_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/educator_editThree_friday"
+                      android:layout_width="170dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="135dp"
+                      android:layout_alignStart="@+id/subject_editThree_friday"
+                      android:layout_alignTop="@+id/subject_editThree_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <TextView
+                      android:id="@+id/clear_cardThree_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="30dp"
+                      android:layout_marginTop="3dp"
+                      android:layout_marginRight="3dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableBottom="@drawable/ic_clear_card"/>
+                    <TextView
+                      android:id="@+id/copy_upThree_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="35dp"
+                      android:layout_marginTop="70dp"
+                      android:layout_marginRight="4dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableBottom="@drawable/ic_copy_up"/>
+                    <TextView
+                      android:id="@+id/copy_downThree_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="35dp"
+                      android:layout_marginTop="115dp"
+                      android:layout_marginRight="4dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableTop="@drawable/ic_copy_down"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+              android:id="@+id/card_viewFour"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginTop="15dp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginStart="10dp"
+              android:layout_marginEnd="10dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              card_view:cardCornerRadius="4dp"
+              card_view:elevation="14dp">
+
+                <RelativeLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="150dp">
+
+                    <TextView
+                      android:id="@+id/numberFour_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="match_parent"
+                      android:gravity="center_vertical|center_horizontal|center"
+                      android:textAlignment="center"
+                      android:textSize="19sp"/>
+
+
+                    <TextView
+                      android:id="@+id/timeFour_friday"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:layout_marginStart="3dp"
+                      android:layout_alignParentTop="true"
+                      android:layout_toEndOf="@+id/numberFour_friday"
+                      android:text="Время"
+                      android:textSize="18sp"/>
+
+                    <RadioGroup
+                      android:id="@+id/typeEditFour_friday"
+                      android:layout_width="337dp"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="9dp"
+                      android:layout_marginLeft="3dp"
+                      android:layout_alignParentBottom="true"
+                      android:layout_alignParentEnd="true"
+                      android:orientation="horizontal">
+
+                        <RadioButton
+                          android:id="@+id/rb_lectureFour_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:text="Лекция"/>
+
+                        <RadioButton
+                          android:id="@+id/rb_labworkFour_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Лаб./раб."/>
+
+                        <RadioButton
+                          android:id="@+id/rb_practiceFour_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Практика"/>
+
+                    </RadioGroup>
+
+                    <Spinner
+                      android:id="@+id/subject_editFour_friday"
+                      android:layout_width="305dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="28dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/timeFour_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/audience_editFour_friday"
+                      android:layout_width="140dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/subject_editFour_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/educator_editFour_friday"
+                      android:layout_width="170dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="135dp"
+                      android:layout_alignStart="@+id/subject_editFour_friday"
+                      android:layout_alignTop="@+id/subject_editFour_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <TextView
+                      android:id="@+id/clear_cardFour_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="30dp"
+                      android:layout_marginTop="3dp"
+                      android:layout_marginRight="3dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableBottom="@drawable/ic_clear_card"/>
+                    <TextView
+                      android:id="@+id/copy_upFour_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="35dp"
+                      android:layout_marginTop="70dp"
+                      android:layout_marginRight="4dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableBottom="@drawable/ic_copy_up"/>
+                    <TextView
+                      android:id="@+id/copy_downFour_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="35dp"
+                      android:layout_marginTop="115dp"
+                      android:layout_marginRight="4dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableTop="@drawable/ic_copy_down"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+              android:id="@+id/card_viewFive"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginTop="15dp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginStart="10dp"
+              android:layout_marginEnd="10dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              card_view:cardCornerRadius="4dp"
+              card_view:elevation="14dp">
+
+                <RelativeLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="150dp">
+
+                    <TextView
+                      android:id="@+id/numberFive_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="match_parent"
+                      android:gravity="center_vertical|center_horizontal|center"
+                      android:textAlignment="center"
+                      android:textSize="19sp"/>
+
+
+                    <TextView
+                      android:id="@+id/timeFive_friday"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:layout_marginStart="3dp"
+                      android:layout_alignParentTop="true"
+                      android:layout_toEndOf="@+id/numberFive_friday"
+                      android:text="Время"
+                      android:textSize="18sp"/>
+
+                    <RadioGroup
+                      android:id="@+id/typeEditFive_friday"
+                      android:layout_width="337dp"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="9dp"
+                      android:layout_marginLeft="3dp"
+                      android:layout_alignParentBottom="true"
+                      android:layout_alignParentEnd="true"
+                      android:orientation="horizontal">
+
+                        <RadioButton
+                          android:id="@+id/rb_lectureFive_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:text="Лекция"/>
+
+                        <RadioButton
+                          android:id="@+id/rb_labworkFive_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Лаб./раб."/>
+
+                        <RadioButton
+                          android:id="@+id/rb_practiceFive_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Практика"/>
+
+                    </RadioGroup>
+
+                    <Spinner
+                      android:id="@+id/subject_editFive_friday"
+                      android:layout_width="305dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="28dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/timeFive_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/audience_editFive_friday"
+                      android:layout_width="140dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/subject_editFive_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/educator_editFive_friday"
+                      android:layout_width="170dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="135dp"
+                      android:layout_alignStart="@+id/subject_editFive_friday"
+                      android:layout_alignTop="@+id/subject_editFive_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <TextView
+                      android:id="@+id/clear_cardFive_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="30dp"
+                      android:layout_marginTop="3dp"
+                      android:layout_marginRight="3dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableBottom="@drawable/ic_clear_card"/>
+                    <TextView
+                      android:id="@+id/copy_upFive_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="35dp"
+                      android:layout_marginTop="70dp"
+                      android:layout_marginRight="4dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableBottom="@drawable/ic_copy_up"/>
+                    <TextView
+                      android:id="@+id/copy_downFive_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="35dp"
+                      android:layout_marginTop="115dp"
+                      android:layout_marginRight="4dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableTop="@drawable/ic_copy_down"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+              android:id="@+id/card_viewSix"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginTop="15dp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginStart="10dp"
+              android:layout_marginEnd="10dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              card_view:cardCornerRadius="4dp"
+              card_view:elevation="14dp">
+
+                <RelativeLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="150dp">
+
+                    <TextView
+                      android:id="@+id/numberSix_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="match_parent"
+                      android:gravity="center_vertical|center_horizontal|center"
+                      android:textAlignment="center"
+                      android:textSize="19sp"/>
+
+
+                    <TextView
+                      android:id="@+id/timeSix_friday"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:layout_marginStart="3dp"
+                      android:layout_alignParentTop="true"
+                      android:layout_toEndOf="@+id/numberSix_friday"
+                      android:text="Время"
+                      android:textSize="18sp"/>
+
+                    <RadioGroup
+                      android:id="@+id/typeEditSix_friday"
+                      android:layout_width="337dp"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="9dp"
+                      android:layout_marginLeft="3dp"
+                      android:layout_alignParentBottom="true"
+                      android:layout_alignParentEnd="true"
+                      android:orientation="horizontal">
+
+                        <RadioButton
+                          android:id="@+id/rb_lectureSix_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:text="Лекция"/>
+
+                        <RadioButton
+                          android:id="@+id/rb_labworkSix_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Лаб./раб."/>
+
+                        <RadioButton
+                          android:id="@+id/rb_practiceSix_friday"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="0"
+                          android:layout_marginLeft="2dp"
+                          android:text="Практика"/>
+
+                    </RadioGroup>
+
+                    <Spinner
+                      android:id="@+id/subject_editSix_friday"
+                      android:layout_width="305dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="28dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/timeSix_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/audience_editSix_friday"
+                      android:layout_width="140dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="36dp"
+                      android:layout_alignTop="@+id/subject_editSix_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <Spinner
+                      android:id="@+id/educator_editSix_friday"
+                      android:layout_width="170dp"
+                      android:layout_height="36dp"
+                      android:layout_marginTop="34dp"
+                      android:layout_marginStart="135dp"
+                      android:layout_alignStart="@+id/subject_editSix_friday"
+                      android:layout_alignTop="@+id/subject_editSix_friday"
+                      android:background="#0000"
+                      android:spinnerMode="dropdown"/>
+                    <TextView
+                      android:id="@+id/clear_cardSix_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="30dp"
+                      android:layout_marginTop="3dp"
+                      android:layout_marginRight="3dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableBottom="@drawable/ic_clear_card"/>
+                    <TextView
+                      android:id="@+id/copy_upSix_friday"
+                      android:layout_width="40dp"
+                      android:layout_height="35dp"
+                      android:layout_marginTop="115dp"
+                      android:layout_marginRight="4dp"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentTop="true"
+                      android:background="#424242"
+                      android:drawableTop="@drawable/ic_copy_up"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
