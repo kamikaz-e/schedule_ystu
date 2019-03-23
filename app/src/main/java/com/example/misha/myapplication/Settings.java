@@ -30,6 +30,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -56,6 +57,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.CirclePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.FullscreenPromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.CirclePromptFocal;
@@ -80,9 +82,6 @@ public class Settings extends AppCompatActivity {
   final String dat="date_start";
 
   Calendar Date = Calendar.getInstance();
-  Long get_date = (Date.getTimeInMillis());
-  long diff=0;
-  long days=0;
 
   String database_name="";
 
@@ -100,12 +99,9 @@ public class Settings extends AppCompatActivity {
   final Context context = this;
   public ArrayAdapter<String> adapter;
   String  current_date;
-  Paint mBoundsPaint;
-  RectF mBounds, mBaseBounds;
-  Paint mPaint;
-  int mBaseColourAlpha;
-  float mRx, mRy;
-  PointF mFocalCentre;
+  RelativeLayout layout_pick_week;
+  RelativeLayout layout_import;
+  RelativeLayout layout_export;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -116,103 +112,102 @@ public class Settings extends AppCompatActivity {
     setSupportActionBar(toolbar);
     ActionBar actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
-
+/*
     SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-    db.isOpen();
+    db.isOpen();*/
     requestQueue = Volley.newRequestQueue(Settings.this);
     progressDialog = new ProgressDialog(Settings.this);
-    ImageView image_current_week = findViewById(R.id.ic_current_week);
-    ImageView image_import = findViewById(R.id.image_import);
-    ImageView image_export = findViewById(R.id.image_export);
-    TextView get_week = findViewById(R.id.text_current_week);
-    TextView import_schedule = findViewById(R.id.text_import);
-    TextView export_schedule = findViewById(R.id.text_export);
 
-    new MaterialTapTargetPrompt.Builder(Settings.this)
-        .setTarget(R.id.oneitem)
-        .setPromptBackground(new RectanglePromptBackground())
-        .setPromptFocal(new RectanglePromptFocal())
-        .setPrimaryText("Это кнопка)")
-        .setSecondaryText("Тут должна быть кнопка фывфыв  фыв ыфв выаы чсм см ")
-        .setBackButtonDismissEnabled(true).setFocalColour(Color.TRANSPARENT)
-        .setBackgroundColour(Color.rgb(100,100,255))
-        .setPrimaryTextColour(Color.rgb(255,255,255))
-        .setSecondaryTextColour(Color.rgb(255,255,255))
-        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
-        {
-          public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state)
-          {
-            if (state==MaterialTapTargetPrompt.STATE_DISMISSED){
+    layout_pick_week = findViewById(R.id.oneitem);
+    layout_import = findViewById(R.id.twoitem);
+    layout_export = findViewById(R.id.threeitem);
 
-              new MaterialTapTargetPrompt.Builder(Settings.this)
-                  .setTarget(R.id.twoitem)
-                  .setPromptBackground(new RectanglePromptBackground())
-                  .setPromptFocal(new RectanglePromptFocal())
-                  .setPrimaryText("Это кнопка)")
-                  .setSecondaryText("Тут должна быть кнопк фывыфвыфв  фывфывыфв вфыв фыывфа")
-                  .setBackButtonDismissEnabled(true).setFocalColour(Color.TRANSPARENT)
-                  .setBackgroundColour(Color.rgb(100, 100, 255))
-                  .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                  .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                  .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+    SharedPreferences sp = getPreferences(MODE_PRIVATE);
+    String hasVisited = sp.getString("hasVisited", "nope");
+    if (hasVisited == "nope") {
 
 
-                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                      if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                        new MaterialTapTargetPrompt.Builder(Settings.this)
-                            .setTarget(R.id.threeitem)
+      new MaterialTapTargetPrompt.Builder(Settings.this)
+              .setTarget(layout_pick_week)
+              .setPromptBackground(new RectanglePromptBackground())
+              .setPromptFocal(new RectanglePromptFocal())
+              .setPrimaryText("Дата начала семестра")
+              .setSecondaryText("Выберите дату начала семестра для автоматического определения текущей учебной недели")
+              .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
+              .setBackgroundColour(Color.rgb(100, 100, 255))
+              .setPrimaryTextColour(Color.rgb(255, 255, 255))
+              .setSecondaryTextColour(Color.rgb(255, 255, 255))
+              .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                  if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+
+                    new MaterialTapTargetPrompt.Builder(Settings.this)
+                            .setTarget(layout_import)
                             .setPromptBackground(new RectanglePromptBackground())
                             .setPromptFocal(new RectanglePromptFocal())
-                            .setPrimaryText("Это кнопка)")
-                            .setSecondaryText("Тут должна быть кнопк фывыфвыфв  фывфывыфв вфыв фыывфа")
-                            .setBackButtonDismissEnabled(true).setFocalColour(Color.TRANSPARENT)
+                            .setPrimaryText("Импорт расписания")
+                            .setSecondaryText("Загрузка готового расписания по названию с сервера")
+                            .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
                             .setBackgroundColour(Color.rgb(100, 100, 255))
                             .setPrimaryTextColour(Color.rgb(255, 255, 255))
                             .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                            .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+
+
+                              public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                  new MaterialTapTargetPrompt.Builder(Settings.this)
+                                          .setTarget(layout_export)
+                                          .setPromptBackground(new RectanglePromptBackground())
+                                          .setPromptFocal(new RectanglePromptFocal())
+                                          .setPrimaryText("Экспорт расписания")
+                                          .setSecondaryText("Выгрузка расписания с заданным названием на сервер")
+                                          .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
+                                          .setBackgroundColour(Color.rgb(100, 100, 255))
+                                          .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                                          .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                                          .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+
+
+                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                              if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                Intent intent = new Intent(Settings.this, call_schedule.class);
+                                                finish();
+                                                startActivity(intent);
+                                              }
+                                            }
+                                          })
+                                          .show();
+                                }
+                              }
+                            })
                             .show();
-                      }
-                    }
-                  })
-                  .show();
-                      }
-                    }
-                  })
-                  .show();
+                  }
+                }
+              })
+              .show();
 
-      getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
+      SharedPreferences.Editor e = sp.edit();
+      e.putString("hasVisited", "yes");
+      e.commit();
+    }
+
+    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
 
 
-    image_current_week.setOnClickListener(new OnClickListener() {
+    layout_pick_week.setOnClickListener(new OnClickListener() {
       public void onClick(View v) {
         get_current_week();
       }
     });
 
-    image_import.setOnClickListener(new OnClickListener() {
+    layout_import.setOnClickListener(new OnClickListener() {
       public void onClick(View v) {
         onCreateDialogImport().show();
       }
     });
 
-    image_export.setOnClickListener(new OnClickListener() {
-      public void onClick(View v) {
-        onCreateDialogExport().show();
-      }
-    });
-
-    get_week.setOnClickListener(new OnClickListener() {
-      public void onClick(View v) {
-        get_current_week();
-      }
-    });
-
-    import_schedule.setOnClickListener(new OnClickListener() {
-      public void onClick(View v) {
-        onCreateDialogImport().show();
-      }
-    });
-
-    export_schedule.setOnClickListener(new OnClickListener() {
+    layout_export.setOnClickListener(new OnClickListener() {
       public void onClick(View v) {
         onCreateDialogExport().show();
       }
@@ -246,8 +241,7 @@ public class Settings extends AppCompatActivity {
       SharedPreferences.Editor editor = settings.edit();
       editor.putLong("current_week", (Date.getTimeInMillis()));
       editor.commit();
-      Intent intent = new Intent(Settings.this, call_schedule.class);
-      startActivity(intent);
+
     }
   };
 
@@ -257,7 +251,7 @@ public class Settings extends AppCompatActivity {
     AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.AppCompatAlertDialogStyle);
     builder.setView(view);
     final EditText name_db =  view.findViewById(R.id.name_schedule);
-    builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+    builder.setCancelable(false).setPositiveButton("Импортировать", new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int id) {
         database_name= name_db.getText().toString();
@@ -382,7 +376,7 @@ public class Settings extends AppCompatActivity {
       AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.AppCompatAlertDialogStyle);
       builder.setView(view);
       final EditText name_db =  view.findViewById(R.id.name_schedule);
-      builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+      builder.setCancelable(false).setPositiveButton("Экспортировать", new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int id) {
           name_db_string= name_db.getText().toString();
@@ -631,8 +625,7 @@ public class Settings extends AppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case android.R.id.home:
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        finish();
         return true;
       default:
         return super.onOptionsItemSelected(item);

@@ -1,69 +1,73 @@
 <resources>
 
-  <string name="title_activity_main2">MainActivity2</string>
-  <string name="title_activity_adapter">Adapter</string>
-  <string name="title_activity_item">Item</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_activity_adapter">Adapter</string>
+    <string name="title_activity_item">Item</string>
 
 
-  <string-array name="days">
-    <item>Понедельник</item>
-    <item>Вторник</item>
-    <item>Среда</item>
-    <item>Четверг</item>
-    <item>Пятница</item>
-    <item>Суббота</item>
-  </string-array>
+    <string-array name="days">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+    </string-array>
 
-  <string-array name="weeks">
-    <item>1 неделя</item>
-    <item>2 неделя</item>
-    <item>3 неделя</item>
-    <item>4 неделя</item>
-    <item>5 неделя</item>
-    <item>6 неделя</item>
-    <item>7 неделя</item>
-    <item>8 неделя</item>
-    <item>9 неделя</item>
-    <item>10 неделя</item>
-    <item>11 неделя</item>
-    <item>12 неделя</item>
-    <item>13 неделя</item>
-    <item>14 неделя</item>
-    <item>15 неделя</item>
-    <item>16 неделя</item>
-    <item>17 неделя</item>
-  </string-array>
+    <string-array name="weeks">
+        <item>1 неделя</item>
+        <item>2 неделя</item>
+        <item>3 неделя</item>
+        <item>4 неделя</item>
+        <item>5 неделя</item>
+        <item>6 неделя</item>
+        <item>7 неделя</item>
+        <item>8 неделя</item>
+        <item>9 неделя</item>
+        <item>10 неделя</item>
+        <item>11 неделя</item>
+        <item>12 неделя</item>
+        <item>13 неделя</item>
+        <item>14 неделя</item>
+        <item>15 неделя</item>
+        <item>16 неделя</item>
+        <item>17 неделя</item>
+    </string-array>
 
-  <string-array name="timeWith">
-    <item>8:30</item>
-    <item>10:10</item>
-    <item>12:20</item>
-    <item>14:00</item>
-    <item>15:40</item>
-    <item>17:30</item>
-  </string-array>
+    <string-array name="timeWith">
+        <item>8:30</item>
+        <item>10:10</item>
+        <item>12:20</item>
+        <item>14:00</item>
+        <item>15:40</item>
+        <item>17:30</item>
+    </string-array>
 
-  <string-array name="timeTo">
-    <item>10:00</item>
-    <item>11:40</item>
-    <item>13:50</item>
-    <item>15:30</item>
-    <item>17:10</item>
-    <item>19:00</item>
-  </string-array>
+    <string-array name="timeTo">
+        <item>10:00</item>
+        <item>11:40</item>
+        <item>13:50</item>
+        <item>15:30</item>
+        <item>17:10</item>
+        <item>19:00</item>
+    </string-array>
 
-  <string name="app_name">Расписание</string>
-  <string name="navigation_drawer_open">Open navigation drawer</string>
-  <string name="navigation_drawer_close">Close navigation drawer</string>
-  <string name="nav_header_desc">Navigation header</string>
-  <string name="title_activity_activitysubject">activitysubject</string>
-  <string name="title_activity_activityaudience">activityaudience</string>
-  <string name="title_activity_activityeducator">activityeducator</string>
-  <string name="title_activity_activitydatabases">activitydatabases</string>
-  <string name="title_activity_call_schedule">call_schedule</string>
-  <string name="title_activity_settings">Settings</string>
-  <string name="title_activity_import_database">import_database</string>
-  <string name="title_activity_welcom_activity">welcom_activity</string>
+    <string name="app_name">Расписание</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="title_activity_activitysubject">activitysubject</string>
+    <string name="title_activity_activityaudience">activityaudience</string>
+    <string name="title_activity_activityeducator">activityeducator</string>
+    <string name="title_activity_activitydatabases">activitydatabases</string>
+    <string name="title_activity_call_schedule">call_schedule</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_import_database">import_database</string>
+    <string name="title_activity_welcom_activity">welcom_activity</string>
+    <string name="title_activity_start_settings">start_settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

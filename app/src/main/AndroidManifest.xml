@@ -1,54 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  package="com.example.misha.myapplication">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.misha.myapplication">
 
-  <uses-permission android:name="android.permission.INTERNET"/>
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-  <application
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="Расписание"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme">
-    <activity
-      android:label="@string/title_activity_welcom_activity"
-      android:name=".welcome_activity">
-    </activity>
-    <activity
-      android:label="@string/title_activity_settings"
-      android:name=".Settings">
-    </activity>
-    <activity
-      android:label="@string/title_activity_call_schedule"
-      android:name=".call_schedule">
-    </activity>
-    <activity
-      android:label="@string/title_activity_activityeducator"
-      android:name=".activityeducator">
-    </activity>
-    <activity
-      android:label="@string/title_activity_activityaudience"
-      android:name=".activityaudience">
-    </activity>
-    <activity
-      android:label="Предметы"
-      android:name=".activitysubject">
-    </activity>
-    <activity
-      android:label="settings"
-      android:name=".SettingsActivity">
-    </activity>
-    <activity android:name=".MainActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Расписание"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".start_settings"
+            android:label="@string/title_activity_start_settings"></activity>
+        <activity
+            android:name=".welcome_activity"
+            android:label="@string/title_activity_welcom_activity"></activity>
+        <activity
+            android:name=".Settings"
+            android:label="@string/title_activity_settings"></activity>
+        <activity
+            android:name=".call_schedule"
+            android:label="@string/title_activity_call_schedule"></activity>
+        <activity
+            android:name=".activityeducator"
+            android:label="@string/title_activity_activityeducator"></activity>
+        <activity
+            android:name=".activityaudience"
+            android:label="@string/title_activity_activityaudience"></activity>
+        <activity
+            android:name=".activitysubject"
+            android:label="Предметы"></activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="settings"></activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
-    </activity>
-    <activity android:name=".MainActivity2"/>
-  </application>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity2" />
+    </application>
 
 </manifest>

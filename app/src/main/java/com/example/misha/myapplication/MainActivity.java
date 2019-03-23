@@ -7,25 +7,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,17 +30,25 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.misha.myapplication.data.ScheduleClass.date_start;
+
 import com.example.misha.myapplication.data.ScheduleDB;
+
 import java.util.Calendar;
+import java.util.Set;
+
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.CirclePromptBackground;
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.CirclePromptFocal;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 public class MainActivity extends AppCompatActivity
  implements NavigationView.OnNavigationItemSelectedListener,FragmentOne.OnFragmentInteractionListener, FragmentTwo.OnFragmentInteractionListener {
     private com.example.misha.myapplication.data.ScheduleDB ScheduleDB;
 
-    private static final String MY_SETTINGS = "";
     long diff=0;
     long days=0;
+    DrawerLayout drawer;
     Long current_week;
     TextView text_main;
     Button button_toolbar;
@@ -55,18 +58,18 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         text_main = findViewById(R.id.text_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+        drawer = findViewById(R.id.drawer_layout);
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
             R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        Spinner spinner = findViewById(R.id.rasp_weeks);
+        final Spinner spinner = findViewById(R.id.rasp_weeks);
 
         button_toolbar= findViewById(R.id.toolbar_but);
         button_toolbar.setBackgroundResource(R.drawable.ic_editor);
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity
         }
       });
 
-        OnItemSelectedListener itemSelectedListener = new OnItemSelectedListener() {
+        final OnItemSelectedListener itemSelectedListener = new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 SharedPreferences settings = getSharedPreferences("choice_week", 0);
@@ -98,23 +101,68 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         displayView(R.id.rasp_day);
 
-      SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
-            Context.MODE_PRIVATE);
-        boolean hasVisited = sp.getBoolean("hasVisited", false);
-        if (!hasVisited) {
-            Intent intent = new Intent(this, Settings.class);
+
+        SharedPreferences sp = getPreferences(MODE_PRIVATE);
+        String hasVisited = sp.getString("hasVisited", "nope");
+        if (hasVisited=="nope") {
+
+
+            Intent intent = new Intent(MainActivity.this,welcome_activity.class);
             startActivity(intent);
+
+            button_toolbar.setEnabled(false);
+
+            new MaterialTapTargetPrompt.Builder(MainActivity.this)
+                    .setTarget(spinner)
+                    .setPromptBackground(new CirclePromptBackground())
+                    .setPromptFocal(new RectanglePromptFocal())
+                    .setPrimaryText("Выбор недели")
+                    .setSecondaryText("Вы можете выбрать номер недели при просмотре расписания. В настройках также можно выбрать дату начала семестра для автоопределения текущей учебной недели")
+                    .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170,170,255))
+                    .setBackgroundColour(Color.rgb(100,100,255))
+                    .setPrimaryTextColour(Color.rgb(255,255,255))
+                    .setSecondaryTextColour(Color.rgb(255,255,255))
+                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
+                    {
+                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                            button_toolbar.setEnabled(true);
+                            if (state == MaterialTapTargetPrompt.STATE_FINISHED || state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
+                                new MaterialTapTargetPrompt.Builder(MainActivity.this)
+                                        .setTarget(button_toolbar)
+                                        .setPromptBackground(new CirclePromptBackground())
+                                        .setPromptFocal(new CirclePromptFocal())
+                                        .setPrimaryText("Редактор расписания")
+                                        .setSecondaryText("Нажав эту кнопку, Вы перейдете в окно редактирования расписания")
+                                        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170,170,255))
+                                        .setBackgroundColour(Color.rgb(100,100,255))
+                                        .setPrimaryTextColour(Color.rgb(255,255,255))
+                                        .setSecondaryTextColour(Color.rgb(255,255,255))
+                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
+                                        {
+                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                                if (state == MaterialTapTargetPrompt.STATE_FINISHED || state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
+                                                   //         drawer.openDrawer(Gravity.LEFT);
+
+                                                }
+                                            }})
+                                        .show();
+                            }
+
+                        }})
+                    .show();
+
             Editor e = sp.edit();
-            e.putBoolean("hasVisited", true);
+            e.putString("hasVisited", "yes");
             e.commit();
         }
+
         Calendar today = Calendar.getInstance();
         SharedPreferences settings = getSharedPreferences("week", 0);
         current_week = (settings.getLong("current_week", today.getTimeInMillis()));
         diff= today.getTimeInMillis()- current_week;
-       // Toast.makeText(this, String.valueOf(diff), Toast.LENGTH_SHORT).show();
-         days = (diff / (7 * 24 * 60 * 60 * 1000));
-         dayy= (int) days;
+        // Toast.makeText(this, String.valueOf(diff), Toast.LENGTH_SHORT).show();
+        days = (diff / (7 * 24 * 60 * 60 * 1000));
+        dayy= (int) days;
         spinner.setSelection(dayy);
 }
 

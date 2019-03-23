@@ -31,7 +31,7 @@ public class FragmentOne extends android.support.v4.app.Fragment {
         FragmentOne fragment = new FragmentOne();
         return fragment;
     }
-    String position_pager="";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

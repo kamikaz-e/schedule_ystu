@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -29,13 +30,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.misha.myapplication.data.ScheduleClass;
@@ -45,14 +47,18 @@ import com.example.misha.myapplication.data.ScheduleClass.educators;
 import com.example.misha.myapplication.data.ScheduleClass.schedule;
 import com.example.misha.myapplication.data.ScheduleClass.subjects;
 import com.example.misha.myapplication.data.ScheduleDB;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.CirclePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.CirclePromptFocal;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
-public class MainActivity2 extends AppCompatActivity {
 
+public class MainActivity2 extends AppCompatActivity {
 
     Switch switcher_save;
     Spinner SubjectEditOne;
@@ -6367,12 +6373,8 @@ public class MainActivity2 extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
 
-
-
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_editor_menu);
         toolbar.setOverflowIcon(drawable);
-
-
 
         viewPager = findViewById(R.id.viewpager);
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(), MainActivity2.this);
@@ -6399,32 +6401,137 @@ public class MainActivity2 extends AppCompatActivity {
         });
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-
-        new MaterialTapTargetPrompt.Builder(this)
-            .setTarget(spinner)
-            .setPrimaryText("Это кнопка)")
-            .setSecondaryText("Тут должна быть кнопка")
-            .setBackButtonDismissEnabled(true)
-            .setPromptBackground(new RectanglePromptBackground())
-            .setPromptFocal(new RectanglePromptFocal())
-
-            .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
-            {
-                @Override
-                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state)
-                {
-                    if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
-                    {
-                        // User has pressed the prompt target
-                    }
-                }
-            })
-            .show();
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
 
-           TabLayout.Tab tab = tabLayout.getTabAt(i);
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(pagerAdapter.getTabView(i));
 
+        }
+
+        SharedPreferences sp = getPreferences(MODE_PRIVATE);
+        String hasVisited = sp.getString("hasVisited", "nope");
+        if (hasVisited=="nope") {
+            LinearLayout tabStrip = ((LinearLayout) tabLayout.getChildAt(0));
+            tabStrip.setEnabled(false);
+            for (int i = 0; i < tabStrip.getChildCount(); i++) {
+                tabStrip.getChildAt(i).setClickable(false);
+            }
+
+            new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+                    .setTarget(spinner)
+                    .setPromptBackground(new CirclePromptBackground())
+                    .setPromptFocal(new RectanglePromptFocal())
+                    .setPrimaryText("Выбор недели)")
+                    .setSecondaryText("Вы можете выбрать номер недели при редактировании расписания. В настройках также можете выбрать дату начала семестра для автоопределения текущей учебной недели")
+                    .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170, 170, 255))
+                    .setBackgroundColour(Color.rgb(100, 100, 255))
+                    .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                    .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                            if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+                                        .setTarget(R.id.switcher_save)
+                                        .setPromptBackground(new CirclePromptBackground())
+                                        .setPromptFocal(new RectanglePromptFocal())
+                                        .setPrimaryText("Автосохранение расписания")
+                                        .setSecondaryText("В активированном состоянии при смене учебной недели или выходе из редактора расписание сохраняется автоматически")
+                                        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170, 170, 255))
+                                        .setBackgroundColour(Color.rgb(100, 100, 255))
+                                        .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                                        .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+
+                                                if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                    new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+                                                            .setTarget(R.id.card_viewTwo)
+                                                            .setPromptBackground(new RectanglePromptBackground())
+                                                            .setPromptFocal(new RectanglePromptFocal())
+                                                            .setPrimaryText("Редактирование занятия")
+                                                            .setSecondaryText("Вы можете выбрать ранее добавленные учебный предмет, аудиторию, преподавателя, а так же тип занятия")
+                                                            .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170, 170, 255))
+                                                            .setBackgroundColour(Color.rgb(100, 100, 255))
+                                                            .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                                                            .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                                                            .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                                                                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+
+                                                                    if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                                        new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+                                                                                .setTarget(R.id.clear_cardTwo_monday)
+                                                                                .setPromptBackground(new CirclePromptBackground())
+                                                                                .setPromptFocal(new CirclePromptFocal())
+                                                                                .setPrimaryText("Очистка занятия")
+                                                                                .setSecondaryText("Вы можете очистить выбранные данные занятия")
+                                                                                .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170, 170, 255))
+                                                                                .setBackgroundColour(Color.rgb(100, 100, 255))
+                                                                                .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                                                                                .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                                                                                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                                                                                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+
+                                                                                        if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                                                            new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+                                                                                                    .setTarget(R.id.copy_upTwo_monday)
+                                                                                                    .setPromptBackground(new CirclePromptBackground())
+                                                                                                    .setPromptFocal(new CirclePromptFocal())
+                                                                                                    .setPrimaryText("Копирование данных занятия")
+                                                                                                    .setSecondaryText("Копирование данных занятия предыдущему занятию")
+                                                                                                    .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170, 170, 255))
+                                                                                                    .setBackgroundColour(Color.rgb(100, 100, 255))
+                                                                                                    .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                                                                                                    .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                                                                                                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                                                                                                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                                                                                            if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                                                                                new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+                                                                                                                        .setTarget(R.id.copy_downTwo_monday)
+                                                                                                                        .setPromptBackground(new CirclePromptBackground())
+                                                                                                                        .setPromptFocal(new CirclePromptFocal())
+                                                                                                                        .setPrimaryText("Копирование данных занятия")
+                                                                                                                        .setSecondaryText("Копирование данных занятия следующему занятию")
+                                                                                                                        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170, 170, 255))
+                                                                                                                        .setBackgroundColour(Color.rgb(100, 100, 255))
+                                                                                                                        .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                                                                                                                        .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                                                                                                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                                                                                                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                                                                                                                if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                                                                                                    LinearLayout tabStrip = ((LinearLayout) tabLayout.getChildAt(0));
+                                                                                                                                    tabStrip.setEnabled(true);
+                                                                                                                                    for (int i = 0; i < tabStrip.getChildCount(); i++) {
+                                                                                                                                        tabStrip.getChildAt(i).setClickable(true);
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        })
+                                                                                                                        .show();
+                                                                                                            }
+                                                                                                        }
+                                                                                                    })
+                                                                                                    .show();
+
+                                                                                        }
+                                                                                    }
+                                                                                })
+                                                                                .show();
+                                                                    }
+                                                                }
+                                                            })
+                                                            .show();
+                                                }
+                                            }
+                                        })
+                                        .show();
+                            }
+                        }
+                    })
+                    .show();
+
+            SharedPreferences.Editor e = sp.edit();
+            e.putString("hasVisited", "yes");
+            e.commit();
         }
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -6873,7 +6980,7 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Сохранить расписание по нечетным неделям?");
+        }).setTitle("Сохранить расписание текущей недели в нечетные недели?");
         return builder.create();}
 
 
@@ -6895,7 +7002,7 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Сохранить расписание по четным неделям?");
+        }).setTitle("Сохранить расписание текущей недели в четные недели?");
 
         return builder.create();}
 

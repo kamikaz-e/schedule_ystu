@@ -1,34 +1,35 @@
 package com.example.misha.myapplication;
 
-import static android.icu.util.MeasureUnit.STONE;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
-import android.widget.Toast;
 import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleClass.audiences;
 import com.example.misha.myapplication.data.ScheduleClass.calls;
 import com.example.misha.myapplication.data.ScheduleDB;
-import java.util.ArrayList;
+
 import java.util.Calendar;
-import java.util.List;
+
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.CirclePromptBackground;
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.CirclePromptFocal;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 public class call_schedule extends AppCompatActivity {
 
@@ -55,10 +56,11 @@ public class call_schedule extends AppCompatActivity {
   Calendar Time=Calendar.getInstance();
   Integer start=1;
   Button button_toolbar;
-
+  String hasVisited;
+  SharedPreferences sp;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-
+    // STOPSHIP: 23.03.2019
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_call_schedule);
     android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
@@ -67,7 +69,8 @@ public class call_schedule extends AppCompatActivity {
     actionBar.setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
 
-    button_toolbar= findViewById(R.id.toolbar_but);
+
+    button_toolbar = findViewById(R.id.toolbar_but);
     button_toolbar.setBackgroundResource(R.drawable.ic_clear);
     button_toolbar.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -75,14 +78,42 @@ public class call_schedule extends AppCompatActivity {
         onCreateDialogClear().show();
       }
     });
-    oneTime=findViewById(R.id.OneTime);
-    twoTime=findViewById(R.id.TwoTime);
-    threeTime=findViewById(R.id.ThreeTime);
-    fourTime=findViewById(R.id.FourTime);
-    fiveTime=findViewById(R.id.FiveTime);
-    sixTime=findViewById(R.id.SixTime);
+    oneTime = findViewById(R.id.OneTime);
+    twoTime = findViewById(R.id.TwoTime);
+    threeTime = findViewById(R.id.ThreeTime);
+    fourTime = findViewById(R.id.FourTime);
+    fiveTime = findViewById(R.id.FiveTime);
+    sixTime = findViewById(R.id.SixTime);
     ScheduleDB = new ScheduleDB(this);
     start();
+
+
+    sp = getPreferences(MODE_PRIVATE);
+    hasVisited = sp.getString("hasVisited", "nope");
+    if (hasVisited == "nope") {
+
+
+      new MaterialTapTargetPrompt.Builder(call_schedule.this)
+              .setTarget(R.id.card_viewOneTime)
+              .setPromptBackground(new RectanglePromptBackground())
+              .setPromptFocal(new RectanglePromptFocal())
+              .setPrimaryText("Расписание звонков")
+              .setSecondaryText("Вы можете задать расписание звонков для занятий. При нажатии на кнопку «Выбрать» укажите время начала занятия, нажмите кнопку «Ок», затем укажите время окончания занятия и так же нажмите кнопку «Ок»")
+              .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
+              .setBackgroundColour(Color.rgb(100, 100, 255))
+              .setPrimaryTextColour(Color.rgb(255, 255, 255))
+              .setSecondaryTextColour(Color.rgb(255, 255, 255))
+              .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                  if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+
+                  }
+                }
+              })
+              .show();
+
+    }
+
   }
 
 
@@ -98,47 +129,48 @@ public class call_schedule extends AppCompatActivity {
       public void onClick(DialogInterface dialog, int id) {
         dialog.cancel();
       }
-    }).setTitle("Очистить звонки?");
+    }).setTitle("Очистить расписание звонков?");
     return builder.create();
   }
 
-    public void getTimeOne(View v) {
-      new TimePickerDialog(call_schedule.this, timeone,
-          Time.get(Calendar.HOUR_OF_DAY),
-          Time.get(Calendar.MINUTE), true)
-          .show();
-      start=1;
-    }
+  public void getTimeOne(View v) {
+    new TimePickerDialog(call_schedule.this, timeone,
+            Time.get(Calendar.HOUR_OF_DAY),
+            Time.get(Calendar.MINUTE), true)
+            .show();
+    start=1;
+  }
 
-    private void setInitialTimeOne() {
+  private void setInitialTimeOne() {
     if (start==1) {
-        select_time_partOne=(DateUtils.formatDateTime(this,
-          Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+      select_time_partOne=(DateUtils.formatDateTime(this,
+              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
     }  else
     {   select_time_fullOne= select_time_partOne+DateUtils.formatDateTime(this,
-        Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      oneTime.setText(select_time_fullOne);}
-      if (start==1){
-      new TimePickerDialog(call_schedule.this, timeone,
-          Time.get(Calendar.HOUR_OF_DAY),
-          Time.get(Calendar.MINUTE), true)
-          .show();
-      start=0; }
+            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+      oneTime.setText(select_time_fullOne);
     }
+    if (start==1){
+      new TimePickerDialog(call_schedule.this, timeone,
+              Time.get(Calendar.HOUR_OF_DAY),
+              Time.get(Calendar.MINUTE), true)
+              .show();
+      start=0; }
+  }
 
-    TimePickerDialog.OnTimeSetListener timeone=new TimePickerDialog.OnTimeSetListener() {
-      public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        Time.set(Calendar.MINUTE, minute);
-        setInitialTimeOne();
-      }
-    };
+  TimePickerDialog.OnTimeSetListener timeone=new TimePickerDialog.OnTimeSetListener() {
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+      Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
+      Time.set(Calendar.MINUTE, minute);
+      setInitialTimeOne();
+    }
+  };
 
   public void getTimeTwo(View v) {
     new TimePickerDialog(call_schedule.this, timetwo,
-        Time.get(Calendar.HOUR_OF_DAY),
-        Time.get(Calendar.MINUTE), true)
-        .show();
+            Time.get(Calendar.HOUR_OF_DAY),
+            Time.get(Calendar.MINUTE), true)
+            .show();
     start=1;
   }
 
@@ -146,16 +178,17 @@ public class call_schedule extends AppCompatActivity {
   private void setInitialTimeTwo() {
     if (start==1) {
       select_time_partTwo=(DateUtils.formatDateTime(this,
-          Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
     }  else
     {   select_time_fullTwo= select_time_partTwo+DateUtils.formatDateTime(this,
-        Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      twoTime.setText(select_time_fullTwo);}
+            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+      twoTime.setText(select_time_fullTwo);
+      }
     if (start==1){
       new TimePickerDialog(call_schedule.this, timetwo,
-          Time.get(Calendar.HOUR_OF_DAY),
-          Time.get(Calendar.MINUTE), true)
-          .show();
+              Time.get(Calendar.HOUR_OF_DAY),
+              Time.get(Calendar.MINUTE), true)
+              .show();
       start=0; }
   }
 
@@ -170,9 +203,9 @@ public class call_schedule extends AppCompatActivity {
 
   public void getTimeThree(View v) {
     new TimePickerDialog(call_schedule.this, timeThree,
-        Time.get(Calendar.HOUR_OF_DAY),
-        Time.get(Calendar.MINUTE), true)
-        .show();
+            Time.get(Calendar.HOUR_OF_DAY),
+            Time.get(Calendar.MINUTE), true)
+            .show();
     start=1;
   }
 
@@ -180,16 +213,17 @@ public class call_schedule extends AppCompatActivity {
   private void setInitialTimeThree() {
     if (start==1) {
       select_time_partThree=(DateUtils.formatDateTime(this,
-          Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
     }  else
     {   select_time_fullThree= select_time_partThree+DateUtils.formatDateTime(this,
-        Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      threeTime.setText(select_time_fullThree);}
+            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+      threeTime.setText(select_time_fullThree);
+   }
     if (start==1){
       new TimePickerDialog(call_schedule.this, timeThree,
-          Time.get(Calendar.HOUR_OF_DAY),
-          Time.get(Calendar.MINUTE), true)
-          .show();
+              Time.get(Calendar.HOUR_OF_DAY),
+              Time.get(Calendar.MINUTE), true)
+              .show();
       start=0; }
   }
 
@@ -204,9 +238,9 @@ public class call_schedule extends AppCompatActivity {
 
   public void getTimeFour(View v) {
     new TimePickerDialog(call_schedule.this, timeFour,
-        Time.get(Calendar.HOUR_OF_DAY),
-        Time.get(Calendar.MINUTE), true)
-        .show();
+            Time.get(Calendar.HOUR_OF_DAY),
+            Time.get(Calendar.MINUTE), true)
+            .show();
     start=1;
   }
 
@@ -214,16 +248,17 @@ public class call_schedule extends AppCompatActivity {
   private void setInitialTimeFour() {
     if (start==1) {
       select_time_partFour=(DateUtils.formatDateTime(this,
-          Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
     }  else
     {   select_time_fullFour= select_time_partFour+DateUtils.formatDateTime(this,
-        Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      fourTime.setText(select_time_fullFour);}
+            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+      fourTime.setText(select_time_fullFour);
+    }
     if (start==1){
       new TimePickerDialog(call_schedule.this, timeFour,
-          Time.get(Calendar.HOUR_OF_DAY),
-          Time.get(Calendar.MINUTE), true)
-          .show();
+              Time.get(Calendar.HOUR_OF_DAY),
+              Time.get(Calendar.MINUTE), true)
+              .show();
       start=0; }
   }
 
@@ -238,25 +273,26 @@ public class call_schedule extends AppCompatActivity {
 
   public void getTimeFive(View v) {
     new TimePickerDialog(call_schedule.this, timeFive,
-        Time.get(Calendar.HOUR_OF_DAY),
-        Time.get(Calendar.MINUTE), true)
-        .show();
+            Time.get(Calendar.HOUR_OF_DAY),
+            Time.get(Calendar.MINUTE), true)
+            .show();
     start=1;
   }
 
   private void setInitialTimeFive() {
     if (start==1) {
       select_time_partFive=(DateUtils.formatDateTime(this,
-          Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
     }  else
     {   select_time_fullFive= select_time_partFive+DateUtils.formatDateTime(this,
-        Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      fiveTime.setText(select_time_fullFive);}
+            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+      fiveTime.setText(select_time_fullFive);
+      }
     if (start==1){
       new TimePickerDialog(call_schedule.this, timeFive,
-          Time.get(Calendar.HOUR_OF_DAY),
-          Time.get(Calendar.MINUTE), true)
-          .show();
+              Time.get(Calendar.HOUR_OF_DAY),
+              Time.get(Calendar.MINUTE), true)
+              .show();
       start=0; }
   }
 
@@ -270,9 +306,9 @@ public class call_schedule extends AppCompatActivity {
 
   public void getTimeSix(View v) {
     new TimePickerDialog(call_schedule.this, timeSix,
-        Time.get(Calendar.HOUR_OF_DAY),
-        Time.get(Calendar.MINUTE), true)
-        .show();
+            Time.get(Calendar.HOUR_OF_DAY),
+            Time.get(Calendar.MINUTE), true)
+            .show();
     start=1;
   }
 
@@ -280,16 +316,17 @@ public class call_schedule extends AppCompatActivity {
   private void setInitialTimeSix() {
     if (start==1) {
       select_time_partSix=(DateUtils.formatDateTime(this,
-          Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
     }  else
     {   select_time_fullSix= select_time_partSix+DateUtils.formatDateTime(this,
-        Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      sixTime.setText(select_time_fullSix);}
+            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+      sixTime.setText(select_time_fullSix);
+    }
     if (start==1){
       new TimePickerDialog(call_schedule.this, timeSix,
-          Time.get(Calendar.HOUR_OF_DAY),
-          Time.get(Calendar.MINUTE), true)
-          .show();
+              Time.get(Calendar.HOUR_OF_DAY),
+              Time.get(Calendar.MINUTE), true)
+              .show();
       start=0; }
   }
 
@@ -338,8 +375,8 @@ public class call_schedule extends AppCompatActivity {
     try {
       db.execSQL("DROP TABLE " + calls.TABLE_NAME);
       db.execSQL("CREATE TABLE " + calls.TABLE_NAME + " ("
-          + calls.id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-          + calls.time + " STRING );");
+              + calls.id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+              + calls.time + " STRING );");
       db.execSQL("INSERT INTO " + calls.TABLE_NAME + " (" + calls.time + ") VALUES ('"+ select_time_fullOne +"');");
       db.execSQL("INSERT INTO " + calls.TABLE_NAME + " (" + calls.time + ") VALUES ('"+ select_time_fullTwo +"');");
       db.execSQL("INSERT INTO " + calls.TABLE_NAME + " (" + calls.time + ") VALUES ('"+ select_time_fullThree +"');");
@@ -353,15 +390,15 @@ public class call_schedule extends AppCompatActivity {
     }
   }
 
-void clear_calls(){
-  SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-  db.execSQL("DROP TABLE " + calls.TABLE_NAME);
-  String calls_schedule = "CREATE TABLE " + ScheduleClass.calls.TABLE_NAME + " ("
-      + ScheduleClass.calls.id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-      + ScheduleClass.calls.time + " STRING );";
-  db.execSQL(calls_schedule);
-  for (int i=0;i<6;i++){
-    db.execSQL("INSERT INTO " + ScheduleClass.calls.TABLE_NAME + " (" + ScheduleClass.calls.time + ") VALUES ('');");}
+  void clear_calls(){
+    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+    db.execSQL("DROP TABLE " + calls.TABLE_NAME);
+    String calls_schedule = "CREATE TABLE " + ScheduleClass.calls.TABLE_NAME + " ("
+            + ScheduleClass.calls.id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + ScheduleClass.calls.time + " STRING );";
+    db.execSQL(calls_schedule);
+    for (int i=0;i<6;i++){
+      db.execSQL("INSERT INTO " + ScheduleClass.calls.TABLE_NAME + " (" + ScheduleClass.calls.time + ") VALUES ('');");}
     oneTime.setText("");
     twoTime.setText("");
     threeTime.setText("");
@@ -374,15 +411,27 @@ void clear_calls(){
     select_time_fullFour="";
     select_time_fullFive="";
     select_time_fullSix="";
-}
+  }
 
- public boolean onOptionsItemSelected(MenuItem item) {
+  public boolean onOptionsItemSelected(MenuItem item) {
 
     switch (item.getItemId()) {
       case android.R.id.home:
-        save_calls();
-        Intent intent = new Intent(call_schedule.this, MainActivity.class);
-        startActivity(intent);
+        if (hasVisited == "nope"
+        ) {
+          save_calls();
+          finish();
+          SharedPreferences.Editor e = sp.edit();
+          e.putString("hasVisited", "yes");
+          e.commit();
+        }
+        else
+        {
+          save_calls();
+          Intent intent = new Intent(call_schedule.this,MainActivity.class);
+          finish();
+          startActivity(intent);
+        }
         return true;
       default:
         return super.onOptionsItemSelected(item);
