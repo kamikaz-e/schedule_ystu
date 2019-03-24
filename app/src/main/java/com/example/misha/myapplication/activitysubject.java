@@ -2,6 +2,7 @@ package com.example.misha.myapplication;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,22 +14,28 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleClass.subjects;
 import com.example.misha.myapplication.data.ScheduleDB;
 import java.util.ArrayList;
 
 public class activitysubject extends AppCompatActivity {
- EditText input_subject;
- ListView list_subjects;
+  EditText input_subject;
+  ListView list_subjects;
   private ScheduleDB ScheduleDB;
+  final Context context = this;
+
   final ArrayList<String> subject_list = new ArrayList<>();
   public ArrayAdapter<String> adapter;
   Button button_toolbar;
+  String select_item="";
 
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -39,9 +46,26 @@ public class activitysubject extends AppCompatActivity {
     ActionBar actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
     ScheduleDB = new ScheduleDB(this);
+
     input_subject = findViewById(R.id.input_subject);
     list_subjects = findViewById(R.id.list_subjects);
     button_toolbar= findViewById(R.id.toolbar_but);
+
+
+    adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, subject_list);
+    list_subjects.setAdapter(adapter);
+
+    list_subjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
+                              long id) {
+        TextView textView = (TextView) itemClicked;
+        select_item = textView.getText().toString();
+        onCreateDialogDeleteItem().show();
+      }
+    });
+
+
     button_toolbar.setBackgroundResource(R.drawable.ic_clear);
     button_toolbar.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -68,6 +92,28 @@ public class activitysubject extends AppCompatActivity {
       }
     });
   }
+
+
+    public Dialog onCreateDialogDeleteItem() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+                db.execSQL("DELETE FROM " + subjects.TABLE_NAME + " WHERE "+ subjects.subject + "='"+ select_item+"'");
+                start();
+                adapter.notifyDataSetChanged();
+      }
+    }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+      public void onClick(DialogInterface dialog, int id) {
+        dialog.cancel();
+      }
+    }).setTitle("Удалить предмет «"+select_item+"»?");
+    return builder.create();
+  }
+
+
 
   public Dialog onCreateDialogClear() {
 

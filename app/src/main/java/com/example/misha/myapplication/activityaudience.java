@@ -2,6 +2,7 @@ package com.example.misha.myapplication;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,10 +14,13 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleClass.audiences;
 import com.example.misha.myapplication.data.ScheduleDB;
@@ -26,10 +30,12 @@ public class activityaudience extends AppCompatActivity {
   EditText input_audience;
   ListView list_audiences;
   private ScheduleDB ScheduleDB;
+
+  final Context context = this;
   final ArrayList<String> audience_list = new ArrayList<>();
   public ArrayAdapter<String> adapter;
   Button button_toolbar;
-
+  String select_item="";
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activityaudience);
@@ -42,6 +48,20 @@ public class activityaudience extends AppCompatActivity {
     input_audience = findViewById(R.id.input_audience);
     list_audiences = findViewById(R.id.list_audiences);
     button_toolbar= findViewById(R.id.toolbar_but);
+
+
+    adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, audience_list);
+    list_audiences.setAdapter(adapter);
+
+    list_audiences.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
+                              long id) {
+        TextView textView = (TextView) itemClicked;
+        select_item = textView.getText().toString();
+        onCreateDialogDeleteItem().show();
+      }
+    });
     button_toolbar.setBackgroundResource(R.drawable.ic_clear);
     button_toolbar.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -68,6 +88,24 @@ onCreateDialogClear().show();
         return true;
       }
     });
+  }
+  public Dialog onCreateDialogDeleteItem() {
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+    builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, int id) {
+        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+        db.execSQL("DELETE FROM " + audiences.TABLE_NAME + " WHERE "+ audiences.audience + "='"+ select_item+"'");
+        start();
+        adapter.notifyDataSetChanged();
+      }
+    }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+      public void onClick(DialogInterface dialog, int id) {
+        dialog.cancel();
+      }
+    }).setTitle("Удалить аудиторию «"+select_item+"»?");
+    return builder.create();
   }
 
   public Dialog onCreateDialogClear() {
