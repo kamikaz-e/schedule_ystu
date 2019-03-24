@@ -417,21 +417,12 @@ public class call_schedule extends AppCompatActivity {
 
     switch (item.getItemId()) {
       case android.R.id.home:
-        if (hasVisited == "nope"
-        ) {
-          save_calls();
-          finish();
-          SharedPreferences.Editor e = sp.edit();
-          e.putString("hasVisited", "yes");
-          e.commit();
-        }
-        else
-        {
+
           save_calls();
           Intent intent = new Intent(call_schedule.this,MainActivity.class);
           finish();
           startActivity(intent);
-        }
+
         return true;
       default:
         return super.onOptionsItemSelected(item);

@@ -7024,11 +7024,13 @@ public class MainActivity2 extends AppCompatActivity {
                     case 1:
                         saveschedule(position_week);
                         Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+                        finish();
                         startActivity(intent);
                         return true;
                 }
 
                 if (flag_save==1) {Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+                finish();
                     startActivity(intent);}
                 return true;
             case R.id.save_schedule:
@@ -7071,6 +7073,7 @@ public class MainActivity2 extends AppCompatActivity {
                 return;
         }
         if (flag_save==1) {Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+            finish();
             startActivity(intent);}
     }
 

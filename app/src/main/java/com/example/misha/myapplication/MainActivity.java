@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity
         String hasVisited = sp.getString("hasVisited", "nope");
         if (hasVisited=="nope") {
 
-
             Intent intent = new Intent(MainActivity.this,welcome_activity.class);
             startActivity(intent);
 
@@ -202,26 +201,32 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.edit_schedule:
                 Intent intent = new Intent(this, MainActivity2.class);
+                finish();
                 startActivity(intent);
                 break;
             case R.id.subjects:
                 intent = new Intent(this, activitysubject.class);
+                finish();
                 startActivity(intent);
                 break;
             case R.id.audiences:
                 intent = new Intent(this, activityaudience.class);
+                finish();
                 startActivity(intent);
                 break;
             case R.id.educators:
                 intent = new Intent(this, activityeducator.class);
+                finish();
                 startActivity(intent);
                 break;
             case R.id.call_schedule:
                 intent = new Intent(this, call_schedule.class);
+                finish();
                 startActivity(intent);
                 break;
             case R.id.settings:
                 intent = new Intent(this, Settings.class);
+                finish();
                 startActivity(intent);
                 break;
             case R.id.nav_share:
@@ -251,6 +256,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/mikhailvolkov1"));
+                finish();
                 startActivity(browserIntent);
             }
         }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {

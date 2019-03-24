@@ -99,7 +99,9 @@ public class activityeducator extends AppCompatActivity {
 
     switch (item.getItemId()) {
       case android.R.id.home:
+        Intent intent = new Intent(activityeducator.this,MainActivity.class);
         finish();
+        startActivity(intent);
         return true;
       default:
         return super.onOptionsItemSelected(item);

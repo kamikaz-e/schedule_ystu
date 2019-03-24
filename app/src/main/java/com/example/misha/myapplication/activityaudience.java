@@ -101,7 +101,9 @@ onCreateDialogClear().show();
 
     switch (item.getItemId()) {
       case android.R.id.home:
+        Intent intent = new Intent(activityaudience.this,MainActivity.class);
         finish();
+        startActivity(intent);
         return true;
 
       default:

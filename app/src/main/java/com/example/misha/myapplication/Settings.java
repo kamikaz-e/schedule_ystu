@@ -622,7 +622,9 @@ public class Settings extends AppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case android.R.id.home:
+        Intent intent = new Intent(Settings.this,MainActivity.class);
         finish();
+        startActivity(intent);
         return true;
       default:
         return super.onOptionsItemSelected(item);
