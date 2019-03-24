@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6464ff"
+    tools:context=".welcome_activity">
+
+    <TextView
+        android:id="@+id/start_text"
+        android:layout_width="258dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="100dp"
+        android:text="УЧЕБНОЕ РАСПИСАНИЕ"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+
+        android:textSize="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/start_buttonOne"
+        android:layout_width="185dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="50dp"
+        android:background="#4646B3"
+        android:text="Загрузить расписание"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_text" />
+
+    <Button
+        android:id="@+id/start_buttonTwo"
+        android:layout_width="185dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="160dp"
+        android:background="#4646B3"
+        android:text="Создать новое расписание"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_text" />
+
+
+</android.support.constraint.ConstraintLayout>

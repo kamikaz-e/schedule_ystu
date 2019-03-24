@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/oneitem"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="3dip"
+        android:layout_marginTop="200dp">
+
+        <ImageView
+            android:id="@+id/ic_current_week"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/ic_week"/>
+
+        <TextView
+            android:id="@+id/text_current_week"
+            android:layout_width="305dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="39dp"
+            android:layout_marginRight="39dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:gravity="left"
+            android:text="Дата начала семестра"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"/>
+
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_arrow_right"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="40dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+
+</FrameLayout>
