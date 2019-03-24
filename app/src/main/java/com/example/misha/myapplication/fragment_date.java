@@ -12,6 +12,8 @@ import android.app.Fragment;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,31 +73,7 @@ public class fragment_date extends android.support.v4.app.Fragment {
         ScheduleDB = new ScheduleDB(getActivity());
         layout_pich_week = view.findViewById(R.id.oneitem);
 
-        new MaterialTapTargetPrompt.Builder(getActivity())
-                .setTarget(layout_pich_week)
-                .setPromptBackground(new RectanglePromptBackground())
-                .setPromptFocal(new RectanglePromptFocal())
-                .setPrimaryText("Дата начала семестра")
-                .setSecondaryText("Выберите дату начала семестра для автоматического определения текущей учебной недели")
-                .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200,200,255))
-                .setBackgroundColour(Color.rgb(100,100,255))
-                .setPrimaryTextColour(Color.rgb(255,255,255))
-                .setSecondaryTextColour(Color.rgb(255,255,255))
-                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
-                {
-                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state)
-                    {
-                        if (state == MaterialTapTargetPrompt.STATE_FINISHED || state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
-                            fragment_call_schedule fragment= new fragment_call_schedule();
-                            getActivity().getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.content_frame, fragment)
-                                    .addToBackStack(null)
-                                    .commit();
-                        }
-                    }
-                })
-                .show();
-
+        abc();
         layout_pich_week.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -114,6 +92,11 @@ public class fragment_date extends android.support.v4.app.Fragment {
                     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
                     db.execSQL("update " + ScheduleClass.date_start.TABLE_NAME + " set " + ScheduleClass.date_start.date + " = '" +
                             current_date  + "' where " + ScheduleClass.date_start.id_date + " = " + 1);
+                    fragment_call_schedule fragment= new fragment_call_schedule();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_frame, fragment)
+                            .addToBackStack(null)
+                            .commit();
 
                 }
             };
@@ -123,7 +106,27 @@ public class fragment_date extends android.support.v4.app.Fragment {
         return view;
     }
 
+void abc(){  new MaterialTapTargetPrompt.Builder(getActivity())
+        .setTarget(layout_pich_week)
+        .setPromptBackground(new RectanglePromptBackground())
+        .setPromptFocal(new RectanglePromptFocal())
+        .setPrimaryText("Дата начала семестра")
+        .setSecondaryText("Выберите дату начала семестра для автоматического определения текущей учебной недели")
+        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200,200,255))
+        .setBackgroundColour(Color.rgb(100,100,255))
+        .setPrimaryTextColour(Color.rgb(255,255,255))
+        .setSecondaryTextColour(Color.rgb(255,255,255))
+        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
+        {
+            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                if (state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
+                    abc();
+                }
+            }
 
+
+        })
+        .show();}
 
 
     @Override

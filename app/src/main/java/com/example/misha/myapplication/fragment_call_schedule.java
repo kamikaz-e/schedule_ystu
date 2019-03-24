@@ -14,6 +14,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -21,6 +23,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.example.misha.myapplication.data.ScheduleClass;
@@ -49,18 +53,18 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
     public fragment_call_schedule() {
         // Required empty public constructor
     }
-    String select_time_partOne;
-    String select_time_fullOne;
-    String select_time_partTwo;
-    String select_time_fullTwo;
-    String select_time_partThree;
-    String select_time_fullThree;
-    String select_time_partFour;
-    String select_time_fullFour;
-    String select_time_partFive;
-    String select_time_fullFive;
-    String select_time_partSix;
-    String select_time_fullSix;
+    String select_time_partOne="";
+    String select_time_fullOne="";
+    String select_time_partTwo="";
+    String select_time_fullTwo="";
+    String select_time_partThree="";
+    String select_time_fullThree="";
+    String select_time_partFour="";
+    String select_time_fullFour="";
+    String select_time_partFive="";
+    String select_time_fullFive="";
+    String select_time_partSix="";
+    String select_time_fullSix="";
     Integer flag=0;
     EditText oneTime;
     EditText twoTime;
@@ -74,6 +78,7 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
     Button button_toolbar;
     String hasVisited;
     SharedPreferences sp;
+    RelativeLayout rlOne;
 
     public static fragment_call_schedule newInstance() {
         fragment_call_schedule fragment = new fragment_call_schedule();
@@ -90,15 +95,22 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.fragment_call_schedule, container, false);
+        Toolbar profile_toolbar = view.findViewById(R.id.toolbar);
+        AppCompatActivity activity = (AppCompatActivity)getActivity();
+        activity.setSupportActionBar(profile_toolbar);
 
-        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
 
         button_toolbar = view.findViewById(R.id.toolbar_but);
-        button_toolbar.setBackgroundResource(R.drawable.ic_clear);
+        button_toolbar.setBackgroundResource(R.drawable.ic_start_settings_ok);
         button_toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onCreateDialogClear().show();
+                save_calls();
+                fragment_start_subjects fragment= new fragment_start_subjects();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         oneTime = view.findViewById(R.id.OneTime);
@@ -108,16 +120,13 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
         fiveTime = view.findViewById(R.id.FiveTime);
         sixTime = view.findViewById(R.id.SixTime);
         ScheduleDB = new ScheduleDB(getActivity());
-        start();
 
 
-        sp = getActivity().getPreferences(MODE_PRIVATE);
-        hasVisited = sp.getString("hasVisited", "nope");
-        if (hasVisited == "nope") {
+        rlOne= view.findViewById(R.id.rlOne);
 
 
             new MaterialTapTargetPrompt.Builder(getActivity())
-                    .setTarget(R.id.card_viewOneTime)
+                    .setTarget(rlOne)
                     .setPromptBackground(new RectanglePromptBackground())
                     .setPromptFocal(new RectanglePromptFocal())
                     .setPrimaryText("Расписание звонков")
@@ -135,37 +144,73 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
                     })
                     .show();
 
-        }
 
+
+        oneTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(getActivity(), timeOne,
+                        Time.get(Calendar.HOUR_OF_DAY),
+                        Time.get(Calendar.MINUTE), true)
+                        .show();
+                start=1;
+            }
+        });
+
+        twoTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(getActivity(), timeTwo,
+                        Time.get(Calendar.HOUR_OF_DAY),
+                        Time.get(Calendar.MINUTE), true)
+                        .show();
+                start=1;
+            }
+        });
+
+        threeTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(getActivity(), timeThree,
+                        Time.get(Calendar.HOUR_OF_DAY),
+                        Time.get(Calendar.MINUTE), true)
+                        .show();
+                start=1;
+            }
+        });
+
+        fourTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(getActivity(), timeFour,
+                        Time.get(Calendar.HOUR_OF_DAY),
+                        Time.get(Calendar.MINUTE), true)
+                        .show();
+                start=1;
+            }
+        });
+
+        fiveTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(getActivity(), timeFive,
+                        Time.get(Calendar.HOUR_OF_DAY),
+                        Time.get(Calendar.MINUTE), true)
+                        .show();
+                start=1;
+            }
+        });
+
+        sixTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new TimePickerDialog(getActivity(), timeSix,
+                        Time.get(Calendar.HOUR_OF_DAY),
+                        Time.get(Calendar.MINUTE), true)
+                        .show();
+                start=1;
+            }
+        });
 
         return view;
     }
 
 
 
-    public Dialog onCreateDialogClear() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                clear_calls();
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Очистить расписание звонков?");
-        return builder.create();
-    }
-
-    public void getTimeOne(View v) {
-        new TimePickerDialog(getActivity(), timeone,
-                Time.get(Calendar.HOUR_OF_DAY),
-                Time.get(Calendar.MINUTE), true)
-                .show();
-        start=1;
-    }
 
     private void setInitialTimeOne() {
         if (start==1) {
@@ -177,14 +222,14 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
             oneTime.setText(select_time_fullOne);
         }
         if (start==1){
-            new TimePickerDialog(getActivity(), timeone,
+            new TimePickerDialog(getActivity(), timeOne,
                     Time.get(Calendar.HOUR_OF_DAY),
                     Time.get(Calendar.MINUTE), true)
                     .show();
             start=0; }
     }
 
-    TimePickerDialog.OnTimeSetListener timeone=new TimePickerDialog.OnTimeSetListener() {
+    TimePickerDialog.OnTimeSetListener timeOne=new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
             Time.set(Calendar.MINUTE, minute);
@@ -192,13 +237,6 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
         }
     };
 
-    public void getTimeTwo(View v) {
-        new TimePickerDialog(getActivity(), timetwo,
-                Time.get(Calendar.HOUR_OF_DAY),
-                Time.get(Calendar.MINUTE), true)
-                .show();
-        start=1;
-    }
 
 
     private void setInitialTimeTwo() {
@@ -211,14 +249,14 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
             twoTime.setText(select_time_fullTwo);
         }
         if (start==1){
-            new TimePickerDialog(getActivity(), timetwo,
+            new TimePickerDialog(getActivity(), timeTwo,
                     Time.get(Calendar.HOUR_OF_DAY),
                     Time.get(Calendar.MINUTE), true)
                     .show();
             start=0; }
     }
 
-    TimePickerDialog.OnTimeSetListener timetwo=new TimePickerDialog.OnTimeSetListener() {
+    TimePickerDialog.OnTimeSetListener timeTwo=new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
             Time.set(Calendar.MINUTE, minute);
@@ -226,14 +264,6 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
         }
     };
 
-
-    public void getTimeThree(View v) {
-        new TimePickerDialog(getActivity(), timeThree,
-                Time.get(Calendar.HOUR_OF_DAY),
-                Time.get(Calendar.MINUTE), true)
-                .show();
-        start=1;
-    }
 
 
     private void setInitialTimeThree() {
@@ -262,14 +292,6 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
     };
 
 
-    public void getTimeFour(View v) {
-        new TimePickerDialog(getActivity(), timeFour,
-                Time.get(Calendar.HOUR_OF_DAY),
-                Time.get(Calendar.MINUTE), true)
-                .show();
-        start=1;
-    }
-
 
     private void setInitialTimeFour() {
         if (start==1) {
@@ -297,14 +319,6 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
     };
 
 
-    public void getTimeFive(View v) {
-        new TimePickerDialog(getActivity(), timeFive,
-                Time.get(Calendar.HOUR_OF_DAY),
-                Time.get(Calendar.MINUTE), true)
-                .show();
-        start=1;
-    }
-
     private void setInitialTimeFive() {
         if (start==1) {
             select_time_partFive=(DateUtils.formatDateTime(getActivity(),
@@ -329,14 +343,6 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
             setInitialTimeFive();
         }
     };
-
-    public void getTimeSix(View v) {
-        new TimePickerDialog(getActivity(), timeSix,
-                Time.get(Calendar.HOUR_OF_DAY),
-                Time.get(Calendar.MINUTE), true)
-                .show();
-        start=1;
-    }
 
 
     private void setInitialTimeSix() {
@@ -365,36 +371,6 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
     };
 
 
-    void start(){
-        SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        flag=0;
-        String searchQuery = "SELECT "+ ScheduleClass.calls.time +" FROM " + ScheduleClass.calls.TABLE_NAME;
-        Cursor cursor = db.rawQuery(searchQuery, null);
-        while(cursor.moveToNext()) {
-            switch (flag){
-                case 0: oneTime.setText(String.valueOf(cursor.getString(0)));
-                    select_time_fullOne=(cursor.getString(0));
-                    flag++;break;
-                case 1: twoTime.setText(String.valueOf(cursor.getString(0)));
-                    select_time_fullTwo=(cursor.getString(0));
-                    flag++;break;
-                case 2: threeTime.setText(String.valueOf(cursor.getString(0)));
-                    select_time_fullThree=(cursor.getString(0));
-                    flag++;break;
-                case 3: fourTime.setText(String.valueOf(cursor.getString(0)));
-                    select_time_fullFour=(cursor.getString(0));
-                    flag++;break;
-                case 4: fiveTime.setText(String.valueOf(cursor.getString(0)));
-                    select_time_fullFive=(cursor.getString(0));
-                    flag++;break;
-                case 5: sixTime.setText(String.valueOf(cursor.getString(0)));
-                    select_time_fullSix=(cursor.getString(0));
-                    flag++;break;}
-        }
-        cursor.close();
-    }
-
-
     void save_calls(){
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
         db.beginTransaction();
@@ -416,28 +392,6 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
         }
     }
 
-    void clear_calls(){
-        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.execSQL("DROP TABLE " + ScheduleClass.calls.TABLE_NAME);
-        String calls_schedule = "CREATE TABLE " + ScheduleClass.calls.TABLE_NAME + " ("
-                + ScheduleClass.calls.id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ScheduleClass.calls.time + " STRING );";
-        db.execSQL(calls_schedule);
-        for (int i=0;i<6;i++){
-            db.execSQL("INSERT INTO " + ScheduleClass.calls.TABLE_NAME + " (" + ScheduleClass.calls.time + ") VALUES ('');");}
-        oneTime.setText("");
-        twoTime.setText("");
-        threeTime.setText("");
-        fourTime.setText("");
-        fiveTime.setText("");
-        sixTime.setText("");
-        select_time_fullOne="";
-        select_time_fullTwo="";
-        select_time_fullThree="";
-        select_time_fullFour="";
-        select_time_fullFive="";
-        select_time_fullSix="";
-    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
 

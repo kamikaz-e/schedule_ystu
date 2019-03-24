@@ -5,10 +5,34 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStart="60dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/AppTheme"
+        app:title="Расписание звонков">
+        <Button
+            android:id="@+id/toolbar_but"
+            android:layout_width="30dp"
+            android:layout_marginEnd="17dp"
+            android:layout_height="30dp"
+            android:text=""
+            android:layout_gravity="right"
+            />
+    </android.support.v7.widget.Toolbar>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        >
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_viewOne"
@@ -24,6 +48,7 @@
             card_view:elevation="14dp">
 
             <RelativeLayout
+                android:id="@+id/rlOne"
                 android:layout_width="match_parent"
                 android:layout_height="70dp">
                 <TextView
@@ -58,7 +83,6 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginEnd="18dp"
                         android:layout_alignParentTop="true"
-                        android:onClick="getTimeOne"
                         android:focusable="false"
                         android:hint="Выбрать"
                         android:textColorHint="#FFFFFF"
@@ -118,7 +142,6 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginEnd="18dp"
                         android:layout_alignParentTop="true"
-                        android:onClick="getTimeTwo"
                         android:focusable="false"
                         android:longClickable="false"
                         android:cursorVisible="false"
@@ -178,7 +201,6 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginEnd="18dp"
                         android:layout_alignParentTop="true"
-                        android:onClick="getTimeThree"
                         android:focusable="false"
                         android:longClickable="false"
                         android:cursorVisible="false"
@@ -238,7 +260,6 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginEnd="18dp"
                         android:layout_alignParentTop="true"
-                        android:onClick="getTimeFour"
                         android:focusable="false"
                         android:longClickable="false"
                         android:cursorVisible="false"
@@ -298,7 +319,6 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginEnd="18dp"
                         android:layout_alignParentTop="true"
-                        android:onClick="getTimeFive"
                         android:focusable="false"
                         android:longClickable="false"
                         android:cursorVisible="false"
@@ -358,7 +378,6 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginEnd="18dp"
                         android:layout_alignParentTop="true"
-                        android:onClick="getTimeSix"
                         android:focusable="false"
                         android:longClickable="false"
                         android:cursorVisible="false"
@@ -370,6 +389,4 @@
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
-
-
 </FrameLayout>

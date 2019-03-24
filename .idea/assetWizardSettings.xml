@@ -35,7 +35,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="paddingPercent" value="50" />
+                                                <entry key="paddingPercent" value="25" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -47,8 +47,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\volko\Downloads\baseline-border_color-24px.svg" />
-                                      <entry key="outputName" value="ic_editor" />
+                                      <entry key="imageAsset" value="C:\Users\volko\Downloads\baseline-delete-24px.svg" />
+                                      <entry key="outputName" value="ic_clear" />
                                       <entry key="theme" value="HOLO_DARK" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>

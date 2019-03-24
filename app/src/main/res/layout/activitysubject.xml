@@ -19,9 +19,9 @@
     app:title="Предметы">
     <Button
       android:id="@+id/toolbar_but"
-      android:layout_width="17dp"
+      android:layout_width="30dp"
       android:layout_marginEnd="17dp"
-      android:layout_height="17dp"
+      android:layout_height="30dp"
       android:text=""
       android:layout_gravity="right"
       />

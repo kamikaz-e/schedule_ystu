@@ -171,9 +171,6 @@ public class Settings extends AppCompatActivity {
 
                                             public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
                                               if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                                Intent intent = new Intent(Settings.this, call_schedule.class);
-                                                finish();
-                                                startActivity(intent);
                                               }
                                             }
                                           })
