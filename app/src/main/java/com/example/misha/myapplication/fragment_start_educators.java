@@ -19,15 +19,18 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleDB;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
@@ -59,7 +62,7 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
     public ArrayAdapter<String> adapter;
     Button next;
     Button clear_educators;
-
+    String select_item="";
 
     public fragment_start_educators() {
         // Required empty public constructor
@@ -86,13 +89,27 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_start_educators, container, false);
         Toolbar profile_toolbar = view.findViewById(R.id.toolbar);
-        AppCompatActivity activity = (AppCompatActivity)getActivity();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(profile_toolbar);
         ScheduleDB = new ScheduleDB(getActivity());
-        next= view.findViewById(R.id.next);
-        clear_educators= view.findViewById(R.id.clear_educators);
+        next = view.findViewById(R.id.next);
+        clear_educators = view.findViewById(R.id.clear_educators);
         input_educator = view.findViewById(R.id.input_educator);
         list_educators = view.findViewById(R.id.list_educators);
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
+        list_educators.setAdapter(adapter);
+
+        list_educators.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
+                                    long id) {
+                TextView textView = (TextView) itemClicked;
+                select_item = textView.getText().toString();
+                onCreateDialogDeleteItem().show();
+            }
+        });
+
+
         clear_educators.setBackgroundResource(R.drawable.ic_clear);
         next.setBackgroundResource(R.drawable.ic_start_settings_ok);
         next.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +125,9 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
             }
         });
         start();
+        SharedPreferences sp = getActivity().getPreferences(MODE_PRIVATE);
+        String hasVisited = sp.getString("hasVisited", "nope");
+
 
         new MaterialTapTargetPrompt.Builder(getActivity())
                 .setTarget(input_educator)
@@ -162,6 +182,10 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
                 })
                 .show();
 
+        SharedPreferences.Editor e = sp.edit();
+        e.putString("hasVisited", "yes");
+        e.commit();
+
 
         input_educator.setOnKeyListener(new View.OnKeyListener() {
 
@@ -180,6 +204,25 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
             }
         });
         return view;
+    }
+
+    public Dialog onCreateDialogDeleteItem() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
+        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+                db.execSQL("DELETE FROM " + ScheduleClass.educators.TABLE_NAME + " WHERE "+ ScheduleClass.educators.educator + "='"+ select_item+"'");
+                start();
+                adapter.notifyDataSetChanged();
+            }
+        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        }).setTitle("Удалить преподавателя «"+select_item+"»?");
+        return builder.create();
     }
 
     public Dialog onCreateDialogClear() {

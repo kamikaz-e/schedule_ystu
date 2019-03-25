@@ -7,53 +7,62 @@
   android:layout_height="match_parent"
   tools:context=".activitysubject"
   android:orientation="vertical">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal"
+      android:id="@+id/container">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/content_frame">
+    </FrameLayout>
+
+  </LinearLayout>
+
   <android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:popupTheme="@style/AppTheme"
-    app:title="Предметы">
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:background="?attr/colorPrimary"
+      app:popupTheme="@style/AppTheme">
     <Button
-      android:id="@+id/toolbar_but"
-      android:layout_width="30dp"
-      android:layout_marginEnd="17dp"
-      android:layout_height="30dp"
-      android:text=""
-      android:layout_gravity="right"
-      />
+        android:id="@+id/toolbar_but"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_gravity="right"
+        />
+    <Spinner
+        android:id="@+id/rasp_weeks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:dropDownWidth="100dp"
+        android:layout_marginStart="100dp"
+        android:entries="@array/weeks"
+        android:background="#0000"/>
+
+    <TextView
+        android:id="@+id/text_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginLeft="30dp"
+        android:textSize="17dp"
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/toolbar_butt"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="280dp"
+        android:layout_marginTop="3dp"
+        android:layout_gravity="right"
+        />
   </android.support.v7.widget.Toolbar>
-  <EditText
-    android:id="@+id/input_subject"
-    android:layout_width="375dp"
-    android:layout_height="66dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
-    android:ems="10"
-    android:hint="Предмет"
-    android:inputType="textCapWords"
-    android:selectAllOnFocus="false"
-    android:textSize="18sp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/toolbar"
-    app:layout_constraintVertical_bias="0.0"/>
-  <ListView
-    android:id="@+id/list_subjects"
-    android:layout_width="397dp"
-    android:layout_height="589dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/input_subject"/>
 
 
 </LinearLayout>

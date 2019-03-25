@@ -1,5 +1,6 @@
 package com.example.misha.myapplication;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -9,13 +10,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.app.Activity;
-import android.provider.SettingsSlicesContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,10 +30,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 
 public class welcome_activity extends Activity {
@@ -46,6 +44,7 @@ public class welcome_activity extends Activity {
   private static final String date = "http://192.168.0.61/phpmyadmin/requests/date_start.php";
   private static final String insert = "http://192.168.0.61/phpmyadmin/requests/export.php";
 
+
   final String sch="schedule";
   final String sub="subject";
   final String aud="audience";
@@ -53,7 +52,7 @@ public class welcome_activity extends Activity {
   final String typ="typelesson";
   final String cal="calls";
   final String dat="date_start";
-
+  TodoItem item;
   String database_name="";
 
   private com.example.misha.myapplication.data.ScheduleDB ScheduleDB;
@@ -72,6 +71,8 @@ public class welcome_activity extends Activity {
     setContentView(R.layout.welcome_activity);
 
 
+
+
     Button start_buttonOne = findViewById(R.id.start_buttonOne);
     start_buttonOne.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
@@ -87,6 +88,10 @@ public class welcome_activity extends Activity {
       }
     });
 
+  }
+  public class TodoItem {
+    public String Id;
+    public String Text;
   }
 
   public Dialog onCreateDialogImport() {

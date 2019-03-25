@@ -18,10 +18,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleDB;
@@ -35,14 +37,6 @@ import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFoc
 import static android.content.Context.MODE_PRIVATE;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link fragment_start_subjects.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link fragment_start_subjects#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class fragment_start_subjects extends android.support.v4.app.Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -58,7 +52,7 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
     public ArrayAdapter<String> adapter;
     Button next;
     Button clear_subjects;
-
+    String select_item="";
 
     public fragment_start_subjects() {
         // Required empty public constructor
@@ -92,6 +86,22 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
         clear_subjects= view.findViewById(R.id.clear_subjects);
         input_subject = view.findViewById(R.id.input_subject);
         list_subjects = view.findViewById(R.id.list_subjects);
+
+
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
+        list_subjects.setAdapter(adapter);
+
+        list_subjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
+                                    long id) {
+                TextView textView = (TextView) itemClicked;
+                select_item = textView.getText().toString();
+                onCreateDialogDeleteItem().show();
+            }
+        });
+
+
         next= view.findViewById(R.id.next);
         clear_subjects.setBackgroundResource(R.drawable.ic_clear);
         next.setBackgroundResource(R.drawable.ic_start_settings_ok);
@@ -113,7 +123,10 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
             }
         });
         start();
+        SharedPreferences sp = getActivity().getPreferences(MODE_PRIVATE);
+        String hasVisited = sp.getString("hasVisited", "nope");
 
+        if (hasVisited == "nope") {
             new MaterialTapTargetPrompt.Builder(getActivity())
                     .setTarget(input_subject)
                     .setPromptBackground(new RectanglePromptBackground())
@@ -167,7 +180,10 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
                     })
                     .show();
 
-
+            SharedPreferences.Editor e = sp.edit();
+            e.putString("hasVisited", "yes");
+            e.commit();
+        }
         input_subject.setOnKeyListener(new View.OnKeyListener() {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -185,6 +201,24 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
             }
         });
         return view;
+    }
+    public Dialog onCreateDialogDeleteItem() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
+        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+                db.execSQL("DELETE FROM " + ScheduleClass.subjects.TABLE_NAME + " WHERE "+ ScheduleClass.subjects.subject + "='"+ select_item+"'");
+                start();
+                adapter.notifyDataSetChanged();
+            }
+        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        }).setTitle("Удалить предмет «"+select_item+"»?");
+        return builder.create();
     }
 
     public Dialog onCreateDialogClear() {
