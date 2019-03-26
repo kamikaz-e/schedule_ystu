@@ -52,7 +52,7 @@ public class fragment_start_audiences extends android.support.v4.app.Fragment {
     public ArrayAdapter<String> adapter;
     Button clear_audiences;
     Button next;
-String select_item="";
+    String select_item="";
 
     public fragment_start_audiences() {
         // Required empty public constructor
@@ -122,16 +122,12 @@ String select_item="";
         });
         start();
 
-        SharedPreferences sp = getActivity().getPreferences(MODE_PRIVATE);
-        String hasVisited = sp.getString("hasVisited", "nope");
-        if (hasVisited == "nope") {
-
             new MaterialTapTargetPrompt.Builder(getActivity())
                     .setTarget(input_audience)
                     .setPromptBackground(new RectanglePromptBackground())
                     .setPromptFocal(new RectanglePromptFocal())
                     .setPrimaryText("Добавление аудитории")
-                    .setSecondaryText("Введите аудиторию и добавьте его, нажав кнопку подтверждения на клавиатуре <Enter>")
+                    .setSecondaryText("Аналогично, как и в предыдущем действии")
                     .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
                     .setBackgroundColour(Color.rgb(100, 100, 255))
                     .setPrimaryTextColour(Color.rgb(255, 255, 255))
@@ -139,49 +135,11 @@ String select_item="";
                     .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                         public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
                             if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                new MaterialTapTargetPrompt.Builder(getActivity())
-                                        .setTarget(clear_audiences)
-                                        .setPromptBackground(new RectanglePromptBackground())
-                                        .setPromptFocal(new RectanglePromptFocal())
-                                        .setPrimaryText("Удаление аудиторий")
-                                        .setSecondaryText("Если необходимо удалить аудитории, то нажмите на кнопку")
-                                        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                                        .setBackgroundColour(Color.rgb(100, 100, 255))
-                                        .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                                        .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                                                if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                                    new MaterialTapTargetPrompt.Builder(getActivity())
-                                                            .setTarget(next)
-                                                            .setPromptBackground(new RectanglePromptBackground())
-                                                            .setPromptFocal(new RectanglePromptFocal())
-                                                            .setPrimaryText("Завершить добавление аудитории")
-                                                            .setSecondaryText("После добавления аудиторий нажмите на кнопку, чтобы перейти к следующим действиям")
-                                                            .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                                                            .setBackgroundColour(Color.rgb(100, 100, 255))
-                                                            .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                                                            .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                                                            .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                                                                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                                                                    if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
 
-                                                                    }
-                                                                }
-                                                            })
-                                                            .show();
-                                                }
-                                            }
-                                        })
-                                        .show();
                             }
                         }
                     })
                     .show();
-            SharedPreferences.Editor e = sp.edit();
-            e.putString("hasVisited", "yes");
-            e.commit();
-        }
 
         input_audience.setOnKeyListener(new View.OnKeyListener() {
 

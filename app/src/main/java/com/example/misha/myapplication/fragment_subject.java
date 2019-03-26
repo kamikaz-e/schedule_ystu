@@ -37,7 +37,7 @@ import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFoc
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class fragment_start_subjects extends android.support.v4.app.Fragment {
+public class fragment_subject extends android.support.v4.app.Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -50,17 +50,15 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
     private ScheduleDB ScheduleDB;
     final ArrayList<String> subject_list = new ArrayList<>();
     public ArrayAdapter<String> adapter;
-    Button next;
-    Button clear_subjects;
     String select_item="";
 
-    public fragment_start_subjects() {
+    public fragment_subject() {
         // Required empty public constructor
     }
 
 
-    public static fragment_start_subjects newInstance(String param1, String param2) {
-        fragment_start_subjects fragment = new fragment_start_subjects();
+    public static fragment_subject newInstance(String param1, String param2) {
+        fragment_subject fragment = new fragment_subject();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -77,13 +75,11 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_start_subjects, container, false);
-        Toolbar profile_toolbar = view.findViewById(R.id.toolbar);
-        AppCompatActivity activity = (AppCompatActivity)getActivity();
-        activity.setSupportActionBar(profile_toolbar);
+        View view = inflater.inflate(R.layout.fragment_subject, container, false);
+
         ScheduleDB = new ScheduleDB(getActivity());
 
-        clear_subjects= view.findViewById(R.id.clear_subjects);
+     //   clear_subjects= view.findViewById(R.id.clear_subjects);
         input_subject = view.findViewById(R.id.input_subject);
         list_subjects = view.findViewById(R.id.list_subjects);
 
@@ -101,82 +97,8 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
             }
         });
 
-
-        next= view.findViewById(R.id.next);
-        clear_subjects.setBackgroundResource(R.drawable.ic_clear);
-        next.setBackgroundResource(R.drawable.ic_start_settings_ok);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragment_start_audiences fragment= new fragment_start_audiences();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, fragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-
-        clear_subjects.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCreateDialogClear().show();
-            }
-        });
         start();
 
-
-            new MaterialTapTargetPrompt.Builder(getActivity())
-                    .setTarget(input_subject)
-                    .setPromptBackground(new RectanglePromptBackground())
-                    .setPromptFocal(new RectanglePromptFocal())
-                    .setPrimaryText("Добавление предметов")
-                    .setSecondaryText("Введите предмет и добавьте его, нажав кнопку подтверждения на клавиатуре <Enter>")
-                    .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                    .setBackgroundColour(Color.rgb(100, 100, 255))
-                    .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                    .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                            if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                new MaterialTapTargetPrompt.Builder(getActivity())
-                                        .setTarget(clear_subjects)
-                                        .setPromptBackground(new RectanglePromptBackground())
-                                        .setPromptFocal(new RectanglePromptFocal())
-                                        .setPrimaryText("Удаление предметов")
-                                        .setSecondaryText("Если необходимо удалить предметы, то нажмите на кнопку.\nТак же можно удалить нужный предмет, просто кликнув по нему в списке")
-                                        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                                        .setBackgroundColour(Color.rgb(100, 100, 255))
-                                        .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                                        .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                                                if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                                    new MaterialTapTargetPrompt.Builder(getActivity())
-                                                            .setTarget(next)
-                                                            .setPromptBackground(new RectanglePromptBackground())
-                                                            .setPromptFocal(new RectanglePromptFocal())
-                                                            .setPrimaryText("Завершить добавление предметов")
-                                                            .setSecondaryText("После добавления предметов нажмите на кнопку, чтобы перейти к следующим действиям")
-                                                            .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                                                            .setBackgroundColour(Color.rgb(100, 100, 255))
-                                                            .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                                                            .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                                                            .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                                                                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                                                                    if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-
-                                                                    }
-                                                                }
-                                                            })
-                                                            .show();
-                                                }
-                                            }
-                                        })
-                                        .show();
-                            }
-                        }
-                    })
-                    .show();
 
         input_subject.setOnKeyListener(new View.OnKeyListener() {
 
@@ -215,21 +137,6 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
         return builder.create();
     }
 
-    public Dialog onCreateDialogClear() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                clear_subjects();
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Очистить предметы?");
-        return builder.create();
-    }
 
     void clear_subjects () {
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
@@ -244,7 +151,7 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
 
     public void start(){
 
-       adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
         list_subjects.setAdapter(adapter);
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();

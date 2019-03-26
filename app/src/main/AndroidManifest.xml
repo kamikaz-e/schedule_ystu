@@ -18,7 +18,7 @@
             android:label="@string/title_activity_start_settings"></activity>
         <activity
             android:name=".welcome_activity"
-            android:label="@string/title_activity_welcom_activity"></activity>
+            android:label="@string/title_activity_welcome_activity"></activity>
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings"></activity>
@@ -26,17 +26,8 @@
             android:name=".call_schedule"
             android:label="@string/title_activity_call_schedule"></activity>
         <activity
-            android:name=".activityeducator"
-            android:label="@string/title_activity_activityeducator"></activity>
-        <activity
-            android:name=".activityaudience"
-            android:label="@string/title_activity_activityaudience"></activity>
-        <activity
-            android:name=".activitysubject"
+            android:name=".activityEditData"
             android:label="Предметы"></activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="settings"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

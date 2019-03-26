@@ -52,7 +52,7 @@ public class welcome_activity extends Activity {
   final String typ="typelesson";
   final String cal="calls";
   final String dat="date_start";
-  TodoItem item;
+
   String database_name="";
 
   private com.example.misha.myapplication.data.ScheduleDB ScheduleDB;
@@ -88,10 +88,6 @@ public class welcome_activity extends Activity {
       }
     });
 
-  }
-  public class TodoItem {
-    public String Id;
-    public String Text;
   }
 
   public Dialog onCreateDialogImport() {

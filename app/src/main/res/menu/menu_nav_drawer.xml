@@ -6,12 +6,8 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/rasp_day" android:title="Расписание по дням"/>
         <item android:id="@+id/rasp_list" android:title="Расписание списком" />
-        <item
-          android:id="@+id/edit_schedule"
-          android:title="Редактор расписания"/>
-        <item android:id="@+id/subjects" android:title="Предметы"/>
-        <item android:id="@+id/audiences" android:title="Аудитории"/>
-        <item android:id="@+id/educators" android:title="Преподаватели"/>
+        <item android:id="@+id/edit_data" android:title="Редактор данных"/>
+        <item android:id="@+id/edit_schedule" android:title="Редактор расписания"/>
         <item android:id="@+id/call_schedule" android:title="Расписание звонков"/>
         <item android:id="@+id/settings" android:title="Настройки" />
         <item android:id="@+id/help" android:title="Справка" />

@@ -204,18 +204,8 @@ public class MainActivity extends AppCompatActivity
                 finish();
                 startActivity(intent);
                 break;
-            case R.id.subjects:
-                intent = new Intent(this, activitysubject.class);
-                finish();
-                startActivity(intent);
-                break;
-            case R.id.audiences:
-                intent = new Intent(this, activityaudience.class);
-                finish();
-                startActivity(intent);
-                break;
-            case R.id.educators:
-                intent = new Intent(this, activityeducator.class);
+            case R.id.edit_data:
+                intent = new Intent(this, activityEditData.class);
                 finish();
                 startActivity(intent);
                 break;

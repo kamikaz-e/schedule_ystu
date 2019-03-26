@@ -38,7 +38,8 @@ import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFoc
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class fragment_start_educators extends android.support.v4.app.Fragment {
+
+public class fragment_educator extends android.support.v4.app.Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -55,13 +56,13 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
     Button clear_educators;
     String select_item="";
 
-    public fragment_start_educators() {
+    public fragment_educator() {
         // Required empty public constructor
     }
 
 
-    public static fragment_start_educators newInstance(String param1, String param2) {
-        fragment_start_educators fragment = new fragment_start_educators();
+    public static fragment_educator newInstance(String param1, String param2) {
+        fragment_educator fragment = new fragment_educator();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,15 +79,13 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_start_educators, container, false);
-        Toolbar profile_toolbar = view.findViewById(R.id.toolbar);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(profile_toolbar);
+        View view = inflater.inflate(R.layout.fragment_educator, container, false);
+
         ScheduleDB = new ScheduleDB(getActivity());
-        next = view.findViewById(R.id.next);
-        clear_educators = view.findViewById(R.id.clear_educators);
+
         input_educator = view.findViewById(R.id.input_educator);
         list_educators = view.findViewById(R.id.list_educators);
+
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
         list_educators.setAdapter(adapter);
 
@@ -100,41 +99,9 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
             }
         });
 
-
-        clear_educators.setBackgroundResource(R.drawable.ic_clear);
-        next.setBackgroundResource(R.drawable.ic_start_settings_ok);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
-        clear_educators.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCreateDialogClear().show();
-            }
-        });
         start();
 
-        new MaterialTapTargetPrompt.Builder(getActivity())
-                .setTarget(input_educator)
-                .setPromptBackground(new RectanglePromptBackground())
-                .setPromptFocal(new RectanglePromptFocal())
-                .setPrimaryText("Добавление преподавателей")
-                .setSecondaryText("Аналогично, как и в предыдущем действии")
-                .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                .setBackgroundColour(Color.rgb(100, 100, 255))
-                .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                        if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
 
-                        }
-                    }
-                })
-                .show();
         input_educator.setOnKeyListener(new View.OnKeyListener() {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -173,32 +140,6 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
         return builder.create();
     }
 
-    public Dialog onCreateDialogClear() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                clear_educators();
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Очистить преподавателей?");
-        return builder.create();
-    }
-
-    void clear_educators(){
-        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.execSQL("DROP TABLE " + ScheduleClass.educators.TABLE_NAME);
-        db.execSQL("CREATE TABLE " + ScheduleClass.educators.TABLE_NAME + " ("
-                + ScheduleClass.educators.idd_educator + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
-        db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
-        adapter.notifyDataSetChanged();
-        start();
-    }
 
     public void start(){
 
