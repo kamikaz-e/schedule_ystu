@@ -2344,50 +2344,6 @@ public class MainActivity2 extends AppCompatActivity {
             rb_practiceSix.setChecked(true);
         }
 
-
-        if (Wednesday.get(0).typelesson.toString().equals("Лекция")) {
-            rb_lecture.setChecked(true);
-        } else if (Wednesday.get(0).typelesson.toString().equals("Лаб./раб.")) {
-            rb_labwork.setChecked(true);
-        } else if (Wednesday.get(0).typelesson.toString().equals("Практика")) {
-            rb_practice.setChecked(true);
-        }
-        if (Wednesday.get(1).typelesson.toString().equals("Лекция")) {
-            rb_lectureTwo.setChecked(true);
-        } else if (Wednesday.get(1).typelesson.toString().equals("Лаб./раб.")) {
-            rb_labworkTwo.setChecked(true);
-        } else if (Wednesday.get(1).typelesson.toString().equals("Практика")) {
-            rb_practiceTwo.setChecked(true);
-        }
-        if (Wednesday.get(2).typelesson.toString().equals("Лекция")) {
-            rb_lectureThree.setChecked(true);
-        } else if (Wednesday.get(2).typelesson.toString().equals("Лаб./раб.")) {
-            rb_labworkThree.setChecked(true);
-        } else if (Wednesday.get(2).typelesson.toString().equals("Практика")) {
-            rb_practiceThree.setChecked(true);
-        }
-        if (Wednesday.get(3).typelesson.toString().equals("Лекция")) {
-            rb_lectureFour.setChecked(true);
-        } else if (Wednesday.get(3).typelesson.toString().equals("Лаб./раб.")) {
-            rb_labworkFour.setChecked(true);
-        } else if (Wednesday.get(3).typelesson.toString().equals("Практика")) {
-            rb_practiceFour.setChecked(true);
-        }
-        if (Wednesday.get(4).typelesson.toString().equals("Лекция")) {
-            rb_lectureFive.setChecked(true);
-        } else if (Wednesday.get(4).typelesson.toString().equals("Лаб./раб.")) {
-            rb_labworkFive.setChecked(true);
-        } else if (Wednesday.get(4).typelesson.toString().equals("Практика")) {
-            rb_practiceFive.setChecked(true);
-        }
-        if (Wednesday.get(5).typelesson.toString().equals("Лекция")) {
-            rb_lectureSix.setChecked(true);
-        } else if (Wednesday.get(5).typelesson.toString().equals("Лаб./раб.")) {
-            rb_labworkSix.setChecked(true);
-        } else if (Wednesday.get(5).typelesson.toString().equals("Практика")) {
-            rb_practiceSix.setChecked(true);
-        }
-
         //S1
         try {
             SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -8035,13 +7991,7 @@ public class MainActivity2 extends AppCompatActivity {
         db.beginTransaction();
         try{
 
-            ContentValues values = new ContentValues();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, MondayStringTypeLessonEditOne);
-            } catch (NullPointerException e) {
-            }
-            db.insert(ScheduleClass.typelessons.TABLE_NAME, null, values);
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + MondayStringSubjectEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8051,14 +8001,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1));
 
-            //2 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, MondayStringTypeLessonEditTwo);
-            } catch (NullPointerException e) {
-            }
-            db.insert(ScheduleClass.typelessons.TABLE_NAME, null, values);
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + MondayStringSubjectEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 2));
@@ -8069,13 +8012,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 2));
 
-            //3 предмет
-          values.clear();
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, MondayStringTypeLessonEditThree);
-            } catch (NullPointerException e) {
-            }
-            db.insert(ScheduleClass.typelessons.TABLE_NAME, null, values);
+
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + MondayStringSubjectEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 3));
@@ -8086,14 +8023,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 3));
 
-            //4 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, MondayStringTypeLessonEditFour);
-            } catch (NullPointerException e) {
-            }
-            db.insert(ScheduleClass.typelessons.TABLE_NAME, null, values);
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + MondayStringSubjectEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 4));
@@ -8104,14 +8034,6 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 4));
 
-            //5 предмет
-            values.clear();
-
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, MondayStringTypeLessonEditFive);
-            } catch (NullPointerException e) {
-            }
-            db.insert(ScheduleClass.typelessons.TABLE_NAME, null, values);
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + MondayStringSubjectEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 5));
@@ -8122,13 +8044,6 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 5));
 
-            //6 предмет
-            values.clear();
-
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, MondayStringTypeLessonEditSix);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + MondayStringSubjectEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 6));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8140,14 +8055,6 @@ public class MainActivity2 extends AppCompatActivity {
 
 
 
-            values = new ContentValues();
-
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, TuesdayStringTypeLessonEditOne);
-            } catch (NullPointerException e) {
-            }
-            db.insert(ScheduleClass.typelessons.TABLE_NAME, null, values);
-
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + TuesdayStringSubjectEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 7));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8157,13 +8064,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + TuesdayStringTypeLessonEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 7));
 
-            //2 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, TuesdayStringTypeLessonEditTwo);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + TuesdayStringSubjectEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 8));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8173,13 +8074,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + TuesdayStringTypeLessonEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 8));
 
-            //3 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, TuesdayStringTypeLessonEditThree);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + TuesdayStringSubjectEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 9));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8189,13 +8084,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + TuesdayStringTypeLessonEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 9));
 
-            //4 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, TuesdayStringTypeLessonEditFour);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + TuesdayStringSubjectEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 10));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8205,13 +8094,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + TuesdayStringTypeLessonEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 10));
 
-            //5 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, TuesdayStringTypeLessonEditFive);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + TuesdayStringSubjectEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 11));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8221,12 +8104,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + TuesdayStringTypeLessonEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 11));
 
-            //6 предмет
-           values.clear();
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, TuesdayStringTypeLessonEditSix);
-            } catch (NullPointerException e) {
-            }
+
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + TuesdayStringSubjectEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 12));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8236,12 +8114,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + TuesdayStringTypeLessonEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 12));
 
-            values = new ContentValues();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, WednesdayStringTypeLessonEditOne);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + WednesdayStringSubjectEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 13));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8251,12 +8124,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + WednesdayStringTypeLessonEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 13));
 
-            //2 предмет
-            values.clear();
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, WednesdayStringTypeLessonEditTwo);
-            } catch (NullPointerException e) {
-            }
+
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + WednesdayStringSubjectEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 14));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8266,12 +8134,8 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + WednesdayStringTypeLessonEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 14));
 
-            //3 предмет
-            values.clear();
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, WednesdayStringTypeLessonEditThree);
-            } catch (NullPointerException e) {
-            }
+
+
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + WednesdayStringSubjectEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 15));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8281,12 +8145,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + WednesdayStringTypeLessonEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 15));
 
-            //4 предмет
-            values.clear();
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, WednesdayStringTypeLessonEditFour);
-            } catch (NullPointerException e) {
-            }
+
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + WednesdayStringSubjectEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 16));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8296,12 +8155,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + WednesdayStringTypeLessonEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 16));
 
-            //5 предмет
-            values.clear();
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, WednesdayStringTypeLessonEditFive);
-            } catch (NullPointerException e) {
-            }
+
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + WednesdayStringSubjectEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 17));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8310,12 +8164,7 @@ public class MainActivity2 extends AppCompatActivity {
                 "WHERE " + ScheduleClass.educators.educator + "='" + WednesdayStringEducatorEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 17));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + WednesdayStringTypeLessonEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 17));
-            //6 предмет
-            values.clear();
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, WednesdayStringTypeLessonEditSix);
-            } catch (NullPointerException e) {
-            }
+
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + WednesdayStringSubjectEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 18));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8326,12 +8175,6 @@ public class MainActivity2 extends AppCompatActivity {
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + WednesdayStringTypeLessonEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 18));
 
 
-            values = new ContentValues();
-
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, ThursdayStringTypeLessonEditOne);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + ThursdayStringSubjectEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 19));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8341,13 +8184,6 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + ThursdayStringTypeLessonEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 19));
 
-            //2 предмет
-            values.clear();
-
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, ThursdayStringTypeLessonEditTwo);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + ThursdayStringSubjectEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 20));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8357,13 +8193,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + ThursdayStringTypeLessonEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 20));
 
-            //3 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, ThursdayStringTypeLessonEditThree);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + ThursdayStringSubjectEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 21));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8373,13 +8203,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + ThursdayStringTypeLessonEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 21));
 
-            //4 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, ThursdayStringTypeLessonEditFour);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + ThursdayStringSubjectEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 22));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8389,13 +8213,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + ThursdayStringTypeLessonEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 22));
 
-            //5 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, ThursdayStringTypeLessonEditFive);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + ThursdayStringSubjectEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 23));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8406,13 +8224,7 @@ public class MainActivity2 extends AppCompatActivity {
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + ThursdayStringTypeLessonEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 23));
 
 
-            //6 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, ThursdayStringTypeLessonEditSix);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + ThursdayStringSubjectEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 24));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8423,12 +8235,6 @@ public class MainActivity2 extends AppCompatActivity {
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + ThursdayStringTypeLessonEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 24));
 
 
-            values = new ContentValues();
-
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, FridayStringTypeLessonEditOne);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + FridayStringSubjectEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 25));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8438,13 +8244,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + FridayStringTypeLessonEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 25));
 
-            //2 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, FridayStringTypeLessonEditTwo);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + FridayStringSubjectEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 26));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8454,13 +8254,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + FridayStringTypeLessonEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 26));
 
-            //3 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, FridayStringTypeLessonEditThree);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + FridayStringSubjectEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 27));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8470,13 +8264,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + FridayStringTypeLessonEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 27));
 
-            //4 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, FridayStringTypeLessonEditFour);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + FridayStringSubjectEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 28));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8486,13 +8274,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + FridayStringTypeLessonEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 28));
 
-            //5 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, FridayStringTypeLessonEditFive);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + FridayStringSubjectEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 29));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8503,13 +8285,6 @@ public class MainActivity2 extends AppCompatActivity {
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + FridayStringTypeLessonEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 29));
 
 
-            //6 предмет
-            values.clear();
-
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, FridayStringTypeLessonEditSix);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + FridayStringSubjectEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 30));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8520,13 +8295,7 @@ public class MainActivity2 extends AppCompatActivity {
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + FridayStringTypeLessonEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 30));
 
 
-            values = new ContentValues();
 
-
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, SaturdayStringTypeLessonEditOne);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + SaturdayStringSubjectEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 31));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8535,13 +8304,7 @@ public class MainActivity2 extends AppCompatActivity {
                 "WHERE " + ScheduleClass.educators.educator + "='" + SaturdayStringEducatorEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 31));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + SaturdayStringTypeLessonEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 31));
-            values.clear();
-            //2 предмет
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, SaturdayStringTypeLessonEditTwo);
-            } catch (NullPointerException e) {
-            }
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + SaturdayStringSubjectEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 32));
@@ -8552,13 +8315,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + SaturdayStringTypeLessonEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 32));
 
-            //3 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, SaturdayStringTypeLessonEditThree);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + SaturdayStringSubjectEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 33));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8568,13 +8325,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + SaturdayStringTypeLessonEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 33));
 
-            //4 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, SaturdayStringTypeLessonEditFour);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + SaturdayStringSubjectEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 34));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8584,13 +8335,7 @@ public class MainActivity2 extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + SaturdayStringTypeLessonEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 34));
 
-            //5 предмет
-            values.clear();
 
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, SaturdayStringTypeLessonEditFive);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + SaturdayStringSubjectEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 35));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
@@ -8601,13 +8346,6 @@ public class MainActivity2 extends AppCompatActivity {
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + SaturdayStringTypeLessonEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 35));
 
 
-            //6 предмет
-            values.clear();
-
-            try {
-                values.put(ScheduleClass.typelessons.typelesson, SaturdayStringTypeLessonEditSix);
-            } catch (NullPointerException e) {
-            }
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.subjects.subject + "='" + SaturdayStringSubjectEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 36));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +

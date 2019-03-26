@@ -111,6 +111,10 @@ public class ScheduleDB extends SQLiteOpenHelper {
                     db.execSQL(sql);
                 }
             }
+          db.execSQL("INSERT INTO " + ScheduleClass.typelessons.TABLE_NAME + " (" + ScheduleClass.typelessons.typelesson + ") VALUES ('Лекция');");
+          db.execSQL("INSERT INTO " + ScheduleClass.typelessons.TABLE_NAME + " (" + ScheduleClass.typelessons.typelesson + ") VALUES ('Лаб./раб.');");
+          db.execSQL("INSERT INTO " + ScheduleClass.typelessons.TABLE_NAME + " (" + ScheduleClass.typelessons.typelesson + ") VALUES ('Практика');");
+
             for (int i=0;i<6;i++){
             db.execSQL("INSERT INTO " + ScheduleClass.calls.TABLE_NAME + " (" + ScheduleClass.calls.time + ") VALUES ('');");}
             db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
