@@ -465,17 +465,13 @@ public class MainActivity2 extends AppCompatActivity {
     ViewPager viewPager;
     PagerAdapter pagerAdapter;
     Boolean first = true;
-
     private ScheduleDB ScheduleDB;
-    RequestQueue requestQueue;
-    ProgressDialog progressDialog;
 
     final Context context = this;
     final ArrayList<String> subject_list = new ArrayList<>();
     final ArrayList<String> audience_list = new ArrayList<>();
     final ArrayList<String> educator_list = new ArrayList<>();
-    private static final String insert = "http://192.168.0.61/phpmyadmin/requests/export.php";
-    String name_db_string="database";
+
 
 
     public void monday_fill() {
@@ -6367,8 +6363,7 @@ public class MainActivity2 extends AppCompatActivity {
         setSupportActionBar(toolbar);
         switcher_save = findViewById(R.id.switcher_save);
         filling_array_list();
-        requestQueue = Volley.newRequestQueue(MainActivity2.this);
-        progressDialog = new ProgressDialog(MainActivity2.this);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
@@ -6410,7 +6405,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         SharedPreferences sp = getPreferences(MODE_PRIVATE);
         String hasVisited = sp.getString("hasVisited", "nope");
-        if (hasVisited=="nope") {
+       /* if (hasVisited=="nope") {
             LinearLayout tabStrip = ((LinearLayout) tabLayout.getChildAt(0));
             tabStrip.setEnabled(false);
             for (int i = 0; i < tabStrip.getChildCount(); i++) {
@@ -6532,7 +6527,7 @@ public class MainActivity2 extends AppCompatActivity {
             SharedPreferences.Editor e = sp.edit();
             e.putString("hasVisited", "yes");
             e.commit();
-        }
+        }*/
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -7017,21 +7012,21 @@ public class MainActivity2 extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                switch(flag_autosave) {
-                    case 0:
-                        onCreateDialogSaveOnExit().show();
-                        return true;
-                    case 1:
-                        saveschedule(position_week);
-                        Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-                        finish();
-                        startActivity(intent);
-                        return true;
-                }
-
                 if (flag_save==1) {Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-                finish();
-                    startActivity(intent);}
+                    finish();
+                    startActivity(intent);} else {
+                    switch (flag_autosave) {
+                        case 0:
+                            onCreateDialogSaveOnExit().show();
+                            return true;
+                        case 1:
+                            saveschedule(position_week);
+                            Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+                            finish();
+                            startActivity(intent);
+                            return true;
+                    }
+                }
                 return true;
             case R.id.save_schedule:
                 switch(flag_autosave) {
@@ -7063,18 +7058,20 @@ public class MainActivity2 extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        switch(flag_autosave) {
-            case 0:
-                onCreateDialogSaveOnExit().show();
-                return;
-            case 1:
-                saveschedule(position_week);
-                finish();
-                return;
-        }
         if (flag_save==1) {Intent intent = new Intent(MainActivity2.this, MainActivity.class);
             finish();
             startActivity(intent);}
+            else {
+            switch (flag_autosave) {
+                case 0:
+                    onCreateDialogSaveOnExit().show();
+                    return;
+                case 1:
+                    saveschedule(position_week);
+                    finish();
+                    return;
+            }
+        }
     }
 
     void load_calls_schedule(){
