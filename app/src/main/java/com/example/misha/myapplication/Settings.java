@@ -65,14 +65,14 @@ import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFoc
 
 public class Settings extends AppCompatActivity {
 
-  private static final String schedule_import= "http://192.168.0.61/phpmyadmin/requests/schedule_table.php";
-  private static final String subjects_import = "http://192.168.0.61/phpmyadmin/requests/subjects_table.php";
-  private static final String audiences_import = "http://192.168.0.61/phpmyadmin/requests/audiences_table.php";
-  private static final String educators_import= "http://192.168.0.61/phpmyadmin/requests/educators_table.php";
-  private static final String typelessons_import = "http://192.168.0.61/phpmyadmin/requests/typelessons_table.php";
-  private static final String call_schedule = "http://192.168.0.61/phpmyadmin/requests/call_schedule.php";
-  private static final String date = "http://192.168.0.61/phpmyadmin/requests/date_start.php";
-  private static final String insert = "http://192.168.0.61/phpmyadmin/requests/export.php";
+  private static final String schedule_import= "http://schedu1e.h1n.ru/schedule.php";
+  private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
+  private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
+  private static final String educators_import= "http://schedu1e.h1n.ru/educators.php";
+  private static final String typelessons_import = "http://schedu1e.h1n.ru/typelessons.php";
+  private static final String call_schedule = "http://schedu1e.h1n.ru/call_schedule.php";
+  private static final String date = "http://schedu1e.h1n.ru/date_start.php";
+  private static final String export = "http://schedu1e.h1n.ru/export.php";
   final String sch="schedule";
   final String sub="subject";
   final String aud="audience";
@@ -259,6 +259,9 @@ public class Settings extends AppCompatActivity {
         load_db(sch,schedule_import);
         load_db(cal,call_schedule);
         load_db(dat,date);
+        Intent intent = new Intent(Settings.this, MainActivity.class);
+        finish();
+        startActivity(intent);
       }
     }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
       public void onClick(DialogInterface dialog, int id) {
@@ -584,7 +587,7 @@ public class Settings extends AppCompatActivity {
     progressDialog.show();
 
 
-    StringRequest stringRequest = new StringRequest(Request.Method.POST, insert,
+    StringRequest stringRequest = new StringRequest(Request.Method.POST, export,
         new Response.Listener<String>() {
           @Override
           public void onResponse(String ServerResponse) {

@@ -54,8 +54,9 @@ public class MainActivity extends AppCompatActivity
     Button button_toolbar;
     Integer dayy=0;
     public void onCreate(Bundle savedInstanceState) {
-        ScheduleDB = new ScheduleDB(this);
         super.onCreate(savedInstanceState);
+
+        ScheduleDB = new ScheduleDB(this);
         setContentView(R.layout.activity_main);
         text_main = findViewById(R.id.text_main);
         final Toolbar toolbar = findViewById(R.id.toolbar);
@@ -164,6 +165,18 @@ public class MainActivity extends AppCompatActivity
         dayy= (int) days;
         spinner.setSelection(dayy);
 }
+
+
+
+        @Override
+        public void onResume() {
+        super.onResume();
+            Fragment fragment = new FragmentOne();
+            if (fragment != null) {
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, fragment);
+                ft.commit();}
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

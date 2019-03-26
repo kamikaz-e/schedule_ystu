@@ -35,14 +35,14 @@ import java.util.Map;
 
 
 public class welcome_activity extends Activity {
-  private static final String schedule_import= "http://192.168.0.61/phpmyadmin/requests/schedule_table.php";
-  private static final String subjects_import = "http://192.168.0.61/phpmyadmin/requests/subjects_table.php";
-  private static final String audiences_import = "http://192.168.0.61/phpmyadmin/requests/audiences_table.php";
-  private static final String educators_import= "http://192.168.0.61/phpmyadmin/requests/educators_table.php";
-  private static final String typelessons_import = "http://192.168.0.61/phpmyadmin/requests/typelessons_table.php";
-  private static final String call_schedule = "http://192.168.0.61/phpmyadmin/requests/call_schedule.php";
-  private static final String date = "http://192.168.0.61/phpmyadmin/requests/date_start.php";
-  private static final String insert = "http://192.168.0.61/phpmyadmin/requests/export.php";
+  private static final String schedule_import= "http://schedu1e.h1n.ru/schedule.php";
+  private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
+  private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
+  private static final String educators_import= "http://schedu1e.h1n.ru/educators.php";
+  private static final String typelessons_import = "http://schedu1e.h1n.ru/typelessons.php";
+  private static final String call_schedule = "http://schedu1e.h1n.ru/call_schedule.php";
+  private static final String date = "http://schedu1e.h1n.ru/date_start.php";
+
 
 
   final String sch="schedule";
@@ -93,7 +93,7 @@ public class welcome_activity extends Activity {
   public Dialog onCreateDialogImport() {
     LayoutInflater li = LayoutInflater.from(context);
     View view = li.inflate(R.layout.dialog_signin, null);
-    AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.AppCompatAlertDialogStyle);
+    final AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.AppCompatAlertDialogStyle);
     builder.setView(view);
     final EditText name_db =  view.findViewById(R.id.name_schedule);
     builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
@@ -107,6 +107,11 @@ public class welcome_activity extends Activity {
         load_db(sch,schedule_import);
         load_db(cal,call_schedule);
         load_db(dat,date);
+        Intent intent = new Intent(welcome_activity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        finish();
+        startActivityIfNeeded(intent, 0);
+
       }
     }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
       public void onClick(DialogInterface dialog, int id) {

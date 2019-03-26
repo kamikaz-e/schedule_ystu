@@ -72,11 +72,11 @@ public class ScheduleWednesday extends android.support.v4.app.Fragment {
 
         schedule = new ArrayList<>();
         schedule.add(new data_schedule("1",calls_schedule.get(0),SubjectOne, AudienceOne, EducatorOne, TypeLessonOne));
-        schedule.add(new data_schedule("2",calls_schedule.get(0),SubjectTwo, AudienceTwo, EducatorTwo, TypeLessonTwo));
-        schedule.add(new data_schedule("3",calls_schedule.get(0),SubjectThree, AudienceThree, EducatorThree, TypeLessonThree));
-        schedule.add(new data_schedule("4",calls_schedule.get(0),SubjectFour, AudienceFour, EducatorFour, TypeLessonFour));
-        schedule.add(new data_schedule("5",calls_schedule.get(0),SubjectFive, AudienceFive, EducatorFive, TypeLessonFive));
-        schedule.add(new data_schedule("6",calls_schedule.get(0),SubjectSix, AudienceSix, EducatorSix, TypeLessonSix));
+        schedule.add(new data_schedule("2",calls_schedule.get(1),SubjectTwo, AudienceTwo, EducatorTwo, TypeLessonTwo));
+        schedule.add(new data_schedule("3",calls_schedule.get(2),SubjectThree, AudienceThree, EducatorThree, TypeLessonThree));
+        schedule.add(new data_schedule("4",calls_schedule.get(3),SubjectFour, AudienceFour, EducatorFour, TypeLessonFour));
+        schedule.add(new data_schedule("5",calls_schedule.get(4),SubjectFive, AudienceFive, EducatorFive, TypeLessonFive));
+        schedule.add(new data_schedule("6",calls_schedule.get(5),SubjectSix, AudienceSix, EducatorSix, TypeLessonSix));
     }
 
     @Override
