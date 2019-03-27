@@ -1,27 +1,44 @@
 package com.example.misha.myapplication;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleDB;
@@ -32,30 +49,35 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
-public class activityEditData extends AppCompatActivity
-        implements fragment_subject.OnFragmentInteractionListener,fragment_audience.OnFragmentInteractionListener,fragment_educator.OnFragmentInteractionListener{
+public class activityEditData extends AppCompatActivity {
+
+
   EditText input_subject;
   ListView list_subjects;
   private ScheduleDB ScheduleDB;
   final Context context = this;
-  final ArrayList<String> subject_list = new ArrayList<>();
-  Button clear_subjects;
 
-  Integer position_spinner=0;
+  Button clear_subjects;
+  Integer position_spinner = 0;
+
+  TabLayout tabLayout;
+  ViewPager viewPager;
+  Edit_Data_ViewPagerAdapter viewPagerAdapter;
 
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activityeditdata);
-    final Spinner spinner = findViewById(R.id.rasp_weeks);
-    ScheduleDB = new ScheduleDB(this);
-    Fragment fragment = new fragment_subject();
-    if (fragment != null) {
-      FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-      ft.replace(R.id.content_frame, fragment);
-      ft.commit();
+
+   /* final Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    ActionBar actionBar = getSupportActionBar();
+    actionBar.setDisplayHomeAsUpEnabled(true);
+    actionBar.setDisplayShowTitleEnabled(false);
+    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);*/
 
 
-      SharedPreferences sp = getPreferences(MODE_PRIVATE);
+
+     /* SharedPreferences sp = getPreferences(MODE_PRIVATE);
       String hasVisited = sp.getString("hasVisited", "nope");
 
       if (hasVisited == "nope") {
@@ -81,97 +103,59 @@ public class activityEditData extends AppCompatActivity
         SharedPreferences.Editor e = sp.edit();
         e.putString("hasVisited", "yes");
         e.commit();
-      }
+      }*/
 
-      final Toolbar toolbar = findViewById(R.id.toolbar);
+
+
+    ScheduleDB = new ScheduleDB(this);
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     ActionBar actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
-    actionBar.setDisplayShowTitleEnabled(false);
-      getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
-      input_subject = findViewById(R.id.input_subject);
-      list_subjects = findViewById(R.id.list_subjects);
+    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
 
 
-      final AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-          switch (position)
-          { case 0:
-           select_subject();
-           position_spinner=position;
-           break;
-            case 1:
-              select_audience();
-              position_spinner=position;
-              break;
-            case 2:
-              select_educator();
-              position_spinner=position;
-              break;
-          }
-        }
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-        }
-      };
-      spinner.setOnItemSelectedListener(itemSelectedListener);
+    viewPager = (ViewPager) findViewById(R.id.viewPager);
+    viewPagerAdapter = new Edit_Data_ViewPagerAdapter(getSupportFragmentManager());
+    viewPager.setAdapter(viewPagerAdapter);
+    tabLayout = (TabLayout) findViewById(R.id.tabs);
 
-    clear_subjects= findViewById(R.id.clear_subjects);
+    tabLayout.setupWithViewPager(viewPager);
+
+    clear_subjects = findViewById(R.id.clear_subjects);
     clear_subjects.setBackgroundResource(R.drawable.ic_clear);
     clear_subjects.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        switch(position_spinner) {
+
+        switch (tabLayout.getSelectedTabPosition()) {
           case 0:
-          onCreateDialogClearSubjects().show();
-          break;
-          case 1:
-          onCreateDialogClearAudiences().show();
-          break;
+            onCreateDialogClearSubjects().show();
+            break;
+           case 1:
+             onCreateDialogClearAudiences().show();
+            break;
           case 2:
-          onCreateDialogClearEducators().show();
-          break;
-        }}
+            onCreateDialogClearSubjects().show();
+            break;
+        }
+      }
     });
-    }
+
   }
 
-  void select_subject(){
+
+  void clear_subjects () {
+
+    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+    db.execSQL("DROP TABLE " + ScheduleClass.subjects.TABLE_NAME);
+    db.execSQL("CREATE TABLE " + ScheduleClass.subjects.TABLE_NAME + " ("
+            + ScheduleClass.subjects.idd_subject + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + ScheduleClass.subjects.subject + " STRING UNIQUE ON CONFLICT IGNORE );");
+    db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
     fragment_subject fragment= new fragment_subject();
-    getSupportFragmentManager().beginTransaction()
-            .replace(R.id.content_frame, fragment)
-            .addToBackStack(null)
-            .commit();
+    
   }
-  void select_audience(){
-    fragment_audience fragment= new fragment_audience();
-    getSupportFragmentManager().beginTransaction()
-            .replace(R.id.content_frame, fragment)
-            .addToBackStack(null)
-            .commit();
-  }
-  void select_educator(){
-    fragment_educator fragment= new fragment_educator();
-    getSupportFragmentManager().beginTransaction()
-            .replace(R.id.content_frame, fragment)
-            .addToBackStack(null)
-            .commit();
-  }
-  public boolean onOptionsItemSelected(MenuItem item) {
-
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        Intent intent = new Intent(activityEditData.this,MainActivity.class);
-        finish();
-        startActivity(intent);
-        return true;
-
-      default:
-        return super.onOptionsItemSelected(item);
-    }
-  }
-
 
   public Dialog onCreateDialogClearSubjects() {
 
@@ -189,13 +173,25 @@ public class activityEditData extends AppCompatActivity
     return builder.create();
   }
 
+  void clear_audiences () {
+    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+    db.execSQL("DROP TABLE " + ScheduleClass.audiences.TABLE_NAME);
+    db.execSQL("CREATE TABLE " + ScheduleClass.audiences.TABLE_NAME + " ("
+            + ScheduleClass.audiences.idd_audience + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
+    db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
+
+
+  }
+
   public Dialog onCreateDialogClearAudiences() {
 
     AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
     builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int id) {
-       clear_audiences();
+        clear_audiences();
+
       }
     }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
       public void onClick(DialogInterface dialog, int id) {
@@ -203,6 +199,18 @@ public class activityEditData extends AppCompatActivity
       }
     }).setTitle("Очистить аудитории?");
     return builder.create();
+  }
+
+
+
+  void clear_educators () {
+    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+    db.execSQL("DROP TABLE " + ScheduleClass.educators.TABLE_NAME);
+    db.execSQL("CREATE TABLE " + ScheduleClass.educators.TABLE_NAME + " ("
+            + ScheduleClass.educators.idd_educator + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
+    db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
+
   }
 
   public Dialog onCreateDialogClearEducators() {
@@ -220,44 +228,80 @@ public class activityEditData extends AppCompatActivity
     }).setTitle("Очистить преподавателей?");
     return builder.create();
   }
-  void clear_subjects () {
 
-    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-    db.execSQL("DROP TABLE " + ScheduleClass.subjects.TABLE_NAME);
-    db.execSQL("CREATE TABLE " + ScheduleClass.subjects.TABLE_NAME + " ("
-            + ScheduleClass.subjects.idd_subject + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + ScheduleClass.subjects.subject + " STRING UNIQUE ON CONFLICT IGNORE );");
-    db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
-    select_subject();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public class Edit_Data_ViewPagerAdapter extends FragmentPagerAdapter {
+
+    public Edit_Data_ViewPagerAdapter(FragmentManager fm) {
+      super(fm);
+    }
+
+    @Override
+    public Fragment getItem(int position) {
+      Fragment fragment = null;
+      if (position == 0) {
+        fragment = new fragment_subject();
+      } else if (position == 1) {
+        fragment = new fragment_audience();
+      } else if (position == 2) {
+        fragment = new fragment_educator();
+      }
+      return fragment;
+    }
+
+    @Override
+    public int getCount() {
+      return 3;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+      String title = null;
+      if (position == 0) {
+        title = "Предметы";
+      } else if (position == 1) {
+        title = "Аудитории";
+      } else if (position == 2) {
+        title = "Препод-ли";
+      }
+      return title;
+    }
+
   }
 
-  void clear_audiences(){
-    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-    db.execSQL("DROP TABLE " + ScheduleClass.audiences.TABLE_NAME);
-    db.execSQL("CREATE TABLE " + ScheduleClass.audiences.TABLE_NAME + " ("
-            + ScheduleClass.audiences.idd_audience + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
-    db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
-    select_audience();
 
-  }
+  public boolean onOptionsItemSelected(MenuItem item) {
 
-  void clear_educators(){
-    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-    db.execSQL("DROP TABLE " + ScheduleClass.educators.TABLE_NAME);
-    db.execSQL("CREATE TABLE " + ScheduleClass.educators.TABLE_NAME + " ("
-            + ScheduleClass.educators.idd_educator + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
-    db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
-    select_educator();
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        Intent intent = new Intent(activityEditData.this, MainActivity.class);
+        finish();
+        startActivity(intent);
+        return true;
 
-  }
-
-
-
-  @Override
-    public void onFragmentInteraction(Uri uri) {
-
+      default:
+        return super.onOptionsItemSelected(item);
     }
   }
+
+
+}
+
+
 

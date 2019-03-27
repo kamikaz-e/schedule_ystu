@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -39,11 +40,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class fragment_audience extends android.support.v4.app.Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-
-    private OnFragmentInteractionListener mListener;
 
     EditText input_audience;
     ListView list_audiences;
@@ -53,19 +49,12 @@ public class fragment_audience extends android.support.v4.app.Fragment {
     Button clear_audiences;
     Button next;
     String select_item="";
-
+    Integer abc=0;
+Button getClear_audiences;
     public fragment_audience() {
         // Required empty public constructor
     }
 
-    public static fragment_audience newInstance(String param1, String param2) {
-        fragment_audience fragment = new fragment_audience();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,6 +105,20 @@ public class fragment_audience extends android.support.v4.app.Fragment {
                 return true;
             }
         });
+        final TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
+        abc=tabLayout.getSelectedTabPosition();
+       /* getClear_audiences = getActivity().findViewById(R.id.clear_subjects);
+        getClear_audiences.setBackgroundResource(R.drawable.ic_clear);
+        getClear_audiences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (abc==1) {
+                    onCreateDialogClearAudiences().show();
+                }
+            }
+        });*/
+
         return view;
     }
 
@@ -155,42 +158,5 @@ public class fragment_audience extends android.support.v4.app.Fragment {
         cursor.close();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

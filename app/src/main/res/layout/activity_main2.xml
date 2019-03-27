@@ -36,6 +36,7 @@
       app:layout_constraintBottom_toTopOf="@+id/viewpager"
       app:layout_constraintTop_toBottomOf="@+id/toolbar"
       app:tabGravity="center"
+
       app:tabIndicatorColor="#FFA500"
       app:tabMinWidth="62dp"
       app:tabSelectedTextColor="#FF9800"

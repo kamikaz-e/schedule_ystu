@@ -6573,6 +6573,7 @@ public class MainActivity2 extends AppCompatActivity {
                 }
             }
         });
+
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
         for (int i = 0; i < tabLayout.getTabCount(); i++) {

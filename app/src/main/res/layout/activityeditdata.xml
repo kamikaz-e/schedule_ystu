@@ -1,57 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context=".activityEditData"
-  android:orientation="vertical">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activityEditData">
+
   <android.support.design.widget.AppBarLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:theme="@style/AppTheme">
-
+      android:layout_height="wrap_content">
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+      <Button
+          android:id="@+id/clear_subjects"
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:layout_marginStart="345dp"
+          android:layout_marginEnd="17dp"
+          android:layout_marginTop="17dp"
+          android:layout_gravity="right"
+          />
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme">
-      <Button
-          android:id="@+id/clear_subjects"
-          android:layout_width="30dp"
-          android:layout_height="30dp"
-          android:layout_marginEnd="17dp"
-          android:layout_marginTop="17dp"
-          android:layout_gravity="right"
-          />
-      <Spinner
-          android:id="@+id/rasp_weeks"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:dropDownWidth="150dp"
-          android:entries="@array/selection"
-          android:background="#0000"/>
+     />
+      </RelativeLayout>
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="#FFA500"
+        app:tabTextAppearance="@style/TabLayoutTextAppearance"
+        app:tabSelectedTextColor="@color/color_secondary_text"
+        app:tabTextColor="@color/color_primary_text"
+        app:tabMode="fixed" />
 
-    </android.support.v7.widget.Toolbar>
   </android.support.design.widget.AppBarLayout>
 
 
-  <LinearLayout
+  <android.support.v4.view.ViewPager
+      android:id="@+id/viewPager"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="horizontal"
-      android:id="@+id/container"
-     >
+      android:layout_height="wrap_content"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/content_frame">
-    </FrameLayout>
 
-  </LinearLayout>
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

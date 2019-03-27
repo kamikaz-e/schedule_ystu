@@ -9,5 +9,7 @@
     <item name="android:background">#282828</item>
     <item name="android:textSize">15dp</item>
   </style>
-
+    <style name="TabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>
