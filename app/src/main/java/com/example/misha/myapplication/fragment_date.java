@@ -92,16 +92,15 @@ public class fragment_date extends android.support.v4.app.Fragment {
                     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
                     db.execSQL("update " + ScheduleClass.date_start.TABLE_NAME + " set " + ScheduleClass.date_start.date + " = '" +
                             current_date  + "' where " + ScheduleClass.date_start.id_date + " = " + 1);
-                    fragment_call_schedule fragment= new fragment_call_schedule();
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_frame, fragment)
-                            .addToBackStack(null)
-                            .commit();
+                    // Toast.makeText(context, String.valueOf(today.getTimeInMillis()), Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences settings = getActivity().getSharedPreferences("week", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putLong("current_week", (Date.getTimeInMillis()));
+                    editor.commit();
 
                 }
-            };
-
-        });
+            };});
 
         return view;
     }

@@ -453,7 +453,8 @@ public class MainActivity2 extends AppCompatActivity {
     Integer position_week=0;
     Integer position_day=0;
     Integer flag_autosave=1;
-    Integer open = 1;
+    Integer open=0;
+
     Integer flag_save=0;
     List<DataMonday> Monday;
     List<DataTuesday> Tuesday;
@@ -590,6 +591,13 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonOne = typeEditOne_monday.indexOfChild(findViewById(typeEditOne_monday.getCheckedRadioButtonId()));
+                int IdRadioButton = typeEditOne_monday.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(IdRadioButton);
+                if (radioButton != null) {
+                    MondayTypeLessonOne = radioButton.getText().toString();
+                }
+                else { MondayTypeLessonOne = "";}
+
             }
         });
 
@@ -597,6 +605,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonTwo = typeEditTwo_monday.indexOfChild(findViewById(typeEditTwo_monday.getCheckedRadioButtonId()));
+                int IdRadioButtonTwo = typeEditTwo_monday.getCheckedRadioButtonId();
+                RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
+                if (radioButtonTwo != null) {
+                    MondayTypeLessonTwo = radioButtonTwo.getText().toString();
+                }
+                else { MondayTypeLessonTwo = "";}
             }
         });
 
@@ -604,6 +618,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonThree = typeEditThree_monday.indexOfChild(findViewById(typeEditThree_monday.getCheckedRadioButtonId()));
+                int IdRadioButtonThree = typeEditThree_monday.getCheckedRadioButtonId();
+                RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
+                if (radioButtonThree != null) {
+                    MondayTypeLessonThree = radioButtonThree.getText().toString();
+                }
+                else { MondayTypeLessonThree = "";}
             }
         });
 
@@ -611,6 +631,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFour = typeEditFour_monday.indexOfChild(findViewById(typeEditFour_monday.getCheckedRadioButtonId()));
+                int IdRadioButtonFour = typeEditFour_monday.getCheckedRadioButtonId();
+                RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
+                if (radioButtonFour != null) {
+                    MondayTypeLessonFour = radioButtonFour.getText().toString();
+                }
+                else { MondayTypeLessonFour = "";}
             }
         });
 
@@ -618,12 +644,24 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFive = typeEditFive_monday.indexOfChild(findViewById(typeEditFive_monday.getCheckedRadioButtonId()));
+                int IdRadioButtonFive = typeEditFive_monday.getCheckedRadioButtonId();
+                RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
+                if (radioButtonFive != null) {
+                    MondayTypeLessonFive = radioButtonFive.getText().toString();
+                }
+                else { MondayTypeLessonFive = "";}
             }
         });
         typeEditSix_monday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonSix = typeEditSix_monday.indexOfChild(findViewById(typeEditSix_monday.getCheckedRadioButtonId()));
+                int IdRadioButtonSix = typeEditSix_monday.getCheckedRadioButtonId();
+                RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
+                if (radioButtonSix != null) {
+                    MondayTypeLessonSix = radioButtonSix.getText().toString();
+                }
+                else { MondayTypeLessonSix = "";}
             }
         });
 
@@ -1272,6 +1310,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonOne = typeEditOne_tuesday.indexOfChild(findViewById(typeEditOne_tuesday.getCheckedRadioButtonId()));
+                int IdRadioButton = typeEditOne_tuesday.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(IdRadioButton);
+                if (radioButton != null) {
+                    TuesdayTypeLessonOne = radioButton.getText().toString();
+                }
+                else { TuesdayTypeLessonOne = "";}
             }
         });
 
@@ -1279,6 +1323,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonTwo = typeEditTwo_tuesday.indexOfChild(findViewById(typeEditTwo_tuesday.getCheckedRadioButtonId()));
+                int IdRadioButton = typeEditTwo_tuesday.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(IdRadioButton);
+                if (radioButton != null) {
+                    TuesdayTypeLessonTwo = radioButton.getText().toString();
+                }
+                else { TuesdayTypeLessonTwo = "";}
             }
         });
 
@@ -1286,6 +1336,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonThree = typeEditThree_tuesday.indexOfChild(findViewById(typeEditThree_tuesday.getCheckedRadioButtonId()));
+                int IdRadioButton = typeEditThree_tuesday.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(IdRadioButton);
+                if (radioButton != null) {
+                    TuesdayTypeLessonThree = radioButton.getText().toString();
+                }
+                else { TuesdayTypeLessonThree = "";}
             }
         });
 
@@ -1293,6 +1349,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFour = typeEditFour_tuesday.indexOfChild(findViewById(typeEditFour_tuesday.getCheckedRadioButtonId()));
+                int IdRadioButton = typeEditFour_tuesday.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(IdRadioButton);
+                if (radioButton != null) {
+                    TuesdayTypeLessonFour = radioButton.getText().toString();
+                }
+                else { TuesdayTypeLessonFour = "";}
             }
         });
 
@@ -1300,12 +1362,24 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFive = typeEditFive_tuesday.indexOfChild(findViewById(typeEditFive_tuesday.getCheckedRadioButtonId()));
+                int IdRadioButton = typeEditFive_tuesday.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(IdRadioButton);
+                if (radioButton != null) {
+                    TuesdayTypeLessonFive = radioButton.getText().toString();
+                }
+                else { TuesdayTypeLessonFive = "";}
             }
         });
         typeEditSix_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonSix = typeEditSix_tuesday.indexOfChild(findViewById(typeEditSix_tuesday.getCheckedRadioButtonId()));
+                int IdRadioButton = typeEditSix_tuesday.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(IdRadioButton);
+                if (radioButton != null) {
+                    TuesdayTypeLessonSix = radioButton.getText().toString();
+                }
+                else { TuesdayTypeLessonSix = "";}
             }
         });
 
@@ -1977,6 +2051,13 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonOne = typeEditOne_wednesday.indexOfChild(findViewById(typeEditOne_wednesday.getCheckedRadioButtonId()));
+                int IdRadioButton = typeEditOne_wednesday.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(IdRadioButton);
+                if (radioButton != null) {
+                    WednesdayTypeLessonOne = radioButton.getText().toString();
+                }
+                else { WednesdayTypeLessonOne = "";}
+
             }
         });
 
@@ -1984,6 +2065,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonTwo = typeEditTwo_wednesday.indexOfChild(findViewById(typeEditTwo_wednesday.getCheckedRadioButtonId()));
+                int IdRadioButtonTwo = typeEditTwo_wednesday.getCheckedRadioButtonId();
+                RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
+                if (radioButtonTwo != null) {
+                    WednesdayTypeLessonTwo = radioButtonTwo.getText().toString();
+                }
+                else { WednesdayTypeLessonTwo = "";}
             }
         });
 
@@ -1991,6 +2078,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonThree = typeEditThree_wednesday.indexOfChild(findViewById(typeEditThree_wednesday.getCheckedRadioButtonId()));
+                int IdRadioButtonThree = typeEditThree_wednesday.getCheckedRadioButtonId();
+                RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
+                if (radioButtonThree != null) {
+                    WednesdayTypeLessonThree = radioButtonThree.getText().toString();
+                }
+                else { WednesdayTypeLessonThree = "";}
             }
         });
 
@@ -1998,6 +2091,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFour = typeEditFour_wednesday.indexOfChild(findViewById(typeEditFour_wednesday.getCheckedRadioButtonId()));
+                int IdRadioButtonFour = typeEditFour_wednesday.getCheckedRadioButtonId();
+                RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
+                if (radioButtonFour != null) {
+                    WednesdayTypeLessonFour = radioButtonFour.getText().toString();
+                }
+                else { WednesdayTypeLessonFour = "";}
             }
         });
 
@@ -2005,12 +2104,24 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFive = typeEditFive_wednesday.indexOfChild(findViewById(typeEditFive_wednesday.getCheckedRadioButtonId()));
+                int IdRadioButtonFive = typeEditFive_wednesday.getCheckedRadioButtonId();
+                RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
+                if (radioButtonFive != null) {
+                    WednesdayTypeLessonFive = radioButtonFive.getText().toString();
+                }
+                else { WednesdayTypeLessonFive = "";}
             }
         });
         typeEditSix_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonSix = typeEditSix_wednesday.indexOfChild(findViewById(typeEditSix_wednesday.getCheckedRadioButtonId()));
+                int IdRadioButtonSix = typeEditSix_wednesday.getCheckedRadioButtonId();
+                RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
+                if (radioButtonSix != null) {
+                    WednesdayTypeLessonSix = radioButtonSix.getText().toString();
+                }
+                else { WednesdayTypeLessonSix = "";}
             }
         });
 
@@ -2663,6 +2774,13 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonOne = typeEditOne_thursday.indexOfChild(findViewById(typeEditOne_thursday.getCheckedRadioButtonId()));
+                int IdRadioButton = typeEditOne_thursday.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(IdRadioButton);
+                if (radioButton != null) {
+                    ThursdayTypeLessonOne = radioButton.getText().toString();
+                }
+                else { ThursdayTypeLessonOne = "";}
+
             }
         });
 
@@ -2670,6 +2788,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonTwo = typeEditTwo_thursday.indexOfChild(findViewById(typeEditTwo_thursday.getCheckedRadioButtonId()));
+                int IdRadioButtonTwo = typeEditTwo_thursday.getCheckedRadioButtonId();
+                RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
+                if (radioButtonTwo != null) {
+                    ThursdayTypeLessonTwo = radioButtonTwo.getText().toString();
+                }
+                else { ThursdayTypeLessonTwo = "";}
             }
         });
 
@@ -2677,6 +2801,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonThree = typeEditThree_thursday.indexOfChild(findViewById(typeEditThree_thursday.getCheckedRadioButtonId()));
+                int IdRadioButtonThree = typeEditThree_thursday.getCheckedRadioButtonId();
+                RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
+                if (radioButtonThree != null) {
+                    ThursdayTypeLessonThree = radioButtonThree.getText().toString();
+                }
+                else { ThursdayTypeLessonThree = "";}
             }
         });
 
@@ -2684,6 +2814,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFour = typeEditFour_thursday.indexOfChild(findViewById(typeEditFour_thursday.getCheckedRadioButtonId()));
+                int IdRadioButtonFour = typeEditFour_thursday.getCheckedRadioButtonId();
+                RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
+                if (radioButtonFour != null) {
+                    ThursdayTypeLessonFour = radioButtonFour.getText().toString();
+                }
+                else { ThursdayTypeLessonFour = "";}
             }
         });
 
@@ -2691,12 +2827,24 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFive = typeEditFive_thursday.indexOfChild(findViewById(typeEditFive_thursday.getCheckedRadioButtonId()));
+                int IdRadioButtonFive = typeEditFive_thursday.getCheckedRadioButtonId();
+                RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
+                if (radioButtonFive != null) {
+                    ThursdayTypeLessonFive = radioButtonFive.getText().toString();
+                }
+                else { ThursdayTypeLessonFive = "";}
             }
         });
         typeEditSix_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonSix = typeEditSix_thursday.indexOfChild(findViewById(typeEditSix_thursday.getCheckedRadioButtonId()));
+                int IdRadioButtonSix = typeEditSix_thursday.getCheckedRadioButtonId();
+                RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
+                if (radioButtonSix != null) {
+                    ThursdayTypeLessonSix = radioButtonSix.getText().toString();
+                }
+                else { ThursdayTypeLessonSix = "";}
             }
         });
 
@@ -3345,10 +3493,18 @@ public class MainActivity2 extends AppCompatActivity {
         TextView clearFive = findViewById(R.id.clear_cardFive_friday);
         TextView clearSix = findViewById(R.id.clear_cardSix_friday);
 
+
         typeEditOne_friday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonOne = typeEditOne_friday.indexOfChild(findViewById(typeEditOne_friday.getCheckedRadioButtonId()));
+                int IdRadioButton = typeEditOne_friday.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(IdRadioButton);
+                if (radioButton != null) {
+                    FridayTypeLessonOne = radioButton.getText().toString();
+                }
+                else { FridayTypeLessonOne = "";}
+
             }
         });
 
@@ -3356,6 +3512,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonTwo = typeEditTwo_friday.indexOfChild(findViewById(typeEditTwo_friday.getCheckedRadioButtonId()));
+                int IdRadioButtonTwo = typeEditTwo_friday.getCheckedRadioButtonId();
+                RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
+                if (radioButtonTwo != null) {
+                    FridayTypeLessonTwo = radioButtonTwo.getText().toString();
+                }
+                else { FridayTypeLessonTwo = "";}
             }
         });
 
@@ -3363,6 +3525,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonThree = typeEditThree_friday.indexOfChild(findViewById(typeEditThree_friday.getCheckedRadioButtonId()));
+                int IdRadioButtonThree = typeEditThree_friday.getCheckedRadioButtonId();
+                RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
+                if (radioButtonThree != null) {
+                    FridayTypeLessonThree = radioButtonThree.getText().toString();
+                }
+                else { FridayTypeLessonThree = "";}
             }
         });
 
@@ -3370,6 +3538,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFour = typeEditFour_friday.indexOfChild(findViewById(typeEditFour_friday.getCheckedRadioButtonId()));
+                int IdRadioButtonFour = typeEditFour_friday.getCheckedRadioButtonId();
+                RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
+                if (radioButtonFour != null) {
+                    FridayTypeLessonFour = radioButtonFour.getText().toString();
+                }
+                else { FridayTypeLessonFour = "";}
             }
         });
 
@@ -3377,12 +3551,24 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFive = typeEditFive_friday.indexOfChild(findViewById(typeEditFive_friday.getCheckedRadioButtonId()));
+                int IdRadioButtonFive = typeEditFive_friday.getCheckedRadioButtonId();
+                RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
+                if (radioButtonFive != null) {
+                    FridayTypeLessonFive = radioButtonFive.getText().toString();
+                }
+                else { FridayTypeLessonFive = "";}
             }
         });
         typeEditSix_friday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonSix = typeEditSix_friday.indexOfChild(findViewById(typeEditSix_friday.getCheckedRadioButtonId()));
+                int IdRadioButtonSix = typeEditSix_friday.getCheckedRadioButtonId();
+                RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
+                if (radioButtonSix != null) {
+                    FridayTypeLessonSix = radioButtonSix.getText().toString();
+                }
+                else { FridayTypeLessonSix = "";}
             }
         });
 
@@ -4034,6 +4220,13 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonOne = typeEditOne_saturday.indexOfChild(findViewById(typeEditOne_saturday.getCheckedRadioButtonId()));
+                int IdRadioButton = typeEditOne_saturday.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(IdRadioButton);
+                if (radioButton != null) {
+                    SaturdayTypeLessonOne = radioButton.getText().toString();
+                }
+                else { SaturdayTypeLessonOne = "";}
+
             }
         });
 
@@ -4041,6 +4234,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonTwo = typeEditTwo_saturday.indexOfChild(findViewById(typeEditTwo_saturday.getCheckedRadioButtonId()));
+                int IdRadioButtonTwo = typeEditTwo_saturday.getCheckedRadioButtonId();
+                RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
+                if (radioButtonTwo != null) {
+                    SaturdayTypeLessonTwo = radioButtonTwo.getText().toString();
+                }
+                else { SaturdayTypeLessonTwo = "";}
             }
         });
 
@@ -4048,6 +4247,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonThree = typeEditThree_saturday.indexOfChild(findViewById(typeEditThree_saturday.getCheckedRadioButtonId()));
+                int IdRadioButtonThree = typeEditThree_saturday.getCheckedRadioButtonId();
+                RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
+                if (radioButtonThree != null) {
+                    SaturdayTypeLessonThree = radioButtonThree.getText().toString();
+                }
+                else { SaturdayTypeLessonThree = "";}
             }
         });
 
@@ -4055,6 +4260,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFour = typeEditFour_saturday.indexOfChild(findViewById(typeEditFour_saturday.getCheckedRadioButtonId()));
+                int IdRadioButtonFour = typeEditFour_saturday.getCheckedRadioButtonId();
+                RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
+                if (radioButtonFour != null) {
+                    SaturdayTypeLessonFour = radioButtonFour.getText().toString();
+                }
+                else { SaturdayTypeLessonFour = "";}
             }
         });
 
@@ -4062,12 +4273,24 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonFive = typeEditFive_saturday.indexOfChild(findViewById(typeEditFive_saturday.getCheckedRadioButtonId()));
+                int IdRadioButtonFive = typeEditFive_saturday.getCheckedRadioButtonId();
+                RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
+                if (radioButtonFive != null) {
+                    SaturdayTypeLessonFive = radioButtonFive.getText().toString();
+                }
+                else { SaturdayTypeLessonFive = "";}
             }
         });
         typeEditSix_saturday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 IdRadioButtonSix = typeEditSix_saturday.indexOfChild(findViewById(typeEditSix_saturday.getCheckedRadioButtonId()));
+                int IdRadioButtonSix = typeEditSix_saturday.getCheckedRadioButtonId();
+                RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
+                if (radioButtonSix != null) {
+                    SaturdayTypeLessonSix = radioButtonSix.getText().toString();
+                }
+                else { SaturdayTypeLessonSix = "";}
             }
         });
 
@@ -6268,7 +6491,7 @@ public class MainActivity2 extends AppCompatActivity {
         } finally {
             cursor.close();
         }
-        open = 0;
+
     }
 
     void filling_array_list(){
@@ -6326,7 +6549,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_editor_menu);
         toolbar.setOverflowIcon(drawable);
-
+        start();
         viewPager = findViewById(R.id.viewpager);
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(), MainActivity2.this);
         viewPager.setAdapter(pagerAdapter);
@@ -6496,9 +6719,7 @@ public class MainActivity2 extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (open == 1) {
-                    start();
-                }
+
                 position_day=position;
                 switch (position) {
                     case 0:
@@ -6535,8 +6756,9 @@ public class MainActivity2 extends AppCompatActivity {
                     saveschedule(position_week);
                 }
                 position_week = position;
-                update_data();
-
+                if (open==1) {
+                    update_data();
+                }
                 switch (tabLayout.getSelectedTabPosition()) {
                     case 0:
                         monday_fill();
@@ -6557,6 +6779,7 @@ public class MainActivity2 extends AppCompatActivity {
                         saturday_fill();
                         break;
                 }
+                open=1;
             }
 
             @Override
@@ -7181,222 +7404,260 @@ public class MainActivity2 extends AppCompatActivity {
         if (radioButton != null) {
             MondayTypeLessonOne = radioButton.getText().toString();
         }
+        else { MondayTypeLessonOne = "";}
 
         int IdRadioButtonTwo = typeEditTwo_monday.getCheckedRadioButtonId();
         RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
         if (radioButtonTwo != null) {
             MondayTypeLessonTwo = radioButtonTwo.getText().toString();
         }
+        else { MondayTypeLessonTwo = "";}
 
         int IdRadioButtonThree = typeEditThree_monday.getCheckedRadioButtonId();
         RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
         if (radioButtonThree != null) {
             MondayTypeLessonThree = radioButtonThree.getText().toString();
         }
+        else { MondayTypeLessonThree = "";}
 
         int IdRadioButtonFour = typeEditFour_monday.getCheckedRadioButtonId();
         RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
         if (radioButtonFour != null) {
             MondayTypeLessonFour = radioButtonFour.getText().toString();
         }
+        else { MondayTypeLessonFour = "";}
 
         int IdRadioButtonFive = typeEditFive_monday.getCheckedRadioButtonId();
         RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
         if (radioButtonFive != null) {
             MondayTypeLessonFive = radioButtonFive.getText().toString();
         }
+        else { MondayTypeLessonFive = "";}
 
         int IdRadioButtonSix = typeEditSix_monday.getCheckedRadioButtonId();
         RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
         if (radioButtonSix != null) {
             MondayTypeLessonSix = radioButtonSix.getText().toString();
         }
+        else { MondayTypeLessonSix = "";}
 
         IdRadioButton = typeEditOne_tuesday.getCheckedRadioButtonId();
         radioButton = findViewById(IdRadioButton);
         if (radioButton != null) {
             TuesdayTypeLessonOne = radioButton.getText().toString();
         }
+        else { TuesdayTypeLessonOne = "";}
 
         IdRadioButtonTwo = typeEditTwo_tuesday.getCheckedRadioButtonId();
         radioButtonTwo = findViewById(IdRadioButtonTwo);
         if (radioButtonTwo != null) {
             TuesdayTypeLessonTwo = radioButtonTwo.getText().toString();
         }
+        else { TuesdayTypeLessonTwo = "";}
 
         IdRadioButtonThree = typeEditThree_tuesday.getCheckedRadioButtonId();
         radioButtonThree = findViewById(IdRadioButtonThree);
         if (radioButtonThree != null) {
             TuesdayTypeLessonThree = radioButtonThree.getText().toString();
         }
+        else { TuesdayTypeLessonThree = "";}
 
         IdRadioButtonFour = typeEditFour_tuesday.getCheckedRadioButtonId();
         radioButtonFour = findViewById(IdRadioButtonFour);
         if (radioButtonFour != null) {
             TuesdayTypeLessonFour = radioButtonFour.getText().toString();
         }
+        else { TuesdayTypeLessonFour = "";}
 
         IdRadioButtonFive = typeEditFive_tuesday.getCheckedRadioButtonId();
         radioButtonFive = findViewById(IdRadioButtonFive);
         if (radioButtonFive != null) {
             TuesdayTypeLessonFive = radioButtonFive.getText().toString();
         }
+        else { TuesdayTypeLessonFive = "";}
 
         IdRadioButtonSix = typeEditSix_tuesday.getCheckedRadioButtonId();
         radioButtonSix = findViewById(IdRadioButtonSix);
         if (radioButtonSix != null) {
             TuesdayTypeLessonSix = radioButtonSix.getText().toString();
         }
+        else { TuesdayTypeLessonSix = "";}
+
         IdRadioButton = typeEditOne_wednesday.getCheckedRadioButtonId();
         radioButton = findViewById(IdRadioButton);
         if (radioButton != null) {
             WednesdayTypeLessonOne = radioButton.getText().toString();
         }
+        else { WednesdayTypeLessonOne = "";}
 
         IdRadioButtonTwo = typeEditTwo_wednesday.getCheckedRadioButtonId();
         radioButtonTwo = findViewById(IdRadioButtonTwo);
         if (radioButtonTwo != null) {
             WednesdayTypeLessonTwo = radioButtonTwo.getText().toString();
         }
+        else { WednesdayTypeLessonTwo = "";}
 
         IdRadioButtonThree = typeEditThree_wednesday.getCheckedRadioButtonId();
         radioButtonThree = findViewById(IdRadioButtonThree);
         if (radioButtonThree != null) {
             WednesdayTypeLessonThree = radioButtonThree.getText().toString();
         }
+        else { WednesdayTypeLessonThree = "";}
 
         IdRadioButtonFour = typeEditFour_wednesday.getCheckedRadioButtonId();
         radioButtonFour = findViewById(IdRadioButtonFour);
         if (radioButtonFour != null) {
             WednesdayTypeLessonFour = radioButtonFour.getText().toString();
         }
+        else { WednesdayTypeLessonFour = "";}
 
         IdRadioButtonFive = typeEditFive_wednesday.getCheckedRadioButtonId();
         radioButtonFive = findViewById(IdRadioButtonFive);
         if (radioButtonFive != null) {
             WednesdayTypeLessonFive = radioButtonFive.getText().toString();
         }
+        else { WednesdayTypeLessonFive = "";}
 
         IdRadioButtonSix = typeEditSix_wednesday.getCheckedRadioButtonId();
         radioButtonSix = findViewById(IdRadioButtonSix);
         if (radioButtonSix != null) {
             WednesdayTypeLessonSix = radioButtonSix.getText().toString();
         }
-        //четверг
+        else { WednesdayTypeLessonSix = "";}
+
         IdRadioButton = typeEditOne_thursday.getCheckedRadioButtonId();
         radioButton = findViewById(IdRadioButton);
         if (radioButton != null) {
             ThursdayTypeLessonOne = radioButton.getText().toString();
         }
+        else { ThursdayTypeLessonOne = "";}
 
         IdRadioButtonTwo = typeEditTwo_thursday.getCheckedRadioButtonId();
         radioButtonTwo = findViewById(IdRadioButtonTwo);
         if (radioButtonTwo != null) {
             ThursdayTypeLessonTwo = radioButtonTwo.getText().toString();
         }
+        else { ThursdayTypeLessonTwo = "";}
 
         IdRadioButtonThree = typeEditThree_thursday.getCheckedRadioButtonId();
         radioButtonThree = findViewById(IdRadioButtonThree);
         if (radioButtonThree != null) {
             ThursdayTypeLessonThree = radioButtonThree.getText().toString();
         }
+        else { ThursdayTypeLessonThree = "";}
 
         IdRadioButtonFour = typeEditFour_thursday.getCheckedRadioButtonId();
         radioButtonFour = findViewById(IdRadioButtonFour);
         if (radioButtonFour != null) {
             ThursdayTypeLessonFour = radioButtonFour.getText().toString();
         }
+        else { ThursdayTypeLessonFour = "";}
 
         IdRadioButtonFive = typeEditFive_thursday.getCheckedRadioButtonId();
         radioButtonFive = findViewById(IdRadioButtonFive);
         if (radioButtonFive != null) {
             ThursdayTypeLessonFive = radioButtonFive.getText().toString();
         }
+        else { ThursdayTypeLessonFive = "";}
 
         IdRadioButtonSix = typeEditSix_thursday.getCheckedRadioButtonId();
         radioButtonSix = findViewById(IdRadioButtonSix);
         if (radioButtonSix != null) {
             ThursdayTypeLessonSix = radioButtonSix.getText().toString();
         }
-        //пятница
+        else { ThursdayTypeLessonSix = "";}
+
         IdRadioButton = typeEditOne_friday.getCheckedRadioButtonId();
         radioButton = findViewById(IdRadioButton);
         if (radioButton != null) {
             FridayTypeLessonOne = radioButton.getText().toString();
         }
+        else { FridayTypeLessonOne = "";}
 
         IdRadioButtonTwo = typeEditTwo_friday.getCheckedRadioButtonId();
         radioButtonTwo = findViewById(IdRadioButtonTwo);
         if (radioButtonTwo != null) {
             FridayTypeLessonTwo = radioButtonTwo.getText().toString();
         }
+        else { FridayTypeLessonTwo = "";}
 
         IdRadioButtonThree = typeEditThree_friday.getCheckedRadioButtonId();
         radioButtonThree = findViewById(IdRadioButtonThree);
         if (radioButtonThree != null) {
             FridayTypeLessonThree = radioButtonThree.getText().toString();
         }
+        else { FridayTypeLessonThree = "";}
 
         IdRadioButtonFour = typeEditFour_friday.getCheckedRadioButtonId();
         radioButtonFour = findViewById(IdRadioButtonFour);
         if (radioButtonFour != null) {
             FridayTypeLessonFour = radioButtonFour.getText().toString();
         }
+        else { FridayTypeLessonFour = "";}
 
         IdRadioButtonFive = typeEditFive_friday.getCheckedRadioButtonId();
         radioButtonFive = findViewById(IdRadioButtonFive);
         if (radioButtonFive != null) {
             FridayTypeLessonFive = radioButtonFive.getText().toString();
         }
+        else { FridayTypeLessonFive = "";}
 
         IdRadioButtonSix = typeEditSix_friday.getCheckedRadioButtonId();
         radioButtonSix = findViewById(IdRadioButtonSix);
         if (radioButtonSix != null) {
             FridayTypeLessonSix = radioButtonSix.getText().toString();
         }
-        //суббота
+        else { FridayTypeLessonSix = "";}
+
         IdRadioButton = typeEditOne_saturday.getCheckedRadioButtonId();
         radioButton = findViewById(IdRadioButton);
         if (radioButton != null) {
             SaturdayTypeLessonOne = radioButton.getText().toString();
         }
+        else { SaturdayTypeLessonOne = "";}
 
         IdRadioButtonTwo = typeEditTwo_saturday.getCheckedRadioButtonId();
         radioButtonTwo = findViewById(IdRadioButtonTwo);
         if (radioButtonTwo != null) {
             SaturdayTypeLessonTwo = radioButtonTwo.getText().toString();
         }
+        else { SaturdayTypeLessonTwo = "";}
 
         IdRadioButtonThree = typeEditThree_saturday.getCheckedRadioButtonId();
         radioButtonThree = findViewById(IdRadioButtonThree);
         if (radioButtonThree != null) {
             SaturdayTypeLessonThree = radioButtonThree.getText().toString();
         }
+        else { SaturdayTypeLessonThree = "";}
 
         IdRadioButtonFour = typeEditFour_saturday.getCheckedRadioButtonId();
         radioButtonFour = findViewById(IdRadioButtonFour);
         if (radioButtonFour != null) {
             SaturdayTypeLessonFour = radioButtonFour.getText().toString();
         }
+        else { SaturdayTypeLessonFour = "";}
 
         IdRadioButtonFive = typeEditFive_saturday.getCheckedRadioButtonId();
         radioButtonFive = findViewById(IdRadioButtonFive);
         if (radioButtonFive != null) {
             SaturdayTypeLessonFive = radioButtonFive.getText().toString();
         }
+        else { SaturdayTypeLessonFive = "";}
 
         IdRadioButtonSix = typeEditSix_saturday.getCheckedRadioButtonId();
         radioButtonSix = findViewById(IdRadioButtonSix);
         if (radioButtonSix != null) {
             SaturdayTypeLessonSix = radioButtonSix.getText().toString();
         }
+        else { SaturdayTypeLessonSix = "";}
+
     }
 
     public void saveschedule(Integer number_week) {
 
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
         position_week=number_week;
-        radiobutton_class();
+       // radiobutton_class();
         DataMonday();
         try {
             MondayStringSubjectEditOne = Monday.get(0).subjectEdit.toString();
