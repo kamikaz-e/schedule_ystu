@@ -17,20 +17,7 @@ import android.widget.TextView;
 
 public class FragmentOne extends android.support.v4.app.Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
     public FragmentOne() {
-    }
-
-    public static FragmentOne newInstance() {
-        FragmentOne fragment = new FragmentOne();
-        return fragment;
     }
 
     @Override
@@ -113,25 +100,4 @@ public class FragmentOne extends android.support.v4.app.Fragment {
             return title;
         }}
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof FragmentOne.OnFragmentInteractionListener) {
-            mListener = (FragmentOne.OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + "must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 }

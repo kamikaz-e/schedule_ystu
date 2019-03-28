@@ -5018,6 +5018,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     public void start() {
 
+
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
         //1 занятие
         Cursor cursor = db.rawQuery("SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1) + "));", null);
@@ -6554,7 +6555,12 @@ public class MainActivity2 extends AppCompatActivity {
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(), MainActivity2.this);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
-        Spinner spinner = findViewById(R.id.rasp_weeks);
+
+        final Spinner spinner = findViewById(R.id.rasp_weeks);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<> (this, R.layout.spinner_item,  getResources().getStringArray(R.array.weeks));
+        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        spinner .setAdapter(spinnerArrayAdapter);
+
         SharedPreferences settings = getSharedPreferences("choice_week", 0);
         Integer current_week = Integer.valueOf(settings.getString("position", "0"));
         spinner.setSelection(current_week);
@@ -6580,7 +6586,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         SharedPreferences sp = getPreferences(MODE_PRIVATE);
         String hasVisited = sp.getString("hasVisited", "nope");
-       /* if (hasVisited=="nope") {
+        if (hasVisited=="nope") {
             LinearLayout tabStrip = ((LinearLayout) tabLayout.getChildAt(0));
             tabStrip.setEnabled(false);
             for (int i = 0; i < tabStrip.getChildCount(); i++) {
@@ -6702,7 +6708,7 @@ public class MainActivity2 extends AppCompatActivity {
             SharedPreferences.Editor e = sp.edit();
             e.putString("hasVisited", "yes");
             e.commit();
-        }*/
+        }
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -7050,8 +7056,9 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
                switcher_save.setChecked(false);
                saveschedule(position_week);
+               flag_save=1;
             }
-        }).setTitle("В данный момент активирована функция автосохранения?");
+        }).setTitle("В данный момент активирована функция автосохранения");
         return builder.create();}
 
 
@@ -7218,6 +7225,7 @@ public class MainActivity2 extends AppCompatActivity {
                 switch(flag_autosave) {
                     case 0:
                         saveschedule(position_week);
+                        flag_save=1;
                         return true;
                     case 1:
                         onCreateDialogSaveSchedule().show();
@@ -7662,9 +7670,46 @@ public class MainActivity2 extends AppCompatActivity {
 
     public void saveschedule(Integer number_week) {
 
+        typeEditOne_monday = findViewById(R.id.typeEdit_monday);
+        typeEditTwo_monday = findViewById(R.id.typeEditTwo_monday);
+        typeEditThree_monday = findViewById(R.id.typeEditThree_monday);
+        typeEditFour_monday = findViewById(R.id.typeEditFour_monday);
+        typeEditFive_monday = findViewById(R.id.typeEditFive_monday);
+        typeEditSix_monday = findViewById(R.id.typeEditSix_monday);
+        typeEditOne_tuesday = findViewById(R.id.typeEdit_tuesday);
+        typeEditTwo_tuesday = findViewById(R.id.typeEditTwo_tuesday);
+        typeEditThree_tuesday = findViewById(R.id.typeEditThree_tuesday);
+        typeEditFour_tuesday = findViewById(R.id.typeEditFour_tuesday);
+        typeEditFive_tuesday = findViewById(R.id.typeEditFive_tuesday);
+        typeEditSix_tuesday = findViewById(R.id.typeEditSix_tuesday);
+        typeEditOne_wednesday = findViewById(R.id.typeEdit_wednesday);
+        typeEditTwo_wednesday = findViewById(R.id.typeEditTwo_wednesday);
+        typeEditThree_wednesday = findViewById(R.id.typeEditThree_wednesday);
+        typeEditFour_wednesday = findViewById(R.id.typeEditFour_wednesday);
+        typeEditFive_wednesday = findViewById(R.id.typeEditFive_wednesday);
+        typeEditSix_wednesday = findViewById(R.id.typeEditSix_wednesday);
+        typeEditOne_thursday = findViewById(R.id.typeEdit_thursday);
+        typeEditTwo_thursday = findViewById(R.id.typeEditTwo_thursday);
+        typeEditThree_thursday = findViewById(R.id.typeEditThree_thursday);
+        typeEditFour_thursday = findViewById(R.id.typeEditFour_thursday);
+        typeEditFive_thursday = findViewById(R.id.typeEditFive_thursday);
+        typeEditSix_thursday = findViewById(R.id.typeEditSix_thursday);
+        typeEditOne_friday = findViewById(R.id.typeEdit_friday);
+        typeEditTwo_friday = findViewById(R.id.typeEditTwo_friday);
+        typeEditThree_friday = findViewById(R.id.typeEditThree_friday);
+        typeEditFour_friday = findViewById(R.id.typeEditFour_friday);
+        typeEditFive_friday = findViewById(R.id.typeEditFive_friday);
+        typeEditSix_friday = findViewById(R.id.typeEditSix_friday);
+        typeEditOne_saturday = findViewById(R.id.typeEdit_saturday);
+        typeEditTwo_saturday = findViewById(R.id.typeEditTwo_saturday);
+        typeEditThree_saturday = findViewById(R.id.typeEditThree_saturday);
+        typeEditFour_saturday = findViewById(R.id.typeEditFour_saturday);
+        typeEditFive_saturday = findViewById(R.id.typeEditFive_saturday);
+        typeEditSix_saturday = findViewById(R.id.typeEditSix_saturday);
+
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
         position_week=number_week;
-       // radiobutton_class();
+
         DataMonday();
         try {
             MondayStringSubjectEditOne = Monday.get(0).subjectEdit.toString();

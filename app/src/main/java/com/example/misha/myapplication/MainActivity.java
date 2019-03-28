@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,8 +34,11 @@ import android.widget.Toast;
 
 import com.example.misha.myapplication.data.ScheduleDB;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Set;
+
+import javax.security.auth.Subject;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.CirclePromptBackground;
@@ -43,9 +47,8 @@ import uk.co.samuelwall.materialtaptargetprompt.extras.focals.CirclePromptFocal;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 public class MainActivity extends AppCompatActivity
- implements NavigationView.OnNavigationItemSelectedListener,FragmentOne.OnFragmentInteractionListener, FragmentTwo.OnFragmentInteractionListener {
+ implements NavigationView.OnNavigationItemSelectedListener {
     private com.example.misha.myapplication.data.ScheduleDB ScheduleDB;
-
     long diff=0;
     long days=0;
     DrawerLayout drawer;
@@ -70,8 +73,11 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        final Spinner spinner = findViewById(R.id.rasp_weeks);
 
+        final Spinner spinner = findViewById(R.id.rasp_weeks);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<> (this, R.layout.spinner_item,  getResources().getStringArray(R.array.weeks));
+        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        spinner .setAdapter(spinnerArrayAdapter);
         button_toolbar= findViewById(R.id.toolbar_but);
         button_toolbar.setBackgroundResource(R.drawable.ic_editor);
         button_toolbar.setOnClickListener(new OnClickListener() {
@@ -186,7 +192,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.rasp_list) {
         } else if (id == R.id.edit_schedule) {
         } else if (id == R.id.settings) {
-        } else if (id == R.id.help) {
         } else if (id == R.id.nav_share) {
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -200,17 +205,12 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         switch (viewId) {
             case R.id.rasp_day:
-
                 fragment = new FragmentOne();
-
                 text_main.setText("По дням");
                 break;
             case R.id.rasp_list:
                 fragment = new FragmentTwo();
                 text_main.setText("Списком");
-                break;
-            case R.id.help:
-                Toast.makeText(getApplication(), "Разработчик:\nВолков Михаил Евгеньевич", Toast.LENGTH_LONG).show();
                 break;
             case R.id.edit_schedule:
                 Intent intent = new Intent(this, MainActivity2.class);
@@ -254,23 +254,26 @@ public class MainActivity extends AppCompatActivity
     public Dialog onCreateDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-
-        builder.setPositiveButton("Открыть профиль", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Профиль Вконтакте", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/mikhailvolkov1"));
                 finish();
                 startActivity(browserIntent);
             }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+        }).setNeutralButton("Отмена", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("VK-страница разработчика");
+        }).setNegativeButton("Электронная почта", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:mikhailvolkov2014-2014@ya.ru"));
+                finish();
+                startActivity(browserIntent);
+            }
+        }).setTitle("Обратная связь с разработчиком");
         return builder.create();
     }
 
-@Override
-public void onFragmentInteraction(Uri uri)
-{}
 }

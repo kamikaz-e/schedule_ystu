@@ -8,5 +8,8 @@
     <color name="colorControlActivated">#FFA500</color>
     <color name="color_primary_text">#FFFFFF</color>
     <color name="color_secondary_text">#FF9800</color>
-
+    <color name="tab_background_selected">#404040</color>
+    <color name="background_color">#484848</color>
+    <color name="background_colorTwo">#303030</color>
+    <color name="background_colorThree">#202020</color>
 </resources>

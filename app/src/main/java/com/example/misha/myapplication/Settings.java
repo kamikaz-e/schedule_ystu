@@ -317,7 +317,7 @@ public class Settings extends AppCompatActivity {
                             + id_subject + ", " + schedule.id_audience + " = " + id_audience + ", "
                             + schedule.id_educator + " = " + id_educator + ", "
                             + schedule.id_typelesson + " = " + id_typelesson + " where "
-                            + schedule.id + " = " + id + ";");
+                            + schedule.id + " = " + id);
                   }
                   if (table == cal) {
                     String id_call = obj.getString("id_call");

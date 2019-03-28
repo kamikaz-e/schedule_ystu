@@ -31,11 +31,12 @@
         android:id="@+id/tabs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:tabGravity="center"
         android:layout_marginStart="5dp"
+        app:tabGravity="center"
         app:tabIndicatorColor="#FFA500"
         app:tabTextAppearance="@style/TabLayoutTextAppearance"
         app:tabSelectedTextColor="@color/color_secondary_text"
+        app:tabBackground="@drawable/tab_color"
         app:tabTextColor="@color/color_primary_text"
         app:tabMode="fixed"/>
 
