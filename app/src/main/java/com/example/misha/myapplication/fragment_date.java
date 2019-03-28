@@ -35,28 +35,14 @@ import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFoc
 
 
 public class fragment_date extends android.support.v4.app.Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
-    private String mParam2;
-
-    private fragment_date.OnFragmentInteractionListener mListener;
 
     RelativeLayout layout_pich_week;
     public fragment_date(){}
 
-    public static fragment_date newInstance() {
-        fragment_date fragment = new fragment_date();
-        return fragment;
-    }
 
     Calendar Date = Calendar.getInstance();
     private ScheduleDB ScheduleDB;
-    RequestQueue requestQueue;
-    ProgressDialog progressDialog;
-
-    String name_db_string="database";
     String  current_date;
 
 
@@ -73,7 +59,32 @@ public class fragment_date extends android.support.v4.app.Fragment {
         ScheduleDB = new ScheduleDB(getActivity());
         layout_pich_week = view.findViewById(R.id.oneitem);
 
-        abc();
+        new MaterialTapTargetPrompt.Builder(getActivity())
+                .setTarget(layout_pich_week)
+                .setPromptBackground(new RectanglePromptBackground())
+                .setPromptFocal(new RectanglePromptFocal())
+                .setPrimaryText("Дата начала семестра")
+                .setSecondaryText("Выберите дату начала семестра для автоматического определения текущей учебной недели")
+                .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200,200,255))
+                .setBackgroundColour(Color.rgb(100,100,255))
+                .setPrimaryTextColour(Color.rgb(255,255,255))
+                .setSecondaryTextColour(Color.rgb(255,255,255))
+                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
+                {
+                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                        if (state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
+                            fragment_call_schedule fragment= new fragment_call_schedule();
+                            getActivity().getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.content_frame, fragment)
+                                    .addToBackStack(null)
+                                    .commit();
+                        }
+                    }
+
+
+                })
+                .show();
+
         layout_pich_week.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -98,6 +109,11 @@ public class fragment_date extends android.support.v4.app.Fragment {
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putLong("current_week", (Date.getTimeInMillis()));
                     editor.commit();
+                    fragment_call_schedule fragment= new fragment_call_schedule();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_frame, fragment)
+                            .addToBackStack(null)
+                            .commit();
 
                 }
             };});
@@ -105,47 +121,4 @@ public class fragment_date extends android.support.v4.app.Fragment {
         return view;
     }
 
-void abc(){  new MaterialTapTargetPrompt.Builder(getActivity())
-        .setTarget(layout_pich_week)
-        .setPromptBackground(new RectanglePromptBackground())
-        .setPromptFocal(new RectanglePromptFocal())
-        .setPrimaryText("Дата начала семестра")
-        .setSecondaryText("Выберите дату начала семестра для автоматического определения текущей учебной недели")
-        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200,200,255))
-        .setBackgroundColour(Color.rgb(100,100,255))
-        .setPrimaryTextColour(Color.rgb(255,255,255))
-        .setSecondaryTextColour(Color.rgb(255,255,255))
-        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
-        {
-            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                if (state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
-                    abc();
-                }
-            }
-
-
-        })
-        .show();}
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof fragment_date.OnFragmentInteractionListener) {
-            mListener = (fragment_date.OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + "must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 }

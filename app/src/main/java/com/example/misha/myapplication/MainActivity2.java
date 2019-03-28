@@ -6576,12 +6576,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
 
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setCustomView(pagerAdapter.getTabView(i));
-
-        }
 
         SharedPreferences sp = getPreferences(MODE_PRIVATE);
         String hasVisited = sp.getString("hasVisited", "nope");
@@ -6837,17 +6832,28 @@ public class MainActivity2 extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
+            String title = null;
+            if (position == 0) {
+                title = "ПН";
+            } else if (position == 1) {
+                title = "ВТ";
+            } else if (position == 2) {
+                title = "СР";
+            }
+             else if (position == 3) {
+                title = "ЧТ";
+                }
+             else if (position == 4) {
+                title = "ПТ";
+            }
+            else if (position == 5) {
+                title = "СБ";
+            }
 
-            return tabTitles[position];
+            return title;
         }
 
-        @SuppressLint("ResourceType")
-        public View getTabView(int position) {
-            View tab = LayoutInflater.from(MainActivity2.this).inflate(R.layout.custom_tab, null);
-            TextView tv = tab.findViewById(R.id.custom_text);
-            tv.setText(tabTitles[position]);
-            return tab;
-        }
+
     }
 
     private void clear_day() {

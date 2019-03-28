@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -41,17 +42,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class fragment_call_schedule extends android.support.v4.app.Fragment{
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
 
     public fragment_call_schedule() {
-        // Required empty public constructor
+
     }
     String select_time_partOne="";
     String select_time_fullOne="";
@@ -65,7 +58,7 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
     String select_time_fullFive="";
     String select_time_partSix="";
     String select_time_fullSix="";
-    Integer flag=0;
+
     EditText oneTime;
     EditText twoTime;
     EditText threeTime;
@@ -78,17 +71,10 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
     Button button_toolbar;
     String hasVisited;
     SharedPreferences sp;
-    RelativeLayout rlOne;
-
-    public static fragment_call_schedule newInstance() {
-        fragment_call_schedule fragment = new fragment_call_schedule();
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -122,11 +108,11 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
         ScheduleDB = new ScheduleDB(getActivity());
 
 
-        rlOne= view.findViewById(R.id.rlOne);
+        CardView cardViewOne= view.findViewById(R.id.card_viewOne);
 
 
             new MaterialTapTargetPrompt.Builder(getActivity())
-                    .setTarget(rlOne)
+                    .setTarget(cardViewOne)
                     .setPromptBackground(new RectanglePromptBackground())
                     .setPromptFocal(new RectanglePromptFocal())
                     .setPrimaryText("Расписание звонков")
@@ -418,26 +404,4 @@ public class fragment_call_schedule extends android.support.v4.app.Fragment{
         }
     }
 
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof fragment_call_schedule.OnFragmentInteractionListener) {
-            mListener = (fragment_call_schedule.OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + "must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 }

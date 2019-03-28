@@ -23,12 +23,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/toolbar"
-                    android:elevation="8dp"
                     app:tabGravity="center"
                     app:tabIndicatorColor="#FFA500"
-                    app:tabMinWidth="62dp"
-                    app:tabSelectedTextColor="#FFA500"
-                    app:tabTextColor="#d3d3d3" />
+                    app:tabTextAppearance="@style/TabLayoutTextAppearance"
+                    app:tabSelectedTextColor="@color/color_secondary_text"
+                    app:tabTextColor="@color/color_primary_text"
+                    app:tabMode="fixed"
+                    app:tabMinWidth="62dp"/>
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/viewpager"

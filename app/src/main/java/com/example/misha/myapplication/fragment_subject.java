@@ -136,9 +136,6 @@ public class fragment_subject extends android.support.v4.app.Fragment {
 
 
 
-
-
-
     public void start(){
 
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);

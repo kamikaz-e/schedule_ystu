@@ -48,13 +48,7 @@ public class FragmentOne extends android.support.v4.app.Fragment {
         TabLayout tabLayout =  view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setCustomView(pagerAdapter.getTabView(i));
-
-        }
-
-            return view;
+        return view;
     }
     @Override
     public void onResume() {
@@ -98,16 +92,25 @@ public class FragmentOne extends android.support.v4.app.Fragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
+            String title = null;
+            if (position == 0) {
+                title = "ПН";
+            } else if (position == 1) {
+                title = "ВТ";
+            } else if (position == 2) {
+                title = "СР";
+            }
+            else if (position == 3) {
+                title = "ЧТ";
+            }
+            else if (position == 4) {
+                title = "ПТ";
+            }
+            else if (position == 5) {
+                title = "СБ";
+            }
 
-            return tabTitles[position];
-        }
-
-        public View getTabView(int position) {
-            View tab = LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null );
-              TextView tv =  tab.findViewById(R.id.custom_text);
-              tv.setText(tabTitles[position]);
-
-            return tab;
+            return title;
         }}
 
 

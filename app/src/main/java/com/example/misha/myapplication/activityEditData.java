@@ -49,6 +49,8 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
+import static android.support.v4.view.PagerAdapter.POSITION_NONE;
+
 public class activityEditData extends AppCompatActivity {
 
 
@@ -136,7 +138,7 @@ public class activityEditData extends AppCompatActivity {
              onCreateDialogClearAudiences().show();
             break;
           case 2:
-            onCreateDialogClearSubjects().show();
+            onCreateDialogClearEducators().show();
             break;
         }
       }
@@ -153,8 +155,9 @@ public class activityEditData extends AppCompatActivity {
             + ScheduleClass.subjects.idd_subject + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + ScheduleClass.subjects.subject + " STRING UNIQUE ON CONFLICT IGNORE );");
     db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
-    fragment_subject fragment= new fragment_subject();
-    
+      if (!(viewPagerAdapter == null)) {
+          viewPagerAdapter.notifyDataSetChanged();
+      }
   }
 
   public Dialog onCreateDialogClearSubjects() {
@@ -180,7 +183,9 @@ public class activityEditData extends AppCompatActivity {
             + ScheduleClass.audiences.idd_audience + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
     db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
-
+    if (!(viewPagerAdapter == null)) {
+      viewPagerAdapter.notifyDataSetChanged();
+    }
 
   }
 
@@ -210,7 +215,9 @@ public class activityEditData extends AppCompatActivity {
             + ScheduleClass.educators.idd_educator + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
     db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
-
+    if (!(viewPagerAdapter == null)) {
+      viewPagerAdapter.notifyDataSetChanged();
+    }
   }
 
   public Dialog onCreateDialogClearEducators() {
@@ -246,7 +253,7 @@ public class activityEditData extends AppCompatActivity {
 
 
 
-  public class Edit_Data_ViewPagerAdapter extends FragmentPagerAdapter {
+  public class Edit_Data_ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     public Edit_Data_ViewPagerAdapter(FragmentManager fm) {
       super(fm);
@@ -263,7 +270,12 @@ public class activityEditData extends AppCompatActivity {
         fragment = new fragment_educator();
       }
       return fragment;
+
     }
+      @Override
+      public int getItemPosition(Object object) {
+          return POSITION_NONE;
+      }
 
     @Override
     public int getCount() {
@@ -278,7 +290,7 @@ public class activityEditData extends AppCompatActivity {
       } else if (position == 1) {
         title = "Аудитории";
       } else if (position == 2) {
-        title = "Препод-ли";
+        title = "Преподаватели";
       }
       return title;
     }
