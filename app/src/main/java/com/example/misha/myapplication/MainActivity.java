@@ -27,12 +27,14 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.misha.myapplication.data.ScheduleDB;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,7 +57,10 @@ public class MainActivity extends AppCompatActivity
     Long current_week;
     TextView text_main;
     Button button_toolbar;
-    Integer dayy=0;
+    Integer curr_week=0;
+    MaterialBetterSpinner spinner;
+
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -73,11 +78,11 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        spinner =  findViewById(R.id.spinner);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line,  getResources().getStringArray(R.array.weeks));
+        spinner.setAdapter(arrayAdapter);
 
-        final Spinner spinner = findViewById(R.id.rasp_weeks);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<> (this, R.layout.spinner_item,  getResources().getStringArray(R.array.weeks));
-        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        spinner .setAdapter(spinnerArrayAdapter);
         button_toolbar= findViewById(R.id.toolbar_but);
         button_toolbar.setBackgroundResource(R.drawable.ic_editor);
         button_toolbar.setOnClickListener(new OnClickListener() {
@@ -88,21 +93,22 @@ public class MainActivity extends AppCompatActivity
         }
       });
 
-        final OnItemSelectedListener itemSelectedListener = new OnItemSelectedListener() {
+        spinner.setOnDismissListener(new AutoCompleteTextView.OnDismissListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onDismiss() {
+                spinner.clearFocus();
+            }
+        });
+        final AdapterView.OnItemClickListener itemSelectedListener = new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SharedPreferences settings = getSharedPreferences("choice_week", 0);
                 Editor editor = settings.edit();
                 editor.putString("position", String.valueOf(position));
                 editor.commit();
                 displayView(R.id.rasp_day);
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
         };
-        spinner.setOnItemSelectedListener(itemSelectedListener);
+        spinner.setOnItemClickListener(itemSelectedListener);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -168,8 +174,12 @@ public class MainActivity extends AppCompatActivity
         diff= today.getTimeInMillis()- current_week;
         // Toast.makeText(this, String.valueOf(diff), Toast.LENGTH_SHORT).show();
         days = (diff / (7 * 24 * 60 * 60 * 1000));
-        dayy= (int) days;
-        spinner.setSelection(dayy);
+        curr_week= (int) days;
+        spinner.setText(arrayAdapter.getItem(curr_week).toString());
+        settings = getSharedPreferences("choice_week", 0);
+        Editor editor = settings.edit();
+        editor.putString("position", String.valueOf(curr_week));
+        editor.commit();
 }
 
 

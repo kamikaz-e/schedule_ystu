@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:card_view="http://schemas.android.com/apk/res-auto"
-  android:id="@+id/cards_view"
-  android:layout_width="match_parent"
-  android:layout_height="1005dp"
-  android:descendantFocusability="beforeDescendants"
-  android:focusableInTouchMode="true">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/cards_view"
+    android:layout_width="match_parent"
+    android:layout_height="1005dp"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <ScrollView
       android:layout_width="match_parent"

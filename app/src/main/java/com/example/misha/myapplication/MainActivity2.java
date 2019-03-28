@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -47,15 +48,11 @@ import com.example.misha.myapplication.data.ScheduleClass.educators;
 import com.example.misha.myapplication.data.ScheduleClass.schedule;
 import com.example.misha.myapplication.data.ScheduleClass.subjects;
 import com.example.misha.myapplication.data.ScheduleDB;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
-import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.CirclePromptBackground;
-import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
-import uk.co.samuelwall.materialtaptargetprompt.extras.focals.CirclePromptFocal;
-import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 
 public class MainActivity2 extends AppCompatActivity {
@@ -931,7 +928,7 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
 
-        SubjectEditOne.setSelection(subject_list.indexOf(Monday.get(0).subjectEdit.toString()));
+        SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).subjectEdit.toString()));
         SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(1).subjectEdit.toString()));
         SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(2).subjectEdit.toString()));
         SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(3).subjectEdit.toString()));
@@ -995,14 +992,19 @@ public class MainActivity2 extends AppCompatActivity {
         }
         //S1
         try {
-            SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    MondayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
-                    Monday.set(0, new DataMonday("1", "8:30-10:00", MondayValueSubjectOne, Monday.get(0).audienceEdit.toString(), Monday.get(0).educator.toString(), Monday.get(0).typelesson.toString())); }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //S2
+              SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      MondayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
+                      Monday.set(0, new DataMonday("1", "8:30-10:00", MondayValueSubjectOne, Monday.get(0).audienceEdit.toString(), Monday.get(0).educator.toString(), Monday.get(0).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) {
+
+                  }
+              }); } catch (NullPointerException e) { }
+
+                //S2
         try {
             SubjectEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
                 @Override
@@ -4629,7 +4631,7 @@ public class MainActivity2 extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
-                    SaturdayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
+                    SaturdayValueSubjectOne =  SubjectEditOne.getSelectedItem().toString();
                     Saturday.set(0, new DataSaturday("1", "8:30-10:00", SaturdayValueSubjectOne, Saturday.get(0).audienceEdit.toString(), Saturday.get(0).educator.toString(), Saturday.get(0).typelesson.toString()));
                 }
                 @Override
@@ -6524,16 +6526,6 @@ public class MainActivity2 extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
     public void onCreate(Bundle savedInstanceState) {
 
         ScheduleDB = new ScheduleDB(this);
@@ -6556,15 +6548,16 @@ public class MainActivity2 extends AppCompatActivity {
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
 
-        final Spinner spinner = findViewById(R.id.rasp_weeks);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<> (this, R.layout.spinner_item,  getResources().getStringArray(R.array.weeks));
-        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        spinner .setAdapter(spinnerArrayAdapter);
+
+        final MaterialBetterSpinner spinner =  findViewById(R.id.spinner);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line,  getResources().getStringArray(R.array.weeks));
+        spinner.setAdapter(arrayAdapter);
 
         SharedPreferences settings = getSharedPreferences("choice_week", 0);
         Integer current_week = Integer.valueOf(settings.getString("position", "0"));
-        spinner.setSelection(current_week);
-
+        spinner.setText(arrayAdapter.getItem(current_week).toString());
+        
         load_calls_schedule();
         switcher_save.setChecked(true);
         switcher_save.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
@@ -6584,7 +6577,8 @@ public class MainActivity2 extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
-        SharedPreferences sp = getPreferences(MODE_PRIVATE);
+
+       /* SharedPreferences sp = getPreferences(MODE_PRIVATE);
         String hasVisited = sp.getString("hasVisited", "nope");
         if (hasVisited=="nope") {
             LinearLayout tabStrip = ((LinearLayout) tabLayout.getChildAt(0));
@@ -6708,7 +6702,7 @@ public class MainActivity2 extends AppCompatActivity {
             SharedPreferences.Editor e = sp.edit();
             e.putString("hasVisited", "yes");
             e.commit();
-        }
+        }*/
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -6748,12 +6742,14 @@ public class MainActivity2 extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }});
 
-
-        AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
-
+        spinner.setOnDismissListener(new AutoCompleteTextView.OnDismissListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+            public void onDismiss() {
+                spinner.clearFocus();
+            }
+        });
+        final AdapterView.OnItemClickListener itemSelectedListener = new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (flag_autosave==1){
                     saveschedule(position_week);
                 }
@@ -6783,13 +6779,9 @@ public class MainActivity2 extends AppCompatActivity {
                 }
                 open=1;
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
         };
 
-        spinner.setOnItemSelectedListener(itemSelectedListener);
+        spinner.setOnItemClickListener(itemSelectedListener);
 
     }
     @SuppressLint("ResourceType")
