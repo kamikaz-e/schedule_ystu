@@ -1,6 +1,7 @@
 package com.example.misha.myapplication;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -12,8 +13,13 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 public class FragmentOne extends android.support.v4.app.Fragment {
 
@@ -28,11 +34,11 @@ public class FragmentOne extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_one, container, false);
-        ViewPager viewPager =  view.findViewById(R.id.viewpager);
+        final ViewPager viewPager =  view.findViewById(R.id.viewpager);
         PagerAdapter pagerAdapter = new PagerAdapter(getActivity().getSupportFragmentManager(), getActivity());
         viewPager.setAdapter(pagerAdapter);
 
-        TabLayout tabLayout =  view.findViewById(R.id.tab_layout);
+        final TabLayout tabLayout =  view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
         return view;
@@ -50,6 +56,11 @@ public class FragmentOne extends android.support.v4.app.Fragment {
         public PagerAdapter(FragmentManager fm, Context context) {
             super(fm);
             this.context = context;
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
         }
 
         @Override
@@ -96,8 +107,11 @@ public class FragmentOne extends android.support.v4.app.Fragment {
             else if (position == 5) {
                 title = "СБ";
             }
-
             return title;
-        }}
+        }
+
+
+
+    }
 
 }

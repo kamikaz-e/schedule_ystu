@@ -50,9 +50,15 @@ import com.example.misha.myapplication.data.ScheduleClass.subjects;
 import com.example.misha.myapplication.data.ScheduleDB;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.CirclePromptBackground;
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.CirclePromptFocal;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 
 public class MainActivity2 extends AppCompatActivity {
@@ -594,7 +600,6 @@ public class MainActivity2 extends AppCompatActivity {
                     MondayTypeLessonOne = radioButton.getText().toString();
                 }
                 else { MondayTypeLessonOne = "";}
-
             }
         });
 
@@ -662,214 +667,232 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
-        copy_downOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).subjectEdit));
-                AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(0).audienceEdit));
-                EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(0).educator));
-             switch (IdRadioButtonOne){
-                 case 0:
+
+
+    copy_downOne.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try {
+            SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).subjectEdit));
+            AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(0).audienceEdit));
+            EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(0).educator));
+            switch (IdRadioButtonOne) {
+                case 0:
                     rb_lectureTwo.setChecked(true);
-               break;
-                 case 1:
+                    break;
+                case 1:
                     rb_labworkTwo.setChecked(true);
-                     break;
-                 case 2:
+                    break;
+                case 2:
                     rb_practiceTwo.setChecked(true);
                     break;
-             }
             }
-        });
+            } catch   (NullPointerException e) {}
+        }
+    });
 
-        copy_downTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(1).subjectEdit));
-                AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(1).audienceEdit));
-                EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(1).educator));
-                switch (IdRadioButtonTwo){
-                    case 0:
-                        rb_lectureThree.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkThree.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceThree.setChecked(true);
-                        break;
-                }
+    copy_downTwo.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          try{
+              SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(1).subjectEdit));
+            AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(1).audienceEdit));
+            EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(1).educator));
+            switch (IdRadioButtonTwo) {
+                case 0:
+                    rb_lectureThree.setChecked(true);
+                    break;
+                case 1:
+                    rb_labworkThree.setChecked(true);
+                    break;
+                case 2:
+                    rb_practiceThree.setChecked(true);
+                    break;
             }
-        });
+        } catch   (NullPointerException e) {}
+        }
+    });
 
-        copy_downThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(2).subjectEdit));
-                AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(2).audienceEdit));
-                EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(2).educator));
-                switch (IdRadioButtonThree){
-                    case 0:
-                        rb_lectureFour.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFour.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFour.setChecked(true);
-                        break;
-                }
+    copy_downThree.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try{
+            SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(2).subjectEdit));
+            AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(2).audienceEdit));
+            EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(2).educator));
+            switch (IdRadioButtonThree) {
+                case 0:
+                    rb_lectureFour.setChecked(true);
+                    break;
+                case 1:
+                    rb_labworkFour.setChecked(true);
+                    break;
+                case 2:
+                    rb_practiceFour.setChecked(true);
+                    break;
             }
-        });
-        copy_downFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(3).subjectEdit));
-                AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(3).audienceEdit));
-                EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(3).educator));
-                switch (IdRadioButtonFour){
-                    case 0:
-                        rb_lectureFive.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFive.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFive.setChecked(true);
-                        break;
-                }
+            } catch   (NullPointerException e) {}
+        }
+    });
+    copy_downFour.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try{
+            SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(3).subjectEdit));
+            AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(3).audienceEdit));
+            EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(3).educator));
+            switch (IdRadioButtonFour) {
+                case 0:
+                    rb_lectureFive.setChecked(true);
+                    break;
+                case 1:
+                    rb_labworkFive.setChecked(true);
+                    break;
+                case 2:
+                    rb_practiceFive.setChecked(true);
+                    break;
             }
-        });
+            } catch   (NullPointerException e) {}
+        }
+    });
 
-        copy_downFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(4).subjectEdit));
-                AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(4).audienceEdit));
-                EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(4).educator));
-                switch (IdRadioButtonFive){
-                    case 0:
-                        rb_lectureSix.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkSix.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceSix.setChecked(true);
-                        break;
-                }
+    copy_downFive.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try{
+            SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(4).subjectEdit));
+            AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(4).audienceEdit));
+            EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(4).educator));
+            switch (IdRadioButtonFive) {
+                case 0:
+                    rb_lectureSix.setChecked(true);
+                    break;
+                case 1:
+                    rb_labworkSix.setChecked(true);
+                    break;
+                case 2:
+                    rb_practiceSix.setChecked(true);
+                    break;
             }
-        });
+            } catch   (NullPointerException e) {}
+        }
+    });
 
-        copy_upTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SubjectEditOne.setSelection(subject_list.indexOf(Monday.get(1).subjectEdit));
-                AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(1).audienceEdit));
-                EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(1).educator));
-                switch (IdRadioButtonTwo){
-                    case 0:
-                        rb_lecture.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labwork.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practice.setChecked(true);
-                        break;
-                }
+    copy_upTwo.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try{
+            SubjectEditOne.setSelection(subject_list.indexOf(Monday.get(1).subjectEdit));
+            AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(1).audienceEdit));
+            EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(1).educator));
+            switch (IdRadioButtonTwo) {
+                case 0:
+                    rb_lecture.setChecked(true);
+                    break;
+                case 1:
+                    rb_labwork.setChecked(true);
+                    break;
+                case 2:
+                    rb_practice.setChecked(true);
+                    break;
             }
-        });
+            } catch   (NullPointerException e) {}
+        }
+    });
 
-        copy_upThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(2).subjectEdit));
-                AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(2).audienceEdit));
-                EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(2).educator));
-                switch (IdRadioButtonThree){
-                    case 0:
-                        rb_lectureTwo.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkTwo.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceTwo.setChecked(true);
-                        break;
-                }
+    copy_upThree.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        try{
+            SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(2).subjectEdit));
+            AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(2).audienceEdit));
+            EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(2).educator));
+            switch (IdRadioButtonThree) {
+                case 0:
+                    rb_lectureTwo.setChecked(true);
+                    break;
+                case 1:
+                    rb_labworkTwo.setChecked(true);
+                    break;
+                case 2:
+                    rb_practiceTwo.setChecked(true);
+                    break;
             }
-        });
+        } catch   (NullPointerException e) {}
+        }
+    });
 
-        copy_upFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(3).subjectEdit));
-                AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(3).audienceEdit));
-                EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(3).educator));
-                switch (IdRadioButtonFour){
-                    case 0:
-                        rb_lectureThree.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkThree.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceThree.setChecked(true);
-                        break;
-                }
+    copy_upFour.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try{
+            SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(3).subjectEdit));
+            AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(3).audienceEdit));
+            EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(3).educator));
+            switch (IdRadioButtonFour) {
+                case 0:
+                    rb_lectureThree.setChecked(true);
+                    break;
+                case 1:
+                    rb_labworkThree.setChecked(true);
+                    break;
+                case 2:
+                    rb_practiceThree.setChecked(true);
+                    break;
             }
-        });
+            } catch   (NullPointerException e) {}
+        }
+    });
 
-        copy_upFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(4).subjectEdit));
-                AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(4).audienceEdit));
-                EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(4).educator));
-                switch (IdRadioButtonFive){
-                    case 0:
-                        rb_lectureFour.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFour.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFour.setChecked(true);
-                        break;
-                }
+    copy_upFive.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try{
+            SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(4).subjectEdit));
+            AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(4).audienceEdit));
+            EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(4).educator));
+            switch (IdRadioButtonFive) {
+                case 0:
+                    rb_lectureFour.setChecked(true);
+                    break;
+                case 1:
+                    rb_labworkFour.setChecked(true);
+                    break;
+                case 2:
+                    rb_practiceFour.setChecked(true);
+                    break;
             }
-        });
+            } catch   (NullPointerException e) {}
+        }
+    });
 
-        copy_upSix.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(5).subjectEdit));
-                AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(5).audienceEdit));
-                EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(5).educator));
-                switch (IdRadioButtonSix){
-                    case 0:
-                        rb_lectureFive.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFive.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFive.setChecked(true);
-                        break;
-                }
+    copy_upSix.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+                try{
+            SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(5).subjectEdit));
+            AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(5).audienceEdit));
+            EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(5).educator));
+            switch (IdRadioButtonSix) {
+                case 0:
+                    rb_lectureFive.setChecked(true);
+                    break;
+                case 1:
+                    rb_labworkFive.setChecked(true);
+                    break;
+                case 2:
+                    rb_practiceFive.setChecked(true);
+                    break;
             }
-        });
+                } catch   (NullPointerException e) {}
+        }
+    });
 
 
         clearOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 SubjectEditOne.setSelection(0);
                 AudienceEditOne.setSelection(0);
                 EducatorEditOne.setSelection(0);
@@ -1388,6 +1411,7 @@ public class MainActivity2 extends AppCompatActivity {
         copy_downOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditTwo.setSelection(subject_list.indexOf(Tuesday.get(0).subjectEdit));
                 AudienceEditTwo.setSelection(audience_list.indexOf(Tuesday.get(0).audienceEdit));
                 EducatorEditTwo.setSelection(educator_list.indexOf(Tuesday.get(0).educator));
@@ -1402,12 +1426,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceTwo.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditThree.setSelection(subject_list.indexOf(Tuesday.get(1).subjectEdit));
                 AudienceEditThree.setSelection(audience_list.indexOf(Tuesday.get(1).audienceEdit));
                 EducatorEditThree.setSelection(educator_list.indexOf(Tuesday.get(1).educator));
@@ -1422,12 +1448,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceThree.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditFour.setSelection(subject_list.indexOf(Tuesday.get(2).subjectEdit));
                 AudienceEditFour.setSelection(audience_list.indexOf(Tuesday.get(2).audienceEdit));
                 EducatorEditFour.setSelection(educator_list.indexOf(Tuesday.get(2).educator));
@@ -1442,11 +1470,13 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFour.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
         copy_downFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditFive.setSelection(subject_list.indexOf(Tuesday.get(3).subjectEdit));
                 AudienceEditFive.setSelection(audience_list.indexOf(Tuesday.get(3).audienceEdit));
                 EducatorEditFive.setSelection(educator_list.indexOf(Tuesday.get(3).educator));
@@ -1461,12 +1491,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFive.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditSix.setSelection(subject_list.indexOf(Tuesday.get(4).subjectEdit));
                 AudienceEditSix.setSelection(audience_list.indexOf(Tuesday.get(4).audienceEdit));
                 EducatorEditSix.setSelection(educator_list.indexOf(Tuesday.get(4).educator));
@@ -1481,13 +1513,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceSix.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            try{
                 SubjectEditOne.setSelection(subject_list.indexOf(Tuesday.get(1).subjectEdit));
                 AudienceEditOne.setSelection(audience_list.indexOf(Tuesday.get(1).audienceEdit));
                 EducatorEditOne.setSelection(educator_list.indexOf(Tuesday.get(1).educator));
@@ -1502,13 +1535,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practice.setChecked(true);
                         break;
                 }
+            } catch   (NullPointerException e) {}
             }
         });
 
         copy_upThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                    try{
                 SubjectEditTwo.setSelection(subject_list.indexOf(Tuesday.get(2).subjectEdit));
                 AudienceEditTwo.setSelection(audience_list.indexOf(Tuesday.get(2).audienceEdit));
                 EducatorEditTwo.setSelection(educator_list.indexOf(Tuesday.get(2).educator));
@@ -1523,13 +1557,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceTwo.setChecked(true);
                         break;
                 }
+                    } catch   (NullPointerException e) {}
             }
         });
 
         copy_upFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                try{
                 SubjectEditThree.setSelection(subject_list.indexOf(Tuesday.get(3).subjectEdit));
                 AudienceEditThree.setSelection(audience_list.indexOf(Tuesday.get(3).audienceEdit));
                 EducatorEditThree.setSelection(educator_list.indexOf(Tuesday.get(3).educator));
@@ -1544,13 +1579,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceThree.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                try{
                 SubjectEditFour.setSelection(subject_list.indexOf(Tuesday.get(4).subjectEdit));
                 AudienceEditFour.setSelection(audience_list.indexOf(Tuesday.get(4).audienceEdit));
                 EducatorEditFour.setSelection(educator_list.indexOf(Tuesday.get(4).educator));
@@ -1565,13 +1601,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFour.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upSix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            try{
                 SubjectEditFive.setSelection(subject_list.indexOf(Tuesday.get(5).subjectEdit));
                 AudienceEditFive.setSelection(audience_list.indexOf(Tuesday.get(5).audienceEdit));
                 EducatorEditFive.setSelection(educator_list.indexOf(Tuesday.get(5).educator));
@@ -1586,6 +1623,7 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFive.setChecked(true);
                         break;
                 }
+            } catch   (NullPointerException e) {}
             }
         });
 
@@ -2130,6 +2168,7 @@ public class MainActivity2 extends AppCompatActivity {
         copy_downOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditTwo.setSelection(subject_list.indexOf(Wednesday.get(0).subjectEdit));
                 AudienceEditTwo.setSelection(audience_list.indexOf(Wednesday.get(0).audienceEdit));
                 EducatorEditTwo.setSelection(educator_list.indexOf(Wednesday.get(0).educator));
@@ -2144,12 +2183,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceTwo.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditThree.setSelection(subject_list.indexOf(Wednesday.get(1).subjectEdit));
                 AudienceEditThree.setSelection(audience_list.indexOf(Wednesday.get(1).audienceEdit));
                 EducatorEditThree.setSelection(educator_list.indexOf(Wednesday.get(1).educator));
@@ -2164,12 +2205,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceThree.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditFour.setSelection(subject_list.indexOf(Wednesday.get(2).subjectEdit));
                 AudienceEditFour.setSelection(audience_list.indexOf(Wednesday.get(2).audienceEdit));
                 EducatorEditFour.setSelection(educator_list.indexOf(Wednesday.get(2).educator));
@@ -2184,11 +2227,13 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFour.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
         copy_downFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditFive.setSelection(subject_list.indexOf(Wednesday.get(3).subjectEdit));
                 AudienceEditFive.setSelection(audience_list.indexOf(Wednesday.get(3).audienceEdit));
                 EducatorEditFive.setSelection(educator_list.indexOf(Wednesday.get(3).educator));
@@ -2203,12 +2248,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFive.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditSix.setSelection(subject_list.indexOf(Wednesday.get(4).subjectEdit));
                 AudienceEditSix.setSelection(audience_list.indexOf(Wednesday.get(4).audienceEdit));
                 EducatorEditSix.setSelection(educator_list.indexOf(Wednesday.get(4).educator));
@@ -2223,12 +2270,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceSix.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditOne.setSelection(subject_list.indexOf(Wednesday.get(1).subjectEdit));
                 AudienceEditOne.setSelection(audience_list.indexOf(Wednesday.get(1).audienceEdit));
@@ -2244,12 +2293,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practice.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditTwo.setSelection(subject_list.indexOf(Wednesday.get(2).subjectEdit));
                 AudienceEditTwo.setSelection(audience_list.indexOf(Wednesday.get(2).audienceEdit));
@@ -2265,12 +2316,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceTwo.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditThree.setSelection(subject_list.indexOf(Wednesday.get(3).subjectEdit));
                 AudienceEditThree.setSelection(audience_list.indexOf(Wednesday.get(3).audienceEdit));
@@ -2286,12 +2339,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceThree.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditFour.setSelection(subject_list.indexOf(Wednesday.get(4).subjectEdit));
                 AudienceEditFour.setSelection(audience_list.indexOf(Wednesday.get(4).audienceEdit));
@@ -2307,12 +2362,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFour.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upSix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditFive.setSelection(subject_list.indexOf(Wednesday.get(5).subjectEdit));
                 AudienceEditFive.setSelection(audience_list.indexOf(Wednesday.get(5).audienceEdit));
@@ -2328,6 +2385,7 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFive.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
@@ -2853,6 +2911,7 @@ public class MainActivity2 extends AppCompatActivity {
         copy_downOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditTwo.setSelection(subject_list.indexOf(Thursday.get(0).subjectEdit));
                 AudienceEditTwo.setSelection(audience_list.indexOf(Thursday.get(0).audienceEdit));
                 EducatorEditTwo.setSelection(educator_list.indexOf(Thursday.get(0).educator));
@@ -2867,12 +2926,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceTwo.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditThree.setSelection(subject_list.indexOf(Thursday.get(1).subjectEdit));
                 AudienceEditThree.setSelection(audience_list.indexOf(Thursday.get(1).audienceEdit));
                 EducatorEditThree.setSelection(educator_list.indexOf(Thursday.get(1).educator));
@@ -2887,12 +2948,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceThree.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditFour.setSelection(subject_list.indexOf(Thursday.get(2).subjectEdit));
                 AudienceEditFour.setSelection(audience_list.indexOf(Thursday.get(2).audienceEdit));
                 EducatorEditFour.setSelection(educator_list.indexOf(Thursday.get(2).educator));
@@ -2907,11 +2970,13 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFour.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
         copy_downFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditFive.setSelection(subject_list.indexOf(Thursday.get(3).subjectEdit));
                 AudienceEditFive.setSelection(audience_list.indexOf(Thursday.get(3).audienceEdit));
                 EducatorEditFive.setSelection(educator_list.indexOf(Thursday.get(3).educator));
@@ -2926,12 +2991,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFive.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditSix.setSelection(subject_list.indexOf(Thursday.get(4).subjectEdit));
                 AudienceEditSix.setSelection(audience_list.indexOf(Thursday.get(4).audienceEdit));
                 EducatorEditSix.setSelection(educator_list.indexOf(Thursday.get(4).educator));
@@ -2946,12 +3013,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceSix.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditOne.setSelection(subject_list.indexOf(Thursday.get(1).subjectEdit));
                 AudienceEditOne.setSelection(audience_list.indexOf(Thursday.get(1).audienceEdit));
@@ -2967,12 +3036,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practice.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditTwo.setSelection(subject_list.indexOf(Thursday.get(2).subjectEdit));
                 AudienceEditTwo.setSelection(audience_list.indexOf(Thursday.get(2).audienceEdit));
@@ -2988,12 +3059,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceTwo.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditThree.setSelection(subject_list.indexOf(Thursday.get(3).subjectEdit));
                 AudienceEditThree.setSelection(audience_list.indexOf(Thursday.get(3).audienceEdit));
@@ -3009,12 +3082,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceThree.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditFour.setSelection(subject_list.indexOf(Thursday.get(4).subjectEdit));
                 AudienceEditFour.setSelection(audience_list.indexOf(Thursday.get(4).audienceEdit));
@@ -3030,12 +3105,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFour.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upSix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditFive.setSelection(subject_list.indexOf(Thursday.get(5).subjectEdit));
                 AudienceEditFive.setSelection(audience_list.indexOf(Thursday.get(5).audienceEdit));
@@ -3051,6 +3128,8 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFive.setChecked(true);
                         break;
                 }
+
+                } catch   (NullPointerException e) {}
             }
         });
 
@@ -3577,6 +3656,7 @@ public class MainActivity2 extends AppCompatActivity {
         copy_downOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditTwo.setSelection(subject_list.indexOf(Friday.get(0).subjectEdit));
                 AudienceEditTwo.setSelection(audience_list.indexOf(Friday.get(0).audienceEdit));
                 EducatorEditTwo.setSelection(educator_list.indexOf(Friday.get(0).educator));
@@ -3591,12 +3671,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceTwo.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditThree.setSelection(subject_list.indexOf(Friday.get(1).subjectEdit));
                 AudienceEditThree.setSelection(audience_list.indexOf(Friday.get(1).audienceEdit));
                 EducatorEditThree.setSelection(educator_list.indexOf(Friday.get(1).educator));
@@ -3611,12 +3693,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceThree.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditFour.setSelection(subject_list.indexOf(Friday.get(2).subjectEdit));
                 AudienceEditFour.setSelection(audience_list.indexOf(Friday.get(2).audienceEdit));
                 EducatorEditFour.setSelection(educator_list.indexOf(Friday.get(2).educator));
@@ -3631,11 +3715,13 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFour.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
         copy_downFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditFive.setSelection(subject_list.indexOf(Friday.get(3).subjectEdit));
                 AudienceEditFive.setSelection(audience_list.indexOf(Friday.get(3).audienceEdit));
                 EducatorEditFive.setSelection(educator_list.indexOf(Friday.get(3).educator));
@@ -3650,6 +3736,7 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFive.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
@@ -3676,6 +3763,7 @@ public class MainActivity2 extends AppCompatActivity {
         copy_upTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditOne.setSelection(subject_list.indexOf(Friday.get(1).subjectEdit));
                 AudienceEditOne.setSelection(audience_list.indexOf(Friday.get(1).audienceEdit));
@@ -3691,12 +3779,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practice.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditTwo.setSelection(subject_list.indexOf(Friday.get(2).subjectEdit));
                 AudienceEditTwo.setSelection(audience_list.indexOf(Friday.get(2).audienceEdit));
@@ -3712,12 +3802,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceTwo.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditThree.setSelection(subject_list.indexOf(Friday.get(3).subjectEdit));
                 AudienceEditThree.setSelection(audience_list.indexOf(Friday.get(3).audienceEdit));
@@ -3733,12 +3825,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceThree.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditFour.setSelection(subject_list.indexOf(Friday.get(4).subjectEdit));
                 AudienceEditFour.setSelection(audience_list.indexOf(Friday.get(4).audienceEdit));
@@ -3754,12 +3848,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFour.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upSix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditFive.setSelection(subject_list.indexOf(Friday.get(5).subjectEdit));
                 AudienceEditFive.setSelection(audience_list.indexOf(Friday.get(5).audienceEdit));
@@ -3775,6 +3871,7 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFive.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
@@ -4299,6 +4396,7 @@ public class MainActivity2 extends AppCompatActivity {
         copy_downOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditTwo.setSelection(subject_list.indexOf(Saturday.get(0).subjectEdit));
                 AudienceEditTwo.setSelection(audience_list.indexOf(Saturday.get(0).audienceEdit));
                 EducatorEditTwo.setSelection(educator_list.indexOf(Saturday.get(0).educator));
@@ -4313,12 +4411,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceTwo.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditThree.setSelection(subject_list.indexOf(Saturday.get(1).subjectEdit));
                 AudienceEditThree.setSelection(audience_list.indexOf(Saturday.get(1).audienceEdit));
                 EducatorEditThree.setSelection(educator_list.indexOf(Saturday.get(1).educator));
@@ -4333,12 +4433,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceThree.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditFour.setSelection(subject_list.indexOf(Saturday.get(2).subjectEdit));
                 AudienceEditFour.setSelection(audience_list.indexOf(Saturday.get(2).audienceEdit));
                 EducatorEditFour.setSelection(educator_list.indexOf(Saturday.get(2).educator));
@@ -4353,11 +4455,13 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFour.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
         copy_downFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditFive.setSelection(subject_list.indexOf(Saturday.get(3).subjectEdit));
                 AudienceEditFive.setSelection(audience_list.indexOf(Saturday.get(3).audienceEdit));
                 EducatorEditFive.setSelection(educator_list.indexOf(Saturday.get(3).educator));
@@ -4372,12 +4476,15 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFive.setChecked(true);
                         break;
                 }
+
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_downFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 SubjectEditSix.setSelection(subject_list.indexOf(Saturday.get(4).subjectEdit));
                 AudienceEditSix.setSelection(audience_list.indexOf(Saturday.get(4).audienceEdit));
                 EducatorEditSix.setSelection(educator_list.indexOf(Saturday.get(4).educator));
@@ -4392,13 +4499,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceSix.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                try{
                 SubjectEditOne.setSelection(subject_list.indexOf(Saturday.get(1).subjectEdit));
                 AudienceEditOne.setSelection(audience_list.indexOf(Saturday.get(1).audienceEdit));
                 EducatorEditOne.setSelection(educator_list.indexOf(Saturday.get(1).educator));
@@ -4413,13 +4521,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practice.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                try{
                 SubjectEditTwo.setSelection(subject_list.indexOf(Saturday.get(2).subjectEdit));
                 AudienceEditTwo.setSelection(audience_list.indexOf(Saturday.get(2).audienceEdit));
                 EducatorEditTwo.setSelection(educator_list.indexOf(Saturday.get(2).educator));
@@ -4434,12 +4543,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceTwo.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditThree.setSelection(subject_list.indexOf(Saturday.get(3).subjectEdit));
                 AudienceEditThree.setSelection(audience_list.indexOf(Saturday.get(3).audienceEdit));
@@ -4455,12 +4566,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceThree.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditFour.setSelection(subject_list.indexOf(Saturday.get(4).subjectEdit));
                 AudienceEditFour.setSelection(audience_list.indexOf(Saturday.get(4).audienceEdit));
@@ -4476,12 +4589,14 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFour.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
         copy_upSix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
 
                 SubjectEditFive.setSelection(subject_list.indexOf(Saturday.get(5).subjectEdit));
                 AudienceEditFive.setSelection(audience_list.indexOf(Saturday.get(5).audienceEdit));
@@ -4497,6 +4612,7 @@ public class MainActivity2 extends AppCompatActivity {
                         rb_practiceFive.setChecked(true);
                         break;
                 }
+                } catch   (NullPointerException e) {}
             }
         });
 
@@ -5014,13 +5130,13 @@ public class MainActivity2 extends AppCompatActivity {
         typeEditFour_saturday.clearCheck();
         typeEditFive_saturday.clearCheck();
         typeEditSix_saturday.clearCheck();
-        start();
+        start(position_week);
 
     }
 
-    public void start() {
+    public void start(Integer select_week) {
 
-
+        position_week=select_week;
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
         //1 занятие
         Cursor cursor = db.rawQuery("SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1) + "));", null);
@@ -6542,22 +6658,26 @@ public class MainActivity2 extends AppCompatActivity {
 
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_editor_menu);
         toolbar.setOverflowIcon(drawable);
-        start();
+
         viewPager = findViewById(R.id.viewpager);
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(), MainActivity2.this);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
 
 
-        final MaterialBetterSpinner spinner =  findViewById(R.id.spinner);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line,  getResources().getStringArray(R.array.weeks));
-        spinner.setAdapter(arrayAdapter);
+        final Spinner spinner = findViewById(R.id.rasp_weeks);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<> (this, R.layout.spinner_item,  getResources().getStringArray(R.array.weeks));
+        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        spinner .setAdapter(spinnerArrayAdapter);
 
         SharedPreferences settings = getSharedPreferences("choice_week", 0);
         Integer current_week = Integer.valueOf(settings.getString("position", "0"));
-        spinner.setText(arrayAdapter.getItem(current_week).toString());
-        
+
+        spinner.setSelection(current_week);
+        start(current_week);
+       /* if (!(pagerAdapter == null)) {
+            pagerAdapter.notifyDataSetChanged();
+        }*/
         load_calls_schedule();
         switcher_save.setChecked(true);
         switcher_save.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
@@ -6742,14 +6862,11 @@ public class MainActivity2 extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }});
 
-        spinner.setOnDismissListener(new AutoCompleteTextView.OnDismissListener() {
+
+
+        final OnItemSelectedListener itemSelectedListener = new OnItemSelectedListener() {
             @Override
-            public void onDismiss() {
-                spinner.clearFocus();
-            }
-        });
-        final AdapterView.OnItemClickListener itemSelectedListener = new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (flag_autosave==1){
                     saveschedule(position_week);
                 }
@@ -6779,9 +6896,15 @@ public class MainActivity2 extends AppCompatActivity {
                 }
                 open=1;
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
         };
 
-        spinner.setOnItemClickListener(itemSelectedListener);
+        spinner.setOnItemSelectedListener(itemSelectedListener);
 
     }
     @SuppressLint("ResourceType")
@@ -6805,6 +6928,8 @@ public class MainActivity2 extends AppCompatActivity {
         public int getCount() {
             return tabTitles.length;
         }
+
+
 
         @SuppressLint("ResourceType")
         @Override

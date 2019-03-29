@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity
                 editor.putString("position", String.valueOf(position));
                 editor.commit();
                 displayView(R.id.rasp_day);
+
             }
         };
         spinner.setOnItemClickListener(itemSelectedListener);
@@ -113,6 +114,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         displayView(R.id.rasp_day);
+
 
 
         SharedPreferences sp = getPreferences(MODE_PRIVATE);
@@ -180,6 +182,8 @@ public class MainActivity extends AppCompatActivity
         Editor editor = settings.edit();
         editor.putString("position", String.valueOf(curr_week));
         editor.commit();
+
+
 }
 
 

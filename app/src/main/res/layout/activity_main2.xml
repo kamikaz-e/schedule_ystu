@@ -14,21 +14,16 @@
       android:layout_height="?attr/actionBarSize"
       android:background="?attr/colorPrimary"
       app:popupTheme="@style/AppCompatAlertDialogStyle">
-        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-            android:id="@+id/spinner"
+        <Spinner
+            android:id="@+id/rasp_weeks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:hint="Текущая неделя"
-            android:drawableEnd="@android:color/transparent"
-            android:dropDownWidth="wrap_content"
-            app:met_floatingLabel="normal"
-            android:textSize="19sp"
-            app:met_baseColor="@color/color_primary_text"
-            app:met_textColorHint="@color/color_primary_text"
-            app:met_hideUnderline="true"
-            app:met_floatingLabelPadding="1dip"
-            app:met_floatingLabelAnimating="true"
+            android:paddingTop="1dp"
+            android:dropDownWidth="100dp"
+            android:entries="@array/weeks"
+            android:background="#0000"
+            tools:layout_editor_absoluteX="17dp"
+            tools:layout_editor_absoluteY="17dp"
             />
     </android.support.v7.widget.Toolbar>
 
