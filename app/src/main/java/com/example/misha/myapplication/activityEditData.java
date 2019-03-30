@@ -147,6 +147,7 @@ public class activityEditData extends AppCompatActivity {
   }
 
 
+
   void clear_subjects () {
 
     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
@@ -245,14 +246,6 @@ public class activityEditData extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
   public class Edit_Data_ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     public Edit_Data_ViewPagerAdapter(FragmentManager fm) {
@@ -290,7 +283,7 @@ public class activityEditData extends AppCompatActivity {
       } else if (position == 1) {
         title = "Аудитории";
       } else if (position == 2) {
-        title = "Преподаватели";
+        title = "Препод-ли";
       }
       return title;
     }
@@ -311,6 +304,13 @@ public class activityEditData extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
   }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(activityEditData.this, MainActivity.class);
+        finish();
+        startActivity(intent);
+    }
 
 
 }

@@ -69,7 +69,6 @@ public class Settings extends AppCompatActivity {
   private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
   private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
   private static final String educators_import= "http://schedu1e.h1n.ru/educators.php";
-  private static final String typelessons_import = "http://schedu1e.h1n.ru/typelessons.php";
   private static final String call_schedule = "http://schedu1e.h1n.ru/call_schedule.php";
   private static final String date = "http://schedu1e.h1n.ru/date_start.php";
   private static final String export = "http://schedu1e.h1n.ru/export.php";
@@ -77,7 +76,6 @@ public class Settings extends AppCompatActivity {
   final String sub="subject";
   final String aud="audience";
   final String edu="educator";
-  final String typ="typelesson";
   final String cal="calls";
   final String dat="date_start";
 
@@ -92,7 +90,6 @@ public class Settings extends AppCompatActivity {
   String json_subjects = "";
   String json_audiences = "";
   String json_educators = "";
-  String json_typelessons = "";
   String json_calls = "";
   String json_date = "";
   String name_db_string="database";
@@ -252,10 +249,25 @@ public class Settings extends AppCompatActivity {
       @Override
       public void onClick(DialogInterface dialog, int id) {
         database_name= name_db.getText().toString();
+          SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+          db.execSQL("DROP TABLE " + ScheduleClass.subjects.TABLE_NAME);
+          db.execSQL("CREATE TABLE " + ScheduleClass.subjects.TABLE_NAME + " ("
+                  + ScheduleClass.subjects.idd_subject + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                  + ScheduleClass.subjects.subject + " STRING UNIQUE ON CONFLICT IGNORE );");
+          db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
+          db.execSQL("DROP TABLE " + ScheduleClass.audiences.TABLE_NAME);
+          db.execSQL("CREATE TABLE " + ScheduleClass.audiences.TABLE_NAME + " ("
+                  + ScheduleClass.audiences.idd_audience + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                  + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
+          db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
+          db.execSQL("DROP TABLE " + ScheduleClass.educators.TABLE_NAME);
+          db.execSQL("CREATE TABLE " + ScheduleClass.educators.TABLE_NAME + " ("
+                  + ScheduleClass.educators.idd_educator + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                  + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
+          db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
         load_db(sub, subjects_import);
         load_db(aud,audiences_import);
         load_db(edu,educators_import);
-        load_db(typ,typelessons_import);
         load_db(sch,schedule_import);
         load_db(cal,call_schedule);
         load_db(dat,date);
@@ -282,6 +294,7 @@ public class Settings extends AppCompatActivity {
               SQLiteDatabase db = ScheduleDB.getWritableDatabase();
               db.beginTransaction();
               try {
+
                 for (int i = 0; i < jsonArray.length(); i++) {
                   obj = jsonArray.getJSONObject(i);
                   if (table == aud) {
@@ -293,13 +306,6 @@ public class Settings extends AppCompatActivity {
                     String educator = obj.getString("educator");
                     db.execSQL("insert into " + educators.TABLE_NAME + " (" + educators.educator
                         + ") values ('" + educator + "');");
-                  }
-
-                  if (table == typ) {
-                    String typelesson = obj.getString("typelesson");
-                    db.execSQL(
-                        "insert into " + typelessons.TABLE_NAME + " (" + typelessons.typelesson
-                            + ") values ('" + typelesson + "');");
                   }
                   if (table == sub) {
                     String subject = obj.getString("subject");
@@ -502,7 +508,8 @@ public class Settings extends AppCompatActivity {
     cursor3.close();
     json_educators = resultSet3.toString();
 
-    String searchQuery4 = "SELECT  * FROM " + typelessons.TABLE_NAME;
+
+    String searchQuery4 = "SELECT  * FROM " + calls.TABLE_NAME;
     Cursor cursor4 = myDataBase.rawQuery(searchQuery4, null);
     JSONArray resultSet4 = new JSONArray();
     cursor4.moveToFirst();
@@ -527,9 +534,9 @@ public class Settings extends AppCompatActivity {
       cursor4.moveToNext();
     }
     cursor4.close();
-    json_typelessons = resultSet4.toString();
+    json_calls = resultSet4.toString();
 
-    String searchQuery5 = "SELECT  * FROM " + calls.TABLE_NAME;
+    String searchQuery5 = "SELECT  * FROM " + date_start.TABLE_NAME;
     Cursor cursor5 = myDataBase.rawQuery(searchQuery5, null);
     JSONArray resultSet5 = new JSONArray();
     cursor5.moveToFirst();
@@ -554,34 +561,7 @@ public class Settings extends AppCompatActivity {
       cursor5.moveToNext();
     }
     cursor5.close();
-    json_calls = resultSet5.toString();
-
-    String searchQuery6 = "SELECT  * FROM " + date_start.TABLE_NAME;
-    Cursor cursor6 = myDataBase.rawQuery(searchQuery6, null);
-    JSONArray resultSet6 = new JSONArray();
-    cursor6.moveToFirst();
-    while (cursor6.isAfterLast() == false) {
-
-      int totalColumn = cursor6.getColumnCount();
-      JSONObject rowObject6 = new JSONObject();
-
-      for (int i = 0; i < totalColumn; i++) {
-        if (cursor6.getColumnName(i) != null) {
-          try {
-            if (cursor6.getString(i) != null) {
-              rowObject6.put(cursor6.getColumnName(i), cursor6.getString(i));
-            } else {
-              rowObject6.put(cursor6.getColumnName(i), "");
-            }
-          } catch (Exception e) {
-          }
-        }
-      }
-      resultSet6.put(rowObject6);
-      cursor6.moveToNext();
-    }
-    cursor6.close();
-    json_date = resultSet6.toString();
+    json_date = resultSet5.toString();
 
     progressDialog.setMessage("Пожалуйста подождите. Идет выгрузка данных на сервер");
     progressDialog.show();
@@ -611,7 +591,6 @@ public class Settings extends AppCompatActivity {
         params.put("subjects", json_subjects);
         params.put("audiences", json_audiences);
         params.put("educators", json_educators);
-        params.put("typelessons", json_typelessons);
         params.put("call", json_calls);
         params.put("current_date", json_date);
         return params;
@@ -633,4 +612,12 @@ public class Settings extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
   }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Settings.this,MainActivity.class);
+        finish();
+        startActivity(intent);
+    }
+
 }

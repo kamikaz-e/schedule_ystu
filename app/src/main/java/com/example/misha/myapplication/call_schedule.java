@@ -419,7 +419,7 @@ public class call_schedule extends AppCompatActivity {
       case android.R.id.home:
 
           save_calls();
-          Intent intent = new Intent(call_schedule.this,MainActivity.class);
+          Intent intent = new Intent(call_schedule.this, MainActivity.class);
           finish();
           startActivity(intent);
 
@@ -428,4 +428,12 @@ public class call_schedule extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
   }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(call_schedule.this, MainActivity.class);
+        finish();
+        startActivity(intent);
+    }
+
+
 }

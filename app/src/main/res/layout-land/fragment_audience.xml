@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment_start_subjects">
+    tools:context=".fragment_audience">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <EditText
             android:id="@+id/input_audience"
             android:layout_width="375dp"
@@ -19,8 +19,7 @@
             android:layout_marginEnd="10dp"
             android:ems="10"
             android:hint="Аудитория"
-            android:inputType="textCapWords"
-
+            android:inputType="textCapWords|text"
             android:selectAllOnFocus="false"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,7 +27,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintVertical_bias="0.0" />
         <ListView
             android:id="@+id/list_audiences"
             android:layout_width="397dp"

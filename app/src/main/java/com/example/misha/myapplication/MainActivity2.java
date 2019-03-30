@@ -6663,6 +6663,7 @@ public class MainActivity2 extends AppCompatActivity {
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
 
+        radiobutton_class();
 
         final MaterialBetterSpinner spinner =  findViewById(R.id.spinner);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
@@ -6990,9 +6991,35 @@ public class MainActivity2 extends AppCompatActivity {
         values.put("id_educator","");
         values.put("id_typelesson","");
         db.update(schedule.TABLE_NAME, values," ( "+schedule.id_day+"="+ number_day +" ) AND ( "+ schedule.id_week+ "=" + number_week+ " )", null);
-        update_data();
+        radiobutton_class();
+
         switch(position_day) {
             case 0:
+                MondayValueSubjectOne = "";
+                MondayValueSubjectTwo = "";
+                MondayValueSubjectThree = "";
+                MondayValueSubjectFour = "";
+                MondayValueSubjectFive = "";
+                MondayValueSubjectSix = "";
+                MondayValueAudienceOne = "";
+                MondayValueAudienceTwo = "";
+                MondayValueAudienceThree = "";
+                MondayValueAudienceFour = "";
+                MondayValueAudienceFive = "";
+                MondayValueAudienceSix = "";
+                MondayEducatorOne = "";
+                MondayEducatorTwo = "";
+                MondayEducatorThree = "";
+                MondayEducatorFour = "";
+                MondayEducatorFive = "";
+                MondayEducatorSix = "";
+                MondayTypeLessonOne = "";
+                MondayTypeLessonTwo = "";
+                MondayTypeLessonThree = "";
+                MondayTypeLessonFour = "";
+                MondayTypeLessonFive = "";
+                MondayTypeLessonSix = "";
+                start(position_week);
                 monday_fill();
                 typeEditOne_monday.clearCheck();
                 typeEditTwo_monday.clearCheck();
@@ -7002,6 +7029,31 @@ public class MainActivity2 extends AppCompatActivity {
                 typeEditSix_monday.clearCheck();
                 break;
             case 1:
+                TuesdayValueSubjectOne = "";
+                TuesdayValueSubjectTwo = "";
+                TuesdayValueSubjectThree = "";
+                TuesdayValueSubjectFour = "";
+                TuesdayValueSubjectFive = "";
+                TuesdayValueSubjectSix = "";
+                TuesdayValueAudienceOne = "";
+                TuesdayValueAudienceTwo = "";
+                TuesdayValueAudienceThree = "";
+                TuesdayValueAudienceFour = "";
+                TuesdayValueAudienceFive = "";
+                TuesdayValueAudienceSix = "";
+                TuesdayEducatorOne = "";
+                TuesdayEducatorTwo = "";
+                TuesdayEducatorThree = "";
+                TuesdayEducatorFour = "";
+                TuesdayEducatorFive = "";
+                TuesdayEducatorSix = "";
+                TuesdayTypeLessonOne = "";
+                TuesdayTypeLessonTwo = "";
+                TuesdayTypeLessonThree = "";
+                TuesdayTypeLessonFour = "";
+                TuesdayTypeLessonFive = "";
+                TuesdayTypeLessonSix = "";
+                start(position_week);
                 tuesday_fill();
                 typeEditOne_tuesday.clearCheck();
                 typeEditTwo_tuesday.clearCheck();
@@ -7009,8 +7061,34 @@ public class MainActivity2 extends AppCompatActivity {
                 typeEditFour_tuesday.clearCheck();
                 typeEditFive_tuesday.clearCheck();
                 typeEditSix_tuesday.clearCheck();
+
                 break;
             case 2:
+                WednesdayValueSubjectOne = "";
+                WednesdayValueSubjectTwo = "";
+                WednesdayValueSubjectThree = "";
+                WednesdayValueSubjectFour = "";
+                WednesdayValueSubjectFive = "";
+                WednesdayValueSubjectSix = "";
+                WednesdayValueAudienceOne = "";
+                WednesdayValueAudienceTwo = "";
+                WednesdayValueAudienceThree = "";
+                WednesdayValueAudienceFour = "";
+                WednesdayValueAudienceFive = "";
+                WednesdayValueAudienceSix = "";
+                WednesdayEducatorOne = "";
+                WednesdayEducatorTwo = "";
+                WednesdayEducatorThree = "";
+                WednesdayEducatorFour = "";
+                WednesdayEducatorFive = "";
+                WednesdayEducatorSix = "";
+                WednesdayTypeLessonOne = "";
+                WednesdayTypeLessonTwo = "";
+                WednesdayTypeLessonThree = "";
+                WednesdayTypeLessonFour = "";
+                WednesdayTypeLessonFive = "";
+                WednesdayTypeLessonSix = "";
+                start(position_week);
                 wednesday_fill();
                 typeEditOne_wednesday.clearCheck();
                 typeEditTwo_wednesday.clearCheck();
@@ -7020,6 +7098,31 @@ public class MainActivity2 extends AppCompatActivity {
                 typeEditSix_wednesday.clearCheck();
                 break;
             case 3:
+                ThursdayValueSubjectOne = "";
+                ThursdayValueSubjectTwo = "";
+                ThursdayValueSubjectThree = "";
+                ThursdayValueSubjectFour = "";
+                ThursdayValueSubjectFive = "";
+                ThursdayValueSubjectSix = "";
+                ThursdayValueAudienceOne = "";
+                ThursdayValueAudienceTwo = "";
+                ThursdayValueAudienceThree = "";
+                ThursdayValueAudienceFour = "";
+                ThursdayValueAudienceFive = "";
+                ThursdayValueAudienceSix = "";
+                ThursdayEducatorOne = "";
+                ThursdayEducatorTwo = "";
+                ThursdayEducatorThree = "";
+                ThursdayEducatorFour = "";
+                ThursdayEducatorFive = "";
+                ThursdayEducatorSix = "";
+                ThursdayTypeLessonOne = "";
+                ThursdayTypeLessonTwo = "";
+                ThursdayTypeLessonThree = "";
+                ThursdayTypeLessonFour = "";
+                ThursdayTypeLessonFive = "";
+                ThursdayTypeLessonSix = "";
+                start(position_week);
                 thursday_fill();
                 typeEditOne_thursday.clearCheck();
                 typeEditTwo_thursday.clearCheck();
@@ -7029,6 +7132,31 @@ public class MainActivity2 extends AppCompatActivity {
                 typeEditSix_thursday.clearCheck();
                 break;
             case 4:
+                FridayValueSubjectOne = "";
+                FridayValueSubjectTwo = "";
+                FridayValueSubjectThree = "";
+                FridayValueSubjectFour = "";
+                FridayValueSubjectFive = "";
+                FridayValueSubjectSix = "";
+                FridayValueAudienceOne = "";
+                FridayValueAudienceTwo = "";
+                FridayValueAudienceThree = "";
+                FridayValueAudienceFour = "";
+                FridayValueAudienceFive = "";
+                FridayValueAudienceSix = "";
+                FridayEducatorOne = "";
+                FridayEducatorTwo = "";
+                FridayEducatorThree = "";
+                FridayEducatorFour = "";
+                FridayEducatorFive = "";
+                FridayEducatorSix = "";
+                FridayTypeLessonOne = "";
+                FridayTypeLessonTwo = "";
+                FridayTypeLessonThree = "";
+                FridayTypeLessonFour = "";
+                FridayTypeLessonFive = "";
+                FridayTypeLessonSix = "";
+                start(position_week);
                 friday_fill();
                 typeEditOne_friday.clearCheck();
                 typeEditTwo_friday.clearCheck();
@@ -7038,6 +7166,31 @@ public class MainActivity2 extends AppCompatActivity {
                 typeEditSix_friday.clearCheck();
                 break;
             case 5:
+                SaturdayValueSubjectOne = "";
+                SaturdayValueSubjectTwo = "";
+                SaturdayValueSubjectThree = "";
+                SaturdayValueSubjectFour = "";
+                SaturdayValueSubjectFive = "";
+                SaturdayValueSubjectSix = "";
+                SaturdayValueAudienceOne = "";
+                SaturdayValueAudienceTwo = "";
+                SaturdayValueAudienceThree = "";
+                SaturdayValueAudienceFour = "";
+                SaturdayValueAudienceFive = "";
+                SaturdayValueAudienceSix = "";
+                SaturdayEducatorOne = "";
+                SaturdayEducatorTwo = "";
+                SaturdayEducatorThree = "";
+                SaturdayEducatorFour = "";
+                SaturdayEducatorFive = "";
+                SaturdayEducatorSix = "";
+                SaturdayTypeLessonOne = "";
+                SaturdayTypeLessonTwo = "";
+                SaturdayTypeLessonThree = "";
+                SaturdayTypeLessonFour = "";
+                SaturdayTypeLessonFive = "";
+                SaturdayTypeLessonSix = "";
+                start(position_week);
                 saturday_fill();
                 typeEditOne_saturday.clearCheck();
                 typeEditTwo_saturday.clearCheck();
@@ -7060,6 +7213,7 @@ public class MainActivity2 extends AppCompatActivity {
         values.put("id_educator","");
         values.put("id_typelesson","");
         db.update(schedule.TABLE_NAME, values,schedule.id_week+ "=" + number_week, null);
+        radiobutton_class();
             update_data();
             monday_fill();
             tuesday_fill();
@@ -7067,43 +7221,6 @@ public class MainActivity2 extends AppCompatActivity {
             thursday_fill();
             friday_fill();
             saturday_fill();
-                typeEditOne_monday.clearCheck();
-                typeEditTwo_monday.clearCheck();
-                typeEditThree_monday.clearCheck();
-                typeEditFour_monday.clearCheck();
-                typeEditFive_monday.clearCheck();
-                typeEditSix_monday.clearCheck();
-                typeEditOne_tuesday.clearCheck();
-                typeEditTwo_tuesday.clearCheck();
-                typeEditThree_tuesday.clearCheck();
-                typeEditFour_tuesday.clearCheck();
-                typeEditFive_tuesday.clearCheck();
-                typeEditSix_tuesday.clearCheck();
-                typeEditOne_wednesday.clearCheck();
-                typeEditTwo_wednesday.clearCheck();
-                typeEditThree_wednesday.clearCheck();
-                typeEditFour_wednesday.clearCheck();
-                typeEditFive_wednesday.clearCheck();
-                typeEditSix_wednesday.clearCheck();
-                typeEditOne_thursday.clearCheck();
-                typeEditTwo_thursday.clearCheck();
-                typeEditThree_thursday.clearCheck();
-                typeEditFour_thursday.clearCheck();
-                typeEditFive_thursday.clearCheck();
-                typeEditSix_thursday.clearCheck();
-                typeEditOne_friday.clearCheck();
-                typeEditTwo_friday.clearCheck();
-                typeEditThree_friday.clearCheck();
-                typeEditFour_friday.clearCheck();
-                typeEditFive_friday.clearCheck();
-                typeEditSix_friday.clearCheck();
-                typeEditOne_saturday.clearCheck();
-                typeEditTwo_saturday.clearCheck();
-                typeEditThree_saturday.clearCheck();
-                typeEditFour_saturday.clearCheck();
-                typeEditFive_saturday.clearCheck();
-                typeEditSix_saturday.clearCheck();
-
     }
 
     private void clear_full() {
@@ -7116,6 +7233,7 @@ public class MainActivity2 extends AppCompatActivity {
         values.put("id_educator","");
         values.put("id_typelesson","");
         db.update(schedule.TABLE_NAME, values,null, null);
+        radiobutton_class();
         update_data();
         monday_fill();
         tuesday_fill();
@@ -7123,42 +7241,6 @@ public class MainActivity2 extends AppCompatActivity {
         thursday_fill();
         friday_fill();
         saturday_fill();
-        typeEditOne_monday.clearCheck();
-        typeEditTwo_monday.clearCheck();
-        typeEditThree_monday.clearCheck();
-        typeEditFour_monday.clearCheck();
-        typeEditFive_monday.clearCheck();
-        typeEditSix_monday.clearCheck();
-        typeEditOne_tuesday.clearCheck();
-        typeEditTwo_tuesday.clearCheck();
-        typeEditThree_tuesday.clearCheck();
-        typeEditFour_tuesday.clearCheck();
-        typeEditFive_tuesday.clearCheck();
-        typeEditSix_tuesday.clearCheck();
-        typeEditOne_wednesday.clearCheck();
-        typeEditTwo_wednesday.clearCheck();
-        typeEditThree_wednesday.clearCheck();
-        typeEditFour_wednesday.clearCheck();
-        typeEditFive_wednesday.clearCheck();
-        typeEditSix_wednesday.clearCheck();
-        typeEditOne_thursday.clearCheck();
-        typeEditTwo_thursday.clearCheck();
-        typeEditThree_thursday.clearCheck();
-        typeEditFour_thursday.clearCheck();
-        typeEditFive_thursday.clearCheck();
-        typeEditSix_thursday.clearCheck();
-        typeEditOne_friday.clearCheck();
-        typeEditTwo_friday.clearCheck();
-        typeEditThree_friday.clearCheck();
-        typeEditFour_friday.clearCheck();
-        typeEditFive_friday.clearCheck();
-        typeEditSix_friday.clearCheck();
-        typeEditOne_saturday.clearCheck();
-        typeEditTwo_saturday.clearCheck();
-        typeEditThree_saturday.clearCheck();
-        typeEditFour_saturday.clearCheck();
-        typeEditFive_saturday.clearCheck();
-        typeEditSix_saturday.clearCheck();
     }
 
 
@@ -7494,7 +7576,8 @@ public class MainActivity2 extends AppCompatActivity {
         } catch (NullPointerException e) { }
     }
 
-    public void radiobutton_class() {
+
+    void radiobutton_class(){
         typeEditOne_monday = findViewById(R.id.typeEdit_monday);
         typeEditTwo_monday = findViewById(R.id.typeEditTwo_monday);
         typeEditThree_monday = findViewById(R.id.typeEditThree_monday);
@@ -7531,299 +7614,11 @@ public class MainActivity2 extends AppCompatActivity {
         typeEditFour_saturday = findViewById(R.id.typeEditFour_saturday);
         typeEditFive_saturday = findViewById(R.id.typeEditFive_saturday);
         typeEditSix_saturday = findViewById(R.id.typeEditSix_saturday);
-        int IdRadioButton = typeEditOne_monday.getCheckedRadioButtonId();
-        RadioButton radioButton = findViewById(IdRadioButton);
-        if (radioButton != null) {
-            MondayTypeLessonOne = radioButton.getText().toString();
-        }
-        else { MondayTypeLessonOne = "";}
-
-        int IdRadioButtonTwo = typeEditTwo_monday.getCheckedRadioButtonId();
-        RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
-        if (radioButtonTwo != null) {
-            MondayTypeLessonTwo = radioButtonTwo.getText().toString();
-        }
-        else { MondayTypeLessonTwo = "";}
-
-        int IdRadioButtonThree = typeEditThree_monday.getCheckedRadioButtonId();
-        RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
-        if (radioButtonThree != null) {
-            MondayTypeLessonThree = radioButtonThree.getText().toString();
-        }
-        else { MondayTypeLessonThree = "";}
-
-        int IdRadioButtonFour = typeEditFour_monday.getCheckedRadioButtonId();
-        RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
-        if (radioButtonFour != null) {
-            MondayTypeLessonFour = radioButtonFour.getText().toString();
-        }
-        else { MondayTypeLessonFour = "";}
-
-        int IdRadioButtonFive = typeEditFive_monday.getCheckedRadioButtonId();
-        RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
-        if (radioButtonFive != null) {
-            MondayTypeLessonFive = radioButtonFive.getText().toString();
-        }
-        else { MondayTypeLessonFive = "";}
-
-        int IdRadioButtonSix = typeEditSix_monday.getCheckedRadioButtonId();
-        RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
-        if (radioButtonSix != null) {
-            MondayTypeLessonSix = radioButtonSix.getText().toString();
-        }
-        else { MondayTypeLessonSix = "";}
-
-        IdRadioButton = typeEditOne_tuesday.getCheckedRadioButtonId();
-        radioButton = findViewById(IdRadioButton);
-        if (radioButton != null) {
-            TuesdayTypeLessonOne = radioButton.getText().toString();
-        }
-        else { TuesdayTypeLessonOne = "";}
-
-        IdRadioButtonTwo = typeEditTwo_tuesday.getCheckedRadioButtonId();
-        radioButtonTwo = findViewById(IdRadioButtonTwo);
-        if (radioButtonTwo != null) {
-            TuesdayTypeLessonTwo = radioButtonTwo.getText().toString();
-        }
-        else { TuesdayTypeLessonTwo = "";}
-
-        IdRadioButtonThree = typeEditThree_tuesday.getCheckedRadioButtonId();
-        radioButtonThree = findViewById(IdRadioButtonThree);
-        if (radioButtonThree != null) {
-            TuesdayTypeLessonThree = radioButtonThree.getText().toString();
-        }
-        else { TuesdayTypeLessonThree = "";}
-
-        IdRadioButtonFour = typeEditFour_tuesday.getCheckedRadioButtonId();
-        radioButtonFour = findViewById(IdRadioButtonFour);
-        if (radioButtonFour != null) {
-            TuesdayTypeLessonFour = radioButtonFour.getText().toString();
-        }
-        else { TuesdayTypeLessonFour = "";}
-
-        IdRadioButtonFive = typeEditFive_tuesday.getCheckedRadioButtonId();
-        radioButtonFive = findViewById(IdRadioButtonFive);
-        if (radioButtonFive != null) {
-            TuesdayTypeLessonFive = radioButtonFive.getText().toString();
-        }
-        else { TuesdayTypeLessonFive = "";}
-
-        IdRadioButtonSix = typeEditSix_tuesday.getCheckedRadioButtonId();
-        radioButtonSix = findViewById(IdRadioButtonSix);
-        if (radioButtonSix != null) {
-            TuesdayTypeLessonSix = radioButtonSix.getText().toString();
-        }
-        else { TuesdayTypeLessonSix = "";}
-
-        IdRadioButton = typeEditOne_wednesday.getCheckedRadioButtonId();
-        radioButton = findViewById(IdRadioButton);
-        if (radioButton != null) {
-            WednesdayTypeLessonOne = radioButton.getText().toString();
-        }
-        else { WednesdayTypeLessonOne = "";}
-
-        IdRadioButtonTwo = typeEditTwo_wednesday.getCheckedRadioButtonId();
-        radioButtonTwo = findViewById(IdRadioButtonTwo);
-        if (radioButtonTwo != null) {
-            WednesdayTypeLessonTwo = radioButtonTwo.getText().toString();
-        }
-        else { WednesdayTypeLessonTwo = "";}
-
-        IdRadioButtonThree = typeEditThree_wednesday.getCheckedRadioButtonId();
-        radioButtonThree = findViewById(IdRadioButtonThree);
-        if (radioButtonThree != null) {
-            WednesdayTypeLessonThree = radioButtonThree.getText().toString();
-        }
-        else { WednesdayTypeLessonThree = "";}
-
-        IdRadioButtonFour = typeEditFour_wednesday.getCheckedRadioButtonId();
-        radioButtonFour = findViewById(IdRadioButtonFour);
-        if (radioButtonFour != null) {
-            WednesdayTypeLessonFour = radioButtonFour.getText().toString();
-        }
-        else { WednesdayTypeLessonFour = "";}
-
-        IdRadioButtonFive = typeEditFive_wednesday.getCheckedRadioButtonId();
-        radioButtonFive = findViewById(IdRadioButtonFive);
-        if (radioButtonFive != null) {
-            WednesdayTypeLessonFive = radioButtonFive.getText().toString();
-        }
-        else { WednesdayTypeLessonFive = "";}
-
-        IdRadioButtonSix = typeEditSix_wednesday.getCheckedRadioButtonId();
-        radioButtonSix = findViewById(IdRadioButtonSix);
-        if (radioButtonSix != null) {
-            WednesdayTypeLessonSix = radioButtonSix.getText().toString();
-        }
-        else { WednesdayTypeLessonSix = "";}
-
-        IdRadioButton = typeEditOne_thursday.getCheckedRadioButtonId();
-        radioButton = findViewById(IdRadioButton);
-        if (radioButton != null) {
-            ThursdayTypeLessonOne = radioButton.getText().toString();
-        }
-        else { ThursdayTypeLessonOne = "";}
-
-        IdRadioButtonTwo = typeEditTwo_thursday.getCheckedRadioButtonId();
-        radioButtonTwo = findViewById(IdRadioButtonTwo);
-        if (radioButtonTwo != null) {
-            ThursdayTypeLessonTwo = radioButtonTwo.getText().toString();
-        }
-        else { ThursdayTypeLessonTwo = "";}
-
-        IdRadioButtonThree = typeEditThree_thursday.getCheckedRadioButtonId();
-        radioButtonThree = findViewById(IdRadioButtonThree);
-        if (radioButtonThree != null) {
-            ThursdayTypeLessonThree = radioButtonThree.getText().toString();
-        }
-        else { ThursdayTypeLessonThree = "";}
-
-        IdRadioButtonFour = typeEditFour_thursday.getCheckedRadioButtonId();
-        radioButtonFour = findViewById(IdRadioButtonFour);
-        if (radioButtonFour != null) {
-            ThursdayTypeLessonFour = radioButtonFour.getText().toString();
-        }
-        else { ThursdayTypeLessonFour = "";}
-
-        IdRadioButtonFive = typeEditFive_thursday.getCheckedRadioButtonId();
-        radioButtonFive = findViewById(IdRadioButtonFive);
-        if (radioButtonFive != null) {
-            ThursdayTypeLessonFive = radioButtonFive.getText().toString();
-        }
-        else { ThursdayTypeLessonFive = "";}
-
-        IdRadioButtonSix = typeEditSix_thursday.getCheckedRadioButtonId();
-        radioButtonSix = findViewById(IdRadioButtonSix);
-        if (radioButtonSix != null) {
-            ThursdayTypeLessonSix = radioButtonSix.getText().toString();
-        }
-        else { ThursdayTypeLessonSix = "";}
-
-        IdRadioButton = typeEditOne_friday.getCheckedRadioButtonId();
-        radioButton = findViewById(IdRadioButton);
-        if (radioButton != null) {
-            FridayTypeLessonOne = radioButton.getText().toString();
-        }
-        else { FridayTypeLessonOne = "";}
-
-        IdRadioButtonTwo = typeEditTwo_friday.getCheckedRadioButtonId();
-        radioButtonTwo = findViewById(IdRadioButtonTwo);
-        if (radioButtonTwo != null) {
-            FridayTypeLessonTwo = radioButtonTwo.getText().toString();
-        }
-        else { FridayTypeLessonTwo = "";}
-
-        IdRadioButtonThree = typeEditThree_friday.getCheckedRadioButtonId();
-        radioButtonThree = findViewById(IdRadioButtonThree);
-        if (radioButtonThree != null) {
-            FridayTypeLessonThree = radioButtonThree.getText().toString();
-        }
-        else { FridayTypeLessonThree = "";}
-
-        IdRadioButtonFour = typeEditFour_friday.getCheckedRadioButtonId();
-        radioButtonFour = findViewById(IdRadioButtonFour);
-        if (radioButtonFour != null) {
-            FridayTypeLessonFour = radioButtonFour.getText().toString();
-        }
-        else { FridayTypeLessonFour = "";}
-
-        IdRadioButtonFive = typeEditFive_friday.getCheckedRadioButtonId();
-        radioButtonFive = findViewById(IdRadioButtonFive);
-        if (radioButtonFive != null) {
-            FridayTypeLessonFive = radioButtonFive.getText().toString();
-        }
-        else { FridayTypeLessonFive = "";}
-
-        IdRadioButtonSix = typeEditSix_friday.getCheckedRadioButtonId();
-        radioButtonSix = findViewById(IdRadioButtonSix);
-        if (radioButtonSix != null) {
-            FridayTypeLessonSix = radioButtonSix.getText().toString();
-        }
-        else { FridayTypeLessonSix = "";}
-
-        IdRadioButton = typeEditOne_saturday.getCheckedRadioButtonId();
-        radioButton = findViewById(IdRadioButton);
-        if (radioButton != null) {
-            SaturdayTypeLessonOne = radioButton.getText().toString();
-        }
-        else { SaturdayTypeLessonOne = "";}
-
-        IdRadioButtonTwo = typeEditTwo_saturday.getCheckedRadioButtonId();
-        radioButtonTwo = findViewById(IdRadioButtonTwo);
-        if (radioButtonTwo != null) {
-            SaturdayTypeLessonTwo = radioButtonTwo.getText().toString();
-        }
-        else { SaturdayTypeLessonTwo = "";}
-
-        IdRadioButtonThree = typeEditThree_saturday.getCheckedRadioButtonId();
-        radioButtonThree = findViewById(IdRadioButtonThree);
-        if (radioButtonThree != null) {
-            SaturdayTypeLessonThree = radioButtonThree.getText().toString();
-        }
-        else { SaturdayTypeLessonThree = "";}
-
-        IdRadioButtonFour = typeEditFour_saturday.getCheckedRadioButtonId();
-        radioButtonFour = findViewById(IdRadioButtonFour);
-        if (radioButtonFour != null) {
-            SaturdayTypeLessonFour = radioButtonFour.getText().toString();
-        }
-        else { SaturdayTypeLessonFour = "";}
-
-        IdRadioButtonFive = typeEditFive_saturday.getCheckedRadioButtonId();
-        radioButtonFive = findViewById(IdRadioButtonFive);
-        if (radioButtonFive != null) {
-            SaturdayTypeLessonFive = radioButtonFive.getText().toString();
-        }
-        else { SaturdayTypeLessonFive = "";}
-
-        IdRadioButtonSix = typeEditSix_saturday.getCheckedRadioButtonId();
-        radioButtonSix = findViewById(IdRadioButtonSix);
-        if (radioButtonSix != null) {
-            SaturdayTypeLessonSix = radioButtonSix.getText().toString();
-        }
-        else { SaturdayTypeLessonSix = "";}
-
     }
 
     public void saveschedule(Integer number_week) {
 
-        typeEditOne_monday = findViewById(R.id.typeEdit_monday);
-        typeEditTwo_monday = findViewById(R.id.typeEditTwo_monday);
-        typeEditThree_monday = findViewById(R.id.typeEditThree_monday);
-        typeEditFour_monday = findViewById(R.id.typeEditFour_monday);
-        typeEditFive_monday = findViewById(R.id.typeEditFive_monday);
-        typeEditSix_monday = findViewById(R.id.typeEditSix_monday);
-        typeEditOne_tuesday = findViewById(R.id.typeEdit_tuesday);
-        typeEditTwo_tuesday = findViewById(R.id.typeEditTwo_tuesday);
-        typeEditThree_tuesday = findViewById(R.id.typeEditThree_tuesday);
-        typeEditFour_tuesday = findViewById(R.id.typeEditFour_tuesday);
-        typeEditFive_tuesday = findViewById(R.id.typeEditFive_tuesday);
-        typeEditSix_tuesday = findViewById(R.id.typeEditSix_tuesday);
-        typeEditOne_wednesday = findViewById(R.id.typeEdit_wednesday);
-        typeEditTwo_wednesday = findViewById(R.id.typeEditTwo_wednesday);
-        typeEditThree_wednesday = findViewById(R.id.typeEditThree_wednesday);
-        typeEditFour_wednesday = findViewById(R.id.typeEditFour_wednesday);
-        typeEditFive_wednesday = findViewById(R.id.typeEditFive_wednesday);
-        typeEditSix_wednesday = findViewById(R.id.typeEditSix_wednesday);
-        typeEditOne_thursday = findViewById(R.id.typeEdit_thursday);
-        typeEditTwo_thursday = findViewById(R.id.typeEditTwo_thursday);
-        typeEditThree_thursday = findViewById(R.id.typeEditThree_thursday);
-        typeEditFour_thursday = findViewById(R.id.typeEditFour_thursday);
-        typeEditFive_thursday = findViewById(R.id.typeEditFive_thursday);
-        typeEditSix_thursday = findViewById(R.id.typeEditSix_thursday);
-        typeEditOne_friday = findViewById(R.id.typeEdit_friday);
-        typeEditTwo_friday = findViewById(R.id.typeEditTwo_friday);
-        typeEditThree_friday = findViewById(R.id.typeEditThree_friday);
-        typeEditFour_friday = findViewById(R.id.typeEditFour_friday);
-        typeEditFive_friday = findViewById(R.id.typeEditFive_friday);
-        typeEditSix_friday = findViewById(R.id.typeEditSix_friday);
-        typeEditOne_saturday = findViewById(R.id.typeEdit_saturday);
-        typeEditTwo_saturday = findViewById(R.id.typeEditTwo_saturday);
-        typeEditThree_saturday = findViewById(R.id.typeEditThree_saturday);
-        typeEditFour_saturday = findViewById(R.id.typeEditFour_saturday);
-        typeEditFive_saturday = findViewById(R.id.typeEditFive_saturday);
-        typeEditSix_saturday = findViewById(R.id.typeEditSix_saturday);
-
+        radiobutton_class();
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
         position_week=number_week;
 
