@@ -14,6 +14,9 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -120,12 +123,51 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
                     }
                 })
                 .show();
+
+        InputFilter filter = new InputFilter() {
+            boolean canEnterSpace = false;
+
+            public CharSequence filter(CharSequence source, int start, int end,
+                                       Spanned dest, int dstart, int dend) {
+
+                if(input_educator.getText().toString().equals(""))
+                {
+                    canEnterSpace = false;
+                }
+
+                StringBuilder builder = new StringBuilder();
+
+                for (int i = start; i < end; i++) {
+                    char currentChar = source.charAt(i);
+
+                    if (Character.isLetterOrDigit(currentChar)) {
+                        builder.append(currentChar);
+                        canEnterSpace = true;
+                    }
+
+                    if(Character.isWhitespace(currentChar) && canEnterSpace) {
+                        builder.append(currentChar);
+                    }
+
+
+                }
+                return builder.toString();
+            }
+
+        };
+
+
+        input_educator.setFilters(new InputFilter[]{filter});
         input_educator.setOnKeyListener(new View.OnKeyListener() {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
                     if (keyCode == KeyEvent.KEYCODE_ENTER) {
                         String educator = input_educator.getText().toString();
+                        if(TextUtils.isEmpty(educator)) {
+                            input_educator.setError("Введите преподавателя");
+                            return true;
+                        }
                         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
                         db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('" + educator + "');");
                         input_educator.setText("");

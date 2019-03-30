@@ -103,7 +103,7 @@ public class fragment_educator extends android.support.v4.app.Fragment {
                 for (int i = start; i < end; i++) {
                     char currentChar = source.charAt(i);
 
-                    if (Character.isLetterOrDigit(currentChar) || currentChar == '_') {
+                    if (Character.isLetterOrDigit(currentChar)) {
                         builder.append(currentChar);
                         canEnterSpace = true;
                     }

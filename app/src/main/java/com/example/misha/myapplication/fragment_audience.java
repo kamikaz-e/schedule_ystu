@@ -107,7 +107,7 @@ Button getClear_audiences;
                 for (int i = start; i < end; i++) {
                     char currentChar = source.charAt(i);
 
-                    if (Character.isLetterOrDigit(currentChar) || currentChar == '_') {
+                    if (Character.isLetterOrDigit(currentChar) || currentChar == '-') {
                         builder.append(currentChar);
                         canEnterSpace = true;
                     }

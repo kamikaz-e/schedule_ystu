@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment_start_subjects">
+    tools:context=".fragment_educator">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_marginEnd="10dp"
             android:ems="10"
             android:hint="Преподаватель"
-            android:inputType="textCapWords"
+            android:inputType="textCapWords|text"
             android:selectAllOnFocus="false"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

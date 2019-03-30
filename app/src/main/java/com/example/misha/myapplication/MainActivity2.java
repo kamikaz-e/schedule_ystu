@@ -456,7 +456,6 @@ public class MainActivity2 extends AppCompatActivity {
     Integer position_week=0;
     Integer position_day=0;
     Integer flag_autosave=1;
-    Integer open=0;
 
     Integer flag_save=0;
     List<DataMonday> Monday;
@@ -6665,15 +6664,16 @@ public class MainActivity2 extends AppCompatActivity {
         viewPager.setOffscreenPageLimit(6);
 
 
-        final Spinner spinner = findViewById(R.id.rasp_weeks);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<> (this, R.layout.spinner_item,  getResources().getStringArray(R.array.weeks));
-        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        spinner .setAdapter(spinnerArrayAdapter);
+        final MaterialBetterSpinner spinner =  findViewById(R.id.spinner);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line,  getResources().getStringArray(R.array.weeks));
+        spinner.setAdapter(arrayAdapter);
+
 
         SharedPreferences settings = getSharedPreferences("choice_week", 0);
         Integer current_week = Integer.valueOf(settings.getString("position", "0"));
 
-        spinner.setSelection(current_week);
+        spinner.setText(arrayAdapter.getItem(current_week));
         start(current_week);
        /* if (!(pagerAdapter == null)) {
             pagerAdapter.notifyDataSetChanged();
@@ -6862,18 +6862,23 @@ public class MainActivity2 extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }});
 
-
-
-        final OnItemSelectedListener itemSelectedListener = new OnItemSelectedListener() {
+        spinner.setOnDismissListener(new AutoCompleteTextView.OnDismissListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onDismiss() {
+                spinner.clearFocus();
+            }
+        });
+
+        final AdapterView.OnItemClickListener itemClickdListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (flag_autosave==1){
                     saveschedule(position_week);
                 }
                 position_week = position;
-                if (open==1) {
+
                     update_data();
-                }
+
                 switch (tabLayout.getSelectedTabPosition()) {
                     case 0:
                         monday_fill();
@@ -6894,17 +6899,12 @@ public class MainActivity2 extends AppCompatActivity {
                         saturday_fill();
                         break;
                 }
-                open=1;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
             }
 
         };
 
-        spinner.setOnItemSelectedListener(itemSelectedListener);
+        spinner.setOnItemClickListener(itemClickdListener);
 
     }
     @SuppressLint("ResourceType")

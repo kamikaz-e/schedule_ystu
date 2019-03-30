@@ -28,7 +28,7 @@
             android:label="@string/title_activity_call_schedule"></activity>
         <activity
             android:name=".activityEditData"
-            android:label="Предметы"></activity>
+            android:label="Редактор данных"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -47,7 +47,7 @@
         android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="Предмет"
-        android:inputType="textCapWords"
+        android:inputType="textCapWords|text"
         android:selectAllOnFocus="false"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

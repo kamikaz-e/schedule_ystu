@@ -13,6 +13,9 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -127,12 +130,49 @@ public class fragment_start_audiences extends android.support.v4.app.Fragment {
                     })
                     .show();
 
+        InputFilter filter = new InputFilter() {
+            boolean canEnterSpace = false;
+
+            public CharSequence filter(CharSequence source, int start, int end,
+                                       Spanned dest, int dstart, int dend) {
+
+                if(input_audience.getText().toString().equals(""))
+                {
+                    canEnterSpace = false;
+                }
+
+                StringBuilder builder = new StringBuilder();
+
+                for (int i = start; i < end; i++) {
+                    char currentChar = source.charAt(i);
+
+                    if (Character.isLetterOrDigit(currentChar) || currentChar == '-') {
+                        builder.append(currentChar);
+                        canEnterSpace = true;
+                    }
+
+                    if(Character.isWhitespace(currentChar) && canEnterSpace) {
+                        builder.append(currentChar);
+                    }
+
+
+                }
+                return builder.toString();
+            }
+
+        };
+
+        input_audience.setFilters(new InputFilter[]{filter});
         input_audience.setOnKeyListener(new View.OnKeyListener() {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
                     if (keyCode == KeyEvent.KEYCODE_ENTER) {
                         String audience = input_audience.getText().toString();
+                        if(TextUtils.isEmpty(audience)) {
+                            input_audience.setError("Введите аудиторию");
+                            return true;
+                        }
                         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
                         db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('" + audience + "');");
                         input_audience.setText("");
