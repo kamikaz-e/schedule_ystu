@@ -14,6 +14,7 @@ import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -130,46 +132,11 @@ public class fragment_start_audiences extends android.support.v4.app.Fragment {
                     })
                     .show();
 
-        InputFilter filter = new InputFilter() {
-            boolean canEnterSpace = false;
-
-            public CharSequence filter(CharSequence source, int start, int end,
-                                       Spanned dest, int dstart, int dend) {
-
-                if(input_audience.getText().toString().equals(""))
-                {
-                    canEnterSpace = false;
-                }
-
-                StringBuilder builder = new StringBuilder();
-
-                for (int i = start; i < end; i++) {
-                    char currentChar = source.charAt(i);
-
-                    if (Character.isLetterOrDigit(currentChar) || currentChar == '-') {
-                        builder.append(currentChar);
-                        canEnterSpace = true;
-                    }
-
-                    if(Character.isWhitespace(currentChar) && canEnterSpace) {
-                        builder.append(currentChar);
-                    }
-
-
-                }
-                return builder.toString();
-            }
-
-        };
-
-        input_audience.setFilters(new InputFilter[]{filter});
-        input_audience.setOnKeyListener(new View.OnKeyListener() {
-
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() == KeyEvent.ACTION_DOWN)
-                    input_audience.requestFocus();
-                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+        input_audience.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
+                    input_audience.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
                     String audience = input_audience.getText().toString();
                     if(TextUtils.isEmpty(audience)) {
                         input_audience.setError("Введите аудиторию");
@@ -182,7 +149,9 @@ public class fragment_start_audiences extends android.support.v4.app.Fragment {
                     adapter.notifyDataSetChanged();
                     return true;
                 }
-                return false;
+                else{
+                    return false;
+                }
             }
         });
         return view;

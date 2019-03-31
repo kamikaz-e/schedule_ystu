@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity
 
             button_toolbar.setEnabled(false);
 
-            new MaterialTapTargetPrompt.Builder(MainActivity.this)
+           /* new MaterialTapTargetPrompt.Builder(MainActivity.this)
                     .setTarget(spinner)
                     .setPromptBackground(new CirclePromptBackground())
                     .setPromptFocal(new RectanglePromptFocal())
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity
                             }
 
                         }})
-                    .show();
+                    .show();*/
 
             Editor e = sp.edit();
             e.putString("hasVisited", "yes");

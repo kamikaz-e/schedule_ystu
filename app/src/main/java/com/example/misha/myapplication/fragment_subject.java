@@ -17,6 +17,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -25,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -71,7 +73,7 @@ public class fragment_subject extends android.support.v4.app.Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_subject, container, false);
 
@@ -98,63 +100,31 @@ public class fragment_subject extends android.support.v4.app.Fragment {
 
         vp = getActivity().findViewById(R.id.viewPager); //добавить подсказку
 
-
-        InputFilter filter = new InputFilter() {
-            boolean canEnterSpace = false;
-
-            public CharSequence filter(CharSequence source, int start, int end,
-                                       Spanned dest, int dstart, int dend) {
-
-                if(input_subject.getText().toString().equals(""))
-                {
-                    canEnterSpace = false;
-                }
-
-                StringBuilder builder = new StringBuilder();
-
-                for (int i = start; i < end; i++) {
-                    char currentChar = source.charAt(i);
-
-                    if (Character.isLetterOrDigit(currentChar)) {
-                        builder.append(currentChar);
-                        canEnterSpace = true;
-                    }
-
-                    if(Character.isWhitespace(currentChar) && canEnterSpace) {
-                        builder.append(currentChar);
-                    }
-
-
-                }
-                return builder.toString();
-            }
-
-        };
-
-        input_subject.setFilters(new InputFilter[]{filter});
-        input_subject.setOnKeyListener(new View.OnKeyListener() {
-
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN)
-                    input_subject.requestFocus();
-                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
-
-                        String subject = input_subject.getText().toString();
-                        if(TextUtils.isEmpty(subject)) {
-                            input_subject.setError("Введите предмет");
-                            return true;
-                        }
-                        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                        db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('" + subject + "');");
-                        input_subject.getText().clear();
-                        start();
-                        adapter.notifyDataSetChanged();
+        input_subject.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
+                    input_subject.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+                    String subject = input_subject.getText().toString();
+                    subject = subject.trim().replaceAll(" +", " ");
+                    if(TextUtils.isEmpty(subject)||subject==" ") {
+                        input_subject.setError("Введите предмет");
                         return true;
-
                     }
-                return false;
+                    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+                    db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('" + subject + "');");
+                    input_subject.getText().clear();
+                    start();
+                    adapter.notifyDataSetChanged();
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
         });
+
+
         TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
         abc=tabLayout.getSelectedTabPosition();
 
