@@ -75,7 +75,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="2dp"
-                            android:text="Лаб./раб."/>
+                            android:text="Лаб/раб"/>
 
                         <RadioButton
                             android:id="@+id/rb_practice_thursday"
@@ -206,7 +206,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="2dp"
-                            android:text="Лаб./раб."/>
+                            android:text="Лаб/раб"/>
 
                         <RadioButton
                             android:id="@+id/rb_practiceTwo_thursday"
@@ -349,7 +349,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="2dp"
-                            android:text="Лаб./раб."/>
+                            android:text="Лаб/раб"/>
 
                         <RadioButton
                             android:id="@+id/rb_practiceThree_thursday"
@@ -493,7 +493,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="2dp"
-                            android:text="Лаб./раб."/>
+                            android:text="Лаб/раб"/>
 
                         <RadioButton
                             android:id="@+id/rb_practiceFour_thursday"
@@ -637,7 +637,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="2dp"
-                            android:text="Лаб./раб."/>
+                            android:text="Лаб/раб"/>
 
                         <RadioButton
                             android:id="@+id/rb_practiceFive_thursday"
@@ -781,7 +781,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="2dp"
-                            android:text="Лаб./раб."/>
+                            android:text="Лаб/раб"/>
 
                         <RadioButton
                             android:id="@+id/rb_practiceSix_thursday"

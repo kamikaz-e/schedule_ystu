@@ -97,6 +97,7 @@ public class Settings extends AppCompatActivity {
   public ArrayAdapter<String> adapter;
   String  current_date;
   RelativeLayout layout_pick_week;
+  RelativeLayout typelessonitem;
   RelativeLayout layout_import;
   RelativeLayout layout_export;
 
@@ -116,6 +117,7 @@ public class Settings extends AppCompatActivity {
     progressDialog = new ProgressDialog(Settings.this);
 
     layout_pick_week = findViewById(R.id.oneitem);
+    typelessonitem = findViewById(R.id.typelessonitem);
     layout_import = findViewById(R.id.twoitem);
     layout_export = findViewById(R.id.threeitem);
 
@@ -195,6 +197,12 @@ public class Settings extends AppCompatActivity {
       }
     });
 
+    typelessonitem.setOnClickListener(new OnClickListener() {
+          public void onClick(View v) {
+             onCreateDialogTypelesson().show();
+          }
+      });
+
     layout_import.setOnClickListener(new OnClickListener() {
       public void onClick(View v) {
         onCreateDialogImport().show();
@@ -225,10 +233,6 @@ public class Settings extends AppCompatActivity {
       SQLiteDatabase db = ScheduleDB.getWritableDatabase();
       db.execSQL("update " + date_start.TABLE_NAME + " set " + date_start.date + " = '" +
         current_date  + "' where " + date_start.id_date + " = " + 1);
-     // Toast.makeText(context, String.valueOf(today.getTimeInMillis()), Toast.LENGTH_SHORT).show();
-
-
-
 
 
       SharedPreferences settings = getSharedPreferences("week", 0);
@@ -238,6 +242,45 @@ public class Settings extends AppCompatActivity {
 
     }
   };
+
+    public Dialog onCreateDialogTypelesson() {
+        LayoutInflater li = LayoutInflater.from(context);
+        View view = li.inflate(R.layout.typelesson_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.AppCompatAlertDialogStyle);
+        builder.setView(view);
+         final EditText editTextOne =  view.findViewById(R.id.typelesson_one);
+         final EditText editTextTwo=  view.findViewById(R.id.typelesson_two);
+         final EditText editTextThree =  view.findViewById(R.id.typelesson_three);
+
+        ArrayList<String> array_typelesson = new ArrayList<>();
+        SQLiteDatabase db = ScheduleDB.getReadableDatabase();
+        String searchQuery = "select "+ typelessons.typelesson + " from " + typelessons.TABLE_NAME;
+        Cursor cursor = db.rawQuery(searchQuery, null);
+        while(cursor.moveToNext()) {
+            array_typelesson.add(cursor.getString(0));
+        }
+        cursor.close();
+        editTextOne.setText(array_typelesson.get(0));
+        editTextTwo.setText(array_typelesson.get(1));
+        editTextThree.setText(array_typelesson.get(2));
+        builder.setCancelable(false).setPositiveButton("Сохранить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+                db.execSQL("update " + typelessons.TABLE_NAME + " set " + typelessons.typelesson + " = '" +
+                       editTextOne.getText() + "' where " + typelessons.idd_typelesson + " = " + 1 );
+                db.execSQL("update " + typelessons.TABLE_NAME + " set " + typelessons.typelesson + " = '" +
+                        editTextTwo.getText() + "' where " + typelessons.idd_typelesson + " = " + 2 );
+                db.execSQL("update " + typelessons.TABLE_NAME + " set " + typelessons.typelesson + " = '" +
+                        editTextThree.getText() + "' where " + typelessons.idd_typelesson + " = " + 3 );
+
+            }
+        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        return builder.create();
+    }
 
   public Dialog onCreateDialogImport() {
     LayoutInflater li = LayoutInflater.from(context);

@@ -465,6 +465,7 @@ public class MainActivity2 extends AppCompatActivity {
     List<DataFriday> Friday;
     List<DataSaturday> Saturday;
     ArrayList<String> calls_schedule = new ArrayList<>();
+    ArrayList<String> typelesson = new ArrayList<>();
     ViewPager viewPager;
     PagerAdapter pagerAdapter;
     Boolean first = true;
@@ -546,6 +547,24 @@ public class MainActivity2 extends AppCompatActivity {
         TimeFour.setText(Monday.get(3).timelesson.toString());
         TimeFive.setText(Monday.get(4).timelesson.toString());
         TimeSix.setText(Monday.get(5).timelesson.toString());
+        rb_lecture.setText(typelesson.get(0));
+        rb_lectureTwo.setText(typelesson.get(0));
+        rb_lectureThree.setText(typelesson.get(0));
+        rb_lectureFour.setText(typelesson.get(0));
+        rb_lectureFive.setText(typelesson.get(0));
+        rb_lectureSix.setText(typelesson.get(0));
+        rb_labwork.setText(typelesson.get(1));
+        rb_labworkTwo.setText(typelesson.get(1));
+        rb_labworkThree.setText(typelesson.get(1));
+        rb_labworkFour.setText(typelesson.get(1));
+        rb_labworkFive.setText(typelesson.get(1));
+        rb_labworkSix.setText(typelesson.get(1));
+        rb_practice.setText(typelesson.get(2));
+        rb_practice.setText(typelesson.get(2));
+        rb_practiceThree.setText(typelesson.get(2));
+        rb_practiceFour.setText(typelesson.get(2));
+        rb_practiceFive.setText(typelesson.get(2));
+        rb_practiceSix.setText(typelesson.get(2));
         ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
         subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
@@ -970,46 +989,46 @@ public class MainActivity2 extends AppCompatActivity {
         EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(5).educator.toString()));
 
 
-        if (Monday.get(0).typelesson.toString().equals("Лекция")) {
+        if (Monday.get(0).typelesson.toString().equals(typelesson.get(0))) {
             rb_lecture.setChecked(true);
-        } else if (Monday.get(0).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Monday.get(0).typelesson.toString().equals(typelesson.get(1))) {
             rb_labwork.setChecked(true);
-        } else if (Monday.get(0).typelesson.toString().equals("Практика")) {
+        } else if (Monday.get(0).typelesson.toString().equals(typelesson.get(2))) {
             rb_practice.setChecked(true);
         }
-        if (Monday.get(1).typelesson.toString().equals("Лекция")) {
+        if (Monday.get(1).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureTwo.setChecked(true);
-        } else if (Monday.get(1).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Monday.get(1).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkTwo.setChecked(true);
-        } else if (Monday.get(1).typelesson.toString().equals("Практика")) {
+        } else if (Monday.get(1).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceTwo.setChecked(true);
         }
-        if (Monday.get(2).typelesson.toString().equals("Лекция")) {
+        if (Monday.get(2).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureThree.setChecked(true);
-        } else if (Monday.get(2).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Monday.get(2).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkThree.setChecked(true);
-        } else if (Monday.get(2).typelesson.toString().equals("Практика")) {
+        } else if (Monday.get(2).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceThree.setChecked(true);
         }
-        if (Monday.get(3).typelesson.toString().equals("Лекция")) {
+        if (Monday.get(3).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFour.setChecked(true);
-        } else if (Monday.get(3).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Monday.get(3).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFour.setChecked(true);
-        } else if (Monday.get(3).typelesson.toString().equals("Практика")) {
+        } else if (Monday.get(3).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFour.setChecked(true);
         }
-        if (Monday.get(4).typelesson.toString().equals("Лекция")) {
+        if (Monday.get(4).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFive.setChecked(true);
-        } else if (Monday.get(4).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Monday.get(4).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFive.setChecked(true);
-        } else if (Monday.get(4).typelesson.toString().equals("Практика")) {
+        } else if (Monday.get(4).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFive.setChecked(true);
         }
-        if (Monday.get(5).typelesson.toString().equals("Лекция")) {
+        if (Monday.get(5).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureSix.setChecked(true);
-        } else if (Monday.get(5).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Monday.get(5).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkSix.setChecked(true);
-        } else if (Monday.get(5).typelesson.toString().equals("Практика")) {
+        } else if (Monday.get(5).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceSix.setChecked(true);
         }
         //S1
@@ -1288,6 +1307,25 @@ public class MainActivity2 extends AppCompatActivity {
         TimeFour.setText(Tuesday.get(3).timelesson.toString());
         TimeFive.setText(Tuesday.get(4).timelesson.toString());
         TimeSix.setText(Tuesday.get(5).timelesson.toString());
+        rb_lecture.setText(typelesson.get(0));
+        rb_lectureTwo.setText(typelesson.get(0));
+        rb_lectureThree.setText(typelesson.get(0));
+        rb_lectureFour.setText(typelesson.get(0));
+        rb_lectureFive.setText(typelesson.get(0));
+        rb_lectureSix.setText(typelesson.get(0));
+        rb_labwork.setText(typelesson.get(1));
+        rb_labworkTwo.setText(typelesson.get(1));
+        rb_labworkThree.setText(typelesson.get(1));
+        rb_labworkFour.setText(typelesson.get(1));
+        rb_labworkFive.setText(typelesson.get(1));
+        rb_labworkSix.setText(typelesson.get(1));
+        rb_practice.setText(typelesson.get(2));
+        rb_practice.setText(typelesson.get(2));
+        rb_practiceThree.setText(typelesson.get(2));
+        rb_practiceFour.setText(typelesson.get(2));
+        rb_practiceFive.setText(typelesson.get(2));
+        rb_practiceSix.setText(typelesson.get(2));
+
         ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
         subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
@@ -1709,46 +1747,46 @@ public class MainActivity2 extends AppCompatActivity {
         EducatorEditSix.setSelection(educator_list.indexOf(Tuesday.get(5).educator.toString()));
 
 
-        if (Tuesday.get(0).typelesson.toString().equals("Лекция")) {
+        if (Tuesday.get(0).typelesson.toString().equals(typelesson.get(0))) {
             rb_lecture.setChecked(true);
-        } else if (Tuesday.get(0).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Tuesday.get(0).typelesson.toString().equals(typelesson.get(1))) {
             rb_labwork.setChecked(true);
-        } else if (Tuesday.get(0).typelesson.toString().equals("Практика")) {
+        } else if (Tuesday.get(0).typelesson.toString().equals(typelesson.get(2))) {
             rb_practice.setChecked(true);
         }
-        if (Tuesday.get(1).typelesson.toString().equals("Лекция")) {
+        if (Tuesday.get(1).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureTwo.setChecked(true);
-        } else if (Tuesday.get(1).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Tuesday.get(1).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkTwo.setChecked(true);
-        } else if (Tuesday.get(1).typelesson.toString().equals("Практика")) {
+        } else if (Tuesday.get(1).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceTwo.setChecked(true);
         }
-        if (Tuesday.get(2).typelesson.toString().equals("Лекция")) {
+        if (Tuesday.get(2).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureThree.setChecked(true);
-        } else if (Tuesday.get(2).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Tuesday.get(2).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkThree.setChecked(true);
-        } else if (Tuesday.get(2).typelesson.toString().equals("Практика")) {
+        } else if (Tuesday.get(2).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceThree.setChecked(true);
         }
-        if (Tuesday.get(3).typelesson.toString().equals("Лекция")) {
+        if (Tuesday.get(3).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFour.setChecked(true);
-        } else if (Tuesday.get(3).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Tuesday.get(3).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFour.setChecked(true);
-        } else if (Tuesday.get(3).typelesson.toString().equals("Практика")) {
+        } else if (Tuesday.get(3).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFour.setChecked(true);
         }
-        if (Tuesday.get(4).typelesson.toString().equals("Лекция")) {
+        if (Tuesday.get(4).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFive.setChecked(true);
-        } else if (Tuesday.get(4).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Tuesday.get(4).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFive.setChecked(true);
-        } else if (Tuesday.get(4).typelesson.toString().equals("Практика")) {
+        } else if (Tuesday.get(4).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFive.setChecked(true);
         }
-        if (Tuesday.get(5).typelesson.toString().equals("Лекция")) {
+        if (Tuesday.get(5).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureSix.setChecked(true);
-        } else if (Tuesday.get(5).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Tuesday.get(5).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkSix.setChecked(true);
-        } else if (Tuesday.get(5).typelesson.toString().equals("Практика")) {
+        } else if (Tuesday.get(5).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceSix.setChecked(true);
         }
         //S1
@@ -2025,6 +2063,24 @@ public class MainActivity2 extends AppCompatActivity {
         TimeFour.setText(Wednesday.get(3).timelesson.toString());
         TimeFive.setText(Wednesday.get(4).timelesson.toString());
         TimeSix.setText(Wednesday.get(5).timelesson.toString());
+        rb_lecture.setText(typelesson.get(0));
+        rb_lectureTwo.setText(typelesson.get(0));
+        rb_lectureThree.setText(typelesson.get(0));
+        rb_lectureFour.setText(typelesson.get(0));
+        rb_lectureFive.setText(typelesson.get(0));
+        rb_lectureSix.setText(typelesson.get(0));
+        rb_labwork.setText(typelesson.get(1));
+        rb_labworkTwo.setText(typelesson.get(1));
+        rb_labworkThree.setText(typelesson.get(1));
+        rb_labworkFour.setText(typelesson.get(1));
+        rb_labworkFive.setText(typelesson.get(1));
+        rb_labworkSix.setText(typelesson.get(1));
+        rb_practice.setText(typelesson.get(2));
+        rb_practice.setText(typelesson.get(2));
+        rb_practiceThree.setText(typelesson.get(2));
+        rb_practiceFour.setText(typelesson.get(2));
+        rb_practiceFive.setText(typelesson.get(2));
+        rb_practiceSix.setText(typelesson.get(2));
         ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
         subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
@@ -2471,46 +2527,46 @@ public class MainActivity2 extends AppCompatActivity {
         EducatorEditSix.setSelection(educator_list.indexOf(Wednesday.get(5).educator.toString()));
 
 
-        if (Wednesday.get(0).typelesson.toString().equals("Лекция")) {
+        if (Wednesday.get(0).typelesson.toString().equals(typelesson.get(0))) {
             rb_lecture.setChecked(true);
-        } else if (Wednesday.get(0).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Wednesday.get(0).typelesson.toString().equals(typelesson.get(1))) {
             rb_labwork.setChecked(true);
-        } else if (Wednesday.get(0).typelesson.toString().equals("Практика")) {
+        } else if (Wednesday.get(0).typelesson.toString().equals(typelesson.get(2))) {
             rb_practice.setChecked(true);
         }
-        if (Wednesday.get(1).typelesson.toString().equals("Лекция")) {
+        if (Wednesday.get(1).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureTwo.setChecked(true);
-        } else if (Wednesday.get(1).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Wednesday.get(1).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkTwo.setChecked(true);
-        } else if (Wednesday.get(1).typelesson.toString().equals("Практика")) {
+        } else if (Wednesday.get(1).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceTwo.setChecked(true);
         }
-        if (Wednesday.get(2).typelesson.toString().equals("Лекция")) {
+        if (Wednesday.get(2).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureThree.setChecked(true);
-        } else if (Wednesday.get(2).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Wednesday.get(2).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkThree.setChecked(true);
-        } else if (Wednesday.get(2).typelesson.toString().equals("Практика")) {
+        } else if (Wednesday.get(2).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceThree.setChecked(true);
         }
-        if (Wednesday.get(3).typelesson.toString().equals("Лекция")) {
+        if (Wednesday.get(3).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFour.setChecked(true);
-        } else if (Wednesday.get(3).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Wednesday.get(3).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFour.setChecked(true);
-        } else if (Wednesday.get(3).typelesson.toString().equals("Практика")) {
+        } else if (Wednesday.get(3).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFour.setChecked(true);
         }
-        if (Wednesday.get(4).typelesson.toString().equals("Лекция")) {
+        if (Wednesday.get(4).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFive.setChecked(true);
-        } else if (Wednesday.get(4).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Wednesday.get(4).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFive.setChecked(true);
-        } else if (Wednesday.get(4).typelesson.toString().equals("Практика")) {
+        } else if (Wednesday.get(4).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFive.setChecked(true);
         }
-        if (Wednesday.get(5).typelesson.toString().equals("Лекция")) {
+        if (Wednesday.get(5).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureSix.setChecked(true);
-        } else if (Wednesday.get(5).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Wednesday.get(5).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkSix.setChecked(true);
-        } else if (Wednesday.get(5).typelesson.toString().equals("Практика")) {
+        } else if (Wednesday.get(5).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceSix.setChecked(true);
         }
 
@@ -2787,6 +2843,24 @@ public class MainActivity2 extends AppCompatActivity {
         TimeFour.setText(Thursday.get(3).timelesson.toString());
         TimeFive.setText(Thursday.get(4).timelesson.toString());
         TimeSix.setText(Thursday.get(5).timelesson.toString());
+        rb_lecture.setText(typelesson.get(0));
+        rb_lectureTwo.setText(typelesson.get(0));
+        rb_lectureThree.setText(typelesson.get(0));
+        rb_lectureFour.setText(typelesson.get(0));
+        rb_lectureFive.setText(typelesson.get(0));
+        rb_lectureSix.setText(typelesson.get(0));
+        rb_labwork.setText(typelesson.get(1));
+        rb_labworkTwo.setText(typelesson.get(1));
+        rb_labworkThree.setText(typelesson.get(1));
+        rb_labworkFour.setText(typelesson.get(1));
+        rb_labworkFive.setText(typelesson.get(1));
+        rb_labworkSix.setText(typelesson.get(1));
+        rb_practice.setText(typelesson.get(2));
+        rb_practice.setText(typelesson.get(2));
+        rb_practiceThree.setText(typelesson.get(2));
+        rb_practiceFour.setText(typelesson.get(2));
+        rb_practiceFive.setText(typelesson.get(2));
+        rb_practiceSix.setText(typelesson.get(2));
         ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
         subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
@@ -3215,46 +3289,46 @@ public class MainActivity2 extends AppCompatActivity {
         EducatorEditFive.setSelection(educator_list.indexOf(Thursday.get(4).educator.toString()));
         EducatorEditSix.setSelection(educator_list.indexOf(Thursday.get(5).educator.toString()));
 
-        if (Thursday.get(0).typelesson.toString().equals("Лекция")) {
+        if (Thursday.get(0).typelesson.toString().equals(typelesson.get(0))) {
             rb_lecture.setChecked(true);
-        } else if (Thursday.get(0).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Thursday.get(0).typelesson.toString().equals(typelesson.get(1))) {
             rb_labwork.setChecked(true);
-        } else if (Thursday.get(0).typelesson.toString().equals("Практика")) {
+        } else if (Thursday.get(0).typelesson.toString().equals(typelesson.get(2))) {
             rb_practice.setChecked(true);
         }
-        if (Thursday.get(1).typelesson.toString().equals("Лекция")) {
+        if (Thursday.get(1).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureTwo.setChecked(true);
-        } else if (Thursday.get(1).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Thursday.get(1).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkTwo.setChecked(true);
-        } else if (Thursday.get(1).typelesson.toString().equals("Практика")) {
+        } else if (Thursday.get(1).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceTwo.setChecked(true);
         }
-        if (Thursday.get(2).typelesson.toString().equals("Лекция")) {
+        if (Thursday.get(2).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureThree.setChecked(true);
-        } else if (Thursday.get(2).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Thursday.get(2).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkThree.setChecked(true);
-        } else if (Thursday.get(2).typelesson.toString().equals("Практика")) {
+        } else if (Thursday.get(2).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceThree.setChecked(true);
         }
-        if (Thursday.get(3).typelesson.toString().equals("Лекция")) {
+        if (Thursday.get(3).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFour.setChecked(true);
-        } else if (Thursday.get(3).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Thursday.get(3).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFour.setChecked(true);
-        } else if (Thursday.get(3).typelesson.toString().equals("Практика")) {
+        } else if (Thursday.get(3).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFour.setChecked(true);
         }
-        if (Thursday.get(4).typelesson.toString().equals("Лекция")) {
+        if (Thursday.get(4).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFive.setChecked(true);
-        } else if (Thursday.get(4).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Thursday.get(4).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFive.setChecked(true);
-        } else if (Thursday.get(4).typelesson.toString().equals("Практика")) {
+        } else if (Thursday.get(4).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFive.setChecked(true);
         }
-        if (Thursday.get(5).typelesson.toString().equals("Лекция")) {
+        if (Thursday.get(5).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureSix.setChecked(true);
-        } else if (Thursday.get(5).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Thursday.get(5).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkSix.setChecked(true);
-        } else if (Thursday.get(5).typelesson.toString().equals("Практика")) {
+        } else if (Thursday.get(5).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceSix.setChecked(true);
         }
 
@@ -3531,6 +3605,24 @@ public class MainActivity2 extends AppCompatActivity {
         TimeFour.setText(Friday.get(3).timelesson.toString());
         TimeFive.setText(Friday.get(4).timelesson.toString());
         TimeSix.setText(Friday.get(5).timelesson.toString());
+        rb_lecture.setText(typelesson.get(0));
+        rb_lectureTwo.setText(typelesson.get(0));
+        rb_lectureThree.setText(typelesson.get(0));
+        rb_lectureFour.setText(typelesson.get(0));
+        rb_lectureFive.setText(typelesson.get(0));
+        rb_lectureSix.setText(typelesson.get(0));
+        rb_labwork.setText(typelesson.get(1));
+        rb_labworkTwo.setText(typelesson.get(1));
+        rb_labworkThree.setText(typelesson.get(1));
+        rb_labworkFour.setText(typelesson.get(1));
+        rb_labworkFive.setText(typelesson.get(1));
+        rb_labworkSix.setText(typelesson.get(1));
+        rb_practice.setText(typelesson.get(2));
+        rb_practice.setText(typelesson.get(2));
+        rb_practiceThree.setText(typelesson.get(2));
+        rb_practiceFour.setText(typelesson.get(2));
+        rb_practiceFive.setText(typelesson.get(2));
+        rb_practiceSix.setText(typelesson.get(2));
         ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
         subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
@@ -3956,46 +4048,46 @@ public class MainActivity2 extends AppCompatActivity {
         EducatorEditFive.setSelection(educator_list.indexOf(Friday.get(4).educator.toString()));
         EducatorEditSix.setSelection(educator_list.indexOf(Friday.get(5).educator.toString()));
 
-        if (Friday.get(0).typelesson.toString().equals("Лекция")) {
+        if (Friday.get(0).typelesson.toString().equals(typelesson.get(0))) {
             rb_lecture.setChecked(true);
-        } else if (Friday.get(0).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Friday.get(0).typelesson.toString().equals(typelesson.get(1))) {
             rb_labwork.setChecked(true);
-        } else if (Friday.get(0).typelesson.toString().equals("Практика")) {
+        } else if (Friday.get(0).typelesson.toString().equals(typelesson.get(2))) {
             rb_practice.setChecked(true);
         }
-        if (Friday.get(1).typelesson.toString().equals("Лекция")) {
+        if (Friday.get(1).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureTwo.setChecked(true);
-        } else if (Friday.get(1).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Friday.get(1).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkTwo.setChecked(true);
-        } else if (Friday.get(1).typelesson.toString().equals("Практика")) {
+        } else if (Friday.get(1).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceTwo.setChecked(true);
         }
-        if (Friday.get(2).typelesson.toString().equals("Лекция")) {
+        if (Friday.get(2).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureThree.setChecked(true);
-        } else if (Friday.get(2).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Friday.get(2).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkThree.setChecked(true);
-        } else if (Friday.get(2).typelesson.toString().equals("Практика")) {
+        } else if (Friday.get(2).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceThree.setChecked(true);
         }
-        if (Friday.get(3).typelesson.toString().equals("Лекция")) {
+        if (Friday.get(3).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFour.setChecked(true);
-        } else if (Friday.get(3).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Friday.get(3).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFour.setChecked(true);
-        } else if (Friday.get(3).typelesson.toString().equals("Практика")) {
+        } else if (Friday.get(3).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFour.setChecked(true);
         }
-        if (Friday.get(4).typelesson.toString().equals("Лекция")) {
+        if (Friday.get(4).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFive.setChecked(true);
-        } else if (Friday.get(4).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Friday.get(4).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFive.setChecked(true);
-        } else if (Friday.get(4).typelesson.toString().equals("Практика")) {
+        } else if (Friday.get(4).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFive.setChecked(true);
         }
-        if (Friday.get(5).typelesson.toString().equals("Лекция")) {
+        if (Friday.get(5).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureSix.setChecked(true);
-        } else if (Friday.get(5).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Friday.get(5).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkSix.setChecked(true);
-        } else if (Friday.get(5).typelesson.toString().equals("Практика")) {
+        } else if (Friday.get(5).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceSix.setChecked(true);
         }
 
@@ -4272,6 +4364,24 @@ public class MainActivity2 extends AppCompatActivity {
         TimeFour.setText(Saturday.get(3).timelesson.toString());
         TimeFive.setText(Saturday.get(4).timelesson.toString());
         TimeSix.setText(Saturday.get(5).timelesson.toString());
+        rb_lecture.setText(typelesson.get(0));
+        rb_lectureTwo.setText(typelesson.get(0));
+        rb_lectureThree.setText(typelesson.get(0));
+        rb_lectureFour.setText(typelesson.get(0));
+        rb_lectureFive.setText(typelesson.get(0));
+        rb_lectureSix.setText(typelesson.get(0));
+        rb_labwork.setText(typelesson.get(1));
+        rb_labworkTwo.setText(typelesson.get(1));
+        rb_labworkThree.setText(typelesson.get(1));
+        rb_labworkFour.setText(typelesson.get(1));
+        rb_labworkFive.setText(typelesson.get(1));
+        rb_labworkSix.setText(typelesson.get(1));
+        rb_practice.setText(typelesson.get(2));
+        rb_practice.setText(typelesson.get(2));
+        rb_practiceThree.setText(typelesson.get(2));
+        rb_practiceFour.setText(typelesson.get(2));
+        rb_practiceFive.setText(typelesson.get(2));
+        rb_practiceSix.setText(typelesson.get(2));
         ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
         subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
@@ -4697,46 +4807,46 @@ public class MainActivity2 extends AppCompatActivity {
         EducatorEditFive.setSelection(educator_list.indexOf(Saturday.get(4).educator.toString()));
         EducatorEditSix.setSelection(educator_list.indexOf(Saturday.get(5).educator.toString()));
 
-        if (Saturday.get(0).typelesson.toString().equals("Лекция")) {
+        if (Saturday.get(0).typelesson.toString().equals(typelesson.get(0))) {
             rb_lecture.setChecked(true);
-        } else if (Saturday.get(0).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Saturday.get(0).typelesson.toString().equals(typelesson.get(1))) {
             rb_labwork.setChecked(true);
-        } else if (Saturday.get(0).typelesson.toString().equals("Практика")) {
+        } else if (Saturday.get(0).typelesson.toString().equals(typelesson.get(2))) {
             rb_practice.setChecked(true);
         }
-        if (Saturday.get(1).typelesson.toString().equals("Лекция")) {
+        if (Saturday.get(1).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureTwo.setChecked(true);
-        } else if (Saturday.get(1).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Saturday.get(1).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkTwo.setChecked(true);
-        } else if (Saturday.get(1).typelesson.toString().equals("Практика")) {
+        } else if (Saturday.get(1).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceTwo.setChecked(true);
         }
-        if (Saturday.get(2).typelesson.toString().equals("Лекция")) {
+        if (Saturday.get(2).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureThree.setChecked(true);
-        } else if (Saturday.get(2).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Saturday.get(2).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkThree.setChecked(true);
-        } else if (Saturday.get(2).typelesson.toString().equals("Практика")) {
+        } else if (Saturday.get(2).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceThree.setChecked(true);
         }
-        if (Saturday.get(3).typelesson.toString().equals("Лекция")) {
+        if (Saturday.get(3).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFour.setChecked(true);
-        } else if (Saturday.get(3).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Saturday.get(3).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFour.setChecked(true);
-        } else if (Saturday.get(3).typelesson.toString().equals("Практика")) {
+        } else if (Saturday.get(3).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFour.setChecked(true);
         }
-        if (Saturday.get(4).typelesson.toString().equals("Лекция")) {
+        if (Saturday.get(4).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureFive.setChecked(true);
-        } else if (Saturday.get(4).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Saturday.get(4).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkFive.setChecked(true);
-        } else if (Saturday.get(4).typelesson.toString().equals("Практика")) {
+        } else if (Saturday.get(4).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceFive.setChecked(true);
         }
-        if (Saturday.get(5).typelesson.toString().equals("Лекция")) {
+        if (Saturday.get(5).typelesson.toString().equals(typelesson.get(0))) {
             rb_lectureSix.setChecked(true);
-        } else if (Saturday.get(5).typelesson.toString().equals("Лаб./раб.")) {
+        } else if (Saturday.get(5).typelesson.toString().equals(typelesson.get(1))) {
             rb_labworkSix.setChecked(true);
-        } else if (Saturday.get(5).typelesson.toString().equals("Практика")) {
+        } else if (Saturday.get(5).typelesson.toString().equals(typelesson.get(2))) {
             rb_practiceSix.setChecked(true);
         }
 
@@ -6680,6 +6790,7 @@ public class MainActivity2 extends AppCompatActivity {
             pagerAdapter.notifyDataSetChanged();
         }*/
         load_calls_schedule();
+        load_type_lesson();
         switcher_save.setChecked(true);
         switcher_save.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
@@ -7466,14 +7577,24 @@ public class MainActivity2 extends AppCompatActivity {
             }
         }
     }
-
     void load_calls_schedule(){
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
         String searchQuery = "SELECT "+ calls.time +" FROM " + calls.TABLE_NAME;
         Cursor cursor = db.rawQuery(searchQuery, null);
         while(cursor.moveToNext()) {
-         calls_schedule.add(cursor.getString(0));
+            calls_schedule.add(cursor.getString(0));
+        }
+        cursor.close();
+    }
+
+    void load_type_lesson(){
+
+        SQLiteDatabase db = ScheduleDB.getReadableDatabase();
+        String searchQuery = "select "+ ScheduleClass.typelessons.typelesson + " from " + ScheduleClass.typelessons.TABLE_NAME;
+        Cursor cursor = db.rawQuery(searchQuery, null);
+        while(cursor.moveToNext()) {
+            typelesson.add(cursor.getString(0));
         }
         cursor.close();
     }
