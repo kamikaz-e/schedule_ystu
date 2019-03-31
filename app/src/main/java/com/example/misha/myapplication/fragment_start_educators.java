@@ -162,20 +162,22 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
-                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                        String educator = input_educator.getText().toString();
-                        if(TextUtils.isEmpty(educator)) {
-                            input_educator.setError("Введите преподавателя");
-                            return true;
-                        }
-                        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                        db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('" + educator + "');");
-                        input_educator.setText("");
-                        start();
-                        adapter.notifyDataSetChanged();
+                    input_educator.requestFocus();
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+
+                    String educator = input_educator.getText().toString();
+                    if(TextUtils.isEmpty(educator)) {
+                        input_educator.setError("Введите преподавателя");
                         return true;
                     }
-                return true;
+                    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+                    db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('" + educator + "');");
+                    input_educator.setText("");
+                    start();
+                    adapter.notifyDataSetChanged();
+                    return true;
+                }
+                return false;
             }
         });
         return view;

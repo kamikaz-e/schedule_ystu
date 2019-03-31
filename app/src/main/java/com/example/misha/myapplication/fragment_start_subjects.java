@@ -203,20 +203,23 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
-                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                        String subject = input_subject.getText().toString();
-                        if(TextUtils.isEmpty(subject)) {
-                            input_subject.setError("Введите предмет");
-                            return true;
-                        }
-                        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                        db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('" + subject + "');");
-                        input_subject.getText().clear();
-                        start();
-                        adapter.notifyDataSetChanged();
+                    input_subject.requestFocus();
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+
+                    String subject = input_subject.getText().toString();
+                    if(TextUtils.isEmpty(subject)) {
+                        input_subject.setError("Введите предмет");
                         return true;
                     }
-                return true;
+                    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+                    db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('" + subject + "');");
+                    input_subject.getText().clear();
+                    start();
+                    adapter.notifyDataSetChanged();
+                    return true;
+
+                }
+                return false;
             }
         });
         return view;

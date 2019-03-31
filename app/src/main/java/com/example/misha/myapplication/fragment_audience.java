@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,6 +16,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -33,6 +35,8 @@ import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleDB;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
@@ -53,7 +57,7 @@ public class fragment_audience extends android.support.v4.app.Fragment {
     Button next;
     String select_item="";
     Integer abc=0;
-Button getClear_audiences;
+
     public fragment_audience() {
         // Required empty public constructor
     }
@@ -91,7 +95,9 @@ Button getClear_audiences;
 
         start();
 
-        InputFilter filter = new InputFilter() {
+
+
+      InputFilter filter = new InputFilter() {
             boolean canEnterSpace = false;
 
             public CharSequence filter(CharSequence source, int start, int end,
@@ -123,11 +129,14 @@ Button getClear_audiences;
 
         };
 
+
         input_audience.setFilters(new InputFilter[]{filter});
         input_audience.setOnKeyListener(new View.OnKeyListener() {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
+
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
+                    input_audience.requestFocus();
                     if (keyCode == KeyEvent.KEYCODE_ENTER) {
                         String audience = input_audience.getText().toString();
                         if(TextUtils.isEmpty(audience)) {
@@ -141,7 +150,7 @@ Button getClear_audiences;
                         adapter.notifyDataSetChanged();
                         return true;
                     }
-                return true;
+               return false;
             }
         });
         final TabLayout tabLayout = getActivity().findViewById(R.id.tabs);

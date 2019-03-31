@@ -124,7 +124,9 @@ public class fragment_educator extends android.support.v4.app.Fragment {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
+                    input_educator.requestFocus();
                     if (keyCode == KeyEvent.KEYCODE_ENTER) {
+
                         String educator = input_educator.getText().toString();
                         if(TextUtils.isEmpty(educator)) {
                             input_educator.setError("Введите преподавателя");
@@ -137,7 +139,7 @@ public class fragment_educator extends android.support.v4.app.Fragment {
                         adapter.notifyDataSetChanged();
                         return true;
                     }
-                return true;
+                return false;
 
 
             }

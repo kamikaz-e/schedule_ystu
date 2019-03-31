@@ -166,21 +166,23 @@ public class fragment_start_audiences extends android.support.v4.app.Fragment {
         input_audience.setOnKeyListener(new View.OnKeyListener() {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
+
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
-                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                        String audience = input_audience.getText().toString();
-                        if(TextUtils.isEmpty(audience)) {
-                            input_audience.setError("Введите аудиторию");
-                            return true;
-                        }
-                        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                        db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('" + audience + "');");
-                        input_audience.setText("");
-                        start();
-                        adapter.notifyDataSetChanged();
+                    input_audience.requestFocus();
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    String audience = input_audience.getText().toString();
+                    if(TextUtils.isEmpty(audience)) {
+                        input_audience.setError("Введите аудиторию");
                         return true;
                     }
-                return true;
+                    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+                    db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('" + audience + "');");
+                    input_audience.setText("");
+                    start();
+                    adapter.notifyDataSetChanged();
+                    return true;
+                }
+                return false;
             }
         });
         return view;

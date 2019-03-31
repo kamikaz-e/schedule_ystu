@@ -24,6 +24,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -134,23 +136,23 @@ public class fragment_subject extends android.support.v4.app.Fragment {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
+                    input_subject.requestFocus();
                     if (keyCode == KeyEvent.KEYCODE_ENTER) {
 
                         String subject = input_subject.getText().toString();
-
                         if(TextUtils.isEmpty(subject)) {
                             input_subject.setError("Введите предмет");
                             return true;
                         }
-
                         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
                         db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('" + subject + "');");
                         input_subject.getText().clear();
                         start();
                         adapter.notifyDataSetChanged();
                         return true;
+
                     }
-                return true;
+                return false;
             }
         });
         TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
