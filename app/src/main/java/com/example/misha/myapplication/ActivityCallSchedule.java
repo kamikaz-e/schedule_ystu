@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.model;
+package com.example.misha.myapplication;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,8 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.example.misha.myapplication.MainActivity;
-import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleClass.calls;
 import com.example.misha.myapplication.data.ScheduleDB;

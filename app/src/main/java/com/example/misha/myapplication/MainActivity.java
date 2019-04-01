@@ -28,7 +28,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.data.ScheduleDB;
-import com.example.misha.myapplication.model.ActivityCallSchedule;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.Calendar;

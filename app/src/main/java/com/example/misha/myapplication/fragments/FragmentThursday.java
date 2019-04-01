@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.model.fragments;
+package com.example.misha.myapplication.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

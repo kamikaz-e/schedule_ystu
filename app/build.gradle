@@ -41,4 +41,5 @@ dependencies {
     implementation 'com.android.support:mediarouter-v7:28.0.0'
     implementation 'uk.co.samuelwall:material-tap-target-prompt:2.14.0'
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
+    implementation 'com.github.stfalcon:androidmvvmhelper:0.4'
 }

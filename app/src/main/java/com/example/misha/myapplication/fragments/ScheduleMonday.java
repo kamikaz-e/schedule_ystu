@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.model.fragments;
+package com.example.misha.myapplication.fragments;
 
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -10,19 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.misha.myapplication.Lesson;
 import com.example.misha.myapplication.MyAdapter;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleClass.calls;
 import com.example.misha.myapplication.data.ScheduleDB;
-import com.example.misha.myapplication.data_schedule;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleMonday extends android.support.v4.app.Fragment {
     private ScheduleDB ScheduleDB;
-    private List<data_schedule> schedule;
+    private List<Lesson> schedule;
     String SubjectOne="";
     String SubjectTwo="";
     String SubjectThree="";
@@ -72,12 +72,12 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
     private void data_schedule(){
 
         schedule = new ArrayList<>();
-        schedule.add(new data_schedule("1",calls_schedule.get(0),SubjectOne, AudienceOne, EducatorOne, TypeLessonOne));
-        schedule.add(new data_schedule("2",calls_schedule.get(1),SubjectTwo, AudienceTwo, EducatorTwo, TypeLessonTwo));
-        schedule.add(new data_schedule("3",calls_schedule.get(2),SubjectThree, AudienceThree, EducatorThree, TypeLessonThree));
-        schedule.add(new data_schedule("4",calls_schedule.get(3),SubjectFour, AudienceFour, EducatorFour, TypeLessonFour));
-        schedule.add(new data_schedule("5",calls_schedule.get(4),SubjectFive, AudienceFive, EducatorFive, TypeLessonFive));
-        schedule.add(new data_schedule("6",calls_schedule.get(5),SubjectSix, AudienceSix, EducatorSix, TypeLessonSix));
+        schedule.add(new Lesson("1",calls_schedule.get(0),SubjectOne, AudienceOne, EducatorOne, TypeLessonOne));
+        schedule.add(new Lesson("2",calls_schedule.get(1),SubjectTwo, AudienceTwo, EducatorTwo, TypeLessonTwo));
+        schedule.add(new Lesson("3",calls_schedule.get(2),SubjectThree, AudienceThree, EducatorThree, TypeLessonThree));
+        schedule.add(new Lesson("4",calls_schedule.get(3),SubjectFour, AudienceFour, EducatorFour, TypeLessonFour));
+        schedule.add(new Lesson("5",calls_schedule.get(4),SubjectFive, AudienceFive, EducatorFive, TypeLessonFive));
+        schedule.add(new Lesson("6",calls_schedule.get(5),SubjectSix, AudienceSix, EducatorSix, TypeLessonSix));
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

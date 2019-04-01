@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.model.activity;
+package com.example.misha.myapplication.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,9 +19,6 @@ import com.example.misha.myapplication.ScheduleTuesday;
 import com.example.misha.myapplication.ScheduleWednesday;
 
 public class FragmentScheduleByDays extends android.support.v4.app.Fragment {
-
-    public FragmentScheduleByDays() {
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

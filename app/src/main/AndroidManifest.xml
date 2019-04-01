@@ -24,7 +24,7 @@
             android:name=".ActivitySettings"
             android:label="@string/title_activity_settings"></activity>
         <activity
-            android:name=".model.ActivityCallSchedule"
+            android:name=".ActivityCallSchedule"
             android:label="@string/title_activity_call_schedule"></activity>
         <activity
             android:name=".ActivityEditData"

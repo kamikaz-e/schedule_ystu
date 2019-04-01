@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 {
-    List<data_schedule> schedule;
+    List<Lesson> schedule;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public CardView mCardView;
@@ -35,7 +35,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         }
     }
 
-    MyAdapter(List<data_schedule> schedule) {
+    public MyAdapter(List<Lesson> schedule) {
         this.schedule = schedule;
     }
 
@@ -47,13 +47,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 
     @Override public void onBindViewHolder(MyViewHolder holder, final int position)
     {
-
-        holder.Number.setText(schedule.get(position).id);
-        holder.TimeEdit.setText(schedule.get(position).timelesson);
-        holder.SubjectEdit.setText(schedule.get(position).subjectEdit);
-        holder.AudienceEdit.setText(schedule.get(position).audienceEdit);
-        holder.Educator.setText(schedule.get(position).educator);
-        holder.TypeLesson.setText(schedule.get(position).typelesson);
+        holder.Number.setText(schedule.get(position).getId());
+        holder.TimeEdit.setText(schedule.get(position).getTime());
+        holder.SubjectEdit.setText(schedule.get(position).getSubjectEdit());
+        holder.AudienceEdit.setText(schedule.get(position).getAudienceEdit());
+        holder.Educator.setText(schedule.get(position).getEducator());
+        holder.TypeLesson.setText(schedule.get(position).getTypeLesson());
     }
 
 

@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ScheduleSaturday extends android.support.v4.app.Fragment {
     private ScheduleDB ScheduleDB;
-    private List<data_schedule> schedule;
+    private List<Lesson> schedule;
     String SubjectOne="";
     String SubjectTwo="";
     String SubjectThree="";
@@ -69,12 +69,12 @@ public class ScheduleSaturday extends android.support.v4.app.Fragment {
     private void data_schedule(){
 
         schedule = new ArrayList<>();
-        schedule.add(new data_schedule("1",calls_schedule.get(0),SubjectOne, AudienceOne, EducatorOne, TypeLessonOne));
-        schedule.add(new data_schedule("2",calls_schedule.get(1),SubjectTwo, AudienceTwo, EducatorTwo, TypeLessonTwo));
-        schedule.add(new data_schedule("3",calls_schedule.get(2),SubjectThree, AudienceThree, EducatorThree, TypeLessonThree));
-        schedule.add(new data_schedule("4",calls_schedule.get(3),SubjectFour, AudienceFour, EducatorFour, TypeLessonFour));
-        schedule.add(new data_schedule("5",calls_schedule.get(4),SubjectFive, AudienceFive, EducatorFive, TypeLessonFive));
-        schedule.add(new data_schedule("6",calls_schedule.get(5),SubjectSix, AudienceSix, EducatorSix, TypeLessonSix));
+        schedule.add(new Lesson("1",calls_schedule.get(0),SubjectOne, AudienceOne, EducatorOne, TypeLessonOne));
+        schedule.add(new Lesson("2",calls_schedule.get(1),SubjectTwo, AudienceTwo, EducatorTwo, TypeLessonTwo));
+        schedule.add(new Lesson("3",calls_schedule.get(2),SubjectThree, AudienceThree, EducatorThree, TypeLessonThree));
+        schedule.add(new Lesson("4",calls_schedule.get(3),SubjectFour, AudienceFour, EducatorFour, TypeLessonFour));
+        schedule.add(new Lesson("5",calls_schedule.get(4),SubjectFive, AudienceFive, EducatorFive, TypeLessonFive));
+        schedule.add(new Lesson("6",calls_schedule.get(5),SubjectSix, AudienceSix, EducatorSix, TypeLessonSix));
     }
 
     @Override

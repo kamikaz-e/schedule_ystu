@@ -445,12 +445,12 @@ public class ScheduleEditor extends AppCompatActivity {
     Integer flag_autosave=1;
 
     Integer flag_save=0;
-    List<DataMonday> Monday;
-    List<DataTuesday> Tuesday;
-    List<DataWednesday> Wednesday;
-    List<DataThursday> Thursday;
-    List<DataFriday> Friday;
-    List<DataSaturday> Saturday;
+    List<Lesson> Monday;
+    List<Lesson> Tuesday;
+    List<Lesson> Wednesday;
+    List<Lesson> Thursday;
+    List<Lesson> Friday;
+    List<Lesson> Saturday;
     ArrayList<String> calls_schedule = new ArrayList<>();
     ArrayList<String> typelesson = new ArrayList<>();
     ViewPager viewPager;
@@ -522,18 +522,18 @@ public class ScheduleEditor extends AppCompatActivity {
         typeEditFive_monday = findViewById(R.id.typeEditFive_monday);
         typeEditSix_monday = findViewById(R.id.typeEditSix_monday);
         DataMonday();
-        NumberOne.setText(Monday.get(0).idcards.toString());
-        NumberTwo.setText(Monday.get(1).idcards.toString());
-        NumberThree.setText(Monday.get(2).idcards.toString());
-        NumberFour.setText(Monday.get(3).idcards.toString());
-        NumberFive.setText(Monday.get(4).idcards.toString());
-        NumberSix.setText(Monday.get(5).idcards.toString());
-        TimeOne.setText(Monday.get(0).timelesson.toString());
-        TimeTwo.setText(Monday.get(1).timelesson.toString());
-        TimeThree.setText(Monday.get(2).timelesson.toString());
-        TimeFour.setText(Monday.get(3).timelesson.toString());
-        TimeFive.setText(Monday.get(4).timelesson.toString());
-        TimeSix.setText(Monday.get(5).timelesson.toString());
+        NumberOne.setText(Monday.get(0).getId().toString());
+        NumberTwo.setText(Monday.get(1).getId().toString());
+        NumberThree.setText(Monday.get(2).getId().toString());
+        NumberFour.setText(Monday.get(3).getId().toString());
+        NumberFive.setText(Monday.get(4).getId().toString());
+        NumberSix.setText(Monday.get(5).getId().toString());
+        TimeOne.setText(Monday.get(0).getTime().toString());
+        TimeTwo.setText(Monday.get(1).getTime().toString());
+        TimeThree.setText(Monday.get(2).getTime().toString());
+        TimeFour.setText(Monday.get(3).getTime().toString());
+        TimeFive.setText(Monday.get(4).getTime().toString());
+        TimeSix.setText(Monday.get(5).getTime().toString());
         rb_lecture.setText(typelesson.get(0));
         rb_lectureTwo.setText(typelesson.get(0));
         rb_lectureThree.setText(typelesson.get(0));
@@ -678,9 +678,9 @@ public class ScheduleEditor extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
-            SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).subjectEdit));
-            AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(0).audienceEdit));
-            EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(0).educator));
+            SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).getSubjectEdit()));
+            AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(0).getAudienceEdit()));
+            EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(0).getEducator()));
             switch (IdRadioButtonOne) {
                 case 0:
                     rb_lectureTwo.setChecked(true);
@@ -700,9 +700,9 @@ public class ScheduleEditor extends AppCompatActivity {
         @Override
         public void onClick(View v) {
           try{
-              SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(1).subjectEdit));
-            AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(1).audienceEdit));
-            EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(1).educator));
+              SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit()));
+            AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit()));
+            EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(1).getEducator()));
             switch (IdRadioButtonTwo) {
                 case 0:
                     rb_lectureThree.setChecked(true);
@@ -722,9 +722,9 @@ public class ScheduleEditor extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try{
-            SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(2).subjectEdit));
-            AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(2).audienceEdit));
-            EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(2).educator));
+            SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit()));
+            AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit()));
+            EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(2).getEducator()));
             switch (IdRadioButtonThree) {
                 case 0:
                     rb_lectureFour.setChecked(true);
@@ -743,9 +743,9 @@ public class ScheduleEditor extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try{
-            SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(3).subjectEdit));
-            AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(3).audienceEdit));
-            EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(3).educator));
+            SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit()));
+            AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit()));
+            EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(3).getEducator()));
             switch (IdRadioButtonFour) {
                 case 0:
                     rb_lectureFive.setChecked(true);
@@ -765,9 +765,9 @@ public class ScheduleEditor extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try{
-            SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(4).subjectEdit));
-            AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(4).audienceEdit));
-            EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(4).educator));
+            SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit()));
+            AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit()));
+            EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(4).getEducator()));
             switch (IdRadioButtonFive) {
                 case 0:
                     rb_lectureSix.setChecked(true);
@@ -787,9 +787,9 @@ public class ScheduleEditor extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try{
-            SubjectEditOne.setSelection(subject_list.indexOf(Monday.get(1).subjectEdit));
-            AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(1).audienceEdit));
-            EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(1).educator));
+            SubjectEditOne.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit()));
+            AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit()));
+            EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(1).getEducator()));
             switch (IdRadioButtonTwo) {
                 case 0:
                     rb_lecture.setChecked(true);
@@ -809,9 +809,9 @@ public class ScheduleEditor extends AppCompatActivity {
         @Override
         public void onClick(View v) {
         try{
-            SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(2).subjectEdit));
-            AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(2).audienceEdit));
-            EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(2).educator));
+            SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit()));
+            AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit()));
+            EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(2).getEducator()));
             switch (IdRadioButtonThree) {
                 case 0:
                     rb_lectureTwo.setChecked(true);
@@ -831,9 +831,9 @@ public class ScheduleEditor extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try{
-            SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(3).subjectEdit));
-            AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(3).audienceEdit));
-            EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(3).educator));
+            SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit()));
+            AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit()));
+            EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(3).getEducator()));
             switch (IdRadioButtonFour) {
                 case 0:
                     rb_lectureThree.setChecked(true);
@@ -853,9 +853,9 @@ public class ScheduleEditor extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try{
-            SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(4).subjectEdit));
-            AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(4).audienceEdit));
-            EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(4).educator));
+            SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit()));
+            AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit()));
+            EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(4).getEducator()));
             switch (IdRadioButtonFive) {
                 case 0:
                     rb_lectureFour.setChecked(true);
@@ -875,9 +875,9 @@ public class ScheduleEditor extends AppCompatActivity {
         @Override
         public void onClick(View v) {
                 try{
-            SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(5).subjectEdit));
-            AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(5).audienceEdit));
-            EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(5).educator));
+            SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(5).getSubjectEdit()));
+            AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(5).getAudienceEdit()));
+            EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(5).getEducator()));
             switch (IdRadioButtonSix) {
                 case 0:
                     rb_lectureFive.setChecked(true);
@@ -956,66 +956,66 @@ public class ScheduleEditor extends AppCompatActivity {
         });
 
 
-        SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).subjectEdit.toString()));
-        SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(1).subjectEdit.toString()));
-        SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(2).subjectEdit.toString()));
-        SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(3).subjectEdit.toString()));
-        SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(4).subjectEdit.toString()));
-        SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(5).subjectEdit.toString()));
-        AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(0).audienceEdit.toString()));
-        AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(1).audienceEdit.toString()));
-        AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(2).audienceEdit.toString()));
-        AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(3).audienceEdit.toString()));
-        AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(4).audienceEdit.toString()));
-        AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(5).audienceEdit.toString()));
-        EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(0).educator.toString()));
-        EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(1).educator.toString()));
-        EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(2).educator.toString()));
-        EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(3).educator.toString()));
-        EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(4).educator.toString()));
-        EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(5).educator.toString()));
+        SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).getSubjectEdit().toString()));
+        SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit().toString()));
+        SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit().toString()));
+        SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit().toString()));
+        SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit().toString()));
+        SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(5).getSubjectEdit().toString()));
+        AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(0).getAudienceEdit().toString()));
+        AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit().toString()));
+        AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit().toString()));
+        AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit().toString()));
+        AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit().toString()));
+        AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(5).getAudienceEdit().toString()));
+        EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(0).getEducator().toString()));
+        EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(1).getEducator().toString()));
+        EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(2).getEducator().toString()));
+        EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(3).getEducator().toString()));
+        EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(4).getEducator().toString()));
+        EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(5).getEducator().toString()));
 
 
-        if (Monday.get(0).typelesson.toString().equals(typelesson.get(0))) {
+        if (Monday.get(0).getTypeLesson().toString().equals(typelesson.get(0))) {
             rb_lecture.setChecked(true);
-        } else if (Monday.get(0).typelesson.toString().equals(typelesson.get(1))) {
+        } else if (Monday.get(0).getTypeLesson().toString().equals(typelesson.get(1))) {
             rb_labwork.setChecked(true);
-        } else if (Monday.get(0).typelesson.toString().equals(typelesson.get(2))) {
+        } else if (Monday.get(0).getTypeLesson().toString().equals(typelesson.get(2))) {
             rb_practice.setChecked(true);
         }
-        if (Monday.get(1).typelesson.toString().equals(typelesson.get(0))) {
+        if (Monday.get(1).getTypeLesson().toString().equals(typelesson.get(0))) {
             rb_lectureTwo.setChecked(true);
-        } else if (Monday.get(1).typelesson.toString().equals(typelesson.get(1))) {
+        } else if (Monday.get(1).getTypeLesson().toString().equals(typelesson.get(1))) {
             rb_labworkTwo.setChecked(true);
-        } else if (Monday.get(1).typelesson.toString().equals(typelesson.get(2))) {
+        } else if (Monday.get(1).getTypeLesson().toString().equals(typelesson.get(2))) {
             rb_practiceTwo.setChecked(true);
         }
-        if (Monday.get(2).typelesson.toString().equals(typelesson.get(0))) {
+        if (Monday.get(2).getTypeLesson().toString().equals(typelesson.get(0))) {
             rb_lectureThree.setChecked(true);
-        } else if (Monday.get(2).typelesson.toString().equals(typelesson.get(1))) {
+        } else if (Monday.get(2).getTypeLesson().toString().equals(typelesson.get(1))) {
             rb_labworkThree.setChecked(true);
-        } else if (Monday.get(2).typelesson.toString().equals(typelesson.get(2))) {
+        } else if (Monday.get(2).getTypeLesson().toString().equals(typelesson.get(2))) {
             rb_practiceThree.setChecked(true);
         }
-        if (Monday.get(3).typelesson.toString().equals(typelesson.get(0))) {
+        if (Monday.get(3).getTypeLesson().toString().equals(typelesson.get(0))) {
             rb_lectureFour.setChecked(true);
-        } else if (Monday.get(3).typelesson.toString().equals(typelesson.get(1))) {
+        } else if (Monday.get(3).getTypeLesson().toString().equals(typelesson.get(1))) {
             rb_labworkFour.setChecked(true);
-        } else if (Monday.get(3).typelesson.toString().equals(typelesson.get(2))) {
+        } else if (Monday.get(3).getTypeLesson().toString().equals(typelesson.get(2))) {
             rb_practiceFour.setChecked(true);
         }
-        if (Monday.get(4).typelesson.toString().equals(typelesson.get(0))) {
+        if (Monday.get(4).getTypeLesson().toString().equals(typelesson.get(0))) {
             rb_lectureFive.setChecked(true);
-        } else if (Monday.get(4).typelesson.toString().equals(typelesson.get(1))) {
+        } else if (Monday.get(4).getTypeLesson().toString().equals(typelesson.get(1))) {
             rb_labworkFive.setChecked(true);
-        } else if (Monday.get(4).typelesson.toString().equals(typelesson.get(2))) {
+        } else if (Monday.get(4).getTypeLesson().toString().equals(typelesson.get(2))) {
             rb_practiceFive.setChecked(true);
         }
-        if (Monday.get(5).typelesson.toString().equals(typelesson.get(0))) {
+        if (Monday.get(5).getTypeLesson().toString().equals(typelesson.get(0))) {
             rb_lectureSix.setChecked(true);
-        } else if (Monday.get(5).typelesson.toString().equals(typelesson.get(1))) {
+        } else if (Monday.get(5).getTypeLesson().toString().equals(typelesson.get(1))) {
             rb_labworkSix.setChecked(true);
-        } else if (Monday.get(5).typelesson.toString().equals(typelesson.get(2))) {
+        } else if (Monday.get(5).getTypeLesson().toString().equals(typelesson.get(2))) {
             rb_practiceSix.setChecked(true);
         }
         //S1
@@ -1024,7 +1024,7 @@ public class ScheduleEditor extends AppCompatActivity {
                   @Override
                   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                       MondayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
-                      Monday.set(0, new DataMonday("1", "8:30-10:00", MondayValueSubjectOne, Monday.get(0).audienceEdit.toString(), Monday.get(0).educator.toString(), Monday.get(0).typelesson.toString()));
+                      Monday.set(0, new Lesson("1", "8:30-10:00", MondayValueSubjectOne, Monday.get(0).getAudienceEdit().toString(), Monday.get(0).getEducator().toString(), Monday.get(0).getTypeLesson().toString()));
                   }
                   @Override
                   public void onNothingSelected(AdapterView<?> parent) {
@@ -1038,7 +1038,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     MondayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
-                    Monday.set(1, new DataMonday("2", "10:10-11:40", MondayValueSubjectTwo, Monday.get(1).audienceEdit.toString(), Monday.get(1).educator.toString(), Monday.get(1).typelesson.toString()));
+                    Monday.set(1, new Lesson("2", "10:10-11:40", MondayValueSubjectTwo, Monday.get(1).getAudienceEdit().toString(), Monday.get(1).getEducator().toString(), Monday.get(1).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1049,7 +1049,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
-                    Monday.set(2, new DataMonday("3", "12:20-13:50", MondayValueSubjectThree, Monday.get(2).audienceEdit.toString(), Monday.get(2).educator.toString(), Monday.get(2).typelesson.toString()));
+                    Monday.set(2, new Lesson("3", "12:20-13:50", MondayValueSubjectThree, Monday.get(2).getAudienceEdit().toString(), Monday.get(2).getEducator().toString(), Monday.get(2).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1060,7 +1060,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
-                    Monday.set(3, new DataMonday("4", "14:00-15:30", MondayValueSubjectFour, Monday.get(3).audienceEdit.toString(), Monday.get(3).educator.toString(), Monday.get(3).typelesson.toString()));
+                    Monday.set(3, new Lesson("4", "14:00-15:30", MondayValueSubjectFour, Monday.get(3).getAudienceEdit().toString(), Monday.get(3).getEducator().toString(), Monday.get(3).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1071,7 +1071,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
-                    Monday.set(4, new DataMonday("5", "15:40-17:10", MondayValueSubjectFive, Monday.get(4).audienceEdit.toString(), Monday.get(4).educator.toString(), Monday.get(4).typelesson.toString()));
+                    Monday.set(4, new Lesson("5", "15:40-17:10", MondayValueSubjectFive, Monday.get(4).getAudienceEdit().toString(), Monday.get(4).getEducator().toString(), Monday.get(4).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1082,7 +1082,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
-                    Monday.set(5, new DataMonday("6", "17:30-19:00", MondayValueSubjectSix, Monday.get(5).audienceEdit.toString(), Monday.get(5).educator.toString(), Monday.get(5).typelesson.toString()));
+                    Monday.set(5, new Lesson("6", "17:30-19:00", MondayValueSubjectSix, Monday.get(5).getAudienceEdit().toString(), Monday.get(5).getEducator().toString(), Monday.get(5).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1094,7 +1094,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
-                    Monday.set(0, new DataMonday("1", "8:30-10:00", Monday.get(0).subjectEdit.toString(), MondayValueAudienceOne, Monday.get(0).educator.toString(), Monday.get(0).typelesson.toString()));
+                    Monday.set(0, new Lesson("1", "8:30-10:00", Monday.get(0).getSubjectEdit().toString(), MondayValueAudienceOne, Monday.get(0).getEducator().toString(), Monday.get(0).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1105,7 +1105,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
-                    Monday.set(1, new DataMonday("2", "10:10-11:40", Monday.get(1).subjectEdit.toString(), MondayValueAudienceTwo, Monday.get(1).educator.toString(), Monday.get(1).typelesson.toString()));
+                    Monday.set(1, new Lesson("2", "10:10-11:40", Monday.get(1).getSubjectEdit().toString(), MondayValueAudienceTwo, Monday.get(1).getEducator().toString(), Monday.get(1).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1117,7 +1117,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
-                    Monday.set(2, new DataMonday("3", "12:20-13:50", Monday.get(2).subjectEdit.toString(), MondayValueAudienceThree, Monday.get(2).educator.toString(), Monday.get(2).typelesson.toString()));
+                    Monday.set(2, new Lesson("3", "12:20-13:50", Monday.get(2).getSubjectEdit().toString(), MondayValueAudienceThree, Monday.get(2).getEducator().toString(), Monday.get(2).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1128,7 +1128,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
-                    Monday.set(3, new DataMonday("4", "14:00-15:30", Monday.get(3).subjectEdit.toString(), MondayValueAudienceFour, Monday.get(3).educator.toString(), Monday.get(3).typelesson.toString()));
+                    Monday.set(3, new Lesson("4", "14:00-15:30", Monday.get(3).getSubjectEdit().toString(), MondayValueAudienceFour, Monday.get(3).getEducator().toString(), Monday.get(3).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1139,7 +1139,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
-                    Monday.set(4, new DataMonday("5", "15:40-17:10", Monday.get(4).subjectEdit.toString(), MondayValueAudienceFive, Monday.get(4).educator.toString(), Monday.get(4).typelesson.toString()));
+                    Monday.set(4, new Lesson("5", "15:40-17:10", Monday.get(4).getSubjectEdit().toString(), MondayValueAudienceFive, Monday.get(4).getEducator().toString(), Monday.get(4).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1150,7 +1150,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
-                    Monday.set(5, new DataMonday("6", "17:30-19:00", Monday.get(5).subjectEdit.toString(), MondayValueAudienceSix, Monday.get(5).educator.toString(), Monday.get(5).typelesson.toString()));
+                    Monday.set(5, new Lesson("6", "17:30-19:00", Monday.get(5).getSubjectEdit().toString(), MondayValueAudienceSix, Monday.get(5).getEducator().toString(), Monday.get(5).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1162,7 +1162,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayEducatorOne = EducatorEditOne.getSelectedItem().toString();
-                    Monday.set(0, new DataMonday("1", "8:30-10:00", Monday.get(0).subjectEdit.toString(), Monday.get(0).audienceEdit.toString(), MondayEducatorOne, Monday.get(0).typelesson.toString()));
+                    Monday.set(0, new Lesson("1", "8:30-10:00", Monday.get(0).getSubjectEdit().toString(), Monday.get(0).getAudienceEdit().toString(), MondayEducatorOne, Monday.get(0).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1173,7 +1173,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
-                    Monday.set(1, new DataMonday("2", "10:10-11:40", Monday.get(1).subjectEdit.toString(), Monday.get(1).audienceEdit.toString(), MondayEducatorTwo, Monday.get(1).typelesson.toString()));
+                    Monday.set(1, new Lesson("2", "10:10-11:40", Monday.get(1).getSubjectEdit().toString(), Monday.get(1).getAudienceEdit().toString(), MondayEducatorTwo, Monday.get(1).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1185,7 +1185,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayEducatorThree = EducatorEditThree.getSelectedItem().toString();
-                    Monday.set(2, new DataMonday("3", "12:20-13:50", Monday.get(2).subjectEdit.toString(), Monday.get(2).audienceEdit.toString(), MondayEducatorThree, Monday.get(2).typelesson.toString()));
+                    Monday.set(2, new Lesson("3", "12:20-13:50", Monday.get(2).getSubjectEdit().toString(), Monday.get(2).getAudienceEdit().toString(), MondayEducatorThree, Monday.get(2).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1196,7 +1196,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayEducatorFour = EducatorEditFour.getSelectedItem().toString();
-                    Monday.set(3, new DataMonday("4", "14:00-15:30", Monday.get(3).subjectEdit.toString(), Monday.get(3).audienceEdit.toString(), MondayEducatorFour, Monday.get(3).typelesson.toString()));
+                    Monday.set(3, new Lesson("4", "14:00-15:30", Monday.get(3).getSubjectEdit().toString(), Monday.get(3).getAudienceEdit().toString(), MondayEducatorFour, Monday.get(3).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1207,7 +1207,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayEducatorFive = EducatorEditFive.getSelectedItem().toString();
-                    Monday.set(4, new DataMonday("5", "15:40-17:10", Monday.get(4).subjectEdit.toString(), Monday.get(4).audienceEdit.toString(), MondayEducatorFive, Monday.get(4).typelesson.toString()));
+                    Monday.set(4, new Lesson("5", "15:40-17:10", Monday.get(4).getSubjectEdit().toString(), Monday.get(4).getAudienceEdit().toString(), MondayEducatorFive, Monday.get(4).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1218,14 +1218,14 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     MondayEducatorSix = EducatorEditSix.getSelectedItem().toString();
-                    Monday.set(5, new DataMonday("6", "17:30-19:00", Monday.get(5).subjectEdit.toString(), Monday.get(5).audienceEdit.toString(), MondayEducatorSix, Monday.get(5).typelesson.toString()));
+                    Monday.set(5, new Lesson("6", "17:30-19:00", Monday.get(5).getSubjectEdit().toString(), Monday.get(5).getAudienceEdit().toString(), MondayEducatorSix, Monday.get(5).getTypeLesson().toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
 
     }
 
-    public void tuesday_fill() {
+  /*  public void tuesday_fill() {
         rb_lecture = findViewById(R.id.rb_lecture_tuesday);
         rb_labwork = findViewById(R.id.rb_labwork_tuesday);
         rb_practice = findViewById(R.id.rb_practice_tuesday);
@@ -1281,7 +1281,7 @@ public class ScheduleEditor extends AppCompatActivity {
         typeEditFive_tuesday = findViewById(R.id.typeEditFive_tuesday);
         typeEditSix_tuesday = findViewById(R.id.typeEditSix_tuesday);
 
-        DataTuesday();
+        Lesson();
         NumberOne.setText(Tuesday.get(0).idcards.toString());
         NumberTwo.setText(Tuesday.get(1).idcards.toString());
         NumberThree.setText(Tuesday.get(2).idcards.toString());
@@ -1436,8 +1436,8 @@ public class ScheduleEditor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
-                SubjectEditTwo.setSelection(subject_list.indexOf(Tuesday.get(0).subjectEdit));
-                AudienceEditTwo.setSelection(audience_list.indexOf(Tuesday.get(0).audienceEdit));
+                SubjectEditTwo.setSelection(subject_list.indexOf(Tuesday.get(0).subject()));
+                AudienceEditTwo.setSelection(audience_list.indexOf(Tuesday.get(0).audience));
                 EducatorEditTwo.setSelection(educator_list.indexOf(Tuesday.get(0).educator));
                 switch (IdRadioButtonOne){
                     case 0:
@@ -1458,8 +1458,8 @@ public class ScheduleEditor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
-                SubjectEditThree.setSelection(subject_list.indexOf(Tuesday.get(1).subjectEdit));
-                AudienceEditThree.setSelection(audience_list.indexOf(Tuesday.get(1).audienceEdit));
+                SubjectEditThree.setSelection(subject_list.indexOf(Tuesday.get(1).subject));
+                AudienceEditThree.setSelection(audience_list.indexOf(Tuesday.get(1).audience()));
                 EducatorEditThree.setSelection(educator_list.indexOf(Tuesday.get(1).educator));
                 switch (IdRadioButtonTwo){
                     case 0:
@@ -1783,7 +1783,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
-                    Tuesday.set(0, new DataTuesday("1", "8:30-10:00", TuesdayValueSubjectOne, Tuesday.get(0).audienceEdit.toString(), Tuesday.get(0).educator.toString(), Tuesday.get(0).typelesson.toString()));
+                    Tuesday.set(0, new Lesson("1", "8:30-10:00", TuesdayValueSubjectOne, Tuesday.get(0).audienceEdit.toString(), Tuesday.get(0).educator.toString(), Tuesday.get(0).typelesson.toString()));
                 }
               @Override
               public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1794,7 +1794,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
-                    Tuesday.set(1, new DataTuesday("2", "10:10-11:40", TuesdayValueSubjectTwo, Tuesday.get(1).audienceEdit.toString(), Tuesday.get(1).educator.toString(), Tuesday.get(1).typelesson.toString()));
+                    Tuesday.set(1, new Lesson("2", "10:10-11:40", TuesdayValueSubjectTwo, Tuesday.get(1).audienceEdit.toString(), Tuesday.get(1).educator.toString(), Tuesday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1806,7 +1806,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
-                    Tuesday.set(2, new DataTuesday("3", "12:20-13:50", TuesdayValueSubjectThree, Tuesday.get(2).audienceEdit.toString(), Tuesday.get(2).educator.toString(), Tuesday.get(2).typelesson.toString()));
+                    Tuesday.set(2, new Lesson("3", "12:20-13:50", TuesdayValueSubjectThree, Tuesday.get(2).audienceEdit.toString(), Tuesday.get(2).educator.toString(), Tuesday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1817,7 +1817,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
-                    Tuesday.set(3, new DataTuesday("4", "14:00-15:30", TuesdayValueSubjectFour, Tuesday.get(3).audienceEdit.toString(), Tuesday.get(3).educator.toString(), Tuesday.get(3).typelesson.toString()));
+                    Tuesday.set(3, new Lesson("4", "14:00-15:30", TuesdayValueSubjectFour, Tuesday.get(3).audienceEdit.toString(), Tuesday.get(3).educator.toString(), Tuesday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1828,7 +1828,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
-                    Tuesday.set(4, new DataTuesday("5", "15:40-17:10", TuesdayValueSubjectFive, Tuesday.get(4).audienceEdit.toString(), Tuesday.get(4).educator.toString(), Tuesday.get(4).typelesson.toString()));
+                    Tuesday.set(4, new Lesson("5", "15:40-17:10", TuesdayValueSubjectFive, Tuesday.get(4).audienceEdit.toString(), Tuesday.get(4).educator.toString(), Tuesday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1839,7 +1839,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
-                    Tuesday.set(5, new DataTuesday("6", "17:30-19:00", TuesdayValueSubjectSix, Tuesday.get(5).audienceEdit.toString(), Tuesday.get(5).educator.toString(), Tuesday.get(5).typelesson.toString()));
+                    Tuesday.set(5, new Lesson("6", "17:30-19:00", TuesdayValueSubjectSix, Tuesday.get(5).audienceEdit.toString(), Tuesday.get(5).educator.toString(), Tuesday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1851,7 +1851,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
-                    Tuesday.set(0, new DataTuesday("1", "8:30-10:00", Tuesday.get(0).subjectEdit.toString(), TuesdayValueAudienceOne, Tuesday.get(0).educator.toString(), Tuesday.get(0).typelesson.toString()));
+                    Tuesday.set(0, new Lesson("1", "8:30-10:00", Tuesday.get(0).subjectEdit.toString(), TuesdayValueAudienceOne, Tuesday.get(0).educator.toString(), Tuesday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1862,7 +1862,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
-                    Tuesday.set(1, new DataTuesday("2", "10:10-11:40", Tuesday.get(1).subjectEdit.toString(), TuesdayValueAudienceTwo, Tuesday.get(1).educator.toString(), Tuesday.get(1).typelesson.toString()));
+                    Tuesday.set(1, new Lesson("2", "10:10-11:40", Tuesday.get(1).subjectEdit.toString(), TuesdayValueAudienceTwo, Tuesday.get(1).educator.toString(), Tuesday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1874,7 +1874,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
-                    Tuesday.set(2, new DataTuesday("3", "12:20-13:50", Tuesday.get(2).subjectEdit.toString(), TuesdayValueAudienceThree, Tuesday.get(2).educator.toString(), Tuesday.get(2).typelesson.toString()));
+                    Tuesday.set(2, new Lesson("3", "12:20-13:50", Tuesday.get(2).subjectEdit.toString(), TuesdayValueAudienceThree, Tuesday.get(2).educator.toString(), Tuesday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1885,7 +1885,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
-                    Tuesday.set(3, new DataTuesday("4", "14:00-15:30", Tuesday.get(3).subjectEdit.toString(), TuesdayValueAudienceFour, Tuesday.get(3).educator.toString(), Tuesday.get(3).typelesson.toString()));
+                    Tuesday.set(3, new Lesson("4", "14:00-15:30", Tuesday.get(3).subjectEdit.toString(), TuesdayValueAudienceFour, Tuesday.get(3).educator.toString(), Tuesday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1896,7 +1896,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
-                    Tuesday.set(4, new DataTuesday("5", "15:40-17:10", Tuesday.get(4).subjectEdit.toString(), TuesdayValueAudienceFive, Tuesday.get(4).educator.toString(), Tuesday.get(4).typelesson.toString()));
+                    Tuesday.set(4, new Lesson("5", "15:40-17:10", Tuesday.get(4).subjectEdit.toString(), TuesdayValueAudienceFive, Tuesday.get(4).educator.toString(), Tuesday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1907,7 +1907,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
-                    Tuesday.set(5, new DataTuesday("6", "17:30-19:00", Tuesday.get(5).subjectEdit.toString(), TuesdayValueAudienceSix, Tuesday.get(5).educator.toString(), Tuesday.get(5).typelesson.toString()));
+                    Tuesday.set(5, new Lesson("6", "17:30-19:00", Tuesday.get(5).subjectEdit.toString(), TuesdayValueAudienceSix, Tuesday.get(5).educator.toString(), Tuesday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1918,7 +1918,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayEducatorOne = EducatorEditOne.getSelectedItem().toString();
-                    Tuesday.set(0, new DataTuesday("1", "8:30-10:00", Tuesday.get(0).subjectEdit.toString(), Tuesday.get(0).audienceEdit.toString(), TuesdayEducatorOne, Tuesday.get(0).typelesson.toString()));
+                    Tuesday.set(0, new Lesson("1", "8:30-10:00", Tuesday.get(0).subjectEdit.toString(), Tuesday.get(0).audienceEdit.toString(), TuesdayEducatorOne, Tuesday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1929,7 +1929,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
-                    Tuesday.set(1, new DataTuesday("2", "10:10-11:40", Tuesday.get(1).subjectEdit.toString(), Tuesday.get(1).audienceEdit.toString(), TuesdayEducatorTwo, Tuesday.get(1).typelesson.toString()));
+                    Tuesday.set(1, new Lesson("2", "10:10-11:40", Tuesday.get(1).subjectEdit.toString(), Tuesday.get(1).audienceEdit.toString(), TuesdayEducatorTwo, Tuesday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1941,7 +1941,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayEducatorThree = EducatorEditThree.getSelectedItem().toString();
-                    Tuesday.set(2, new DataTuesday("3", "12:20-13:50", Tuesday.get(2).subjectEdit.toString(), Tuesday.get(2).audienceEdit.toString(), TuesdayEducatorThree, Tuesday.get(2).typelesson.toString()));
+                    Tuesday.set(2, new Lesson("3", "12:20-13:50", Tuesday.get(2).subjectEdit.toString(), Tuesday.get(2).audienceEdit.toString(), TuesdayEducatorThree, Tuesday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1952,7 +1952,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayEducatorFour = EducatorEditFour.getSelectedItem().toString();
-                    Tuesday.set(3, new DataTuesday("4", "14:00-15:30", Tuesday.get(3).subjectEdit.toString(), Tuesday.get(3).audienceEdit.toString(), TuesdayEducatorFour, Tuesday.get(3).typelesson.toString()));
+                    Tuesday.set(3, new Lesson("4", "14:00-15:30", Tuesday.get(3).subjectEdit.toString(), Tuesday.get(3).audienceEdit.toString(), TuesdayEducatorFour, Tuesday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1963,7 +1963,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayEducatorFive = EducatorEditFive.getSelectedItem().toString();
-                    Tuesday.set(4, new DataTuesday("5", "15:40-17:10", Tuesday.get(4).subjectEdit.toString(), Tuesday.get(4).audienceEdit.toString(), TuesdayEducatorFive, Tuesday.get(4).typelesson.toString()));
+                    Tuesday.set(4, new Lesson("5", "15:40-17:10", Tuesday.get(4).subjectEdit.toString(), Tuesday.get(4).audienceEdit.toString(), TuesdayEducatorFive, Tuesday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -1974,13 +1974,11 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     TuesdayEducatorSix = EducatorEditSix.getSelectedItem().toString();
-                    Tuesday.set(5, new DataTuesday("6", "17:30-19:00", Tuesday.get(5).subjectEdit.toString(), Tuesday.get(5).audienceEdit.toString(), TuesdayEducatorSix, Tuesday.get(5).typelesson.toString()));
+                    Tuesday.set(5, new Lesson("6", "17:30-19:00", Tuesday.get(5).subjectEdit.toString(), Tuesday.get(5).audienceEdit.toString(), TuesdayEducatorSix, Tuesday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
     }
-
-
     public void wednesday_fill() {
         rb_lecture = findViewById(R.id.rb_lecture_wednesday);
         rb_labwork = findViewById(R.id.rb_labwork_wednesday);
@@ -2037,7 +2035,7 @@ public class ScheduleEditor extends AppCompatActivity {
         typeEditFive_wednesday = findViewById(R.id.typeEditFive_wednesday);
         typeEditSix_wednesday = findViewById(R.id.typeEditSix_wednesday);
 
-        DataWednesday();
+        Lesson();
         NumberOne.setText(Wednesday.get(0).idcards.toString());
         NumberTwo.setText(Wednesday.get(1).idcards.toString());
         NumberThree.setText(Wednesday.get(2).idcards.toString());
@@ -2564,7 +2562,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
-                    Wednesday.set(0, new DataWednesday("1", "8:30-10:00", WednesdayValueSubjectOne, Wednesday.get(0).audienceEdit.toString(), Wednesday.get(0).educator.toString(), Wednesday.get(0).typelesson.toString()));
+                    Wednesday.set(0, new Lesson("1", "8:30-10:00", WednesdayValueSubjectOne, Wednesday.get(0).audienceEdit.toString(), Wednesday.get(0).educator.toString(), Wednesday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2576,7 +2574,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
-                    Wednesday.set(1, new DataWednesday("2", "10:10-11:40", WednesdayValueSubjectTwo, Wednesday.get(1).audienceEdit.toString(), Wednesday.get(1).educator.toString(), Wednesday.get(1).typelesson.toString()));
+                    Wednesday.set(1, new Lesson("2", "10:10-11:40", WednesdayValueSubjectTwo, Wednesday.get(1).audienceEdit.toString(), Wednesday.get(1).educator.toString(), Wednesday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2588,7 +2586,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
-                    Wednesday.set(2, new DataWednesday("3", "12:20-13:50", WednesdayValueSubjectThree, Wednesday.get(2).audienceEdit.toString(), Wednesday.get(2).educator.toString(), Wednesday.get(2).typelesson.toString()));
+                    Wednesday.set(2, new Lesson("3", "12:20-13:50", WednesdayValueSubjectThree, Wednesday.get(2).audienceEdit.toString(), Wednesday.get(2).educator.toString(), Wednesday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2599,7 +2597,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
-                    Wednesday.set(3, new DataWednesday("4", "14:00-15:30", WednesdayValueSubjectFour, Wednesday.get(3).audienceEdit.toString(), Wednesday.get(3).educator.toString(), Wednesday.get(3).typelesson.toString()));
+                    Wednesday.set(3, new Lesson("4", "14:00-15:30", WednesdayValueSubjectFour, Wednesday.get(3).audienceEdit.toString(), Wednesday.get(3).educator.toString(), Wednesday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2610,7 +2608,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
-                    Wednesday.set(4, new DataWednesday("5", "15:40-17:10", WednesdayValueSubjectFive, Wednesday.get(4).audienceEdit.toString(), Wednesday.get(4).educator.toString(), Wednesday.get(4).typelesson.toString()));
+                    Wednesday.set(4, new Lesson("5", "15:40-17:10", WednesdayValueSubjectFive, Wednesday.get(4).audienceEdit.toString(), Wednesday.get(4).educator.toString(), Wednesday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2621,7 +2619,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
-                    Wednesday.set(5, new DataWednesday("6", "17:30-19:00", WednesdayValueSubjectSix, Wednesday.get(5).audienceEdit.toString(), Wednesday.get(5).educator.toString(), Wednesday.get(5).typelesson.toString()));
+                    Wednesday.set(5, new Lesson("6", "17:30-19:00", WednesdayValueSubjectSix, Wednesday.get(5).audienceEdit.toString(), Wednesday.get(5).educator.toString(), Wednesday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2633,7 +2631,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
-                    Wednesday.set(0, new DataWednesday("1", "8:30-10:00", Wednesday.get(0).subjectEdit.toString(), WednesdayValueAudienceOne, Wednesday.get(0).educator.toString(), Wednesday.get(0).typelesson.toString()));
+                    Wednesday.set(0, new Lesson("1", "8:30-10:00", Wednesday.get(0).subjectEdit.toString(), WednesdayValueAudienceOne, Wednesday.get(0).educator.toString(), Wednesday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2644,7 +2642,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
-                    Wednesday.set(1, new DataWednesday("2", "10:10-11:40", Wednesday.get(1).subjectEdit.toString(), WednesdayValueAudienceTwo, Wednesday.get(1).educator.toString(), Wednesday.get(1).typelesson.toString()));
+                    Wednesday.set(1, new Lesson("2", "10:10-11:40", Wednesday.get(1).subjectEdit.toString(), WednesdayValueAudienceTwo, Wednesday.get(1).educator.toString(), Wednesday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2656,7 +2654,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
-                    Wednesday.set(2, new DataWednesday("3", "12:20-13:50", Wednesday.get(2).subjectEdit.toString(), WednesdayValueAudienceThree, Wednesday.get(2).educator.toString(), Wednesday.get(2).typelesson.toString()));
+                    Wednesday.set(2, new Lesson("3", "12:20-13:50", Wednesday.get(2).subjectEdit.toString(), WednesdayValueAudienceThree, Wednesday.get(2).educator.toString(), Wednesday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2667,7 +2665,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
-                    Wednesday.set(3, new DataWednesday("4", "14:00-15:30", Wednesday.get(3).subjectEdit.toString(), WednesdayValueAudienceFour, Wednesday.get(3).educator.toString(), Wednesday.get(3).typelesson.toString()));
+                    Wednesday.set(3, new Lesson("4", "14:00-15:30", Wednesday.get(3).subjectEdit.toString(), WednesdayValueAudienceFour, Wednesday.get(3).educator.toString(), Wednesday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2678,7 +2676,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
-                    Wednesday.set(4, new DataWednesday("5", "15:40-17:10", Wednesday.get(4).subjectEdit.toString(), WednesdayValueAudienceFive, Wednesday.get(4).educator.toString(), Wednesday.get(4).typelesson.toString()));
+                    Wednesday.set(4, new Lesson("5", "15:40-17:10", Wednesday.get(4).subjectEdit.toString(), WednesdayValueAudienceFive, Wednesday.get(4).educator.toString(), Wednesday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2689,7 +2687,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
-                    Wednesday.set(5, new DataWednesday("6", "17:30-19:00", Wednesday.get(5).subjectEdit.toString(), WednesdayValueAudienceSix, Wednesday.get(5).educator.toString(), Wednesday.get(5).typelesson.toString()));
+                    Wednesday.set(5, new Lesson("6", "17:30-19:00", Wednesday.get(5).subjectEdit.toString(), WednesdayValueAudienceSix, Wednesday.get(5).educator.toString(), Wednesday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2700,7 +2698,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayEducatorOne = EducatorEditOne.getSelectedItem().toString();
-                    Wednesday.set(0, new DataWednesday("1", "8:30-10:00", Wednesday.get(0).subjectEdit.toString(), Wednesday.get(0).audienceEdit.toString(), WednesdayEducatorOne, Wednesday.get(0).typelesson.toString()));
+                    Wednesday.set(0, new Lesson("1", "8:30-10:00", Wednesday.get(0).subjectEdit.toString(), Wednesday.get(0).audienceEdit.toString(), WednesdayEducatorOne, Wednesday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2711,7 +2709,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
-                    Wednesday.set(1, new DataWednesday("2", "10:10-11:40", Wednesday.get(1).subjectEdit.toString(), Wednesday.get(1).audienceEdit.toString(), WednesdayEducatorTwo, Wednesday.get(1).typelesson.toString()));
+                    Wednesday.set(1, new Lesson("2", "10:10-11:40", Wednesday.get(1).subjectEdit.toString(), Wednesday.get(1).audienceEdit.toString(), WednesdayEducatorTwo, Wednesday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2723,7 +2721,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayEducatorThree = EducatorEditThree.getSelectedItem().toString();
-                    Wednesday.set(2, new DataWednesday("3", "12:20-13:50", Wednesday.get(2).subjectEdit.toString(), Wednesday.get(2).audienceEdit.toString(), WednesdayEducatorThree, Wednesday.get(2).typelesson.toString()));
+                    Wednesday.set(2, new Lesson("3", "12:20-13:50", Wednesday.get(2).subjectEdit.toString(), Wednesday.get(2).audienceEdit.toString(), WednesdayEducatorThree, Wednesday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2734,7 +2732,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayEducatorFour = EducatorEditFour.getSelectedItem().toString();
-                    Wednesday.set(3, new DataWednesday("4", "14:00-15:30", Wednesday.get(3).subjectEdit.toString(), Wednesday.get(3).audienceEdit.toString(), WednesdayEducatorFour, Wednesday.get(3).typelesson.toString()));
+                    Wednesday.set(3, new Lesson("4", "14:00-15:30", Wednesday.get(3).subjectEdit.toString(), Wednesday.get(3).audienceEdit.toString(), WednesdayEducatorFour, Wednesday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2745,7 +2743,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayEducatorFive = EducatorEditFive.getSelectedItem().toString();
-                    Wednesday.set(4, new DataWednesday("5", "15:40-17:10", Wednesday.get(4).subjectEdit.toString(), Wednesday.get(4).audienceEdit.toString(), WednesdayEducatorFive, Wednesday.get(4).typelesson.toString()));
+                    Wednesday.set(4, new Lesson("5", "15:40-17:10", Wednesday.get(4).subjectEdit.toString(), Wednesday.get(4).audienceEdit.toString(), WednesdayEducatorFive, Wednesday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2756,7 +2754,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     WednesdayEducatorSix = EducatorEditSix.getSelectedItem().toString();
-                    Wednesday.set(5, new DataWednesday("6", "17:30-19:00", Wednesday.get(5).subjectEdit.toString(), Wednesday.get(5).audienceEdit.toString(), WednesdayEducatorSix, Wednesday.get(5).typelesson.toString()));
+                    Wednesday.set(5, new Lesson("6", "17:30-19:00", Wednesday.get(5).subjectEdit.toString(), Wednesday.get(5).audienceEdit.toString(), WednesdayEducatorSix, Wednesday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -2817,7 +2815,7 @@ public class ScheduleEditor extends AppCompatActivity {
         typeEditFive_thursday = findViewById(R.id.typeEditFive_thursday);
         typeEditSix_thursday = findViewById(R.id.typeEditSix_thursday);
 
-        DataThursday();
+        Lesson();
         NumberOne.setText(Thursday.get(0).idcards.toString());
         NumberTwo.setText(Thursday.get(1).idcards.toString());
         NumberThree.setText(Thursday.get(2).idcards.toString());
@@ -3326,7 +3324,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
-                    Thursday.set(0, new DataThursday("1", "8:30-10:00", ThursdayValueSubjectOne, Thursday.get(0).audienceEdit.toString(), Thursday.get(0).educator.toString(), Thursday.get(0).typelesson.toString()));
+                    Thursday.set(0, new Lesson("1", "8:30-10:00", ThursdayValueSubjectOne, Thursday.get(0).audienceEdit.toString(), Thursday.get(0).educator.toString(), Thursday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3338,7 +3336,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
-                    Thursday.set(1, new DataThursday("2", "10:10-11:40", ThursdayValueSubjectTwo, Thursday.get(1).audienceEdit.toString(), Thursday.get(1).educator.toString(), Thursday.get(1).typelesson.toString()));
+                    Thursday.set(1, new Lesson("2", "10:10-11:40", ThursdayValueSubjectTwo, Thursday.get(1).audienceEdit.toString(), Thursday.get(1).educator.toString(), Thursday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3350,7 +3348,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
-                    Thursday.set(2, new DataThursday("3", "12:20-13:50", ThursdayValueSubjectThree, Thursday.get(2).audienceEdit.toString(), Thursday.get(2).educator.toString(), Thursday.get(2).typelesson.toString()));
+                    Thursday.set(2, new Lesson("3", "12:20-13:50", ThursdayValueSubjectThree, Thursday.get(2).audienceEdit.toString(), Thursday.get(2).educator.toString(), Thursday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3361,7 +3359,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
-                    Thursday.set(3, new DataThursday("4", "14:00-15:30", ThursdayValueSubjectFour, Thursday.get(3).audienceEdit.toString(), Thursday.get(3).educator.toString(), Thursday.get(3).typelesson.toString()));
+                    Thursday.set(3, new Lesson("4", "14:00-15:30", ThursdayValueSubjectFour, Thursday.get(3).audienceEdit.toString(), Thursday.get(3).educator.toString(), Thursday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3372,7 +3370,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
-                    Thursday.set(4, new DataThursday("5", "15:40-17:10", ThursdayValueSubjectFive, Thursday.get(4).audienceEdit.toString(), Thursday.get(4).educator.toString(), Thursday.get(4).typelesson.toString()));
+                    Thursday.set(4, new Lesson("5", "15:40-17:10", ThursdayValueSubjectFive, Thursday.get(4).audienceEdit.toString(), Thursday.get(4).educator.toString(), Thursday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3383,7 +3381,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
-                    Thursday.set(5, new DataThursday("6", "17:30-19:00", ThursdayValueSubjectSix, Thursday.get(5).audienceEdit.toString(), Thursday.get(5).educator.toString(), Thursday.get(5).typelesson.toString()));
+                    Thursday.set(5, new Lesson("6", "17:30-19:00", ThursdayValueSubjectSix, Thursday.get(5).audienceEdit.toString(), Thursday.get(5).educator.toString(), Thursday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3395,7 +3393,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
-                    Thursday.set(0, new DataThursday("1", "8:30-10:00", Thursday.get(0).subjectEdit.toString(), ThursdayValueAudienceOne, Thursday.get(0).educator.toString(), Thursday.get(0).typelesson.toString()));
+                    Thursday.set(0, new Lesson("1", "8:30-10:00", Thursday.get(0).subjectEdit.toString(), ThursdayValueAudienceOne, Thursday.get(0).educator.toString(), Thursday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3406,7 +3404,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
-                    Thursday.set(1, new DataThursday("2", "10:10-11:40", Thursday.get(1).subjectEdit.toString(), ThursdayValueAudienceTwo, Thursday.get(1).educator.toString(), Thursday.get(1).typelesson.toString()));
+                    Thursday.set(1, new Lesson("2", "10:10-11:40", Thursday.get(1).subjectEdit.toString(), ThursdayValueAudienceTwo, Thursday.get(1).educator.toString(), Thursday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3418,7 +3416,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
-                    Thursday.set(2, new DataThursday("3", "12:20-13:50", Thursday.get(2).subjectEdit.toString(), ThursdayValueAudienceThree, Thursday.get(2).educator.toString(), Thursday.get(2).typelesson.toString()));
+                    Thursday.set(2, new Lesson("3", "12:20-13:50", Thursday.get(2).subjectEdit.toString(), ThursdayValueAudienceThree, Thursday.get(2).educator.toString(), Thursday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3429,7 +3427,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
-                    Thursday.set(3, new DataThursday("4", "14:00-15:30", Thursday.get(3).subjectEdit.toString(), ThursdayValueAudienceFour, Thursday.get(3).educator.toString(), Thursday.get(3).typelesson.toString()));
+                    Thursday.set(3, new Lesson("4", "14:00-15:30", Thursday.get(3).subjectEdit.toString(), ThursdayValueAudienceFour, Thursday.get(3).educator.toString(), Thursday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3440,7 +3438,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
-                    Thursday.set(4, new DataThursday("5", "15:40-17:10", Thursday.get(4).subjectEdit.toString(), ThursdayValueAudienceFive, Thursday.get(4).educator.toString(), Thursday.get(4).typelesson.toString()));
+                    Thursday.set(4, new Lesson("5", "15:40-17:10", Thursday.get(4).subjectEdit.toString(), ThursdayValueAudienceFive, Thursday.get(4).educator.toString(), Thursday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3451,7 +3449,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
-                    Thursday.set(5, new DataThursday("6", "17:30-19:00", Thursday.get(5).subjectEdit.toString(), ThursdayValueAudienceSix, Thursday.get(5).educator.toString(), Thursday.get(5).typelesson.toString()));
+                    Thursday.set(5, new Lesson("6", "17:30-19:00", Thursday.get(5).subjectEdit.toString(), ThursdayValueAudienceSix, Thursday.get(5).educator.toString(), Thursday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3462,7 +3460,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayEducatorOne = EducatorEditOne.getSelectedItem().toString();
-                    Thursday.set(0, new DataThursday("1", "8:30-10:00", Thursday.get(0).subjectEdit.toString(), Thursday.get(0).audienceEdit.toString(), ThursdayEducatorOne, Thursday.get(0).typelesson.toString()));
+                    Thursday.set(0, new Lesson("1", "8:30-10:00", Thursday.get(0).subjectEdit.toString(), Thursday.get(0).audienceEdit.toString(), ThursdayEducatorOne, Thursday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3473,7 +3471,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
-                    Thursday.set(1, new DataThursday("2", "10:10-11:40", Thursday.get(1).subjectEdit.toString(), Thursday.get(1).audienceEdit.toString(), ThursdayEducatorTwo, Thursday.get(1).typelesson.toString()));
+                    Thursday.set(1, new Lesson("2", "10:10-11:40", Thursday.get(1).subjectEdit.toString(), Thursday.get(1).audienceEdit.toString(), ThursdayEducatorTwo, Thursday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3485,7 +3483,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayEducatorThree = EducatorEditThree.getSelectedItem().toString();
-                    Thursday.set(2, new DataThursday("3", "12:20-13:50", Thursday.get(2).subjectEdit.toString(), Thursday.get(2).audienceEdit.toString(), ThursdayEducatorThree, Thursday.get(2).typelesson.toString()));
+                    Thursday.set(2, new Lesson("3", "12:20-13:50", Thursday.get(2).subjectEdit.toString(), Thursday.get(2).audienceEdit.toString(), ThursdayEducatorThree, Thursday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3496,7 +3494,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayEducatorFour = EducatorEditFour.getSelectedItem().toString();
-                    Thursday.set(3, new DataThursday("4", "14:00-15:30", Thursday.get(3).subjectEdit.toString(), Thursday.get(3).audienceEdit.toString(), ThursdayEducatorFour, Thursday.get(3).typelesson.toString()));
+                    Thursday.set(3, new Lesson("4", "14:00-15:30", Thursday.get(3).subjectEdit.toString(), Thursday.get(3).audienceEdit.toString(), ThursdayEducatorFour, Thursday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3507,7 +3505,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayEducatorFive = EducatorEditFive.getSelectedItem().toString();
-                    Thursday.set(4, new DataThursday("5", "15:40-17:10", Thursday.get(4).subjectEdit.toString(), Thursday.get(4).audienceEdit.toString(), ThursdayEducatorFive, Thursday.get(4).typelesson.toString()));
+                    Thursday.set(4, new Lesson("5", "15:40-17:10", Thursday.get(4).subjectEdit.toString(), Thursday.get(4).audienceEdit.toString(), ThursdayEducatorFive, Thursday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3518,7 +3516,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     ThursdayEducatorSix = EducatorEditSix.getSelectedItem().toString();
-                    Thursday.set(5, new DataThursday("6", "17:30-19:00", Thursday.get(5).subjectEdit.toString(), Thursday.get(5).audienceEdit.toString(), ThursdayEducatorSix, Thursday.get(5).typelesson.toString()));
+                    Thursday.set(5, new Lesson("6", "17:30-19:00", Thursday.get(5).subjectEdit.toString(), Thursday.get(5).audienceEdit.toString(), ThursdayEducatorSix, Thursday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -3579,7 +3577,7 @@ public class ScheduleEditor extends AppCompatActivity {
         typeEditFive_friday = findViewById(R.id.typeEditFive_friday);
         typeEditSix_friday = findViewById(R.id.typeEditSix_friday);
 
-        DataFriday();
+        Lesson();
         NumberOne.setText(Friday.get(0).idcards.toString());
         NumberTwo.setText(Friday.get(1).idcards.toString());
         NumberThree.setText(Friday.get(2).idcards.toString());
@@ -4085,7 +4083,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
-                    Friday.set(0, new DataFriday("1", "8:30-10:00", FridayValueSubjectOne, Friday.get(0).audienceEdit.toString(), Friday.get(0).educator.toString(), Friday.get(0).typelesson.toString()));
+                    Friday.set(0, new Lesson("1", "8:30-10:00", FridayValueSubjectOne, Friday.get(0).audienceEdit.toString(), Friday.get(0).educator.toString(), Friday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4097,7 +4095,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
-                    Friday.set(1, new DataFriday("2", "10:10-11:40", FridayValueSubjectTwo, Friday.get(1).audienceEdit.toString(), Friday.get(1).educator.toString(), Friday.get(1).typelesson.toString()));
+                    Friday.set(1, new Lesson("2", "10:10-11:40", FridayValueSubjectTwo, Friday.get(1).audienceEdit.toString(), Friday.get(1).educator.toString(), Friday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4109,7 +4107,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
-                    Friday.set(2, new DataFriday("3", "12:20-13:50", FridayValueSubjectThree, Friday.get(2).audienceEdit.toString(), Friday.get(2).educator.toString(), Friday.get(2).typelesson.toString()));
+                    Friday.set(2, new Lesson("3", "12:20-13:50", FridayValueSubjectThree, Friday.get(2).audienceEdit.toString(), Friday.get(2).educator.toString(), Friday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4120,7 +4118,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
-                    Friday.set(3, new DataFriday("4", "14:00-15:30", FridayValueSubjectFour, Friday.get(3).audienceEdit.toString(), Friday.get(3).educator.toString(), Friday.get(3).typelesson.toString()));
+                    Friday.set(3, new Lesson("4", "14:00-15:30", FridayValueSubjectFour, Friday.get(3).audienceEdit.toString(), Friday.get(3).educator.toString(), Friday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4131,7 +4129,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
-                    Friday.set(4, new DataFriday("5", "15:40-17:10", FridayValueSubjectFive, Friday.get(4).audienceEdit.toString(), Friday.get(4).educator.toString(), Friday.get(4).typelesson.toString()));
+                    Friday.set(4, new Lesson("5", "15:40-17:10", FridayValueSubjectFive, Friday.get(4).audienceEdit.toString(), Friday.get(4).educator.toString(), Friday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4142,7 +4140,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
-                    Friday.set(5, new DataFriday("6", "17:30-19:00", FridayValueSubjectSix, Friday.get(5).audienceEdit.toString(), Friday.get(5).educator.toString(), Friday.get(5).typelesson.toString()));
+                    Friday.set(5, new Lesson("6", "17:30-19:00", FridayValueSubjectSix, Friday.get(5).audienceEdit.toString(), Friday.get(5).educator.toString(), Friday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4154,7 +4152,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
-                    Friday.set(0, new DataFriday("1", "8:30-10:00", Friday.get(0).subjectEdit.toString(), FridayValueAudienceOne, Friday.get(0).educator.toString(), Friday.get(0).typelesson.toString()));
+                    Friday.set(0, new Lesson("1", "8:30-10:00", Friday.get(0).subjectEdit.toString(), FridayValueAudienceOne, Friday.get(0).educator.toString(), Friday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4165,7 +4163,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
-                    Friday.set(1, new DataFriday("2", "10:10-11:40", Friday.get(1).subjectEdit.toString(), FridayValueAudienceTwo, Friday.get(1).educator.toString(), Friday.get(1).typelesson.toString()));
+                    Friday.set(1, new Lesson("2", "10:10-11:40", Friday.get(1).subjectEdit.toString(), FridayValueAudienceTwo, Friday.get(1).educator.toString(), Friday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4177,7 +4175,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
-                    Friday.set(2, new DataFriday("3", "12:20-13:50", Friday.get(2).subjectEdit.toString(), FridayValueAudienceThree, Friday.get(2).educator.toString(), Friday.get(2).typelesson.toString()));
+                    Friday.set(2, new Lesson("3", "12:20-13:50", Friday.get(2).subjectEdit.toString(), FridayValueAudienceThree, Friday.get(2).educator.toString(), Friday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4188,7 +4186,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
-                    Friday.set(3, new DataFriday("4", "14:00-15:30", Friday.get(3).subjectEdit.toString(), FridayValueAudienceFour, Friday.get(3).educator.toString(), Friday.get(3).typelesson.toString()));
+                    Friday.set(3, new Lesson("4", "14:00-15:30", Friday.get(3).subjectEdit.toString(), FridayValueAudienceFour, Friday.get(3).educator.toString(), Friday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4199,7 +4197,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
-                    Friday.set(4, new DataFriday("5", "15:40-17:10", Friday.get(4).subjectEdit.toString(), FridayValueAudienceFive, Friday.get(4).educator.toString(), Friday.get(4).typelesson.toString()));
+                    Friday.set(4, new Lesson("5", "15:40-17:10", Friday.get(4).subjectEdit.toString(), FridayValueAudienceFive, Friday.get(4).educator.toString(), Friday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4210,7 +4208,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
-                    Friday.set(5, new DataFriday("6", "17:30-19:00", Friday.get(5).subjectEdit.toString(), FridayValueAudienceSix, Friday.get(5).educator.toString(), Friday.get(5).typelesson.toString()));
+                    Friday.set(5, new Lesson("6", "17:30-19:00", Friday.get(5).subjectEdit.toString(), FridayValueAudienceSix, Friday.get(5).educator.toString(), Friday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4221,7 +4219,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayEducatorOne = EducatorEditOne.getSelectedItem().toString();
-                    Friday.set(0, new DataFriday("1", "8:30-10:00", Friday.get(0).subjectEdit.toString(), Friday.get(0).audienceEdit.toString(), FridayEducatorOne, Friday.get(0).typelesson.toString()));
+                    Friday.set(0, new Lesson("1", "8:30-10:00", Friday.get(0).subjectEdit.toString(), Friday.get(0).audienceEdit.toString(), FridayEducatorOne, Friday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4232,7 +4230,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
-                    Friday.set(1, new DataFriday("2", "10:10-11:40", Friday.get(1).subjectEdit.toString(), Friday.get(1).audienceEdit.toString(), FridayEducatorTwo, Friday.get(1).typelesson.toString()));
+                    Friday.set(1, new Lesson("2", "10:10-11:40", Friday.get(1).subjectEdit.toString(), Friday.get(1).audienceEdit.toString(), FridayEducatorTwo, Friday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4244,7 +4242,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayEducatorThree = EducatorEditThree.getSelectedItem().toString();
-                    Friday.set(2, new DataFriday("3", "12:20-13:50", Friday.get(2).subjectEdit.toString(), Friday.get(2).audienceEdit.toString(), FridayEducatorThree, Friday.get(2).typelesson.toString()));
+                    Friday.set(2, new Lesson("3", "12:20-13:50", Friday.get(2).subjectEdit.toString(), Friday.get(2).audienceEdit.toString(), FridayEducatorThree, Friday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4255,7 +4253,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayEducatorFour = EducatorEditFour.getSelectedItem().toString();
-                    Friday.set(3, new DataFriday("4", "14:00-15:30", Friday.get(3).subjectEdit.toString(), Friday.get(3).audienceEdit.toString(), FridayEducatorFour, Friday.get(3).typelesson.toString()));
+                    Friday.set(3, new Lesson("4", "14:00-15:30", Friday.get(3).subjectEdit.toString(), Friday.get(3).audienceEdit.toString(), FridayEducatorFour, Friday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4266,7 +4264,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayEducatorFive = EducatorEditFive.getSelectedItem().toString();
-                    Friday.set(4, new DataFriday("5", "15:40-17:10", Friday.get(4).subjectEdit.toString(), Friday.get(4).audienceEdit.toString(), FridayEducatorFive, Friday.get(4).typelesson.toString()));
+                    Friday.set(4, new Lesson("5", "15:40-17:10", Friday.get(4).subjectEdit.toString(), Friday.get(4).audienceEdit.toString(), FridayEducatorFive, Friday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4277,7 +4275,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     FridayEducatorSix = EducatorEditSix.getSelectedItem().toString();
-                    Friday.set(5, new DataFriday("6", "17:30-19:00", Friday.get(5).subjectEdit.toString(), Friday.get(5).audienceEdit.toString(), FridayEducatorSix, Friday.get(5).typelesson.toString()));
+                    Friday.set(5, new Lesson("6", "17:30-19:00", Friday.get(5).subjectEdit.toString(), Friday.get(5).audienceEdit.toString(), FridayEducatorSix, Friday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4338,7 +4336,7 @@ public class ScheduleEditor extends AppCompatActivity {
         typeEditFive_saturday = findViewById(R.id.typeEditFive_saturday);
         typeEditSix_saturday = findViewById(R.id.typeEditSix_saturday);
 
-        DataSaturday();
+        Lesson();
         NumberOne.setText(Saturday.get(0).idcards.toString());
         NumberTwo.setText(Saturday.get(1).idcards.toString());
         NumberThree.setText(Saturday.get(2).idcards.toString());
@@ -4844,7 +4842,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueSubjectOne =  SubjectEditOne.getSelectedItem().toString();
-                    Saturday.set(0, new DataSaturday("1", "8:30-10:00", SaturdayValueSubjectOne, Saturday.get(0).audienceEdit.toString(), Saturday.get(0).educator.toString(), Saturday.get(0).typelesson.toString()));
+                    Saturday.set(0, new Lesson("1", "8:30-10:00", SaturdayValueSubjectOne, Saturday.get(0).audienceEdit.toString(), Saturday.get(0).educator.toString(), Saturday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4856,7 +4854,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
-                    Saturday.set(1, new DataSaturday("2", "10:10-11:40", SaturdayValueSubjectTwo, Saturday.get(1).audienceEdit.toString(), Saturday.get(1).educator.toString(), Saturday.get(1).typelesson.toString()));
+                    Saturday.set(1, new Lesson("2", "10:10-11:40", SaturdayValueSubjectTwo, Saturday.get(1).audienceEdit.toString(), Saturday.get(1).educator.toString(), Saturday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4868,7 +4866,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
-                    Saturday.set(2, new DataSaturday("3", "12:20-13:50", SaturdayValueSubjectThree, Saturday.get(2).audienceEdit.toString(), Saturday.get(2).educator.toString(), Saturday.get(2).typelesson.toString()));
+                    Saturday.set(2, new Lesson("3", "12:20-13:50", SaturdayValueSubjectThree, Saturday.get(2).audienceEdit.toString(), Saturday.get(2).educator.toString(), Saturday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4879,7 +4877,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
-                    Saturday.set(3, new DataSaturday("4", "14:00-15:30", SaturdayValueSubjectFour, Saturday.get(3).audienceEdit.toString(), Saturday.get(3).educator.toString(), Saturday.get(3).typelesson.toString()));
+                    Saturday.set(3, new Lesson("4", "14:00-15:30", SaturdayValueSubjectFour, Saturday.get(3).audienceEdit.toString(), Saturday.get(3).educator.toString(), Saturday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4890,7 +4888,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
-                    Saturday.set(4, new DataSaturday("5", "15:40-17:10", SaturdayValueSubjectFive, Saturday.get(4).audienceEdit.toString(), Saturday.get(4).educator.toString(), Saturday.get(4).typelesson.toString()));
+                    Saturday.set(4, new Lesson("5", "15:40-17:10", SaturdayValueSubjectFive, Saturday.get(4).audienceEdit.toString(), Saturday.get(4).educator.toString(), Saturday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4901,7 +4899,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
-                    Saturday.set(5, new DataSaturday("6", "17:30-19:00", SaturdayValueSubjectSix, Saturday.get(5).audienceEdit.toString(), Saturday.get(5).educator.toString(), Saturday.get(5).typelesson.toString()));
+                    Saturday.set(5, new Lesson("6", "17:30-19:00", SaturdayValueSubjectSix, Saturday.get(5).audienceEdit.toString(), Saturday.get(5).educator.toString(), Saturday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4913,7 +4911,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
-                    Saturday.set(0, new DataSaturday("1", "8:30-10:00", Saturday.get(0).subjectEdit.toString(), SaturdayValueAudienceOne, Saturday.get(0).educator.toString(), Saturday.get(0).typelesson.toString()));
+                    Saturday.set(0, new Lesson("1", "8:30-10:00", Saturday.get(0).subjectEdit.toString(), SaturdayValueAudienceOne, Saturday.get(0).educator.toString(), Saturday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4924,7 +4922,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
-                    Saturday.set(1, new DataSaturday("2", "10:10-11:40", Saturday.get(1).subjectEdit.toString(), SaturdayValueAudienceTwo, Saturday.get(1).educator.toString(), Saturday.get(1).typelesson.toString()));
+                    Saturday.set(1, new Lesson("2", "10:10-11:40", Saturday.get(1).subjectEdit.toString(), SaturdayValueAudienceTwo, Saturday.get(1).educator.toString(), Saturday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4936,7 +4934,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
-                    Saturday.set(2, new DataSaturday("3", "12:20-13:50", Saturday.get(2).subjectEdit.toString(), SaturdayValueAudienceThree, Saturday.get(2).educator.toString(), Saturday.get(2).typelesson.toString()));
+                    Saturday.set(2, new Lesson("3", "12:20-13:50", Saturday.get(2).subjectEdit.toString(), SaturdayValueAudienceThree, Saturday.get(2).educator.toString(), Saturday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4947,7 +4945,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
-                    Saturday.set(3, new DataSaturday("4", "14:00-15:30", Saturday.get(3).subjectEdit.toString(), SaturdayValueAudienceFour, Saturday.get(3).educator.toString(), Saturday.get(3).typelesson.toString()));
+                    Saturday.set(3, new Lesson("4", "14:00-15:30", Saturday.get(3).subjectEdit.toString(), SaturdayValueAudienceFour, Saturday.get(3).educator.toString(), Saturday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4958,7 +4956,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
-                    Saturday.set(4, new DataSaturday("5", "15:40-17:10", Saturday.get(4).subjectEdit.toString(), SaturdayValueAudienceFive, Saturday.get(4).educator.toString(), Saturday.get(4).typelesson.toString()));
+                    Saturday.set(4, new Lesson("5", "15:40-17:10", Saturday.get(4).subjectEdit.toString(), SaturdayValueAudienceFive, Saturday.get(4).educator.toString(), Saturday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4969,7 +4967,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
-                    Saturday.set(5, new DataSaturday("6", "17:30-19:00", Saturday.get(5).subjectEdit.toString(), SaturdayValueAudienceSix, Saturday.get(5).educator.toString(), Saturday.get(5).typelesson.toString()));
+                    Saturday.set(5, new Lesson("6", "17:30-19:00", Saturday.get(5).subjectEdit.toString(), SaturdayValueAudienceSix, Saturday.get(5).educator.toString(), Saturday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4980,7 +4978,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayEducatorOne = EducatorEditOne.getSelectedItem().toString();
-                    Saturday.set(0, new DataSaturday("1", "8:30-10:00", Saturday.get(0).subjectEdit.toString(), Saturday.get(0).audienceEdit.toString(), SaturdayEducatorOne, Saturday.get(0).typelesson.toString()));
+                    Saturday.set(0, new Lesson("1", "8:30-10:00", Saturday.get(0).subjectEdit.toString(), Saturday.get(0).audienceEdit.toString(), SaturdayEducatorOne, Saturday.get(0).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -4991,7 +4989,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
-                    Saturday.set(1, new DataSaturday("2", "10:10-11:40", Saturday.get(1).subjectEdit.toString(), Saturday.get(1).audienceEdit.toString(), SaturdayEducatorTwo, Saturday.get(1).typelesson.toString()));
+                    Saturday.set(1, new Lesson("2", "10:10-11:40", Saturday.get(1).subjectEdit.toString(), Saturday.get(1).audienceEdit.toString(), SaturdayEducatorTwo, Saturday.get(1).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -5003,7 +5001,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayEducatorThree = EducatorEditThree.getSelectedItem().toString();
-                    Saturday.set(2, new DataSaturday("3", "12:20-13:50", Saturday.get(2).subjectEdit.toString(), Saturday.get(2).audienceEdit.toString(), SaturdayEducatorThree, Saturday.get(2).typelesson.toString()));
+                    Saturday.set(2, new Lesson("3", "12:20-13:50", Saturday.get(2).subjectEdit.toString(), Saturday.get(2).audienceEdit.toString(), SaturdayEducatorThree, Saturday.get(2).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -5014,7 +5012,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayEducatorFour = EducatorEditFour.getSelectedItem().toString();
-                    Saturday.set(3, new DataSaturday("4", "14:00-15:30", Saturday.get(3).subjectEdit.toString(), Saturday.get(3).audienceEdit.toString(), SaturdayEducatorFour, Saturday.get(3).typelesson.toString()));
+                    Saturday.set(3, new Lesson("4", "14:00-15:30", Saturday.get(3).subjectEdit.toString(), Saturday.get(3).audienceEdit.toString(), SaturdayEducatorFour, Saturday.get(3).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -5025,7 +5023,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayEducatorFive = EducatorEditFive.getSelectedItem().toString();
-                    Saturday.set(4, new DataSaturday("5", "15:40-17:10", Saturday.get(4).subjectEdit.toString(), Saturday.get(4).audienceEdit.toString(), SaturdayEducatorFive, Saturday.get(4).typelesson.toString()));
+                    Saturday.set(4, new Lesson("5", "15:40-17:10", Saturday.get(4).subjectEdit.toString(), Saturday.get(4).audienceEdit.toString(), SaturdayEducatorFive, Saturday.get(4).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
@@ -5036,12 +5034,12 @@ public class ScheduleEditor extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // TODO Auto-generated method stub
                     SaturdayEducatorSix = EducatorEditSix.getSelectedItem().toString();
-                    Saturday.set(5, new DataSaturday("6", "17:30-19:00", Saturday.get(5).subjectEdit.toString(), Saturday.get(5).audienceEdit.toString(), SaturdayEducatorSix, Saturday.get(5).typelesson.toString()));
+                    Saturday.set(5, new Lesson("6", "17:30-19:00", Saturday.get(5).subjectEdit.toString(), Saturday.get(5).audienceEdit.toString(), SaturdayEducatorSix, Saturday.get(5).typelesson.toString()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
     }
-
+*/
     void update_data(){
         MondayValueSubjectOne = "";
         MondayValueSubjectTwo = "";
@@ -6941,19 +6939,19 @@ public class ScheduleEditor extends AppCompatActivity {
                         monday_fill();
                         break;
                     case 1:
-                        tuesday_fill();
+                        monday_fill();
                         break;
                     case 2:
-                        wednesday_fill();
+                        monday_fill();
                         break;
                     case 3:
-                        thursday_fill();
+                        monday_fill();
                         break;
                     case 4:
-                        friday_fill();
+                        monday_fill();
                         break;
                     case 5:
-                        saturday_fill();
+                        monday_fill();
                         break;
                 }
             }
@@ -6983,19 +6981,19 @@ public class ScheduleEditor extends AppCompatActivity {
                         monday_fill();
                         break;
                     case 1:
-                        tuesday_fill();
+                        monday_fill();
                         break;
                     case 2:
-                        wednesday_fill();
+                        monday_fill();
                         break;
                     case 3:
-                        thursday_fill();
+                        monday_fill();
                         break;
                     case 4:
-                        friday_fill();
+                        monday_fill();
                         break;
                     case 5:
-                        saturday_fill();
+                        monday_fill();
                         break;
                 }
 
@@ -7152,7 +7150,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 TuesdayTypeLessonFive = "";
                 TuesdayTypeLessonSix = "";
                 start(position_week);
-                tuesday_fill();
+                monday_fill();
                 typeEditOne_tuesday.clearCheck();
                 typeEditTwo_tuesday.clearCheck();
                 typeEditThree_tuesday.clearCheck();
@@ -7187,7 +7185,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 WednesdayTypeLessonFive = "";
                 WednesdayTypeLessonSix = "";
                 start(position_week);
-                wednesday_fill();
+                monday_fill();
                 typeEditOne_wednesday.clearCheck();
                 typeEditTwo_wednesday.clearCheck();
                 typeEditThree_wednesday.clearCheck();
@@ -7221,7 +7219,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 ThursdayTypeLessonFive = "";
                 ThursdayTypeLessonSix = "";
                 start(position_week);
-                thursday_fill();
+                monday_fill();
                 typeEditOne_thursday.clearCheck();
                 typeEditTwo_thursday.clearCheck();
                 typeEditThree_thursday.clearCheck();
@@ -7255,7 +7253,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 FridayTypeLessonFive = "";
                 FridayTypeLessonSix = "";
                 start(position_week);
-                friday_fill();
+                monday_fill();
                 typeEditOne_friday.clearCheck();
                 typeEditTwo_friday.clearCheck();
                 typeEditThree_friday.clearCheck();
@@ -7289,7 +7287,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 SaturdayTypeLessonFive = "";
                 SaturdayTypeLessonSix = "";
                 start(position_week);
-                saturday_fill();
+                monday_fill();
                 typeEditOne_saturday.clearCheck();
                 typeEditTwo_saturday.clearCheck();
                 typeEditThree_saturday.clearCheck();
@@ -7314,11 +7312,7 @@ public class ScheduleEditor extends AppCompatActivity {
         radiobutton_class();
             update_data();
             monday_fill();
-            tuesday_fill();
-            wednesday_fill();
-            thursday_fill();
-            friday_fill();
-            saturday_fill();
+        monday_fill();
     }
 
     private void clear_full() {
@@ -7334,11 +7328,7 @@ public class ScheduleEditor extends AppCompatActivity {
         radiobutton_class();
         update_data();
         monday_fill();
-        tuesday_fill();
-        wednesday_fill();
-        thursday_fill();
-        friday_fill();
-        saturday_fill();
+
     }
 
 
@@ -7588,101 +7578,101 @@ public class ScheduleEditor extends AppCompatActivity {
 
     private void DataMonday() {
         Monday = new ArrayList<>();
-        try { Monday.add(new DataMonday("1", String.valueOf(calls_schedule.get(0)), MondayValueSubjectOne, MondayValueAudienceOne, MondayEducatorOne, MondayTypeLessonOne));
+        try { Monday.add(new Lesson("1", String.valueOf(calls_schedule.get(0)), MondayValueSubjectOne, MondayValueAudienceOne, MondayEducatorOne, MondayTypeLessonOne));
         } catch (NullPointerException e) { }
-        try { Monday.add(new DataMonday("2", String.valueOf(calls_schedule.get(1)), MondayValueSubjectTwo, MondayValueAudienceTwo, MondayEducatorTwo, MondayTypeLessonTwo));
+        try { Monday.add(new Lesson("2", String.valueOf(calls_schedule.get(1)), MondayValueSubjectTwo, MondayValueAudienceTwo, MondayEducatorTwo, MondayTypeLessonTwo));
         } catch (NullPointerException e) { }
-        try { Monday.add(new DataMonday("3", String.valueOf(calls_schedule.get(2)), MondayValueSubjectThree, MondayValueAudienceThree, MondayEducatorThree, MondayTypeLessonThree));
+        try { Monday.add(new Lesson("3", String.valueOf(calls_schedule.get(2)), MondayValueSubjectThree, MondayValueAudienceThree, MondayEducatorThree, MondayTypeLessonThree));
         } catch (NullPointerException e) { }
-        try { Monday.add(new DataMonday("4", String.valueOf(calls_schedule.get(3)), MondayValueSubjectFour, MondayValueAudienceFour, MondayEducatorFour, MondayTypeLessonFour));
+        try { Monday.add(new Lesson("4", String.valueOf(calls_schedule.get(3)), MondayValueSubjectFour, MondayValueAudienceFour, MondayEducatorFour, MondayTypeLessonFour));
         } catch (NullPointerException e) { }
-        try { Monday.add(new DataMonday("5", String.valueOf(calls_schedule.get(4)), MondayValueSubjectFive, MondayValueAudienceFive, MondayEducatorFive, MondayTypeLessonFive));
+        try { Monday.add(new Lesson("5", String.valueOf(calls_schedule.get(4)), MondayValueSubjectFive, MondayValueAudienceFive, MondayEducatorFive, MondayTypeLessonFive));
         } catch (NullPointerException e) { }
-        try { Monday.add(new DataMonday("6", String.valueOf(calls_schedule.get(5)), MondayValueSubjectSix, MondayValueAudienceSix, MondayEducatorSix, MondayTypeLessonSix));
+        try { Monday.add(new Lesson("6", String.valueOf(calls_schedule.get(5)), MondayValueSubjectSix, MondayValueAudienceSix, MondayEducatorSix, MondayTypeLessonSix));
         } catch (NullPointerException e) { }
     }
 
-    private void DataTuesday() {
+    private void Lesson() {
         Tuesday = new ArrayList<>();
-        try { Tuesday.add(new DataTuesday("1", String.valueOf(calls_schedule.get(0)), TuesdayValueSubjectOne, TuesdayValueAudienceOne, TuesdayEducatorOne, TuesdayTypeLessonOne));
+        try { Tuesday.add(new Lesson("1", String.valueOf(calls_schedule.get(0)), TuesdayValueSubjectOne, TuesdayValueAudienceOne, TuesdayEducatorOne, TuesdayTypeLessonOne));
         } catch (NullPointerException e) { }
-        try { Tuesday.add(new DataTuesday("2", String.valueOf(calls_schedule.get(1)), TuesdayValueSubjectTwo, TuesdayValueAudienceTwo, TuesdayEducatorTwo, TuesdayTypeLessonTwo));
+        try { Tuesday.add(new Lesson("2", String.valueOf(calls_schedule.get(1)), TuesdayValueSubjectTwo, TuesdayValueAudienceTwo, TuesdayEducatorTwo, TuesdayTypeLessonTwo));
         } catch (NullPointerException e) { }
-        try { Tuesday.add(new DataTuesday("3", String.valueOf(calls_schedule.get(2)), TuesdayValueSubjectThree, TuesdayValueAudienceThree, TuesdayEducatorThree, TuesdayTypeLessonThree));
+        try { Tuesday.add(new Lesson("3", String.valueOf(calls_schedule.get(2)), TuesdayValueSubjectThree, TuesdayValueAudienceThree, TuesdayEducatorThree, TuesdayTypeLessonThree));
         } catch (NullPointerException e) { }
-        try { Tuesday.add(new DataTuesday("4", String.valueOf(calls_schedule.get(3)), TuesdayValueSubjectFour, TuesdayValueAudienceFour, TuesdayEducatorFour, TuesdayTypeLessonFour));
+        try { Tuesday.add(new Lesson("4", String.valueOf(calls_schedule.get(3)), TuesdayValueSubjectFour, TuesdayValueAudienceFour, TuesdayEducatorFour, TuesdayTypeLessonFour));
         } catch (NullPointerException e) { }
-        try { Tuesday.add(new DataTuesday("5", String.valueOf(calls_schedule.get(4)), TuesdayValueSubjectFive, TuesdayValueAudienceFive, TuesdayEducatorFive, TuesdayTypeLessonFive));
+        try { Tuesday.add(new Lesson("5", String.valueOf(calls_schedule.get(4)), TuesdayValueSubjectFive, TuesdayValueAudienceFive, TuesdayEducatorFive, TuesdayTypeLessonFive));
         } catch (NullPointerException e) { }
         try {
-            Tuesday.add(new DataTuesday("6", String.valueOf(calls_schedule.get(5)), TuesdayValueSubjectSix, TuesdayValueAudienceSix, TuesdayEducatorSix, TuesdayTypeLessonSix));
+            Tuesday.add(new Lesson("6", String.valueOf(calls_schedule.get(5)), TuesdayValueSubjectSix, TuesdayValueAudienceSix, TuesdayEducatorSix, TuesdayTypeLessonSix));
         } catch (NullPointerException e) {
         }
     }
 
-    private void DataWednesday() {
+    /*private void Lesson() {
         Wednesday = new ArrayList<>(); //Вторник
-        try { Wednesday.add(new DataWednesday("1", String.valueOf(calls_schedule.get(0)), WednesdayValueSubjectOne, WednesdayValueAudienceOne, WednesdayEducatorOne, WednesdayTypeLessonOne));
+        try { Wednesday.add(new Lesson("1", String.valueOf(calls_schedule.get(0)), WednesdayValueSubjectOne, WednesdayValueAudienceOne, WednesdayEducatorOne, WednesdayTypeLessonOne));
         } catch (NullPointerException e) { }
-        try { Wednesday.add(new DataWednesday("2", String.valueOf(calls_schedule.get(1)), WednesdayValueSubjectTwo, WednesdayValueAudienceTwo, WednesdayEducatorTwo, WednesdayTypeLessonTwo));
+        try { Wednesday.add(new Lesson("2", String.valueOf(calls_schedule.get(1)), WednesdayValueSubjectTwo, WednesdayValueAudienceTwo, WednesdayEducatorTwo, WednesdayTypeLessonTwo));
         } catch (NullPointerException e) { }
-        try { Wednesday.add(new DataWednesday("3", String.valueOf(calls_schedule.get(2)), WednesdayValueSubjectThree, WednesdayValueAudienceThree, WednesdayEducatorThree, WednesdayTypeLessonThree));
+        try { Wednesday.add(new Lesson("3", String.valueOf(calls_schedule.get(2)), WednesdayValueSubjectThree, WednesdayValueAudienceThree, WednesdayEducatorThree, WednesdayTypeLessonThree));
         } catch (NullPointerException e) { }
-        try { Wednesday.add(new DataWednesday("4", String.valueOf(calls_schedule.get(3)), WednesdayValueSubjectFour, WednesdayValueAudienceFour, WednesdayEducatorFour, WednesdayTypeLessonFour));
+        try { Wednesday.add(new Lesson("4", String.valueOf(calls_schedule.get(3)), WednesdayValueSubjectFour, WednesdayValueAudienceFour, WednesdayEducatorFour, WednesdayTypeLessonFour));
         } catch (NullPointerException e) { }
-        try { Wednesday.add(new DataWednesday("5", String.valueOf(calls_schedule.get(4)), WednesdayValueSubjectFive, WednesdayValueAudienceFive, WednesdayEducatorFive, WednesdayTypeLessonFive));
+        try { Wednesday.add(new Lesson("5", String.valueOf(calls_schedule.get(4)), WednesdayValueSubjectFive, WednesdayValueAudienceFive, WednesdayEducatorFive, WednesdayTypeLessonFive));
         } catch (NullPointerException e) { }
-        try { Wednesday.add(new DataWednesday("6", String.valueOf(calls_schedule.get(5)), WednesdayValueSubjectSix, WednesdayValueAudienceSix, WednesdayEducatorSix, WednesdayTypeLessonSix));
+        try { Wednesday.add(new Lesson("6", String.valueOf(calls_schedule.get(5)), WednesdayValueSubjectSix, WednesdayValueAudienceSix, WednesdayEducatorSix, WednesdayTypeLessonSix));
         } catch (NullPointerException e) { }
     }
 
-    private void DataThursday() {
+    private void Lesson() {
         Thursday = new ArrayList<>(); //Вторник
-        try { Thursday.add(new DataThursday("1", String.valueOf(calls_schedule.get(0)), ThursdayValueSubjectOne, ThursdayValueAudienceOne, ThursdayEducatorOne, ThursdayTypeLessonOne));
+        try { Thursday.add(new Lesson("1", String.valueOf(calls_schedule.get(0)), ThursdayValueSubjectOne, ThursdayValueAudienceOne, ThursdayEducatorOne, ThursdayTypeLessonOne));
         } catch (NullPointerException e) { }
-        try { Thursday.add(new DataThursday("2", String.valueOf(calls_schedule.get(1)), ThursdayValueSubjectTwo, ThursdayValueAudienceTwo, ThursdayEducatorTwo, ThursdayTypeLessonTwo));
+        try { Thursday.add(new Lesson("2", String.valueOf(calls_schedule.get(1)), ThursdayValueSubjectTwo, ThursdayValueAudienceTwo, ThursdayEducatorTwo, ThursdayTypeLessonTwo));
         } catch (NullPointerException e) { }
-        try { Thursday.add(new DataThursday("3", String.valueOf(calls_schedule.get(2)), ThursdayValueSubjectThree, ThursdayValueAudienceThree, ThursdayEducatorThree, ThursdayTypeLessonThree));
+        try { Thursday.add(new Lesson("3", String.valueOf(calls_schedule.get(2)), ThursdayValueSubjectThree, ThursdayValueAudienceThree, ThursdayEducatorThree, ThursdayTypeLessonThree));
         } catch (NullPointerException e) { }
-        try { Thursday.add(new DataThursday("4", String.valueOf(calls_schedule.get(3)), ThursdayValueSubjectFour, ThursdayValueAudienceFour, ThursdayEducatorFour, ThursdayTypeLessonFour));
+        try { Thursday.add(new Lesson("4", String.valueOf(calls_schedule.get(3)), ThursdayValueSubjectFour, ThursdayValueAudienceFour, ThursdayEducatorFour, ThursdayTypeLessonFour));
         } catch (NullPointerException e) { }
-        try { Thursday.add(new DataThursday("5", String.valueOf(calls_schedule.get(4)), ThursdayValueSubjectFive, ThursdayValueAudienceFive, ThursdayEducatorFive, ThursdayTypeLessonFive));
+        try { Thursday.add(new Lesson("5", String.valueOf(calls_schedule.get(4)), ThursdayValueSubjectFive, ThursdayValueAudienceFive, ThursdayEducatorFive, ThursdayTypeLessonFive));
         } catch (NullPointerException e) { }
-        try { Thursday.add(new DataThursday("6", String.valueOf(calls_schedule.get(5)), ThursdayValueSubjectSix, ThursdayValueAudienceSix, ThursdayEducatorSix, ThursdayTypeLessonSix));
+        try { Thursday.add(new Lesson("6", String.valueOf(calls_schedule.get(5)), ThursdayValueSubjectSix, ThursdayValueAudienceSix, ThursdayEducatorSix, ThursdayTypeLessonSix));
         } catch (NullPointerException e) { }
     }
 
-    private void DataFriday() {
+    private void Lesson() {
         Friday = new ArrayList<>(); //Вторник
-        try { Friday.add(new DataFriday("1", String.valueOf(calls_schedule.get(0)), FridayValueSubjectOne, FridayValueAudienceOne, FridayEducatorOne, FridayTypeLessonOne));
+        try { Friday.add(new Lesson("1", String.valueOf(calls_schedule.get(0)), FridayValueSubjectOne, FridayValueAudienceOne, FridayEducatorOne, FridayTypeLessonOne));
         } catch (NullPointerException e) { }
-        try { Friday.add(new DataFriday("2", String.valueOf(calls_schedule.get(1)), FridayValueSubjectTwo, FridayValueAudienceTwo, FridayEducatorTwo, FridayTypeLessonTwo));
+        try { Friday.add(new Lesson("2", String.valueOf(calls_schedule.get(1)), FridayValueSubjectTwo, FridayValueAudienceTwo, FridayEducatorTwo, FridayTypeLessonTwo));
         } catch (NullPointerException e) { }
-        try { Friday.add(new DataFriday("3", String.valueOf(calls_schedule.get(2)), FridayValueSubjectThree, FridayValueAudienceThree, FridayEducatorThree, FridayTypeLessonThree));
+        try { Friday.add(new Lesson("3", String.valueOf(calls_schedule.get(2)), FridayValueSubjectThree, FridayValueAudienceThree, FridayEducatorThree, FridayTypeLessonThree));
         } catch (NullPointerException e) { }
-        try { Friday.add(new DataFriday("4", String.valueOf(calls_schedule.get(3)), FridayValueSubjectFour, FridayValueAudienceFour, FridayEducatorFour, FridayTypeLessonFour));
+        try { Friday.add(new Lesson("4", String.valueOf(calls_schedule.get(3)), FridayValueSubjectFour, FridayValueAudienceFour, FridayEducatorFour, FridayTypeLessonFour));
         } catch (NullPointerException e) { }
-        try { Friday.add(new DataFriday("5", String.valueOf(calls_schedule.get(4)), FridayValueSubjectFive, FridayValueAudienceFive, FridayEducatorFive, FridayTypeLessonFive));
+        try { Friday.add(new Lesson("5", String.valueOf(calls_schedule.get(4)), FridayValueSubjectFive, FridayValueAudienceFive, FridayEducatorFive, FridayTypeLessonFive));
         } catch (NullPointerException e) { }
-        try { Friday.add(new DataFriday("6", String.valueOf(calls_schedule.get(5)), FridayValueSubjectSix, FridayValueAudienceSix, FridayEducatorSix, FridayTypeLessonSix));
+        try { Friday.add(new Lesson("6", String.valueOf(calls_schedule.get(5)), FridayValueSubjectSix, FridayValueAudienceSix, FridayEducatorSix, FridayTypeLessonSix));
         } catch (NullPointerException e) { }
     }
 
-    private void DataSaturday() {
+    private void Lesson() {
         Saturday = new ArrayList<>(); //Вторник
-        try { Saturday.add(new DataSaturday("1", String.valueOf(calls_schedule.get(0)), SaturdayValueSubjectOne, SaturdayValueAudienceOne, SaturdayEducatorOne, SaturdayTypeLessonOne));
+        try { Saturday.add(new Lesson("1", String.valueOf(calls_schedule.get(0)), SaturdayValueSubjectOne, SaturdayValueAudienceOne, SaturdayEducatorOne, SaturdayTypeLessonOne));
         } catch (NullPointerException e) { }
-        try { Saturday.add(new DataSaturday("2", String.valueOf(calls_schedule.get(1)), SaturdayValueSubjectTwo, SaturdayValueAudienceTwo, SaturdayEducatorTwo, SaturdayTypeLessonTwo));
+        try { Saturday.add(new Lesson("2", String.valueOf(calls_schedule.get(1)), SaturdayValueSubjectTwo, SaturdayValueAudienceTwo, SaturdayEducatorTwo, SaturdayTypeLessonTwo));
         } catch (NullPointerException e) { }
-        try { Saturday.add(new DataSaturday("3", String.valueOf(calls_schedule.get(2)), SaturdayValueSubjectThree, SaturdayValueAudienceThree, SaturdayEducatorThree, SaturdayTypeLessonThree));
+        try { Saturday.add(new Lesson("3", String.valueOf(calls_schedule.get(2)), SaturdayValueSubjectThree, SaturdayValueAudienceThree, SaturdayEducatorThree, SaturdayTypeLessonThree));
         } catch (NullPointerException e) { }
-        try { Saturday.add(new DataSaturday("4", String.valueOf(calls_schedule.get(3)), SaturdayValueSubjectFour, SaturdayValueAudienceFour, SaturdayEducatorFour, SaturdayTypeLessonFour));
+        try { Saturday.add(new Lesson("4", String.valueOf(calls_schedule.get(3)), SaturdayValueSubjectFour, SaturdayValueAudienceFour, SaturdayEducatorFour, SaturdayTypeLessonFour));
         } catch (NullPointerException e) { }
-        try { Saturday.add(new DataSaturday("5", String.valueOf(calls_schedule.get(4)), SaturdayValueSubjectFive, SaturdayValueAudienceFive, SaturdayEducatorFive, SaturdayTypeLessonFive));
+        try { Saturday.add(new Lesson("5", String.valueOf(calls_schedule.get(4)), SaturdayValueSubjectFive, SaturdayValueAudienceFive, SaturdayEducatorFive, SaturdayTypeLessonFive));
         } catch (NullPointerException e) { }
-        try { Saturday.add(new DataSaturday("6", String.valueOf(calls_schedule.get(5)), SaturdayValueSubjectSix, SaturdayValueAudienceSix, SaturdayEducatorSix, SaturdayTypeLessonSix));
+        try { Saturday.add(new Lesson("6", String.valueOf(calls_schedule.get(5)), SaturdayValueSubjectSix, SaturdayValueAudienceSix, SaturdayEducatorSix, SaturdayTypeLessonSix));
         } catch (NullPointerException e) { }
-    }
+    }*/
 
 
     void radiobutton_class(){
@@ -7732,592 +7722,592 @@ public class ScheduleEditor extends AppCompatActivity {
 
         DataMonday();
         try {
-            MondayStringSubjectEditOne = Monday.get(0).subjectEdit.toString();
+            MondayStringSubjectEditOne = Monday.get(0).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringSubjectEditTwo = Monday.get(1).subjectEdit.toString();
+            MondayStringSubjectEditTwo = Monday.get(1).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringSubjectEditThree = Monday.get(2).subjectEdit.toString();
+            MondayStringSubjectEditThree = Monday.get(2).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringSubjectEditFour = Monday.get(3).subjectEdit.toString();
+            MondayStringSubjectEditFour = Monday.get(3).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringSubjectEditFive = Monday.get(4).subjectEdit.toString();
+            MondayStringSubjectEditFive = Monday.get(4).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringSubjectEditSix = Monday.get(5).subjectEdit.toString();
+            MondayStringSubjectEditSix = Monday.get(5).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringAudienceEditOne = Monday.get(0).audienceEdit.toString();
+            MondayStringAudienceEditOne = Monday.get(0).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringAudienceEditTwo = Monday.get(1).audienceEdit.toString();
+            MondayStringAudienceEditTwo = Monday.get(1).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringAudienceEditThree = Monday.get(2).audienceEdit.toString();
+            MondayStringAudienceEditThree = Monday.get(2).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringAudienceEditFour = Monday.get(3).audienceEdit.toString();
+            MondayStringAudienceEditFour = Monday.get(3).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringAudienceEditFive = Monday.get(4).audienceEdit.toString();
+            MondayStringAudienceEditFive = Monday.get(4).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringAudienceEditSix = Monday.get(5).audienceEdit.toString();
+            MondayStringAudienceEditSix = Monday.get(5).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditOne = Monday.get(0).educator.toString();
+            MondayStringEducatorEditOne = Monday.get(0).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditTwo = Monday.get(1).educator.toString();
+            MondayStringEducatorEditTwo = Monday.get(1).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditThree = Monday.get(2).educator.toString();
+            MondayStringEducatorEditThree = Monday.get(2).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditFour = Monday.get(3).educator.toString();
+            MondayStringEducatorEditFour = Monday.get(3).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditFive = Monday.get(4).educator.toString();
+            MondayStringEducatorEditFive = Monday.get(4).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditSix = Monday.get(5).educator.toString();
+            MondayStringEducatorEditSix = Monday.get(5).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringTypeLessonEditOne = Monday.get(0).typelesson.toString();
+            MondayStringTypeLessonEditOne = Monday.get(0).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringTypeLessonEditTwo = Monday.get(1).typelesson.toString();
+            MondayStringTypeLessonEditTwo = Monday.get(1).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringTypeLessonEditThree = Monday.get(2).typelesson.toString();
+            MondayStringTypeLessonEditThree = Monday.get(2).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringTypeLessonEditFour = Monday.get(3).typelesson.toString();
+            MondayStringTypeLessonEditFour = Monday.get(3).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringTypeLessonEditFive = Monday.get(4).typelesson.toString();
+            MondayStringTypeLessonEditFive = Monday.get(4).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringTypeLessonEditSix = Monday.get(5).typelesson.toString();
+            MondayStringTypeLessonEditSix = Monday.get(5).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
 
-        DataTuesday();
+        Lesson();
 
         try {
-            TuesdayStringSubjectEditOne = Tuesday.get(0).subjectEdit.toString();
+            TuesdayStringSubjectEditOne = Tuesday.get(0).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringSubjectEditTwo = Tuesday.get(1).subjectEdit.toString();
+            TuesdayStringSubjectEditTwo = Tuesday.get(1).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringSubjectEditThree = Tuesday.get(2).subjectEdit.toString();
+            TuesdayStringSubjectEditThree = Tuesday.get(2).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringSubjectEditFour = Tuesday.get(3).subjectEdit.toString();
+            TuesdayStringSubjectEditFour = Tuesday.get(3).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringSubjectEditFive = Tuesday.get(4).subjectEdit.toString();
+            TuesdayStringSubjectEditFive = Tuesday.get(4).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringSubjectEditSix = Tuesday.get(5).subjectEdit.toString();
+            TuesdayStringSubjectEditSix = Tuesday.get(5).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringAudienceEditOne = Tuesday.get(0).audienceEdit.toString();
+            TuesdayStringAudienceEditOne = Tuesday.get(0).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringAudienceEditTwo = Tuesday.get(1).audienceEdit.toString();
+            TuesdayStringAudienceEditTwo = Tuesday.get(1).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringAudienceEditThree = Tuesday.get(2).audienceEdit.toString();
+            TuesdayStringAudienceEditThree = Tuesday.get(2).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringAudienceEditFour = Tuesday.get(3).audienceEdit.toString();
+            TuesdayStringAudienceEditFour = Tuesday.get(3).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringAudienceEditFive = Tuesday.get(4).audienceEdit.toString();
+            TuesdayStringAudienceEditFive = Tuesday.get(4).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringAudienceEditSix = Tuesday.get(5).audienceEdit.toString();
+            TuesdayStringAudienceEditSix = Tuesday.get(5).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringEducatorEditOne = Tuesday.get(0).educator.toString();
+            TuesdayStringEducatorEditOne = Tuesday.get(0).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringEducatorEditTwo = Tuesday.get(1).educator.toString();
+            TuesdayStringEducatorEditTwo = Tuesday.get(1).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringEducatorEditThree = Tuesday.get(2).educator.toString();
+            TuesdayStringEducatorEditThree = Tuesday.get(2).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringEducatorEditFour = Tuesday.get(3).educator.toString();
+            TuesdayStringEducatorEditFour = Tuesday.get(3).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringEducatorEditFive = Tuesday.get(4).educator.toString();
+            TuesdayStringEducatorEditFive = Tuesday.get(4).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringEducatorEditSix = Tuesday.get(5).educator.toString();
+            TuesdayStringEducatorEditSix = Tuesday.get(5).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringTypeLessonEditOne = Tuesday.get(0).typelesson.toString();
+            TuesdayStringTypeLessonEditOne = Tuesday.get(0).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringTypeLessonEditTwo = Tuesday.get(1).typelesson.toString();
+            TuesdayStringTypeLessonEditTwo = Tuesday.get(1).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringTypeLessonEditThree = Tuesday.get(2).typelesson.toString();
+            TuesdayStringTypeLessonEditThree = Tuesday.get(2).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringTypeLessonEditFour = Tuesday.get(3).typelesson.toString();
+            TuesdayStringTypeLessonEditFour = Tuesday.get(3).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringTypeLessonEditFive = Tuesday.get(4).typelesson.toString();
+            TuesdayStringTypeLessonEditFive = Tuesday.get(4).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            TuesdayStringTypeLessonEditSix = Tuesday.get(5).typelesson.toString();
+            TuesdayStringTypeLessonEditSix = Tuesday.get(5).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
-        DataWednesday();
+        Lesson();
 
         try {
-            WednesdayStringSubjectEditOne = Wednesday.get(0).subjectEdit.toString();
+            WednesdayStringSubjectEditOne = Wednesday.get(0).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringSubjectEditTwo = Wednesday.get(1).subjectEdit.toString();
+            WednesdayStringSubjectEditTwo = Wednesday.get(1).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringSubjectEditThree = Wednesday.get(2).subjectEdit.toString();
+            WednesdayStringSubjectEditThree = Wednesday.get(2).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringSubjectEditFour = Wednesday.get(3).subjectEdit.toString();
+            WednesdayStringSubjectEditFour = Wednesday.get(3).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringSubjectEditFive = Wednesday.get(4).subjectEdit.toString();
+            WednesdayStringSubjectEditFive = Wednesday.get(4).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringSubjectEditSix = Wednesday.get(5).subjectEdit.toString();
+            WednesdayStringSubjectEditSix = Wednesday.get(5).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringAudienceEditOne = Wednesday.get(0).audienceEdit.toString();
+            WednesdayStringAudienceEditOne = Wednesday.get(0).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringAudienceEditTwo = Wednesday.get(1).audienceEdit.toString();
+            WednesdayStringAudienceEditTwo = Wednesday.get(1).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringAudienceEditThree = Wednesday.get(2).audienceEdit.toString();
+            WednesdayStringAudienceEditThree = Wednesday.get(2).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringAudienceEditFour = Wednesday.get(3).audienceEdit.toString();
+            WednesdayStringAudienceEditFour = Wednesday.get(3).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringAudienceEditFive = Wednesday.get(4).audienceEdit.toString();
+            WednesdayStringAudienceEditFive = Wednesday.get(4).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringAudienceEditSix = Wednesday.get(5).audienceEdit.toString();
+            WednesdayStringAudienceEditSix = Wednesday.get(5).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringEducatorEditOne = Wednesday.get(0).educator.toString();
+            WednesdayStringEducatorEditOne = Wednesday.get(0).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringEducatorEditTwo = Wednesday.get(1).educator.toString();
+            WednesdayStringEducatorEditTwo = Wednesday.get(1).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringEducatorEditThree = Wednesday.get(2).educator.toString();
+            WednesdayStringEducatorEditThree = Wednesday.get(2).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringEducatorEditFour = Wednesday.get(3).educator.toString();
+            WednesdayStringEducatorEditFour = Wednesday.get(3).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringEducatorEditFive = Wednesday.get(4).educator.toString();
+            WednesdayStringEducatorEditFive = Wednesday.get(4).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringEducatorEditSix = Wednesday.get(5).educator.toString();
+            WednesdayStringEducatorEditSix = Wednesday.get(5).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringTypeLessonEditOne = Wednesday.get(0).typelesson.toString();
+            WednesdayStringTypeLessonEditOne = Wednesday.get(0).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringTypeLessonEditTwo = Wednesday.get(1).typelesson.toString();
+            WednesdayStringTypeLessonEditTwo = Wednesday.get(1).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringTypeLessonEditThree = Wednesday.get(2).typelesson.toString();
+            WednesdayStringTypeLessonEditThree = Wednesday.get(2).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringTypeLessonEditFour = Wednesday.get(3).typelesson.toString();
+            WednesdayStringTypeLessonEditFour = Wednesday.get(3).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringTypeLessonEditFive = Wednesday.get(4).typelesson.toString();
+            WednesdayStringTypeLessonEditFive = Wednesday.get(4).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            WednesdayStringTypeLessonEditSix = Wednesday.get(5).typelesson.toString();
+            WednesdayStringTypeLessonEditSix = Wednesday.get(5).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
-        DataThursday();
+        Lesson();
 
         try {
-            ThursdayStringSubjectEditOne = Thursday.get(0).subjectEdit.toString();
+            ThursdayStringSubjectEditOne = Thursday.get(0).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringSubjectEditTwo = Thursday.get(1).subjectEdit.toString();
+            ThursdayStringSubjectEditTwo = Thursday.get(1).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringSubjectEditThree = Thursday.get(2).subjectEdit.toString();
+            ThursdayStringSubjectEditThree = Thursday.get(2).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringSubjectEditFour = Thursday.get(3).subjectEdit.toString();
+            ThursdayStringSubjectEditFour = Thursday.get(3).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringSubjectEditFive = Thursday.get(4).subjectEdit.toString();
+            ThursdayStringSubjectEditFive = Thursday.get(4).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringSubjectEditSix = Thursday.get(5).subjectEdit.toString();
+            ThursdayStringSubjectEditSix = Thursday.get(5).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringAudienceEditOne = Thursday.get(0).audienceEdit.toString();
+            ThursdayStringAudienceEditOne = Thursday.get(0).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringAudienceEditTwo = Thursday.get(1).audienceEdit.toString();
+            ThursdayStringAudienceEditTwo = Thursday.get(1).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringAudienceEditThree = Thursday.get(2).audienceEdit.toString();
+            ThursdayStringAudienceEditThree = Thursday.get(2).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringAudienceEditFour = Thursday.get(3).audienceEdit.toString();
+            ThursdayStringAudienceEditFour = Thursday.get(3).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringAudienceEditFive = Thursday.get(4).audienceEdit.toString();
+            ThursdayStringAudienceEditFive = Thursday.get(4).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringAudienceEditSix = Thursday.get(5).audienceEdit.toString();
+            ThursdayStringAudienceEditSix = Thursday.get(5).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringEducatorEditOne = Thursday.get(0).educator.toString();
+            ThursdayStringEducatorEditOne = Thursday.get(0).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringEducatorEditTwo = Thursday.get(1).educator.toString();
+            ThursdayStringEducatorEditTwo = Thursday.get(1).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringEducatorEditThree = Thursday.get(2).educator.toString();
+            ThursdayStringEducatorEditThree = Thursday.get(2).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringEducatorEditFour = Thursday.get(3).educator.toString();
+            ThursdayStringEducatorEditFour = Thursday.get(3).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringEducatorEditFive = Thursday.get(4).educator.toString();
+            ThursdayStringEducatorEditFive = Thursday.get(4).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringEducatorEditSix = Thursday.get(5).educator.toString();
+            ThursdayStringEducatorEditSix = Thursday.get(5).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringTypeLessonEditOne = Thursday.get(0).typelesson.toString();
+            ThursdayStringTypeLessonEditOne = Thursday.get(0).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringTypeLessonEditTwo = Thursday.get(1).typelesson.toString();
+            ThursdayStringTypeLessonEditTwo = Thursday.get(1).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringTypeLessonEditThree = Thursday.get(2).typelesson.toString();
+            ThursdayStringTypeLessonEditThree = Thursday.get(2).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringTypeLessonEditFour = Thursday.get(3).typelesson.toString();
+            ThursdayStringTypeLessonEditFour = Thursday.get(3).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringTypeLessonEditFive = Thursday.get(4).typelesson.toString();
+            ThursdayStringTypeLessonEditFive = Thursday.get(4).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            ThursdayStringTypeLessonEditSix = Thursday.get(5).typelesson.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-
-        DataFriday();
-
-        try {
-            FridayStringSubjectEditOne = Friday.get(0).subjectEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringSubjectEditTwo = Friday.get(1).subjectEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringSubjectEditThree = Friday.get(2).subjectEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringSubjectEditFour = Friday.get(3).subjectEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringSubjectEditFive = Friday.get(4).subjectEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringSubjectEditSix = Friday.get(5).subjectEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringAudienceEditOne = Friday.get(0).audienceEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringAudienceEditTwo = Friday.get(1).audienceEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringAudienceEditThree = Friday.get(2).audienceEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringAudienceEditFour = Friday.get(3).audienceEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringAudienceEditFive = Friday.get(4).audienceEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringAudienceEditSix = Friday.get(5).audienceEdit.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringEducatorEditOne = Friday.get(0).educator.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringEducatorEditTwo = Friday.get(1).educator.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringEducatorEditThree = Friday.get(2).educator.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringEducatorEditFour = Friday.get(3).educator.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringEducatorEditFive = Friday.get(4).educator.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringEducatorEditSix = Friday.get(5).educator.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringTypeLessonEditOne = Friday.get(0).typelesson.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringTypeLessonEditTwo = Friday.get(1).typelesson.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringTypeLessonEditThree = Friday.get(2).typelesson.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringTypeLessonEditFour = Friday.get(3).typelesson.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringTypeLessonEditFive = Friday.get(4).typelesson.toString();
-        } catch (IndexOutOfBoundsException e) {
-        }
-        try {
-            FridayStringTypeLessonEditSix = Friday.get(5).typelesson.toString();
+            ThursdayStringTypeLessonEditSix = Thursday.get(5).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
 
-        DataSaturday();
+        Lesson();
 
         try {
-            SaturdayStringSubjectEditOne = Saturday.get(0).subjectEdit.toString();
+            FridayStringSubjectEditOne = Friday.get(0).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringSubjectEditTwo = Saturday.get(1).subjectEdit.toString();
+            FridayStringSubjectEditTwo = Friday.get(1).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringSubjectEditThree = Saturday.get(2).subjectEdit.toString();
+            FridayStringSubjectEditThree = Friday.get(2).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringSubjectEditFour = Saturday.get(3).subjectEdit.toString();
+            FridayStringSubjectEditFour = Friday.get(3).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringSubjectEditFive = Saturday.get(4).subjectEdit.toString();
+            FridayStringSubjectEditFive = Friday.get(4).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringSubjectEditSix = Saturday.get(5).subjectEdit.toString();
+            FridayStringSubjectEditSix = Friday.get(5).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringAudienceEditOne = Saturday.get(0).audienceEdit.toString();
+            FridayStringAudienceEditOne = Friday.get(0).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringAudienceEditTwo = Saturday.get(1).audienceEdit.toString();
+            FridayStringAudienceEditTwo = Friday.get(1).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringAudienceEditThree = Saturday.get(2).audienceEdit.toString();
+            FridayStringAudienceEditThree = Friday.get(2).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringAudienceEditFour = Saturday.get(3).audienceEdit.toString();
+            FridayStringAudienceEditFour = Friday.get(3).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringAudienceEditFive = Saturday.get(4).audienceEdit.toString();
+            FridayStringAudienceEditFive = Friday.get(4).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringAudienceEditSix = Saturday.get(5).audienceEdit.toString();
+            FridayStringAudienceEditSix = Friday.get(5).getAudienceEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringEducatorEditOne = Saturday.get(0).educator.toString();
+            FridayStringEducatorEditOne = Friday.get(0).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringEducatorEditTwo = Saturday.get(1).educator.toString();
+            FridayStringEducatorEditTwo = Friday.get(1).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringEducatorEditThree = Saturday.get(2).educator.toString();
+            FridayStringEducatorEditThree = Friday.get(2).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringEducatorEditFour = Saturday.get(3).educator.toString();
+            FridayStringEducatorEditFour = Friday.get(3).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringEducatorEditFive = Saturday.get(4).educator.toString();
+            FridayStringEducatorEditFive = Friday.get(4).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringEducatorEditSix = Saturday.get(5).educator.toString();
+            FridayStringEducatorEditSix = Friday.get(5).getEducator().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringTypeLessonEditOne = Saturday.get(0).typelesson.toString();
+            FridayStringTypeLessonEditOne = Friday.get(0).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringTypeLessonEditTwo = Saturday.get(1).typelesson.toString();
+            FridayStringTypeLessonEditTwo = Friday.get(1).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringTypeLessonEditThree = Saturday.get(2).typelesson.toString();
+            FridayStringTypeLessonEditThree = Friday.get(2).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringTypeLessonEditFour = Saturday.get(3).typelesson.toString();
+            FridayStringTypeLessonEditFour = Friday.get(3).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringTypeLessonEditFive = Saturday.get(4).typelesson.toString();
+            FridayStringTypeLessonEditFive = Friday.get(4).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            SaturdayStringTypeLessonEditSix = Saturday.get(5).typelesson.toString();
+            FridayStringTypeLessonEditSix = Friday.get(5).getTypeLesson().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+
+        Lesson();
+
+        try {
+            SaturdayStringSubjectEditOne = Saturday.get(0).getSubjectEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringSubjectEditTwo = Saturday.get(1).getSubjectEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringSubjectEditThree = Saturday.get(2).getSubjectEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringSubjectEditFour = Saturday.get(3).getSubjectEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringSubjectEditFive = Saturday.get(4).getSubjectEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringSubjectEditSix = Saturday.get(5).getSubjectEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringAudienceEditOne = Saturday.get(0).getAudienceEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringAudienceEditTwo = Saturday.get(1).getAudienceEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringAudienceEditThree = Saturday.get(2).getAudienceEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringAudienceEditFour = Saturday.get(3).getAudienceEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringAudienceEditFive = Saturday.get(4).getAudienceEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringAudienceEditSix = Saturday.get(5).getAudienceEdit().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringEducatorEditOne = Saturday.get(0).getEducator().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringEducatorEditTwo = Saturday.get(1).getEducator().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringEducatorEditThree = Saturday.get(2).getEducator().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringEducatorEditFour = Saturday.get(3).getEducator().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringEducatorEditFive = Saturday.get(4).getEducator().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringEducatorEditSix = Saturday.get(5).getEducator().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringTypeLessonEditOne = Saturday.get(0).getTypeLesson().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringTypeLessonEditTwo = Saturday.get(1).getTypeLesson().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringTypeLessonEditThree = Saturday.get(2).getTypeLesson().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringTypeLessonEditFour = Saturday.get(3).getTypeLesson().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringTypeLessonEditFive = Saturday.get(4).getTypeLesson().toString();
+        } catch (IndexOutOfBoundsException e) {
+        }
+        try {
+            SaturdayStringTypeLessonEditSix = Saturday.get(5).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
 

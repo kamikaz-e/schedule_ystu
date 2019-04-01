@@ -17,7 +17,7 @@ public class ScheduleDB extends SQLiteOpenHelper {
     /**
      * Имя файла базы данных
      */
-    private static final String DATABASE_NAME = "Schedule.db";
+    private static final String DATABASE_NAME = "Lesson.db";
 
     /**
      * Версия базы данных. При изменении схемы увеличить на единицу
