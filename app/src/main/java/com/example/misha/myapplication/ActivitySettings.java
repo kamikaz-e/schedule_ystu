@@ -53,13 +53,13 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
-public class Settings extends AppCompatActivity {
+public class ActivitySettings extends AppCompatActivity {
 
   private static final String schedule_import= "http://schedu1e.h1n.ru/schedule.php";
   private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
   private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
   private static final String educators_import= "http://schedu1e.h1n.ru/educators.php";
-  private static final String call_schedule = "http://schedu1e.h1n.ru/call_schedule.php";
+  private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallSchedule.php";
   private static final String date = "http://schedu1e.h1n.ru/date_start.php";
   private static final String export = "http://schedu1e.h1n.ru/export.php";
   final String sch="schedule";
@@ -103,8 +103,8 @@ public class Settings extends AppCompatActivity {
 /*
     SQLiteDatabase db = ScheduleDB.getReadableDatabase();
     db.isOpen();*/
-    requestQueue = Volley.newRequestQueue(Settings.this);
-    progressDialog = new ProgressDialog(Settings.this);
+    requestQueue = Volley.newRequestQueue(ActivitySettings.this);
+    progressDialog = new ProgressDialog(ActivitySettings.this);
 
     layout_pick_week = findViewById(R.id.oneitem);
     typelessonitem = findViewById(R.id.typelessonitem);
@@ -116,7 +116,7 @@ public class Settings extends AppCompatActivity {
     if (hasVisited == "nope") {
 
 
-      new MaterialTapTargetPrompt.Builder(Settings.this)
+      new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
               .setTarget(layout_pick_week)
               .setPromptBackground(new RectanglePromptBackground())
               .setPromptFocal(new RectanglePromptFocal())
@@ -130,7 +130,7 @@ public class Settings extends AppCompatActivity {
                 public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
                   if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
 
-                    new MaterialTapTargetPrompt.Builder(Settings.this)
+                    new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
                             .setTarget(layout_import)
                             .setPromptBackground(new RectanglePromptBackground())
                             .setPromptFocal(new RectanglePromptFocal())
@@ -145,7 +145,7 @@ public class Settings extends AppCompatActivity {
 
                               public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
                                 if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                  new MaterialTapTargetPrompt.Builder(Settings.this)
+                                  new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
                                           .setTarget(layout_export)
                                           .setPromptBackground(new RectanglePromptBackground())
                                           .setPromptFocal(new RectanglePromptFocal())
@@ -208,7 +208,7 @@ public class Settings extends AppCompatActivity {
 
 
   void get_current_week(){
-    new DatePickerDialog(Settings.this, dateone,
+    new DatePickerDialog(ActivitySettings.this, dateone,
         Date.get(Calendar.YEAR),
         Date.get(Calendar.MONTH),
         Date.get(Calendar.DAY_OF_MONTH)).show();
@@ -304,7 +304,7 @@ public class Settings extends AppCompatActivity {
         load_db(sch,schedule_import);
         load_db(cal,call_schedule);
         load_db(dat,date);
-        Intent intent = new Intent(Settings.this, MainActivity.class);
+        Intent intent = new Intent(ActivitySettings.this, MainActivity.class);
         finish();
         startActivity(intent);
       }
@@ -605,14 +605,14 @@ public class Settings extends AppCompatActivity {
           @Override
           public void onResponse(String ServerResponse) {
             progressDialog.dismiss();
-            Toast.makeText(Settings.this, ServerResponse, Toast.LENGTH_LONG).show();
+            Toast.makeText(ActivitySettings.this, ServerResponse, Toast.LENGTH_LONG).show();
           }
         },
         new Response.ErrorListener() {
           @Override
           public void onErrorResponse(VolleyError volleyError) {
             progressDialog.dismiss();
-            Toast.makeText(Settings.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(ActivitySettings.this, volleyError.toString(), Toast.LENGTH_LONG).show();
           }
         }) {
       @Override
@@ -637,7 +637,7 @@ public class Settings extends AppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case android.R.id.home:
-        Intent intent = new Intent(Settings.this,MainActivity.class);
+        Intent intent = new Intent(ActivitySettings.this,MainActivity.class);
         finish();
         startActivity(intent);
         return true;
@@ -648,7 +648,7 @@ public class Settings extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Settings.this,MainActivity.class);
+        Intent intent = new Intent(ActivitySettings.this,MainActivity.class);
         finish();
         startActivity(intent);
     }

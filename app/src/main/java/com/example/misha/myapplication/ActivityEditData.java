@@ -24,7 +24,7 @@ import android.widget.ListView;
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleDB;
 
-public class activityEditData extends AppCompatActivity {
+public class ActivityEditData extends AppCompatActivity {
 
 
   EditText input_subject;
@@ -229,11 +229,11 @@ public class activityEditData extends AppCompatActivity {
     public Fragment getItem(int position) {
       Fragment fragment = null;
       if (position == 0) {
-        fragment = new fragment_subject();
+        fragment = new FragmentSubject();
       } else if (position == 1) {
-        fragment = new fragment_audience();
+        fragment = new FragmentAudience();
       } else if (position == 2) {
-        fragment = new fragment_educator();
+        fragment = new FragmentEducator();
       }
       return fragment;
 
@@ -268,7 +268,7 @@ public class activityEditData extends AppCompatActivity {
 
     switch (item.getItemId()) {
       case android.R.id.home:
-        Intent intent = new Intent(activityEditData.this, MainActivity.class);
+        Intent intent = new Intent(ActivityEditData.this, MainActivity.class);
         finish();
         startActivity(intent);
         return true;
@@ -280,7 +280,7 @@ public class activityEditData extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(activityEditData.this, MainActivity.class);
+        Intent intent = new Intent(ActivityEditData.this, MainActivity.class);
         finish();
         startActivity(intent);
     }

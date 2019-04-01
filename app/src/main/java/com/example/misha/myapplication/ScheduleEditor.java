@@ -48,7 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity2 extends AppCompatActivity {
+public class ScheduleEditor extends AppCompatActivity {
 
     Switch switcher_save;
     Spinner SubjectEditOne;
@@ -6756,7 +6756,7 @@ public class MainActivity2 extends AppCompatActivity {
         toolbar.setOverflowIcon(drawable);
 
         viewPager = findViewById(R.id.viewpager);
-        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), MainActivity2.this);
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), ScheduleEditor.this);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
 
@@ -6806,7 +6806,7 @@ public class MainActivity2 extends AppCompatActivity {
                 tabStrip.getChildAt(i).setClickable(false);
             }
 
-            new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+            new MaterialTapTargetPrompt.Builder(ScheduleEditor.this)
                     .setTarget(spinner)
                     .setPromptBackground(new CirclePromptBackground())
                     .setPromptFocal(new RectanglePromptFocal())
@@ -6819,7 +6819,7 @@ public class MainActivity2 extends AppCompatActivity {
                     .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                         public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
                             if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+                                new MaterialTapTargetPrompt.Builder(ScheduleEditor.this)
                                         .setTarget(R.id.switcher_save)
                                         .setPromptBackground(new CirclePromptBackground())
                                         .setPromptFocal(new RectanglePromptFocal())
@@ -6833,7 +6833,7 @@ public class MainActivity2 extends AppCompatActivity {
                                             public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
 
                                                 if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                                    new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+                                                    new MaterialTapTargetPrompt.Builder(ScheduleEditor.this)
                                                             .setTarget(R.id.card_viewTwo)
                                                             .setPromptBackground(new RectanglePromptBackground())
                                                             .setPromptFocal(new RectanglePromptFocal())
@@ -6847,7 +6847,7 @@ public class MainActivity2 extends AppCompatActivity {
                                                                 public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
 
                                                                     if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                                                        new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+                                                                        new MaterialTapTargetPrompt.Builder(ScheduleEditor.this)
                                                                                 .setTarget(R.id.clear_cardTwo_monday)
                                                                                 .setPromptBackground(new CirclePromptBackground())
                                                                                 .setPromptFocal(new CirclePromptFocal())
@@ -6861,7 +6861,7 @@ public class MainActivity2 extends AppCompatActivity {
                                                                                     public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
 
                                                                                         if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                                                                            new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+                                                                                            new MaterialTapTargetPrompt.Builder(ScheduleEditor.this)
                                                                                                     .setTarget(R.id.copy_upTwo_monday)
                                                                                                     .setPromptBackground(new CirclePromptBackground())
                                                                                                     .setPromptFocal(new CirclePromptFocal())
@@ -6874,7 +6874,7 @@ public class MainActivity2 extends AppCompatActivity {
                                                                                                     .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
                                                                                                         public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
                                                                                                             if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                                                                                                new MaterialTapTargetPrompt.Builder(MainActivity2.this)
+                                                                                                                new MaterialTapTargetPrompt.Builder(ScheduleEditor.this)
                                                                                                                         .setTarget(R.id.copy_downTwo_monday)
                                                                                                                         .setPromptBackground(new CirclePromptBackground())
                                                                                                                         .setPromptFocal(new CirclePromptFocal())
@@ -7036,17 +7036,17 @@ public class MainActivity2 extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    return new Monday();
+                    return new FragmentMonday();
                 case 1:
-                    return new Tuesday();
+                    return new FragmentTuesday();
                 case 2:
-                    return new Wednesday();
+                    return new FragmentWednesday();
                 case 3:
-                    return new Thursday();
+                    return new FragmentThursday();
                 case 4:
-                    return new Friday();
+                    return new FragmentFriday();
                 case 5:
-                    return new Saturday();
+                    return new FragmentSaturday();
                 default:
                     return null;
             }
@@ -7502,7 +7502,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (flag_save==1) {Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+                if (flag_save==1) {Intent intent = new Intent(ScheduleEditor.this, MainActivity.class);
                     finish();
                     startActivity(intent);} else {
                     switch (flag_autosave) {
@@ -7511,7 +7511,7 @@ public class MainActivity2 extends AppCompatActivity {
                             return true;
                         case 1:
                             saveschedule(position_week);
-                            Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+                            Intent intent = new Intent(ScheduleEditor.this, MainActivity.class);
                             finish();
                             startActivity(intent);
                             return true;
@@ -7549,7 +7549,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (flag_save==1) {Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+        if (flag_save==1) {Intent intent = new Intent(ScheduleEditor.this, MainActivity.class);
             finish();
             startActivity(intent);}
             else {

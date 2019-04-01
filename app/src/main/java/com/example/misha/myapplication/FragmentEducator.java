@@ -24,7 +24,7 @@ import com.example.misha.myapplication.data.ScheduleDB;
 import java.util.ArrayList;
 
 
-public class fragment_educator extends android.support.v4.app.Fragment {
+public class FragmentEducator extends android.support.v4.app.Fragment {
 
 
     EditText input_educator;
@@ -34,7 +34,7 @@ public class fragment_educator extends android.support.v4.app.Fragment {
     public ArrayAdapter<String> adapter;
     String select_item="";
 
-    public fragment_educator() {
+    public FragmentEducator() {
 
     }
 

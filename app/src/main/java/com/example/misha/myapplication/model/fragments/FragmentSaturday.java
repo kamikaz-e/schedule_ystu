@@ -1,12 +1,14 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.model.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Saturday extends android.support.v4.app.Fragment {
-    public Saturday() { }
+import com.example.misha.myapplication.R;
+
+public class FragmentSaturday extends android.support.v4.app.Fragment {
+    public FragmentSaturday() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.model.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,6 +27,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.misha.myapplication.ActivityEditData;
+import com.example.misha.myapplication.ActivitySettings;
+import com.example.misha.myapplication.ActivityStart;
+import com.example.misha.myapplication.FragmentScheduleByDays;
+import com.example.misha.myapplication.FragmentTwo;
+import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.ScheduleEditor;
 import com.example.misha.myapplication.data.ScheduleDB;
 import com.example.misha.myapplication.model.ActivityCallSchedule;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;

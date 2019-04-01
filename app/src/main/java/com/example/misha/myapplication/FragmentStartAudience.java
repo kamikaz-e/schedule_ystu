@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -31,19 +32,20 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
-public class fragment_start_educators extends android.support.v4.app.Fragment {
 
-    EditText input_educator;
-    ListView list_educators;
+public class FragmentStartAudience extends android.support.v4.app.Fragment {
+
+
+    EditText input_audience;
+    ListView list_audiences;
     private ScheduleDB ScheduleDB;
-    final ArrayList<String> educator_list = new ArrayList<>();
+    final ArrayList<String> audience_list = new ArrayList<>();
     public ArrayAdapter<String> adapter;
+    Button clear_audiences;
     Button next;
-    Button clear_educators;
     String select_item="";
 
-    public fragment_start_educators() {
-
+    public FragmentStartAudience() {
     }
 
 
@@ -56,19 +58,22 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_start_educators, container, false);
+        View view = inflater.inflate(R.layout.fragment_start_audiences, container, false);
         Toolbar profile_toolbar = view.findViewById(R.id.toolbar);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        AppCompatActivity activity = (AppCompatActivity)getActivity();
         activity.setSupportActionBar(profile_toolbar);
         ScheduleDB = new ScheduleDB(getActivity());
-        next = view.findViewById(R.id.next);
-        clear_educators = view.findViewById(R.id.clear_educators);
-        input_educator = view.findViewById(R.id.input_educator);
-        list_educators = view.findViewById(R.id.list_educators);
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
-        list_educators.setAdapter(adapter);
 
-        list_educators.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        clear_audiences = view.findViewById(R.id.clear_audiences);
+        next = view.findViewById(R.id.next);
+        input_audience = view.findViewById(R.id.input_audience);
+        list_audiences = view.findViewById(R.id.list_audiences);
+
+
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
+        list_audiences.setAdapter(adapter);
+
+        list_audiences.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
@@ -78,16 +83,20 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
             }
         });
 
-
-        clear_educators.setBackgroundResource(R.drawable.ic_clear);
+        clear_audiences.setBackgroundResource(R.drawable.ic_clear);
         next.setBackgroundResource(R.drawable.ic_start_settings_ok);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().finish();
+                FragmentStartEducator fragment= new FragmentStartEducator();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
-        clear_educators.setOnClickListener(new View.OnClickListener() {
+
+        clear_audiences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onCreateDialogClear().show();
@@ -95,37 +104,38 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
         });
         start();
 
-        new MaterialTapTargetPrompt.Builder(getActivity())
-                .setTarget(input_educator)
-                .setPromptBackground(new RectanglePromptBackground())
-                .setPromptFocal(new RectanglePromptFocal())
-                .setPrimaryText("Добавление преподавателей")
-                .setSecondaryText("Аналогично, как и в предыдущем действии")
-                .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                .setBackgroundColour(Color.rgb(100, 100, 255))
-                .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                        if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+            new MaterialTapTargetPrompt.Builder(getActivity())
+                    .setTarget(input_audience)
+                    .setPromptBackground(new RectanglePromptBackground())
+                    .setPromptFocal(new RectanglePromptFocal())
+                    .setPrimaryText("Добавление аудитории")
+                    .setSecondaryText("Аналогично, как и в предыдущем действии")
+                    .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
+                    .setBackgroundColour(Color.rgb(100, 100, 255))
+                    .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                    .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                            if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
 
+                            }
                         }
-                    }
-                })
-                .show();
+                    })
+                    .show();
 
-        input_educator.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        input_audience.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
-                    String educator = input_educator.getText().toString();
-                    if(TextUtils.isEmpty(educator)) {
-                        input_educator.setError("Введите преподавателя");
+                    input_audience.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+                    String audience = input_audience.getText().toString();
+                    if(TextUtils.isEmpty(audience)) {
+                        input_audience.setError("Введите аудиторию");
                         return true;
                     }
                     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('" + educator + "');");
-                    input_educator.setText("");
+                    db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('" + audience + "');");
+                    input_audience.setText("");
                     start();
                     adapter.notifyDataSetChanged();
                     return true;
@@ -145,7 +155,7 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + ScheduleClass.educators.TABLE_NAME + " WHERE "+ ScheduleClass.educators.educator + "='"+ select_item+"'");
+                db.execSQL("DELETE FROM " + ScheduleClass.audiences.TABLE_NAME + " WHERE "+ ScheduleClass.audiences.audience + "='"+ select_item+"'");
                 start();
                 adapter.notifyDataSetChanged();
             }
@@ -153,7 +163,7 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Удалить преподавателя «"+select_item+"»?");
+        }).setTitle("Удалить аудиторию «"+select_item+"»?");
         return builder.create();
     }
 
@@ -163,39 +173,41 @@ public class fragment_start_educators extends android.support.v4.app.Fragment {
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                clear_educators();
+                clear_audiences();
             }
         }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Очистить преподавателей?");
+        }).setTitle("Очистить аудитории?");
         return builder.create();
     }
 
-    void clear_educators(){
+    void clear_audiences(){
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.execSQL("DROP TABLE " + ScheduleClass.educators.TABLE_NAME);
-        db.execSQL("CREATE TABLE " + ScheduleClass.educators.TABLE_NAME + " ("
-                + ScheduleClass.educators.idd_educator + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
-        db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
+        db.execSQL("DROP TABLE " + ScheduleClass.audiences.TABLE_NAME);
+        db.execSQL("CREATE TABLE " + ScheduleClass.audiences.TABLE_NAME + " ("
+                + ScheduleClass.audiences.idd_audience + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
+        db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
         adapter.notifyDataSetChanged();
         start();
     }
 
+
     public void start(){
 
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
-        list_educators.setAdapter(adapter);
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
+        list_audiences.setAdapter(adapter);
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ ScheduleClass.educators.educator +" FROM " + ScheduleClass.educators.TABLE_NAME + " WHERE "+ ScheduleClass.educators.idd_educator +">1;";
-        educator_list.clear();
+        String searchQuery = "SELECT "+ ScheduleClass.audiences.audience +" FROM " + ScheduleClass.audiences.TABLE_NAME + " WHERE "+ ScheduleClass.audiences.idd_audience +">1;";
+        audience_list.clear();
         Cursor cursor = db.rawQuery(searchQuery, null);
         while(cursor.moveToNext()) {
-            educator_list.add(cursor.getString(0));
+            audience_list.add(cursor.getString(0));
         }
         cursor.close();
     }
+
 }

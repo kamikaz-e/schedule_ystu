@@ -21,11 +21,11 @@ import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectangleProm
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 
-public class fragment_date extends android.support.v4.app.Fragment {
+public class FragmentDate extends android.support.v4.app.Fragment {
 
 
     RelativeLayout layout_pich_week;
-    public fragment_date(){}
+    public FragmentDate(){}
 
 
     Calendar Date = Calendar.getInstance();

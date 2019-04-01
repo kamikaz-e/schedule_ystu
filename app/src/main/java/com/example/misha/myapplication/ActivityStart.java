@@ -31,12 +31,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class welcome_activity extends Activity {
+public class ActivityStart extends Activity {
   private static final String schedule_import= "http://schedu1e.h1n.ru/schedule.php";
   private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
   private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
   private static final String educators_import= "http://schedu1e.h1n.ru/educators.php";
-  private static final String call_schedule = "http://schedu1e.h1n.ru/call_schedule.php";
+  private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallSchedule.php";
   private static final String date = "http://schedu1e.h1n.ru/date_start.php";
 
 
@@ -75,7 +75,7 @@ public class welcome_activity extends Activity {
     Button start_buttonTwo = findViewById(R.id.start_buttonTwo);
     start_buttonTwo.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
-        Intent intent = new Intent (welcome_activity.this, start_settings.class);
+        Intent intent = new Intent (ActivityStart.this, ActivityStartSettings.class);
         finish();
         startActivity(intent);
       }
@@ -115,13 +115,13 @@ public class welcome_activity extends Activity {
                 load_db(sch,schedule_import);
                 load_db(cal,call_schedule);
                 load_db(dat,date);
-                Intent intent = new Intent(welcome_activity.this, MainActivity.class);
+                Intent intent = new Intent(ActivityStart.this, MainActivity.class);
                 finish();
                 startActivity(intent);
             }
         }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                Intent intent = new Intent (welcome_activity.this, start_settings.class);
+                Intent intent = new Intent (ActivityStart.this, ActivityStartSettings.class);
                 finish();
                 startActivity(intent);
             }

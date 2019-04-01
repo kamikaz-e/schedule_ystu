@@ -1,4 +1,4 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.model;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.example.misha.myapplication.MainActivity;
+import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleClass.calls;
 import com.example.misha.myapplication.data.ScheduleDB;
@@ -29,7 +31,7 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
-public class call_schedule extends AppCompatActivity {
+public class ActivityCallSchedule extends AppCompatActivity {
 
   String select_time_partOne;
   String select_time_fullOne;
@@ -91,7 +93,7 @@ public class call_schedule extends AppCompatActivity {
     if (hasVisited == "nope") {
 
 
-      new MaterialTapTargetPrompt.Builder(call_schedule.this)
+      new MaterialTapTargetPrompt.Builder(ActivityCallSchedule.this)
               .setTarget(R.id.card_viewOneTime)
               .setPromptBackground(new RectanglePromptBackground())
               .setPromptFocal(new RectanglePromptFocal())
@@ -132,7 +134,7 @@ public class call_schedule extends AppCompatActivity {
   }
 
   public void getTimeOne(View v) {
-    new TimePickerDialog(call_schedule.this, timeone,
+    new TimePickerDialog(ActivityCallSchedule.this, timeone,
             Time.get(Calendar.HOUR_OF_DAY),
             Time.get(Calendar.MINUTE), true)
             .show();
@@ -149,7 +151,7 @@ public class call_schedule extends AppCompatActivity {
       oneTime.setText(select_time_fullOne);
     }
     if (start==1){
-      new TimePickerDialog(call_schedule.this, timeone,
+      new TimePickerDialog(ActivityCallSchedule.this, timeone,
               Time.get(Calendar.HOUR_OF_DAY),
               Time.get(Calendar.MINUTE), true)
               .show();
@@ -165,7 +167,7 @@ public class call_schedule extends AppCompatActivity {
   };
 
   public void getTimeTwo(View v) {
-    new TimePickerDialog(call_schedule.this, timetwo,
+    new TimePickerDialog(ActivityCallSchedule.this, timetwo,
             Time.get(Calendar.HOUR_OF_DAY),
             Time.get(Calendar.MINUTE), true)
             .show();
@@ -183,7 +185,7 @@ public class call_schedule extends AppCompatActivity {
       twoTime.setText(select_time_fullTwo);
       }
     if (start==1){
-      new TimePickerDialog(call_schedule.this, timetwo,
+      new TimePickerDialog(ActivityCallSchedule.this, timetwo,
               Time.get(Calendar.HOUR_OF_DAY),
               Time.get(Calendar.MINUTE), true)
               .show();
@@ -200,7 +202,7 @@ public class call_schedule extends AppCompatActivity {
 
 
   public void getTimeThree(View v) {
-    new TimePickerDialog(call_schedule.this, timeThree,
+    new TimePickerDialog(ActivityCallSchedule.this, timeThree,
             Time.get(Calendar.HOUR_OF_DAY),
             Time.get(Calendar.MINUTE), true)
             .show();
@@ -218,7 +220,7 @@ public class call_schedule extends AppCompatActivity {
       threeTime.setText(select_time_fullThree);
    }
     if (start==1){
-      new TimePickerDialog(call_schedule.this, timeThree,
+      new TimePickerDialog(ActivityCallSchedule.this, timeThree,
               Time.get(Calendar.HOUR_OF_DAY),
               Time.get(Calendar.MINUTE), true)
               .show();
@@ -235,7 +237,7 @@ public class call_schedule extends AppCompatActivity {
 
 
   public void getTimeFour(View v) {
-    new TimePickerDialog(call_schedule.this, timeFour,
+    new TimePickerDialog(ActivityCallSchedule.this, timeFour,
             Time.get(Calendar.HOUR_OF_DAY),
             Time.get(Calendar.MINUTE), true)
             .show();
@@ -253,7 +255,7 @@ public class call_schedule extends AppCompatActivity {
       fourTime.setText(select_time_fullFour);
     }
     if (start==1){
-      new TimePickerDialog(call_schedule.this, timeFour,
+      new TimePickerDialog(ActivityCallSchedule.this, timeFour,
               Time.get(Calendar.HOUR_OF_DAY),
               Time.get(Calendar.MINUTE), true)
               .show();
@@ -270,7 +272,7 @@ public class call_schedule extends AppCompatActivity {
 
 
   public void getTimeFive(View v) {
-    new TimePickerDialog(call_schedule.this, timeFive,
+    new TimePickerDialog(ActivityCallSchedule.this, timeFive,
             Time.get(Calendar.HOUR_OF_DAY),
             Time.get(Calendar.MINUTE), true)
             .show();
@@ -287,7 +289,7 @@ public class call_schedule extends AppCompatActivity {
       fiveTime.setText(select_time_fullFive);
       }
     if (start==1){
-      new TimePickerDialog(call_schedule.this, timeFive,
+      new TimePickerDialog(ActivityCallSchedule.this, timeFive,
               Time.get(Calendar.HOUR_OF_DAY),
               Time.get(Calendar.MINUTE), true)
               .show();
@@ -303,7 +305,7 @@ public class call_schedule extends AppCompatActivity {
   };
 
   public void getTimeSix(View v) {
-    new TimePickerDialog(call_schedule.this, timeSix,
+    new TimePickerDialog(ActivityCallSchedule.this, timeSix,
             Time.get(Calendar.HOUR_OF_DAY),
             Time.get(Calendar.MINUTE), true)
             .show();
@@ -321,7 +323,7 @@ public class call_schedule extends AppCompatActivity {
       sixTime.setText(select_time_fullSix);
     }
     if (start==1){
-      new TimePickerDialog(call_schedule.this, timeSix,
+      new TimePickerDialog(ActivityCallSchedule.this, timeSix,
               Time.get(Calendar.HOUR_OF_DAY),
               Time.get(Calendar.MINUTE), true)
               .show();
@@ -417,7 +419,7 @@ public class call_schedule extends AppCompatActivity {
       case android.R.id.home:
 
           save_calls();
-          Intent intent = new Intent(call_schedule.this, MainActivity.class);
+          Intent intent = new Intent(ActivityCallSchedule.this, MainActivity.class);
           finish();
           startActivity(intent);
 
@@ -428,7 +430,7 @@ public class call_schedule extends AppCompatActivity {
   }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(call_schedule.this, MainActivity.class);
+        Intent intent = new Intent(ActivityCallSchedule.this, MainActivity.class);
         finish();
         startActivity(intent);
     }

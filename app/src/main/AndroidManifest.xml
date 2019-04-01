@@ -15,19 +15,19 @@
         tools:replace="android:label"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".start_settings"
+            android:name=".ActivityStartSettings"
             android:label="@string/title_activity_start_settings"></activity>
         <activity
-            android:name=".welcome_activity"
+            android:name=".ActivityStart"
             android:label="@string/title_activity_welcome_activity"></activity>
         <activity
-            android:name=".Settings"
+            android:name=".ActivitySettings"
             android:label="@string/title_activity_settings"></activity>
         <activity
-            android:name=".call_schedule"
+            android:name=".model.ActivityCallSchedule"
             android:label="@string/title_activity_call_schedule"></activity>
         <activity
-            android:name=".activityEditData"
+            android:name=".ActivityEditData"
             android:label="Редактор данных"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -36,7 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity2" />
+        <activity android:name=".ScheduleEditor" />
     </application>
 
 </manifest>

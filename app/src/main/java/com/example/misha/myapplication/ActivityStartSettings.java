@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-public class start_settings extends AppCompatActivity
+public class ActivityStartSettings extends AppCompatActivity
      {
 
     @Override
@@ -13,7 +13,7 @@ public class start_settings extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_settings);
 
-        Fragment fragment = new fragment_date();
+        Fragment fragment = new FragmentDate();
             if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);

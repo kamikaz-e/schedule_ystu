@@ -1,12 +1,15 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.model.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Friday extends android.support.v4.app.Fragment {
-    public Friday() { }
+import com.example.misha.myapplication.R;
+
+public class FragmentTuesday extends android.support.v4.app.Fragment {
+
+    public FragmentTuesday() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -16,6 +19,6 @@ public class Friday extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.card_item_edit_friday, container, false);
+        View rootView = inflater.inflate(R.layout.card_item_edit_tuesday, container, false);
         return rootView; }
 }

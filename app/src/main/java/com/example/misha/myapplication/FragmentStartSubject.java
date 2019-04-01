@@ -33,7 +33,7 @@ import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectangleProm
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 
-public class fragment_start_subjects extends android.support.v4.app.Fragment {
+public class FragmentStartSubject extends android.support.v4.app.Fragment {
 
 
     EditText input_subject;
@@ -45,7 +45,7 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
     Button clear_subjects;
     String select_item="";
 
-    public fragment_start_subjects() {
+    public FragmentStartSubject() {
 
     }
 
@@ -89,7 +89,7 @@ public class fragment_start_subjects extends android.support.v4.app.Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragment_start_audiences fragment= new fragment_start_audiences();
+                FragmentStartAudience fragment= new FragmentStartAudience();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, fragment)
                         .addToBackStack(null)

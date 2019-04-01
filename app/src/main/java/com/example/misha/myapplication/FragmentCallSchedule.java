@@ -80,7 +80,7 @@ public class FragmentCallSchedule extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 save_calls();
-                fragment_start_subjects fragment= new fragment_start_subjects();
+                FragmentStartSubject fragment= new FragmentStartSubject();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, fragment)
                         .addToBackStack(null)

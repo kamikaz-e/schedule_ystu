@@ -5,9 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Tuesday extends android.support.v4.app.Fragment {
-
-    public Tuesday() { }
+public class FragmentThursday extends android.support.v4.app.Fragment {
+    public FragmentThursday() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -17,6 +16,6 @@ public class Tuesday extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.card_item_edit_tuesday, container, false);
+        View rootView = inflater.inflate(R.layout.card_item_edit_thursday, container, false);
         return rootView; }
 }

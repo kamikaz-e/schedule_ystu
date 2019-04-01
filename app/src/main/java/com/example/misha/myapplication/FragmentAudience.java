@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -28,19 +26,20 @@ import com.example.misha.myapplication.data.ScheduleDB;
 import java.util.ArrayList;
 
 
-public class fragment_subject extends android.support.v4.app.Fragment {
+public class FragmentAudience extends android.support.v4.app.Fragment {
 
 
-    EditText input_subject;
-    ListView list_subjects;
+    EditText input_audience;
+    ListView list_audiences;
     private ScheduleDB ScheduleDB;
-    final ArrayList<String> subject_list = new ArrayList<>();
+    final ArrayList<String> audience_list = new ArrayList<>();
     public ArrayAdapter<String> adapter;
+    Button clear_audiences;
+    Button next;
     String select_item="";
-    ViewPager vp;
-    Button clear_subjects;
     Integer abc=0;
-    public fragment_subject() {
+
+    public FragmentAudience() {
         // Required empty public constructor
     }
 
@@ -52,20 +51,20 @@ public class fragment_subject extends android.support.v4.app.Fragment {
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_subject, container, false);
+        View view = inflater.inflate(R.layout.fragment_audience, container, false);
 
         ScheduleDB = new ScheduleDB(getActivity());
 
-        input_subject = view.findViewById(R.id.input_subject);
-        list_subjects = view.findViewById(R.id.list_subjects);
+        input_audience = view.findViewById(R.id.input_audience);
+        list_audiences = view.findViewById(R.id.list_audiences);
 
 
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
-        list_subjects.setAdapter(adapter);
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
+        list_audiences.setAdapter(adapter);
 
-        list_subjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list_audiences.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
@@ -77,22 +76,20 @@ public class fragment_subject extends android.support.v4.app.Fragment {
 
         start();
 
-        vp = getActivity().findViewById(R.id.viewPager); //добавить подсказку
 
-        input_subject.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        input_audience.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
-                    input_subject.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                    String subject = input_subject.getText().toString();
-                    subject = subject.trim().replaceAll(" +", " ");
-                    if(TextUtils.isEmpty(subject)||subject==" ") {
-                        input_subject.setError("Введите предмет");
+                    input_audience.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+                    String audience = input_audience.getText().toString();
+                    if(TextUtils.isEmpty(audience)) {
+                        input_audience.setError("Введите аудиторию");
                         return true;
                     }
                     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('" + subject + "');");
-                    input_subject.getText().clear();
+                    db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('" + audience + "');");
+                    input_audience.setText("");
                     start();
                     adapter.notifyDataSetChanged();
                     return true;
@@ -103,12 +100,9 @@ public class fragment_subject extends android.support.v4.app.Fragment {
             }
         });
 
-
-        TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
-        abc=tabLayout.getSelectedTabPosition();
-
         return view;
     }
+
     public Dialog onCreateDialogDeleteItem() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
@@ -116,7 +110,7 @@ public class fragment_subject extends android.support.v4.app.Fragment {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + ScheduleClass.subjects.TABLE_NAME + " WHERE "+ ScheduleClass.subjects.subject + "='"+ select_item+"'");
+                db.execSQL("DELETE FROM " + ScheduleClass.audiences.TABLE_NAME + " WHERE "+ ScheduleClass.audiences.audience + "='"+ select_item+"'");
                 start();
                 adapter.notifyDataSetChanged();
             }
@@ -124,7 +118,7 @@ public class fragment_subject extends android.support.v4.app.Fragment {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Удалить предмет «"+select_item+"»?");
+        }).setTitle("Удалить аудиторию «"+select_item+"»?");
         return builder.create();
     }
 
@@ -132,19 +126,18 @@ public class fragment_subject extends android.support.v4.app.Fragment {
 
     public void start(){
 
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
-        list_subjects.setAdapter(adapter);
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
+        list_audiences.setAdapter(adapter);
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ ScheduleClass.subjects.subject +" FROM " + ScheduleClass.subjects.TABLE_NAME + " WHERE "+ ScheduleClass.subjects.idd_subject +">1;";
-        subject_list.clear();
+        String searchQuery = "SELECT "+ ScheduleClass.audiences.audience +" FROM " + ScheduleClass.audiences.TABLE_NAME + " WHERE "+ ScheduleClass.audiences.idd_audience +">1;";
+        audience_list.clear();
         Cursor cursor = db.rawQuery(searchQuery, null);
         while(cursor.moveToNext()) {
-            subject_list.add(cursor.getString(0));
+            audience_list.add(cursor.getString(0));
         }
         cursor.close();
     }
-
 
 
 }
