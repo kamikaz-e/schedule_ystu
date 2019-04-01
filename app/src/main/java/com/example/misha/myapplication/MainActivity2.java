@@ -3,7 +3,6 @@ package com.example.misha.myapplication;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,7 +10,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -22,7 +20,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +28,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -39,8 +35,6 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleClass.audiences;
 import com.example.misha.myapplication.data.ScheduleClass.calls;
@@ -50,15 +44,8 @@ import com.example.misha.myapplication.data.ScheduleClass.subjects;
 import com.example.misha.myapplication.data.ScheduleDB;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
-import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.CirclePromptBackground;
-import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
-import uk.co.samuelwall.materialtaptargetprompt.extras.focals.CirclePromptFocal;
-import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 
 public class MainActivity2 extends AppCompatActivity {
@@ -2106,7 +2093,7 @@ public class MainActivity2 extends AppCompatActivity {
         EducatorEditFive.setAdapter(eduSpinnerArrayAdapter);
         EducatorEditSix.setAdapter(eduSpinnerArrayAdapter);
 
-        SubjectEditOne.setSelection(subject_list.indexOf(Wednesday.get(0).subjectEdit.toString()));
+        SubjectEditOne.setSelection(subject_list.indexOf(Wednesday.get(0).subjectEdit));
         SubjectEditTwo.setSelection(subject_list.indexOf(Wednesday.get(1).subjectEdit.toString()));
         SubjectEditThree.setSelection(subject_list.indexOf(Wednesday.get(2).subjectEdit.toString()));
         SubjectEditFour.setSelection(subject_list.indexOf(Wednesday.get(3).subjectEdit.toString()));

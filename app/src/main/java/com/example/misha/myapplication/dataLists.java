@@ -44,6 +44,7 @@ class DataTuesday {
 }
 
 class DataWednesday {
+
     String idcards;
     String timelesson;
     String subjectEdit;

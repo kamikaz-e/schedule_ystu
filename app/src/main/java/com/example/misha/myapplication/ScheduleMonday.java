@@ -9,9 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleClass.calls;
 import com.example.misha.myapplication.data.ScheduleDB;
+
 import java.util.ArrayList;
 import java.util.List;
 

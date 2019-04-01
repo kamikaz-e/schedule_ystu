@@ -1,29 +1,16 @@
 package com.example.misha.myapplication;
 
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleDB;
 
@@ -73,7 +60,7 @@ public class fragment_date extends android.support.v4.app.Fragment {
                 {
                     public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
                         if (state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
-                            fragment_call_schedule fragment= new fragment_call_schedule();
+                            FragmentCallSchedule fragment= new FragmentCallSchedule();
                             getActivity().getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.content_frame, fragment)
                                     .addToBackStack(null)
@@ -109,7 +96,7 @@ public class fragment_date extends android.support.v4.app.Fragment {
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putLong("current_week", (Date.getTimeInMillis()));
                     editor.commit();
-                    fragment_call_schedule fragment= new fragment_call_schedule();
+                    FragmentCallSchedule fragment= new FragmentCallSchedule();
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.content_frame, fragment)
                             .addToBackStack(null)
