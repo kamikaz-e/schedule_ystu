@@ -3,7 +3,9 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
 
@@ -11,7 +13,6 @@
         android:id="@+id/rv_lessons_edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:persistentDrawingCache="scrolling"
-        />
+        android:persistentDrawingCache="scrolling" />
 
 </RelativeLayout>

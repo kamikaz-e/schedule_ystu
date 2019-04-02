@@ -1,6 +1,7 @@
 package com.example.misha.myapplication;
 
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,9 +21,9 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
     private View fragmentView;
 
     private RecyclerView rvLessons;
+    private RecyclerViewAdapterEditSchedule rvadapter;
 
-
-    List<Lesson> Monday;
+    private List<Lesson> lessonList = new ArrayList<>();
     ArrayList<String> typelesson = new ArrayList<>();
     final ArrayList<String> subject_list = new ArrayList<>();
     final ArrayList<String> audience_list = new ArrayList<>();
@@ -39,26 +40,45 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         fragmentView = inflater.inflate(R.layout.card_item_edit_monday_for_recycler, container, false);
         rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
+        rvadapter = new RecyclerViewAdapterEditSchedule(lessonList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        rvLessons.setLayoutManager(mLayoutManager);
+        rvLessons.setAdapter(rvadapter);
+        RadioButton rb_lecture = fragmentView.findViewById(R.id.rb_lecture_monday);
+        RadioButton rb_labwork = fragmentView.findViewById(R.id.rb_labwork_monday);
+        RadioButton rb_practice = fragmentView.findViewById(R.id.rb_practice_monday);
+        Lesson lesson = new Lesson("1", "Action & Adventure", "2015","Star Wars: Episod","Star Wars: Episakens","Star Wars: II - The Force Awakens");
+        lessonList.add(lesson);
+
+        lesson = new Lesson("2", "Animation, K Family", "2015","Star Wars: Episce Awakens","Star Wars: he Force Awakens","Star Warode VII - The Force Awakens");
+        lessonList.add(lesson);
+
+        lesson = new Lesson("3", "Action", "2015","Star Wars: Episodkens","Star Wars: Episode VII - Tns","Star WarI - The Force Awakens");
+        lessonList.add(lesson);
+
+        lesson = new Lesson("4", "Animation", "2015","Star Wars: Episod-  Force Awakens","Star WarEpisode Force Awakens","Star WarI - The Force Awakens");
+        lessonList.add(lesson);
+
+        lesson = new Lesson("5", "Science Fictintasy", "2015","Star Wars: Epe Force Awakens","Star Waisodee Force Awakens","Stade VII - The Force Awakens");
+        lessonList.add(lesson);
+
+        lesson = new Lesson("6", "Science Fictntasy", "2015","Star Wars: Epi Awakens","Star Wars: Ee Force Awakens","StarVII - The Force Awakens");
+        lessonList.add(lesson);
+
+        TextView NumberOne = fragmentView.findViewById(R.id.number_monday);
+
+        TextView TimeOne = fragmentView.findViewById(R.id.time_monday);
+
+        Spinner SubjectEditOne = fragmentView.findViewById(R.id.subject_edit_monday);
+
+        Spinner AudienceEditOne = fragmentView.findViewById(R.id.audience_edit_monday);
+
+        Spinner EducatorEditOne = fragmentView.findViewById(R.id.educator_edit_monday);
+
+        Spinner typeEditOne_monday = fragmentView.findViewById(R.id.typeEdit_monday);
 
 
-        RadioButton rb_lecture = rvLessons.findViewById(R.id.rb_lecture_monday);
-        RadioButton rb_labwork = rvLessons.findViewById(R.id.rb_labwork_monday);
-        RadioButton rb_practice = rvLessons.findViewById(R.id.rb_practice_monday);
 
-        TextView NumberOne = rvLessons.findViewById(R.id.number_monday);
-
-        TextView TimeOne = rvLessons.findViewById(R.id.time_monday);
-
-        Spinner SubjectEditOne = rvLessons.findViewById(R.id.subject_edit_monday);
-
-        Spinner AudienceEditOne = rvLessons.findViewById(R.id.audience_edit_monday);
-
-        Spinner EducatorEditOne = rvLessons.findViewById(R.id.educator_edit_monday);
-
-        Spinner typeEditOne_monday = rvLessons.findViewById(R.id.typeEdit_monday);
-
-        RecyclerViewAdapterEditSchedule adapter = new RecyclerViewAdapterEditSchedule(Monday);
-        rvLessons.setAdapter(adapter);
 
        /* NumberOne.setText(Monday.get(0).getId());
         TimeOne.setText(Monday.get(0).getTime());

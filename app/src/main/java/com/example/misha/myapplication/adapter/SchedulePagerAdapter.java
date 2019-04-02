@@ -22,7 +22,6 @@ public class SchedulePagerAdapter extends FragmentPagerAdapter {
     }
 
 
-
     @SuppressLint("ResourceType")
     @Override
     public Fragment getItem(int position) {

@@ -28,8 +28,10 @@ public class RecyclerViewAdapterEditSchedule extends RecyclerView.Adapter<Recycl
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-            holder.onBindView(position);
+        holder.onBindView(position);
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -56,12 +58,12 @@ public class RecyclerViewAdapterEditSchedule extends RecyclerView.Adapter<Recycl
 
         public void onBindView(int position) {
             Lesson lesson = schedule.get(position);
-            number.setText(lesson.getId());
+          /*  number.setText(lesson.getId());
             timeEdit.setText(lesson.getTime());
             subjectEdit.setText(lesson.getSubjectEdit());
             audienceEdit.setText(lesson.getAudienceEdit());
             educator.setText(lesson.getEducator());
-            typeLesson.setText(lesson.getTypeLesson());
+            typeLesson.setText(lesson.getTypeLesson());*/
         }
 
     }
