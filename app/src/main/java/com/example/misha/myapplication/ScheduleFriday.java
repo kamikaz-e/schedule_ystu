@@ -336,10 +336,7 @@ public class ScheduleFriday extends android.support.v4.app.Fragment {
         }
         data_schedule();
 
-
         MyAdapter adapter = new MyAdapter(schedule);
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        rv.setLayoutManager(llm);
         rv.setAdapter(adapter);
         return rootView;
     }

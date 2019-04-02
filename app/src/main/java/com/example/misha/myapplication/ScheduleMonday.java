@@ -48,8 +48,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
 
     ArrayList<String> calls_schedule = new ArrayList<>();
 
-    public ScheduleMonday() {
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

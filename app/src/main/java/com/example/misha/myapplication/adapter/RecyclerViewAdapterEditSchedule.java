@@ -1,4 +1,4 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,26 +6,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.misha.myapplication.Lesson;
+import com.example.misha.myapplication.R;
+
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class RecyclerViewAdapterEditSchedule extends RecyclerView.Adapter<RecyclerViewAdapterEditSchedule.ViewHolder> {
 
     private List<Lesson> schedule;
 
-    public MyAdapter(List<Lesson> schedule) {
+    public RecyclerViewAdapterEditSchedule(List<Lesson> schedule) {
         this.schedule = schedule;
     }
 
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_item, parent, false);
-        return new MyViewHolder(view);
+                .inflate(R.layout.list_item_lesson, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.onBindView(position);
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+            holder.onBindView(position);
     }
 
     @Override
@@ -33,7 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return schedule.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView number;
         private final TextView timeEdit;
         private final TextView subjectEdit;
@@ -41,7 +44,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         private final TextView educator;
         private final TextView typeLesson;
 
-        public MyViewHolder(View view) {
+        public ViewHolder(View view) {
             super(view);
             number = view.findViewById(R.id.number);
             timeEdit = view.findViewById(R.id.time);

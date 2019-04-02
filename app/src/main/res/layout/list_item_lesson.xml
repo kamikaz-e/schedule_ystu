@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp">
+
+    <RelativeLayout
+        android:padding="@dimen/spacing_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+             <TextView
+                android:id="@+id/number_monday"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="#393939"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:textAlignment="center"
+                android:textSize="19sp" />
+
+
+            <TextView
+                android:id="@+id/time_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/number_monday"
+                android:text="Время"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:id="@+id/typeEdit_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="45dp"
+                android:layout_marginTop="110dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_lecture_monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Лекция" />
+
+                <RadioButton
+                    android:id="@+id/rb_labwork_monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:text="Лаб/раб" />
+
+                <RadioButton
+                    android:id="@+id/rb_practice_monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:text="Практика" />
+
+            </RadioGroup>
+
+            <Spinner
+                android:id="@+id/subject_edit_monday"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_alignTop="@+id/time_monday"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="50dp"
+                android:background="#0000"
+                android:spinnerMode="dropdown" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/subject_edit_monday"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="31dp">
+
+                <Spinner
+                    android:id="@+id/audience_edit_monday"
+                    android:layout_width="120dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentStart="true"
+                    android:background="#0000"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:spinnerMode="dropdown" />
+
+                <Spinner
+                    android:id="@+id/educator_edit_monday"
+                    android:layout_width="180dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/audience_edit_monday"
+                    android:background="#0000"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/clear_card_monday"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="4dp"
+                android:background="#424242"
+                android:drawableBottom="@drawable/ic_clear_card" />
+
+            <TextView
+                android:id="@+id/copy_up_monday"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_alignTop="@+id/clear_card_monday"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="52dp"
+                android:background="#424242"
+                android:drawableBottom="@drawable/ic_copy_up" />
+
+            <TextView
+                android:id="@+id/copy_down_monday"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#424242"
+                android:drawableTop="@drawable/ic_copy_down" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

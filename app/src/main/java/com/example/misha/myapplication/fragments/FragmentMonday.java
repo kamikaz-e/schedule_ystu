@@ -20,7 +20,7 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.card_item_edit_monday, container, false);
+        View rootView = inflater.inflate(R.layout.card_item_edit_monday_for_recycler, container, false);
 
         return rootView; }
 }

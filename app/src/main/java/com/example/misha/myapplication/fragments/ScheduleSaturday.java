@@ -343,7 +343,6 @@ public class ScheduleSaturday extends android.support.v4.app.Fragment {
         MyAdapter adapter = new MyAdapter(schedule);
         rv.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(llm);
         return rootView; }
 
