@@ -9,8 +9,6 @@ import com.example.misha.myapplication.R;
 
 public class FragmentTuesday extends android.support.v4.app.Fragment {
 
-    public FragmentTuesday() { }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

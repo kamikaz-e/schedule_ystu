@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import com.example.misha.myapplication.R;
 
 public class FragmentSaturday extends android.support.v4.app.Fragment {
-    public FragmentSaturday() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

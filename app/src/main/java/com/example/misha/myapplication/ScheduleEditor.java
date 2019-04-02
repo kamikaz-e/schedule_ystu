@@ -23,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -47,6 +48,8 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.support.v4.view.PagerAdapter.POSITION_NONE;
+
 
 public class ScheduleEditor extends AppCompatActivity {
 
@@ -70,6 +73,7 @@ public class ScheduleEditor extends AppCompatActivity {
     Spinner EducatorEditFive;
     Spinner EducatorEditSix;
     TextView NumberOne;
+    TextView NumberOneO;
     TextView NumberTwo;
     TextView NumberThree;
     TextView NumberFour;
@@ -440,11 +444,11 @@ public class ScheduleEditor extends AppCompatActivity {
     String SaturdayTypeLessonFive = "";
     String SaturdayTypeLessonSix = "";
 
-    Integer position_week=0;
-    Integer position_day=0;
-    Integer flag_autosave=1;
+    Integer position_week = 0;
+    Integer position_day = 0;
+    Integer flag_autosave = 1;
 
-    Integer flag_save=0;
+    Integer flag_save = 0;
     List<Lesson> Monday;
     List<Lesson> Tuesday;
     List<Lesson> Wednesday;
@@ -462,7 +466,6 @@ public class ScheduleEditor extends AppCompatActivity {
     final ArrayList<String> subject_list = new ArrayList<>();
     final ArrayList<String> audience_list = new ArrayList<>();
     final ArrayList<String> educator_list = new ArrayList<>();
-
 
 
     public void monday_fill() {
@@ -521,7 +524,7 @@ public class ScheduleEditor extends AppCompatActivity {
         typeEditFour_monday = findViewById(R.id.typeEditFour_monday);
         typeEditFive_monday = findViewById(R.id.typeEditFive_monday);
         typeEditSix_monday = findViewById(R.id.typeEditSix_monday);
-        DataMonday();
+        Lesson();
         NumberOne.setText(Monday.get(0).getId().toString());
         NumberTwo.setText(Monday.get(1).getId().toString());
         NumberThree.setText(Monday.get(2).getId().toString());
@@ -552,12 +555,12 @@ public class ScheduleEditor extends AppCompatActivity {
         rb_practiceFour.setText(typelesson.get(2));
         rb_practiceFive.setText(typelesson.get(2));
         rb_practiceSix.setText(typelesson.get(2));
-        ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
-        subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
-        audSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> eduSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, educator_list);
-        eduSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, subject_list);
+        subSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, audience_list);
+        audSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> eduSpinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, educator_list);
+        eduSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         SubjectEditOne.setAdapter(subSpinnerArrayAdapter);
         SubjectEditTwo.setAdapter(subSpinnerArrayAdapter);
         SubjectEditThree.setAdapter(subSpinnerArrayAdapter);
@@ -582,11 +585,11 @@ public class ScheduleEditor extends AppCompatActivity {
         TextView copy_downThree = findViewById(R.id.copy_downThree_monday);
         TextView copy_downFour = findViewById(R.id.copy_downFour_monday);
         TextView copy_downFive = findViewById(R.id.copy_downFive_monday);
-        TextView copy_upTwo= findViewById(R.id.copy_upTwo_monday);
-        TextView copy_upThree= findViewById(R.id.copy_upThree_monday);
-        TextView copy_upFour= findViewById(R.id.copy_upFour_monday);
-        TextView copy_upFive= findViewById(R.id.copy_upFive_monday);
-        TextView copy_upSix= findViewById(R.id.copy_upSix_monday);
+        TextView copy_upTwo = findViewById(R.id.copy_upTwo_monday);
+        TextView copy_upThree = findViewById(R.id.copy_upThree_monday);
+        TextView copy_upFour = findViewById(R.id.copy_upFour_monday);
+        TextView copy_upFive = findViewById(R.id.copy_upFive_monday);
+        TextView copy_upSix = findViewById(R.id.copy_upSix_monday);
         TextView clearOne = findViewById(R.id.clear_cardOne_monday);
         TextView clearTwo = findViewById(R.id.clear_cardTwo_monday);
         TextView clearThree = findViewById(R.id.clear_cardThree_monday);
@@ -603,8 +606,9 @@ public class ScheduleEditor extends AppCompatActivity {
                 RadioButton radioButton = findViewById(IdRadioButton);
                 if (radioButton != null) {
                     MondayTypeLessonOne = radioButton.getText().toString();
+                } else {
+                    MondayTypeLessonOne = "";
                 }
-                else { MondayTypeLessonOne = "";}
             }
         });
 
@@ -616,8 +620,9 @@ public class ScheduleEditor extends AppCompatActivity {
                 RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
                 if (radioButtonTwo != null) {
                     MondayTypeLessonTwo = radioButtonTwo.getText().toString();
+                } else {
+                    MondayTypeLessonTwo = "";
                 }
-                else { MondayTypeLessonTwo = "";}
             }
         });
 
@@ -629,8 +634,9 @@ public class ScheduleEditor extends AppCompatActivity {
                 RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
                 if (radioButtonThree != null) {
                     MondayTypeLessonThree = radioButtonThree.getText().toString();
+                } else {
+                    MondayTypeLessonThree = "";
                 }
-                else { MondayTypeLessonThree = "";}
             }
         });
 
@@ -642,8 +648,9 @@ public class ScheduleEditor extends AppCompatActivity {
                 RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
                 if (radioButtonFour != null) {
                     MondayTypeLessonFour = radioButtonFour.getText().toString();
+                } else {
+                    MondayTypeLessonFour = "";
                 }
-                else { MondayTypeLessonFour = "";}
             }
         });
 
@@ -655,8 +662,9 @@ public class ScheduleEditor extends AppCompatActivity {
                 RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
                 if (radioButtonFive != null) {
                     MondayTypeLessonFive = radioButtonFive.getText().toString();
+                } else {
+                    MondayTypeLessonFive = "";
                 }
-                else { MondayTypeLessonFive = "";}
             }
         });
         typeEditSix_monday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -667,231 +675,241 @@ public class ScheduleEditor extends AppCompatActivity {
                 RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
                 if (radioButtonSix != null) {
                     MondayTypeLessonSix = radioButtonSix.getText().toString();
+                } else {
+                    MondayTypeLessonSix = "";
                 }
-                else { MondayTypeLessonSix = "";}
             }
         });
 
 
+        copy_downOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).getSubjectEdit()));
+                    AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(0).getAudienceEdit()));
+                    EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(0).getEducator()));
+                    switch (IdRadioButtonOne) {
+                        case 0:
+                            rb_lectureTwo.setChecked(true);
+                            break;
+                        case 1:
+                            rb_labworkTwo.setChecked(true);
+                            break;
+                        case 2:
+                            rb_practiceTwo.setChecked(true);
+                            break;
+                    }
+                } catch (NullPointerException e) {
+                }
+            }
+        });
 
-    copy_downOne.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            try {
-            SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).getSubjectEdit()));
-            AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(0).getAudienceEdit()));
-            EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(0).getEducator()));
-            switch (IdRadioButtonOne) {
-                case 0:
-                    rb_lectureTwo.setChecked(true);
-                    break;
-                case 1:
-                    rb_labworkTwo.setChecked(true);
-                    break;
-                case 2:
-                    rb_practiceTwo.setChecked(true);
-                    break;
+        copy_downTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit()));
+                    AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit()));
+                    EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(1).getEducator()));
+                    switch (IdRadioButtonTwo) {
+                        case 0:
+                            rb_lectureThree.setChecked(true);
+                            break;
+                        case 1:
+                            rb_labworkThree.setChecked(true);
+                            break;
+                        case 2:
+                            rb_practiceThree.setChecked(true);
+                            break;
+                    }
+                } catch (NullPointerException e) {
+                }
             }
-            } catch   (NullPointerException e) {}
-        }
-    });
+        });
 
-    copy_downTwo.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          try{
-              SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit()));
-            AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit()));
-            EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(1).getEducator()));
-            switch (IdRadioButtonTwo) {
-                case 0:
-                    rb_lectureThree.setChecked(true);
-                    break;
-                case 1:
-                    rb_labworkThree.setChecked(true);
-                    break;
-                case 2:
-                    rb_practiceThree.setChecked(true);
-                    break;
+        copy_downThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit()));
+                    AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit()));
+                    EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(2).getEducator()));
+                    switch (IdRadioButtonThree) {
+                        case 0:
+                            rb_lectureFour.setChecked(true);
+                            break;
+                        case 1:
+                            rb_labworkFour.setChecked(true);
+                            break;
+                        case 2:
+                            rb_practiceFour.setChecked(true);
+                            break;
+                    }
+                } catch (NullPointerException e) {
+                }
             }
-        } catch   (NullPointerException e) {}
-        }
-    });
+        });
+        copy_downFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit()));
+                    AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit()));
+                    EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(3).getEducator()));
+                    switch (IdRadioButtonFour) {
+                        case 0:
+                            rb_lectureFive.setChecked(true);
+                            break;
+                        case 1:
+                            rb_labworkFive.setChecked(true);
+                            break;
+                        case 2:
+                            rb_practiceFive.setChecked(true);
+                            break;
+                    }
+                } catch (NullPointerException e) {
+                }
+            }
+        });
 
-    copy_downThree.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            try{
-            SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit()));
-            AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit()));
-            EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(2).getEducator()));
-            switch (IdRadioButtonThree) {
-                case 0:
-                    rb_lectureFour.setChecked(true);
-                    break;
-                case 1:
-                    rb_labworkFour.setChecked(true);
-                    break;
-                case 2:
-                    rb_practiceFour.setChecked(true);
-                    break;
+        copy_downFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit()));
+                    AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit()));
+                    EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(4).getEducator()));
+                    switch (IdRadioButtonFive) {
+                        case 0:
+                            rb_lectureSix.setChecked(true);
+                            break;
+                        case 1:
+                            rb_labworkSix.setChecked(true);
+                            break;
+                        case 2:
+                            rb_practiceSix.setChecked(true);
+                            break;
+                    }
+                } catch (NullPointerException e) {
+                }
             }
-            } catch   (NullPointerException e) {}
-        }
-    });
-    copy_downFour.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            try{
-            SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit()));
-            AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit()));
-            EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(3).getEducator()));
-            switch (IdRadioButtonFour) {
-                case 0:
-                    rb_lectureFive.setChecked(true);
-                    break;
-                case 1:
-                    rb_labworkFive.setChecked(true);
-                    break;
-                case 2:
-                    rb_practiceFive.setChecked(true);
-                    break;
-            }
-            } catch   (NullPointerException e) {}
-        }
-    });
+        });
 
-    copy_downFive.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            try{
-            SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit()));
-            AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit()));
-            EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(4).getEducator()));
-            switch (IdRadioButtonFive) {
-                case 0:
-                    rb_lectureSix.setChecked(true);
-                    break;
-                case 1:
-                    rb_labworkSix.setChecked(true);
-                    break;
-                case 2:
-                    rb_practiceSix.setChecked(true);
-                    break;
+        copy_upTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    SubjectEditOne.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit()));
+                    AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit()));
+                    EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(1).getEducator()));
+                    switch (IdRadioButtonTwo) {
+                        case 0:
+                            rb_lecture.setChecked(true);
+                            break;
+                        case 1:
+                            rb_labwork.setChecked(true);
+                            break;
+                        case 2:
+                            rb_practice.setChecked(true);
+                            break;
+                    }
+                } catch (NullPointerException e) {
+                }
             }
-            } catch   (NullPointerException e) {}
-        }
-    });
+        });
 
-    copy_upTwo.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            try{
-            SubjectEditOne.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit()));
-            AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit()));
-            EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(1).getEducator()));
-            switch (IdRadioButtonTwo) {
-                case 0:
-                    rb_lecture.setChecked(true);
-                    break;
-                case 1:
-                    rb_labwork.setChecked(true);
-                    break;
-                case 2:
-                    rb_practice.setChecked(true);
-                    break;
+        copy_upThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit()));
+                    AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit()));
+                    EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(2).getEducator()));
+                    switch (IdRadioButtonThree) {
+                        case 0:
+                            rb_lectureTwo.setChecked(true);
+                            break;
+                        case 1:
+                            rb_labworkTwo.setChecked(true);
+                            break;
+                        case 2:
+                            rb_practiceTwo.setChecked(true);
+                            break;
+                    }
+                } catch (NullPointerException e) {
+                }
             }
-            } catch   (NullPointerException e) {}
-        }
-    });
+        });
 
-    copy_upThree.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        try{
-            SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit()));
-            AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit()));
-            EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(2).getEducator()));
-            switch (IdRadioButtonThree) {
-                case 0:
-                    rb_lectureTwo.setChecked(true);
-                    break;
-                case 1:
-                    rb_labworkTwo.setChecked(true);
-                    break;
-                case 2:
-                    rb_practiceTwo.setChecked(true);
-                    break;
+        copy_upFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit()));
+                    AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit()));
+                    EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(3).getEducator()));
+                    switch (IdRadioButtonFour) {
+                        case 0:
+                            rb_lectureThree.setChecked(true);
+                            break;
+                        case 1:
+                            rb_labworkThree.setChecked(true);
+                            break;
+                        case 2:
+                            rb_practiceThree.setChecked(true);
+                            break;
+                    }
+                } catch (NullPointerException e) {
+                }
             }
-        } catch   (NullPointerException e) {}
-        }
-    });
+        });
 
-    copy_upFour.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            try{
-            SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit()));
-            AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit()));
-            EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(3).getEducator()));
-            switch (IdRadioButtonFour) {
-                case 0:
-                    rb_lectureThree.setChecked(true);
-                    break;
-                case 1:
-                    rb_labworkThree.setChecked(true);
-                    break;
-                case 2:
-                    rb_practiceThree.setChecked(true);
-                    break;
+        copy_upFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit()));
+                    AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit()));
+                    EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(4).getEducator()));
+                    switch (IdRadioButtonFive) {
+                        case 0:
+                            rb_lectureFour.setChecked(true);
+                            break;
+                        case 1:
+                            rb_labworkFour.setChecked(true);
+                            break;
+                        case 2:
+                            rb_practiceFour.setChecked(true);
+                            break;
+                    }
+                } catch (NullPointerException e) {
+                }
             }
-            } catch   (NullPointerException e) {}
-        }
-    });
+        });
 
-    copy_upFive.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            try{
-            SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit()));
-            AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit()));
-            EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(4).getEducator()));
-            switch (IdRadioButtonFive) {
-                case 0:
-                    rb_lectureFour.setChecked(true);
-                    break;
-                case 1:
-                    rb_labworkFour.setChecked(true);
-                    break;
-                case 2:
-                    rb_practiceFour.setChecked(true);
-                    break;
+        copy_upSix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(5).getSubjectEdit()));
+                    AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(5).getAudienceEdit()));
+                    EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(5).getEducator()));
+                    switch (IdRadioButtonSix) {
+                        case 0:
+                            rb_lectureFive.setChecked(true);
+                            break;
+                        case 1:
+                            rb_labworkFive.setChecked(true);
+                            break;
+                        case 2:
+                            rb_practiceFive.setChecked(true);
+                            break;
+                    }
+                } catch (NullPointerException e) {
+                }
             }
-            } catch   (NullPointerException e) {}
-        }
-    });
-
-    copy_upSix.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-                try{
-            SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(5).getSubjectEdit()));
-            AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(5).getAudienceEdit()));
-            EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(5).getEducator()));
-            switch (IdRadioButtonSix) {
-                case 0:
-                    rb_lectureFive.setChecked(true);
-                    break;
-                case 1:
-                    rb_labworkFive.setChecked(true);
-                    break;
-                case 2:
-                    rb_practiceFive.setChecked(true);
-                    break;
-            }
-                } catch   (NullPointerException e) {}
-        }
-    });
+        });
 
 
         clearOne.setOnClickListener(new View.OnClickListener() {
@@ -956,7 +974,7 @@ public class ScheduleEditor extends AppCompatActivity {
         });
 
 
-        SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).getSubjectEdit().toString()));
+        SubjectEditOne.setSelection(subject_list.indexOf(Monday.get(0).getSubjectEdit().toString()));
         SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit().toString()));
         SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit().toString()));
         SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit().toString()));
@@ -1020,19 +1038,22 @@ public class ScheduleEditor extends AppCompatActivity {
         }
         //S1
         try {
-              SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
-                  @Override
-                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                      MondayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
-                      Monday.set(0, new Lesson("1", "8:30-10:00", MondayValueSubjectOne, Monday.get(0).getAudienceEdit().toString(), Monday.get(0).getEducator().toString(), Monday.get(0).getTypeLesson().toString()));
-                  }
-                  @Override
-                  public void onNothingSelected(AdapterView<?> parent) {
+            SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    MondayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
+                    Monday.set(0, new Lesson("1", "8:30-10:00", MondayValueSubjectOne, Monday.get(0).getAudienceEdit().toString(), Monday.get(0).getEducator().toString(), Monday.get(0).getTypeLesson().toString()));
+                }
 
-                  }
-              }); } catch (NullPointerException e) { }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-                //S2
+                }
+            });
+        } catch (NullPointerException e) {
+        }
+
+        //S2
         try {
             SubjectEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
                 @Override
@@ -1040,8 +1061,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
                     Monday.set(1, new Lesson("2", "10:10-11:40", MondayValueSubjectTwo, Monday.get(1).getAudienceEdit().toString(), Monday.get(1).getEducator().toString(), Monday.get(1).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //S3
         try {
             SubjectEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1051,8 +1077,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
                     Monday.set(2, new Lesson("3", "12:20-13:50", MondayValueSubjectThree, Monday.get(2).getAudienceEdit().toString(), Monday.get(2).getEducator().toString(), Monday.get(2).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //S4
         try {
             SubjectEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1062,8 +1093,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
                     Monday.set(3, new Lesson("4", "14:00-15:30", MondayValueSubjectFour, Monday.get(3).getAudienceEdit().toString(), Monday.get(3).getEducator().toString(), Monday.get(3).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //S5
         try {
             SubjectEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1073,8 +1109,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
                     Monday.set(4, new Lesson("5", "15:40-17:10", MondayValueSubjectFive, Monday.get(4).getAudienceEdit().toString(), Monday.get(4).getEducator().toString(), Monday.get(4).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //S6
         try {
             SubjectEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1084,8 +1125,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
                     Monday.set(5, new Lesson("6", "17:30-19:00", MondayValueSubjectSix, Monday.get(5).getAudienceEdit().toString(), Monday.get(5).getEducator().toString(), Monday.get(5).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
 
         //A1
         try {
@@ -1096,8 +1142,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
                     Monday.set(0, new Lesson("1", "8:30-10:00", Monday.get(0).getSubjectEdit().toString(), MondayValueAudienceOne, Monday.get(0).getEducator().toString(), Monday.get(0).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //A2
         try {
             AudienceEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1107,8 +1158,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
                     Monday.set(1, new Lesson("2", "10:10-11:40", Monday.get(1).getSubjectEdit().toString(), MondayValueAudienceTwo, Monday.get(1).getEducator().toString(), Monday.get(1).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
 
         //A3
         try {
@@ -1119,8 +1175,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
                     Monday.set(2, new Lesson("3", "12:20-13:50", Monday.get(2).getSubjectEdit().toString(), MondayValueAudienceThree, Monday.get(2).getEducator().toString(), Monday.get(2).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //A4
         try {
             AudienceEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1130,8 +1191,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
                     Monday.set(3, new Lesson("4", "14:00-15:30", Monday.get(3).getSubjectEdit().toString(), MondayValueAudienceFour, Monday.get(3).getEducator().toString(), Monday.get(3).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //A5
         try {
             AudienceEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1141,8 +1207,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
                     Monday.set(4, new Lesson("5", "15:40-17:10", Monday.get(4).getSubjectEdit().toString(), MondayValueAudienceFive, Monday.get(4).getEducator().toString(), Monday.get(4).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //A6
         try {
             AudienceEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1152,8 +1223,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
                     Monday.set(5, new Lesson("6", "17:30-19:00", Monday.get(5).getSubjectEdit().toString(), MondayValueAudienceSix, Monday.get(5).getEducator().toString(), Monday.get(5).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
 
         //E1
         try {
@@ -1164,8 +1240,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayEducatorOne = EducatorEditOne.getSelectedItem().toString();
                     Monday.set(0, new Lesson("1", "8:30-10:00", Monday.get(0).getSubjectEdit().toString(), Monday.get(0).getAudienceEdit().toString(), MondayEducatorOne, Monday.get(0).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //E2
         try {
             EducatorEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1175,8 +1256,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
                     Monday.set(1, new Lesson("2", "10:10-11:40", Monday.get(1).getSubjectEdit().toString(), Monday.get(1).getAudienceEdit().toString(), MondayEducatorTwo, Monday.get(1).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
 
         //E3
         try {
@@ -1187,8 +1273,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayEducatorThree = EducatorEditThree.getSelectedItem().toString();
                     Monday.set(2, new Lesson("3", "12:20-13:50", Monday.get(2).getSubjectEdit().toString(), Monday.get(2).getAudienceEdit().toString(), MondayEducatorThree, Monday.get(2).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //E4
         try {
             EducatorEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1198,8 +1289,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayEducatorFour = EducatorEditFour.getSelectedItem().toString();
                     Monday.set(3, new Lesson("4", "14:00-15:30", Monday.get(3).getSubjectEdit().toString(), Monday.get(3).getAudienceEdit().toString(), MondayEducatorFour, Monday.get(3).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //E5
         try {
             EducatorEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1209,8 +1305,13 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayEducatorFive = EducatorEditFive.getSelectedItem().toString();
                     Monday.set(4, new Lesson("5", "15:40-17:10", Monday.get(4).getSubjectEdit().toString(), Monday.get(4).getAudienceEdit().toString(), MondayEducatorFive, Monday.get(4).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
         //E6
         try {
             EducatorEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -1220,2415 +1321,3153 @@ public class ScheduleEditor extends AppCompatActivity {
                     MondayEducatorSix = EducatorEditSix.getSelectedItem().toString();
                     Monday.set(5, new Lesson("6", "17:30-19:00", Monday.get(5).getSubjectEdit().toString(), Monday.get(5).getAudienceEdit().toString(), MondayEducatorSix, Monday.get(5).getTypeLesson().toString()));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        } catch (NullPointerException e) {
+        }
 
     }
 
-  /*  public void tuesday_fill() {
-        rb_lecture = findViewById(R.id.rb_lecture_tuesday);
-        rb_labwork = findViewById(R.id.rb_labwork_tuesday);
-        rb_practice = findViewById(R.id.rb_practice_tuesday);
-        rb_lectureTwo = findViewById(R.id.rb_lectureTwo_tuesday);
-        rb_labworkTwo = findViewById(R.id.rb_labworkTwo_tuesday);
-        rb_practiceTwo = findViewById(R.id.rb_practiceTwo_tuesday);
-        rb_lectureThree = findViewById(R.id.rb_lectureThree_tuesday);
-        rb_labworkThree = findViewById(R.id.rb_labworkThree_tuesday);
-        rb_practiceThree = findViewById(R.id.rb_practiceThree_tuesday);
-        rb_lectureFour = findViewById(R.id.rb_lectureFour_tuesday);
-        rb_labworkFour = findViewById(R.id.rb_labworkFour_tuesday);
-        rb_practiceFour = findViewById(R.id.rb_practiceFour_tuesday);
-        rb_lectureFive = findViewById(R.id.rb_lectureFive_tuesday);
-        rb_labworkFive = findViewById(R.id.rb_labworkFive_tuesday);
-        rb_practiceFive = findViewById(R.id.rb_practiceFive_tuesday);
-        rb_lectureSix = findViewById(R.id.rb_lectureSix_tuesday);
-        rb_labworkSix = findViewById(R.id.rb_labworkSix_tuesday);
-        rb_practiceSix = findViewById(R.id.rb_practiceSix_tuesday);
-        NumberOne = findViewById(R.id.number_tuesday);
-        NumberTwo = findViewById(R.id.numberTwo_tuesday);
-        NumberThree = findViewById(R.id.numberThree_tuesday);
-        NumberFour = findViewById(R.id.numberFour_tuesday);
-        NumberFive = findViewById(R.id.numberFive_tuesday);
-        NumberSix = findViewById(R.id.numberSix_tuesday);
-        TimeOne = findViewById(R.id.time_tuesday);
-        TimeTwo = findViewById(R.id.timeTwo_tuesday);
-        TimeThree = findViewById(R.id.timeThree_tuesday);
-        TimeFour = findViewById(R.id.timeFour_tuesday);
-        TimeFive = findViewById(R.id.timeFive_tuesday);
-        TimeSix = findViewById(R.id.timeSix_tuesday);
-        SubjectEditOne = findViewById(R.id.subject_edit_tuesday);
-        SubjectEditTwo = findViewById(R.id.subject_editTwo_tuesday);
-        SubjectEditThree = findViewById(R.id.subject_editThree_tuesday);
-        SubjectEditFour = findViewById(R.id.subject_editFour_tuesday);
-        SubjectEditFive = findViewById(R.id.subject_editFive_tuesday);
-        SubjectEditSix = findViewById(R.id.subject_editSix_tuesday);
-        AudienceEditOne = findViewById(R.id.audience_edit_tuesday);
-        AudienceEditTwo = findViewById(R.id.audience_editTwo_tuesday);
-        AudienceEditThree = findViewById(R.id.audience_editThree_tuesday);
-        AudienceEditFour = findViewById(R.id.audience_editFour_tuesday);
-        AudienceEditFive = findViewById(R.id.audience_editFive_tuesday);
-        AudienceEditSix = findViewById(R.id.audience_editSix_tuesday);
-        EducatorEditOne = findViewById(R.id.educator_edit_tuesday);
-        EducatorEditTwo = findViewById(R.id.educator_editTwo_tuesday);
-        EducatorEditThree = findViewById(R.id.educator_editThree_tuesday);
-        EducatorEditFour = findViewById(R.id.educator_editFour_tuesday);
-        EducatorEditFive = findViewById(R.id.educator_editFive_tuesday);
-        EducatorEditSix = findViewById(R.id.educator_editSix_tuesday);
-        typeEditOne_tuesday = findViewById(R.id.typeEdit_tuesday);
-        typeEditTwo_tuesday = findViewById(R.id.typeEditTwo_tuesday);
-        typeEditThree_tuesday = findViewById(R.id.typeEditThree_tuesday);
-        typeEditFour_tuesday = findViewById(R.id.typeEditFour_tuesday);
-        typeEditFive_tuesday = findViewById(R.id.typeEditFive_tuesday);
-        typeEditSix_tuesday = findViewById(R.id.typeEditSix_tuesday);
+      public void tuesday_fill() {
+              rb_lecture = findViewById(R.id.rb_lecture_monday);
+              rb_labwork = findViewById(R.id.rb_labwork_monday);
+              rb_practice = findViewById(R.id.rb_practice_monday);
+              rb_lectureTwo = findViewById(R.id.rb_lectureTwo_monday);
+              rb_labworkTwo = findViewById(R.id.rb_labworkTwo_monday);
+              rb_practiceTwo = findViewById(R.id.rb_practiceTwo_monday);
+              rb_lectureThree = findViewById(R.id.rb_lectureThree_monday);
+              rb_labworkThree = findViewById(R.id.rb_labworkThree_monday);
+              rb_practiceThree = findViewById(R.id.rb_practiceThree_monday);
+              rb_lectureFour = findViewById(R.id.rb_lectureFour_monday);
+              rb_labworkFour = findViewById(R.id.rb_labworkFour_monday);
+              rb_practiceFour = findViewById(R.id.rb_practiceFour_monday);
+              rb_lectureFive = findViewById(R.id.rb_lectureFive_monday);
+              rb_labworkFive = findViewById(R.id.rb_labworkFive_monday);
+              rb_practiceFive = findViewById(R.id.rb_practiceFive_monday);
+              rb_lectureSix = findViewById(R.id.rb_lectureSix_monday);
+              rb_labworkSix = findViewById(R.id.rb_labworkSix_monday);
+              rb_practiceSix = findViewById(R.id.rb_practiceSix_monday);
 
-        Lesson();
-        NumberOne.setText(Tuesday.get(0).idcards.toString());
-        NumberTwo.setText(Tuesday.get(1).idcards.toString());
-        NumberThree.setText(Tuesday.get(2).idcards.toString());
-        NumberFour.setText(Tuesday.get(3).idcards.toString());
-        NumberFive.setText(Tuesday.get(4).idcards.toString());
-        NumberSix.setText(Tuesday.get(5).idcards.toString());
-        TimeOne.setText(Tuesday.get(0).timelesson.toString());
-        TimeTwo.setText(Tuesday.get(1).timelesson.toString());
-        TimeThree.setText(Tuesday.get(2).timelesson.toString());
-        TimeFour.setText(Tuesday.get(3).timelesson.toString());
-        TimeFive.setText(Tuesday.get(4).timelesson.toString());
-        TimeSix.setText(Tuesday.get(5).timelesson.toString());
-        rb_lecture.setText(typelesson.get(0));
-        rb_lectureTwo.setText(typelesson.get(0));
-        rb_lectureThree.setText(typelesson.get(0));
-        rb_lectureFour.setText(typelesson.get(0));
-        rb_lectureFive.setText(typelesson.get(0));
-        rb_lectureSix.setText(typelesson.get(0));
-        rb_labwork.setText(typelesson.get(1));
-        rb_labworkTwo.setText(typelesson.get(1));
-        rb_labworkThree.setText(typelesson.get(1));
-        rb_labworkFour.setText(typelesson.get(1));
-        rb_labworkFive.setText(typelesson.get(1));
-        rb_labworkSix.setText(typelesson.get(1));
-        rb_practice.setText(typelesson.get(2));
-        rb_practice.setText(typelesson.get(2));
-        rb_practiceThree.setText(typelesson.get(2));
-        rb_practiceFour.setText(typelesson.get(2));
-        rb_practiceFive.setText(typelesson.get(2));
-        rb_practiceSix.setText(typelesson.get(2));
+              NumberOneO = findViewById(R.id.number_monday);
+              NumberTwo = findViewById(R.id.numberTwo_monday);
+              NumberThree = findViewById(R.id.numberThree_monday);
+              NumberFour = findViewById(R.id.numberFour_monday);
+              NumberFive = findViewById(R.id.numberFive_monday);
+              NumberSix = findViewById(R.id.numberSix_monday);
+              TimeOne = findViewById(R.id.time_monday);
+              TimeTwo = findViewById(R.id.timeTwo_monday);
+              TimeThree = findViewById(R.id.timeThree_monday);
+              TimeFour = findViewById(R.id.timeFour_monday);
+              TimeFive = findViewById(R.id.timeFive_monday);
+              TimeSix = findViewById(R.id.timeSix_monday);
+              SubjectEditOne = findViewById(R.id.subject_edit_monday);
+              SubjectEditTwo = findViewById(R.id.subject_editTwo_monday);
+              SubjectEditThree = findViewById(R.id.subject_editThree_monday);
+              SubjectEditFour = findViewById(R.id.subject_editFour_monday);
+              SubjectEditFive = findViewById(R.id.subject_editFive_monday);
+              SubjectEditSix = findViewById(R.id.subject_editSix_monday);
+              AudienceEditOne = findViewById(R.id.audience_edit_monday);
+              AudienceEditTwo = findViewById(R.id.audience_editTwo_monday);
+              AudienceEditThree = findViewById(R.id.audience_editThree_monday);
+              AudienceEditFour = findViewById(R.id.audience_editFour_monday);
+              AudienceEditFive = findViewById(R.id.audience_editFive_monday);
+              AudienceEditSix = findViewById(R.id.audience_editSix_monday);
+              EducatorEditOne = findViewById(R.id.educator_edit_monday);
+              EducatorEditTwo = findViewById(R.id.educator_editTwo_monday);
+              EducatorEditThree = findViewById(R.id.educator_editThree_monday);
+              EducatorEditFour = findViewById(R.id.educator_editFour_monday);
+              EducatorEditFive = findViewById(R.id.educator_editFive_monday);
+              EducatorEditSix = findViewById(R.id.educator_editSix_monday);
+              typeEditOne_monday = findViewById(R.id.typeEdit_monday);
+              typeEditTwo_monday = findViewById(R.id.typeEditTwo_monday);
+              typeEditThree_monday = findViewById(R.id.typeEditThree_monday);
+              typeEditFour_monday = findViewById(R.id.typeEditFour_monday);
+              typeEditFive_monday = findViewById(R.id.typeEditFive_monday);
+              typeEditSix_monday = findViewById(R.id.typeEditSix_monday);
+              Lesson();
+              NumberOneO.setText(Monday.get(0).getId().toString());
+              NumberTwo.setText(Monday.get(1).getId().toString());
+              NumberThree.setText(Monday.get(2).getId().toString());
+              NumberFour.setText(Monday.get(3).getId().toString());
+              NumberFive.setText(Monday.get(4).getId().toString());
+              NumberSix.setText(Monday.get(5).getId().toString());
+              TimeOne.setText(Monday.get(0).getTime().toString());
+              TimeTwo.setText(Monday.get(1).getTime().toString());
+              TimeThree.setText(Monday.get(2).getTime().toString());
+              TimeFour.setText(Monday.get(3).getTime().toString());
+              TimeFive.setText(Monday.get(4).getTime().toString());
+              TimeSix.setText(Monday.get(5).getTime().toString());
+              rb_lecture.setText(typelesson.get(0));
+              rb_lectureTwo.setText(typelesson.get(0));
+              rb_lectureThree.setText(typelesson.get(0));
+              rb_lectureFour.setText(typelesson.get(0));
+              rb_lectureFive.setText(typelesson.get(0));
+              rb_lectureSix.setText(typelesson.get(0));
+              rb_labwork.setText(typelesson.get(1));
+              rb_labworkTwo.setText(typelesson.get(1));
+              rb_labworkThree.setText(typelesson.get(1));
+              rb_labworkFour.setText(typelesson.get(1));
+              rb_labworkFive.setText(typelesson.get(1));
+              rb_labworkSix.setText(typelesson.get(1));
+              rb_practice.setText(typelesson.get(2));
+              rb_practice.setText(typelesson.get(2));
+              rb_practiceThree.setText(typelesson.get(2));
+              rb_practiceFour.setText(typelesson.get(2));
+              rb_practiceFive.setText(typelesson.get(2));
+              rb_practiceSix.setText(typelesson.get(2));
+              ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, subject_list);
+              subSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+              ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, audience_list);
+              audSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+              ArrayAdapter<String> eduSpinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, educator_list);
+              eduSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+              SubjectEditOne.setAdapter(subSpinnerArrayAdapter);
+              SubjectEditTwo.setAdapter(subSpinnerArrayAdapter);
+              SubjectEditThree.setAdapter(subSpinnerArrayAdapter);
+              SubjectEditFour.setAdapter(subSpinnerArrayAdapter);
+              SubjectEditFive.setAdapter(subSpinnerArrayAdapter);
+              SubjectEditSix.setAdapter(subSpinnerArrayAdapter);
+              AudienceEditOne.setAdapter(audSpinnerArrayAdapter);
+              AudienceEditTwo.setAdapter(audSpinnerArrayAdapter);
+              AudienceEditThree.setAdapter(audSpinnerArrayAdapter);
+              AudienceEditFour.setAdapter(audSpinnerArrayAdapter);
+              AudienceEditFive.setAdapter(audSpinnerArrayAdapter);
+              AudienceEditSix.setAdapter(audSpinnerArrayAdapter);
+              EducatorEditOne.setAdapter(eduSpinnerArrayAdapter);
+              EducatorEditTwo.setAdapter(eduSpinnerArrayAdapter);
+              EducatorEditThree.setAdapter(eduSpinnerArrayAdapter);
+              EducatorEditFour.setAdapter(eduSpinnerArrayAdapter);
+              EducatorEditFive.setAdapter(eduSpinnerArrayAdapter);
+              EducatorEditSix.setAdapter(eduSpinnerArrayAdapter);
 
-        ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
-        subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
-        audSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> eduSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, educator_list);
-        eduSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        SubjectEditOne.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditTwo.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditThree.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditFour.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditFive.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditSix.setAdapter(subSpinnerArrayAdapter);
-        AudienceEditOne.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditTwo.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditThree.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditFour.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditFive.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditSix.setAdapter(audSpinnerArrayAdapter);
-        EducatorEditOne.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditTwo.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditThree.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditFour.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditFive.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditSix.setAdapter(eduSpinnerArrayAdapter);
-
-        TextView copy_downOne = findViewById(R.id.copy_downOne_tuesday);
-        TextView copy_downTwo = findViewById(R.id.copy_downTwo_tuesday);
-        TextView copy_downThree = findViewById(R.id.copy_downThree_tuesday);
-        TextView copy_downFour = findViewById(R.id.copy_downFour_tuesday);
-        TextView copy_downFive = findViewById(R.id.copy_downFive_tuesday);
-        TextView copy_upTwo= findViewById(R.id.copy_upTwo_tuesday);
-        TextView copy_upThree= findViewById(R.id.copy_upThree_tuesday);
-        TextView copy_upFour= findViewById(R.id.copy_upFour_tuesday);
-        TextView copy_upFive= findViewById(R.id.copy_upFive_tuesday);
-        TextView copy_upSix= findViewById(R.id.copy_upSix_tuesday);
-        TextView clearOne = findViewById(R.id.clear_cardOne_tuesday);
-        TextView clearTwo = findViewById(R.id.clear_cardTwo_tuesday);
-        TextView clearThree = findViewById(R.id.clear_cardThree_tuesday);
-        TextView clearFour = findViewById(R.id.clear_cardFour_tuesday);
-        TextView clearFive = findViewById(R.id.clear_cardFive_tuesday);
-        TextView clearSix = findViewById(R.id.clear_cardSix_tuesday);
-
-        typeEditOne_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonOne = typeEditOne_tuesday.indexOfChild(findViewById(typeEditOne_tuesday.getCheckedRadioButtonId()));
-                int IdRadioButton = typeEditOne_tuesday.getCheckedRadioButtonId();
-                RadioButton radioButton = findViewById(IdRadioButton);
-                if (radioButton != null) {
-                    TuesdayTypeLessonOne = radioButton.getText().toString();
-                }
-                else { TuesdayTypeLessonOne = "";}
-            }
-        });
-
-        typeEditTwo_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonTwo = typeEditTwo_tuesday.indexOfChild(findViewById(typeEditTwo_tuesday.getCheckedRadioButtonId()));
-                int IdRadioButton = typeEditTwo_tuesday.getCheckedRadioButtonId();
-                RadioButton radioButton = findViewById(IdRadioButton);
-                if (radioButton != null) {
-                    TuesdayTypeLessonTwo = radioButton.getText().toString();
-                }
-                else { TuesdayTypeLessonTwo = "";}
-            }
-        });
-
-        typeEditThree_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonThree = typeEditThree_tuesday.indexOfChild(findViewById(typeEditThree_tuesday.getCheckedRadioButtonId()));
-                int IdRadioButton = typeEditThree_tuesday.getCheckedRadioButtonId();
-                RadioButton radioButton = findViewById(IdRadioButton);
-                if (radioButton != null) {
-                    TuesdayTypeLessonThree = radioButton.getText().toString();
-                }
-                else { TuesdayTypeLessonThree = "";}
-            }
-        });
-
-        typeEditFour_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonFour = typeEditFour_tuesday.indexOfChild(findViewById(typeEditFour_tuesday.getCheckedRadioButtonId()));
-                int IdRadioButton = typeEditFour_tuesday.getCheckedRadioButtonId();
-                RadioButton radioButton = findViewById(IdRadioButton);
-                if (radioButton != null) {
-                    TuesdayTypeLessonFour = radioButton.getText().toString();
-                }
-                else { TuesdayTypeLessonFour = "";}
-            }
-        });
-
-        typeEditFive_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonFive = typeEditFive_tuesday.indexOfChild(findViewById(typeEditFive_tuesday.getCheckedRadioButtonId()));
-                int IdRadioButton = typeEditFive_tuesday.getCheckedRadioButtonId();
-                RadioButton radioButton = findViewById(IdRadioButton);
-                if (radioButton != null) {
-                    TuesdayTypeLessonFive = radioButton.getText().toString();
-                }
-                else { TuesdayTypeLessonFive = "";}
-            }
-        });
-        typeEditSix_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonSix = typeEditSix_tuesday.indexOfChild(findViewById(typeEditSix_tuesday.getCheckedRadioButtonId()));
-                int IdRadioButton = typeEditSix_tuesday.getCheckedRadioButtonId();
-                RadioButton radioButton = findViewById(IdRadioButton);
-                if (radioButton != null) {
-                    TuesdayTypeLessonSix = radioButton.getText().toString();
-                }
-                else { TuesdayTypeLessonSix = "";}
-            }
-        });
-
-        copy_downOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditTwo.setSelection(subject_list.indexOf(Tuesday.get(0).subject()));
-                AudienceEditTwo.setSelection(audience_list.indexOf(Tuesday.get(0).audience));
-                EducatorEditTwo.setSelection(educator_list.indexOf(Tuesday.get(0).educator));
-                switch (IdRadioButtonOne){
-                    case 0:
-                        rb_lectureTwo.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkTwo.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceTwo.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_downTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditThree.setSelection(subject_list.indexOf(Tuesday.get(1).subject));
-                AudienceEditThree.setSelection(audience_list.indexOf(Tuesday.get(1).audience()));
-                EducatorEditThree.setSelection(educator_list.indexOf(Tuesday.get(1).educator));
-                switch (IdRadioButtonTwo){
-                    case 0:
-                        rb_lectureThree.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkThree.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceThree.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_downThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditFour.setSelection(subject_list.indexOf(Tuesday.get(2).subjectEdit));
-                AudienceEditFour.setSelection(audience_list.indexOf(Tuesday.get(2).audienceEdit));
-                EducatorEditFour.setSelection(educator_list.indexOf(Tuesday.get(2).educator));
-                switch (IdRadioButtonThree){
-                    case 0:
-                        rb_lectureFour.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFour.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFour.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-        copy_downFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditFive.setSelection(subject_list.indexOf(Tuesday.get(3).subjectEdit));
-                AudienceEditFive.setSelection(audience_list.indexOf(Tuesday.get(3).audienceEdit));
-                EducatorEditFive.setSelection(educator_list.indexOf(Tuesday.get(3).educator));
-                switch (IdRadioButtonFour){
-                    case 0:
-                        rb_lectureFive.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFive.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFive.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_downFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditSix.setSelection(subject_list.indexOf(Tuesday.get(4).subjectEdit));
-                AudienceEditSix.setSelection(audience_list.indexOf(Tuesday.get(4).audienceEdit));
-                EducatorEditSix.setSelection(educator_list.indexOf(Tuesday.get(4).educator));
-                switch (IdRadioButtonFive){
-                    case 0:
-                        rb_lectureSix.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkSix.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceSix.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            try{
-                SubjectEditOne.setSelection(subject_list.indexOf(Tuesday.get(1).subjectEdit));
-                AudienceEditOne.setSelection(audience_list.indexOf(Tuesday.get(1).audienceEdit));
-                EducatorEditOne.setSelection(educator_list.indexOf(Tuesday.get(1).educator));
-                switch (IdRadioButtonTwo){
-                    case 0:
-                        rb_lecture.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labwork.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practice.setChecked(true);
-                        break;
-                }
-            } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    try{
-                SubjectEditTwo.setSelection(subject_list.indexOf(Tuesday.get(2).subjectEdit));
-                AudienceEditTwo.setSelection(audience_list.indexOf(Tuesday.get(2).audienceEdit));
-                EducatorEditTwo.setSelection(educator_list.indexOf(Tuesday.get(2).educator));
-                switch (IdRadioButtonThree){
-                    case 0:
-                        rb_lectureTwo.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkTwo.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceTwo.setChecked(true);
-                        break;
-                }
-                    } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditThree.setSelection(subject_list.indexOf(Tuesday.get(3).subjectEdit));
-                AudienceEditThree.setSelection(audience_list.indexOf(Tuesday.get(3).audienceEdit));
-                EducatorEditThree.setSelection(educator_list.indexOf(Tuesday.get(3).educator));
-                switch (IdRadioButtonFour){
-                    case 0:
-                        rb_lectureThree.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkThree.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceThree.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditFour.setSelection(subject_list.indexOf(Tuesday.get(4).subjectEdit));
-                AudienceEditFour.setSelection(audience_list.indexOf(Tuesday.get(4).audienceEdit));
-                EducatorEditFour.setSelection(educator_list.indexOf(Tuesday.get(4).educator));
-                switch (IdRadioButtonFive){
-                    case 0:
-                        rb_lectureFour.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFour.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFour.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upSix.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            try{
-                SubjectEditFive.setSelection(subject_list.indexOf(Tuesday.get(5).subjectEdit));
-                AudienceEditFive.setSelection(audience_list.indexOf(Tuesday.get(5).audienceEdit));
-                EducatorEditFive.setSelection(educator_list.indexOf(Tuesday.get(5).educator));
-                switch (IdRadioButtonSix){
-                    case 0:
-                        rb_lectureFive.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFive.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFive.setChecked(true);
-                        break;
-                }
-            } catch   (NullPointerException e) {}
-            }
-        });
+              TextView copy_downOne = findViewById(R.id.copy_downOne_monday);
+              TextView copy_downTwo = findViewById(R.id.copy_downTwo_monday);
+              TextView copy_downThree = findViewById(R.id.copy_downThree_monday);
+              TextView copy_downFour = findViewById(R.id.copy_downFour_monday);
+              TextView copy_downFive = findViewById(R.id.copy_downFive_monday);
+              TextView copy_upTwo = findViewById(R.id.copy_upTwo_monday);
+              TextView copy_upThree = findViewById(R.id.copy_upThree_monday);
+              TextView copy_upFour = findViewById(R.id.copy_upFour_monday);
+              TextView copy_upFive = findViewById(R.id.copy_upFive_monday);
+              TextView copy_upSix = findViewById(R.id.copy_upSix_monday);
+              TextView clearOne = findViewById(R.id.clear_cardOne_monday);
+              TextView clearTwo = findViewById(R.id.clear_cardTwo_monday);
+              TextView clearThree = findViewById(R.id.clear_cardThree_monday);
+              TextView clearFour = findViewById(R.id.clear_cardFour_monday);
+              TextView clearFive = findViewById(R.id.clear_cardFive_monday);
+              TextView clearSix = findViewById(R.id.clear_cardSix_monday);
 
 
+              typeEditOne_monday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+                  @Override
+                  public void onCheckedChanged(RadioGroup group, int checkedId) {
+                      IdRadioButtonOne = typeEditOne_monday.indexOfChild(findViewById(typeEditOne_monday.getCheckedRadioButtonId()));
+                      int IdRadioButton = typeEditOne_monday.getCheckedRadioButtonId();
+                      RadioButton radioButton = findViewById(IdRadioButton);
+                      if (radioButton != null) {
+                          MondayTypeLessonOne = radioButton.getText().toString();
+                      } else {
+                          MondayTypeLessonOne = "";
+                      }
+                  }
+              });
 
-        clearOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditOne.setSelection(0);
-                AudienceEditOne.setSelection(0);
-                EducatorEditOne.setSelection(0);
-                typeEditOne_tuesday.clearCheck();
-            }
-        });
+              typeEditTwo_monday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+                  @Override
+                  public void onCheckedChanged(RadioGroup group, int checkedId) {
+                      IdRadioButtonTwo = typeEditTwo_monday.indexOfChild(findViewById(typeEditTwo_monday.getCheckedRadioButtonId()));
+                      int IdRadioButtonTwo = typeEditTwo_monday.getCheckedRadioButtonId();
+                      RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
+                      if (radioButtonTwo != null) {
+                          MondayTypeLessonTwo = radioButtonTwo.getText().toString();
+                      } else {
+                          MondayTypeLessonTwo = "";
+                      }
+                  }
+              });
 
-        clearTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditTwo.setSelection(0);
-                AudienceEditTwo.setSelection(0);
-                EducatorEditTwo.setSelection(0);
-                typeEditTwo_tuesday.clearCheck();
-            }
-        });
+              typeEditThree_monday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+                  @Override
+                  public void onCheckedChanged(RadioGroup group, int checkedId) {
+                      IdRadioButtonThree = typeEditThree_monday.indexOfChild(findViewById(typeEditThree_monday.getCheckedRadioButtonId()));
+                      int IdRadioButtonThree = typeEditThree_monday.getCheckedRadioButtonId();
+                      RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
+                      if (radioButtonThree != null) {
+                          MondayTypeLessonThree = radioButtonThree.getText().toString();
+                      } else {
+                          MondayTypeLessonThree = "";
+                      }
+                  }
+              });
 
-        clearThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditThree.setSelection(0);
-                AudienceEditThree.setSelection(0);
-                EducatorEditThree.setSelection(0);
-                typeEditThree_tuesday.clearCheck();
-            }
-        });
+              typeEditFour_monday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+                  @Override
+                  public void onCheckedChanged(RadioGroup group, int checkedId) {
+                      IdRadioButtonFour = typeEditFour_monday.indexOfChild(findViewById(typeEditFour_monday.getCheckedRadioButtonId()));
+                      int IdRadioButtonFour = typeEditFour_monday.getCheckedRadioButtonId();
+                      RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
+                      if (radioButtonFour != null) {
+                          MondayTypeLessonFour = radioButtonFour.getText().toString();
+                      } else {
+                          MondayTypeLessonFour = "";
+                      }
+                  }
+              });
 
-        clearFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditFour.setSelection(0);
-                AudienceEditFour.setSelection(0);
-                EducatorEditFour.setSelection(0);
-                typeEditFour_tuesday.clearCheck();
-            }
-        });
-
-        clearFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditFive.setSelection(0);
-                AudienceEditFive.setSelection(0);
-                EducatorEditFive.setSelection(0);
-                typeEditFive_tuesday.clearCheck();
-            }
-        });
-
-        clearSix.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditSix.setSelection(0);
-                AudienceEditSix.setSelection(0);
-                EducatorEditSix.setSelection(0);
-                typeEditSix_tuesday.clearCheck();
-            }
-        });
-
-
-        SubjectEditOne.setSelection(subject_list.indexOf(Tuesday.get(0).subjectEdit.toString()));
-        SubjectEditTwo.setSelection(subject_list.indexOf(Tuesday.get(1).subjectEdit.toString()));
-        SubjectEditThree.setSelection(subject_list.indexOf(Tuesday.get(2).subjectEdit.toString()));
-        SubjectEditFour.setSelection(subject_list.indexOf(Tuesday.get(3).subjectEdit.toString()));
-        SubjectEditFive.setSelection(subject_list.indexOf(Tuesday.get(4).subjectEdit.toString()));
-        SubjectEditSix.setSelection(subject_list.indexOf(Tuesday.get(5).subjectEdit.toString()));
-        AudienceEditOne.setSelection(audience_list.indexOf(Tuesday.get(0).audienceEdit.toString()));
-        AudienceEditTwo.setSelection(audience_list.indexOf(Tuesday.get(1).audienceEdit.toString()));
-        AudienceEditThree.setSelection(audience_list.indexOf(Tuesday.get(2).audienceEdit.toString()));
-        AudienceEditFour.setSelection(audience_list.indexOf(Tuesday.get(3).audienceEdit.toString()));
-        AudienceEditFive.setSelection(audience_list.indexOf(Tuesday.get(4).audienceEdit.toString()));
-        AudienceEditSix.setSelection(audience_list.indexOf(Tuesday.get(5).audienceEdit.toString()));
-        EducatorEditOne.setSelection(educator_list.indexOf(Tuesday.get(0).educator.toString()));
-        EducatorEditTwo.setSelection(educator_list.indexOf(Tuesday.get(1).educator.toString()));
-        EducatorEditThree.setSelection(educator_list.indexOf(Tuesday.get(2).educator.toString()));
-        EducatorEditFour.setSelection(educator_list.indexOf(Tuesday.get(3).educator.toString()));
-        EducatorEditFive.setSelection(educator_list.indexOf(Tuesday.get(4).educator.toString()));
-        EducatorEditSix.setSelection(educator_list.indexOf(Tuesday.get(5).educator.toString()));
+              typeEditFive_monday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+                  @Override
+                  public void onCheckedChanged(RadioGroup group, int checkedId) {
+                      IdRadioButtonFive = typeEditFive_monday.indexOfChild(findViewById(typeEditFive_monday.getCheckedRadioButtonId()));
+                      int IdRadioButtonFive = typeEditFive_monday.getCheckedRadioButtonId();
+                      RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
+                      if (radioButtonFive != null) {
+                          MondayTypeLessonFive = radioButtonFive.getText().toString();
+                      } else {
+                          MondayTypeLessonFive = "";
+                      }
+                  }
+              });
+              typeEditSix_monday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+                  @Override
+                  public void onCheckedChanged(RadioGroup group, int checkedId) {
+                      IdRadioButtonSix = typeEditSix_monday.indexOfChild(findViewById(typeEditSix_monday.getCheckedRadioButtonId()));
+                      int IdRadioButtonSix = typeEditSix_monday.getCheckedRadioButtonId();
+                      RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
+                      if (radioButtonSix != null) {
+                          MondayTypeLessonSix = radioButtonSix.getText().toString();
+                      } else {
+                          MondayTypeLessonSix = "";
+                      }
+                  }
+              });
 
 
-        if (Tuesday.get(0).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lecture.setChecked(true);
-        } else if (Tuesday.get(0).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labwork.setChecked(true);
-        } else if (Tuesday.get(0).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practice.setChecked(true);
-        }
-        if (Tuesday.get(1).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureTwo.setChecked(true);
-        } else if (Tuesday.get(1).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkTwo.setChecked(true);
-        } else if (Tuesday.get(1).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceTwo.setChecked(true);
-        }
-        if (Tuesday.get(2).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureThree.setChecked(true);
-        } else if (Tuesday.get(2).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkThree.setChecked(true);
-        } else if (Tuesday.get(2).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceThree.setChecked(true);
-        }
-        if (Tuesday.get(3).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureFour.setChecked(true);
-        } else if (Tuesday.get(3).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkFour.setChecked(true);
-        } else if (Tuesday.get(3).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceFour.setChecked(true);
-        }
-        if (Tuesday.get(4).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureFive.setChecked(true);
-        } else if (Tuesday.get(4).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkFive.setChecked(true);
-        } else if (Tuesday.get(4).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceFive.setChecked(true);
-        }
-        if (Tuesday.get(5).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureSix.setChecked(true);
-        } else if (Tuesday.get(5).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkSix.setChecked(true);
-        } else if (Tuesday.get(5).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceSix.setChecked(true);
-        }
-        //S1
-       try {
-            SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
-                    Tuesday.set(0, new Lesson("1", "8:30-10:00", TuesdayValueSubjectOne, Tuesday.get(0).audienceEdit.toString(), Tuesday.get(0).educator.toString(), Tuesday.get(0).typelesson.toString()));
-                }
+              copy_downOne.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      try {
+                          SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).getSubjectEdit()));
+                          AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(0).getAudienceEdit()));
+                          EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(0).getEducator()));
+                          switch (IdRadioButtonOne) {
+                              case 0:
+                                  rb_lectureTwo.setChecked(true);
+                                  break;
+                              case 1:
+                                  rb_labworkTwo.setChecked(true);
+                                  break;
+                              case 2:
+                                  rb_practiceTwo.setChecked(true);
+                                  break;
+                          }
+                      } catch (NullPointerException e) {
+                      }
+                  }
+              });
+
+              copy_downTwo.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      try {
+                          SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit()));
+                          AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit()));
+                          EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(1).getEducator()));
+                          switch (IdRadioButtonTwo) {
+                              case 0:
+                                  rb_lectureThree.setChecked(true);
+                                  break;
+                              case 1:
+                                  rb_labworkThree.setChecked(true);
+                                  break;
+                              case 2:
+                                  rb_practiceThree.setChecked(true);
+                                  break;
+                          }
+                      } catch (NullPointerException e) {
+                      }
+                  }
+              });
+
+              copy_downThree.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      try {
+                          SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit()));
+                          AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit()));
+                          EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(2).getEducator()));
+                          switch (IdRadioButtonThree) {
+                              case 0:
+                                  rb_lectureFour.setChecked(true);
+                                  break;
+                              case 1:
+                                  rb_labworkFour.setChecked(true);
+                                  break;
+                              case 2:
+                                  rb_practiceFour.setChecked(true);
+                                  break;
+                          }
+                      } catch (NullPointerException e) {
+                      }
+                  }
+              });
+              copy_downFour.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      try {
+                          SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit()));
+                          AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit()));
+                          EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(3).getEducator()));
+                          switch (IdRadioButtonFour) {
+                              case 0:
+                                  rb_lectureFive.setChecked(true);
+                                  break;
+                              case 1:
+                                  rb_labworkFive.setChecked(true);
+                                  break;
+                              case 2:
+                                  rb_practiceFive.setChecked(true);
+                                  break;
+                          }
+                      } catch (NullPointerException e) {
+                      }
+                  }
+              });
+
+              copy_downFive.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      try {
+                          SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit()));
+                          AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit()));
+                          EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(4).getEducator()));
+                          switch (IdRadioButtonFive) {
+                              case 0:
+                                  rb_lectureSix.setChecked(true);
+                                  break;
+                              case 1:
+                                  rb_labworkSix.setChecked(true);
+                                  break;
+                              case 2:
+                                  rb_practiceSix.setChecked(true);
+                                  break;
+                          }
+                      } catch (NullPointerException e) {
+                      }
+                  }
+              });
+
+              copy_upTwo.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      try {
+                          SubjectEditOne.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit()));
+                          AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit()));
+                          EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(1).getEducator()));
+                          switch (IdRadioButtonTwo) {
+                              case 0:
+                                  rb_lecture.setChecked(true);
+                                  break;
+                              case 1:
+                                  rb_labwork.setChecked(true);
+                                  break;
+                              case 2:
+                                  rb_practice.setChecked(true);
+                                  break;
+                          }
+                      } catch (NullPointerException e) {
+                      }
+                  }
+              });
+
+              copy_upThree.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      try {
+                          SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit()));
+                          AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit()));
+                          EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(2).getEducator()));
+                          switch (IdRadioButtonThree) {
+                              case 0:
+                                  rb_lectureTwo.setChecked(true);
+                                  break;
+                              case 1:
+                                  rb_labworkTwo.setChecked(true);
+                                  break;
+                              case 2:
+                                  rb_practiceTwo.setChecked(true);
+                                  break;
+                          }
+                      } catch (NullPointerException e) {
+                      }
+                  }
+              });
+
+              copy_upFour.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      try {
+                          SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit()));
+                          AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit()));
+                          EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(3).getEducator()));
+                          switch (IdRadioButtonFour) {
+                              case 0:
+                                  rb_lectureThree.setChecked(true);
+                                  break;
+                              case 1:
+                                  rb_labworkThree.setChecked(true);
+                                  break;
+                              case 2:
+                                  rb_practiceThree.setChecked(true);
+                                  break;
+                          }
+                      } catch (NullPointerException e) {
+                      }
+                  }
+              });
+
+              copy_upFive.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      try {
+                          SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit()));
+                          AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit()));
+                          EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(4).getEducator()));
+                          switch (IdRadioButtonFive) {
+                              case 0:
+                                  rb_lectureFour.setChecked(true);
+                                  break;
+                              case 1:
+                                  rb_labworkFour.setChecked(true);
+                                  break;
+                              case 2:
+                                  rb_practiceFour.setChecked(true);
+                                  break;
+                          }
+                      } catch (NullPointerException e) {
+                      }
+                  }
+              });
+
+              copy_upSix.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      try {
+                          SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(5).getSubjectEdit()));
+                          AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(5).getAudienceEdit()));
+                          EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(5).getEducator()));
+                          switch (IdRadioButtonSix) {
+                              case 0:
+                                  rb_lectureFive.setChecked(true);
+                                  break;
+                              case 1:
+                                  rb_labworkFive.setChecked(true);
+                                  break;
+                              case 2:
+                                  rb_practiceFive.setChecked(true);
+                                  break;
+                          }
+                      } catch (NullPointerException e) {
+                      }
+                  }
+              });
+
+
+              clearOne.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+
+                      SubjectEditOne.setSelection(0);
+                      AudienceEditOne.setSelection(0);
+                      EducatorEditOne.setSelection(0);
+                      typeEditOne_monday.clearCheck();
+                  }
+              });
+
+              clearTwo.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      SubjectEditTwo.setSelection(0);
+                      AudienceEditTwo.setSelection(0);
+                      EducatorEditTwo.setSelection(0);
+                      typeEditTwo_monday.clearCheck();
+                  }
+              });
+
+              clearThree.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      SubjectEditThree.setSelection(0);
+                      AudienceEditThree.setSelection(0);
+                      EducatorEditThree.setSelection(0);
+                      typeEditThree_monday.clearCheck();
+                  }
+              });
+
+              clearFour.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      SubjectEditFour.setSelection(0);
+                      AudienceEditFour.setSelection(0);
+                      EducatorEditFour.setSelection(0);
+                      typeEditFour_monday.clearCheck();
+                  }
+              });
+
+              clearFive.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      SubjectEditFive.setSelection(0);
+                      AudienceEditFive.setSelection(0);
+                      EducatorEditFive.setSelection(0);
+                      typeEditFive_monday.clearCheck();
+                  }
+              });
+
+              clearSix.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      SubjectEditSix.setSelection(0);
+                      AudienceEditSix.setSelection(0);
+                      EducatorEditSix.setSelection(0);
+                      typeEditSix_monday.clearCheck();
+                  }
+              });
+
+
+              SubjectEditOne.setSelection(subject_list.indexOf(Monday.get(0).getSubjectEdit().toString()));
+              SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit().toString()));
+              SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit().toString()));
+              SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit().toString()));
+              SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit().toString()));
+              SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(5).getSubjectEdit().toString()));
+              AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(0).getAudienceEdit().toString()));
+              AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit().toString()));
+              AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit().toString()));
+              AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit().toString()));
+              AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit().toString()));
+              AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(5).getAudienceEdit().toString()));
+              EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(0).getEducator().toString()));
+              EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(1).getEducator().toString()));
+              EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(2).getEducator().toString()));
+              EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(3).getEducator().toString()));
+              EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(4).getEducator().toString()));
+              EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(5).getEducator().toString()));
+
+
+              if (Monday.get(0).getTypeLesson().toString().equals(typelesson.get(0))) {
+                  rb_lecture.setChecked(true);
+              } else if (Monday.get(0).getTypeLesson().toString().equals(typelesson.get(1))) {
+                  rb_labwork.setChecked(true);
+              } else if (Monday.get(0).getTypeLesson().toString().equals(typelesson.get(2))) {
+                  rb_practice.setChecked(true);
+              }
+              if (Monday.get(1).getTypeLesson().toString().equals(typelesson.get(0))) {
+                  rb_lectureTwo.setChecked(true);
+              } else if (Monday.get(1).getTypeLesson().toString().equals(typelesson.get(1))) {
+                  rb_labworkTwo.setChecked(true);
+              } else if (Monday.get(1).getTypeLesson().toString().equals(typelesson.get(2))) {
+                  rb_practiceTwo.setChecked(true);
+              }
+              if (Monday.get(2).getTypeLesson().toString().equals(typelesson.get(0))) {
+                  rb_lectureThree.setChecked(true);
+              } else if (Monday.get(2).getTypeLesson().toString().equals(typelesson.get(1))) {
+                  rb_labworkThree.setChecked(true);
+              } else if (Monday.get(2).getTypeLesson().toString().equals(typelesson.get(2))) {
+                  rb_practiceThree.setChecked(true);
+              }
+              if (Monday.get(3).getTypeLesson().toString().equals(typelesson.get(0))) {
+                  rb_lectureFour.setChecked(true);
+              } else if (Monday.get(3).getTypeLesson().toString().equals(typelesson.get(1))) {
+                  rb_labworkFour.setChecked(true);
+              } else if (Monday.get(3).getTypeLesson().toString().equals(typelesson.get(2))) {
+                  rb_practiceFour.setChecked(true);
+              }
+              if (Monday.get(4).getTypeLesson().toString().equals(typelesson.get(0))) {
+                  rb_lectureFive.setChecked(true);
+              } else if (Monday.get(4).getTypeLesson().toString().equals(typelesson.get(1))) {
+                  rb_labworkFive.setChecked(true);
+              } else if (Monday.get(4).getTypeLesson().toString().equals(typelesson.get(2))) {
+                  rb_practiceFive.setChecked(true);
+              }
+              if (Monday.get(5).getTypeLesson().toString().equals(typelesson.get(0))) {
+                  rb_lectureSix.setChecked(true);
+              } else if (Monday.get(5).getTypeLesson().toString().equals(typelesson.get(1))) {
+                  rb_labworkSix.setChecked(true);
+              } else if (Monday.get(5).getTypeLesson().toString().equals(typelesson.get(2))) {
+                  rb_practiceSix.setChecked(true);
+              }
+              //S1
+              try {
+                  SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          MondayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
+                          Monday.set(0, new Lesson("1", "8:30-10:00", MondayValueSubjectOne, Monday.get(0).getAudienceEdit().toString(), Monday.get(0).getEducator().toString(), Monday.get(0).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+
+              //S2
+              try {
+                  SubjectEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          MondayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
+                          Monday.set(1, new Lesson("2", "10:10-11:40", MondayValueSubjectTwo, Monday.get(1).getAudienceEdit().toString(), Monday.get(1).getEducator().toString(), Monday.get(1).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //S3
+              try {
+                  SubjectEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
+                          Monday.set(2, new Lesson("3", "12:20-13:50", MondayValueSubjectThree, Monday.get(2).getAudienceEdit().toString(), Monday.get(2).getEducator().toString(), Monday.get(2).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //S4
+              try {
+                  SubjectEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
+                          Monday.set(3, new Lesson("4", "14:00-15:30", MondayValueSubjectFour, Monday.get(3).getAudienceEdit().toString(), Monday.get(3).getEducator().toString(), Monday.get(3).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //S5
+              try {
+                  SubjectEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
+                          Monday.set(4, new Lesson("5", "15:40-17:10", MondayValueSubjectFive, Monday.get(4).getAudienceEdit().toString(), Monday.get(4).getEducator().toString(), Monday.get(4).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //S6
+              try {
+                  SubjectEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
+                          Monday.set(5, new Lesson("6", "17:30-19:00", MondayValueSubjectSix, Monday.get(5).getAudienceEdit().toString(), Monday.get(5).getEducator().toString(), Monday.get(5).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+
+              //A1
+              try {
+                  AudienceEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
+                          Monday.set(0, new Lesson("1", "8:30-10:00", Monday.get(0).getSubjectEdit().toString(), MondayValueAudienceOne, Monday.get(0).getEducator().toString(), Monday.get(0).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //A2
+              try {
+                  AudienceEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
+                          Monday.set(1, new Lesson("2", "10:10-11:40", Monday.get(1).getSubjectEdit().toString(), MondayValueAudienceTwo, Monday.get(1).getEducator().toString(), Monday.get(1).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+
+              //A3
+              try {
+                  AudienceEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
+                          Monday.set(2, new Lesson("3", "12:20-13:50", Monday.get(2).getSubjectEdit().toString(), MondayValueAudienceThree, Monday.get(2).getEducator().toString(), Monday.get(2).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //A4
+              try {
+                  AudienceEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
+                          Monday.set(3, new Lesson("4", "14:00-15:30", Monday.get(3).getSubjectEdit().toString(), MondayValueAudienceFour, Monday.get(3).getEducator().toString(), Monday.get(3).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //A5
+              try {
+                  AudienceEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
+                          Monday.set(4, new Lesson("5", "15:40-17:10", Monday.get(4).getSubjectEdit().toString(), MondayValueAudienceFive, Monday.get(4).getEducator().toString(), Monday.get(4).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //A6
+              try {
+                  AudienceEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
+                          Monday.set(5, new Lesson("6", "17:30-19:00", Monday.get(5).getSubjectEdit().toString(), MondayValueAudienceSix, Monday.get(5).getEducator().toString(), Monday.get(5).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+
+              //E1
+              try {
+                  EducatorEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayEducatorOne = EducatorEditOne.getSelectedItem().toString();
+                          Monday.set(0, new Lesson("1", "8:30-10:00", Monday.get(0).getSubjectEdit().toString(), Monday.get(0).getAudienceEdit().toString(), MondayEducatorOne, Monday.get(0).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //E2
+              try {
+                  EducatorEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
+                          Monday.set(1, new Lesson("2", "10:10-11:40", Monday.get(1).getSubjectEdit().toString(), Monday.get(1).getAudienceEdit().toString(), MondayEducatorTwo, Monday.get(1).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+
+              //E3
+              try {
+                  EducatorEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayEducatorThree = EducatorEditThree.getSelectedItem().toString();
+                          Monday.set(2, new Lesson("3", "12:20-13:50", Monday.get(2).getSubjectEdit().toString(), Monday.get(2).getAudienceEdit().toString(), MondayEducatorThree, Monday.get(2).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //E4
+              try {
+                  EducatorEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayEducatorFour = EducatorEditFour.getSelectedItem().toString();
+                          Monday.set(3, new Lesson("4", "14:00-15:30", Monday.get(3).getSubjectEdit().toString(), Monday.get(3).getAudienceEdit().toString(), MondayEducatorFour, Monday.get(3).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //E5
+              try {
+                  EducatorEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayEducatorFive = EducatorEditFive.getSelectedItem().toString();
+                          Monday.set(4, new Lesson("5", "15:40-17:10", Monday.get(4).getSubjectEdit().toString(), Monday.get(4).getAudienceEdit().toString(), MondayEducatorFive, Monday.get(4).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+              //E6
+              try {
+                  EducatorEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                      @Override
+                      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                          // TODO Auto-generated method stub
+                          MondayEducatorSix = EducatorEditSix.getSelectedItem().toString();
+                          Monday.set(5, new Lesson("6", "17:30-19:00", Monday.get(5).getSubjectEdit().toString(), Monday.get(5).getAudienceEdit().toString(), MondayEducatorSix, Monday.get(5).getTypeLesson().toString()));
+                      }
+
+                      @Override
+                      public void onNothingSelected(AdapterView<?> parent) {
+                      }
+                  });
+              } catch (NullPointerException e) {
+              }
+
+          }
+/*
+          typeEditOne_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
               @Override
-              public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //S2
-        try {
-            SubjectEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
-                    Tuesday.set(1, new Lesson("2", "10:10-11:40", TuesdayValueSubjectTwo, Tuesday.get(1).audienceEdit.toString(), Tuesday.get(1).educator.toString(), Tuesday.get(1).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonOne = typeEditOne_tuesday.indexOfChild(findViewById(typeEditOne_tuesday.getCheckedRadioButtonId()));
+                  int IdRadioButton = typeEditOne_tuesday.getCheckedRadioButtonId();
+                  RadioButton radioButton = findViewById(IdRadioButton);
+                  if (radioButton != null) {
+                      TuesdayTypeLessonOne = radioButton.getText().toString();
+                  }
+                  else { TuesdayTypeLessonOne = "";}
+              }
+          });
 
-        //S3
-        try {
-            SubjectEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
-                    Tuesday.set(2, new Lesson("3", "12:20-13:50", TuesdayValueSubjectThree, Tuesday.get(2).audienceEdit.toString(), Tuesday.get(2).educator.toString(), Tuesday.get(2).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //S4
-        try {
-            SubjectEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
-                    Tuesday.set(3, new Lesson("4", "14:00-15:30", TuesdayValueSubjectFour, Tuesday.get(3).audienceEdit.toString(), Tuesday.get(3).educator.toString(), Tuesday.get(3).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //S5
-        try {
-            SubjectEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
-                    Tuesday.set(4, new Lesson("5", "15:40-17:10", TuesdayValueSubjectFive, Tuesday.get(4).audienceEdit.toString(), Tuesday.get(4).educator.toString(), Tuesday.get(4).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //S6
-        try {
-            SubjectEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
-                    Tuesday.set(5, new Lesson("6", "17:30-19:00", TuesdayValueSubjectSix, Tuesday.get(5).audienceEdit.toString(), Tuesday.get(5).educator.toString(), Tuesday.get(5).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          typeEditTwo_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonTwo = typeEditTwo_tuesday.indexOfChild(findViewById(typeEditTwo_tuesday.getCheckedRadioButtonId()));
+                  int IdRadioButton = typeEditTwo_tuesday.getCheckedRadioButtonId();
+                  RadioButton radioButton = findViewById(IdRadioButton);
+                  if (radioButton != null) {
+                      TuesdayTypeLessonTwo = radioButton.getText().toString();
+                  }
+                  else { TuesdayTypeLessonTwo = "";}
+              }
+          });
 
-        //A1
-        try {
-            AudienceEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
-                    Tuesday.set(0, new Lesson("1", "8:30-10:00", Tuesday.get(0).subjectEdit.toString(), TuesdayValueAudienceOne, Tuesday.get(0).educator.toString(), Tuesday.get(0).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A2
-        try {
-            AudienceEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
-                    Tuesday.set(1, new Lesson("2", "10:10-11:40", Tuesday.get(1).subjectEdit.toString(), TuesdayValueAudienceTwo, Tuesday.get(1).educator.toString(), Tuesday.get(1).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          typeEditThree_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonThree = typeEditThree_tuesday.indexOfChild(findViewById(typeEditThree_tuesday.getCheckedRadioButtonId()));
+                  int IdRadioButton = typeEditThree_tuesday.getCheckedRadioButtonId();
+                  RadioButton radioButton = findViewById(IdRadioButton);
+                  if (radioButton != null) {
+                      TuesdayTypeLessonThree = radioButton.getText().toString();
+                  }
+                  else { TuesdayTypeLessonThree = "";}
+              }
+          });
 
-        //A3
-        try {
-            AudienceEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
-                    Tuesday.set(2, new Lesson("3", "12:20-13:50", Tuesday.get(2).subjectEdit.toString(), TuesdayValueAudienceThree, Tuesday.get(2).educator.toString(), Tuesday.get(2).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A4
-        try {
-            AudienceEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
-                    Tuesday.set(3, new Lesson("4", "14:00-15:30", Tuesday.get(3).subjectEdit.toString(), TuesdayValueAudienceFour, Tuesday.get(3).educator.toString(), Tuesday.get(3).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A5
-        try {
-            AudienceEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
-                    Tuesday.set(4, new Lesson("5", "15:40-17:10", Tuesday.get(4).subjectEdit.toString(), TuesdayValueAudienceFive, Tuesday.get(4).educator.toString(), Tuesday.get(4).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A6
-        try {
-            AudienceEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
-                    Tuesday.set(5, new Lesson("6", "17:30-19:00", Tuesday.get(5).subjectEdit.toString(), TuesdayValueAudienceSix, Tuesday.get(5).educator.toString(), Tuesday.get(5).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E1
-        try {
-            EducatorEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayEducatorOne = EducatorEditOne.getSelectedItem().toString();
-                    Tuesday.set(0, new Lesson("1", "8:30-10:00", Tuesday.get(0).subjectEdit.toString(), Tuesday.get(0).audienceEdit.toString(), TuesdayEducatorOne, Tuesday.get(0).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E2
-        try {
-            EducatorEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
-                    Tuesday.set(1, new Lesson("2", "10:10-11:40", Tuesday.get(1).subjectEdit.toString(), Tuesday.get(1).audienceEdit.toString(), TuesdayEducatorTwo, Tuesday.get(1).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          typeEditFour_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonFour = typeEditFour_tuesday.indexOfChild(findViewById(typeEditFour_tuesday.getCheckedRadioButtonId()));
+                  int IdRadioButton = typeEditFour_tuesday.getCheckedRadioButtonId();
+                  RadioButton radioButton = findViewById(IdRadioButton);
+                  if (radioButton != null) {
+                      TuesdayTypeLessonFour = radioButton.getText().toString();
+                  }
+                  else { TuesdayTypeLessonFour = "";}
+              }
+          });
 
-        //E3
-        try {
-            EducatorEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayEducatorThree = EducatorEditThree.getSelectedItem().toString();
-                    Tuesday.set(2, new Lesson("3", "12:20-13:50", Tuesday.get(2).subjectEdit.toString(), Tuesday.get(2).audienceEdit.toString(), TuesdayEducatorThree, Tuesday.get(2).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E4
-        try {
-            EducatorEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayEducatorFour = EducatorEditFour.getSelectedItem().toString();
-                    Tuesday.set(3, new Lesson("4", "14:00-15:30", Tuesday.get(3).subjectEdit.toString(), Tuesday.get(3).audienceEdit.toString(), TuesdayEducatorFour, Tuesday.get(3).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E5
-        try {
-            EducatorEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayEducatorFive = EducatorEditFive.getSelectedItem().toString();
-                    Tuesday.set(4, new Lesson("5", "15:40-17:10", Tuesday.get(4).subjectEdit.toString(), Tuesday.get(4).audienceEdit.toString(), TuesdayEducatorFive, Tuesday.get(4).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E6
-        try {
-            EducatorEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    TuesdayEducatorSix = EducatorEditSix.getSelectedItem().toString();
-                    Tuesday.set(5, new Lesson("6", "17:30-19:00", Tuesday.get(5).subjectEdit.toString(), Tuesday.get(5).audienceEdit.toString(), TuesdayEducatorSix, Tuesday.get(5).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-    }
-    public void wednesday_fill() {
-        rb_lecture = findViewById(R.id.rb_lecture_wednesday);
-        rb_labwork = findViewById(R.id.rb_labwork_wednesday);
-        rb_practice = findViewById(R.id.rb_practice_wednesday);
-        rb_lectureTwo = findViewById(R.id.rb_lectureTwo_wednesday);
-        rb_labworkTwo = findViewById(R.id.rb_labworkTwo_wednesday);
-        rb_practiceTwo = findViewById(R.id.rb_practiceTwo_wednesday);
-        rb_lectureThree = findViewById(R.id.rb_lectureThree_wednesday);
-        rb_labworkThree = findViewById(R.id.rb_labworkThree_wednesday);
-        rb_practiceThree = findViewById(R.id.rb_practiceThree_wednesday);
-        rb_lectureFour = findViewById(R.id.rb_lectureFour_wednesday);
-        rb_labworkFour = findViewById(R.id.rb_labworkFour_wednesday);
-        rb_practiceFour = findViewById(R.id.rb_practiceFour_wednesday);
-        rb_lectureFive = findViewById(R.id.rb_lectureFive_wednesday);
-        rb_labworkFive = findViewById(R.id.rb_labworkFive_wednesday);
-        rb_practiceFive = findViewById(R.id.rb_practiceFive_wednesday);
-        rb_lectureSix = findViewById(R.id.rb_lectureSix_wednesday);
-        rb_labworkSix = findViewById(R.id.rb_labworkSix_wednesday);
-        rb_practiceSix = findViewById(R.id.rb_practiceSix_wednesday);
-        NumberOne = findViewById(R.id.number_wednesday);
-        NumberTwo = findViewById(R.id.numberTwo_wednesday);
-        NumberThree = findViewById(R.id.numberThree_wednesday);
-        NumberFour = findViewById(R.id.numberFour_wednesday);
-        NumberFive = findViewById(R.id.numberFive_wednesday);
-        NumberSix = findViewById(R.id.numberSix_wednesday);
-        TimeOne = findViewById(R.id.time_wednesday);
-        TimeTwo = findViewById(R.id.timeTwo_wednesday);
-        TimeThree = findViewById(R.id.timeThree_wednesday);
-        TimeFour = findViewById(R.id.timeFour_wednesday);
-        TimeFive = findViewById(R.id.timeFive_wednesday);
-        TimeSix = findViewById(R.id.timeSix_wednesday);
-        SubjectEditOne = findViewById(R.id.subject_edit_wednesday);
-        SubjectEditTwo = findViewById(R.id.subject_editTwo_wednesday);
-        SubjectEditThree = findViewById(R.id.subject_editThree_wednesday);
-        SubjectEditFour = findViewById(R.id.subject_editFour_wednesday);
-        SubjectEditFive = findViewById(R.id.subject_editFive_wednesday);
-        SubjectEditSix = findViewById(R.id.subject_editSix_wednesday);
-        AudienceEditOne = findViewById(R.id.audience_edit_wednesday);
-        AudienceEditTwo = findViewById(R.id.audience_editTwo_wednesday);
-        AudienceEditThree = findViewById(R.id.audience_editThree_wednesday);
-        AudienceEditFour = findViewById(R.id.audience_editFour_wednesday);
-        AudienceEditFive = findViewById(R.id.audience_editFive_wednesday);
-        AudienceEditSix = findViewById(R.id.audience_editSix_wednesday);
-        EducatorEditOne = findViewById(R.id.educator_edit_wednesday);
-        EducatorEditTwo = findViewById(R.id.educator_editTwo_wednesday);
-        EducatorEditThree = findViewById(R.id.educator_editThree_wednesday);
-        EducatorEditFour = findViewById(R.id.educator_editFour_wednesday);
-        EducatorEditFive = findViewById(R.id.educator_editFive_wednesday);
-        EducatorEditSix = findViewById(R.id.educator_editSix_wednesday);
-        typeEditOne_wednesday = findViewById(R.id.typeEdit_wednesday);
-        typeEditTwo_wednesday = findViewById(R.id.typeEditTwo_wednesday);
-        typeEditThree_wednesday = findViewById(R.id.typeEditThree_wednesday);
-        typeEditFour_wednesday = findViewById(R.id.typeEditFour_wednesday);
-        typeEditFive_wednesday = findViewById(R.id.typeEditFive_wednesday);
-        typeEditSix_wednesday = findViewById(R.id.typeEditSix_wednesday);
+          typeEditFive_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonFive = typeEditFive_tuesday.indexOfChild(findViewById(typeEditFive_tuesday.getCheckedRadioButtonId()));
+                  int IdRadioButton = typeEditFive_tuesday.getCheckedRadioButtonId();
+                  RadioButton radioButton = findViewById(IdRadioButton);
+                  if (radioButton != null) {
+                      TuesdayTypeLessonFive = radioButton.getText().toString();
+                  }
+                  else { TuesdayTypeLessonFive = "";}
+              }
+          });
+          typeEditSix_tuesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonSix = typeEditSix_tuesday.indexOfChild(findViewById(typeEditSix_tuesday.getCheckedRadioButtonId()));
+                  int IdRadioButton = typeEditSix_tuesday.getCheckedRadioButtonId();
+                  RadioButton radioButton = findViewById(IdRadioButton);
+                  if (radioButton != null) {
+                      TuesdayTypeLessonSix = radioButton.getText().toString();
+                  }
+                  else { TuesdayTypeLessonSix = "";}
+              }
+          });
 
-        Lesson();
-        NumberOne.setText(Wednesday.get(0).idcards.toString());
-        NumberTwo.setText(Wednesday.get(1).idcards.toString());
-        NumberThree.setText(Wednesday.get(2).idcards.toString());
-        NumberFour.setText(Wednesday.get(3).idcards.toString());
-        NumberFive.setText(Wednesday.get(4).idcards.toString());
-        NumberSix.setText(Wednesday.get(5).idcards.toString());
-        TimeOne.setText(Wednesday.get(0).timelesson.toString());
-        TimeTwo.setText(Wednesday.get(1).timelesson.toString());
-        TimeThree.setText(Wednesday.get(2).timelesson.toString());
-        TimeFour.setText(Wednesday.get(3).timelesson.toString());
-        TimeFive.setText(Wednesday.get(4).timelesson.toString());
-        TimeSix.setText(Wednesday.get(5).timelesson.toString());
-        rb_lecture.setText(typelesson.get(0));
-        rb_lectureTwo.setText(typelesson.get(0));
-        rb_lectureThree.setText(typelesson.get(0));
-        rb_lectureFour.setText(typelesson.get(0));
-        rb_lectureFive.setText(typelesson.get(0));
-        rb_lectureSix.setText(typelesson.get(0));
-        rb_labwork.setText(typelesson.get(1));
-        rb_labworkTwo.setText(typelesson.get(1));
-        rb_labworkThree.setText(typelesson.get(1));
-        rb_labworkFour.setText(typelesson.get(1));
-        rb_labworkFive.setText(typelesson.get(1));
-        rb_labworkSix.setText(typelesson.get(1));
-        rb_practice.setText(typelesson.get(2));
-        rb_practice.setText(typelesson.get(2));
-        rb_practiceThree.setText(typelesson.get(2));
-        rb_practiceFour.setText(typelesson.get(2));
-        rb_practiceFive.setText(typelesson.get(2));
-        rb_practiceSix.setText(typelesson.get(2));
-        ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
-        subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
-        audSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> eduSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, educator_list);
-        eduSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        SubjectEditOne.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditTwo.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditThree.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditFour.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditFive.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditSix.setAdapter(subSpinnerArrayAdapter);
-        AudienceEditOne.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditTwo.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditThree.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditFour.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditFive.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditSix.setAdapter(audSpinnerArrayAdapter);
-        EducatorEditOne.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditTwo.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditThree.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditFour.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditFive.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditSix.setAdapter(eduSpinnerArrayAdapter);
+          copy_downOne.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditTwo.setSelection(subject_list.indexOf(Tuesday.get(0).subject()));
+                  AudienceEditTwo.setSelection(audience_list.indexOf(Tuesday.get(0).audience));
+                  EducatorEditTwo.setSelection(educator_list.indexOf(Tuesday.get(0).educator));
+                  switch (IdRadioButtonOne){
+                      case 0:
+                          rb_lectureTwo.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkTwo.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceTwo.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
 
-        SubjectEditOne.setSelection(subject_list.indexOf(Wednesday.get(0).subjectEdit));
-        SubjectEditTwo.setSelection(subject_list.indexOf(Wednesday.get(1).subjectEdit.toString()));
-        SubjectEditThree.setSelection(subject_list.indexOf(Wednesday.get(2).subjectEdit.toString()));
-        SubjectEditFour.setSelection(subject_list.indexOf(Wednesday.get(3).subjectEdit.toString()));
-        SubjectEditFive.setSelection(subject_list.indexOf(Wednesday.get(4).subjectEdit.toString()));
-        SubjectEditSix.setSelection(subject_list.indexOf(Wednesday.get(5).subjectEdit.toString()));
-        AudienceEditOne.setSelection(audience_list.indexOf(Wednesday.get(0).audienceEdit.toString()));
-        AudienceEditTwo.setSelection(audience_list.indexOf(Wednesday.get(1).audienceEdit.toString()));
-        AudienceEditThree.setSelection(audience_list.indexOf(Wednesday.get(2).audienceEdit.toString()));
-        AudienceEditFour.setSelection(audience_list.indexOf(Wednesday.get(3).audienceEdit.toString()));
-        AudienceEditFive.setSelection(audience_list.indexOf(Wednesday.get(4).audienceEdit.toString()));
-        AudienceEditSix.setSelection(audience_list.indexOf(Wednesday.get(5).audienceEdit.toString()));
-        EducatorEditOne.setSelection(educator_list.indexOf(Wednesday.get(0).educator.toString()));
-        EducatorEditTwo.setSelection(educator_list.indexOf(Wednesday.get(1).educator.toString()));
-        EducatorEditThree.setSelection(educator_list.indexOf(Wednesday.get(2).educator.toString()));
-        EducatorEditFour.setSelection(educator_list.indexOf(Wednesday.get(3).educator.toString()));
-        EducatorEditFive.setSelection(educator_list.indexOf(Wednesday.get(4).educator.toString()));
-        EducatorEditSix.setSelection(educator_list.indexOf(Wednesday.get(5).educator.toString()));
+          copy_downTwo.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditThree.setSelection(subject_list.indexOf(Tuesday.get(1).subject));
+                  AudienceEditThree.setSelection(audience_list.indexOf(Tuesday.get(1).audience()));
+                  EducatorEditThree.setSelection(educator_list.indexOf(Tuesday.get(1).educator));
+                  switch (IdRadioButtonTwo){
+                      case 0:
+                          rb_lectureThree.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkThree.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceThree.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
 
-        TextView copy_downOne = findViewById(R.id.copy_downOne_wednesday);
-        TextView copy_downTwo = findViewById(R.id.copy_downTwo_wednesday);
-        TextView copy_downThree = findViewById(R.id.copy_downThree_wednesday);
-        TextView copy_downFour = findViewById(R.id.copy_downFour_wednesday);
-        TextView copy_downFive = findViewById(R.id.copy_downFive_wednesday);
-        TextView copy_upTwo= findViewById(R.id.copy_upTwo_wednesday);
-        TextView copy_upThree= findViewById(R.id.copy_upThree_wednesday);
-        TextView copy_upFour= findViewById(R.id.copy_upFour_wednesday);
-        TextView copy_upFive= findViewById(R.id.copy_upFive_wednesday);
-        TextView copy_upSix= findViewById(R.id.copy_upSix_wednesday);
-        TextView clearOne = findViewById(R.id.clear_cardOne_wednesday);
-        TextView clearTwo = findViewById(R.id.clear_cardTwo_wednesday);
-        TextView clearThree = findViewById(R.id.clear_cardThree_wednesday);
-        TextView clearFour = findViewById(R.id.clear_cardFour_wednesday);
-        TextView clearFive = findViewById(R.id.clear_cardFive_wednesday);
-        TextView clearSix = findViewById(R.id.clear_cardSix_wednesday);
+          copy_downThree.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditFour.setSelection(subject_list.indexOf(Tuesday.get(2).subjectEdit));
+                  AudienceEditFour.setSelection(audience_list.indexOf(Tuesday.get(2).audienceEdit));
+                  EducatorEditFour.setSelection(educator_list.indexOf(Tuesday.get(2).educator));
+                  switch (IdRadioButtonThree){
+                      case 0:
+                          rb_lectureFour.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFour.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFour.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+          copy_downFour.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditFive.setSelection(subject_list.indexOf(Tuesday.get(3).subjectEdit));
+                  AudienceEditFive.setSelection(audience_list.indexOf(Tuesday.get(3).audienceEdit));
+                  EducatorEditFive.setSelection(educator_list.indexOf(Tuesday.get(3).educator));
+                  switch (IdRadioButtonFour){
+                      case 0:
+                          rb_lectureFive.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFive.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFive.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
 
-        typeEditOne_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonOne = typeEditOne_wednesday.indexOfChild(findViewById(typeEditOne_wednesday.getCheckedRadioButtonId()));
-                int IdRadioButton = typeEditOne_wednesday.getCheckedRadioButtonId();
-                RadioButton radioButton = findViewById(IdRadioButton);
-                if (radioButton != null) {
-                    WednesdayTypeLessonOne = radioButton.getText().toString();
-                }
-                else { WednesdayTypeLessonOne = "";}
+          copy_downFive.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditSix.setSelection(subject_list.indexOf(Tuesday.get(4).subjectEdit));
+                  AudienceEditSix.setSelection(audience_list.indexOf(Tuesday.get(4).audienceEdit));
+                  EducatorEditSix.setSelection(educator_list.indexOf(Tuesday.get(4).educator));
+                  switch (IdRadioButtonFive){
+                      case 0:
+                          rb_lectureSix.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkSix.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceSix.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
 
-            }
-        });
+          copy_upTwo.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+              try{
+                  SubjectEditOne.setSelection(subject_list.indexOf(Tuesday.get(1).subjectEdit));
+                  AudienceEditOne.setSelection(audience_list.indexOf(Tuesday.get(1).audienceEdit));
+                  EducatorEditOne.setSelection(educator_list.indexOf(Tuesday.get(1).educator));
+                  switch (IdRadioButtonTwo){
+                      case 0:
+                          rb_lecture.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labwork.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practice.setChecked(true);
+                          break;
+                  }
+              } catch   (NullPointerException e) {}
+              }
+          });
 
-        typeEditTwo_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonTwo = typeEditTwo_wednesday.indexOfChild(findViewById(typeEditTwo_wednesday.getCheckedRadioButtonId()));
-                int IdRadioButtonTwo = typeEditTwo_wednesday.getCheckedRadioButtonId();
-                RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
-                if (radioButtonTwo != null) {
-                    WednesdayTypeLessonTwo = radioButtonTwo.getText().toString();
-                }
-                else { WednesdayTypeLessonTwo = "";}
-            }
-        });
+          copy_upThree.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                      try{
+                  SubjectEditTwo.setSelection(subject_list.indexOf(Tuesday.get(2).subjectEdit));
+                  AudienceEditTwo.setSelection(audience_list.indexOf(Tuesday.get(2).audienceEdit));
+                  EducatorEditTwo.setSelection(educator_list.indexOf(Tuesday.get(2).educator));
+                  switch (IdRadioButtonThree){
+                      case 0:
+                          rb_lectureTwo.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkTwo.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceTwo.setChecked(true);
+                          break;
+                  }
+                      } catch   (NullPointerException e) {}
+              }
+          });
 
-        typeEditThree_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonThree = typeEditThree_wednesday.indexOfChild(findViewById(typeEditThree_wednesday.getCheckedRadioButtonId()));
-                int IdRadioButtonThree = typeEditThree_wednesday.getCheckedRadioButtonId();
-                RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
-                if (radioButtonThree != null) {
-                    WednesdayTypeLessonThree = radioButtonThree.getText().toString();
-                }
-                else { WednesdayTypeLessonThree = "";}
-            }
-        });
+          copy_upFour.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditThree.setSelection(subject_list.indexOf(Tuesday.get(3).subjectEdit));
+                  AudienceEditThree.setSelection(audience_list.indexOf(Tuesday.get(3).audienceEdit));
+                  EducatorEditThree.setSelection(educator_list.indexOf(Tuesday.get(3).educator));
+                  switch (IdRadioButtonFour){
+                      case 0:
+                          rb_lectureThree.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkThree.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceThree.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
 
-        typeEditFour_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonFour = typeEditFour_wednesday.indexOfChild(findViewById(typeEditFour_wednesday.getCheckedRadioButtonId()));
-                int IdRadioButtonFour = typeEditFour_wednesday.getCheckedRadioButtonId();
-                RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
-                if (radioButtonFour != null) {
-                    WednesdayTypeLessonFour = radioButtonFour.getText().toString();
-                }
-                else { WednesdayTypeLessonFour = "";}
-            }
-        });
+          copy_upFive.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditFour.setSelection(subject_list.indexOf(Tuesday.get(4).subjectEdit));
+                  AudienceEditFour.setSelection(audience_list.indexOf(Tuesday.get(4).audienceEdit));
+                  EducatorEditFour.setSelection(educator_list.indexOf(Tuesday.get(4).educator));
+                  switch (IdRadioButtonFive){
+                      case 0:
+                          rb_lectureFour.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFour.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFour.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
 
-        typeEditFive_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonFive = typeEditFive_wednesday.indexOfChild(findViewById(typeEditFive_wednesday.getCheckedRadioButtonId()));
-                int IdRadioButtonFive = typeEditFive_wednesday.getCheckedRadioButtonId();
-                RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
-                if (radioButtonFive != null) {
-                    WednesdayTypeLessonFive = radioButtonFive.getText().toString();
-                }
-                else { WednesdayTypeLessonFive = "";}
-            }
-        });
-        typeEditSix_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonSix = typeEditSix_wednesday.indexOfChild(findViewById(typeEditSix_wednesday.getCheckedRadioButtonId()));
-                int IdRadioButtonSix = typeEditSix_wednesday.getCheckedRadioButtonId();
-                RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
-                if (radioButtonSix != null) {
-                    WednesdayTypeLessonSix = radioButtonSix.getText().toString();
-                }
-                else { WednesdayTypeLessonSix = "";}
-            }
-        });
-
-        copy_downOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditTwo.setSelection(subject_list.indexOf(Wednesday.get(0).subjectEdit));
-                AudienceEditTwo.setSelection(audience_list.indexOf(Wednesday.get(0).audienceEdit));
-                EducatorEditTwo.setSelection(educator_list.indexOf(Wednesday.get(0).educator));
-                switch (IdRadioButtonOne){
-                    case 0:
-                        rb_lectureTwo.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkTwo.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceTwo.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_downTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditThree.setSelection(subject_list.indexOf(Wednesday.get(1).subjectEdit));
-                AudienceEditThree.setSelection(audience_list.indexOf(Wednesday.get(1).audienceEdit));
-                EducatorEditThree.setSelection(educator_list.indexOf(Wednesday.get(1).educator));
-                switch (IdRadioButtonTwo){
-                    case 0:
-                        rb_lectureThree.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkThree.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceThree.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_downThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditFour.setSelection(subject_list.indexOf(Wednesday.get(2).subjectEdit));
-                AudienceEditFour.setSelection(audience_list.indexOf(Wednesday.get(2).audienceEdit));
-                EducatorEditFour.setSelection(educator_list.indexOf(Wednesday.get(2).educator));
-                switch (IdRadioButtonThree){
-                    case 0:
-                        rb_lectureFour.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFour.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFour.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-        copy_downFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditFive.setSelection(subject_list.indexOf(Wednesday.get(3).subjectEdit));
-                AudienceEditFive.setSelection(audience_list.indexOf(Wednesday.get(3).audienceEdit));
-                EducatorEditFive.setSelection(educator_list.indexOf(Wednesday.get(3).educator));
-                switch (IdRadioButtonFour){
-                    case 0:
-                        rb_lectureFive.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFive.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFive.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_downFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditSix.setSelection(subject_list.indexOf(Wednesday.get(4).subjectEdit));
-                AudienceEditSix.setSelection(audience_list.indexOf(Wednesday.get(4).audienceEdit));
-                EducatorEditSix.setSelection(educator_list.indexOf(Wednesday.get(4).educator));
-                switch (IdRadioButtonFive){
-                    case 0:
-                        rb_lectureSix.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkSix.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceSix.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-
-                SubjectEditOne.setSelection(subject_list.indexOf(Wednesday.get(1).subjectEdit));
-                AudienceEditOne.setSelection(audience_list.indexOf(Wednesday.get(1).audienceEdit));
-                EducatorEditOne.setSelection(educator_list.indexOf(Wednesday.get(1).educator));
-                switch (IdRadioButtonTwo){
-                    case 0:
-                        rb_lecture.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labwork.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practice.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-
-                SubjectEditTwo.setSelection(subject_list.indexOf(Wednesday.get(2).subjectEdit));
-                AudienceEditTwo.setSelection(audience_list.indexOf(Wednesday.get(2).audienceEdit));
-                EducatorEditTwo.setSelection(educator_list.indexOf(Wednesday.get(2).educator));
-                switch (IdRadioButtonThree){
-                    case 0:
-                        rb_lectureTwo.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkTwo.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceTwo.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-
-                SubjectEditThree.setSelection(subject_list.indexOf(Wednesday.get(3).subjectEdit));
-                AudienceEditThree.setSelection(audience_list.indexOf(Wednesday.get(3).audienceEdit));
-                EducatorEditThree.setSelection(educator_list.indexOf(Wednesday.get(3).educator));
-                switch (IdRadioButtonFour){
-                    case 0:
-                        rb_lectureThree.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkThree.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceThree.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-
-                SubjectEditFour.setSelection(subject_list.indexOf(Wednesday.get(4).subjectEdit));
-                AudienceEditFour.setSelection(audience_list.indexOf(Wednesday.get(4).audienceEdit));
-                EducatorEditFour.setSelection(educator_list.indexOf(Wednesday.get(4).educator));
-                switch (IdRadioButtonFive){
-                    case 0:
-                        rb_lectureFour.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFour.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFour.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upSix.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-
-                SubjectEditFive.setSelection(subject_list.indexOf(Wednesday.get(5).subjectEdit));
-                AudienceEditFive.setSelection(audience_list.indexOf(Wednesday.get(5).audienceEdit));
-                EducatorEditFive.setSelection(educator_list.indexOf(Wednesday.get(5).educator));
-                switch (IdRadioButtonSix){
-                    case 0:
-                        rb_lectureFive.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFive.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFive.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
+          copy_upSix.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+              try{
+                  SubjectEditFive.setSelection(subject_list.indexOf(Tuesday.get(5).subjectEdit));
+                  AudienceEditFive.setSelection(audience_list.indexOf(Tuesday.get(5).audienceEdit));
+                  EducatorEditFive.setSelection(educator_list.indexOf(Tuesday.get(5).educator));
+                  switch (IdRadioButtonSix){
+                      case 0:
+                          rb_lectureFive.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFive.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFive.setChecked(true);
+                          break;
+                  }
+              } catch   (NullPointerException e) {}
+              }
+          });
 
 
 
-        clearOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditOne.setSelection(0);
-                AudienceEditOne.setSelection(0);
-                EducatorEditOne.setSelection(0);
-                typeEditOne_wednesday.clearCheck();
-            }
-        });
+          clearOne.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditOne.setSelection(0);
+                  AudienceEditOne.setSelection(0);
+                  EducatorEditOne.setSelection(0);
+                  typeEditOne_tuesday.clearCheck();
+              }
+          });
 
-        clearTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditTwo.setSelection(0);
-                AudienceEditTwo.setSelection(0);
-                EducatorEditTwo.setSelection(0);
-                typeEditTwo_wednesday.clearCheck();
-            }
-        });
+          clearTwo.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditTwo.setSelection(0);
+                  AudienceEditTwo.setSelection(0);
+                  EducatorEditTwo.setSelection(0);
+                  typeEditTwo_tuesday.clearCheck();
+              }
+          });
 
-        clearThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditThree.setSelection(0);
-                AudienceEditThree.setSelection(0);
-                EducatorEditThree.setSelection(0);
-                typeEditThree_wednesday.clearCheck();
-            }
-        });
+          clearThree.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditThree.setSelection(0);
+                  AudienceEditThree.setSelection(0);
+                  EducatorEditThree.setSelection(0);
+                  typeEditThree_tuesday.clearCheck();
+              }
+          });
 
-        clearFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditFour.setSelection(0);
-                AudienceEditFour.setSelection(0);
-                EducatorEditFour.setSelection(0);
-                typeEditFour_wednesday.clearCheck();
-            }
-        });
+          clearFour.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditFour.setSelection(0);
+                  AudienceEditFour.setSelection(0);
+                  EducatorEditFour.setSelection(0);
+                  typeEditFour_tuesday.clearCheck();
+              }
+          });
 
-        clearFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditFive.setSelection(0);
-                AudienceEditFive.setSelection(0);
-                EducatorEditFive.setSelection(0);
-                typeEditFive_wednesday.clearCheck();
-            }
-        });
+          clearFive.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditFive.setSelection(0);
+                  AudienceEditFive.setSelection(0);
+                  EducatorEditFive.setSelection(0);
+                  typeEditFive_tuesday.clearCheck();
+              }
+          });
 
-        clearSix.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditSix.setSelection(0);
-                AudienceEditSix.setSelection(0);
-                EducatorEditSix.setSelection(0);
-                typeEditSix_wednesday.clearCheck();
-            }
-        });
-
-
-        SubjectEditOne.setSelection(subject_list.indexOf(Wednesday.get(0).subjectEdit.toString()));
-        SubjectEditTwo.setSelection(subject_list.indexOf(Wednesday.get(1).subjectEdit.toString()));
-        SubjectEditThree.setSelection(subject_list.indexOf(Wednesday.get(2).subjectEdit.toString()));
-        SubjectEditFour.setSelection(subject_list.indexOf(Wednesday.get(3).subjectEdit.toString()));
-        SubjectEditFive.setSelection(subject_list.indexOf(Wednesday.get(4).subjectEdit.toString()));
-        SubjectEditSix.setSelection(subject_list.indexOf(Wednesday.get(5).subjectEdit.toString()));
-        AudienceEditOne.setSelection(audience_list.indexOf(Wednesday.get(0).audienceEdit.toString()));
-        AudienceEditTwo.setSelection(audience_list.indexOf(Wednesday.get(1).audienceEdit.toString()));
-        AudienceEditThree.setSelection(audience_list.indexOf(Wednesday.get(2).audienceEdit.toString()));
-        AudienceEditFour.setSelection(audience_list.indexOf(Wednesday.get(3).audienceEdit.toString()));
-        AudienceEditFive.setSelection(audience_list.indexOf(Wednesday.get(4).audienceEdit.toString()));
-        AudienceEditSix.setSelection(audience_list.indexOf(Wednesday.get(5).audienceEdit.toString()));
-        EducatorEditOne.setSelection(educator_list.indexOf(Wednesday.get(0).educator.toString()));
-        EducatorEditTwo.setSelection(educator_list.indexOf(Wednesday.get(1).educator.toString()));
-        EducatorEditThree.setSelection(educator_list.indexOf(Wednesday.get(2).educator.toString()));
-        EducatorEditFour.setSelection(educator_list.indexOf(Wednesday.get(3).educator.toString()));
-        EducatorEditFive.setSelection(educator_list.indexOf(Wednesday.get(4).educator.toString()));
-        EducatorEditSix.setSelection(educator_list.indexOf(Wednesday.get(5).educator.toString()));
+          clearSix.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditSix.setSelection(0);
+                  AudienceEditSix.setSelection(0);
+                  EducatorEditSix.setSelection(0);
+                  typeEditSix_tuesday.clearCheck();
+              }
+          });
 
 
-        if (Wednesday.get(0).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lecture.setChecked(true);
-        } else if (Wednesday.get(0).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labwork.setChecked(true);
-        } else if (Wednesday.get(0).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practice.setChecked(true);
-        }
-        if (Wednesday.get(1).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureTwo.setChecked(true);
-        } else if (Wednesday.get(1).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkTwo.setChecked(true);
-        } else if (Wednesday.get(1).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceTwo.setChecked(true);
-        }
-        if (Wednesday.get(2).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureThree.setChecked(true);
-        } else if (Wednesday.get(2).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkThree.setChecked(true);
-        } else if (Wednesday.get(2).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceThree.setChecked(true);
-        }
-        if (Wednesday.get(3).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureFour.setChecked(true);
-        } else if (Wednesday.get(3).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkFour.setChecked(true);
-        } else if (Wednesday.get(3).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceFour.setChecked(true);
-        }
-        if (Wednesday.get(4).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureFive.setChecked(true);
-        } else if (Wednesday.get(4).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkFive.setChecked(true);
-        } else if (Wednesday.get(4).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceFive.setChecked(true);
-        }
-        if (Wednesday.get(5).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureSix.setChecked(true);
-        } else if (Wednesday.get(5).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkSix.setChecked(true);
-        } else if (Wednesday.get(5).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceSix.setChecked(true);
-        }
+          SubjectEditOne.setSelection(subject_list.indexOf(Tuesday.get(0).subjectEdit.toString()));
+          SubjectEditTwo.setSelection(subject_list.indexOf(Tuesday.get(1).subjectEdit.toString()));
+          SubjectEditThree.setSelection(subject_list.indexOf(Tuesday.get(2).subjectEdit.toString()));
+          SubjectEditFour.setSelection(subject_list.indexOf(Tuesday.get(3).subjectEdit.toString()));
+          SubjectEditFive.setSelection(subject_list.indexOf(Tuesday.get(4).subjectEdit.toString()));
+          SubjectEditSix.setSelection(subject_list.indexOf(Tuesday.get(5).subjectEdit.toString()));
+          AudienceEditOne.setSelection(audience_list.indexOf(Tuesday.get(0).audienceEdit.toString()));
+          AudienceEditTwo.setSelection(audience_list.indexOf(Tuesday.get(1).audienceEdit.toString()));
+          AudienceEditThree.setSelection(audience_list.indexOf(Tuesday.get(2).audienceEdit.toString()));
+          AudienceEditFour.setSelection(audience_list.indexOf(Tuesday.get(3).audienceEdit.toString()));
+          AudienceEditFive.setSelection(audience_list.indexOf(Tuesday.get(4).audienceEdit.toString()));
+          AudienceEditSix.setSelection(audience_list.indexOf(Tuesday.get(5).audienceEdit.toString()));
+          EducatorEditOne.setSelection(educator_list.indexOf(Tuesday.get(0).educator.toString()));
+          EducatorEditTwo.setSelection(educator_list.indexOf(Tuesday.get(1).educator.toString()));
+          EducatorEditThree.setSelection(educator_list.indexOf(Tuesday.get(2).educator.toString()));
+          EducatorEditFour.setSelection(educator_list.indexOf(Tuesday.get(3).educator.toString()));
+          EducatorEditFive.setSelection(educator_list.indexOf(Tuesday.get(4).educator.toString()));
+          EducatorEditSix.setSelection(educator_list.indexOf(Tuesday.get(5).educator.toString()));
 
-        //S1
-        try {
-            SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
-                    Wednesday.set(0, new Lesson("1", "8:30-10:00", WednesdayValueSubjectOne, Wednesday.get(0).audienceEdit.toString(), Wednesday.get(0).educator.toString(), Wednesday.get(0).typelesson.toString()));
-                }
+
+          if (Tuesday.get(0).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lecture.setChecked(true);
+          } else if (Tuesday.get(0).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labwork.setChecked(true);
+          } else if (Tuesday.get(0).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practice.setChecked(true);
+          }
+          if (Tuesday.get(1).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureTwo.setChecked(true);
+          } else if (Tuesday.get(1).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkTwo.setChecked(true);
+          } else if (Tuesday.get(1).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceTwo.setChecked(true);
+          }
+          if (Tuesday.get(2).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureThree.setChecked(true);
+          } else if (Tuesday.get(2).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkThree.setChecked(true);
+          } else if (Tuesday.get(2).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceThree.setChecked(true);
+          }
+          if (Tuesday.get(3).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureFour.setChecked(true);
+          } else if (Tuesday.get(3).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkFour.setChecked(true);
+          } else if (Tuesday.get(3).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceFour.setChecked(true);
+          }
+          if (Tuesday.get(4).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureFive.setChecked(true);
+          } else if (Tuesday.get(4).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkFive.setChecked(true);
+          } else if (Tuesday.get(4).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceFive.setChecked(true);
+          }
+          if (Tuesday.get(5).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureSix.setChecked(true);
+          } else if (Tuesday.get(5).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkSix.setChecked(true);
+          } else if (Tuesday.get(5).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceSix.setChecked(true);
+          }
+          //S1
+         try {
+              SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
+                      Tuesday.set(0, new Lesson("1", "8:30-10:00", TuesdayValueSubjectOne, Tuesday.get(0).audienceEdit.toString(), Tuesday.get(0).educator.toString(), Tuesday.get(0).typelesson.toString()));
+                  }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-
-        //S2
-        try {
-            SubjectEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
-                    Wednesday.set(1, new Lesson("2", "10:10-11:40", WednesdayValueSubjectTwo, Wednesday.get(1).audienceEdit.toString(), Wednesday.get(1).educator.toString(), Wednesday.get(1).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-
-        //S3
-        try {
-            SubjectEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
-                    Wednesday.set(2, new Lesson("3", "12:20-13:50", WednesdayValueSubjectThree, Wednesday.get(2).audienceEdit.toString(), Wednesday.get(2).educator.toString(), Wednesday.get(2).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //S4
-        try {
-            SubjectEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
-                    Wednesday.set(3, new Lesson("4", "14:00-15:30", WednesdayValueSubjectFour, Wednesday.get(3).audienceEdit.toString(), Wednesday.get(3).educator.toString(), Wednesday.get(3).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //S5
-        try {
-            SubjectEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
-                    Wednesday.set(4, new Lesson("5", "15:40-17:10", WednesdayValueSubjectFive, Wednesday.get(4).audienceEdit.toString(), Wednesday.get(4).educator.toString(), Wednesday.get(4).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //S6
-        try {
-            SubjectEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
-                    Wednesday.set(5, new Lesson("6", "17:30-19:00", WednesdayValueSubjectSix, Wednesday.get(5).audienceEdit.toString(), Wednesday.get(5).educator.toString(), Wednesday.get(5).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-
-        //A1
-        try {
-            AudienceEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
-                    Wednesday.set(0, new Lesson("1", "8:30-10:00", Wednesday.get(0).subjectEdit.toString(), WednesdayValueAudienceOne, Wednesday.get(0).educator.toString(), Wednesday.get(0).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A2
-        try {
-            AudienceEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
-                    Wednesday.set(1, new Lesson("2", "10:10-11:40", Wednesday.get(1).subjectEdit.toString(), WednesdayValueAudienceTwo, Wednesday.get(1).educator.toString(), Wednesday.get(1).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-
-        //A3
-        try {
-            AudienceEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
-                    Wednesday.set(2, new Lesson("3", "12:20-13:50", Wednesday.get(2).subjectEdit.toString(), WednesdayValueAudienceThree, Wednesday.get(2).educator.toString(), Wednesday.get(2).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A4
-        try {
-            AudienceEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
-                    Wednesday.set(3, new Lesson("4", "14:00-15:30", Wednesday.get(3).subjectEdit.toString(), WednesdayValueAudienceFour, Wednesday.get(3).educator.toString(), Wednesday.get(3).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A5
-        try {
-            AudienceEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
-                    Wednesday.set(4, new Lesson("5", "15:40-17:10", Wednesday.get(4).subjectEdit.toString(), WednesdayValueAudienceFive, Wednesday.get(4).educator.toString(), Wednesday.get(4).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A6
-        try {
-            AudienceEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
-                    Wednesday.set(5, new Lesson("6", "17:30-19:00", Wednesday.get(5).subjectEdit.toString(), WednesdayValueAudienceSix, Wednesday.get(5).educator.toString(), Wednesday.get(5).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E1
-        try {
-            EducatorEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayEducatorOne = EducatorEditOne.getSelectedItem().toString();
-                    Wednesday.set(0, new Lesson("1", "8:30-10:00", Wednesday.get(0).subjectEdit.toString(), Wednesday.get(0).audienceEdit.toString(), WednesdayEducatorOne, Wednesday.get(0).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E2
-        try {
-            EducatorEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
-                    Wednesday.set(1, new Lesson("2", "10:10-11:40", Wednesday.get(1).subjectEdit.toString(), Wednesday.get(1).audienceEdit.toString(), WednesdayEducatorTwo, Wednesday.get(1).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-
-        //E3
-        try {
-            EducatorEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayEducatorThree = EducatorEditThree.getSelectedItem().toString();
-                    Wednesday.set(2, new Lesson("3", "12:20-13:50", Wednesday.get(2).subjectEdit.toString(), Wednesday.get(2).audienceEdit.toString(), WednesdayEducatorThree, Wednesday.get(2).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E4
-        try {
-            EducatorEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayEducatorFour = EducatorEditFour.getSelectedItem().toString();
-                    Wednesday.set(3, new Lesson("4", "14:00-15:30", Wednesday.get(3).subjectEdit.toString(), Wednesday.get(3).audienceEdit.toString(), WednesdayEducatorFour, Wednesday.get(3).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E5
-        try {
-            EducatorEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayEducatorFive = EducatorEditFive.getSelectedItem().toString();
-                    Wednesday.set(4, new Lesson("5", "15:40-17:10", Wednesday.get(4).subjectEdit.toString(), Wednesday.get(4).audienceEdit.toString(), WednesdayEducatorFive, Wednesday.get(4).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E6
-        try {
-            EducatorEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    WednesdayEducatorSix = EducatorEditSix.getSelectedItem().toString();
-                    Wednesday.set(5, new Lesson("6", "17:30-19:00", Wednesday.get(5).subjectEdit.toString(), Wednesday.get(5).audienceEdit.toString(), WednesdayEducatorSix, Wednesday.get(5).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-    }
-    public void thursday_fill() {
-        rb_lecture = findViewById(R.id.rb_lecture_thursday);
-        rb_labwork = findViewById(R.id.rb_labwork_thursday);
-        rb_practice = findViewById(R.id.rb_practice_thursday);
-        rb_lectureTwo = findViewById(R.id.rb_lectureTwo_thursday);
-        rb_labworkTwo = findViewById(R.id.rb_labworkTwo_thursday);
-        rb_practiceTwo = findViewById(R.id.rb_practiceTwo_thursday);
-        rb_lectureThree = findViewById(R.id.rb_lectureThree_thursday);
-        rb_labworkThree = findViewById(R.id.rb_labworkThree_thursday);
-        rb_practiceThree = findViewById(R.id.rb_practiceThree_thursday);
-        rb_lectureFour = findViewById(R.id.rb_lectureFour_thursday);
-        rb_labworkFour = findViewById(R.id.rb_labworkFour_thursday);
-        rb_practiceFour = findViewById(R.id.rb_practiceFour_thursday);
-        rb_lectureFive = findViewById(R.id.rb_lectureFive_thursday);
-        rb_labworkFive = findViewById(R.id.rb_labworkFive_thursday);
-        rb_practiceFive = findViewById(R.id.rb_practiceFive_thursday);
-        rb_lectureSix = findViewById(R.id.rb_lectureSix_thursday);
-        rb_labworkSix = findViewById(R.id.rb_labworkSix_thursday);
-        rb_practiceSix = findViewById(R.id.rb_practiceSix_thursday);
-        NumberOne = findViewById(R.id.number_thursday);
-        NumberTwo = findViewById(R.id.numberTwo_thursday);
-        NumberThree = findViewById(R.id.numberThree_thursday);
-        NumberFour = findViewById(R.id.numberFour_thursday);
-        NumberFive = findViewById(R.id.numberFive_thursday);
-        NumberSix = findViewById(R.id.numberSix_thursday);
-        TimeOne = findViewById(R.id.time_thursday);
-        TimeTwo = findViewById(R.id.timeTwo_thursday);
-        TimeThree = findViewById(R.id.timeThree_thursday);
-        TimeFour = findViewById(R.id.timeFour_thursday);
-        TimeFive = findViewById(R.id.timeFive_thursday);
-        TimeSix = findViewById(R.id.timeSix_thursday);
-        SubjectEditOne = findViewById(R.id.subject_edit_thursday);
-        SubjectEditTwo = findViewById(R.id.subject_editTwo_thursday);
-        SubjectEditThree = findViewById(R.id.subject_editThree_thursday);
-        SubjectEditFour = findViewById(R.id.subject_editFour_thursday);
-        SubjectEditFive = findViewById(R.id.subject_editFive_thursday);
-        SubjectEditSix = findViewById(R.id.subject_editSix_thursday);
-        AudienceEditOne = findViewById(R.id.audience_edit_thursday);
-        AudienceEditTwo = findViewById(R.id.audience_editTwo_thursday);
-        AudienceEditThree = findViewById(R.id.audience_editThree_thursday);
-        AudienceEditFour = findViewById(R.id.audience_editFour_thursday);
-        AudienceEditFive = findViewById(R.id.audience_editFive_thursday);
-        AudienceEditSix = findViewById(R.id.audience_editSix_thursday);
-        EducatorEditOne = findViewById(R.id.educator_edit_thursday);
-        EducatorEditTwo = findViewById(R.id.educator_editTwo_thursday);
-        EducatorEditThree = findViewById(R.id.educator_editThree_thursday);
-        EducatorEditFour = findViewById(R.id.educator_editFour_thursday);
-        EducatorEditFive = findViewById(R.id.educator_editFive_thursday);
-        EducatorEditSix = findViewById(R.id.educator_editSix_thursday);
-        typeEditOne_thursday = findViewById(R.id.typeEdit_thursday);
-        typeEditTwo_thursday = findViewById(R.id.typeEditTwo_thursday);
-        typeEditThree_thursday = findViewById(R.id.typeEditThree_thursday);
-        typeEditFour_thursday = findViewById(R.id.typeEditFour_thursday);
-        typeEditFive_thursday = findViewById(R.id.typeEditFive_thursday);
-        typeEditSix_thursday = findViewById(R.id.typeEditSix_thursday);
-
-        Lesson();
-        NumberOne.setText(Thursday.get(0).idcards.toString());
-        NumberTwo.setText(Thursday.get(1).idcards.toString());
-        NumberThree.setText(Thursday.get(2).idcards.toString());
-        NumberFour.setText(Thursday.get(3).idcards.toString());
-        NumberFive.setText(Thursday.get(4).idcards.toString());
-        NumberSix.setText(Thursday.get(5).idcards.toString());
-        TimeOne.setText(Thursday.get(0).timelesson.toString());
-        TimeTwo.setText(Thursday.get(1).timelesson.toString());
-        TimeThree.setText(Thursday.get(2).timelesson.toString());
-        TimeFour.setText(Thursday.get(3).timelesson.toString());
-        TimeFive.setText(Thursday.get(4).timelesson.toString());
-        TimeSix.setText(Thursday.get(5).timelesson.toString());
-        rb_lecture.setText(typelesson.get(0));
-        rb_lectureTwo.setText(typelesson.get(0));
-        rb_lectureThree.setText(typelesson.get(0));
-        rb_lectureFour.setText(typelesson.get(0));
-        rb_lectureFive.setText(typelesson.get(0));
-        rb_lectureSix.setText(typelesson.get(0));
-        rb_labwork.setText(typelesson.get(1));
-        rb_labworkTwo.setText(typelesson.get(1));
-        rb_labworkThree.setText(typelesson.get(1));
-        rb_labworkFour.setText(typelesson.get(1));
-        rb_labworkFive.setText(typelesson.get(1));
-        rb_labworkSix.setText(typelesson.get(1));
-        rb_practice.setText(typelesson.get(2));
-        rb_practice.setText(typelesson.get(2));
-        rb_practiceThree.setText(typelesson.get(2));
-        rb_practiceFour.setText(typelesson.get(2));
-        rb_practiceFive.setText(typelesson.get(2));
-        rb_practiceSix.setText(typelesson.get(2));
-        ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
-        subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
-        audSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> eduSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, educator_list);
-        eduSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        SubjectEditOne.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditTwo.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditThree.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditFour.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditFive.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditSix.setAdapter(subSpinnerArrayAdapter);
-        AudienceEditOne.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditTwo.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditThree.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditFour.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditFive.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditSix.setAdapter(audSpinnerArrayAdapter);
-        EducatorEditOne.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditTwo.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditThree.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditFour.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditFive.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditSix.setAdapter(eduSpinnerArrayAdapter);
-
-        TextView copy_downOne = findViewById(R.id.copy_downOne_thursday);
-        TextView copy_downTwo = findViewById(R.id.copy_downTwo_thursday);
-        TextView copy_downThree = findViewById(R.id.copy_downThree_thursday);
-        TextView copy_downFour = findViewById(R.id.copy_downFour_thursday);
-        TextView copy_downFive = findViewById(R.id.copy_downFive_thursday);
-        TextView copy_upTwo= findViewById(R.id.copy_upTwo_thursday);
-        TextView copy_upThree= findViewById(R.id.copy_upThree_thursday);
-        TextView copy_upFour= findViewById(R.id.copy_upFour_thursday);
-        TextView copy_upFive= findViewById(R.id.copy_upFive_thursday);
-        TextView copy_upSix= findViewById(R.id.copy_upSix_thursday);
-        TextView clearOne = findViewById(R.id.clear_cardOne_thursday);
-        TextView clearTwo = findViewById(R.id.clear_cardTwo_thursday);
-        TextView clearThree = findViewById(R.id.clear_cardThree_thursday);
-        TextView clearFour = findViewById(R.id.clear_cardFour_thursday);
-        TextView clearFive = findViewById(R.id.clear_cardFive_thursday);
-        TextView clearSix = findViewById(R.id.clear_cardSix_thursday);
-
-        typeEditOne_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonOne = typeEditOne_thursday.indexOfChild(findViewById(typeEditOne_thursday.getCheckedRadioButtonId()));
-                int IdRadioButton = typeEditOne_thursday.getCheckedRadioButtonId();
-                RadioButton radioButton = findViewById(IdRadioButton);
-                if (radioButton != null) {
-                    ThursdayTypeLessonOne = radioButton.getText().toString();
-                }
-                else { ThursdayTypeLessonOne = "";}
-
-            }
-        });
-
-        typeEditTwo_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonTwo = typeEditTwo_thursday.indexOfChild(findViewById(typeEditTwo_thursday.getCheckedRadioButtonId()));
-                int IdRadioButtonTwo = typeEditTwo_thursday.getCheckedRadioButtonId();
-                RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
-                if (radioButtonTwo != null) {
-                    ThursdayTypeLessonTwo = radioButtonTwo.getText().toString();
-                }
-                else { ThursdayTypeLessonTwo = "";}
-            }
-        });
-
-        typeEditThree_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonThree = typeEditThree_thursday.indexOfChild(findViewById(typeEditThree_thursday.getCheckedRadioButtonId()));
-                int IdRadioButtonThree = typeEditThree_thursday.getCheckedRadioButtonId();
-                RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
-                if (radioButtonThree != null) {
-                    ThursdayTypeLessonThree = radioButtonThree.getText().toString();
-                }
-                else { ThursdayTypeLessonThree = "";}
-            }
-        });
-
-        typeEditFour_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonFour = typeEditFour_thursday.indexOfChild(findViewById(typeEditFour_thursday.getCheckedRadioButtonId()));
-                int IdRadioButtonFour = typeEditFour_thursday.getCheckedRadioButtonId();
-                RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
-                if (radioButtonFour != null) {
-                    ThursdayTypeLessonFour = radioButtonFour.getText().toString();
-                }
-                else { ThursdayTypeLessonFour = "";}
-            }
-        });
-
-        typeEditFive_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonFive = typeEditFive_thursday.indexOfChild(findViewById(typeEditFive_thursday.getCheckedRadioButtonId()));
-                int IdRadioButtonFive = typeEditFive_thursday.getCheckedRadioButtonId();
-                RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
-                if (radioButtonFive != null) {
-                    ThursdayTypeLessonFive = radioButtonFive.getText().toString();
-                }
-                else { ThursdayTypeLessonFive = "";}
-            }
-        });
-        typeEditSix_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                IdRadioButtonSix = typeEditSix_thursday.indexOfChild(findViewById(typeEditSix_thursday.getCheckedRadioButtonId()));
-                int IdRadioButtonSix = typeEditSix_thursday.getCheckedRadioButtonId();
-                RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
-                if (radioButtonSix != null) {
-                    ThursdayTypeLessonSix = radioButtonSix.getText().toString();
-                }
-                else { ThursdayTypeLessonSix = "";}
-            }
-        });
-
-        copy_downOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditTwo.setSelection(subject_list.indexOf(Thursday.get(0).subjectEdit));
-                AudienceEditTwo.setSelection(audience_list.indexOf(Thursday.get(0).audienceEdit));
-                EducatorEditTwo.setSelection(educator_list.indexOf(Thursday.get(0).educator));
-                switch (IdRadioButtonOne){
-                    case 0:
-                        rb_lectureTwo.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkTwo.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceTwo.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_downTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditThree.setSelection(subject_list.indexOf(Thursday.get(1).subjectEdit));
-                AudienceEditThree.setSelection(audience_list.indexOf(Thursday.get(1).audienceEdit));
-                EducatorEditThree.setSelection(educator_list.indexOf(Thursday.get(1).educator));
-                switch (IdRadioButtonTwo){
-                    case 0:
-                        rb_lectureThree.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkThree.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceThree.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_downThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditFour.setSelection(subject_list.indexOf(Thursday.get(2).subjectEdit));
-                AudienceEditFour.setSelection(audience_list.indexOf(Thursday.get(2).audienceEdit));
-                EducatorEditFour.setSelection(educator_list.indexOf(Thursday.get(2).educator));
-                switch (IdRadioButtonThree){
-                    case 0:
-                        rb_lectureFour.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFour.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFour.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-        copy_downFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditFive.setSelection(subject_list.indexOf(Thursday.get(3).subjectEdit));
-                AudienceEditFive.setSelection(audience_list.indexOf(Thursday.get(3).audienceEdit));
-                EducatorEditFive.setSelection(educator_list.indexOf(Thursday.get(3).educator));
-                switch (IdRadioButtonFour){
-                    case 0:
-                        rb_lectureFive.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFive.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFive.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_downFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                SubjectEditSix.setSelection(subject_list.indexOf(Thursday.get(4).subjectEdit));
-                AudienceEditSix.setSelection(audience_list.indexOf(Thursday.get(4).audienceEdit));
-                EducatorEditSix.setSelection(educator_list.indexOf(Thursday.get(4).educator));
-                switch (IdRadioButtonFive){
-                    case 0:
-                        rb_lectureSix.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkSix.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceSix.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-
-                SubjectEditOne.setSelection(subject_list.indexOf(Thursday.get(1).subjectEdit));
-                AudienceEditOne.setSelection(audience_list.indexOf(Thursday.get(1).audienceEdit));
-                EducatorEditOne.setSelection(educator_list.indexOf(Thursday.get(1).educator));
-                switch (IdRadioButtonTwo){
-                    case 0:
-                        rb_lecture.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labwork.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practice.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-
-                SubjectEditTwo.setSelection(subject_list.indexOf(Thursday.get(2).subjectEdit));
-                AudienceEditTwo.setSelection(audience_list.indexOf(Thursday.get(2).audienceEdit));
-                EducatorEditTwo.setSelection(educator_list.indexOf(Thursday.get(2).educator));
-                switch (IdRadioButtonThree){
-                    case 0:
-                        rb_lectureTwo.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkTwo.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceTwo.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-
-                SubjectEditThree.setSelection(subject_list.indexOf(Thursday.get(3).subjectEdit));
-                AudienceEditThree.setSelection(audience_list.indexOf(Thursday.get(3).audienceEdit));
-                EducatorEditThree.setSelection(educator_list.indexOf(Thursday.get(3).educator));
-                switch (IdRadioButtonFour){
-                    case 0:
-                        rb_lectureThree.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkThree.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceThree.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-
-                SubjectEditFour.setSelection(subject_list.indexOf(Thursday.get(4).subjectEdit));
-                AudienceEditFour.setSelection(audience_list.indexOf(Thursday.get(4).audienceEdit));
-                EducatorEditFour.setSelection(educator_list.indexOf(Thursday.get(4).educator));
-                switch (IdRadioButtonFive){
-                    case 0:
-                        rb_lectureFour.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFour.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFour.setChecked(true);
-                        break;
-                }
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-        copy_upSix.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-
-                SubjectEditFive.setSelection(subject_list.indexOf(Thursday.get(5).subjectEdit));
-                AudienceEditFive.setSelection(audience_list.indexOf(Thursday.get(5).audienceEdit));
-                EducatorEditFive.setSelection(educator_list.indexOf(Thursday.get(5).educator));
-                switch (IdRadioButtonSix){
-                    case 0:
-                        rb_lectureFive.setChecked(true);
-                        break;
-                    case 1:
-                        rb_labworkFive.setChecked(true);
-                        break;
-                    case 2:
-                        rb_practiceFive.setChecked(true);
-                        break;
-                }
-
-                } catch   (NullPointerException e) {}
-            }
-        });
-
-
-
-        clearOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditOne.setSelection(0);
-                AudienceEditOne.setSelection(0);
-                EducatorEditOne.setSelection(0);
-                typeEditOne_thursday.clearCheck();
-            }
-        });
-
-        clearTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditTwo.setSelection(0);
-                AudienceEditTwo.setSelection(0);
-                EducatorEditTwo.setSelection(0);
-                typeEditTwo_thursday.clearCheck();
-            }
-        });
-
-        clearThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditThree.setSelection(0);
-                AudienceEditThree.setSelection(0);
-                EducatorEditThree.setSelection(0);
-                typeEditThree_thursday.clearCheck();
-            }
-        });
-
-        clearFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditFour.setSelection(0);
-                AudienceEditFour.setSelection(0);
-                EducatorEditFour.setSelection(0);
-                typeEditFour_thursday.clearCheck();
-            }
-        });
-
-        clearFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditFive.setSelection(0);
-                AudienceEditFive.setSelection(0);
-                EducatorEditFive.setSelection(0);
-                typeEditFive_thursday.clearCheck();
-            }
-        });
-
-        clearSix.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SubjectEditSix.setSelection(0);
-                AudienceEditSix.setSelection(0);
-                EducatorEditSix.setSelection(0);
-                typeEditSix_thursday.clearCheck();
-            }
-        });
-
-
-
-        SubjectEditOne.setSelection(subject_list.indexOf(Thursday.get(0).subjectEdit.toString()));
-        SubjectEditTwo.setSelection(subject_list.indexOf(Thursday.get(1).subjectEdit.toString()));
-        SubjectEditThree.setSelection(subject_list.indexOf(Thursday.get(2).subjectEdit.toString()));
-        SubjectEditFour.setSelection(subject_list.indexOf(Thursday.get(3).subjectEdit.toString()));
-        SubjectEditFive.setSelection(subject_list.indexOf(Thursday.get(4).subjectEdit.toString()));
-        SubjectEditSix.setSelection(subject_list.indexOf(Thursday.get(5).subjectEdit.toString()));
-        AudienceEditOne.setSelection(audience_list.indexOf(Thursday.get(0).audienceEdit.toString()));
-        AudienceEditTwo.setSelection(audience_list.indexOf(Thursday.get(1).audienceEdit.toString()));
-        AudienceEditThree.setSelection(audience_list.indexOf(Thursday.get(2).audienceEdit.toString()));
-        AudienceEditFour.setSelection(audience_list.indexOf(Thursday.get(3).audienceEdit.toString()));
-        AudienceEditFive.setSelection(audience_list.indexOf(Thursday.get(4).audienceEdit.toString()));
-        AudienceEditSix.setSelection(audience_list.indexOf(Thursday.get(5).audienceEdit.toString()));
-        EducatorEditOne.setSelection(educator_list.indexOf(Thursday.get(0).educator.toString()));
-        EducatorEditTwo.setSelection(educator_list.indexOf(Thursday.get(1).educator.toString()));
-        EducatorEditThree.setSelection(educator_list.indexOf(Thursday.get(2).educator.toString()));
-        EducatorEditFour.setSelection(educator_list.indexOf(Thursday.get(3).educator.toString()));
-        EducatorEditFive.setSelection(educator_list.indexOf(Thursday.get(4).educator.toString()));
-        EducatorEditSix.setSelection(educator_list.indexOf(Thursday.get(5).educator.toString()));
-
-        if (Thursday.get(0).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lecture.setChecked(true);
-        } else if (Thursday.get(0).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labwork.setChecked(true);
-        } else if (Thursday.get(0).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practice.setChecked(true);
-        }
-        if (Thursday.get(1).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureTwo.setChecked(true);
-        } else if (Thursday.get(1).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkTwo.setChecked(true);
-        } else if (Thursday.get(1).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceTwo.setChecked(true);
-        }
-        if (Thursday.get(2).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureThree.setChecked(true);
-        } else if (Thursday.get(2).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkThree.setChecked(true);
-        } else if (Thursday.get(2).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceThree.setChecked(true);
-        }
-        if (Thursday.get(3).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureFour.setChecked(true);
-        } else if (Thursday.get(3).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkFour.setChecked(true);
-        } else if (Thursday.get(3).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceFour.setChecked(true);
-        }
-        if (Thursday.get(4).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureFive.setChecked(true);
-        } else if (Thursday.get(4).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkFive.setChecked(true);
-        } else if (Thursday.get(4).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceFive.setChecked(true);
-        }
-        if (Thursday.get(5).typelesson.toString().equals(typelesson.get(0))) {
-            rb_lectureSix.setChecked(true);
-        } else if (Thursday.get(5).typelesson.toString().equals(typelesson.get(1))) {
-            rb_labworkSix.setChecked(true);
-        } else if (Thursday.get(5).typelesson.toString().equals(typelesson.get(2))) {
-            rb_practiceSix.setChecked(true);
-        }
-
-        //S1
+          //S2
           try {
-            SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
-                    Thursday.set(0, new Lesson("1", "8:30-10:00", ThursdayValueSubjectOne, Thursday.get(0).audienceEdit.toString(), Thursday.get(0).educator.toString(), Thursday.get(0).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+              SubjectEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
+                      Tuesday.set(1, new Lesson("2", "10:10-11:40", TuesdayValueSubjectTwo, Tuesday.get(1).audienceEdit.toString(), Tuesday.get(1).educator.toString(), Tuesday.get(1).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
 
-        //S2
-        try {
-            SubjectEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
-                    Thursday.set(1, new Lesson("2", "10:10-11:40", ThursdayValueSubjectTwo, Thursday.get(1).audienceEdit.toString(), Thursday.get(1).educator.toString(), Thursday.get(1).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //S3
+          try {
+              SubjectEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
+                      Tuesday.set(2, new Lesson("3", "12:20-13:50", TuesdayValueSubjectThree, Tuesday.get(2).audienceEdit.toString(), Tuesday.get(2).educator.toString(), Tuesday.get(2).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //S4
+          try {
+              SubjectEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
+                      Tuesday.set(3, new Lesson("4", "14:00-15:30", TuesdayValueSubjectFour, Tuesday.get(3).audienceEdit.toString(), Tuesday.get(3).educator.toString(), Tuesday.get(3).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //S5
+          try {
+              SubjectEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
+                      Tuesday.set(4, new Lesson("5", "15:40-17:10", TuesdayValueSubjectFive, Tuesday.get(4).audienceEdit.toString(), Tuesday.get(4).educator.toString(), Tuesday.get(4).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //S6
+          try {
+              SubjectEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
+                      Tuesday.set(5, new Lesson("6", "17:30-19:00", TuesdayValueSubjectSix, Tuesday.get(5).audienceEdit.toString(), Tuesday.get(5).educator.toString(), Tuesday.get(5).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
 
-        //S3
-        try {
-            SubjectEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
-                    Thursday.set(2, new Lesson("3", "12:20-13:50", ThursdayValueSubjectThree, Thursday.get(2).audienceEdit.toString(), Thursday.get(2).educator.toString(), Thursday.get(2).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //S4
-        try {
-            SubjectEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
-                    Thursday.set(3, new Lesson("4", "14:00-15:30", ThursdayValueSubjectFour, Thursday.get(3).audienceEdit.toString(), Thursday.get(3).educator.toString(), Thursday.get(3).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //S5
-        try {
-            SubjectEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
-                    Thursday.set(4, new Lesson("5", "15:40-17:10", ThursdayValueSubjectFive, Thursday.get(4).audienceEdit.toString(), Thursday.get(4).educator.toString(), Thursday.get(4).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //S6
-        try {
-            SubjectEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
-                    Thursday.set(5, new Lesson("6", "17:30-19:00", ThursdayValueSubjectSix, Thursday.get(5).audienceEdit.toString(), Thursday.get(5).educator.toString(), Thursday.get(5).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A1
+          try {
+              AudienceEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
+                      Tuesday.set(0, new Lesson("1", "8:30-10:00", Tuesday.get(0).subjectEdit.toString(), TuesdayValueAudienceOne, Tuesday.get(0).educator.toString(), Tuesday.get(0).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A2
+          try {
+              AudienceEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
+                      Tuesday.set(1, new Lesson("2", "10:10-11:40", Tuesday.get(1).subjectEdit.toString(), TuesdayValueAudienceTwo, Tuesday.get(1).educator.toString(), Tuesday.get(1).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
 
-        //A1
-        try {
-            AudienceEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
-                    Thursday.set(0, new Lesson("1", "8:30-10:00", Thursday.get(0).subjectEdit.toString(), ThursdayValueAudienceOne, Thursday.get(0).educator.toString(), Thursday.get(0).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A2
-        try {
-            AudienceEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
-                    Thursday.set(1, new Lesson("2", "10:10-11:40", Thursday.get(1).subjectEdit.toString(), ThursdayValueAudienceTwo, Thursday.get(1).educator.toString(), Thursday.get(1).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A3
+          try {
+              AudienceEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
+                      Tuesday.set(2, new Lesson("3", "12:20-13:50", Tuesday.get(2).subjectEdit.toString(), TuesdayValueAudienceThree, Tuesday.get(2).educator.toString(), Tuesday.get(2).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A4
+          try {
+              AudienceEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
+                      Tuesday.set(3, new Lesson("4", "14:00-15:30", Tuesday.get(3).subjectEdit.toString(), TuesdayValueAudienceFour, Tuesday.get(3).educator.toString(), Tuesday.get(3).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A5
+          try {
+              AudienceEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
+                      Tuesday.set(4, new Lesson("5", "15:40-17:10", Tuesday.get(4).subjectEdit.toString(), TuesdayValueAudienceFive, Tuesday.get(4).educator.toString(), Tuesday.get(4).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A6
+          try {
+              AudienceEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
+                      Tuesday.set(5, new Lesson("6", "17:30-19:00", Tuesday.get(5).subjectEdit.toString(), TuesdayValueAudienceSix, Tuesday.get(5).educator.toString(), Tuesday.get(5).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E1
+          try {
+              EducatorEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayEducatorOne = EducatorEditOne.getSelectedItem().toString();
+                      Tuesday.set(0, new Lesson("1", "8:30-10:00", Tuesday.get(0).subjectEdit.toString(), Tuesday.get(0).audienceEdit.toString(), TuesdayEducatorOne, Tuesday.get(0).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E2
+          try {
+              EducatorEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
+                      Tuesday.set(1, new Lesson("2", "10:10-11:40", Tuesday.get(1).subjectEdit.toString(), Tuesday.get(1).audienceEdit.toString(), TuesdayEducatorTwo, Tuesday.get(1).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
 
-        //A3
-        try {
-            AudienceEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
-                    Thursday.set(2, new Lesson("3", "12:20-13:50", Thursday.get(2).subjectEdit.toString(), ThursdayValueAudienceThree, Thursday.get(2).educator.toString(), Thursday.get(2).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A4
-        try {
-            AudienceEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
-                    Thursday.set(3, new Lesson("4", "14:00-15:30", Thursday.get(3).subjectEdit.toString(), ThursdayValueAudienceFour, Thursday.get(3).educator.toString(), Thursday.get(3).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A5
-        try {
-            AudienceEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
-                    Thursday.set(4, new Lesson("5", "15:40-17:10", Thursday.get(4).subjectEdit.toString(), ThursdayValueAudienceFive, Thursday.get(4).educator.toString(), Thursday.get(4).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //A6
-        try {
-            AudienceEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
-                    Thursday.set(5, new Lesson("6", "17:30-19:00", Thursday.get(5).subjectEdit.toString(), ThursdayValueAudienceSix, Thursday.get(5).educator.toString(), Thursday.get(5).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E1
-        try {
-            EducatorEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayEducatorOne = EducatorEditOne.getSelectedItem().toString();
-                    Thursday.set(0, new Lesson("1", "8:30-10:00", Thursday.get(0).subjectEdit.toString(), Thursday.get(0).audienceEdit.toString(), ThursdayEducatorOne, Thursday.get(0).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E2
-        try {
-            EducatorEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
-                    Thursday.set(1, new Lesson("2", "10:10-11:40", Thursday.get(1).subjectEdit.toString(), Thursday.get(1).audienceEdit.toString(), ThursdayEducatorTwo, Thursday.get(1).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E3
+          try {
+              EducatorEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayEducatorThree = EducatorEditThree.getSelectedItem().toString();
+                      Tuesday.set(2, new Lesson("3", "12:20-13:50", Tuesday.get(2).subjectEdit.toString(), Tuesday.get(2).audienceEdit.toString(), TuesdayEducatorThree, Tuesday.get(2).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E4
+          try {
+              EducatorEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayEducatorFour = EducatorEditFour.getSelectedItem().toString();
+                      Tuesday.set(3, new Lesson("4", "14:00-15:30", Tuesday.get(3).subjectEdit.toString(), Tuesday.get(3).audienceEdit.toString(), TuesdayEducatorFour, Tuesday.get(3).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E5
+          try {
+              EducatorEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayEducatorFive = EducatorEditFive.getSelectedItem().toString();
+                      Tuesday.set(4, new Lesson("5", "15:40-17:10", Tuesday.get(4).subjectEdit.toString(), Tuesday.get(4).audienceEdit.toString(), TuesdayEducatorFive, Tuesday.get(4).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E6
+          try {
+              EducatorEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      TuesdayEducatorSix = EducatorEditSix.getSelectedItem().toString();
+                      Tuesday.set(5, new Lesson("6", "17:30-19:00", Tuesday.get(5).subjectEdit.toString(), Tuesday.get(5).audienceEdit.toString(), TuesdayEducatorSix, Tuesday.get(5).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+      }
+      public void wednesday_fill() {
+          rb_lecture = findViewById(R.id.rb_lecture_wednesday);
+          rb_labwork = findViewById(R.id.rb_labwork_wednesday);
+          rb_practice = findViewById(R.id.rb_practice_wednesday);
+          rb_lectureTwo = findViewById(R.id.rb_lectureTwo_wednesday);
+          rb_labworkTwo = findViewById(R.id.rb_labworkTwo_wednesday);
+          rb_practiceTwo = findViewById(R.id.rb_practiceTwo_wednesday);
+          rb_lectureThree = findViewById(R.id.rb_lectureThree_wednesday);
+          rb_labworkThree = findViewById(R.id.rb_labworkThree_wednesday);
+          rb_practiceThree = findViewById(R.id.rb_practiceThree_wednesday);
+          rb_lectureFour = findViewById(R.id.rb_lectureFour_wednesday);
+          rb_labworkFour = findViewById(R.id.rb_labworkFour_wednesday);
+          rb_practiceFour = findViewById(R.id.rb_practiceFour_wednesday);
+          rb_lectureFive = findViewById(R.id.rb_lectureFive_wednesday);
+          rb_labworkFive = findViewById(R.id.rb_labworkFive_wednesday);
+          rb_practiceFive = findViewById(R.id.rb_practiceFive_wednesday);
+          rb_lectureSix = findViewById(R.id.rb_lectureSix_wednesday);
+          rb_labworkSix = findViewById(R.id.rb_labworkSix_wednesday);
+          rb_practiceSix = findViewById(R.id.rb_practiceSix_wednesday);
+          NumberOne = findViewById(R.id.number_wednesday);
+          NumberTwo = findViewById(R.id.numberTwo_wednesday);
+          NumberThree = findViewById(R.id.numberThree_wednesday);
+          NumberFour = findViewById(R.id.numberFour_wednesday);
+          NumberFive = findViewById(R.id.numberFive_wednesday);
+          NumberSix = findViewById(R.id.numberSix_wednesday);
+          TimeOne = findViewById(R.id.time_wednesday);
+          TimeTwo = findViewById(R.id.timeTwo_wednesday);
+          TimeThree = findViewById(R.id.timeThree_wednesday);
+          TimeFour = findViewById(R.id.timeFour_wednesday);
+          TimeFive = findViewById(R.id.timeFive_wednesday);
+          TimeSix = findViewById(R.id.timeSix_wednesday);
+          SubjectEditOne = findViewById(R.id.subject_edit_wednesday);
+          SubjectEditTwo = findViewById(R.id.subject_editTwo_wednesday);
+          SubjectEditThree = findViewById(R.id.subject_editThree_wednesday);
+          SubjectEditFour = findViewById(R.id.subject_editFour_wednesday);
+          SubjectEditFive = findViewById(R.id.subject_editFive_wednesday);
+          SubjectEditSix = findViewById(R.id.subject_editSix_wednesday);
+          AudienceEditOne = findViewById(R.id.audience_edit_wednesday);
+          AudienceEditTwo = findViewById(R.id.audience_editTwo_wednesday);
+          AudienceEditThree = findViewById(R.id.audience_editThree_wednesday);
+          AudienceEditFour = findViewById(R.id.audience_editFour_wednesday);
+          AudienceEditFive = findViewById(R.id.audience_editFive_wednesday);
+          AudienceEditSix = findViewById(R.id.audience_editSix_wednesday);
+          EducatorEditOne = findViewById(R.id.educator_edit_wednesday);
+          EducatorEditTwo = findViewById(R.id.educator_editTwo_wednesday);
+          EducatorEditThree = findViewById(R.id.educator_editThree_wednesday);
+          EducatorEditFour = findViewById(R.id.educator_editFour_wednesday);
+          EducatorEditFive = findViewById(R.id.educator_editFive_wednesday);
+          EducatorEditSix = findViewById(R.id.educator_editSix_wednesday);
+          typeEditOne_wednesday = findViewById(R.id.typeEdit_wednesday);
+          typeEditTwo_wednesday = findViewById(R.id.typeEditTwo_wednesday);
+          typeEditThree_wednesday = findViewById(R.id.typeEditThree_wednesday);
+          typeEditFour_wednesday = findViewById(R.id.typeEditFour_wednesday);
+          typeEditFive_wednesday = findViewById(R.id.typeEditFive_wednesday);
+          typeEditSix_wednesday = findViewById(R.id.typeEditSix_wednesday);
 
-        //E3
-        try {
-            EducatorEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayEducatorThree = EducatorEditThree.getSelectedItem().toString();
-                    Thursday.set(2, new Lesson("3", "12:20-13:50", Thursday.get(2).subjectEdit.toString(), Thursday.get(2).audienceEdit.toString(), ThursdayEducatorThree, Thursday.get(2).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E4
-        try {
-            EducatorEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayEducatorFour = EducatorEditFour.getSelectedItem().toString();
-                    Thursday.set(3, new Lesson("4", "14:00-15:30", Thursday.get(3).subjectEdit.toString(), Thursday.get(3).audienceEdit.toString(), ThursdayEducatorFour, Thursday.get(3).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E5
-        try {
-            EducatorEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayEducatorFive = EducatorEditFive.getSelectedItem().toString();
-                    Thursday.set(4, new Lesson("5", "15:40-17:10", Thursday.get(4).subjectEdit.toString(), Thursday.get(4).audienceEdit.toString(), ThursdayEducatorFive, Thursday.get(4).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-        //E6
-        try {
-            EducatorEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    ThursdayEducatorSix = EducatorEditSix.getSelectedItem().toString();
-                    Thursday.set(5, new Lesson("6", "17:30-19:00", Thursday.get(5).subjectEdit.toString(), Thursday.get(5).audienceEdit.toString(), ThursdayEducatorSix, Thursday.get(5).typelesson.toString()));
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
-    }
-    public void friday_fill() {
-        rb_lecture = findViewById(R.id.rb_lecture_friday);
-        rb_labwork = findViewById(R.id.rb_labwork_friday);
-        rb_practice = findViewById(R.id.rb_practice_friday);
-        rb_lectureTwo = findViewById(R.id.rb_lectureTwo_friday);
-        rb_labworkTwo = findViewById(R.id.rb_labworkTwo_friday);
-        rb_practiceTwo = findViewById(R.id.rb_practiceTwo_friday);
-        rb_lectureThree = findViewById(R.id.rb_lectureThree_friday);
-        rb_labworkThree = findViewById(R.id.rb_labworkThree_friday);
-        rb_practiceThree = findViewById(R.id.rb_practiceThree_friday);
-        rb_lectureFour = findViewById(R.id.rb_lectureFour_friday);
-        rb_labworkFour = findViewById(R.id.rb_labworkFour_friday);
-        rb_practiceFour = findViewById(R.id.rb_practiceFour_friday);
-        rb_lectureFive = findViewById(R.id.rb_lectureFive_friday);
-        rb_labworkFive = findViewById(R.id.rb_labworkFive_friday);
-        rb_practiceFive = findViewById(R.id.rb_practiceFive_friday);
-        rb_lectureSix = findViewById(R.id.rb_lectureSix_friday);
-        rb_labworkSix = findViewById(R.id.rb_labworkSix_friday);
-        rb_practiceSix = findViewById(R.id.rb_practiceSix_friday);
-        NumberOne = findViewById(R.id.number_friday);
-        NumberTwo = findViewById(R.id.numberTwo_friday);
-        NumberThree = findViewById(R.id.numberThree_friday);
-        NumberFour = findViewById(R.id.numberFour_friday);
-        NumberFive = findViewById(R.id.numberFive_friday);
-        NumberSix = findViewById(R.id.numberSix_friday);
-        TimeOne = findViewById(R.id.time_friday);
-        TimeTwo = findViewById(R.id.timeTwo_friday);
-        TimeThree = findViewById(R.id.timeThree_friday);
-        TimeFour = findViewById(R.id.timeFour_friday);
-        TimeFive = findViewById(R.id.timeFive_friday);
-        TimeSix = findViewById(R.id.timeSix_friday);
-        SubjectEditOne = findViewById(R.id.subject_edit_friday);
-        SubjectEditTwo = findViewById(R.id.subject_editTwo_friday);
-        SubjectEditThree = findViewById(R.id.subject_editThree_friday);
-        SubjectEditFour = findViewById(R.id.subject_editFour_friday);
-        SubjectEditFive = findViewById(R.id.subject_editFive_friday);
-        SubjectEditSix = findViewById(R.id.subject_editSix_friday);
-        AudienceEditOne = findViewById(R.id.audience_edit_friday);
-        AudienceEditTwo = findViewById(R.id.audience_editTwo_friday);
-        AudienceEditThree = findViewById(R.id.audience_editThree_friday);
-        AudienceEditFour = findViewById(R.id.audience_editFour_friday);
-        AudienceEditFive = findViewById(R.id.audience_editFive_friday);
-        AudienceEditSix = findViewById(R.id.audience_editSix_friday);
-        EducatorEditOne = findViewById(R.id.educator_edit_friday);
-        EducatorEditTwo = findViewById(R.id.educator_editTwo_friday);
-        EducatorEditThree = findViewById(R.id.educator_editThree_friday);
-        EducatorEditFour = findViewById(R.id.educator_editFour_friday);
-        EducatorEditFive = findViewById(R.id.educator_editFive_friday);
-        EducatorEditSix = findViewById(R.id.educator_editSix_friday);
-        typeEditOne_friday = findViewById(R.id.typeEdit_friday);
-        typeEditTwo_friday = findViewById(R.id.typeEditTwo_friday);
-        typeEditThree_friday = findViewById(R.id.typeEditThree_friday);
-        typeEditFour_friday = findViewById(R.id.typeEditFour_friday);
-        typeEditFive_friday = findViewById(R.id.typeEditFive_friday);
-        typeEditSix_friday = findViewById(R.id.typeEditSix_friday);
+          Lesson();
+          NumberOne.setText(Wednesday.get(0).idcards.toString());
+          NumberTwo.setText(Wednesday.get(1).idcards.toString());
+          NumberThree.setText(Wednesday.get(2).idcards.toString());
+          NumberFour.setText(Wednesday.get(3).idcards.toString());
+          NumberFive.setText(Wednesday.get(4).idcards.toString());
+          NumberSix.setText(Wednesday.get(5).idcards.toString());
+          TimeOne.setText(Wednesday.get(0).timelesson.toString());
+          TimeTwo.setText(Wednesday.get(1).timelesson.toString());
+          TimeThree.setText(Wednesday.get(2).timelesson.toString());
+          TimeFour.setText(Wednesday.get(3).timelesson.toString());
+          TimeFive.setText(Wednesday.get(4).timelesson.toString());
+          TimeSix.setText(Wednesday.get(5).timelesson.toString());
+          rb_lecture.setText(typelesson.get(0));
+          rb_lectureTwo.setText(typelesson.get(0));
+          rb_lectureThree.setText(typelesson.get(0));
+          rb_lectureFour.setText(typelesson.get(0));
+          rb_lectureFive.setText(typelesson.get(0));
+          rb_lectureSix.setText(typelesson.get(0));
+          rb_labwork.setText(typelesson.get(1));
+          rb_labworkTwo.setText(typelesson.get(1));
+          rb_labworkThree.setText(typelesson.get(1));
+          rb_labworkFour.setText(typelesson.get(1));
+          rb_labworkFive.setText(typelesson.get(1));
+          rb_labworkSix.setText(typelesson.get(1));
+          rb_practice.setText(typelesson.get(2));
+          rb_practice.setText(typelesson.get(2));
+          rb_practiceThree.setText(typelesson.get(2));
+          rb_practiceFour.setText(typelesson.get(2));
+          rb_practiceFive.setText(typelesson.get(2));
+          rb_practiceSix.setText(typelesson.get(2));
+          ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
+          subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+          ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
+          audSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+          ArrayAdapter<String> eduSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, educator_list);
+          eduSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+          SubjectEditOne.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditTwo.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditThree.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditFour.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditFive.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditSix.setAdapter(subSpinnerArrayAdapter);
+          AudienceEditOne.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditTwo.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditThree.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditFour.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditFive.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditSix.setAdapter(audSpinnerArrayAdapter);
+          EducatorEditOne.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditTwo.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditThree.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditFour.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditFive.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditSix.setAdapter(eduSpinnerArrayAdapter);
 
-        Lesson();
-        NumberOne.setText(Friday.get(0).idcards.toString());
-        NumberTwo.setText(Friday.get(1).idcards.toString());
-        NumberThree.setText(Friday.get(2).idcards.toString());
-        NumberFour.setText(Friday.get(3).idcards.toString());
-        NumberFive.setText(Friday.get(4).idcards.toString());
-        NumberSix.setText(Friday.get(5).idcards.toString());
-        TimeOne.setText(Friday.get(0).timelesson.toString());
-        TimeTwo.setText(Friday.get(1).timelesson.toString());
-        TimeThree.setText(Friday.get(2).timelesson.toString());
-        TimeFour.setText(Friday.get(3).timelesson.toString());
-        TimeFive.setText(Friday.get(4).timelesson.toString());
-        TimeSix.setText(Friday.get(5).timelesson.toString());
-        rb_lecture.setText(typelesson.get(0));
-        rb_lectureTwo.setText(typelesson.get(0));
-        rb_lectureThree.setText(typelesson.get(0));
-        rb_lectureFour.setText(typelesson.get(0));
-        rb_lectureFive.setText(typelesson.get(0));
-        rb_lectureSix.setText(typelesson.get(0));
-        rb_labwork.setText(typelesson.get(1));
-        rb_labworkTwo.setText(typelesson.get(1));
-        rb_labworkThree.setText(typelesson.get(1));
-        rb_labworkFour.setText(typelesson.get(1));
-        rb_labworkFive.setText(typelesson.get(1));
-        rb_labworkSix.setText(typelesson.get(1));
-        rb_practice.setText(typelesson.get(2));
-        rb_practice.setText(typelesson.get(2));
-        rb_practiceThree.setText(typelesson.get(2));
-        rb_practiceFour.setText(typelesson.get(2));
-        rb_practiceFive.setText(typelesson.get(2));
-        rb_practiceSix.setText(typelesson.get(2));
-        ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
-        subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
-        audSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> eduSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, educator_list);
-        eduSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        SubjectEditOne.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditTwo.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditThree.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditFour.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditFive.setAdapter(subSpinnerArrayAdapter);
-        SubjectEditSix.setAdapter(subSpinnerArrayAdapter);
-        AudienceEditOne.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditTwo.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditThree.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditFour.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditFive.setAdapter(audSpinnerArrayAdapter);
-        AudienceEditSix.setAdapter(audSpinnerArrayAdapter);
-        EducatorEditOne.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditTwo.setAdapter(eduSpinnerArrayAdapter);
-        EducatorEditThree.setAdapter(eduSpinnerArrayAdapter);
+          SubjectEditOne.setSelection(subject_list.indexOf(Wednesday.get(0).subjectEdit));
+          SubjectEditTwo.setSelection(subject_list.indexOf(Wednesday.get(1).subjectEdit.toString()));
+          SubjectEditThree.setSelection(subject_list.indexOf(Wednesday.get(2).subjectEdit.toString()));
+          SubjectEditFour.setSelection(subject_list.indexOf(Wednesday.get(3).subjectEdit.toString()));
+          SubjectEditFive.setSelection(subject_list.indexOf(Wednesday.get(4).subjectEdit.toString()));
+          SubjectEditSix.setSelection(subject_list.indexOf(Wednesday.get(5).subjectEdit.toString()));
+          AudienceEditOne.setSelection(audience_list.indexOf(Wednesday.get(0).audienceEdit.toString()));
+          AudienceEditTwo.setSelection(audience_list.indexOf(Wednesday.get(1).audienceEdit.toString()));
+          AudienceEditThree.setSelection(audience_list.indexOf(Wednesday.get(2).audienceEdit.toString()));
+          AudienceEditFour.setSelection(audience_list.indexOf(Wednesday.get(3).audienceEdit.toString()));
+          AudienceEditFive.setSelection(audience_list.indexOf(Wednesday.get(4).audienceEdit.toString()));
+          AudienceEditSix.setSelection(audience_list.indexOf(Wednesday.get(5).audienceEdit.toString()));
+          EducatorEditOne.setSelection(educator_list.indexOf(Wednesday.get(0).educator.toString()));
+          EducatorEditTwo.setSelection(educator_list.indexOf(Wednesday.get(1).educator.toString()));
+          EducatorEditThree.setSelection(educator_list.indexOf(Wednesday.get(2).educator.toString()));
+          EducatorEditFour.setSelection(educator_list.indexOf(Wednesday.get(3).educator.toString()));
+          EducatorEditFive.setSelection(educator_list.indexOf(Wednesday.get(4).educator.toString()));
+          EducatorEditSix.setSelection(educator_list.indexOf(Wednesday.get(5).educator.toString()));
+
+          TextView copy_downOne = findViewById(R.id.copy_downOne_wednesday);
+          TextView copy_downTwo = findViewById(R.id.copy_downTwo_wednesday);
+          TextView copy_downThree = findViewById(R.id.copy_downThree_wednesday);
+          TextView copy_downFour = findViewById(R.id.copy_downFour_wednesday);
+          TextView copy_downFive = findViewById(R.id.copy_downFive_wednesday);
+          TextView copy_upTwo= findViewById(R.id.copy_upTwo_wednesday);
+          TextView copy_upThree= findViewById(R.id.copy_upThree_wednesday);
+          TextView copy_upFour= findViewById(R.id.copy_upFour_wednesday);
+          TextView copy_upFive= findViewById(R.id.copy_upFive_wednesday);
+          TextView copy_upSix= findViewById(R.id.copy_upSix_wednesday);
+          TextView clearOne = findViewById(R.id.clear_cardOne_wednesday);
+          TextView clearTwo = findViewById(R.id.clear_cardTwo_wednesday);
+          TextView clearThree = findViewById(R.id.clear_cardThree_wednesday);
+          TextView clearFour = findViewById(R.id.clear_cardFour_wednesday);
+          TextView clearFive = findViewById(R.id.clear_cardFive_wednesday);
+          TextView clearSix = findViewById(R.id.clear_cardSix_wednesday);
+
+          typeEditOne_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonOne = typeEditOne_wednesday.indexOfChild(findViewById(typeEditOne_wednesday.getCheckedRadioButtonId()));
+                  int IdRadioButton = typeEditOne_wednesday.getCheckedRadioButtonId();
+                  RadioButton radioButton = findViewById(IdRadioButton);
+                  if (radioButton != null) {
+                      WednesdayTypeLessonOne = radioButton.getText().toString();
+                  }
+                  else { WednesdayTypeLessonOne = "";}
+
+              }
+          });
+
+          typeEditTwo_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonTwo = typeEditTwo_wednesday.indexOfChild(findViewById(typeEditTwo_wednesday.getCheckedRadioButtonId()));
+                  int IdRadioButtonTwo = typeEditTwo_wednesday.getCheckedRadioButtonId();
+                  RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
+                  if (radioButtonTwo != null) {
+                      WednesdayTypeLessonTwo = radioButtonTwo.getText().toString();
+                  }
+                  else { WednesdayTypeLessonTwo = "";}
+              }
+          });
+
+          typeEditThree_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonThree = typeEditThree_wednesday.indexOfChild(findViewById(typeEditThree_wednesday.getCheckedRadioButtonId()));
+                  int IdRadioButtonThree = typeEditThree_wednesday.getCheckedRadioButtonId();
+                  RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
+                  if (radioButtonThree != null) {
+                      WednesdayTypeLessonThree = radioButtonThree.getText().toString();
+                  }
+                  else { WednesdayTypeLessonThree = "";}
+              }
+          });
+
+          typeEditFour_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonFour = typeEditFour_wednesday.indexOfChild(findViewById(typeEditFour_wednesday.getCheckedRadioButtonId()));
+                  int IdRadioButtonFour = typeEditFour_wednesday.getCheckedRadioButtonId();
+                  RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
+                  if (radioButtonFour != null) {
+                      WednesdayTypeLessonFour = radioButtonFour.getText().toString();
+                  }
+                  else { WednesdayTypeLessonFour = "";}
+              }
+          });
+
+          typeEditFive_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonFive = typeEditFive_wednesday.indexOfChild(findViewById(typeEditFive_wednesday.getCheckedRadioButtonId()));
+                  int IdRadioButtonFive = typeEditFive_wednesday.getCheckedRadioButtonId();
+                  RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
+                  if (radioButtonFive != null) {
+                      WednesdayTypeLessonFive = radioButtonFive.getText().toString();
+                  }
+                  else { WednesdayTypeLessonFive = "";}
+              }
+          });
+          typeEditSix_wednesday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonSix = typeEditSix_wednesday.indexOfChild(findViewById(typeEditSix_wednesday.getCheckedRadioButtonId()));
+                  int IdRadioButtonSix = typeEditSix_wednesday.getCheckedRadioButtonId();
+                  RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
+                  if (radioButtonSix != null) {
+                      WednesdayTypeLessonSix = radioButtonSix.getText().toString();
+                  }
+                  else { WednesdayTypeLessonSix = "";}
+              }
+          });
+
+          copy_downOne.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditTwo.setSelection(subject_list.indexOf(Wednesday.get(0).subjectEdit));
+                  AudienceEditTwo.setSelection(audience_list.indexOf(Wednesday.get(0).audienceEdit));
+                  EducatorEditTwo.setSelection(educator_list.indexOf(Wednesday.get(0).educator));
+                  switch (IdRadioButtonOne){
+                      case 0:
+                          rb_lectureTwo.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkTwo.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceTwo.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_downTwo.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditThree.setSelection(subject_list.indexOf(Wednesday.get(1).subjectEdit));
+                  AudienceEditThree.setSelection(audience_list.indexOf(Wednesday.get(1).audienceEdit));
+                  EducatorEditThree.setSelection(educator_list.indexOf(Wednesday.get(1).educator));
+                  switch (IdRadioButtonTwo){
+                      case 0:
+                          rb_lectureThree.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkThree.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceThree.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_downThree.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditFour.setSelection(subject_list.indexOf(Wednesday.get(2).subjectEdit));
+                  AudienceEditFour.setSelection(audience_list.indexOf(Wednesday.get(2).audienceEdit));
+                  EducatorEditFour.setSelection(educator_list.indexOf(Wednesday.get(2).educator));
+                  switch (IdRadioButtonThree){
+                      case 0:
+                          rb_lectureFour.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFour.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFour.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+          copy_downFour.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditFive.setSelection(subject_list.indexOf(Wednesday.get(3).subjectEdit));
+                  AudienceEditFive.setSelection(audience_list.indexOf(Wednesday.get(3).audienceEdit));
+                  EducatorEditFive.setSelection(educator_list.indexOf(Wednesday.get(3).educator));
+                  switch (IdRadioButtonFour){
+                      case 0:
+                          rb_lectureFive.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFive.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFive.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_downFive.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditSix.setSelection(subject_list.indexOf(Wednesday.get(4).subjectEdit));
+                  AudienceEditSix.setSelection(audience_list.indexOf(Wednesday.get(4).audienceEdit));
+                  EducatorEditSix.setSelection(educator_list.indexOf(Wednesday.get(4).educator));
+                  switch (IdRadioButtonFive){
+                      case 0:
+                          rb_lectureSix.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkSix.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceSix.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_upTwo.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+
+                  SubjectEditOne.setSelection(subject_list.indexOf(Wednesday.get(1).subjectEdit));
+                  AudienceEditOne.setSelection(audience_list.indexOf(Wednesday.get(1).audienceEdit));
+                  EducatorEditOne.setSelection(educator_list.indexOf(Wednesday.get(1).educator));
+                  switch (IdRadioButtonTwo){
+                      case 0:
+                          rb_lecture.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labwork.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practice.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_upThree.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+
+                  SubjectEditTwo.setSelection(subject_list.indexOf(Wednesday.get(2).subjectEdit));
+                  AudienceEditTwo.setSelection(audience_list.indexOf(Wednesday.get(2).audienceEdit));
+                  EducatorEditTwo.setSelection(educator_list.indexOf(Wednesday.get(2).educator));
+                  switch (IdRadioButtonThree){
+                      case 0:
+                          rb_lectureTwo.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkTwo.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceTwo.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_upFour.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+
+                  SubjectEditThree.setSelection(subject_list.indexOf(Wednesday.get(3).subjectEdit));
+                  AudienceEditThree.setSelection(audience_list.indexOf(Wednesday.get(3).audienceEdit));
+                  EducatorEditThree.setSelection(educator_list.indexOf(Wednesday.get(3).educator));
+                  switch (IdRadioButtonFour){
+                      case 0:
+                          rb_lectureThree.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkThree.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceThree.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_upFive.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+
+                  SubjectEditFour.setSelection(subject_list.indexOf(Wednesday.get(4).subjectEdit));
+                  AudienceEditFour.setSelection(audience_list.indexOf(Wednesday.get(4).audienceEdit));
+                  EducatorEditFour.setSelection(educator_list.indexOf(Wednesday.get(4).educator));
+                  switch (IdRadioButtonFive){
+                      case 0:
+                          rb_lectureFour.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFour.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFour.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_upSix.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+
+                  SubjectEditFive.setSelection(subject_list.indexOf(Wednesday.get(5).subjectEdit));
+                  AudienceEditFive.setSelection(audience_list.indexOf(Wednesday.get(5).audienceEdit));
+                  EducatorEditFive.setSelection(educator_list.indexOf(Wednesday.get(5).educator));
+                  switch (IdRadioButtonSix){
+                      case 0:
+                          rb_lectureFive.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFive.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFive.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+
+
+          clearOne.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditOne.setSelection(0);
+                  AudienceEditOne.setSelection(0);
+                  EducatorEditOne.setSelection(0);
+                  typeEditOne_wednesday.clearCheck();
+              }
+          });
+
+          clearTwo.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditTwo.setSelection(0);
+                  AudienceEditTwo.setSelection(0);
+                  EducatorEditTwo.setSelection(0);
+                  typeEditTwo_wednesday.clearCheck();
+              }
+          });
+
+          clearThree.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditThree.setSelection(0);
+                  AudienceEditThree.setSelection(0);
+                  EducatorEditThree.setSelection(0);
+                  typeEditThree_wednesday.clearCheck();
+              }
+          });
+
+          clearFour.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditFour.setSelection(0);
+                  AudienceEditFour.setSelection(0);
+                  EducatorEditFour.setSelection(0);
+                  typeEditFour_wednesday.clearCheck();
+              }
+          });
+
+          clearFive.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditFive.setSelection(0);
+                  AudienceEditFive.setSelection(0);
+                  EducatorEditFive.setSelection(0);
+                  typeEditFive_wednesday.clearCheck();
+              }
+          });
+
+          clearSix.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditSix.setSelection(0);
+                  AudienceEditSix.setSelection(0);
+                  EducatorEditSix.setSelection(0);
+                  typeEditSix_wednesday.clearCheck();
+              }
+          });
+
+
+          SubjectEditOne.setSelection(subject_list.indexOf(Wednesday.get(0).subjectEdit.toString()));
+          SubjectEditTwo.setSelection(subject_list.indexOf(Wednesday.get(1).subjectEdit.toString()));
+          SubjectEditThree.setSelection(subject_list.indexOf(Wednesday.get(2).subjectEdit.toString()));
+          SubjectEditFour.setSelection(subject_list.indexOf(Wednesday.get(3).subjectEdit.toString()));
+          SubjectEditFive.setSelection(subject_list.indexOf(Wednesday.get(4).subjectEdit.toString()));
+          SubjectEditSix.setSelection(subject_list.indexOf(Wednesday.get(5).subjectEdit.toString()));
+          AudienceEditOne.setSelection(audience_list.indexOf(Wednesday.get(0).audienceEdit.toString()));
+          AudienceEditTwo.setSelection(audience_list.indexOf(Wednesday.get(1).audienceEdit.toString()));
+          AudienceEditThree.setSelection(audience_list.indexOf(Wednesday.get(2).audienceEdit.toString()));
+          AudienceEditFour.setSelection(audience_list.indexOf(Wednesday.get(3).audienceEdit.toString()));
+          AudienceEditFive.setSelection(audience_list.indexOf(Wednesday.get(4).audienceEdit.toString()));
+          AudienceEditSix.setSelection(audience_list.indexOf(Wednesday.get(5).audienceEdit.toString()));
+          EducatorEditOne.setSelection(educator_list.indexOf(Wednesday.get(0).educator.toString()));
+          EducatorEditTwo.setSelection(educator_list.indexOf(Wednesday.get(1).educator.toString()));
+          EducatorEditThree.setSelection(educator_list.indexOf(Wednesday.get(2).educator.toString()));
+          EducatorEditFour.setSelection(educator_list.indexOf(Wednesday.get(3).educator.toString()));
+          EducatorEditFive.setSelection(educator_list.indexOf(Wednesday.get(4).educator.toString()));
+          EducatorEditSix.setSelection(educator_list.indexOf(Wednesday.get(5).educator.toString()));
+
+
+          if (Wednesday.get(0).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lecture.setChecked(true);
+          } else if (Wednesday.get(0).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labwork.setChecked(true);
+          } else if (Wednesday.get(0).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practice.setChecked(true);
+          }
+          if (Wednesday.get(1).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureTwo.setChecked(true);
+          } else if (Wednesday.get(1).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkTwo.setChecked(true);
+          } else if (Wednesday.get(1).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceTwo.setChecked(true);
+          }
+          if (Wednesday.get(2).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureThree.setChecked(true);
+          } else if (Wednesday.get(2).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkThree.setChecked(true);
+          } else if (Wednesday.get(2).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceThree.setChecked(true);
+          }
+          if (Wednesday.get(3).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureFour.setChecked(true);
+          } else if (Wednesday.get(3).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkFour.setChecked(true);
+          } else if (Wednesday.get(3).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceFour.setChecked(true);
+          }
+          if (Wednesday.get(4).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureFive.setChecked(true);
+          } else if (Wednesday.get(4).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkFive.setChecked(true);
+          } else if (Wednesday.get(4).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceFive.setChecked(true);
+          }
+          if (Wednesday.get(5).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureSix.setChecked(true);
+          } else if (Wednesday.get(5).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkSix.setChecked(true);
+          } else if (Wednesday.get(5).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceSix.setChecked(true);
+          }
+
+          //S1
+          try {
+              SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
+                      Wednesday.set(0, new Lesson("1", "8:30-10:00", WednesdayValueSubjectOne, Wednesday.get(0).audienceEdit.toString(), Wednesday.get(0).educator.toString(), Wednesday.get(0).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+
+          //S2
+          try {
+              SubjectEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
+                      Wednesday.set(1, new Lesson("2", "10:10-11:40", WednesdayValueSubjectTwo, Wednesday.get(1).audienceEdit.toString(), Wednesday.get(1).educator.toString(), Wednesday.get(1).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+
+          //S3
+          try {
+              SubjectEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
+                      Wednesday.set(2, new Lesson("3", "12:20-13:50", WednesdayValueSubjectThree, Wednesday.get(2).audienceEdit.toString(), Wednesday.get(2).educator.toString(), Wednesday.get(2).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //S4
+          try {
+              SubjectEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
+                      Wednesday.set(3, new Lesson("4", "14:00-15:30", WednesdayValueSubjectFour, Wednesday.get(3).audienceEdit.toString(), Wednesday.get(3).educator.toString(), Wednesday.get(3).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //S5
+          try {
+              SubjectEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
+                      Wednesday.set(4, new Lesson("5", "15:40-17:10", WednesdayValueSubjectFive, Wednesday.get(4).audienceEdit.toString(), Wednesday.get(4).educator.toString(), Wednesday.get(4).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //S6
+          try {
+              SubjectEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
+                      Wednesday.set(5, new Lesson("6", "17:30-19:00", WednesdayValueSubjectSix, Wednesday.get(5).audienceEdit.toString(), Wednesday.get(5).educator.toString(), Wednesday.get(5).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+
+          //A1
+          try {
+              AudienceEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
+                      Wednesday.set(0, new Lesson("1", "8:30-10:00", Wednesday.get(0).subjectEdit.toString(), WednesdayValueAudienceOne, Wednesday.get(0).educator.toString(), Wednesday.get(0).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A2
+          try {
+              AudienceEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
+                      Wednesday.set(1, new Lesson("2", "10:10-11:40", Wednesday.get(1).subjectEdit.toString(), WednesdayValueAudienceTwo, Wednesday.get(1).educator.toString(), Wednesday.get(1).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+
+          //A3
+          try {
+              AudienceEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
+                      Wednesday.set(2, new Lesson("3", "12:20-13:50", Wednesday.get(2).subjectEdit.toString(), WednesdayValueAudienceThree, Wednesday.get(2).educator.toString(), Wednesday.get(2).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A4
+          try {
+              AudienceEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
+                      Wednesday.set(3, new Lesson("4", "14:00-15:30", Wednesday.get(3).subjectEdit.toString(), WednesdayValueAudienceFour, Wednesday.get(3).educator.toString(), Wednesday.get(3).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A5
+          try {
+              AudienceEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
+                      Wednesday.set(4, new Lesson("5", "15:40-17:10", Wednesday.get(4).subjectEdit.toString(), WednesdayValueAudienceFive, Wednesday.get(4).educator.toString(), Wednesday.get(4).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A6
+          try {
+              AudienceEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
+                      Wednesday.set(5, new Lesson("6", "17:30-19:00", Wednesday.get(5).subjectEdit.toString(), WednesdayValueAudienceSix, Wednesday.get(5).educator.toString(), Wednesday.get(5).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E1
+          try {
+              EducatorEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayEducatorOne = EducatorEditOne.getSelectedItem().toString();
+                      Wednesday.set(0, new Lesson("1", "8:30-10:00", Wednesday.get(0).subjectEdit.toString(), Wednesday.get(0).audienceEdit.toString(), WednesdayEducatorOne, Wednesday.get(0).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E2
+          try {
+              EducatorEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
+                      Wednesday.set(1, new Lesson("2", "10:10-11:40", Wednesday.get(1).subjectEdit.toString(), Wednesday.get(1).audienceEdit.toString(), WednesdayEducatorTwo, Wednesday.get(1).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+
+          //E3
+          try {
+              EducatorEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayEducatorThree = EducatorEditThree.getSelectedItem().toString();
+                      Wednesday.set(2, new Lesson("3", "12:20-13:50", Wednesday.get(2).subjectEdit.toString(), Wednesday.get(2).audienceEdit.toString(), WednesdayEducatorThree, Wednesday.get(2).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E4
+          try {
+              EducatorEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayEducatorFour = EducatorEditFour.getSelectedItem().toString();
+                      Wednesday.set(3, new Lesson("4", "14:00-15:30", Wednesday.get(3).subjectEdit.toString(), Wednesday.get(3).audienceEdit.toString(), WednesdayEducatorFour, Wednesday.get(3).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E5
+          try {
+              EducatorEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayEducatorFive = EducatorEditFive.getSelectedItem().toString();
+                      Wednesday.set(4, new Lesson("5", "15:40-17:10", Wednesday.get(4).subjectEdit.toString(), Wednesday.get(4).audienceEdit.toString(), WednesdayEducatorFive, Wednesday.get(4).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E6
+          try {
+              EducatorEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      WednesdayEducatorSix = EducatorEditSix.getSelectedItem().toString();
+                      Wednesday.set(5, new Lesson("6", "17:30-19:00", Wednesday.get(5).subjectEdit.toString(), Wednesday.get(5).audienceEdit.toString(), WednesdayEducatorSix, Wednesday.get(5).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+      }
+      public void thursday_fill() {
+          rb_lecture = findViewById(R.id.rb_lecture_thursday);
+          rb_labwork = findViewById(R.id.rb_labwork_thursday);
+          rb_practice = findViewById(R.id.rb_practice_thursday);
+          rb_lectureTwo = findViewById(R.id.rb_lectureTwo_thursday);
+          rb_labworkTwo = findViewById(R.id.rb_labworkTwo_thursday);
+          rb_practiceTwo = findViewById(R.id.rb_practiceTwo_thursday);
+          rb_lectureThree = findViewById(R.id.rb_lectureThree_thursday);
+          rb_labworkThree = findViewById(R.id.rb_labworkThree_thursday);
+          rb_practiceThree = findViewById(R.id.rb_practiceThree_thursday);
+          rb_lectureFour = findViewById(R.id.rb_lectureFour_thursday);
+          rb_labworkFour = findViewById(R.id.rb_labworkFour_thursday);
+          rb_practiceFour = findViewById(R.id.rb_practiceFour_thursday);
+          rb_lectureFive = findViewById(R.id.rb_lectureFive_thursday);
+          rb_labworkFive = findViewById(R.id.rb_labworkFive_thursday);
+          rb_practiceFive = findViewById(R.id.rb_practiceFive_thursday);
+          rb_lectureSix = findViewById(R.id.rb_lectureSix_thursday);
+          rb_labworkSix = findViewById(R.id.rb_labworkSix_thursday);
+          rb_practiceSix = findViewById(R.id.rb_practiceSix_thursday);
+          NumberOne = findViewById(R.id.number_thursday);
+          NumberTwo = findViewById(R.id.numberTwo_thursday);
+          NumberThree = findViewById(R.id.numberThree_thursday);
+          NumberFour = findViewById(R.id.numberFour_thursday);
+          NumberFive = findViewById(R.id.numberFive_thursday);
+          NumberSix = findViewById(R.id.numberSix_thursday);
+          TimeOne = findViewById(R.id.time_thursday);
+          TimeTwo = findViewById(R.id.timeTwo_thursday);
+          TimeThree = findViewById(R.id.timeThree_thursday);
+          TimeFour = findViewById(R.id.timeFour_thursday);
+          TimeFive = findViewById(R.id.timeFive_thursday);
+          TimeSix = findViewById(R.id.timeSix_thursday);
+          SubjectEditOne = findViewById(R.id.subject_edit_thursday);
+          SubjectEditTwo = findViewById(R.id.subject_editTwo_thursday);
+          SubjectEditThree = findViewById(R.id.subject_editThree_thursday);
+          SubjectEditFour = findViewById(R.id.subject_editFour_thursday);
+          SubjectEditFive = findViewById(R.id.subject_editFive_thursday);
+          SubjectEditSix = findViewById(R.id.subject_editSix_thursday);
+          AudienceEditOne = findViewById(R.id.audience_edit_thursday);
+          AudienceEditTwo = findViewById(R.id.audience_editTwo_thursday);
+          AudienceEditThree = findViewById(R.id.audience_editThree_thursday);
+          AudienceEditFour = findViewById(R.id.audience_editFour_thursday);
+          AudienceEditFive = findViewById(R.id.audience_editFive_thursday);
+          AudienceEditSix = findViewById(R.id.audience_editSix_thursday);
+          EducatorEditOne = findViewById(R.id.educator_edit_thursday);
+          EducatorEditTwo = findViewById(R.id.educator_editTwo_thursday);
+          EducatorEditThree = findViewById(R.id.educator_editThree_thursday);
+          EducatorEditFour = findViewById(R.id.educator_editFour_thursday);
+          EducatorEditFive = findViewById(R.id.educator_editFive_thursday);
+          EducatorEditSix = findViewById(R.id.educator_editSix_thursday);
+          typeEditOne_thursday = findViewById(R.id.typeEdit_thursday);
+          typeEditTwo_thursday = findViewById(R.id.typeEditTwo_thursday);
+          typeEditThree_thursday = findViewById(R.id.typeEditThree_thursday);
+          typeEditFour_thursday = findViewById(R.id.typeEditFour_thursday);
+          typeEditFive_thursday = findViewById(R.id.typeEditFive_thursday);
+          typeEditSix_thursday = findViewById(R.id.typeEditSix_thursday);
+
+          Lesson();
+          NumberOne.setText(Thursday.get(0).idcards.toString());
+          NumberTwo.setText(Thursday.get(1).idcards.toString());
+          NumberThree.setText(Thursday.get(2).idcards.toString());
+          NumberFour.setText(Thursday.get(3).idcards.toString());
+          NumberFive.setText(Thursday.get(4).idcards.toString());
+          NumberSix.setText(Thursday.get(5).idcards.toString());
+          TimeOne.setText(Thursday.get(0).timelesson.toString());
+          TimeTwo.setText(Thursday.get(1).timelesson.toString());
+          TimeThree.setText(Thursday.get(2).timelesson.toString());
+          TimeFour.setText(Thursday.get(3).timelesson.toString());
+          TimeFive.setText(Thursday.get(4).timelesson.toString());
+          TimeSix.setText(Thursday.get(5).timelesson.toString());
+          rb_lecture.setText(typelesson.get(0));
+          rb_lectureTwo.setText(typelesson.get(0));
+          rb_lectureThree.setText(typelesson.get(0));
+          rb_lectureFour.setText(typelesson.get(0));
+          rb_lectureFive.setText(typelesson.get(0));
+          rb_lectureSix.setText(typelesson.get(0));
+          rb_labwork.setText(typelesson.get(1));
+          rb_labworkTwo.setText(typelesson.get(1));
+          rb_labworkThree.setText(typelesson.get(1));
+          rb_labworkFour.setText(typelesson.get(1));
+          rb_labworkFive.setText(typelesson.get(1));
+          rb_labworkSix.setText(typelesson.get(1));
+          rb_practice.setText(typelesson.get(2));
+          rb_practice.setText(typelesson.get(2));
+          rb_practiceThree.setText(typelesson.get(2));
+          rb_practiceFour.setText(typelesson.get(2));
+          rb_practiceFive.setText(typelesson.get(2));
+          rb_practiceSix.setText(typelesson.get(2));
+          ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
+          subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+          ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
+          audSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+          ArrayAdapter<String> eduSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, educator_list);
+          eduSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+          SubjectEditOne.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditTwo.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditThree.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditFour.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditFive.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditSix.setAdapter(subSpinnerArrayAdapter);
+          AudienceEditOne.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditTwo.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditThree.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditFour.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditFive.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditSix.setAdapter(audSpinnerArrayAdapter);
+          EducatorEditOne.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditTwo.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditThree.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditFour.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditFive.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditSix.setAdapter(eduSpinnerArrayAdapter);
+
+          TextView copy_downOne = findViewById(R.id.copy_downOne_thursday);
+          TextView copy_downTwo = findViewById(R.id.copy_downTwo_thursday);
+          TextView copy_downThree = findViewById(R.id.copy_downThree_thursday);
+          TextView copy_downFour = findViewById(R.id.copy_downFour_thursday);
+          TextView copy_downFive = findViewById(R.id.copy_downFive_thursday);
+          TextView copy_upTwo= findViewById(R.id.copy_upTwo_thursday);
+          TextView copy_upThree= findViewById(R.id.copy_upThree_thursday);
+          TextView copy_upFour= findViewById(R.id.copy_upFour_thursday);
+          TextView copy_upFive= findViewById(R.id.copy_upFive_thursday);
+          TextView copy_upSix= findViewById(R.id.copy_upSix_thursday);
+          TextView clearOne = findViewById(R.id.clear_cardOne_thursday);
+          TextView clearTwo = findViewById(R.id.clear_cardTwo_thursday);
+          TextView clearThree = findViewById(R.id.clear_cardThree_thursday);
+          TextView clearFour = findViewById(R.id.clear_cardFour_thursday);
+          TextView clearFive = findViewById(R.id.clear_cardFive_thursday);
+          TextView clearSix = findViewById(R.id.clear_cardSix_thursday);
+
+          typeEditOne_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonOne = typeEditOne_thursday.indexOfChild(findViewById(typeEditOne_thursday.getCheckedRadioButtonId()));
+                  int IdRadioButton = typeEditOne_thursday.getCheckedRadioButtonId();
+                  RadioButton radioButton = findViewById(IdRadioButton);
+                  if (radioButton != null) {
+                      ThursdayTypeLessonOne = radioButton.getText().toString();
+                  }
+                  else { ThursdayTypeLessonOne = "";}
+
+              }
+          });
+
+          typeEditTwo_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonTwo = typeEditTwo_thursday.indexOfChild(findViewById(typeEditTwo_thursday.getCheckedRadioButtonId()));
+                  int IdRadioButtonTwo = typeEditTwo_thursday.getCheckedRadioButtonId();
+                  RadioButton radioButtonTwo = findViewById(IdRadioButtonTwo);
+                  if (radioButtonTwo != null) {
+                      ThursdayTypeLessonTwo = radioButtonTwo.getText().toString();
+                  }
+                  else { ThursdayTypeLessonTwo = "";}
+              }
+          });
+
+          typeEditThree_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonThree = typeEditThree_thursday.indexOfChild(findViewById(typeEditThree_thursday.getCheckedRadioButtonId()));
+                  int IdRadioButtonThree = typeEditThree_thursday.getCheckedRadioButtonId();
+                  RadioButton radioButtonThree = findViewById(IdRadioButtonThree);
+                  if (radioButtonThree != null) {
+                      ThursdayTypeLessonThree = radioButtonThree.getText().toString();
+                  }
+                  else { ThursdayTypeLessonThree = "";}
+              }
+          });
+
+          typeEditFour_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonFour = typeEditFour_thursday.indexOfChild(findViewById(typeEditFour_thursday.getCheckedRadioButtonId()));
+                  int IdRadioButtonFour = typeEditFour_thursday.getCheckedRadioButtonId();
+                  RadioButton radioButtonFour = findViewById(IdRadioButtonFour);
+                  if (radioButtonFour != null) {
+                      ThursdayTypeLessonFour = radioButtonFour.getText().toString();
+                  }
+                  else { ThursdayTypeLessonFour = "";}
+              }
+          });
+
+          typeEditFive_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonFive = typeEditFive_thursday.indexOfChild(findViewById(typeEditFive_thursday.getCheckedRadioButtonId()));
+                  int IdRadioButtonFive = typeEditFive_thursday.getCheckedRadioButtonId();
+                  RadioButton radioButtonFive = findViewById(IdRadioButtonFive);
+                  if (radioButtonFive != null) {
+                      ThursdayTypeLessonFive = radioButtonFive.getText().toString();
+                  }
+                  else { ThursdayTypeLessonFive = "";}
+              }
+          });
+          typeEditSix_thursday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+                  IdRadioButtonSix = typeEditSix_thursday.indexOfChild(findViewById(typeEditSix_thursday.getCheckedRadioButtonId()));
+                  int IdRadioButtonSix = typeEditSix_thursday.getCheckedRadioButtonId();
+                  RadioButton radioButtonSix = findViewById(IdRadioButtonSix);
+                  if (radioButtonSix != null) {
+                      ThursdayTypeLessonSix = radioButtonSix.getText().toString();
+                  }
+                  else { ThursdayTypeLessonSix = "";}
+              }
+          });
+
+          copy_downOne.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditTwo.setSelection(subject_list.indexOf(Thursday.get(0).subjectEdit));
+                  AudienceEditTwo.setSelection(audience_list.indexOf(Thursday.get(0).audienceEdit));
+                  EducatorEditTwo.setSelection(educator_list.indexOf(Thursday.get(0).educator));
+                  switch (IdRadioButtonOne){
+                      case 0:
+                          rb_lectureTwo.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkTwo.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceTwo.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_downTwo.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditThree.setSelection(subject_list.indexOf(Thursday.get(1).subjectEdit));
+                  AudienceEditThree.setSelection(audience_list.indexOf(Thursday.get(1).audienceEdit));
+                  EducatorEditThree.setSelection(educator_list.indexOf(Thursday.get(1).educator));
+                  switch (IdRadioButtonTwo){
+                      case 0:
+                          rb_lectureThree.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkThree.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceThree.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_downThree.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditFour.setSelection(subject_list.indexOf(Thursday.get(2).subjectEdit));
+                  AudienceEditFour.setSelection(audience_list.indexOf(Thursday.get(2).audienceEdit));
+                  EducatorEditFour.setSelection(educator_list.indexOf(Thursday.get(2).educator));
+                  switch (IdRadioButtonThree){
+                      case 0:
+                          rb_lectureFour.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFour.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFour.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+          copy_downFour.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditFive.setSelection(subject_list.indexOf(Thursday.get(3).subjectEdit));
+                  AudienceEditFive.setSelection(audience_list.indexOf(Thursday.get(3).audienceEdit));
+                  EducatorEditFive.setSelection(educator_list.indexOf(Thursday.get(3).educator));
+                  switch (IdRadioButtonFour){
+                      case 0:
+                          rb_lectureFive.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFive.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFive.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_downFive.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+                  SubjectEditSix.setSelection(subject_list.indexOf(Thursday.get(4).subjectEdit));
+                  AudienceEditSix.setSelection(audience_list.indexOf(Thursday.get(4).audienceEdit));
+                  EducatorEditSix.setSelection(educator_list.indexOf(Thursday.get(4).educator));
+                  switch (IdRadioButtonFive){
+                      case 0:
+                          rb_lectureSix.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkSix.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceSix.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_upTwo.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+
+                  SubjectEditOne.setSelection(subject_list.indexOf(Thursday.get(1).subjectEdit));
+                  AudienceEditOne.setSelection(audience_list.indexOf(Thursday.get(1).audienceEdit));
+                  EducatorEditOne.setSelection(educator_list.indexOf(Thursday.get(1).educator));
+                  switch (IdRadioButtonTwo){
+                      case 0:
+                          rb_lecture.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labwork.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practice.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_upThree.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+
+                  SubjectEditTwo.setSelection(subject_list.indexOf(Thursday.get(2).subjectEdit));
+                  AudienceEditTwo.setSelection(audience_list.indexOf(Thursday.get(2).audienceEdit));
+                  EducatorEditTwo.setSelection(educator_list.indexOf(Thursday.get(2).educator));
+                  switch (IdRadioButtonThree){
+                      case 0:
+                          rb_lectureTwo.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkTwo.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceTwo.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_upFour.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+
+                  SubjectEditThree.setSelection(subject_list.indexOf(Thursday.get(3).subjectEdit));
+                  AudienceEditThree.setSelection(audience_list.indexOf(Thursday.get(3).audienceEdit));
+                  EducatorEditThree.setSelection(educator_list.indexOf(Thursday.get(3).educator));
+                  switch (IdRadioButtonFour){
+                      case 0:
+                          rb_lectureThree.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkThree.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceThree.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_upFive.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+
+                  SubjectEditFour.setSelection(subject_list.indexOf(Thursday.get(4).subjectEdit));
+                  AudienceEditFour.setSelection(audience_list.indexOf(Thursday.get(4).audienceEdit));
+                  EducatorEditFour.setSelection(educator_list.indexOf(Thursday.get(4).educator));
+                  switch (IdRadioButtonFive){
+                      case 0:
+                          rb_lectureFour.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFour.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFour.setChecked(true);
+                          break;
+                  }
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+          copy_upSix.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  try{
+
+                  SubjectEditFive.setSelection(subject_list.indexOf(Thursday.get(5).subjectEdit));
+                  AudienceEditFive.setSelection(audience_list.indexOf(Thursday.get(5).audienceEdit));
+                  EducatorEditFive.setSelection(educator_list.indexOf(Thursday.get(5).educator));
+                  switch (IdRadioButtonSix){
+                      case 0:
+                          rb_lectureFive.setChecked(true);
+                          break;
+                      case 1:
+                          rb_labworkFive.setChecked(true);
+                          break;
+                      case 2:
+                          rb_practiceFive.setChecked(true);
+                          break;
+                  }
+
+                  } catch   (NullPointerException e) {}
+              }
+          });
+
+
+
+          clearOne.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditOne.setSelection(0);
+                  AudienceEditOne.setSelection(0);
+                  EducatorEditOne.setSelection(0);
+                  typeEditOne_thursday.clearCheck();
+              }
+          });
+
+          clearTwo.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditTwo.setSelection(0);
+                  AudienceEditTwo.setSelection(0);
+                  EducatorEditTwo.setSelection(0);
+                  typeEditTwo_thursday.clearCheck();
+              }
+          });
+
+          clearThree.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditThree.setSelection(0);
+                  AudienceEditThree.setSelection(0);
+                  EducatorEditThree.setSelection(0);
+                  typeEditThree_thursday.clearCheck();
+              }
+          });
+
+          clearFour.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditFour.setSelection(0);
+                  AudienceEditFour.setSelection(0);
+                  EducatorEditFour.setSelection(0);
+                  typeEditFour_thursday.clearCheck();
+              }
+          });
+
+          clearFive.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditFive.setSelection(0);
+                  AudienceEditFive.setSelection(0);
+                  EducatorEditFive.setSelection(0);
+                  typeEditFive_thursday.clearCheck();
+              }
+          });
+
+          clearSix.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  SubjectEditSix.setSelection(0);
+                  AudienceEditSix.setSelection(0);
+                  EducatorEditSix.setSelection(0);
+                  typeEditSix_thursday.clearCheck();
+              }
+          });
+
+
+
+          SubjectEditOne.setSelection(subject_list.indexOf(Thursday.get(0).subjectEdit.toString()));
+          SubjectEditTwo.setSelection(subject_list.indexOf(Thursday.get(1).subjectEdit.toString()));
+          SubjectEditThree.setSelection(subject_list.indexOf(Thursday.get(2).subjectEdit.toString()));
+          SubjectEditFour.setSelection(subject_list.indexOf(Thursday.get(3).subjectEdit.toString()));
+          SubjectEditFive.setSelection(subject_list.indexOf(Thursday.get(4).subjectEdit.toString()));
+          SubjectEditSix.setSelection(subject_list.indexOf(Thursday.get(5).subjectEdit.toString()));
+          AudienceEditOne.setSelection(audience_list.indexOf(Thursday.get(0).audienceEdit.toString()));
+          AudienceEditTwo.setSelection(audience_list.indexOf(Thursday.get(1).audienceEdit.toString()));
+          AudienceEditThree.setSelection(audience_list.indexOf(Thursday.get(2).audienceEdit.toString()));
+          AudienceEditFour.setSelection(audience_list.indexOf(Thursday.get(3).audienceEdit.toString()));
+          AudienceEditFive.setSelection(audience_list.indexOf(Thursday.get(4).audienceEdit.toString()));
+          AudienceEditSix.setSelection(audience_list.indexOf(Thursday.get(5).audienceEdit.toString()));
+          EducatorEditOne.setSelection(educator_list.indexOf(Thursday.get(0).educator.toString()));
+          EducatorEditTwo.setSelection(educator_list.indexOf(Thursday.get(1).educator.toString()));
+          EducatorEditThree.setSelection(educator_list.indexOf(Thursday.get(2).educator.toString()));
+          EducatorEditFour.setSelection(educator_list.indexOf(Thursday.get(3).educator.toString()));
+          EducatorEditFive.setSelection(educator_list.indexOf(Thursday.get(4).educator.toString()));
+          EducatorEditSix.setSelection(educator_list.indexOf(Thursday.get(5).educator.toString()));
+
+          if (Thursday.get(0).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lecture.setChecked(true);
+          } else if (Thursday.get(0).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labwork.setChecked(true);
+          } else if (Thursday.get(0).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practice.setChecked(true);
+          }
+          if (Thursday.get(1).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureTwo.setChecked(true);
+          } else if (Thursday.get(1).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkTwo.setChecked(true);
+          } else if (Thursday.get(1).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceTwo.setChecked(true);
+          }
+          if (Thursday.get(2).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureThree.setChecked(true);
+          } else if (Thursday.get(2).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkThree.setChecked(true);
+          } else if (Thursday.get(2).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceThree.setChecked(true);
+          }
+          if (Thursday.get(3).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureFour.setChecked(true);
+          } else if (Thursday.get(3).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkFour.setChecked(true);
+          } else if (Thursday.get(3).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceFour.setChecked(true);
+          }
+          if (Thursday.get(4).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureFive.setChecked(true);
+          } else if (Thursday.get(4).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkFive.setChecked(true);
+          } else if (Thursday.get(4).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceFive.setChecked(true);
+          }
+          if (Thursday.get(5).typelesson.toString().equals(typelesson.get(0))) {
+              rb_lectureSix.setChecked(true);
+          } else if (Thursday.get(5).typelesson.toString().equals(typelesson.get(1))) {
+              rb_labworkSix.setChecked(true);
+          } else if (Thursday.get(5).typelesson.toString().equals(typelesson.get(2))) {
+              rb_practiceSix.setChecked(true);
+          }
+
+          //S1
+            try {
+              SubjectEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueSubjectOne = SubjectEditOne.getSelectedItem().toString();
+                      Thursday.set(0, new Lesson("1", "8:30-10:00", ThursdayValueSubjectOne, Thursday.get(0).audienceEdit.toString(), Thursday.get(0).educator.toString(), Thursday.get(0).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+
+          //S2
+          try {
+              SubjectEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueSubjectTwo = SubjectEditTwo.getSelectedItem().toString();
+                      Thursday.set(1, new Lesson("2", "10:10-11:40", ThursdayValueSubjectTwo, Thursday.get(1).audienceEdit.toString(), Thursday.get(1).educator.toString(), Thursday.get(1).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+
+          //S3
+          try {
+              SubjectEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueSubjectThree = SubjectEditThree.getSelectedItem().toString();
+                      Thursday.set(2, new Lesson("3", "12:20-13:50", ThursdayValueSubjectThree, Thursday.get(2).audienceEdit.toString(), Thursday.get(2).educator.toString(), Thursday.get(2).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //S4
+          try {
+              SubjectEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueSubjectFour = SubjectEditFour.getSelectedItem().toString();
+                      Thursday.set(3, new Lesson("4", "14:00-15:30", ThursdayValueSubjectFour, Thursday.get(3).audienceEdit.toString(), Thursday.get(3).educator.toString(), Thursday.get(3).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //S5
+          try {
+              SubjectEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueSubjectFive = SubjectEditFive.getSelectedItem().toString();
+                      Thursday.set(4, new Lesson("5", "15:40-17:10", ThursdayValueSubjectFive, Thursday.get(4).audienceEdit.toString(), Thursday.get(4).educator.toString(), Thursday.get(4).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //S6
+          try {
+              SubjectEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueSubjectSix = SubjectEditSix.getSelectedItem().toString();
+                      Thursday.set(5, new Lesson("6", "17:30-19:00", ThursdayValueSubjectSix, Thursday.get(5).audienceEdit.toString(), Thursday.get(5).educator.toString(), Thursday.get(5).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+
+          //A1
+          try {
+              AudienceEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueAudienceOne = AudienceEditOne.getSelectedItem().toString();
+                      Thursday.set(0, new Lesson("1", "8:30-10:00", Thursday.get(0).subjectEdit.toString(), ThursdayValueAudienceOne, Thursday.get(0).educator.toString(), Thursday.get(0).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A2
+          try {
+              AudienceEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueAudienceTwo = AudienceEditTwo.getSelectedItem().toString();
+                      Thursday.set(1, new Lesson("2", "10:10-11:40", Thursday.get(1).subjectEdit.toString(), ThursdayValueAudienceTwo, Thursday.get(1).educator.toString(), Thursday.get(1).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+
+          //A3
+          try {
+              AudienceEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueAudienceThree = AudienceEditThree.getSelectedItem().toString();
+                      Thursday.set(2, new Lesson("3", "12:20-13:50", Thursday.get(2).subjectEdit.toString(), ThursdayValueAudienceThree, Thursday.get(2).educator.toString(), Thursday.get(2).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A4
+          try {
+              AudienceEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueAudienceFour = AudienceEditFour.getSelectedItem().toString();
+                      Thursday.set(3, new Lesson("4", "14:00-15:30", Thursday.get(3).subjectEdit.toString(), ThursdayValueAudienceFour, Thursday.get(3).educator.toString(), Thursday.get(3).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A5
+          try {
+              AudienceEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueAudienceFive = AudienceEditFive.getSelectedItem().toString();
+                      Thursday.set(4, new Lesson("5", "15:40-17:10", Thursday.get(4).subjectEdit.toString(), ThursdayValueAudienceFive, Thursday.get(4).educator.toString(), Thursday.get(4).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //A6
+          try {
+              AudienceEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayValueAudienceSix = AudienceEditSix.getSelectedItem().toString();
+                      Thursday.set(5, new Lesson("6", "17:30-19:00", Thursday.get(5).subjectEdit.toString(), ThursdayValueAudienceSix, Thursday.get(5).educator.toString(), Thursday.get(5).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E1
+          try {
+              EducatorEditOne.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayEducatorOne = EducatorEditOne.getSelectedItem().toString();
+                      Thursday.set(0, new Lesson("1", "8:30-10:00", Thursday.get(0).subjectEdit.toString(), Thursday.get(0).audienceEdit.toString(), ThursdayEducatorOne, Thursday.get(0).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E2
+          try {
+              EducatorEditTwo.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayEducatorTwo = EducatorEditTwo.getSelectedItem().toString();
+                      Thursday.set(1, new Lesson("2", "10:10-11:40", Thursday.get(1).subjectEdit.toString(), Thursday.get(1).audienceEdit.toString(), ThursdayEducatorTwo, Thursday.get(1).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+
+          //E3
+          try {
+              EducatorEditThree.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayEducatorThree = EducatorEditThree.getSelectedItem().toString();
+                      Thursday.set(2, new Lesson("3", "12:20-13:50", Thursday.get(2).subjectEdit.toString(), Thursday.get(2).audienceEdit.toString(), ThursdayEducatorThree, Thursday.get(2).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E4
+          try {
+              EducatorEditFour.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayEducatorFour = EducatorEditFour.getSelectedItem().toString();
+                      Thursday.set(3, new Lesson("4", "14:00-15:30", Thursday.get(3).subjectEdit.toString(), Thursday.get(3).audienceEdit.toString(), ThursdayEducatorFour, Thursday.get(3).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E5
+          try {
+              EducatorEditFive.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayEducatorFive = EducatorEditFive.getSelectedItem().toString();
+                      Thursday.set(4, new Lesson("5", "15:40-17:10", Thursday.get(4).subjectEdit.toString(), Thursday.get(4).audienceEdit.toString(), ThursdayEducatorFive, Thursday.get(4).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+          //E6
+          try {
+              EducatorEditSix.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  @Override
+                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                      // TODO Auto-generated method stub
+                      ThursdayEducatorSix = EducatorEditSix.getSelectedItem().toString();
+                      Thursday.set(5, new Lesson("6", "17:30-19:00", Thursday.get(5).subjectEdit.toString(), Thursday.get(5).audienceEdit.toString(), ThursdayEducatorSix, Thursday.get(5).typelesson.toString()));
+                  }
+                  @Override
+                  public void onNothingSelected(AdapterView<?> parent) { }}); } catch (NullPointerException e) { }
+      }
+      public void friday_fill() {
+          rb_lecture = findViewById(R.id.rb_lecture_friday);
+          rb_labwork = findViewById(R.id.rb_labwork_friday);
+          rb_practice = findViewById(R.id.rb_practice_friday);
+          rb_lectureTwo = findViewById(R.id.rb_lectureTwo_friday);
+          rb_labworkTwo = findViewById(R.id.rb_labworkTwo_friday);
+          rb_practiceTwo = findViewById(R.id.rb_practiceTwo_friday);
+          rb_lectureThree = findViewById(R.id.rb_lectureThree_friday);
+          rb_labworkThree = findViewById(R.id.rb_labworkThree_friday);
+          rb_practiceThree = findViewById(R.id.rb_practiceThree_friday);
+          rb_lectureFour = findViewById(R.id.rb_lectureFour_friday);
+          rb_labworkFour = findViewById(R.id.rb_labworkFour_friday);
+          rb_practiceFour = findViewById(R.id.rb_practiceFour_friday);
+          rb_lectureFive = findViewById(R.id.rb_lectureFive_friday);
+          rb_labworkFive = findViewById(R.id.rb_labworkFive_friday);
+          rb_practiceFive = findViewById(R.id.rb_practiceFive_friday);
+          rb_lectureSix = findViewById(R.id.rb_lectureSix_friday);
+          rb_labworkSix = findViewById(R.id.rb_labworkSix_friday);
+          rb_practiceSix = findViewById(R.id.rb_practiceSix_friday);
+          NumberOne = findViewById(R.id.number_friday);
+          NumberTwo = findViewById(R.id.numberTwo_friday);
+          NumberThree = findViewById(R.id.numberThree_friday);
+          NumberFour = findViewById(R.id.numberFour_friday);
+          NumberFive = findViewById(R.id.numberFive_friday);
+          NumberSix = findViewById(R.id.numberSix_friday);
+          TimeOne = findViewById(R.id.time_friday);
+          TimeTwo = findViewById(R.id.timeTwo_friday);
+          TimeThree = findViewById(R.id.timeThree_friday);
+          TimeFour = findViewById(R.id.timeFour_friday);
+          TimeFive = findViewById(R.id.timeFive_friday);
+          TimeSix = findViewById(R.id.timeSix_friday);
+          SubjectEditOne = findViewById(R.id.subject_edit_friday);
+          SubjectEditTwo = findViewById(R.id.subject_editTwo_friday);
+          SubjectEditThree = findViewById(R.id.subject_editThree_friday);
+          SubjectEditFour = findViewById(R.id.subject_editFour_friday);
+          SubjectEditFive = findViewById(R.id.subject_editFive_friday);
+          SubjectEditSix = findViewById(R.id.subject_editSix_friday);
+          AudienceEditOne = findViewById(R.id.audience_edit_friday);
+          AudienceEditTwo = findViewById(R.id.audience_editTwo_friday);
+          AudienceEditThree = findViewById(R.id.audience_editThree_friday);
+          AudienceEditFour = findViewById(R.id.audience_editFour_friday);
+          AudienceEditFive = findViewById(R.id.audience_editFive_friday);
+          AudienceEditSix = findViewById(R.id.audience_editSix_friday);
+          EducatorEditOne = findViewById(R.id.educator_edit_friday);
+          EducatorEditTwo = findViewById(R.id.educator_editTwo_friday);
+          EducatorEditThree = findViewById(R.id.educator_editThree_friday);
+          EducatorEditFour = findViewById(R.id.educator_editFour_friday);
+          EducatorEditFive = findViewById(R.id.educator_editFive_friday);
+          EducatorEditSix = findViewById(R.id.educator_editSix_friday);
+          typeEditOne_friday = findViewById(R.id.typeEdit_friday);
+          typeEditTwo_friday = findViewById(R.id.typeEditTwo_friday);
+          typeEditThree_friday = findViewById(R.id.typeEditThree_friday);
+          typeEditFour_friday = findViewById(R.id.typeEditFour_friday);
+          typeEditFive_friday = findViewById(R.id.typeEditFive_friday);
+          typeEditSix_friday = findViewById(R.id.typeEditSix_friday);
+
+          Lesson();
+          NumberOne.setText(Friday.get(0).idcards.toString());
+          NumberTwo.setText(Friday.get(1).idcards.toString());
+          NumberThree.setText(Friday.get(2).idcards.toString());
+          NumberFour.setText(Friday.get(3).idcards.toString());
+          NumberFive.setText(Friday.get(4).idcards.toString());
+          NumberSix.setText(Friday.get(5).idcards.toString());
+          TimeOne.setText(Friday.get(0).timelesson.toString());
+          TimeTwo.setText(Friday.get(1).timelesson.toString());
+          TimeThree.setText(Friday.get(2).timelesson.toString());
+          TimeFour.setText(Friday.get(3).timelesson.toString());
+          TimeFive.setText(Friday.get(4).timelesson.toString());
+          TimeSix.setText(Friday.get(5).timelesson.toString());
+          rb_lecture.setText(typelesson.get(0));
+          rb_lectureTwo.setText(typelesson.get(0));
+          rb_lectureThree.setText(typelesson.get(0));
+          rb_lectureFour.setText(typelesson.get(0));
+          rb_lectureFive.setText(typelesson.get(0));
+          rb_lectureSix.setText(typelesson.get(0));
+          rb_labwork.setText(typelesson.get(1));
+          rb_labworkTwo.setText(typelesson.get(1));
+          rb_labworkThree.setText(typelesson.get(1));
+          rb_labworkFour.setText(typelesson.get(1));
+          rb_labworkFive.setText(typelesson.get(1));
+          rb_labworkSix.setText(typelesson.get(1));
+          rb_practice.setText(typelesson.get(2));
+          rb_practice.setText(typelesson.get(2));
+          rb_practiceThree.setText(typelesson.get(2));
+          rb_practiceFour.setText(typelesson.get(2));
+          rb_practiceFive.setText(typelesson.get(2));
+          rb_practiceSix.setText(typelesson.get(2));
+          ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, subject_list);
+          subSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+          ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, audience_list);
+          audSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+          ArrayAdapter<String> eduSpinnerArrayAdapter = new ArrayAdapter<> (this, android.R.layout.simple_spinner_dropdown_item, educator_list);
+          eduSpinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+          SubjectEditOne.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditTwo.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditThree.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditFour.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditFive.setAdapter(subSpinnerArrayAdapter);
+          SubjectEditSix.setAdapter(subSpinnerArrayAdapter);
+          AudienceEditOne.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditTwo.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditThree.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditFour.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditFive.setAdapter(audSpinnerArrayAdapter);
+          AudienceEditSix.setAdapter(audSpinnerArrayAdapter);
+          EducatorEditOne.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditTwo.setAdapter(eduSpinnerArrayAdapter);
+          EducatorEditThree.setAdapter(eduSpinnerArrayAdapter);
         EducatorEditFour.setAdapter(eduSpinnerArrayAdapter);
         EducatorEditFive.setAdapter(eduSpinnerArrayAdapter);
         EducatorEditSix.setAdapter(eduSpinnerArrayAdapter);
@@ -6927,8 +7766,8 @@ public class ScheduleEditor extends AppCompatActivity {
                 if (first && positionOffset == 0 && positionOffsetPixels == 0)
                     onPageSelected(0);
                 first = false;
-
             }
+
 
             @Override
             public void onPageSelected(int position) {
@@ -6937,22 +7776,16 @@ public class ScheduleEditor extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         monday_fill();
-                        break;
                     case 1:
-                        monday_fill();
-                        break;
+                        tuesday_fill();
                     case 2:
                         monday_fill();
-                        break;
                     case 3:
                         monday_fill();
-                        break;
                     case 4:
                         monday_fill();
-                        break;
                     case 5:
                         monday_fill();
-                        break;
                 }
             }
             @Override
@@ -6981,8 +7814,9 @@ public class ScheduleEditor extends AppCompatActivity {
                         monday_fill();
                         break;
                     case 1:
+
                         monday_fill();
-                        break;
+                       break;
                     case 2:
                         monday_fill();
                         break;
@@ -7026,6 +7860,11 @@ public class ScheduleEditor extends AppCompatActivity {
             return tabTitles.length;
         }
 
+        private Fragment CurrentFragment;
+
+        public Fragment getCurrentFragment() {
+            return CurrentFragment;
+        }
 
 
         @SuppressLint("ResourceType")
@@ -7036,19 +7875,24 @@ public class ScheduleEditor extends AppCompatActivity {
                 case 0:
                     return new FragmentMonday();
                 case 1:
-                    return new FragmentTuesday();
+
+                    return new FragmentMonday();
                 case 2:
-                    return new FragmentWednesday();
+                    return new FragmentMonday();
                 case 3:
-                    return new FragmentThursday();
+                    return new FragmentMonday();
                 case 4:
-                    return new FragmentFriday();
+                    return new FragmentMonday();
                 case 5:
-                    return new FragmentSaturday();
+                    return new FragmentMonday();
                 default:
                     return null;
             }
         }
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
+
 
         @Override
         public CharSequence getPageTitle(int position) {
@@ -7059,14 +7903,11 @@ public class ScheduleEditor extends AppCompatActivity {
                 title = "ВТ";
             } else if (position == 2) {
                 title = "СР";
-            }
-             else if (position == 3) {
+            } else if (position == 3) {
                 title = "ЧТ";
-                }
-             else if (position == 4) {
+            } else if (position == 4) {
                 title = "ПТ";
-            }
-            else if (position == 5) {
+            } else if (position == 5) {
                 title = "СБ";
             }
 
@@ -7576,7 +8417,7 @@ public class ScheduleEditor extends AppCompatActivity {
         cursor.close();
     }
 
-    private void DataMonday() {
+    private void Lesson() {
         Monday = new ArrayList<>();
         try { Monday.add(new Lesson("1", String.valueOf(calls_schedule.get(0)), MondayValueSubjectOne, MondayValueAudienceOne, MondayEducatorOne, MondayTypeLessonOne));
         } catch (NullPointerException e) { }
@@ -7592,7 +8433,7 @@ public class ScheduleEditor extends AppCompatActivity {
         } catch (NullPointerException e) { }
     }
 
-    private void Lesson() {
+   /* private void Lesson() {
         Tuesday = new ArrayList<>();
         try { Tuesday.add(new Lesson("1", String.valueOf(calls_schedule.get(0)), TuesdayValueSubjectOne, TuesdayValueAudienceOne, TuesdayEducatorOne, TuesdayTypeLessonOne));
         } catch (NullPointerException e) { }
@@ -7608,7 +8449,7 @@ public class ScheduleEditor extends AppCompatActivity {
             Tuesday.add(new Lesson("6", String.valueOf(calls_schedule.get(5)), TuesdayValueSubjectSix, TuesdayValueAudienceSix, TuesdayEducatorSix, TuesdayTypeLessonSix));
         } catch (NullPointerException e) {
         }
-    }
+    }*/
 
     /*private void Lesson() {
         Wednesday = new ArrayList<>(); //Вторник
@@ -7720,7 +8561,7 @@ public class ScheduleEditor extends AppCompatActivity {
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
         position_week=number_week;
 
-        DataMonday();
+        Lesson();
         try {
             MondayStringSubjectEditOne = Monday.get(0).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
@@ -7818,9 +8659,10 @@ public class ScheduleEditor extends AppCompatActivity {
         } catch (IndexOutOfBoundsException e) {
         }
 
-        Lesson();
 
-        try {
+
+      /*   Lesson();
+       try {
             TuesdayStringSubjectEditOne = Tuesday.get(0).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
@@ -8310,7 +9152,7 @@ public class ScheduleEditor extends AppCompatActivity {
             SaturdayStringTypeLessonEditSix = Saturday.get(5).getTypeLesson().toString();
         } catch (IndexOutOfBoundsException e) {
         }
-
+*/
         db.beginTransaction();
         try{
 
@@ -8376,6 +9218,7 @@ public class ScheduleEditor extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 6));
 
+/*
 
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
@@ -8677,6 +9520,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 "WHERE " + ScheduleClass.educators.educator + "='" + SaturdayStringEducatorEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 36));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                 "WHERE " + ScheduleClass.typelessons.typelesson + "='" + SaturdayStringTypeLessonEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 36));
+*/
 
             db.setTransactionSuccessful(); }
         finally {
