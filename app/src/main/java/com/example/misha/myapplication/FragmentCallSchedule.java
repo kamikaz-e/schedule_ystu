@@ -93,7 +93,7 @@ public class FragmentCallSchedule extends android.support.v4.app.Fragment {
         fourTime = view.findViewById(R.id.FourTime);
         fiveTime = view.findViewById(R.id.FiveTime);
         sixTime = view.findViewById(R.id.SixTime);
-        ScheduleDB = new ScheduleDB(getActivity());
+        ScheduleDB = new ScheduleDB();
 
 
         CardView cardViewOne= view.findViewById(R.id.card_viewOne);

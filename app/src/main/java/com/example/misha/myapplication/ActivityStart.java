@@ -59,7 +59,7 @@ public class ActivityStart extends Activity {
 
   @Override
     protected void onCreate(Bundle savedInstanceState) {
-    ScheduleDB = new ScheduleDB(this);
+    ScheduleDB = new ScheduleDB();
     super.onCreate(savedInstanceState);
     setContentView(R.layout.welcome_activity);
 

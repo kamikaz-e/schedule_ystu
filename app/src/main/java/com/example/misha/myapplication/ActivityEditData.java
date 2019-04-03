@@ -82,7 +82,7 @@ public class ActivityEditData extends AppCompatActivity {
 
 
 
-    ScheduleDB = new ScheduleDB(this);
+    ScheduleDB = new ScheduleDB();
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     ActionBar actionBar = getSupportActionBar();

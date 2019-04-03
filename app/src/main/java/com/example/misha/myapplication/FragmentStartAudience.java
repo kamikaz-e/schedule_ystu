@@ -62,7 +62,7 @@ public class FragmentStartAudience extends android.support.v4.app.Fragment {
         Toolbar profile_toolbar = view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity)getActivity();
         activity.setSupportActionBar(profile_toolbar);
-        ScheduleDB = new ScheduleDB(getActivity());
+        ScheduleDB = new ScheduleDB();
 
         clear_audiences = view.findViewById(R.id.clear_audiences);
         next = view.findViewById(R.id.next);

@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ScheduleDB = new ScheduleDB(this);
+        ScheduleDB = new ScheduleDB();
         setContentView(R.layout.activity_main);
         text_main = findViewById(R.id.text_main);
         final Toolbar toolbar = findViewById(R.id.toolbar);

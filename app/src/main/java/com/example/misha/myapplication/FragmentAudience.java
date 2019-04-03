@@ -55,7 +55,7 @@ public class FragmentAudience extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_audience, container, false);
 
-        ScheduleDB = new ScheduleDB(getActivity());
+        ScheduleDB = new ScheduleDB();
 
         input_audience = view.findViewById(R.id.input_audience);
         list_audiences = view.findViewById(R.id.list_audiences);

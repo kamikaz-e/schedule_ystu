@@ -82,7 +82,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ScheduleDB = new ScheduleDB(getContext());
+        ScheduleDB = new ScheduleDB();
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
         load_calls_schedule();

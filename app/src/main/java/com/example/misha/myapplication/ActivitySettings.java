@@ -38,14 +38,12 @@ import com.example.misha.myapplication.data.ScheduleClass.date_start;
 import com.example.misha.myapplication.data.ScheduleClass.educators;
 import com.example.misha.myapplication.data.ScheduleClass.schedule;
 import com.example.misha.myapplication.data.ScheduleClass.subjects;
-import com.example.misha.myapplication.data.ScheduleClass.typelessons;
 import com.example.misha.myapplication.data.ScheduleDB;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -95,7 +93,7 @@ public class ActivitySettings extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    ScheduleDB = new ScheduleDB(this);
+    ScheduleDB = new ScheduleDB();
     super.onCreate(savedInstanceState);
     setContentView(R.layout.settings);
     android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);

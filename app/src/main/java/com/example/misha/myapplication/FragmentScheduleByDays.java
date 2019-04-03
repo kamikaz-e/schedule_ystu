@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.misha.myapplication.fragments.ScheduleMonday;
+
 public class FragmentScheduleByDays extends android.support.v4.app.Fragment {
 
     public FragmentScheduleByDays() {
@@ -59,22 +61,7 @@ public class FragmentScheduleByDays extends android.support.v4.app.Fragment {
 
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
-
-            switch (position) {
-                case 0:
-                  return  new ScheduleMonday();
-                case 1:
-                    return new ScheduleTuesday();
-                case 2:
-                    return new ScheduleWednesday();
-                case 3:
-                    return new ScheduleThursday();
-                case 4:
-                    return new ScheduleFriday();
-                case 5:
-                    return new ScheduleSaturday();
-            }
-            return null;
+            return new ScheduleMonday();
         }
 
         @Override

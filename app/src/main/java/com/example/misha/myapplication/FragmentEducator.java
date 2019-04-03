@@ -49,7 +49,7 @@ public class FragmentEducator extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_educator, container, false);
 
-        ScheduleDB = new ScheduleDB(getActivity());
+        ScheduleDB = new ScheduleDB();
 
         input_educator = view.findViewById(R.id.input_educator);
         list_educators = view.findViewById(R.id.list_educators);

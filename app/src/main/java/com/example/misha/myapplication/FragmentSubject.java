@@ -77,7 +77,7 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_subject, container, false);
 
-        ScheduleDB = new ScheduleDB(getActivity());
+        ScheduleDB = new ScheduleDB();
 
         input_subject = view.findViewById(R.id.input_subject);
         list_subjects = view.findViewById(R.id.list_subjects);

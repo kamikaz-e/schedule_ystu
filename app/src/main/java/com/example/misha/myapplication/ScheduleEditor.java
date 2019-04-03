@@ -13,26 +13,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -5982,7 +5975,7 @@ public class ScheduleEditor extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
 
-        ScheduleDB = new ScheduleDB(this);
+        ScheduleDB = new ScheduleDB();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);

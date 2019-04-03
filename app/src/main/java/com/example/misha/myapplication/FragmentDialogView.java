@@ -18,18 +18,38 @@ import android.widget.Toast;
 
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleDB;
+import com.example.misha.myapplication.model.Subject;
 
 import java.util.ArrayList;
 
 
-
+//Todo прочитать про наследование инкапсуляцию интерфейсы абстрактные классы и generic.
 public class FragmentDialogView extends DialogFragment {
 
     private ScheduleDB ScheduleDB;
 
+    public static final String SUBJECTS = "SUBJECTS";
+    public static final String POSITION = "POSITION";
+
+    private int clickedPosition;
+
+    private ArrayList<Subject> subjects;
+
+    public static FragmentDialogView newInstance(int position, ArrayList<Subject> subjects) {
+        Bundle args = new Bundle();
+        args.putParcelableArrayList(SUBJECTS, subjects);
+        args.putInt(POSITION, position);
+        FragmentDialogView fragment = new FragmentDialogView();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        ScheduleDB = new ScheduleDB(getActivity());
+        ScheduleDB = new ScheduleDB();
+        clickedPosition = getArguments().getInt(POSITION);
+        subjects = getArguments().getParcelableArrayList(SUBJECTS);
         LayoutInflater li = LayoutInflater.from(getActivity());
         View view = li.inflate(R.layout.typelesson_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AppCompatAlertDialogStyle);

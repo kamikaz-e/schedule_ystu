@@ -60,7 +60,7 @@ public class FragmentStartEducator extends android.support.v4.app.Fragment {
         Toolbar profile_toolbar = view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(profile_toolbar);
-        ScheduleDB = new ScheduleDB(getActivity());
+        ScheduleDB = new ScheduleDB();
         next = view.findViewById(R.id.next);
         clear_educators = view.findViewById(R.id.clear_educators);
         input_educator = view.findViewById(R.id.input_educator);

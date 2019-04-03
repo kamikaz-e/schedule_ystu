@@ -82,7 +82,7 @@ public class ActivityCallSchedule extends AppCompatActivity {
     fourTime = findViewById(R.id.FourTime);
     fiveTime = findViewById(R.id.FiveTime);
     sixTime = findViewById(R.id.SixTime);
-    ScheduleDB = new ScheduleDB(this);
+    ScheduleDB = new ScheduleDB();
     start();
 
 

@@ -43,7 +43,7 @@ public class FragmentDate extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
 
        View view =inflater.inflate(R.layout.fragment_date, container, false);
-        ScheduleDB = new ScheduleDB(getActivity());
+        ScheduleDB = new ScheduleDB();
         layout_pich_week = view.findViewById(R.id.oneitem);
 
         new MaterialTapTargetPrompt.Builder(getActivity())

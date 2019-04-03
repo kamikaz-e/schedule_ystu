@@ -1,10 +1,17 @@
 package com.example.misha.myapplication.adapter;
 
+
+import com.example.misha.myapplication.model.Subject;
+
+import java.util.ArrayList;
+
 public interface EditScheduleCallback {
 
-    void onSubjectSelected(int position, Object subject);
 
-    void onAudienceSelected(int position, Object audience);
+    void onAudienceSelected(int position, String audience);
 
-    void onEducatorSelected(int position, Object educator);
+    void onEducatorSelected(int position, String educator);
+
+    void onSubjectClick(int position, ArrayList<Subject> subject);
+
 }
