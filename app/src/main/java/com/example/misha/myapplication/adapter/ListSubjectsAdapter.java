@@ -4,24 +4,27 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.example.misha.myapplication.Lesson;
+
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.model.Subject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapter.ViewHolder> {
 
-    private List<Lesson> listSubjects;
+    private List<Subject> listSubjects;
 
-    public ListSubjectsAdapter(List<Lesson> schedule) {
+    public ListSubjectsAdapter(ArrayList<Subject> schedule) {
         this.listSubjects = schedule;
     }
 
     @Override
     public ListSubjectsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_item, parent, false);
+                .inflate(R.layout.fragment_dialog_view, parent, false);
         return new ViewHolder(view);
     }
 
@@ -36,16 +39,17 @@ public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
+        private final TextView subject;
 
         public ViewHolder(View view) {
             super(view);
+            subject = view.findViewById(R.id.subject);
 
         }
 
         public void onBindView(int position) {
-            Lesson lesson = listSubjects.get(position);
-
+            Subject lesson = listSubjects.get(position);
+            subject.setText(lesson.getName());
         }
 
     }
