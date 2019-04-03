@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.misha.myapplication.FragmentMonday;
+import com.example.misha.myapplication.fragments.FragmentMonday;
 
 public class SchedulePagerAdapter extends FragmentPagerAdapter {
 
