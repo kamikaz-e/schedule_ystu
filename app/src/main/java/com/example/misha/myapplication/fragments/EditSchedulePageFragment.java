@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.misha.myapplication.FragmentDialogView;
+import com.example.misha.myapplication.subjectDialogFragment;
 import com.example.misha.myapplication.Lesson;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditScheduleAdapter;
@@ -21,7 +21,6 @@ import com.example.misha.myapplication.model.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class EditSchedulePageFragment extends Fragment implements EditScheduleCallback {
 
@@ -106,8 +105,8 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
 
     @Override
     public void onSubjectClick(int position, ArrayList<Subject> subject) {
-        DialogFragment dialogFragment = FragmentDialogView.newInstance(position, subject);
-        dialogFragment.show(getChildFragmentManager(), FragmentDialogView.class.getSimpleName());
+        DialogFragment dialogFragment = subjectDialogFragment.newInstance(position, subject);
+        dialogFragment.show(getChildFragmentManager(), subjectDialogFragment.class.getSimpleName());
     }
 
     @Override

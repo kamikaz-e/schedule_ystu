@@ -189,7 +189,7 @@ public class ActivitySettings extends AppCompatActivity {
 
     typelessonitem.setOnClickListener(new OnClickListener() {
           public void onClick(View v) {
-           dlg1 = new FragmentDialogView();
+           dlg1 = new subjectDialogFragment();
            dlg1.show(getSupportFragmentManager(),"dlg1");
           }
       });

@@ -2,19 +2,14 @@ package com.example.misha.myapplication;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleDB;
@@ -24,7 +19,7 @@ import java.util.ArrayList;
 
 
 //Todo прочитать про наследование инкапсуляцию интерфейсы абстрактные классы и generic.
-public class FragmentDialogView extends DialogFragment {
+public class subjectDialogFragment extends DialogFragment {
 
     private ScheduleDB ScheduleDB;
 
@@ -35,11 +30,11 @@ public class FragmentDialogView extends DialogFragment {
 
     private ArrayList<Subject> subjects;
 
-    public static FragmentDialogView newInstance(int position, ArrayList<Subject> subjects) {
+    public static subjectDialogFragment newInstance(int position, ArrayList<Subject> subjects) {
         Bundle args = new Bundle();
         args.putParcelableArrayList(SUBJECTS, subjects);
         args.putInt(POSITION, position);
-        FragmentDialogView fragment = new FragmentDialogView();
+        subjectDialogFragment fragment = new subjectDialogFragment();
         fragment.setArguments(args);
         return fragment;
     }

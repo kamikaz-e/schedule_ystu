@@ -125,11 +125,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
 
         }
 
-        /*@Override
-        public void onClick(DialogInterface dialog, int position) {
-            callback.onSubjectClicked(getAdapterPosition(), subjectList.get(position));
-        }
-*/
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
@@ -140,18 +135,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         public void onClick(View v) {
             callback.onSubjectClick(getAdapterPosition(), subjectList);
         }
-
-
-
-        /*@Override
-        public void onClick(View v) {
-
-        }*/
-
-     /*   @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        }*/
 
 
 
