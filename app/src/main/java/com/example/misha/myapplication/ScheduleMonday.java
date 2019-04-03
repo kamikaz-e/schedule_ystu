@@ -20,34 +20,39 @@ import java.util.List;
 public class ScheduleMonday extends android.support.v4.app.Fragment {
     private ScheduleDB ScheduleDB;
     private List<Lesson> schedule;
-    String SubjectOne="";
-    String SubjectTwo="";
-    String SubjectThree="";
-    String SubjectFour="";
-    String SubjectFive="";
-    String SubjectSix="";
-    String AudienceOne="";
-    String AudienceTwo="";
-    String AudienceThree="";
-    String AudienceFour="";
-    String AudienceFive="";
-    String AudienceSix="";
-    String EducatorOne="";
-    String EducatorTwo="";
-    String EducatorThree="";
-    String EducatorFour="";
-    String EducatorFive="";
-    String EducatorSix="";
-    String TypeLessonOne="";
-    String TypeLessonTwo="";
-    String TypeLessonThree="";
-    String TypeLessonFour="";
-    String TypeLessonFive="";
-    String TypeLessonSix="";
-    Integer position_pager=0;
+
+    private ArrayList<String> subject;
+    private ArrayList<String> audience;
+    private ArrayList<String> educator;
+    private ArrayList<String> lessonTypes;
+
+    String SubjectOne = "";
+    String SubjectTwo = "";
+    String SubjectThree = "";
+    String SubjectFour = "";
+    String SubjectFive = "";
+    String SubjectSix = "";
+    String AudienceOne = "";
+    String AudienceTwo = "";
+    String AudienceThree = "";
+    String AudienceFour = "";
+    String AudienceFive = "";
+    String AudienceSix = "";
+    String EducatorOne = "";
+    String EducatorTwo = "";
+    String EducatorThree = "";
+    String EducatorFour = "";
+    String EducatorFive = "";
+    String EducatorSix = "";
+    String TypeLessonOne = "";
+    String TypeLessonTwo = "";
+    String TypeLessonThree = "";
+    String TypeLessonFour = "";
+    String TypeLessonFive = "";
+    String TypeLessonSix = "";
+    Integer position_pager = 0;
 
     ArrayList<String> calls_schedule = new ArrayList<>();
-
 
 
     @Override
@@ -55,26 +60,27 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
     }
 
-  void load_calls_schedule(){
-    SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-    String searchQuery = "SELECT "+ calls.time +" FROM " + calls.TABLE_NAME;
-    Cursor cursor = db.rawQuery(searchQuery, null);
-    while(cursor.moveToNext()) {
-      calls_schedule.add(cursor.getString(0));
+    void load_calls_schedule() {
+        SQLiteDatabase db = ScheduleDB.getReadableDatabase();
+        String searchQuery = "SELECT " + calls.time + " FROM " + calls.TABLE_NAME;
+        Cursor cursor = db.rawQuery(searchQuery, null);
+        while (cursor.moveToNext()) {
+            calls_schedule.add(cursor.getString(0));
+        }
+        cursor.close();
     }
-    cursor.close();
-  }
 
-    private void data_schedule(){
+    private void data_schedule() {
 
         schedule = new ArrayList<>();
-        schedule.add(new Lesson("1",calls_schedule.get(0),SubjectOne, AudienceOne, EducatorOne, TypeLessonOne));
-        schedule.add(new Lesson("2",calls_schedule.get(1),SubjectTwo, AudienceTwo, EducatorTwo, TypeLessonTwo));
-        schedule.add(new Lesson("3",calls_schedule.get(2),SubjectThree, AudienceThree, EducatorThree, TypeLessonThree));
-        schedule.add(new Lesson("4",calls_schedule.get(3),SubjectFour, AudienceFour, EducatorFour, TypeLessonFour));
-        schedule.add(new Lesson("5",calls_schedule.get(4),SubjectFive, AudienceFive, EducatorFive, TypeLessonFive));
-        schedule.add(new Lesson("6",calls_schedule.get(5),SubjectSix, AudienceSix, EducatorSix, TypeLessonSix));
+        schedule.add(new Lesson("1", calls_schedule.get(0), SubjectOne, AudienceOne, EducatorOne, TypeLessonOne));
+        schedule.add(new Lesson("2", calls_schedule.get(1), SubjectTwo, AudienceTwo, EducatorTwo, TypeLessonTwo));
+        schedule.add(new Lesson("3", calls_schedule.get(2), SubjectThree, AudienceThree, EducatorThree, TypeLessonThree));
+        schedule.add(new Lesson("4", calls_schedule.get(3), SubjectFour, AudienceFour, EducatorFour, TypeLessonFour));
+        schedule.add(new Lesson("5", calls_schedule.get(4), SubjectFive, AudienceFive, EducatorFive, TypeLessonFive));
+        schedule.add(new Lesson("6", calls_schedule.get(5), SubjectSix, AudienceSix, EducatorSix, TypeLessonSix));
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,18 +88,18 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
         load_calls_schedule();
-      SharedPreferences preferences = this.getActivity().getSharedPreferences("choice_week",0);
-      position_pager = Integer.valueOf(preferences.getString("position", "0"));
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("choice_week", 0);
+        position_pager = Integer.valueOf(preferences.getString("position", "0"));
 
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
-        RecyclerView rv =  rootView.findViewById(R.id.rv_recycler_view);
+        RecyclerView rv = rootView.findViewById(R.id.rv_recycler_view);
 
 
-      Cursor cursor = db.rawQuery("SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 1) + "));", null);
+        Cursor cursor = db.rawQuery("SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 1) + "));", null);
         try {
             int idSubjectOne = cursor.getColumnIndex(ScheduleClass.subjects.subject);
             while (cursor.moveToNext()) {
-                 SubjectOne = cursor.getString(idSubjectOne);
+                SubjectOne = cursor.getString(idSubjectOne);
             }
         } finally {
             cursor.close();
@@ -103,7 +109,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idAudienceOne = cursor.getColumnIndex(ScheduleClass.audiences.audience);
             while (cursor.moveToNext()) {
-                 AudienceOne = cursor.getString(idAudienceOne);
+                AudienceOne = cursor.getString(idAudienceOne);
             }
         } finally {
             cursor.close();
@@ -113,7 +119,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idEducatorOne = cursor.getColumnIndex(ScheduleClass.educators.educator);
             while (cursor.moveToNext()) {
-                 EducatorOne = cursor.getString(idEducatorOne);
+                EducatorOne = cursor.getString(idEducatorOne);
             }
         } finally {
             cursor.close();
@@ -123,7 +129,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idTypeLessonOne = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
             while (cursor.moveToNext()) {
-                 TypeLessonOne = cursor.getString(idTypeLessonOne);
+                TypeLessonOne = cursor.getString(idTypeLessonOne);
             }
         } finally {
             cursor.close();
@@ -134,7 +140,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idSubjectTwo = cursor.getColumnIndex(ScheduleClass.subjects.subject);
             while (cursor.moveToNext()) {
-                 SubjectTwo = cursor.getString(idSubjectTwo);
+                SubjectTwo = cursor.getString(idSubjectTwo);
             }
         } finally {
             cursor.close();
@@ -144,7 +150,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idAudienceTwo = cursor.getColumnIndex(ScheduleClass.audiences.audience);
             while (cursor.moveToNext()) {
-                 AudienceTwo = cursor.getString(idAudienceTwo);
+                AudienceTwo = cursor.getString(idAudienceTwo);
             }
         } finally {
             cursor.close();
@@ -154,7 +160,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idEducatorTwo = cursor.getColumnIndex(ScheduleClass.educators.educator);
             while (cursor.moveToNext()) {
-                 EducatorTwo = cursor.getString(idEducatorTwo);
+                EducatorTwo = cursor.getString(idEducatorTwo);
             }
         } finally {
             cursor.close();
@@ -164,7 +170,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idTypeLessonTwo = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
             while (cursor.moveToNext()) {
-                 TypeLessonTwo = cursor.getString(idTypeLessonTwo);
+                TypeLessonTwo = cursor.getString(idTypeLessonTwo);
             }
         } finally {
             cursor.close();
@@ -175,7 +181,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idSubjectThree = cursor.getColumnIndex(ScheduleClass.subjects.subject);
             while (cursor.moveToNext()) {
-                 SubjectThree = cursor.getString(idSubjectThree);
+                SubjectThree = cursor.getString(idSubjectThree);
             }
         } finally {
             cursor.close();
@@ -185,7 +191,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idAudienceThree = cursor.getColumnIndex(ScheduleClass.audiences.audience);
             while (cursor.moveToNext()) {
-                 AudienceThree = cursor.getString(idAudienceThree);
+                AudienceThree = cursor.getString(idAudienceThree);
             }
         } finally {
             cursor.close();
@@ -195,7 +201,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idEducatorThree = cursor.getColumnIndex(ScheduleClass.educators.educator);
             while (cursor.moveToNext()) {
-                 EducatorThree = cursor.getString(idEducatorThree);
+                EducatorThree = cursor.getString(idEducatorThree);
             }
         } finally {
             cursor.close();
@@ -205,7 +211,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idTypeLessonThree = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
             while (cursor.moveToNext()) {
-                 TypeLessonThree = cursor.getString(idTypeLessonThree);
+                TypeLessonThree = cursor.getString(idTypeLessonThree);
             }
         } finally {
             cursor.close();
@@ -216,7 +222,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idSubjectFour = cursor.getColumnIndex(ScheduleClass.subjects.subject);
             while (cursor.moveToNext()) {
-                 SubjectFour = cursor.getString(idSubjectFour);
+                SubjectFour = cursor.getString(idSubjectFour);
             }
         } finally {
             cursor.close();
@@ -226,7 +232,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idAudienceFour = cursor.getColumnIndex(ScheduleClass.audiences.audience);
             while (cursor.moveToNext()) {
-                 AudienceFour = cursor.getString(idAudienceFour);
+                AudienceFour = cursor.getString(idAudienceFour);
             }
         } finally {
             cursor.close();
@@ -236,7 +242,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idEducatorFour = cursor.getColumnIndex(ScheduleClass.educators.educator);
             while (cursor.moveToNext()) {
-                 EducatorFour = cursor.getString(idEducatorFour);
+                EducatorFour = cursor.getString(idEducatorFour);
             }
         } finally {
             cursor.close();
@@ -246,7 +252,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idTypeLessonFour = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
             while (cursor.moveToNext()) {
-                 TypeLessonFour = cursor.getString(idTypeLessonFour);
+                TypeLessonFour = cursor.getString(idTypeLessonFour);
             }
         } finally {
             cursor.close();
@@ -257,7 +263,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idSubjectFive = cursor.getColumnIndex(ScheduleClass.subjects.subject);
             while (cursor.moveToNext()) {
-                 SubjectFive = cursor.getString(idSubjectFive);
+                SubjectFive = cursor.getString(idSubjectFive);
             }
         } finally {
             cursor.close();
@@ -267,7 +273,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idAudienceFive = cursor.getColumnIndex(ScheduleClass.audiences.audience);
             while (cursor.moveToNext()) {
-                 AudienceFive = cursor.getString(idAudienceFive);
+                AudienceFive = cursor.getString(idAudienceFive);
             }
         } finally {
             cursor.close();
@@ -277,7 +283,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idEducatorFive = cursor.getColumnIndex(ScheduleClass.educators.educator);
             while (cursor.moveToNext()) {
-                 EducatorFive = cursor.getString(idEducatorFive);
+                EducatorFive = cursor.getString(idEducatorFive);
             }
         } finally {
             cursor.close();
@@ -287,7 +293,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idTypeLessonFive = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
             while (cursor.moveToNext()) {
-                 TypeLessonFive = cursor.getString(idTypeLessonFive);
+                TypeLessonFive = cursor.getString(idTypeLessonFive);
             }
         } finally {
             cursor.close();
@@ -298,7 +304,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idSubjectSix = cursor.getColumnIndex(ScheduleClass.subjects.subject);
             while (cursor.moveToNext()) {
-                 SubjectSix = cursor.getString(idSubjectSix);
+                SubjectSix = cursor.getString(idSubjectSix);
             }
         } finally {
             cursor.close();
@@ -308,7 +314,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idAudienceSix = cursor.getColumnIndex(ScheduleClass.audiences.audience);
             while (cursor.moveToNext()) {
-                 AudienceSix = cursor.getString(idAudienceSix);
+                AudienceSix = cursor.getString(idAudienceSix);
             }
         } finally {
             cursor.close();
@@ -318,7 +324,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idEducatorSix = cursor.getColumnIndex(ScheduleClass.educators.educator);
             while (cursor.moveToNext()) {
-                 EducatorSix = cursor.getString(idEducatorSix);
+                EducatorSix = cursor.getString(idEducatorSix);
             }
         } finally {
             cursor.close();
@@ -328,18 +334,18 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         try {
             int idTypeLessonSix = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
             while (cursor.moveToNext()) {
-                 TypeLessonSix = cursor.getString(idTypeLessonSix);
+                TypeLessonSix = cursor.getString(idTypeLessonSix);
             }
         } finally {
             cursor.close();
         }
         data_schedule();
 
-                MyAdapter adapter = new MyAdapter(schedule);
-                LinearLayoutManager llm = new LinearLayoutManager(getContext());
-                rv.setLayoutManager(llm);
-                rv.setAdapter(adapter);
-                return rootView;
-            }
+        MyAdapter adapter = new MyAdapter(schedule);
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        rv.setLayoutManager(llm);
+        rv.setAdapter(adapter);
+        return rootView;
+    }
 
-        }
+}

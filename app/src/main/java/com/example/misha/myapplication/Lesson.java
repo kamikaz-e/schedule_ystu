@@ -2,11 +2,11 @@ package com.example.misha.myapplication;
 
 public class Lesson {
 
-    private String  id;
+    private String id;
 
     private String time;
 
-    private String subjectEdit;
+    private Object subjectEdit;
 
     private String audienceEdit;
 
@@ -29,7 +29,7 @@ public class Lesson {
     public String getTime() {
         return time;
     }
-    public String getSubjectEdit() {
+    public Object getSubjectEdit() {
         return subjectEdit;
     }
     public String getAudienceEdit() {
@@ -40,5 +40,17 @@ public class Lesson {
     }
     public String getTypeLesson() {
         return typeLesson;
+    }
+
+    public void setSubjectEdit(Object subjectEdit) {
+        this.subjectEdit = subjectEdit;
+    }
+
+    public void setAudienceEdit(String audienceEdit) {
+        this.audienceEdit = audienceEdit;
+    }
+
+    public void setEducator(String educator) {
+        this.educator = educator;
     }
 }

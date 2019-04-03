@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.misha.myapplication.fragments.FragmentMonday;
+import com.example.misha.myapplication.fragments.EditSchedulePageFragment;
 
 public class SchedulePagerAdapter extends FragmentPagerAdapter {
 
@@ -25,7 +25,7 @@ public class SchedulePagerAdapter extends FragmentPagerAdapter {
     @SuppressLint("ResourceType")
     @Override
     public Fragment getItem(int position) {
-        return new FragmentMonday();
+        return new EditSchedulePageFragment();
     }
 
     @Override

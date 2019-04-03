@@ -3,51 +3,55 @@ package com.example.misha.myapplication.fragments;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.misha.myapplication.Lesson;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.RecyclerViewAdapterEditSchedule;
+import com.example.misha.myapplication.adapter.EditScheduleAdapter;
+import com.example.misha.myapplication.adapter.EditScheduleCallback;
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleDB;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentMonday extends android.support.v4.app.Fragment {
+public class EditSchedulePageFragment extends Fragment implements EditScheduleCallback {
 
     private View fragmentView;
 
     private RecyclerView rvLessons;
-    private RecyclerViewAdapterEditSchedule rvadapter;
+    private EditScheduleAdapter rvadapter;
     private ScheduleDB ScheduleDB;
     private List<Lesson> lessonList = new ArrayList<>();
 
-    final ArrayList<String> subject_list = new ArrayList<>();
-    final ArrayList<String> audience_list = new ArrayList<>();
-    final ArrayList<String> educator_list = new ArrayList<>();
-
-
-    private ArrayList<String> calls_schedule = new ArrayList<>();
-
+    final ArrayList<Object> subjectList = new ArrayList<>();
+    final ArrayList<Object> audienceList = new ArrayList<>();
+    final ArrayList<Object> educatorList = new ArrayList<>();
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        rvadapter = new EditScheduleAdapter(this);
     }
 
-    private void lessonList(){
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initLessonList();
+        initResources();
+        rvadapter.setLessonList(lessonList);
+        rvadapter.setAudiences(audienceList);
+        rvadapter.setEducators(educatorList);
+        rvadapter.setSubjects(subjectList);
+        rvadapter.notifyDataSetChanged();
+    }
 
+    private void initLessonList(){
         lessonList = new ArrayList<>();
         lessonList.add(new Lesson("1","adas","asdasd", "asdasdasd", "zxczxc", "vcxvxc"));
         lessonList.add(new Lesson("2","adas","asdasd", "asdasdasd", "zxczxc", "vcxvxc"));
@@ -57,12 +61,12 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
         lessonList.add(new Lesson("6","adas","asdasd", "asdasdasd", "zxczxc", "vcxvxc"));
     }
 
-    void filling_array_list() {
+    void initResources() {
         SQLiteDatabase myDataBase = ScheduleDB.getReadableDatabase();
         String searchQuery = "SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME;
         Cursor cursor = myDataBase.rawQuery(searchQuery, null);
         while (cursor.moveToNext()) {
-            subject_list.add(cursor.getString(0));
+            subjectList.add(cursor.getString(0));
         }
         cursor.close();
 
@@ -70,7 +74,7 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
         searchQuery = "SELECT " + ScheduleClass.audiences.audience + " FROM " + ScheduleClass.audiences.TABLE_NAME;
         cursor = myDataBase.rawQuery(searchQuery, null);
         while (cursor.moveToNext()) {
-            audience_list.add(cursor.getString(0));
+            audienceList.add(cursor.getString(0));
         }
         cursor.close();
 
@@ -78,9 +82,26 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
         searchQuery = "SELECT " + ScheduleClass.educators.educator + " FROM " + ScheduleClass.educators.TABLE_NAME;
         cursor = myDataBase.rawQuery(searchQuery, null);
         while (cursor.moveToNext()) {
-            educator_list.add(cursor.getString(0));
+            educatorList.add(cursor.getString(0));
         }
         cursor.close();
+
+
+    }
+
+    @Override
+    public void onSubjectSelected(int position, Object subject) {
+        lessonList.get(position).setSubjectEdit(subject);
+    }
+
+    @Override
+    public void onAudienceSelected(int position, Object audience) {
+        lessonList.get(position).setSubjectEdit(audience);
+    }
+
+    @Override
+    public void onEducatorSelected(int position, Object editor) {
+        lessonList.get(position).setSubjectEdit(editor);
     }
 
     @Override
@@ -88,38 +109,14 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
         fragmentView = inflater.inflate(R.layout.card_item_edit_monday_for_recycler, container, false);
         ScheduleDB = new ScheduleDB(getActivity());
         rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
+        rvLessons.setAdapter(rvadapter);
 
-
-        filling_array_list();
-        lessonList();
-
-
-
-        Spinner SubjectEditOne = fragmentView.findViewById(R.id.subject_edit_monday);
        // load_type_lesson();
 
-        ArrayAdapter<String> subSpinnerArrayAdapter = new ArrayAdapter<>(fragmentView.getContext(), android.R.layout.simple_spinner_dropdown_item, subject_list);
-        subSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> audSpinnerArrayAdapter = new ArrayAdapter<>(fragmentView.getContext(), android.R.layout.simple_spinner_dropdown_item, audience_list);
-        audSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> eduSpinnerArrayAdapter = new ArrayAdapter<>(fragmentView.getContext(), android.R.layout.simple_spinner_dropdown_item, educator_list);
-        eduSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        SubjectEditOne.setAdapter(subSpinnerArrayAdapter);
+
         /*AudienceEditOne.setAdapter(audSpinnerArrayAdapter);
         EducatorEditOne.setAdapter(eduSpinnerArrayAdapter);*/
 
-
-
-
-        Spinner AudienceEditOne = fragmentView.findViewById(R.id.audience_edit_monday);
-
-        Spinner EducatorEditOne = fragmentView.findViewById(R.id.educator_edit_monday);
-
-        Spinner typeEditOne_monday = fragmentView.findViewById(R.id.typeEdit_monday);
-
-
-        rvadapter = new RecyclerViewAdapterEditSchedule(lessonList);
-        rvLessons.setAdapter(rvadapter);
 
      /*   NumberOne.setText(Monday.get(0).getId());
         TimeOne.setText(Monday.get(0).getTime());
@@ -234,9 +231,9 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).getSubjectEdit()));
-                    AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(0).getAudienceEdit()));
-                    EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(0).getEducator()));
+                    SubjectEditTwo.setSelection(subjectList.indexOf(Monday.get(0).getSubjectEdit()));
+                    AudienceEditTwo.setSelection(audienceList.indexOf(Monday.get(0).getAudienceEdit()));
+                    EducatorEditTwo.setSelection(educatorList.indexOf(Monday.get(0).getEducator()));
                     switch (IdRadioButtonOne) {
                         case 0:
                             rb_lectureTwo.setChecked(true);
@@ -257,9 +254,9 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit()));
-                    AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit()));
-                    EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(1).getEducator()));
+                    SubjectEditThree.setSelection(subjectList.indexOf(Monday.get(1).getSubjectEdit()));
+                    AudienceEditThree.setSelection(audienceList.indexOf(Monday.get(1).getAudienceEdit()));
+                    EducatorEditThree.setSelection(educatorList.indexOf(Monday.get(1).getEducator()));
                     switch (IdRadioButtonTwo) {
                         case 0:
                             rb_lectureThree.setChecked(true);
@@ -280,9 +277,9 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit()));
-                    AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit()));
-                    EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(2).getEducator()));
+                    SubjectEditFour.setSelection(subjectList.indexOf(Monday.get(2).getSubjectEdit()));
+                    AudienceEditFour.setSelection(audienceList.indexOf(Monday.get(2).getAudienceEdit()));
+                    EducatorEditFour.setSelection(educatorList.indexOf(Monday.get(2).getEducator()));
                     switch (IdRadioButtonThree) {
                         case 0:
                             rb_lectureFour.setChecked(true);
@@ -302,9 +299,9 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit()));
-                    AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit()));
-                    EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(3).getEducator()));
+                    SubjectEditFive.setSelection(subjectList.indexOf(Monday.get(3).getSubjectEdit()));
+                    AudienceEditFive.setSelection(audienceList.indexOf(Monday.get(3).getAudienceEdit()));
+                    EducatorEditFive.setSelection(educatorList.indexOf(Monday.get(3).getEducator()));
                     switch (IdRadioButtonFour) {
                         case 0:
                             rb_lectureFive.setChecked(true);
@@ -325,9 +322,9 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit()));
-                    AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit()));
-                    EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(4).getEducator()));
+                    SubjectEditSix.setSelection(subjectList.indexOf(Monday.get(4).getSubjectEdit()));
+                    AudienceEditSix.setSelection(audienceList.indexOf(Monday.get(4).getAudienceEdit()));
+                    EducatorEditSix.setSelection(educatorList.indexOf(Monday.get(4).getEducator()));
                     switch (IdRadioButtonFive) {
                         case 0:
                             rb_lectureSix.setChecked(true);
@@ -348,9 +345,9 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    SubjectEditOne.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit()));
-                    AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit()));
-                    EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(1).getEducator()));
+                    SubjectEditOne.setSelection(subjectList.indexOf(Monday.get(1).getSubjectEdit()));
+                    AudienceEditOne.setSelection(audienceList.indexOf(Monday.get(1).getAudienceEdit()));
+                    EducatorEditOne.setSelection(educatorList.indexOf(Monday.get(1).getEducator()));
                     switch (IdRadioButtonTwo) {
                         case 0:
                             rb_lecture.setChecked(true);
@@ -371,9 +368,9 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit()));
-                    AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit()));
-                    EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(2).getEducator()));
+                    SubjectEditTwo.setSelection(subjectList.indexOf(Monday.get(2).getSubjectEdit()));
+                    AudienceEditTwo.setSelection(audienceList.indexOf(Monday.get(2).getAudienceEdit()));
+                    EducatorEditTwo.setSelection(educatorList.indexOf(Monday.get(2).getEducator()));
                     switch (IdRadioButtonThree) {
                         case 0:
                             rb_lectureTwo.setChecked(true);
@@ -394,9 +391,9 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit()));
-                    AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit()));
-                    EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(3).getEducator()));
+                    SubjectEditThree.setSelection(subjectList.indexOf(Monday.get(3).getSubjectEdit()));
+                    AudienceEditThree.setSelection(audienceList.indexOf(Monday.get(3).getAudienceEdit()));
+                    EducatorEditThree.setSelection(educatorList.indexOf(Monday.get(3).getEducator()));
                     switch (IdRadioButtonFour) {
                         case 0:
                             rb_lectureThree.setChecked(true);
@@ -417,9 +414,9 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit()));
-                    AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit()));
-                    EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(4).getEducator()));
+                    SubjectEditFour.setSelection(subjectList.indexOf(Monday.get(4).getSubjectEdit()));
+                    AudienceEditFour.setSelection(audienceList.indexOf(Monday.get(4).getAudienceEdit()));
+                    EducatorEditFour.setSelection(educatorList.indexOf(Monday.get(4).getEducator()));
                     switch (IdRadioButtonFive) {
                         case 0:
                             rb_lectureFour.setChecked(true);
@@ -440,9 +437,9 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(5).getSubjectEdit()));
-                    AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(5).getAudienceEdit()));
-                    EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(5).getEducator()));
+                    SubjectEditFive.setSelection(subjectList.indexOf(Monday.get(5).getSubjectEdit()));
+                    AudienceEditFive.setSelection(audienceList.indexOf(Monday.get(5).getAudienceEdit()));
+                    EducatorEditFive.setSelection(educatorList.indexOf(Monday.get(5).getEducator()));
                     switch (IdRadioButtonSix) {
                         case 0:
                             rb_lectureFive.setChecked(true);
@@ -522,24 +519,24 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
         });
 
 
-        SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(0).getSubjectEdit().toString()));
-        SubjectEditTwo.setSelection(subject_list.indexOf(Monday.get(1).getSubjectEdit().toString()));
-        SubjectEditThree.setSelection(subject_list.indexOf(Monday.get(2).getSubjectEdit().toString()));
-        SubjectEditFour.setSelection(subject_list.indexOf(Monday.get(3).getSubjectEdit().toString()));
-        SubjectEditFive.setSelection(subject_list.indexOf(Monday.get(4).getSubjectEdit().toString()));
-        SubjectEditSix.setSelection(subject_list.indexOf(Monday.get(5).getSubjectEdit().toString()));
-        AudienceEditOne.setSelection(audience_list.indexOf(Monday.get(0).getAudienceEdit().toString()));
-        AudienceEditTwo.setSelection(audience_list.indexOf(Monday.get(1).getAudienceEdit().toString()));
-        AudienceEditThree.setSelection(audience_list.indexOf(Monday.get(2).getAudienceEdit().toString()));
-        AudienceEditFour.setSelection(audience_list.indexOf(Monday.get(3).getAudienceEdit().toString()));
-        AudienceEditFive.setSelection(audience_list.indexOf(Monday.get(4).getAudienceEdit().toString()));
-        AudienceEditSix.setSelection(audience_list.indexOf(Monday.get(5).getAudienceEdit().toString()));
-        EducatorEditOne.setSelection(educator_list.indexOf(Monday.get(0).getEducator().toString()));
-        EducatorEditTwo.setSelection(educator_list.indexOf(Monday.get(1).getEducator().toString()));
-        EducatorEditThree.setSelection(educator_list.indexOf(Monday.get(2).getEducator().toString()));
-        EducatorEditFour.setSelection(educator_list.indexOf(Monday.get(3).getEducator().toString()));
-        EducatorEditFive.setSelection(educator_list.indexOf(Monday.get(4).getEducator().toString()));
-        EducatorEditSix.setSelection(educator_list.indexOf(Monday.get(5).getEducator().toString()));
+        SubjectEditTwo.setSelection(subjectList.indexOf(Monday.get(0).getSubjectEdit().toString()));
+        SubjectEditTwo.setSelection(subjectList.indexOf(Monday.get(1).getSubjectEdit().toString()));
+        SubjectEditThree.setSelection(subjectList.indexOf(Monday.get(2).getSubjectEdit().toString()));
+        SubjectEditFour.setSelection(subjectList.indexOf(Monday.get(3).getSubjectEdit().toString()));
+        SubjectEditFive.setSelection(subjectList.indexOf(Monday.get(4).getSubjectEdit().toString()));
+        SubjectEditSix.setSelection(subjectList.indexOf(Monday.get(5).getSubjectEdit().toString()));
+        AudienceEditOne.setSelection(audienceList.indexOf(Monday.get(0).getAudienceEdit().toString()));
+        AudienceEditTwo.setSelection(audienceList.indexOf(Monday.get(1).getAudienceEdit().toString()));
+        AudienceEditThree.setSelection(audienceList.indexOf(Monday.get(2).getAudienceEdit().toString()));
+        AudienceEditFour.setSelection(audienceList.indexOf(Monday.get(3).getAudienceEdit().toString()));
+        AudienceEditFive.setSelection(audienceList.indexOf(Monday.get(4).getAudienceEdit().toString()));
+        AudienceEditSix.setSelection(audienceList.indexOf(Monday.get(5).getAudienceEdit().toString()));
+        EducatorEditOne.setSelection(educatorList.indexOf(Monday.get(0).getEducator().toString()));
+        EducatorEditTwo.setSelection(educatorList.indexOf(Monday.get(1).getEducator().toString()));
+        EducatorEditThree.setSelection(educatorList.indexOf(Monday.get(2).getEducator().toString()));
+        EducatorEditFour.setSelection(educatorList.indexOf(Monday.get(3).getEducator().toString()));
+        EducatorEditFive.setSelection(educatorList.indexOf(Monday.get(4).getEducator().toString()));
+        EducatorEditSix.setSelection(educatorList.indexOf(Monday.get(5).getEducator().toString()));
 
 
         if (Monday.get(0).getTypeLesson().toString().equals(typelesson.get(0))) {
@@ -882,6 +879,8 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
         return fragmentView;
     }
 
+
+
 /*    private void DataMonday() {
         Monday = new ArrayList<>();
         try {
@@ -909,13 +908,13 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
         } catch (NullPointerException e) {
         }
     }*/
-   /* void filling_array_list() {
+   /* void initResources() {
         ScheduleDB = new ScheduleDB(this);
         SQLiteDatabase myDataBase = ScheduleDB.getReadableDatabase();
         String searchQuery = "SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME;
         Cursor cursor = myDataBase.rawQuery(searchQuery, null);
         while (cursor.moveToNext()) {
-            subject_list.add(cursor.getString(0));
+            subjectList.add(cursor.getString(0));
         }
         cursor.close();
 
@@ -923,7 +922,7 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
         searchQuery = "SELECT " + ScheduleClass.audiences.audience + " FROM " + ScheduleClass.audiences.TABLE_NAME;
         cursor = myDataBase.rawQuery(searchQuery, null);
         while (cursor.moveToNext()) {
-            audience_list.add(cursor.getString(0));
+            audienceList.add(cursor.getString(0));
         }
         cursor.close();
 
@@ -931,7 +930,7 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
         searchQuery = "SELECT " + ScheduleClass.educators.educator + " FROM " + ScheduleClass.educators.TABLE_NAME;
         cursor = myDataBase.rawQuery(searchQuery, null);
         while (cursor.moveToNext()) {
-            educator_list.add(cursor.getString(0));
+            educatorList.add(cursor.getString(0));
         }
         cursor.close();
     }*/
@@ -949,11 +948,4 @@ public class FragmentMonday extends android.support.v4.app.Fragment {
     }
 */
 
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-
-    }
 }

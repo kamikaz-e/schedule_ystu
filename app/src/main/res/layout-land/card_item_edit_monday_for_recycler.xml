@@ -87,7 +87,7 @@
                     </RadioGroup>
 
                     <Spinner
-                        android:id="@+id/subject_edit_monday"
+                        android:id="@+id/spinner_subject"
                         android:layout_width="match_parent"
                         android:layout_height="36dp"
                         android:layout_marginTop="27dp"
@@ -101,9 +101,9 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="31dp"
-                        android:layout_alignTop="@+id/subject_edit_monday">
+                        android:layout_alignTop="@+id/spinner_subject">
                         <Spinner
-                            android:id="@+id/audience_edit_monday"
+                            android:id="@+id/spinner_audience"
                             android:layout_width="120dp"
                             android:layout_height="36dp"
                             android:maxLines="1"
@@ -112,12 +112,12 @@
                             android:background="#0000"
                             android:spinnerMode="dropdown" />
                         <Spinner
-                            android:id="@+id/educator_edit_monday"
+                            android:id="@+id/spinner_educator"
                             android:layout_width="180dp"
                             android:layout_height="36dp"
                             android:maxLines="1"
                             android:singleLine="true"
-                            android:layout_toEndOf="@+id/audience_edit_monday"
+                            android:layout_toEndOf="@+id/spinner_audience"
                             android:layout_alignParentEnd="true"
                             android:background="#0000"
                             android:spinnerMode="dropdown"/>
