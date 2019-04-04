@@ -56,12 +56,12 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
 
     private void initLessonList(){
         lessonList = new ArrayList<>();
-        lessonList.add(new Lesson("1","adas","asdasd", "asdasdasd", "zxczxc", "vcxvxc"));
-        lessonList.add(new Lesson("2","adas","asdasd", "asdasdasd", "zxczxc", "vcxvxc"));
-        lessonList.add(new Lesson("3","adas","asdasd", "asdasdasd", "zxczxc", "vcxvxc"));
-        lessonList.add(new Lesson("4","adas","asdasd", "asdasdasd", "zxczxc", "vcxvxc"));
-        lessonList.add(new Lesson("5","adas","asdasd", "asdasdasd", "zxczxc", "vcxvxc"));
-        lessonList.add(new Lesson("6","adas","asdasd", "asdasdasd", "zxczxc", "vcxvxc"));
+        lessonList.add(new Lesson("1","a","aaa", "ewq", "rfv", "zcv"));
+        lessonList.add(new Lesson("2","b","bbb", "qwe", "vfr", "bfd"));
+        lessonList.add(new Lesson("3","c","ccc", "dsa", "edc", "fds"));
+        lessonList.add(new Lesson("4","d","ddd", "asd", "cde", "qwe"));
+        lessonList.add(new Lesson("5","e","eee", "cxz", "xsw", "xaw"));
+        lessonList.add(new Lesson("6","f","fff", "zxc", "qaz", "zxa"));
     }
 
     void initResources() {

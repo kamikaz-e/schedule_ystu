@@ -24,7 +24,7 @@ public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapte
     @Override
     public ListSubjectsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_dialog_view, parent, false);
+                .inflate(R.layout.list_item_subject, parent, false);
         return new ViewHolder(view);
     }
 
@@ -43,13 +43,13 @@ public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapte
 
         public ViewHolder(View view) {
             super(view);
-            subject = view.findViewById(R.id.subject);
+            subject = view.findViewById(R.id.subject_item);
 
         }
 
         public void onBindView(int position) {
-            Subject lesson = listSubjects.get(position);
-            subject.setText(lesson.getName());
+            Subject subj = listSubjects.get(position);
+            subject.setText(subj.getName());
         }
 
     }
