@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:persistentDrawingCache="scrolling"
+        android:paddingBottom="65dp"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
     <Button
