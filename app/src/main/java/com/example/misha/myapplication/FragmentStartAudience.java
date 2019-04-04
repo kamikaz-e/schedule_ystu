@@ -32,6 +32,10 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience;
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience_id;
+
 
 public class FragmentStartAudience extends android.support.v4.app.Fragment {
 
@@ -134,7 +138,7 @@ public class FragmentStartAudience extends android.support.v4.app.Fragment {
                         return true;
                     }
                     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('" + audience + "');");
+                    db.execSQL("INSERT INTO " + AUDIENCE + " (" + ScheduleClass.audiences.audience + ") VALUES ('" + audience + "');");
                     input_audience.setText("");
                     start();
                     adapter.notifyDataSetChanged();
@@ -155,7 +159,7 @@ public class FragmentStartAudience extends android.support.v4.app.Fragment {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + ScheduleClass.audiences.TABLE_NAME + " WHERE "+ ScheduleClass.audiences.audience + "='"+ select_item+"'");
+                db.execSQL("DELETE FROM " + AUDIENCE + " WHERE "+ ScheduleClass.audiences.audience + "='"+ select_item+"'");
                 start();
                 adapter.notifyDataSetChanged();
             }
@@ -185,11 +189,11 @@ public class FragmentStartAudience extends android.support.v4.app.Fragment {
 
     void clear_audiences(){
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.execSQL("DROP TABLE " + ScheduleClass.audiences.TABLE_NAME);
-        db.execSQL("CREATE TABLE " + ScheduleClass.audiences.TABLE_NAME + " ("
-                + ScheduleClass.audiences.idd_audience + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
-        db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
+        db.execSQL("DROP TABLE " + AUDIENCE);
+        db.execSQL("CREATE TABLE " + AUDIENCE + " ("
+                + audience_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + audience + " STRING UNIQUE ON CONFLICT IGNORE );");
+        db.execSQL("INSERT INTO " + AUDIENCE + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
         adapter.notifyDataSetChanged();
         start();
     }
@@ -201,7 +205,7 @@ public class FragmentStartAudience extends android.support.v4.app.Fragment {
         list_audiences.setAdapter(adapter);
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ ScheduleClass.audiences.audience +" FROM " + ScheduleClass.audiences.TABLE_NAME + " WHERE "+ ScheduleClass.audiences.idd_audience +">1;";
+        String searchQuery = "SELECT "+ audience +" FROM " + AUDIENCE + " WHERE "+ audience_id +">1;";
         audience_list.clear();
         Cursor cursor = db.rawQuery(searchQuery, null);
         while(cursor.moveToNext()) {

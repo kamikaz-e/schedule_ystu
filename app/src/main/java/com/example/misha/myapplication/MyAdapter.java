@@ -57,7 +57,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             timeEdit.setText(lesson.getTime());
             subjectEdit.setText((CharSequence) lesson.getSubjectEdit());
             audienceEdit.setText(lesson.getAudienceEdit());
-            educator.setText(lesson.getEducator());
+            educator.setText(lesson.getEducatorEdit());
             typeLesson.setText(lesson.getTypeLesson());
         }
 

@@ -9,7 +9,7 @@
     android:focusableInTouchMode="true">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_subject_list"
+        android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:persistentDrawingCache="scrolling"
@@ -21,19 +21,25 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:text="Закрыть"
+        android:paddingStart="30sp"
+        android:paddingEnd="30sp"
+        android:textSize="18sp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="40sp"
         android:layout_marginBottom="20dp" />
 
     <Button
         android:id="@+id/button_add"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:text="Добавить новый предмет"
+        android:paddingStart="30sp"
+        android:paddingEnd="30sp"
+        android:textSize="18sp"
+        android:text="Добавить"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="40sp"
         android:layout_marginBottom="20dp" />
 
 </RelativeLayout>

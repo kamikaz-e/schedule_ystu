@@ -43,6 +43,11 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
+import static com.example.misha.myapplication.data.ScheduleClass.schedule.SCHEDULE;
+import static com.example.misha.myapplication.data.ScheduleClass.typelessons.TYPELESSON;
+import static com.example.misha.myapplication.data.ScheduleClass.typelessons.typelesson;
+
 
 public class ScheduleEditor extends AppCompatActivity {
 
@@ -447,8 +452,8 @@ public class ScheduleEditor extends AppCompatActivity {
     List<Lesson> Thursday;
     List<Lesson> Friday;
     List<Lesson> Saturday;
-    ArrayList<String> calls_schedule = new ArrayList<>();
-    ArrayList<String> typelesson = new ArrayList<>();
+    ArrayList<String> calls_scheduleList = new ArrayList<>();
+    ArrayList<String> typelessonList = new ArrayList<>();
     ViewPager viewPager;
     SchedulePagerAdapter pagerAdapter;
     Boolean first = true;
@@ -4463,11 +4468,11 @@ public class ScheduleEditor extends AppCompatActivity {
         typeEditFour_saturday.clearCheck();
         typeEditFive_saturday.clearCheck();
         typeEditSix_saturday.clearCheck();
-        start(position_week);
+     //   start(position_week);
 
     }
 
-    public void start(Integer select_week) {
+  /*  public void start(Integer select_week) {
 
         position_week = select_week;
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
@@ -5970,7 +5975,7 @@ public class ScheduleEditor extends AppCompatActivity {
             educator_list.add(cursor.getString(0));
         }
         cursor.close();
-    }
+    }*/
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -5981,7 +5986,7 @@ public class ScheduleEditor extends AppCompatActivity {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         switcher_save = findViewById(R.id.switcher_save);
-        filling_array_list();
+       // filling_array_list();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -6008,7 +6013,7 @@ public class ScheduleEditor extends AppCompatActivity {
         Integer current_week = Integer.valueOf(settings.getString("position", "0"));
 
         spinner.setText(arrayAdapter.getItem(current_week));
-        start(current_week);
+        //start(current_week);
        /* if (!(pagerAdapter == null)) {
             pagerAdapter.notifyDataSetChanged();
         }*/
@@ -6258,7 +6263,7 @@ public class ScheduleEditor extends AppCompatActivity {
         values.put("id_audience", "");
         values.put("id_educator", "");
         values.put("id_typelesson", "");
-        db.update(schedule.TABLE_NAME, values, " ( " + schedule.id_day + "=" + number_day + " ) AND ( " + schedule.id_week + "=" + number_week + " )", null);
+        db.update(SCHEDULE, values, " ( " + schedule.id_day + "=" + number_day + " ) AND ( " + schedule.id_week + "=" + number_week + " )", null);
         radiobutton_class();
 
         switch (position_day) {
@@ -6287,7 +6292,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 MondayTypeLessonFour = "";
                 MondayTypeLessonFive = "";
                 MondayTypeLessonSix = "";
-                start(position_week);
+              //  start(position_week);
                 monday_fill();
                 typeEditOne_monday.clearCheck();
                 typeEditTwo_monday.clearCheck();
@@ -6321,7 +6326,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 TuesdayTypeLessonFour = "";
                 TuesdayTypeLessonFive = "";
                 TuesdayTypeLessonSix = "";
-                start(position_week);
+              //  start(position_week);
                 monday_fill();
                 typeEditOne_tuesday.clearCheck();
                 typeEditTwo_tuesday.clearCheck();
@@ -6356,7 +6361,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 WednesdayTypeLessonFour = "";
                 WednesdayTypeLessonFive = "";
                 WednesdayTypeLessonSix = "";
-                start(position_week);
+               // start(position_week);
                 monday_fill();
                 typeEditOne_wednesday.clearCheck();
                 typeEditTwo_wednesday.clearCheck();
@@ -6390,7 +6395,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 ThursdayTypeLessonFour = "";
                 ThursdayTypeLessonFive = "";
                 ThursdayTypeLessonSix = "";
-                start(position_week);
+               // start(position_week);
                 monday_fill();
                 typeEditOne_thursday.clearCheck();
                 typeEditTwo_thursday.clearCheck();
@@ -6424,7 +6429,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 FridayTypeLessonFour = "";
                 FridayTypeLessonFive = "";
                 FridayTypeLessonSix = "";
-                start(position_week);
+               // start(position_week);
                 monday_fill();
                 typeEditOne_friday.clearCheck();
                 typeEditTwo_friday.clearCheck();
@@ -6458,7 +6463,7 @@ public class ScheduleEditor extends AppCompatActivity {
                 SaturdayTypeLessonFour = "";
                 SaturdayTypeLessonFive = "";
                 SaturdayTypeLessonSix = "";
-                start(position_week);
+               // start(position_week);
                 monday_fill();
                 typeEditOne_saturday.clearCheck();
                 typeEditTwo_saturday.clearCheck();
@@ -6480,7 +6485,7 @@ public class ScheduleEditor extends AppCompatActivity {
         values.put("id_audience", "");
         values.put("id_educator", "");
         values.put("id_typelesson", "");
-        db.update(schedule.TABLE_NAME, values, schedule.id_week + "=" + number_week, null);
+        db.update(SCHEDULE, values, schedule.id_week + "=" + number_week, null);
         radiobutton_class();
         update_data();
         monday_fill();
@@ -6496,7 +6501,7 @@ public class ScheduleEditor extends AppCompatActivity {
         values.put("id_audience", "");
         values.put("id_educator", "");
         values.put("id_typelesson", "");
-        db.update(schedule.TABLE_NAME, values, null, null);
+        db.update(SCHEDULE, values, null, null);
         radiobutton_class();
         update_data();
         monday_fill();
@@ -6737,10 +6742,10 @@ public class ScheduleEditor extends AppCompatActivity {
     void load_calls_schedule() {
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT " + calls.time + " FROM " + calls.TABLE_NAME;
+        String searchQuery = "SELECT " + calls.time + " FROM " + CALLS;
         Cursor cursor = db.rawQuery(searchQuery, null);
         while (cursor.moveToNext()) {
-            calls_schedule.add(cursor.getString(0));
+            calls_scheduleList.add(cursor.getString(0));
         }
         cursor.close();
     }
@@ -6748,15 +6753,15 @@ public class ScheduleEditor extends AppCompatActivity {
     void load_type_lesson() {
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "select " + ScheduleClass.typelessons.typelesson + " from " + ScheduleClass.typelessons.TABLE_NAME;
+        String searchQuery = "select " + typelesson + " from " + TYPELESSON;
         Cursor cursor = db.rawQuery(searchQuery, null);
         while (cursor.moveToNext()) {
-            typelesson.add(cursor.getString(0));
+            typelessonList.add(cursor.getString(0));
         }
         cursor.close();
     }
 
-    private void DataMonday() {
+  /*  private void DataMonday() {
         Monday = new ArrayList<>();
         try {
             Monday.add(new Lesson("1", String.valueOf(calls_schedule.get(0)), MondayValueSubjectOne, MondayValueAudienceOne, MondayEducatorOne, MondayTypeLessonOne));
@@ -6810,7 +6815,7 @@ public class ScheduleEditor extends AppCompatActivity {
             Tuesday.add(new Lesson("6", String.valueOf(calls_schedule.get(5)), TuesdayValueSubjectSix, TuesdayValueAudienceSix, TuesdayEducatorSix, TuesdayTypeLessonSix));
         } catch (NullPointerException e) {
         }
-    }
+    }*/
 
     /*private void Lesson() {
         Wednesday = new ArrayList<>(); //Вторник
@@ -6922,7 +6927,7 @@ public class ScheduleEditor extends AppCompatActivity {
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
         position_week = number_week;
 
-        DataMonday();
+        //DataMonday();
         try {
             MondayStringSubjectEditOne = Monday.get(0).getSubjectEdit().toString();
         } catch (IndexOutOfBoundsException e) {
@@ -6972,27 +6977,27 @@ public class ScheduleEditor extends AppCompatActivity {
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditOne = Monday.get(0).getEducator().toString();
+            MondayStringEducatorEditOne = Monday.get(0).getEducatorEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditTwo = Monday.get(1).getEducator().toString();
+            MondayStringEducatorEditTwo = Monday.get(1).getEducatorEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditThree = Monday.get(2).getEducator().toString();
+            MondayStringEducatorEditThree = Monday.get(2).getEducatorEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditFour = Monday.get(3).getEducator().toString();
+            MondayStringEducatorEditFour = Monday.get(3).getEducatorEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditFive = Monday.get(4).getEducator().toString();
+            MondayStringEducatorEditFive = Monday.get(4).getEducatorEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
-            MondayStringEducatorEditSix = Monday.get(5).getEducator().toString();
+            MondayStringEducatorEditSix = Monday.get(5).getEducatorEdit().toString();
         } catch (IndexOutOfBoundsException e) {
         }
         try {
@@ -7513,7 +7518,7 @@ public class ScheduleEditor extends AppCompatActivity {
         } catch (IndexOutOfBoundsException e) {
         }
 */
-        db.beginTransaction();
+       /* db.beginTransaction();
         try {
 
 
@@ -7524,7 +7529,7 @@ public class ScheduleEditor extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_educator + "= (SELECT " + ScheduleClass.educators.idd_educator + " FROM " + ScheduleClass.educators.TABLE_NAME + " " +
                     "WHERE " + ScheduleClass.educators.educator + "='" + MondayStringEducatorEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
-                    "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1));
+                    "WHERE " + typelesson + "='" + MondayStringTypeLessonEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1));
 
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
@@ -7534,7 +7539,7 @@ public class ScheduleEditor extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_educator + "= (SELECT " + ScheduleClass.educators.idd_educator + " FROM " + ScheduleClass.educators.TABLE_NAME + " " +
                     "WHERE " + ScheduleClass.educators.educator + "='" + MondayStringEducatorEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 2));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
-                    "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 2));
+                    "WHERE " + typelesson + "='" + MondayStringTypeLessonEditTwo + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 2));
 
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
@@ -7544,7 +7549,7 @@ public class ScheduleEditor extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_educator + "= (SELECT " + ScheduleClass.educators.idd_educator + " FROM " + ScheduleClass.educators.TABLE_NAME + " " +
                     "WHERE " + ScheduleClass.educators.educator + "='" + MondayStringEducatorEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 3));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
-                    "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 3));
+                    "WHERE " + typelesson + "='" + MondayStringTypeLessonEditThree + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 3));
 
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
@@ -7554,7 +7559,7 @@ public class ScheduleEditor extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_educator + "= (SELECT " + ScheduleClass.educators.idd_educator + " FROM " + ScheduleClass.educators.TABLE_NAME + " " +
                     "WHERE " + ScheduleClass.educators.educator + "='" + MondayStringEducatorEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 4));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
-                    "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 4));
+                    "WHERE " + typelesson + "='" + MondayStringTypeLessonEditFour + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 4));
 
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
@@ -7564,7 +7569,7 @@ public class ScheduleEditor extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_educator + "= (SELECT " + ScheduleClass.educators.idd_educator + " FROM " + ScheduleClass.educators.TABLE_NAME + " " +
                     "WHERE " + ScheduleClass.educators.educator + "='" + MondayStringEducatorEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 5));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
-                    "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 5));
+                    "WHERE " + typelesson + "='" + MondayStringTypeLessonEditFive + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 5));
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                     "WHERE " + ScheduleClass.subjects.subject + "='" + MondayStringSubjectEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 6));
@@ -7573,8 +7578,8 @@ public class ScheduleEditor extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_educator + "= (SELECT " + ScheduleClass.educators.idd_educator + " FROM " + ScheduleClass.educators.TABLE_NAME + " " +
                     "WHERE " + ScheduleClass.educators.educator + "='" + MondayStringEducatorEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 6));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
-                    "WHERE " + ScheduleClass.typelessons.typelesson + "='" + MondayStringTypeLessonEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 6));
-
+                    "WHERE " + typelesson + "='" + MondayStringTypeLessonEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 6));
+*/
 
         /*    db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
                     "WHERE " + ScheduleClass.subjects.subject + "='" + TuesdayStringSubjectEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 7));
@@ -7873,10 +7878,10 @@ public class ScheduleEditor extends AppCompatActivity {
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
                     "WHERE " + ScheduleClass.typelessons.typelesson + "='" + SaturdayStringTypeLessonEditSix + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 36));
 */
-            db.setTransactionSuccessful();
+        /*    db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
-        }
+        }*/
 
     }
 

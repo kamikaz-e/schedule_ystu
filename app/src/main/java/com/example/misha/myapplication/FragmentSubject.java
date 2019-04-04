@@ -47,6 +47,9 @@ import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectangleProm
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject_id;
 
 
 public class FragmentSubject extends android.support.v4.app.Fragment {
@@ -112,7 +115,7 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
                         return true;
                     }
                     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('" + subject + "');");
+                    db.execSQL("INSERT INTO " + SUBJECT + " (" + ScheduleClass.subjects.subject + ") VALUES ('" + subject + "');");
                     input_subject.getText().clear();
                     start();
                     adapter.notifyDataSetChanged();
@@ -137,7 +140,7 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + ScheduleClass.subjects.TABLE_NAME + " WHERE "+ ScheduleClass.subjects.subject + "='"+ select_item+"'");
+                db.execSQL("DELETE FROM " + SUBJECT + " WHERE "+ ScheduleClass.subjects.subject + "='"+ select_item+"'");
                 start();
                 adapter.notifyDataSetChanged();
             }
@@ -157,7 +160,7 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
         list_subjects.setAdapter(adapter);
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ ScheduleClass.subjects.subject +" FROM " + ScheduleClass.subjects.TABLE_NAME + " WHERE "+ ScheduleClass.subjects.idd_subject +">1;";
+        String searchQuery = "SELECT "+ subject +" FROM " + SUBJECT + " WHERE "+ subject_id +">1;";
         subject_list.clear();
         Cursor cursor = db.rawQuery(searchQuery, null);
         while(cursor.moveToNext()) {

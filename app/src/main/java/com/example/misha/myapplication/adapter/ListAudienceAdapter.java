@@ -6,26 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.model.Subject;
+import com.example.misha.myapplication.model.Audience;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapter.ViewHolder> {
+public class ListAudienceAdapter extends RecyclerView.Adapter<ListAudienceAdapter.ViewHolder> {
 
-    private List<Subject> listSubjects;
+    private List<Audience> listAudience;
 
     private SimpleItemClickListener itemClickListener;
 
-    public ListSubjectsAdapter(ArrayList<Subject> schedule, SimpleItemClickListener simpleItemClickListener) {
-        this.listSubjects = schedule;
+    public ListAudienceAdapter(ArrayList<Audience> schedule, SimpleItemClickListener simpleItemClickListener) {
+        this.listAudience = schedule;
         this.itemClickListener = simpleItemClickListener;
     }
 
     @Override
-    public ListSubjectsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListAudienceAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_row, parent, false);
         return new ViewHolder(view);
@@ -38,22 +37,22 @@ public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapte
 
     @Override
     public int getItemCount() {
-        return listSubjects.size();
+        return listAudience.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView subject;
+        private final TextView audience;
 
         public ViewHolder(View view) {
             super(view);
-            subject = view.findViewById(R.id.item);
+            audience = view.findViewById(R.id.item);
             view.setOnClickListener(this);
 
         }
 
         public void onBindView(int position) {
-            Subject subj = listSubjects.get(position);
-            subject.setText(subj.getName());
+            Audience aud = listAudience.get(position);
+            audience.setText(aud.getName());
 
         }
 

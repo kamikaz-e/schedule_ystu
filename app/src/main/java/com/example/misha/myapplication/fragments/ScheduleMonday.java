@@ -20,6 +20,21 @@ import com.example.misha.myapplication.data.ScheduleDB;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience;
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience_id;
+import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.educator;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.educator_id;
+import static com.example.misha.myapplication.data.ScheduleClass.schedule.SCHEDULE;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject_id;
+import static com.example.misha.myapplication.data.ScheduleClass.typelessons.TYPELESSON;
+import static com.example.misha.myapplication.data.ScheduleClass.typelessons.typelesson;
+import static com.example.misha.myapplication.data.ScheduleClass.typelessons.typelesson_id;
+
 public class ScheduleMonday extends android.support.v4.app.Fragment {
     private ScheduleDB ScheduleDB;
     private List<Lesson> schedule;
@@ -61,7 +76,7 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
 
   void load_calls_schedule(){
     SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-    String searchQuery = "SELECT "+ calls.time +" FROM " + calls.TABLE_NAME;
+    String searchQuery = "SELECT "+ calls.time +" FROM " + CALLS;
     Cursor cursor = db.rawQuery(searchQuery, null);
     while(cursor.moveToNext()) {
       calls_schedule.add(cursor.getString(0));
@@ -86,16 +101,17 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
         load_calls_schedule();
-      SharedPreferences preferences = this.getActivity().getSharedPreferences("choice_week",0);
-      position_pager = Integer.valueOf(preferences.getString("position", "0"));
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("choice_week", 0);
+        position_pager = Integer.valueOf(preferences.getString("position", "0"));
 
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
-        RecyclerView rv =  rootView.findViewById(R.id.rv_recycler_view);
+        RecyclerView rv = rootView.findViewById(R.id.rv_recycler_view);
 
+/*
 
-      Cursor cursor = db.rawQuery("SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 1) + "));", null);
+      Cursor cursor = db.rawQuery("SELECT " + subject + " FROM " + SUBJECT + ", " + SCHEDULE + " WHERE (" + subject_id + "= (SELECT " + subject_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 1) + "));", null);
         try {
-            int idSubjectOne = cursor.getColumnIndex(ScheduleClass.subjects.subject);
+            int idSubjectOne = cursor.getColumnIndex(subject);
             while (cursor.moveToNext()) {
                  SubjectOne = cursor.getString(idSubjectOne);
             }
@@ -103,9 +119,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.audiences.audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.audiences.idd_audience + "= (SELECT " + ScheduleClass.schedule.id_audience + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 1) + "));", null);
+        cursor = db.rawQuery("SELECT " + audience + " FROM " + AUDIENCE + ", " + SCHEDULE + " WHERE (" + audience_id + "= (SELECT " + audience_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 1) + "));", null);
         try {
-            int idAudienceOne = cursor.getColumnIndex(ScheduleClass.audiences.audience);
+            int idAudienceOne = cursor.getColumnIndex(audience);
             while (cursor.moveToNext()) {
                  AudienceOne = cursor.getString(idAudienceOne);
             }
@@ -113,9 +129,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.educators.educator + " FROM " + ScheduleClass.educators.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.educators.idd_educator + "= (SELECT " + ScheduleClass.schedule.id_educator + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 1) + "));", null);
+        cursor = db.rawQuery("SELECT " + educator + " FROM " + EDUCATOR + ", " + SCHEDULE + " WHERE (" + educator_id + "= (SELECT " + educator_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 1) + "));", null);
         try {
-            int idEducatorOne = cursor.getColumnIndex(ScheduleClass.educators.educator);
+            int idEducatorOne = cursor.getColumnIndex(educator);
             while (cursor.moveToNext()) {
                  EducatorOne = cursor.getString(idEducatorOne);
             }
@@ -123,9 +139,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.typelessons.typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.typelessons.idd_typelesson + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 1) + "));", null);
+        cursor = db.rawQuery("SELECT " + typelesson + " FROM " + TYPELESSON + ", " + SCHEDULE + " WHERE (" + typelesson_id + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 1) + "));", null);
         try {
-            int idTypeLessonOne = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
+            int idTypeLessonOne = cursor.getColumnIndex(typelesson);
             while (cursor.moveToNext()) {
                  TypeLessonOne = cursor.getString(idTypeLessonOne);
             }
@@ -134,9 +150,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         }
 
         //2 занятие
-        cursor = db.rawQuery("SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 2) + "));", null);
+        cursor = db.rawQuery("SELECT " + subject + " FROM " + SUBJECT + ", " + SCHEDULE + " WHERE (" + subject_id + "= (SELECT " + subject_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 2) + "));", null);
         try {
-            int idSubjectTwo = cursor.getColumnIndex(ScheduleClass.subjects.subject);
+            int idSubjectTwo = cursor.getColumnIndex(SUBJECT);
             while (cursor.moveToNext()) {
                  SubjectTwo = cursor.getString(idSubjectTwo);
             }
@@ -144,9 +160,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.audiences.audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.audiences.idd_audience + "= (SELECT " + ScheduleClass.schedule.id_audience + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 2) + "));", null);
+        cursor = db.rawQuery("SELECT " + audience + " FROM " + AUDIENCE + ", " + SCHEDULE + " WHERE (" + audience_id + "= (SELECT " + audience_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 2) + "));", null);
         try {
-            int idAudienceTwo = cursor.getColumnIndex(ScheduleClass.audiences.audience);
+            int idAudienceTwo = cursor.getColumnIndex(audience);
             while (cursor.moveToNext()) {
                  AudienceTwo = cursor.getString(idAudienceTwo);
             }
@@ -154,9 +170,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.educators.educator + " FROM " + ScheduleClass.educators.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.educators.idd_educator + "= (SELECT " + ScheduleClass.schedule.id_educator + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 2) + "));", null);
+        cursor = db.rawQuery("SELECT " + educator + " FROM " + EDUCATOR + ", " + SCHEDULE + " WHERE (" + educator_id + "= (SELECT " + educator_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 2) + "));", null);
         try {
-            int idEducatorTwo = cursor.getColumnIndex(ScheduleClass.educators.educator);
+            int idEducatorTwo = cursor.getColumnIndex(educator);
             while (cursor.moveToNext()) {
                  EducatorTwo = cursor.getString(idEducatorTwo);
             }
@@ -164,9 +180,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.typelessons.typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.typelessons.idd_typelesson + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 2) + "));", null);
+        cursor = db.rawQuery("SELECT " + typelesson + " FROM " + TYPELESSON + ", " + SCHEDULE + " WHERE (" + typelesson_id + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 2) + "));", null);
         try {
-            int idTypeLessonTwo = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
+            int idTypeLessonTwo = cursor.getColumnIndex(typelesson);
             while (cursor.moveToNext()) {
                  TypeLessonTwo = cursor.getString(idTypeLessonTwo);
             }
@@ -175,9 +191,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         }
 
         //3 занятие
-        cursor = db.rawQuery("SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 3) + "));", null);
+        cursor = db.rawQuery("SELECT " + subject + " FROM " + SUBJECT + ", " + SCHEDULE + " WHERE (" + subject_id + "= (SELECT " + subject_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 3) + "));", null);
         try {
-            int idSubjectThree = cursor.getColumnIndex(ScheduleClass.subjects.subject);
+            int idSubjectThree = cursor.getColumnIndex(subject);
             while (cursor.moveToNext()) {
                  SubjectThree = cursor.getString(idSubjectThree);
             }
@@ -185,9 +201,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.audiences.audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.audiences.idd_audience + "= (SELECT " + ScheduleClass.schedule.id_audience + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 3) + "));", null);
+        cursor = db.rawQuery("SELECT " + audience + " FROM " + AUDIENCE + ", " + SCHEDULE + " WHERE (" + audience_id + "= (SELECT " + audience_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 3) + "));", null);
         try {
-            int idAudienceThree = cursor.getColumnIndex(ScheduleClass.audiences.audience);
+            int idAudienceThree = cursor.getColumnIndex(audience);
             while (cursor.moveToNext()) {
                  AudienceThree = cursor.getString(idAudienceThree);
             }
@@ -195,9 +211,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.educators.educator + " FROM " + ScheduleClass.educators.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.educators.idd_educator + "= (SELECT " + ScheduleClass.schedule.id_educator + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 3) + "));", null);
+        cursor = db.rawQuery("SELECT " + educator + " FROM " + EDUCATOR + ", " + SCHEDULE + " WHERE (" + educator_id + "= (SELECT " + educator_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 3) + "));", null);
         try {
-            int idEducatorThree = cursor.getColumnIndex(ScheduleClass.educators.educator);
+            int idEducatorThree = cursor.getColumnIndex(educator);
             while (cursor.moveToNext()) {
                  EducatorThree = cursor.getString(idEducatorThree);
             }
@@ -205,9 +221,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.typelessons.typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.typelessons.idd_typelesson + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 3) + "));", null);
+        cursor = db.rawQuery("SELECT " + typelesson + " FROM " + TYPELESSON + ", " + SCHEDULE + " WHERE (" + typelesson_id + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 3) + "));", null);
         try {
-            int idTypeLessonThree = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
+            int idTypeLessonThree = cursor.getColumnIndex(typelesson);
             while (cursor.moveToNext()) {
                  TypeLessonThree = cursor.getString(idTypeLessonThree);
             }
@@ -216,9 +232,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         }
 
         //4 занятие
-        cursor = db.rawQuery("SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 4) + "));", null);
+        cursor = db.rawQuery("SELECT " + subject + " FROM " + SUBJECT + ", " + SCHEDULE + " WHERE (" + subject_id + "= (SELECT " + subject_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 4) + "));", null);
         try {
-            int idSubjectFour = cursor.getColumnIndex(ScheduleClass.subjects.subject);
+            int idSubjectFour = cursor.getColumnIndex(subject);
             while (cursor.moveToNext()) {
                  SubjectFour = cursor.getString(idSubjectFour);
             }
@@ -226,9 +242,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.audiences.audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.audiences.idd_audience + "= (SELECT " + ScheduleClass.schedule.id_audience + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 4) + "));", null);
+        cursor = db.rawQuery("SELECT " + audience + " FROM " + AUDIENCE + ", " + SCHEDULE + " WHERE (" + audience_id + "= (SELECT " + audience_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 4) + "));", null);
         try {
-            int idAudienceFour = cursor.getColumnIndex(ScheduleClass.audiences.audience);
+            int idAudienceFour = cursor.getColumnIndex(audience);
             while (cursor.moveToNext()) {
                  AudienceFour = cursor.getString(idAudienceFour);
             }
@@ -236,9 +252,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.educators.educator + " FROM " + ScheduleClass.educators.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.educators.idd_educator + "= (SELECT " + ScheduleClass.schedule.id_educator + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 4) + "));", null);
+        cursor = db.rawQuery("SELECT " + educator + " FROM " + EDUCATOR + ", " + SCHEDULE + " WHERE (" + educator_id + "= (SELECT " + educator_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 4) + "));", null);
         try {
-            int idEducatorFour = cursor.getColumnIndex(ScheduleClass.educators.educator);
+            int idEducatorFour = cursor.getColumnIndex(educator);
             while (cursor.moveToNext()) {
                  EducatorFour = cursor.getString(idEducatorFour);
             }
@@ -246,9 +262,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.typelessons.typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.typelessons.idd_typelesson + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 4) + "));", null);
+        cursor = db.rawQuery("SELECT " + typelesson + " FROM " + TYPELESSON + ", " + SCHEDULE + " WHERE (" + typelesson_id + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 4) + "));", null);
         try {
-            int idTypeLessonFour = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
+            int idTypeLessonFour = cursor.getColumnIndex(typelesson);
             while (cursor.moveToNext()) {
                  TypeLessonFour = cursor.getString(idTypeLessonFour);
             }
@@ -257,9 +273,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         }
 
         //5 занятие
-        cursor = db.rawQuery("SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 5) + "));", null);
+        cursor = db.rawQuery("SELECT " + subject + " FROM " + SUBJECT + ", " + SCHEDULE + " WHERE (" + subject_id + "= (SELECT " + subject_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 5) + "));", null);
         try {
-            int idSubjectFive = cursor.getColumnIndex(ScheduleClass.subjects.subject);
+            int idSubjectFive = cursor.getColumnIndex(subject);
             while (cursor.moveToNext()) {
                  SubjectFive = cursor.getString(idSubjectFive);
             }
@@ -267,9 +283,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.audiences.audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.audiences.idd_audience + "= (SELECT " + ScheduleClass.schedule.id_audience + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 5) + "));", null);
+        cursor = db.rawQuery("SELECT " + audience + " FROM " + AUDIENCE + ", " + SCHEDULE + " WHERE (" + audience_id + "= (SELECT " + audience_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 5) + "));", null);
         try {
-            int idAudienceFive = cursor.getColumnIndex(ScheduleClass.audiences.audience);
+            int idAudienceFive = cursor.getColumnIndex(audience);
             while (cursor.moveToNext()) {
                  AudienceFive = cursor.getString(idAudienceFive);
             }
@@ -277,9 +293,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.educators.educator + " FROM " + ScheduleClass.educators.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.educators.idd_educator + "= (SELECT " + ScheduleClass.schedule.id_educator + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 5) + "));", null);
+        cursor = db.rawQuery("SELECT " + educator + " FROM " + EDUCATOR + ", " + SCHEDULE + " WHERE (" + educator_id + "= (SELECT " + educator_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 5) + "));", null);
         try {
-            int idEducatorFive = cursor.getColumnIndex(ScheduleClass.educators.educator);
+            int idEducatorFive = cursor.getColumnIndex(educator);
             while (cursor.moveToNext()) {
                  EducatorFive = cursor.getString(idEducatorFive);
             }
@@ -287,9 +303,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.typelessons.typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.typelessons.idd_typelesson + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 5) + "));", null);
+        cursor = db.rawQuery("SELECT " + typelesson + " FROM " + TYPELESSON + ", " + SCHEDULE + " WHERE (" + typelesson_id + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 5) + "));", null);
         try {
-            int idTypeLessonFive = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
+            int idTypeLessonFive = cursor.getColumnIndex(typelesson);
             while (cursor.moveToNext()) {
                  TypeLessonFive = cursor.getString(idTypeLessonFive);
             }
@@ -298,9 +314,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         }
 
         //6 занятие
-        cursor = db.rawQuery("SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 6) + "));", null);
+        cursor = db.rawQuery("SELECT " + subject + " FROM " + SUBJECT + ", " + SCHEDULE + " WHERE (" + subject_id + "= (SELECT " + subject_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 6) + "));", null);
         try {
-            int idSubjectSix = cursor.getColumnIndex(ScheduleClass.subjects.subject);
+            int idSubjectSix = cursor.getColumnIndex(subject);
             while (cursor.moveToNext()) {
                  SubjectSix = cursor.getString(idSubjectSix);
             }
@@ -308,9 +324,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.audiences.audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.audiences.idd_audience + "= (SELECT " + ScheduleClass.schedule.id_audience + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 6) + "));", null);
+        cursor = db.rawQuery("SELECT " + audience + " FROM " + AUDIENCE + ", " + SCHEDULE + " WHERE (" + audience_id + "= (SELECT " + audience_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 6) + "));", null);
         try {
-            int idAudienceSix = cursor.getColumnIndex(ScheduleClass.audiences.audience);
+            int idAudienceSix = cursor.getColumnIndex(audience);
             while (cursor.moveToNext()) {
                  AudienceSix = cursor.getString(idAudienceSix);
             }
@@ -318,9 +334,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.educators.educator + " FROM " + ScheduleClass.educators.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.educators.idd_educator + "= (SELECT " + ScheduleClass.schedule.id_educator + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 6) + "));", null);
+        cursor = db.rawQuery("SELECT " + educator + " FROM " + EDUCATOR + ", " + SCHEDULE + " WHERE (" + educator_id + "= (SELECT " + educator_id + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 6) + "));", null);
         try {
-            int idEducatorSix = cursor.getColumnIndex(ScheduleClass.educators.educator);
+            int idEducatorSix = cursor.getColumnIndex(educator);
             while (cursor.moveToNext()) {
                  EducatorSix = cursor.getString(idEducatorSix);
             }
@@ -328,9 +344,9 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.typelessons.typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.typelessons.idd_typelesson + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 6) + "));", null);
+        cursor = db.rawQuery("SELECT " + typelesson + " FROM " + TYPELESSON + ", " + SCHEDULE + " WHERE (" + typelesson_id + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + SCHEDULE + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_pager * 36) + 6) + "));", null);
         try {
-            int idTypeLessonSix = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
+            int idTypeLessonSix = cursor.getColumnIndex(typelesson);
             while (cursor.moveToNext()) {
                  TypeLessonSix = cursor.getString(idTypeLessonSix);
             }
@@ -343,7 +359,8 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
                 LinearLayoutManager llm = new LinearLayoutManager(getContext());
                 rv.setLayoutManager(llm);
                 rv.setAdapter(adapter);
-                return rootView;
-            }
 
+            }
+*/
+        return rootView;  }
         }

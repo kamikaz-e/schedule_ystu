@@ -25,6 +25,11 @@ import com.example.misha.myapplication.data.ScheduleDB;
 
 import java.util.ArrayList;
 
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience;
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience_id;
+import static com.example.misha.myapplication.dialog.AudienceList.AUDIENCES;
+
 
 public class FragmentAudience extends android.support.v4.app.Fragment {
 
@@ -82,13 +87,13 @@ public class FragmentAudience extends android.support.v4.app.Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
                     input_audience.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                    String audience = input_audience.getText().toString();
-                    if(TextUtils.isEmpty(audience)) {
+                    String audience_text = input_audience.getText().toString();
+                    if(TextUtils.isEmpty(audience_text)) {
                         input_audience.setError("Введите аудиторию");
                         return true;
                     }
                     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('" + audience + "');");
+                    db.execSQL("INSERT INTO " + AUDIENCE + " (" + audience + ") VALUES ('" + audience_text + "');");
                     input_audience.setText("");
                     start();
                     adapter.notifyDataSetChanged();
@@ -110,7 +115,7 @@ public class FragmentAudience extends android.support.v4.app.Fragment {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + ScheduleClass.audiences.TABLE_NAME + " WHERE "+ ScheduleClass.audiences.audience + "='"+ select_item+"'");
+                db.execSQL("DELETE FROM " + AUDIENCES + " WHERE "+ ScheduleClass.audiences.audience + "='"+ select_item+"'");
                 start();
                 adapter.notifyDataSetChanged();
             }
@@ -130,7 +135,7 @@ public class FragmentAudience extends android.support.v4.app.Fragment {
         list_audiences.setAdapter(adapter);
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ ScheduleClass.audiences.audience +" FROM " + ScheduleClass.audiences.TABLE_NAME + " WHERE "+ ScheduleClass.audiences.idd_audience +">1;";
+        String searchQuery = "SELECT "+ audience +" FROM " + AUDIENCE + " WHERE "+ audience_id +">1;";
         audience_list.clear();
         Cursor cursor = db.rawQuery(searchQuery, null);
         while(cursor.moveToNext()) {

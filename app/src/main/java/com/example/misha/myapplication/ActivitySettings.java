@@ -39,6 +39,7 @@ import com.example.misha.myapplication.data.ScheduleClass.educators;
 import com.example.misha.myapplication.data.ScheduleClass.schedule;
 import com.example.misha.myapplication.data.ScheduleClass.subjects;
 import com.example.misha.myapplication.data.ScheduleDB;
+import com.example.misha.myapplication.dialog.SubjectList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,6 +52,16 @@ import java.util.Map;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
+
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience_id;
+import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
+import static com.example.misha.myapplication.data.ScheduleClass.date_start.DATE_START;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.educator_id;
+import static com.example.misha.myapplication.data.ScheduleClass.schedule.SCHEDULE;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject_id;
 
 public class ActivitySettings extends AppCompatActivity {
 
@@ -189,7 +200,7 @@ public class ActivitySettings extends AppCompatActivity {
 
     typelessonitem.setOnClickListener(new OnClickListener() {
           public void onClick(View v) {
-           dlg1 = new subjectDialogFragment();
+           dlg1 = new SubjectList();
            dlg1.show(getSupportFragmentManager(),"dlg1");
           }
       });
@@ -222,7 +233,7 @@ public class ActivitySettings extends AppCompatActivity {
       Calendar today = Calendar.getInstance();
       current_date = String.valueOf(Date.getTimeInMillis());
       SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-      db.execSQL("update " + date_start.TABLE_NAME + " set " + date_start.date + " = '" +
+      db.execSQL("update " + DATE_START + " set " + date_start.date + " = '" +
         current_date  + "' where " + date_start.id_date + " = " + 1);
 
 
@@ -247,21 +258,21 @@ public class ActivitySettings extends AppCompatActivity {
       public void onClick(DialogInterface dialog, int id) {
         database_name= name_db.getText().toString();
           SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-          db.execSQL("DROP TABLE " + ScheduleClass.subjects.TABLE_NAME);
-          db.execSQL("CREATE TABLE " + ScheduleClass.subjects.TABLE_NAME + " ("
-                  + ScheduleClass.subjects.idd_subject + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+          db.execSQL("DROP TABLE " + SUBJECT);
+          db.execSQL("CREATE TABLE " + SUBJECT + " ("
+                  + subject_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                   + ScheduleClass.subjects.subject + " STRING UNIQUE ON CONFLICT IGNORE );");
-          db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
-          db.execSQL("DROP TABLE " + ScheduleClass.audiences.TABLE_NAME);
-          db.execSQL("CREATE TABLE " + ScheduleClass.audiences.TABLE_NAME + " ("
-                  + ScheduleClass.audiences.idd_audience + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+          db.execSQL("INSERT INTO " + SUBJECT + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
+          db.execSQL("DROP TABLE " + AUDIENCE);
+          db.execSQL("CREATE TABLE " + AUDIENCE + " ("
+                  + audience_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                   + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
-          db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
-          db.execSQL("DROP TABLE " + ScheduleClass.educators.TABLE_NAME);
-          db.execSQL("CREATE TABLE " + ScheduleClass.educators.TABLE_NAME + " ("
-                  + ScheduleClass.educators.idd_educator + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+          db.execSQL("INSERT INTO " + AUDIENCE + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
+          db.execSQL("DROP TABLE " + EDUCATOR);
+          db.execSQL("CREATE TABLE " + EDUCATOR + " ("
+                  + educator_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                   + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
-          db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
+          db.execSQL("INSERT INTO " + EDUCATOR + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
         load_db(sub, subjects_import);
         load_db(aud,audiences_import);
         load_db(edu,educators_import);
@@ -296,17 +307,17 @@ public class ActivitySettings extends AppCompatActivity {
                   obj = jsonArray.getJSONObject(i);
                   if (table == aud) {
                     String audience = obj.getString("audience");
-                    db.execSQL("insert into " + audiences.TABLE_NAME + " (" + audiences.audience
+                    db.execSQL("insert into " + AUDIENCE + " (" + audiences.audience
                         + ") values ('" + audience + "');");
                   }
                   if (table == edu) {
                     String educator = obj.getString("educator");
-                    db.execSQL("insert into " + educators.TABLE_NAME + " (" + educators.educator
+                    db.execSQL("insert into " + EDUCATOR + " (" + educators.educator
                         + ") values ('" + educator + "');");
                   }
                   if (table == sub) {
                     String subject = obj.getString("subject");
-                    db.execSQL("insert into " + subjects.TABLE_NAME + " (" + subjects.subject
+                    db.execSQL("insert into " + SUBJECT + " (" + subjects.subject
                         + ") values ('" + subject + "');");
                   }
                   if (table==sch) {
@@ -316,7 +327,7 @@ public class ActivitySettings extends AppCompatActivity {
                     String id_educator = obj.getString("id_educator");
                     String id_typelesson = obj.getString("id_typelesson");
                     db.execSQL(
-                        "update " + schedule.TABLE_NAME + " set " + schedule.id_subject + " = "
+                        "update " + SCHEDULE + " set " + schedule.id_subject + " = "
                             + id_subject + ", " + schedule.id_audience + " = " + id_audience + ", "
                             + schedule.id_educator + " = " + id_educator + ", "
                             + schedule.id_typelesson + " = " + id_typelesson + " where "
@@ -325,13 +336,13 @@ public class ActivitySettings extends AppCompatActivity {
                   if (table == cal) {
                     String id_call = obj.getString("id_call");
                     String time = obj.getString("time");
-                    db.execSQL("update " + calls.TABLE_NAME + " set " + calls.time + " = '" +
+                    db.execSQL("update " + CALLS + " set " + calls.time + " = '" +
                         time + "' where " + calls.id_call + " = " + id_call);
                   }
                   if (table == dat) {
                     String id_date = obj.getString("id_date");
                     String date = obj.getString("date");
-                    db.execSQL("update " + date_start.TABLE_NAME + " set " + date_start.date + " = '" +
+                    db.execSQL("update " + DATE_START + " set " + date_start.date + " = '" +
                         date + "' where " + date_start.id_date + " = " + id_date);
 
                     SharedPreferences settings = getSharedPreferences("week", 0);
@@ -396,7 +407,7 @@ public class ActivitySettings extends AppCompatActivity {
   void upload() {
     SQLiteDatabase myDataBase = ScheduleDB.getReadableDatabase();
 
-    String searchQuery = "SELECT  * FROM " + schedule.TABLE_NAME;
+    String searchQuery = "SELECT  * FROM " + SCHEDULE;
     Cursor cursor = myDataBase.rawQuery(searchQuery, null);
     JSONArray resultSet = new JSONArray();
     cursor.moveToFirst();
@@ -424,7 +435,7 @@ public class ActivitySettings extends AppCompatActivity {
 
     json_schedule = resultSet.toString();
 
-    String searchQuery1 = "SELECT  * FROM " + subjects.TABLE_NAME;
+    String searchQuery1 = "SELECT  * FROM " + SUBJECT;
     Cursor cursor1 = myDataBase.rawQuery(searchQuery1, null);
     JSONArray resultSet1 = new JSONArray();
     cursor1.moveToFirst();
@@ -451,7 +462,7 @@ public class ActivitySettings extends AppCompatActivity {
     cursor1.close();
     json_subjects = resultSet1.toString();
 
-    String searchQuery2 = "SELECT  * FROM " + audiences.TABLE_NAME;
+    String searchQuery2 = "SELECT  * FROM " + AUDIENCE;
     Cursor cursor2 = myDataBase.rawQuery(searchQuery2, null);
     JSONArray resultSet2 = new JSONArray();
     cursor2.moveToFirst();
@@ -478,7 +489,7 @@ public class ActivitySettings extends AppCompatActivity {
     cursor2.close();
     json_audiences = resultSet2.toString();
 
-    String searchQuery3 = "SELECT  * FROM " + educators.TABLE_NAME;
+    String searchQuery3 = "SELECT  * FROM " + EDUCATOR;
     Cursor cursor3 = myDataBase.rawQuery(searchQuery3, null);
     JSONArray resultSet3 = new JSONArray();
     cursor3.moveToFirst();
@@ -506,7 +517,7 @@ public class ActivitySettings extends AppCompatActivity {
     json_educators = resultSet3.toString();
 
 
-    String searchQuery4 = "SELECT  * FROM " + calls.TABLE_NAME;
+    String searchQuery4 = "SELECT  * FROM " + CALLS;
     Cursor cursor4 = myDataBase.rawQuery(searchQuery4, null);
     JSONArray resultSet4 = new JSONArray();
     cursor4.moveToFirst();
@@ -533,7 +544,7 @@ public class ActivitySettings extends AppCompatActivity {
     cursor4.close();
     json_calls = resultSet4.toString();
 
-    String searchQuery5 = "SELECT  * FROM " + date_start.TABLE_NAME;
+    String searchQuery5 = "SELECT  * FROM " + DATE_START;
     Cursor cursor5 = myDataBase.rawQuery(searchQuery5, null);
     JSONArray resultSet5 = new JSONArray();
     cursor5.moveToFirst();

@@ -2,6 +2,7 @@
 <RelativeLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -80,8 +81,11 @@
                 android:layout_height="36dp"
                 android:layout_alignTop="@+id/time_monday"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="27dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginTop="31dp"
+                android:layout_marginEnd="80dp"
+                android:hint="Предмет"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
                 android:background="#0000"
                 android:spinnerMode="dropdown" />
 
@@ -92,25 +96,31 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="31dp">
 
-                <Spinner
-                    android:id="@+id/spinner_audience"
+                <TextView
+                    android:id="@+id/button_audience"
                     android:layout_width="120dp"
                     android:layout_height="36dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="0dp"
                     android:background="#0000"
+                    android:hint="Аудитория"
+                    android:layout_marginTop="5sp"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:spinnerMode="dropdown" />
 
-                <Spinner
-                    android:id="@+id/spinner_educator"
-                    android:layout_width="180dp"
+                <TextView
+                    android:id="@+id/button_educator"
+                    android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_toEndOf="@+id/spinner_audience"
+                    android:layout_toEndOf="@+id/button_audience"
                     android:background="#0000"
+                    android:hint="Преподаватель"
+                    android:layout_marginTop="5sp"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:spinnerMode="dropdown" />
@@ -133,9 +143,9 @@
                 android:layout_height="30dp"
                 android:layout_alignTop="@+id/clear_card_monday"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="55sp"
                 android:layout_marginRight="4dp"
-                android:layout_marginBottom="52dp"
+
                 android:background="#424242"
                 android:drawableBottom="@drawable/ic_copy_up" />
 
@@ -143,9 +153,10 @@
                 android:id="@+id/copy_down_monday"
                 android:layout_width="40dp"
                 android:layout_height="30dp"
+                android:layout_below="@+id/copy_up_monday"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="25sp"
+                android:layout_marginRight="4sp"
                 android:background="#424242"
                 android:drawableTop="@drawable/ic_copy_down" />
 

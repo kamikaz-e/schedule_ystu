@@ -23,6 +23,10 @@ import com.example.misha.myapplication.data.ScheduleDB;
 
 import java.util.ArrayList;
 
+import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.educator;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.educator_id;
+
 
 public class FragmentEducator extends android.support.v4.app.Fragment {
 
@@ -79,7 +83,7 @@ public class FragmentEducator extends android.support.v4.app.Fragment {
                         return true;
                     }
                     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('" + educator + "');");
+                    db.execSQL("INSERT INTO " + EDUCATOR + " (" + ScheduleClass.educators.educator + ") VALUES ('" + educator + "');");
                     input_educator.setText("");
                     start();
                     adapter.notifyDataSetChanged();
@@ -100,7 +104,7 @@ public class FragmentEducator extends android.support.v4.app.Fragment {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + ScheduleClass.educators.TABLE_NAME + " WHERE "+ ScheduleClass.educators.educator + "='"+ select_item+"'");
+                db.execSQL("DELETE FROM " + EDUCATOR + " WHERE "+ ScheduleClass.educators.educator + "='"+ select_item+"'");
                 start();
                 adapter.notifyDataSetChanged();
             }
@@ -119,7 +123,7 @@ public class FragmentEducator extends android.support.v4.app.Fragment {
         list_educators.setAdapter(adapter);
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ ScheduleClass.educators.educator +" FROM " + ScheduleClass.educators.TABLE_NAME + " WHERE "+ ScheduleClass.educators.idd_educator +">1;";
+        String searchQuery = "SELECT "+ educator +" FROM " + EDUCATOR + " WHERE "+ educator_id +">1;";
         educator_list.clear();
         Cursor cursor = db.rawQuery(searchQuery, null);
         while(cursor.moveToNext()) {

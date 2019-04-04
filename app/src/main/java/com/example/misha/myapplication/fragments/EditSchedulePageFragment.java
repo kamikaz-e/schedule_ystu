@@ -1,26 +1,38 @@
 package com.example.misha.myapplication.fragments;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.misha.myapplication.subjectDialogFragment;
+import com.example.misha.myapplication.dialog.AudienceList;
+import com.example.misha.myapplication.dialog.EducatorList;
+import com.example.misha.myapplication.model.Audience;
+import com.example.misha.myapplication.model.Educator;
+import com.example.misha.myapplication.dialog.SubjectList;
 import com.example.misha.myapplication.Lesson;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditScheduleAdapter;
 import com.example.misha.myapplication.adapter.EditScheduleCallback;
-import com.example.misha.myapplication.data.ScheduleClass;
+import com.example.misha.myapplication.data.ScheduleClass.audiences;
+import com.example.misha.myapplication.data.ScheduleClass.educators;
 import com.example.misha.myapplication.data.ScheduleDB;
 import com.example.misha.myapplication.model.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject;
 
 public class EditSchedulePageFragment extends Fragment implements EditScheduleCallback {
 
@@ -32,13 +44,14 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     private List<Lesson> lessonList = new ArrayList<>();
 
     final ArrayList<Subject> subjectList = new ArrayList<>();
-    final ArrayList<String> audienceList = new ArrayList<>();
-    final ArrayList<String> educatorList = new ArrayList<>();
+    final ArrayList<Audience> audienceList = new ArrayList<>();
+    final ArrayList<Educator> educatorList = new ArrayList<>();
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         rvadapter = new EditScheduleAdapter(this);
     }
 
@@ -65,27 +78,28 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     }
 
     void initResources() {
+        ScheduleDB = new ScheduleDB();
         SQLiteDatabase myDataBase = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT * FROM " + ScheduleClass.subjects.TABLE_NAME;
+
+
+        String searchQuery = "SELECT * FROM " + SUBJECT  ;
         Cursor cursor = myDataBase.rawQuery(searchQuery, null);
         while (cursor.moveToNext()) {
             subjectList.add(new Subject(cursor));
         }
         cursor.close();
 
-        myDataBase = ScheduleDB.getReadableDatabase();
-        searchQuery = "SELECT " + ScheduleClass.audiences.audience + " FROM " + ScheduleClass.audiences.TABLE_NAME;
+        searchQuery = "SELECT * FROM " + AUDIENCE;
         cursor = myDataBase.rawQuery(searchQuery, null);
         while (cursor.moveToNext()) {
-            audienceList.add(cursor.getString(0));
+            audienceList.add(new Audience(cursor));
         }
         cursor.close();
 
-        myDataBase = ScheduleDB.getReadableDatabase();
-        searchQuery = "SELECT " + ScheduleClass.educators.educator + " FROM " + ScheduleClass.educators.TABLE_NAME;
+        searchQuery = "SELECT * FROM " + EDUCATOR;
         cursor = myDataBase.rawQuery(searchQuery, null);
         while (cursor.moveToNext()) {
-            educatorList.add(cursor.getString(0));
+            educatorList.add(new Educator(cursor));
         }
         cursor.close();
 
@@ -93,20 +107,51 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     }
 
     @Override
-    public void onAudienceSelected(int position, String audience) {
-        lessonList.get(position).setAudienceEdit(audience);
+    public void onAudienceClick(int position, ArrayList<Audience> audience) {
+        AudienceList dialogFragment = AudienceList.newInstance(position, audience);
+        dialogFragment.show(getChildFragmentManager(), Audience.class.getSimpleName());
     }
 
     @Override
-    public void onEducatorSelected(int position, String editor) {
-        lessonList.get(position).setEducator(editor);
-
+    public void onEducatorClick(int position, ArrayList<Educator> educator) {
+        EducatorList dialogFragment = EducatorList.newInstance(position, educator);
+        dialogFragment.show(getChildFragmentManager(), EducatorList.class.getSimpleName());
     }
 
     @Override
     public void onSubjectClick(int position, ArrayList<Subject> subject) {
-        DialogFragment dialogFragment = subjectDialogFragment.newInstance(position, subject);
-        dialogFragment.show(getChildFragmentManager(), subjectDialogFragment.class.getSimpleName());
+        SubjectList dialogFragment = SubjectList.newInstance(position, subject);
+        dialogFragment.show(getChildFragmentManager(), SubjectList.class.getSimpleName());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultOk, Intent data) {
+        if (requestCode == SubjectList.SUBJECT_CODE) {
+            int lessonPosition = data.getIntExtra(SubjectList.POSITION, 0);
+            Subject subject = data.getParcelableExtra(SubjectList.SUBJECT_LIST);
+            lessonList.get(lessonPosition).setSubjectEdit(subject.getName());
+            rvadapter.setLessonList(lessonList);
+            rvadapter.notifyDataSetChanged();
+        }
+        if (requestCode == AudienceList.AUDIENCE_CODE) {
+            int lessonPosition = data.getIntExtra(AudienceList.POSITION, 0);
+            Audience audience = data.getParcelableExtra(AudienceList.AUDIENCE_LIST);
+            lessonList.get(lessonPosition).setAudienceEdit(audience.getName());
+            rvadapter.setLessonList(lessonList);
+            rvadapter.notifyDataSetChanged();
+        }
+        if (requestCode == EducatorList.EDUCATOR_CODE) {
+            int lessonPosition = data.getIntExtra(EducatorList.POSITION, 0);
+            Educator educator = data.getParcelableExtra(EducatorList.EDUCATOR_LIST);
+            lessonList.get(lessonPosition).setEducatorEdit(educator.getName());
+            rvadapter.setLessonList(lessonList);
+            rvadapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onSubjectSetText(int position, ArrayList<Subject> subject) {
+
     }
 
     @Override

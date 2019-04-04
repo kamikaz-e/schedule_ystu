@@ -6,7 +6,7 @@ public class Lesson {
 
     private String time;
 
-    private Object subjectEdit;
+    private String subjectEdit;
 
     private String audienceEdit;
 
@@ -29,20 +29,20 @@ public class Lesson {
     public String getTime() {
         return time;
     }
-    public Object getSubjectEdit() {
+    public String getSubjectEdit() {
         return subjectEdit;
     }
     public String getAudienceEdit() {
         return audienceEdit;
     }
-    public String getEducator() {
+    public String getEducatorEdit() {
         return educator;
     }
     public String getTypeLesson() {
         return typeLesson;
     }
 
-    public void setSubjectEdit(Object subjectEdit) {
+    public void setSubjectEdit(String subjectEdit) {
         this.subjectEdit = subjectEdit;
     }
 
@@ -50,7 +50,7 @@ public class Lesson {
         this.audienceEdit = audienceEdit;
     }
 
-    public void setEducator(String educator) {
-        this.educator = educator;
+    public void setEducatorEdit(String educatorEdit) {
+        this.educator = educatorEdit;
     }
 }

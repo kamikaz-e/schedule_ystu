@@ -27,6 +27,8 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
+import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
+
 
 public class FragmentCallSchedule extends android.support.v4.app.Fragment {
 
@@ -349,16 +351,16 @@ public class FragmentCallSchedule extends android.support.v4.app.Fragment {
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
         db.beginTransaction();
         try {
-            db.execSQL("DROP TABLE " + ScheduleClass.calls.TABLE_NAME);
-            db.execSQL("CREATE TABLE " + ScheduleClass.calls.TABLE_NAME + " ("
+            db.execSQL("DROP TABLE " + CALLS);
+            db.execSQL("CREATE TABLE " + CALLS + " ("
                     + ScheduleClass.calls.id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + ScheduleClass.calls.time + " STRING );");
-            db.execSQL("INSERT INTO " + ScheduleClass.calls.TABLE_NAME + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullOne +"');");
-            db.execSQL("INSERT INTO " + ScheduleClass.calls.TABLE_NAME + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullTwo +"');");
-            db.execSQL("INSERT INTO " + ScheduleClass.calls.TABLE_NAME + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullThree +"');");
-            db.execSQL("INSERT INTO " + ScheduleClass.calls.TABLE_NAME + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullFour +"');");
-            db.execSQL("INSERT INTO " + ScheduleClass.calls.TABLE_NAME + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullFive +"');");
-            db.execSQL("INSERT INTO " + ScheduleClass.calls.TABLE_NAME + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullSix +"');");
+            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullOne +"');");
+            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullTwo +"');");
+            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullThree +"');");
+            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullFour +"');");
+            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullFive +"');");
+            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullSix +"');");
 
             db.setTransactionSuccessful();
         } finally {

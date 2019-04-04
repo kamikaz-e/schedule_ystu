@@ -24,24 +24,29 @@ import android.widget.ListView;
 import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.data.ScheduleDB;
 
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
+
 public class ActivityEditData extends AppCompatActivity {
 
 
-  EditText input_subject;
-  ListView list_subjects;
-  private ScheduleDB ScheduleDB;
-  final Context context = this;
+    EditText input_subject;
+    ListView list_subjects;
+    private ScheduleDB ScheduleDB;
+    final Context context = this;
 
-  Button clear_subjects;
-  Integer position_spinner = 0;
+    Button clear_subjects;
+    Integer position_spinner = 0;
 
-  TabLayout tabLayout;
-  ViewPager viewPager;
-  Edit_Data_ViewPagerAdapter viewPagerAdapter;
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    Edit_Data_ViewPagerAdapter viewPagerAdapter;
 
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activityeditdata);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activityeditdata);
 
    /* final Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -81,202 +86,189 @@ public class ActivityEditData extends AppCompatActivity {
       }*/
 
 
+        ScheduleDB = new ScheduleDB();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
 
-    ScheduleDB = new ScheduleDB();
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-    ActionBar actionBar = getSupportActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(true);
-    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
+
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPagerAdapter = new Edit_Data_ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        clear_subjects = findViewById(R.id.clear_subjects);
+        clear_subjects.setBackgroundResource(R.drawable.ic_clear);
+        clear_subjects.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                switch (tabLayout.getSelectedTabPosition()) {
+                    case 0:
+                        onCreateDialogClearSubjects().show();
+                        break;
+                    case 1:
+                        onCreateDialogClearAudiences().show();
+                        break;
+                    case 2:
+                        onCreateDialogClearEducators().show();
+                        break;
+                }
+            }
+        });
+
+    }
 
 
-    viewPager = (ViewPager) findViewById(R.id.viewPager);
-    viewPagerAdapter = new Edit_Data_ViewPagerAdapter(getSupportFragmentManager());
-    viewPager.setAdapter(viewPagerAdapter);
-    tabLayout = (TabLayout) findViewById(R.id.tabs);
+    void clear_subjects() {
 
-    tabLayout.setupWithViewPager(viewPager);
-
-    clear_subjects = findViewById(R.id.clear_subjects);
-    clear_subjects.setBackgroundResource(R.drawable.ic_clear);
-    clear_subjects.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-
-        switch (tabLayout.getSelectedTabPosition()) {
-          case 0:
-            onCreateDialogClearSubjects().show();
-            break;
-           case 1:
-             onCreateDialogClearAudiences().show();
-            break;
-          case 2:
-            onCreateDialogClearEducators().show();
-            break;
+        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+        db.execSQL("DROP TABLE " + SUBJECT);
+        db.execSQL("CREATE TABLE " + SUBJECT + " ("
+                + ScheduleClass.subjects.subject_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + ScheduleClass.subjects.subject + " STRING UNIQUE ON CONFLICT IGNORE );");
+        if (!(viewPagerAdapter == null)) {
+            viewPagerAdapter.notifyDataSetChanged();
         }
-      }
-    });
-
-  }
-
-
-
-  void clear_subjects () {
-
-    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-    db.execSQL("DROP TABLE " + ScheduleClass.subjects.TABLE_NAME);
-    db.execSQL("CREATE TABLE " + ScheduleClass.subjects.TABLE_NAME + " ("
-            + ScheduleClass.subjects.idd_subject + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + ScheduleClass.subjects.subject + " STRING UNIQUE ON CONFLICT IGNORE );");
-    db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
-      if (!(viewPagerAdapter == null)) {
-          viewPagerAdapter.notifyDataSetChanged();
-      }
-  }
-
-  public Dialog onCreateDialogClearSubjects() {
-
-    AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-    builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int id) {
-        clear_subjects();
-      }
-    }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface dialog, int id) {
-        dialog.cancel();
-      }
-    }).setTitle("Очистить предметы?");
-    return builder.create();
-  }
-
-  void clear_audiences () {
-    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-    db.execSQL("DROP TABLE " + ScheduleClass.audiences.TABLE_NAME);
-    db.execSQL("CREATE TABLE " + ScheduleClass.audiences.TABLE_NAME + " ("
-            + ScheduleClass.audiences.idd_audience + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
-    db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
-    if (!(viewPagerAdapter == null)) {
-      viewPagerAdapter.notifyDataSetChanged();
     }
 
-  }
+    public Dialog onCreateDialogClearSubjects() {
 
-  public Dialog onCreateDialogClearAudiences() {
-
-    AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-    builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int id) {
-        clear_audiences();
-
-      }
-    }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface dialog, int id) {
-        dialog.cancel();
-      }
-    }).setTitle("Очистить аудитории?");
-    return builder.create();
-  }
-
-
-
-  void clear_educators () {
-    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-    db.execSQL("DROP TABLE " + ScheduleClass.educators.TABLE_NAME);
-    db.execSQL("CREATE TABLE " + ScheduleClass.educators.TABLE_NAME + " ("
-            + ScheduleClass.educators.idd_educator + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
-    db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
-    if (!(viewPagerAdapter == null)) {
-      viewPagerAdapter.notifyDataSetChanged();
-    }
-  }
-
-  public Dialog onCreateDialogClearEducators() {
-
-    AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-    builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int id) {
-        clear_educators();
-      }
-    }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface dialog, int id) {
-        dialog.cancel();
-      }
-    }).setTitle("Очистить преподавателей?");
-    return builder.create();
-  }
-
-
-
-
-
-
-
-
-
-
-  public class Edit_Data_ViewPagerAdapter extends FragmentStatePagerAdapter {
-
-    public Edit_Data_ViewPagerAdapter(FragmentManager fm) {
-      super(fm);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                clear_subjects();
+            }
+        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        }).setTitle("Очистить предметы?");
+        return builder.create();
     }
 
-    @Override
-    public Fragment getItem(int position) {
-      Fragment fragment = null;
-      if (position == 0) {
-        fragment = new FragmentSubject();
-      } else if (position == 1) {
-        fragment = new FragmentAudience();
-      } else if (position == 2) {
-        fragment = new FragmentEducator();
-      }
-      return fragment;
+    void clear_audiences() {
+        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+        db.execSQL("DROP TABLE " +AUDIENCE);
+        db.execSQL("CREATE TABLE " + AUDIENCE + " ("
+                + ScheduleClass.audiences.audience_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
+        if (!(viewPagerAdapter == null)) {
+            viewPagerAdapter.notifyDataSetChanged();
+        }
 
     }
-      @Override
-      public int getItemPosition(Object object) {
-          return POSITION_NONE;
-      }
 
-    @Override
-    public int getCount() {
-      return 3;
+    public Dialog onCreateDialogClearAudiences() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                clear_audiences();
+
+            }
+        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        }).setTitle("Очистить аудитории?");
+        return builder.create();
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-      String title = null;
-      if (position == 0) {
-        title = "Предметы";
-      } else if (position == 1) {
-        title = "Аудитории";
-      } else if (position == 2) {
-        title = "Препод-ли";
-      }
-      return title;
+
+    void clear_educators() {
+        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+        db.execSQL("DROP TABLE " +  EDUCATOR);
+        db.execSQL("CREATE TABLE " + EDUCATOR + " ("
+                + ScheduleClass.educators.educator_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
+        if (!(viewPagerAdapter == null)) {
+            viewPagerAdapter.notifyDataSetChanged();
+        }
     }
 
-  }
+    public Dialog onCreateDialogClearEducators() {
 
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        Intent intent = new Intent(ActivityEditData.this, MainActivity.class);
-        finish();
-        startActivity(intent);
-        return true;
-
-      default:
-        return super.onOptionsItemSelected(item);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                clear_educators();
+            }
+        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        }).setTitle("Очистить преподавателей?");
+        return builder.create();
     }
-  }
+
+
+    public class Edit_Data_ViewPagerAdapter extends FragmentStatePagerAdapter {
+
+        public Edit_Data_ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            Fragment fragment = null;
+            if (position == 0) {
+                fragment = new FragmentSubject();
+            } else if (position == 1) {
+                fragment = new FragmentAudience();
+            } else if (position == 2) {
+                fragment = new FragmentEducator();
+            }
+            return fragment;
+
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            String title = null;
+            if (position == 0) {
+                title = "Предметы";
+            } else if (position == 1) {
+                title = "Аудитории";
+            } else if (position == 2) {
+                title = "Препод-ли";
+            }
+            return title;
+        }
+
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(ActivityEditData.this, MainActivity.class);
+                finish();
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public void onBackPressed() {

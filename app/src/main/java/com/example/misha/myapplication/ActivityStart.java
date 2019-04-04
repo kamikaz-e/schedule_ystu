@@ -30,6 +30,16 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
+import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience_id;
+import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
+import static com.example.misha.myapplication.data.ScheduleClass.date_start.DATE_START;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.educator_id;
+import static com.example.misha.myapplication.data.ScheduleClass.schedule.SCHEDULE;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
+import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject_id;
+
 
 public class ActivityStart extends Activity {
   private static final String schedule_import= "http://schedu1e.h1n.ru/schedule.php";
@@ -94,21 +104,21 @@ public class ActivityStart extends Activity {
             public void onClick(DialogInterface dialog, int id) {
                 database_name= name_db.getText().toString();
                 SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DROP TABLE " + ScheduleClass.subjects.TABLE_NAME);
-                db.execSQL("CREATE TABLE " + ScheduleClass.subjects.TABLE_NAME + " ("
-                        + ScheduleClass.subjects.idd_subject + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                db.execSQL("DROP TABLE " + SUBJECT);
+                db.execSQL("CREATE TABLE " + SUBJECT + " ("
+                        + subject_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + ScheduleClass.subjects.subject + " STRING UNIQUE ON CONFLICT IGNORE );");
-                db.execSQL("INSERT INTO " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
-                db.execSQL("DROP TABLE " + ScheduleClass.audiences.TABLE_NAME);
-                db.execSQL("CREATE TABLE " + ScheduleClass.audiences.TABLE_NAME + " ("
-                        + ScheduleClass.audiences.idd_audience + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                db.execSQL("INSERT INTO " + SUBJECT + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
+                db.execSQL("DROP TABLE " + AUDIENCE);
+                db.execSQL("CREATE TABLE " + AUDIENCE + " ("
+                        + audience_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
-                db.execSQL("INSERT INTO " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
-                db.execSQL("DROP TABLE " + ScheduleClass.educators.TABLE_NAME);
-                db.execSQL("CREATE TABLE " + ScheduleClass.educators.TABLE_NAME + " ("
-                        + ScheduleClass.educators.idd_educator + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                db.execSQL("INSERT INTO " + AUDIENCE + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
+                db.execSQL("DROP TABLE " + EDUCATOR);
+                db.execSQL("CREATE TABLE " + EDUCATOR + " ("
+                        + educator_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
-                db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
+                db.execSQL("INSERT INTO " + EDUCATOR + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
                 load_db(sub, subjects_import);
                 load_db(aud,audiences_import);
                 load_db(edu,educators_import);
@@ -146,17 +156,17 @@ public class ActivityStart extends Activity {
                                     obj = jsonArray.getJSONObject(i);
                                     if (table == aud) {
                                         String audience = obj.getString("audience");
-                                        db.execSQL("insert into " + ScheduleClass.audiences.TABLE_NAME + " (" + ScheduleClass.audiences.audience
+                                        db.execSQL("insert into " + AUDIENCE + " (" + ScheduleClass.audiences.audience
                                                 + ") values ('" + audience + "');");
                                     }
                                     if (table == edu) {
                                         String educator = obj.getString("educator");
-                                        db.execSQL("insert into " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator
+                                        db.execSQL("insert into " + EDUCATOR + " (" + ScheduleClass.educators.educator
                                                 + ") values ('" + educator + "');");
                                     }
                                     if (table == sub) {
                                         String subject = obj.getString("subject");
-                                        db.execSQL("insert into " + ScheduleClass.subjects.TABLE_NAME + " (" + ScheduleClass.subjects.subject
+                                        db.execSQL("insert into " + SUBJECT + " (" + ScheduleClass.subjects.subject
                                                 + ") values ('" + subject + "');");
                                     }
                                     if (table==sch) {
@@ -166,7 +176,7 @@ public class ActivityStart extends Activity {
                                         String id_educator = obj.getString("id_educator");
                                         String id_typelesson = obj.getString("id_typelesson");
                                         db.execSQL(
-                                                "update " + ScheduleClass.schedule.TABLE_NAME + " set " + ScheduleClass.schedule.id_subject + " = "
+                                                "update " + SCHEDULE + " set " + ScheduleClass.schedule.id_subject + " = "
                                                         + id_subject + ", " + ScheduleClass.schedule.id_audience + " = " + id_audience + ", "
                                                         + ScheduleClass.schedule.id_educator + " = " + id_educator + ", "
                                                         + ScheduleClass.schedule.id_typelesson + " = " + id_typelesson + " where "
@@ -175,13 +185,13 @@ public class ActivityStart extends Activity {
                                     if (table == cal) {
                                         String id_call = obj.getString("id_call");
                                         String time = obj.getString("time");
-                                        db.execSQL("update " + ScheduleClass.calls.TABLE_NAME + " set " + ScheduleClass.calls.time + " = '" +
+                                        db.execSQL("update " + CALLS + " set " + ScheduleClass.calls.time + " = '" +
                                                 time + "' where " + ScheduleClass.calls.id_call + " = " + id_call);
                                     }
                                     if (table == dat) {
                                         String id_date = obj.getString("id_date");
                                         String date = obj.getString("date");
-                                        db.execSQL("update " + ScheduleClass.date_start.TABLE_NAME + " set " + ScheduleClass.date_start.date + " = '" +
+                                        db.execSQL("update " + DATE_START + " set " + ScheduleClass.date_start.date + " = '" +
                                                 date + "' where " + ScheduleClass.date_start.id_date + " = " + id_date);
 
                                         SharedPreferences settings = getSharedPreferences("week", 0);

@@ -20,6 +20,8 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
+import static com.example.misha.myapplication.data.ScheduleClass.date_start.DATE_START;
+
 
 public class FragmentDate extends android.support.v4.app.Fragment {
 
@@ -88,7 +90,7 @@ public class FragmentDate extends android.support.v4.app.Fragment {
                     Calendar today = Calendar.getInstance();
                     current_date = String.valueOf(Date.getTimeInMillis());
                     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("update " + ScheduleClass.date_start.TABLE_NAME + " set " + ScheduleClass.date_start.date + " = '" +
+                    db.execSQL("update " + DATE_START + " set " + ScheduleClass.date_start.date + " = '" +
                             current_date  + "' where " + ScheduleClass.date_start.id_date + " = " + 1);
                     // Toast.makeText(context, String.valueOf(today.getTimeInMillis()), Toast.LENGTH_SHORT).show();
 

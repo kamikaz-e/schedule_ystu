@@ -6,26 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.model.Subject;
+import com.example.misha.myapplication.model.Educator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapter.ViewHolder> {
+public class ListEducatorAdapter extends RecyclerView.Adapter<ListEducatorAdapter.ViewHolder> {
 
-    private List<Subject> listSubjects;
+    private List<Educator> listEducators;
 
     private SimpleItemClickListener itemClickListener;
 
-    public ListSubjectsAdapter(ArrayList<Subject> schedule, SimpleItemClickListener simpleItemClickListener) {
-        this.listSubjects = schedule;
+    public ListEducatorAdapter(ArrayList<Educator> schedule, SimpleItemClickListener simpleItemClickListener) {
+        this.listEducators = schedule;
         this.itemClickListener = simpleItemClickListener;
     }
 
     @Override
-    public ListSubjectsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListEducatorAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_row, parent, false);
         return new ViewHolder(view);
@@ -38,22 +37,22 @@ public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapte
 
     @Override
     public int getItemCount() {
-        return listSubjects.size();
+        return listEducators.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView subject;
+        private final TextView educator;
 
         public ViewHolder(View view) {
             super(view);
-            subject = view.findViewById(R.id.item);
+            educator = view.findViewById(R.id.item);
             view.setOnClickListener(this);
 
         }
 
         public void onBindView(int position) {
-            Subject subj = listSubjects.get(position);
-            subject.setText(subj.getName());
+            Educator educ = listEducators.get(position);
+            educator.setText(educ.getName());
 
         }
 

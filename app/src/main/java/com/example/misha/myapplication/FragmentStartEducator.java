@@ -31,6 +31,10 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
+import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.educator;
+import static com.example.misha.myapplication.data.ScheduleClass.educators.educator_id;
+
 public class FragmentStartEducator extends android.support.v4.app.Fragment {
 
     EditText input_educator;
@@ -124,7 +128,7 @@ public class FragmentStartEducator extends android.support.v4.app.Fragment {
                         return true;
                     }
                     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('" + educator + "');");
+                    db.execSQL("INSERT INTO " + EDUCATOR + " (" + ScheduleClass.educators.educator + ") VALUES ('" + educator + "');");
                     input_educator.setText("");
                     start();
                     adapter.notifyDataSetChanged();
@@ -145,7 +149,7 @@ public class FragmentStartEducator extends android.support.v4.app.Fragment {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + ScheduleClass.educators.TABLE_NAME + " WHERE "+ ScheduleClass.educators.educator + "='"+ select_item+"'");
+                db.execSQL("DELETE FROM " + EDUCATOR + " WHERE "+ ScheduleClass.educators.educator + "='"+ select_item+"'");
                 start();
                 adapter.notifyDataSetChanged();
             }
@@ -175,11 +179,11 @@ public class FragmentStartEducator extends android.support.v4.app.Fragment {
 
     void clear_educators(){
         SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.execSQL("DROP TABLE " + ScheduleClass.educators.TABLE_NAME);
-        db.execSQL("CREATE TABLE " + ScheduleClass.educators.TABLE_NAME + " ("
-                + ScheduleClass.educators.idd_educator + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
-        db.execSQL("INSERT INTO " + ScheduleClass.educators.TABLE_NAME + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
+        db.execSQL("DROP TABLE " + EDUCATOR);
+        db.execSQL("CREATE TABLE " + EDUCATOR + " ("
+                + educator_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + educator + " STRING UNIQUE ON CONFLICT IGNORE );");
+        db.execSQL("INSERT INTO " + EDUCATOR + " (" + educator+ ") VALUES ('Преподаватель');");
         adapter.notifyDataSetChanged();
         start();
     }
@@ -190,7 +194,7 @@ public class FragmentStartEducator extends android.support.v4.app.Fragment {
         list_educators.setAdapter(adapter);
 
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ ScheduleClass.educators.educator +" FROM " + ScheduleClass.educators.TABLE_NAME + " WHERE "+ ScheduleClass.educators.idd_educator +">1;";
+        String searchQuery = "SELECT "+ educator +" FROM " + EDUCATOR + " WHERE "+ educator_id +">1;";
         educator_list.clear();
         Cursor cursor = db.rawQuery(searchQuery, null);
         while(cursor.moveToNext()) {

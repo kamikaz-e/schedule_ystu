@@ -19,8 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleClass.calls;
 import com.example.misha.myapplication.data.ScheduleDB;
 
 import java.util.Calendar;
@@ -28,6 +26,10 @@ import java.util.Calendar;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
+
+import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
+import static com.example.misha.myapplication.data.ScheduleClass.calls.id_call;
+import static com.example.misha.myapplication.data.ScheduleClass.calls.time;
 
 public class ActivityCallSchedule extends AppCompatActivity {
 
@@ -340,7 +342,7 @@ public class ActivityCallSchedule extends AppCompatActivity {
   void start(){
     SQLiteDatabase db = ScheduleDB.getReadableDatabase();
     flag=0;
-    String searchQuery = "SELECT "+ calls.time +" FROM " + calls.TABLE_NAME;
+    String searchQuery = "SELECT "+ time +" FROM " + CALLS;
     Cursor cursor = db.rawQuery(searchQuery, null);
     while(cursor.moveToNext()) {
       switch (flag){
@@ -371,16 +373,16 @@ public class ActivityCallSchedule extends AppCompatActivity {
     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
     db.beginTransaction();
     try {
-      db.execSQL("DROP TABLE " + calls.TABLE_NAME);
-      db.execSQL("CREATE TABLE " + calls.TABLE_NAME + " ("
-              + calls.id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-              + calls.time + " STRING );");
-      db.execSQL("INSERT INTO " + calls.TABLE_NAME + " (" + calls.time + ") VALUES ('"+ select_time_fullOne +"');");
-      db.execSQL("INSERT INTO " + calls.TABLE_NAME + " (" + calls.time + ") VALUES ('"+ select_time_fullTwo +"');");
-      db.execSQL("INSERT INTO " + calls.TABLE_NAME + " (" + calls.time + ") VALUES ('"+ select_time_fullThree +"');");
-      db.execSQL("INSERT INTO " + calls.TABLE_NAME + " (" + calls.time + ") VALUES ('"+ select_time_fullFour +"');");
-      db.execSQL("INSERT INTO " + calls.TABLE_NAME + " (" + calls.time + ") VALUES ('"+ select_time_fullFive +"');");
-      db.execSQL("INSERT INTO " + calls.TABLE_NAME + " (" + calls.time + ") VALUES ('"+ select_time_fullSix +"');");
+      db.execSQL("DROP TABLE " + CALLS);
+      db.execSQL("CREATE TABLE " + CALLS + " ("
+              + id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+              + time + " STRING );");
+      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullOne +"');");
+      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullTwo +"');");
+      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullThree +"');");
+      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullFour +"');");
+      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullFive +"');");
+      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullSix +"');");
 
       db.setTransactionSuccessful();
     } finally {
@@ -390,13 +392,13 @@ public class ActivityCallSchedule extends AppCompatActivity {
 
   void clear_calls(){
     SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-    db.execSQL("DROP TABLE " + calls.TABLE_NAME);
-    String calls_schedule = "CREATE TABLE " + ScheduleClass.calls.TABLE_NAME + " ("
-            + ScheduleClass.calls.id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + ScheduleClass.calls.time + " STRING );";
+    db.execSQL("DROP TABLE " + CALLS);
+    String calls_schedule = "CREATE TABLE " + CALLS + " ("
+            + id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + time + " STRING );";
     db.execSQL(calls_schedule);
     for (int i=0;i<6;i++){
-      db.execSQL("INSERT INTO " + ScheduleClass.calls.TABLE_NAME + " (" + ScheduleClass.calls.time + ") VALUES ('');");}
+      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('');");}
     oneTime.setText("");
     twoTime.setText("");
     threeTime.setText("");

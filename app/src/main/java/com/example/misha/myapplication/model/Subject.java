@@ -8,9 +8,9 @@ import android.os.Parcelable;
 //Todo прочитать про сериализацию и Parcelable
 public class Subject implements Parcelable {
 
-    private long id;
+    private final long id;
 
-    private String name;
+    private final String name;
 
     public Subject(long id, String name) {
         this.id = id;
