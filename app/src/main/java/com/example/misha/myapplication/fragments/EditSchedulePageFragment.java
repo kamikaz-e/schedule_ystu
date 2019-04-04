@@ -1,7 +1,5 @@
 package com.example.misha.myapplication.fragments;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,18 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.misha.myapplication.dialog.AudienceList;
-import com.example.misha.myapplication.dialog.EducatorList;
-import com.example.misha.myapplication.model.Audience;
-import com.example.misha.myapplication.model.Educator;
-import com.example.misha.myapplication.dialog.SubjectList;
 import com.example.misha.myapplication.Lesson;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditScheduleAdapter;
 import com.example.misha.myapplication.adapter.EditScheduleCallback;
-import com.example.misha.myapplication.data.ScheduleClass.audiences;
-import com.example.misha.myapplication.data.ScheduleClass.educators;
 import com.example.misha.myapplication.data.ScheduleDB;
+import com.example.misha.myapplication.dialog.AudienceList;
+import com.example.misha.myapplication.dialog.EducatorList;
+import com.example.misha.myapplication.dialog.SubjectList;
+import com.example.misha.myapplication.model.Audience;
+import com.example.misha.myapplication.model.Educator;
 import com.example.misha.myapplication.model.Subject;
 
 import java.util.ArrayList;
@@ -32,7 +28,6 @@ import java.util.List;
 import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
 import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
 import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject;
 
 public class EditSchedulePageFragment extends Fragment implements EditScheduleCallback {
 
