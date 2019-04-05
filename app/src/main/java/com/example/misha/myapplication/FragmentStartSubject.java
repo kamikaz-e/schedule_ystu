@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +23,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleDB;
+import com.example.misha.myapplication.database.dao.SubjectDao;
+import com.example.misha.myapplication.database.entity.Subject;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,6 @@ import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectangleProm
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject;
 import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject_id;
 
 
@@ -42,12 +41,12 @@ public class FragmentStartSubject extends android.support.v4.app.Fragment {
 
     EditText input_subject;
     ListView list_subjects;
-    private ScheduleDB ScheduleDB;
-    final ArrayList<String> subject_list = new ArrayList<>();
+
+    ArrayList<Subject> subject_list = new ArrayList<>();
     public ArrayAdapter<String> adapter;
     Button next;
     Button clear_subjects;
-    String select_item="";
+    int select_item;
 
     public FragmentStartSubject() {
 
@@ -66,7 +65,6 @@ public class FragmentStartSubject extends android.support.v4.app.Fragment {
         Toolbar profile_toolbar = view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity)getActivity();
         activity.setSupportActionBar(profile_toolbar);
-        ScheduleDB = new ScheduleDB();
 
         clear_subjects= view.findViewById(R.id.clear_subjects);
         input_subject = view.findViewById(R.id.input_subject);
@@ -81,8 +79,8 @@ public class FragmentStartSubject extends android.support.v4.app.Fragment {
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
                 TextView textView = (TextView) itemClicked;
-                select_item = textView.getText().toString();
-                onCreateDialogDeleteItem().show();
+                select_item = position;
+                onCreateDialogDeleteItem(position).show();
             }
         });
 
@@ -107,7 +105,7 @@ public class FragmentStartSubject extends android.support.v4.app.Fragment {
                 onCreateDialogClear().show();
             }
         });
-        start();
+        updateList();
 
 
             new MaterialTapTargetPrompt.Builder(getActivity())
@@ -168,16 +166,17 @@ public class FragmentStartSubject extends android.support.v4.app.Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
                     input_subject.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                    String subject = input_subject.getText().toString();
-                    subject = subject.trim().replaceAll(" +", " ");
-                    if(TextUtils.isEmpty(subject)||subject==" ") {
+                    String subjectName = input_subject.getText().toString();
+                    subjectName = subjectName.trim().replaceAll(" +", " ");
+                    if(TextUtils.isEmpty(subjectName)|| subjectName ==" ") {
                         input_subject.setError("Введите предмет");
                         return true;
                     }
-                    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + SUBJECT + " (" + ScheduleClass.subjects.subject + ") VALUES ('" + subject + "');");
+                    Subject subject = new Subject();
+                    subject.setName(subjectName);
+                    SubjectDao.getInstance().insertItem(subject);
                     input_subject.getText().clear();
-                    start();
+                    updateList();
                     adapter.notifyDataSetChanged();
                     return true;
                 }
@@ -188,15 +187,16 @@ public class FragmentStartSubject extends android.support.v4.app.Fragment {
         });
         return view;
     }
-    public Dialog onCreateDialogDeleteItem() {
+    public Dialog onCreateDialogDeleteItem(final int position) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + SUBJECT + " WHERE "+ ScheduleClass.subjects.subject + "='"+ select_item+"'");
-                start();
+
+                Subject subject = subject_list.get(position);
+                SubjectDao.getInstance().deleteItemById(Long.parseLong(subject.getId()));
+                updateList();
                 adapter.notifyDataSetChanged();
             }
         }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
@@ -224,29 +224,19 @@ public class FragmentStartSubject extends android.support.v4.app.Fragment {
     }
 
     void clear_subjects () {
-        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.execSQL("DROP TABLE " + SUBJECT);
-        db.execSQL("CREATE TABLE " + SUBJECT + " ("
-                + subject_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + subject + " STRING UNIQUE ON CONFLICT IGNORE );");
-        db.execSQL("INSERT INTO " + SUBJECT + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
+        SubjectDao.getInstance().deleteAll();
         adapter.notifyDataSetChanged();
-        start();
+        updateList();
     }
 
-    public void start(){
+    public void updateList(){
 
        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
         list_subjects.setAdapter(adapter);
 
-        SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ ScheduleClass.subjects.subject +" FROM " + SUBJECT + " WHERE "+ subject_id +">1;";
+        subject_list = SubjectDao.getInstance().getAllData();
         subject_list.clear();
-        Cursor cursor = db.rawQuery(searchQuery, null);
-        while(cursor.moveToNext()) {
-            subject_list.add(cursor.getString(0));
-        }
-        cursor.close();
+
     }
 
 }

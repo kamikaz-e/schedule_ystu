@@ -1,6 +1,5 @@
 package com.example.misha.myapplication;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -8,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -24,25 +22,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import com.example.misha.myapplication.adapter.SchedulePagerAdapter;
-import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleDB;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
-import static com.example.misha.myapplication.data.ScheduleClass.calls.time;
 import static com.example.misha.myapplication.data.ScheduleClass.schedule.SCHEDULE;
 import static com.example.misha.myapplication.data.ScheduleClass.schedule.id_day;
 import static com.example.misha.myapplication.data.ScheduleClass.schedule.id_week;
-import static com.example.misha.myapplication.data.ScheduleClass.typelessons.TYPELESSON;
-import static com.example.misha.myapplication.data.ScheduleClass.typelessons.typelesson;
 
 
 public class ScheduleEditor extends AppCompatActivity {
@@ -143,12 +130,12 @@ public class ScheduleEditor extends AppCompatActivity {
 
     }
 
-  /*  public void start(Integer select_week) {
+  /*  public void updateListVIew(Integer select_week) {
 
         position_week = select_week;
         SQLiteDatabase db = ScheduleDB.getReadableDatabase();
         //1 занятие
-        Cursor cursor = db.rawQuery("SELECT " + ScheduleClass.subjects.subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1) + "));", null);
+        Cursor cursor = db.rawQuery("SELECT " + subject + " FROM " + subjects.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.subjects.idd_subject + "= (SELECT " + ScheduleClass.schedule.id_subject + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.ID + "=" + ((position_week * 36) + 1) + "));", null);
         try {
             int idSubjectEditOne = cursor.getColumnIndex(ScheduleClass.subjects.subject);
             while (cursor.moveToNext()) {
@@ -158,7 +145,7 @@ public class ScheduleEditor extends AppCompatActivity {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.audiences.audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.audiences.idd_audience + "= (SELECT " + ScheduleClass.schedule.id_audience + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1) + "));", null);
+        cursor = db.rawQuery("SELECT " + ScheduleClass.audiences.audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.audiences.idd_audience + "= (SELECT " + ScheduleClass.schedule.id_audience + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.ID + "=" + ((position_week * 36) + 1) + "));", null);
         try {
             int idAudienceEditOne = cursor.getColumnIndex(ScheduleClass.audiences.audience);
             while (cursor.moveToNext()) {
@@ -168,7 +155,7 @@ public class ScheduleEditor extends AppCompatActivity {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.educators.educator + " FROM " + ScheduleClass.educators.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.educators.idd_educator + "= (SELECT " + ScheduleClass.schedule.id_educator + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1) + "));", null);
+        cursor = db.rawQuery("SELECT " + ScheduleClass.educators.educator + " FROM " + ScheduleClass.educators.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.educators.idd_educator + "= (SELECT " + ScheduleClass.schedule.id_educator + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.ID + "=" + ((position_week * 36) + 1) + "));", null);
         try {
             int idEducatorOne = cursor.getColumnIndex(ScheduleClass.educators.educator);
             while (cursor.moveToNext()) {
@@ -178,7 +165,7 @@ public class ScheduleEditor extends AppCompatActivity {
             cursor.close();
         }
 
-        cursor = db.rawQuery("SELECT " + ScheduleClass.typelessons.typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.typelessons.idd_typelesson + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1) + "));", null);
+        cursor = db.rawQuery("SELECT " + ScheduleClass.typelessons.typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + ", " + ScheduleClass.schedule.TABLE_NAME + " WHERE (" + ScheduleClass.typelessons.idd_typelesson + "= (SELECT " + ScheduleClass.schedule.id_typelesson + " FROM " + ScheduleClass.schedule.TABLE_NAME + " WHERE " + ScheduleClass.schedule.ID + "=" + ((position_week * 36) + 1) + "));", null);
         try {
             int idTypeLessonOne = cursor.getColumnIndex(ScheduleClass.typelessons.typelesson);
             while (cursor.moveToNext()) {
@@ -565,13 +552,13 @@ public class ScheduleEditor extends AppCompatActivity {
 
 
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_subject + "= (SELECT " + ScheduleClass.subjects.idd_subject + " FROM " + ScheduleClass.subjects.TABLE_NAME + " " +
-                    "WHERE " + ScheduleClass.subjects.subject + "='" + MondayStringSubjectEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1));
+                    "WHERE " + ScheduleClass.subjects.subject + "='" + MondayStringSubjectEditOne + "') WHERE " + ScheduleClass.schedule.ID + "=" + ((position_week * 36) + 1));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_audience + "= (SELECT " + ScheduleClass.audiences.idd_audience + " FROM " + ScheduleClass.audiences.TABLE_NAME + " " +
-                    "WHERE " + ScheduleClass.audiences.audience + "='" + MondayStringAudienceEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1));
+                    "WHERE " + ScheduleClass.audiences.audience + "='" + MondayStringAudienceEditOne + "') WHERE " + ScheduleClass.schedule.ID + "=" + ((position_week * 36) + 1));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_educator + "= (SELECT " + ScheduleClass.educators.idd_educator + " FROM " + ScheduleClass.educators.TABLE_NAME + " " +
-                    "WHERE " + ScheduleClass.educators.educator + "='" + MondayStringEducatorEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1));
+                    "WHERE " + ScheduleClass.educators.educator + "='" + MondayStringEducatorEditOne + "') WHERE " + ScheduleClass.schedule.ID + "=" + ((position_week * 36) + 1));
             db.execSQL("UPDATE " + ScheduleClass.schedule.TABLE_NAME + " SET " + ScheduleClass.schedule.id_typelesson + "= (SELECT " + ScheduleClass.typelessons.idd_typelesson + " FROM " + ScheduleClass.typelessons.TABLE_NAME + " " +
-                    "WHERE " + typelesson + "='" + MondayStringTypeLessonEditOne + "') WHERE " + ScheduleClass.schedule.id + "=" + ((position_week * 36) + 1));
+                    "WHERE " + typelesson + "='" + MondayStringTypeLessonEditOne + "') WHERE " + ScheduleClass.schedule.ID + "=" + ((position_week * 36) + 1));
 
 */
         /*    db.setTransactionSuccessful();

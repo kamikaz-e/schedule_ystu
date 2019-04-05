@@ -17,16 +17,13 @@ import com.example.misha.myapplication.ActivityEditData;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.ListAudienceAdapter;
 import com.example.misha.myapplication.adapter.SimpleItemClickListener;
-import com.example.misha.myapplication.data.ScheduleDB;
-import com.example.misha.myapplication.model.Audience;
+import com.example.misha.myapplication.database.entity.Audience;
 
 import java.util.ArrayList;
 
 
 //Todo прочитать про наследование инкапсуляцию интерфейсы абстрактные классы и generic.
 public class AudienceList extends DialogFragment {
-
-    private ScheduleDB ScheduleDB;
 
     public static final int AUDIENCE_CODE = 3431;
 
@@ -48,9 +45,7 @@ public class AudienceList extends DialogFragment {
         return fragment;
     }
 
-
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        ScheduleDB = new ScheduleDB();
         clickedPosition = getArguments().getInt(POSITION);
         listAudience = getArguments().getParcelableArrayList(AUDIENCES);
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());

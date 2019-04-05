@@ -3,7 +3,6 @@ package com.example.misha.myapplication;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.InputType;
@@ -15,37 +14,31 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleDB;
+import com.example.misha.myapplication.database.dao.AudienceDao;
+import com.example.misha.myapplication.database.entity.Audience;
 
 import java.util.ArrayList;
 
 import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
 import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience;
-import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience_id;
 import static com.example.misha.myapplication.dialog.AudienceList.AUDIENCES;
 
 
 public class FragmentAudience extends android.support.v4.app.Fragment {
 
-
     EditText input_audience;
     ListView list_audiences;
-    private ScheduleDB ScheduleDB;
-    final ArrayList<String> audience_list = new ArrayList<>();
+
+    ArrayList<Audience> audience_list = new ArrayList<>();
     public ArrayAdapter<String> adapter;
-    Button clear_audiences;
-    Button next;
-    String select_item="";
-    Integer abc=0;
+    String selectedId = "";
 
     public FragmentAudience() {
-        // Required empty public constructor
     }
 
 
@@ -60,7 +53,6 @@ public class FragmentAudience extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_audience, container, false);
 
-        ScheduleDB = new ScheduleDB();
 
         input_audience = view.findViewById(R.id.input_audience);
         list_audiences = view.findViewById(R.id.list_audiences);
@@ -73,13 +65,13 @@ public class FragmentAudience extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
-                TextView textView = (TextView) itemClicked;
-                select_item = textView.getText().toString();
+                Audience audience = audience_list.get(position);
+                selectedId = audience.getId();
                 onCreateDialogDeleteItem().show();
             }
         });
 
-        start();
+        updateListVIew();
 
 
         input_audience.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -92,10 +84,11 @@ public class FragmentAudience extends android.support.v4.app.Fragment {
                         input_audience.setError("Введите аудиторию");
                         return true;
                     }
-                    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + AUDIENCE + " (" + audience + ") VALUES ('" + audience_text + "');");
+                    Audience audience = new Audience();
+                    audience.setName(audience_text);
+                    AudienceDao.getInstance().insertItem(audience);
                     input_audience.setText("");
-                    start();
+                    updateListVIew();
                     adapter.notifyDataSetChanged();
                     return true;
                 }
@@ -114,34 +107,24 @@ public class FragmentAudience extends android.support.v4.app.Fragment {
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + AUDIENCES + " WHERE "+ ScheduleClass.audiences.audience + "='"+ select_item+"'");
-                start();
-                adapter.notifyDataSetChanged();
+                AudienceDao.getInstance().deleteItemById(Long.parseLong(selectedId));
+                updateListVIew();
             }
         }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Удалить аудиторию «"+select_item+"»?");
+        }).setTitle("Удалить аудиторию «"+selectedId +"»?");
         return builder.create();
     }
 
 
 
-    public void start(){
-
+    public void updateListVIew(){
+        audience_list = AudienceDao.getInstance().getAllData();
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
         list_audiences.setAdapter(adapter);
-
-        SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ audience +" FROM " + AUDIENCE + " WHERE "+ audience_id +">1;";
-        audience_list.clear();
-        Cursor cursor = db.rawQuery(searchQuery, null);
-        while(cursor.moveToNext()) {
-            audience_list.add(cursor.getString(0));
-        }
-        cursor.close();
+        adapter.notifyDataSetChanged();
     }
 
 

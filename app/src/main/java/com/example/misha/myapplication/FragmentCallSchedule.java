@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleDB;
 
 import java.util.Calendar;
 

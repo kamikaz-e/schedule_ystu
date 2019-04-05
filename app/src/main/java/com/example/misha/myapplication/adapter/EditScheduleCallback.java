@@ -1,9 +1,9 @@
 package com.example.misha.myapplication.adapter;
 
 
-import com.example.misha.myapplication.model.Audience;
-import com.example.misha.myapplication.model.Educator;
-import com.example.misha.myapplication.model.Subject;
+import com.example.misha.myapplication.database.entity.Audience;
+import com.example.misha.myapplication.database.entity.Educator;
+import com.example.misha.myapplication.database.entity.Subject;
 
 import java.util.ArrayList;
 

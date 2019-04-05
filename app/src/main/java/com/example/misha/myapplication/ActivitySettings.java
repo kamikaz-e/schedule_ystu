@@ -8,8 +8,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -31,20 +29,24 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleClass.audiences;
-import com.example.misha.myapplication.data.ScheduleClass.calls;
-import com.example.misha.myapplication.data.ScheduleClass.date_start;
-import com.example.misha.myapplication.data.ScheduleClass.educators;
-import com.example.misha.myapplication.data.ScheduleClass.schedule;
-import com.example.misha.myapplication.data.ScheduleClass.subjects;
-import com.example.misha.myapplication.data.ScheduleDB;
+import com.example.misha.myapplication.database.dao.AudienceDao;
+import com.example.misha.myapplication.database.dao.CallDao;
+import com.example.misha.myapplication.database.dao.EducatorDao;
+import com.example.misha.myapplication.database.dao.LessonDao;
+import com.example.misha.myapplication.database.dao.SubjectDao;
+import com.example.misha.myapplication.database.entity.Audience;
+import com.example.misha.myapplication.database.entity.Calls;
+import com.example.misha.myapplication.database.entity.Educator;
+import com.example.misha.myapplication.database.entity.Lesson;
+import com.example.misha.myapplication.database.entity.Subject;
 import com.example.misha.myapplication.dialog.SubjectList;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,577 +55,380 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
-import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
-import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience_id;
-import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
-import static com.example.misha.myapplication.data.ScheduleClass.date_start.DATE_START;
-import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
-import static com.example.misha.myapplication.data.ScheduleClass.educators.educator_id;
-import static com.example.misha.myapplication.data.ScheduleClass.schedule.SCHEDULE;
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject_id;
-
 public class ActivitySettings extends AppCompatActivity {
 
-  private static final String schedule_import= "http://schedu1e.h1n.ru/schedule.php";
-  private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
-  private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
-  private static final String educators_import= "http://schedu1e.h1n.ru/educators.php";
-  private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallSchedule.php";
-  private static final String date = "http://schedu1e.h1n.ru/date_start.php";
-  private static final String export = "http://schedu1e.h1n.ru/export.php";
-  final String sch="schedule";
-  final String sub="subject";
-  final String aud="audience";
-  final String edu="educator";
-  final String cal="calls";
-  final String dat="date_start";
+    private static final String schedule_import = "http://schedu1e.h1n.ru/schedule.php";
+    private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
+    private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
+    private static final String educators_import = "http://schedu1e.h1n.ru/educators.php";
+    private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallSchedule.php";
+    private static final String date = "http://schedu1e.h1n.ru/date_start.php";
+    private static final String export = "http://schedu1e.h1n.ru/export.php";
+    final String sch = "schedule";
+    final String sub = "subject";
+    final String aud = "audience";
+    final String edu = "educator";
+    final String cal = "calls";
+    final String dat = "date_start";
 
-  Calendar Date = Calendar.getInstance();
+    Calendar Date = Calendar.getInstance();
 
-  String database_name="";
+    String database_name = "";
 
-  private ScheduleDB ScheduleDB;
-  RequestQueue requestQueue;
-  ProgressDialog progressDialog;
-  String json_schedule = "";
-  String json_subjects = "";
-  String json_audiences = "";
-  String json_educators = "";
-  String json_calls = "";
-  String json_date = "";
-  String name_db_string="database";
-  final Context context = this;
-  public ArrayAdapter<String> adapter;
-  String  current_date;
-  RelativeLayout layout_pick_week;
-  RelativeLayout typelessonitem;
-  RelativeLayout layout_import;
-  RelativeLayout layout_export;
+
+    RequestQueue requestQueue;
+    ProgressDialog progressDialog;
+    String json_schedule = "";
+    String json_subjects = "";
+    String json_audiences = "";
+    String json_educators = "";
+    String json_calls = "";
+    String json_date = "";
+    String name_db_string = "database";
+    final Context context = this;
+    public ArrayAdapter<String> adapter;
+    String current_date;
+    RelativeLayout layout_pick_week;
+    RelativeLayout typelessonitem;
+    RelativeLayout layout_import;
+    RelativeLayout layout_export;
     DialogFragment dlg1;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    ScheduleDB = new ScheduleDB();
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.settings);
-    android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-    ActionBar actionBar = getSupportActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(true);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.settings);
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 /*
     SQLiteDatabase db = ScheduleDB.getReadableDatabase();
     db.isOpen();*/
-    requestQueue = Volley.newRequestQueue(ActivitySettings.this);
-    progressDialog = new ProgressDialog(ActivitySettings.this);
+        requestQueue = Volley.newRequestQueue(ActivitySettings.this);
+        progressDialog = new ProgressDialog(ActivitySettings.this);
 
-    layout_pick_week = findViewById(R.id.oneitem);
-    typelessonitem = findViewById(R.id.typelessonitem);
-    layout_import = findViewById(R.id.twoitem);
-    layout_export = findViewById(R.id.threeitem);
+        layout_pick_week = findViewById(R.id.oneitem);
+        typelessonitem = findViewById(R.id.typelessonitem);
+        layout_import = findViewById(R.id.twoitem);
+        layout_export = findViewById(R.id.threeitem);
 
-    SharedPreferences sp = getPreferences(MODE_PRIVATE);
-    String hasVisited = sp.getString("hasVisited", "nope");
-    if (hasVisited == "nope") {
-
-
-      new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
-              .setTarget(layout_pick_week)
-              .setPromptBackground(new RectanglePromptBackground())
-              .setPromptFocal(new RectanglePromptFocal())
-              .setPrimaryText("Дата начала семестра")
-              .setSecondaryText("Выберите дату начала семестра для автоматического определения текущей учебной недели")
-              .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-              .setBackgroundColour(Color.rgb(100, 100, 255))
-              .setPrimaryTextColour(Color.rgb(255, 255, 255))
-              .setSecondaryTextColour(Color.rgb(255, 255, 255))
-              .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                  if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-
-                    new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
-                            .setTarget(layout_import)
-                            .setPromptBackground(new RectanglePromptBackground())
-                            .setPromptFocal(new RectanglePromptFocal())
-                            .setPrimaryText("Импорт расписания")
-                            .setSecondaryText("Загрузка готового расписания по названию с сервера")
-                            .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                            .setBackgroundColour(Color.rgb(100, 100, 255))
-                            .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                            .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                            .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+        SharedPreferences sp = getPreferences(MODE_PRIVATE);
+        String hasVisited = sp.getString("hasVisited", "nope");
+        if (hasVisited == "nope") {
 
 
-                              public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                                if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                  new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
-                                          .setTarget(layout_export)
-                                          .setPromptBackground(new RectanglePromptBackground())
-                                          .setPromptFocal(new RectanglePromptFocal())
-                                          .setPrimaryText("Экспорт расписания")
-                                          .setSecondaryText("Выгрузка расписания с заданным названием на сервер")
-                                          .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                                          .setBackgroundColour(Color.rgb(100, 100, 255))
-                                          .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                                          .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                                          .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+            new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
+                    .setTarget(layout_pick_week)
+                    .setPromptBackground(new RectanglePromptBackground())
+                    .setPromptFocal(new RectanglePromptFocal())
+                    .setPrimaryText("Дата начала семестра")
+                    .setSecondaryText("Выберите дату начала семестра для автоматического определения текущей учебной недели")
+                    .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
+                    .setBackgroundColour(Color.rgb(100, 100, 255))
+                    .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                    .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                            if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+
+                                new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
+                                        .setTarget(layout_import)
+                                        .setPromptBackground(new RectanglePromptBackground())
+                                        .setPromptFocal(new RectanglePromptFocal())
+                                        .setPrimaryText("Импорт расписания")
+                                        .setSecondaryText("Загрузка готового расписания по названию с сервера")
+                                        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
+                                        .setBackgroundColour(Color.rgb(100, 100, 255))
+                                        .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                                        .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
 
 
                                             public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                                              if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                              }
+                                                if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                    new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
+                                                            .setTarget(layout_export)
+                                                            .setPromptBackground(new RectanglePromptBackground())
+                                                            .setPromptFocal(new RectanglePromptFocal())
+                                                            .setPrimaryText("Экспорт расписания")
+                                                            .setSecondaryText("Выгрузка расписания с заданным названием на сервер")
+                                                            .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
+                                                            .setBackgroundColour(Color.rgb(100, 100, 255))
+                                                            .setPrimaryTextColour(Color.rgb(255, 255, 255))
+                                                            .setSecondaryTextColour(Color.rgb(255, 255, 255))
+                                                            .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+
+
+                                                                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                                                    if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                                    }
+                                                                }
+                                                            })
+                                                            .show();
+                                                }
                                             }
-                                          })
-                                          .show();
+                                        })
+                                        .show();
+                            }
+                        }
+                    })
+                    .show();
+
+            SharedPreferences.Editor e = sp.edit();
+            e.putString("hasVisited", "yes");
+            e.commit();
+        }
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
+
+
+        layout_pick_week.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                get_current_week();
+            }
+        });
+
+        typelessonitem.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                dlg1 = new SubjectList();
+                dlg1.show(getSupportFragmentManager(), "dlg1");
+            }
+        });
+
+        layout_import.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                onCreateDialogImport().show();
+            }
+        });
+
+        layout_export.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                onCreateDialogExport().show();
+            }
+        });
+    }
+
+
+    void get_current_week() {
+        new DatePickerDialog(ActivitySettings.this, dateone,
+                Date.get(Calendar.YEAR),
+                Date.get(Calendar.MONTH),
+                Date.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    DatePickerDialog.OnDateSetListener dateone = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            Date.set(Calendar.YEAR, year);
+            Date.set(Calendar.MONTH, monthOfYear);
+            Date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            Calendar today = Calendar.getInstance();
+            current_date = String.valueOf(Date.getTimeInMillis());
+            //todo to PReferences
+            /** SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+             db.execSQL("update " + DATE_START + " set " + date_start.date + " = '" +
+             current_date + "' where " + date_start.id_date + " = " + 1);
+             */
+
+            SharedPreferences settings = getSharedPreferences("week", 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putLong("current_week", (Date.getTimeInMillis()));
+            editor.commit();
+
+        }
+    };
+
+
+    public Dialog onCreateDialogImport() {
+        LayoutInflater li = LayoutInflater.from(context);
+        View view = li.inflate(R.layout.dialog_signin, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+        builder.setView(view);
+        final EditText name_db = view.findViewById(R.id.name_schedule);
+        builder.setCancelable(false).setPositiveButton("Импортировать", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                database_name = name_db.getText().toString();
+
+                SubjectDao.getInstance().deleteAll();
+                AudienceDao.getInstance().deleteAll();
+                EducatorDao.getInstance().deleteAll();
+                load_db(sub, subjects_import);
+                load_db(aud, audiences_import);
+                load_db(edu, educators_import);
+                load_db(sch, schedule_import);
+                load_db(cal, call_schedule);
+                load_db(dat, date);
+                Intent intent = new Intent(ActivitySettings.this, MainActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        return builder.create();
+    }
+
+    void load_db(final String table, final String url) {
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            String jsonString;
+
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    jsonString = jsonArray.getString(i);
+
+
+
+                                    if (table.equals(aud)) {
+                                        ArrayList<Audience> audiences = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Audience>>(){}.getType());
+                                        AudienceDao.getInstance().insertAll(audiences);
+                                    }
+                                    if (table == edu) {
+                                        ArrayList<Educator> educators = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Educator>>(){}.getType());
+                                        EducatorDao.getInstance().insertAll(educators);
+                                    }
+                                    if (table == sub) {
+                                        ArrayList<Subject> subjects = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Subject>>(){}.getType());
+                                        SubjectDao.getInstance().insertAll(subjects);
+                                    }
+                                    if (table == sch) {
+                                        ArrayList<Lesson> lessons = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Lesson>>(){}.getType());
+                                        LessonDao.getInstance().insertAll(lessons);
+                                    }
+                                    if (table == cal) {
+                                        ArrayList<Calls> calls = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Calls>>(){}.getType());
+                                        CallDao.getInstance().insertAll(calls);
+                                    }
+                                    /*if (table == dat) {
+                                        ArrayList<Date> date = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Date>>(){}.getType());
+                                        DateDao.getInstance().insertAll(date);
+
+                                        SharedPreferences settings = getSharedPreferences("week", 0);
+                                        SharedPreferences.Editor editor = settings.edit();
+                                        editor.putLong("current_week", Long.valueOf(date).longValue());
+                                        editor.commit();
+                                    }*/
                                 }
-                              }
-                            })
-                            .show();
-                  }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
                 }
-              })
-              .show();
+        ) {
 
-      SharedPreferences.Editor e = sp.edit();
-      e.putString("hasVisited", "yes");
-      e.commit();
-    }
-
-    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
-
-
-    layout_pick_week.setOnClickListener(new OnClickListener() {
-      public void onClick(View v) {
-        get_current_week();
-      }
-    });
-
-    typelessonitem.setOnClickListener(new OnClickListener() {
-          public void onClick(View v) {
-           dlg1 = new SubjectList();
-           dlg1.show(getSupportFragmentManager(),"dlg1");
-          }
-      });
-
-    layout_import.setOnClickListener(new OnClickListener() {
-      public void onClick(View v) {
-        onCreateDialogImport().show();
-      }
-    });
-
-    layout_export.setOnClickListener(new OnClickListener() {
-      public void onClick(View v) {
-        onCreateDialogExport().show();
-      }
-    });
-  }
-
-
-  void get_current_week(){
-    new DatePickerDialog(ActivitySettings.this, dateone,
-        Date.get(Calendar.YEAR),
-        Date.get(Calendar.MONTH),
-        Date.get(Calendar.DAY_OF_MONTH)).show();
-  }
-  DatePickerDialog.OnDateSetListener dateone = new DatePickerDialog.OnDateSetListener() {
-    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-      Date.set(Calendar.YEAR, year);
-      Date.set(Calendar.MONTH, monthOfYear);
-      Date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-      Calendar today = Calendar.getInstance();
-      current_date = String.valueOf(Date.getTimeInMillis());
-      SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-      db.execSQL("update " + DATE_START + " set " + date_start.date + " = '" +
-        current_date  + "' where " + date_start.id_date + " = " + 1);
-
-
-      SharedPreferences settings = getSharedPreferences("week", 0);
-      SharedPreferences.Editor editor = settings.edit();
-      editor.putLong("current_week", (Date.getTimeInMillis()));
-      editor.commit();
-
-    }
-  };
-
-
-
-  public Dialog onCreateDialogImport() {
-    LayoutInflater li = LayoutInflater.from(context);
-    View view = li.inflate(R.layout.dialog_signin, null);
-    AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.AppCompatAlertDialogStyle);
-    builder.setView(view);
-    final EditText name_db =  view.findViewById(R.id.name_schedule);
-    builder.setCancelable(false).setPositiveButton("Импортировать", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int id) {
-        database_name= name_db.getText().toString();
-          SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-          db.execSQL("DROP TABLE " + SUBJECT);
-          db.execSQL("CREATE TABLE " + SUBJECT + " ("
-                  + subject_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                  + ScheduleClass.subjects.subject + " STRING UNIQUE ON CONFLICT IGNORE );");
-          db.execSQL("INSERT INTO " + SUBJECT + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
-          db.execSQL("DROP TABLE " + AUDIENCE);
-          db.execSQL("CREATE TABLE " + AUDIENCE + " ("
-                  + audience_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                  + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
-          db.execSQL("INSERT INTO " + AUDIENCE + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
-          db.execSQL("DROP TABLE " + EDUCATOR);
-          db.execSQL("CREATE TABLE " + EDUCATOR + " ("
-                  + educator_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                  + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
-          db.execSQL("INSERT INTO " + EDUCATOR + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
-        load_db(sub, subjects_import);
-        load_db(aud,audiences_import);
-        load_db(edu,educators_import);
-        load_db(sch,schedule_import);
-        load_db(cal,call_schedule);
-        load_db(dat,date);
-        Intent intent = new Intent(ActivitySettings.this, MainActivity.class);
-        finish();
-        startActivity(intent);
-      }
-    }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface dialog, int id) {
-      }
-    });
-    return builder.create();
-  }
-
-  void load_db (final String table, final String url) {
-
-    StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-        new Response.Listener<String>() {
-          @Override
-          public void onResponse(String response) {
-            try {
-              JSONArray jsonArray = new JSONArray(response);
-              JSONObject obj;
-              SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-              db.beginTransaction();
-              try {
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-                  obj = jsonArray.getJSONObject(i);
-                  if (table == aud) {
-                    String audience = obj.getString("audience");
-                    db.execSQL("insert into " + AUDIENCE + " (" + audiences.audience
-                        + ") values ('" + audience + "');");
-                  }
-                  if (table == edu) {
-                    String educator = obj.getString("educator");
-                    db.execSQL("insert into " + EDUCATOR + " (" + educators.educator
-                        + ") values ('" + educator + "');");
-                  }
-                  if (table == sub) {
-                    String subject = obj.getString("subject");
-                    db.execSQL("insert into " + SUBJECT + " (" + subjects.subject
-                        + ") values ('" + subject + "');");
-                  }
-                  if (table==sch) {
-                    String id = obj.getString("id");
-                    String id_subject = obj.getString("id_subject");
-                    String id_audience = obj.getString("id_audience");
-                    String id_educator = obj.getString("id_educator");
-                    String id_typelesson = obj.getString("id_typelesson");
-                    db.execSQL(
-                        "update " + SCHEDULE + " set " + schedule.id_subject + " = "
-                            + id_subject + ", " + schedule.id_audience + " = " + id_audience + ", "
-                            + schedule.id_educator + " = " + id_educator + ", "
-                            + schedule.id_typelesson + " = " + id_typelesson + " where "
-                            + schedule.id + " = " + id);
-                  }
-                  if (table == cal) {
-                    String id_call = obj.getString("id_call");
-                    String time = obj.getString("time");
-                    db.execSQL("update " + CALLS + " set " + calls.time + " = '" +
-                        time + "' where " + calls.id_call + " = " + id_call);
-                  }
-                  if (table == dat) {
-                    String id_date = obj.getString("id_date");
-                    String date = obj.getString("date");
-                    db.execSQL("update " + DATE_START + " set " + date_start.date + " = '" +
-                        date + "' where " + date_start.id_date + " = " + id_date);
-
-                    SharedPreferences settings = getSharedPreferences("week", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putLong("current_week",Long.valueOf(date).longValue());
-                    editor.commit();
-                  }
-
-                } db.setTransactionSuccessful();
-              } finally {
-
-                db.endTransaction();
-              }
-
-            } catch (JSONException e) {
-              e.printStackTrace();
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("name_db", database_name);
+                return params;
             }
-          }
-        },
-        new Response.ErrorListener() {
-          @Override
-          public void onErrorResponse(VolleyError error) {
-            error.printStackTrace();
-          }
-        }
-    ) {
-
-      @Override
-      protected Map<String, String> getParams() {
-        Map<String, String> params = new HashMap<>();
-        params.put("name_db",database_name);
-        return params;
-      }
-    };
-    Volley.newRequestQueue(this).add(postRequest);
-
-  }
-
-
-
-
-  public Dialog onCreateDialogExport() {
-      LayoutInflater li = LayoutInflater.from(context);
-      View view = li.inflate(R.layout.dialog_signin, null);
-      AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.AppCompatAlertDialogStyle);
-      builder.setView(view);
-      final EditText name_db =  view.findViewById(R.id.name_schedule);
-      builder.setCancelable(false).setPositiveButton("Экспортировать", new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int id) {
-          name_db_string= name_db.getText().toString();
-          upload();
-        }
-      }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int id) {
-        }
-      });
-      return builder.create();
+        };
+        Volley.newRequestQueue(this).add(postRequest);
     }
 
 
-  void upload() {
-    SQLiteDatabase myDataBase = ScheduleDB.getReadableDatabase();
-
-    String searchQuery = "SELECT  * FROM " + SCHEDULE;
-    Cursor cursor = myDataBase.rawQuery(searchQuery, null);
-    JSONArray resultSet = new JSONArray();
-    cursor.moveToFirst();
-    while (cursor.isAfterLast() == false) {
-
-      int totalColumn = cursor.getColumnCount();
-      JSONObject rowObject = new JSONObject();
-
-      for (int i = 0; i < totalColumn; i++) {
-        if (cursor.getColumnName(i) != null) {
-          try {
-            if (cursor.getString(i) != null) {
-              rowObject.put(cursor.getColumnName(i), cursor.getString(i));
-            } else {
-              rowObject.put(cursor.getColumnName(i), "");
+    public Dialog onCreateDialogExport() {
+        LayoutInflater li = LayoutInflater.from(context);
+        View view = li.inflate(R.layout.dialog_signin, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+        builder.setView(view);
+        final EditText name_db = view.findViewById(R.id.name_schedule);
+        builder.setCancelable(false).setPositiveButton("Экспортировать", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                name_db_string = name_db.getText().toString();
+                upload();
             }
-          } catch (Exception e) {
-          }
-        }
-      }
-      resultSet.put(rowObject);
-      cursor.moveToNext();
-    }
-    cursor.close();
-
-    json_schedule = resultSet.toString();
-
-    String searchQuery1 = "SELECT  * FROM " + SUBJECT;
-    Cursor cursor1 = myDataBase.rawQuery(searchQuery1, null);
-    JSONArray resultSet1 = new JSONArray();
-    cursor1.moveToFirst();
-    while (cursor1.isAfterLast() == false) {
-
-      int totalColumn = cursor1.getColumnCount();
-      JSONObject rowObject1 = new JSONObject();
-
-      for (int i = 0; i < totalColumn; i++) {
-        if (cursor1.getColumnName(i) != null) {
-          try {
-            if (cursor1.getString(i) != null) {
-              rowObject1.put(cursor1.getColumnName(i), cursor1.getString(i));
-            } else {
-              rowObject1.put(cursor1.getColumnName(i), "");
+        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
             }
-          } catch (Exception e) {
-          }
-        }
-      }
-      resultSet1.put(rowObject1);
-      cursor1.moveToNext();
+        });
+        return builder.create();
     }
-    cursor1.close();
-    json_subjects = resultSet1.toString();
 
-    String searchQuery2 = "SELECT  * FROM " + AUDIENCE;
-    Cursor cursor2 = myDataBase.rawQuery(searchQuery2, null);
-    JSONArray resultSet2 = new JSONArray();
-    cursor2.moveToFirst();
-    while (cursor2.isAfterLast() == false) {
 
-      int totalColumn = cursor2.getColumnCount();
-      JSONObject rowObject2 = new JSONObject();
+    void upload() {
+        ArrayList<Lesson> lessons = LessonDao.getInstance().getAllData();
+        json_schedule = new Gson().toJson(lessons);
 
-      for (int i = 0; i < totalColumn; i++) {
-        if (cursor2.getColumnName(i) != null) {
-          try {
-            if (cursor2.getString(i) != null) {
-              rowObject2.put(cursor2.getColumnName(i), cursor2.getString(i));
-            } else {
-              rowObject2.put(cursor2.getColumnName(i), "");
+        ArrayList<Subject> subjects = SubjectDao.getInstance().getAllData();
+        json_subjects = new Gson().toJson(subjects);
+
+        ArrayList<Audience> audiences = AudienceDao.getInstance().getAllData();
+        json_audiences = new Gson().toJson(audiences);
+
+        ArrayList<Educator> educators = EducatorDao.getInstance().getAllData();
+        json_educators = new Gson().toJson(educators);
+
+        ArrayList<Calls> calls = CallDao.getInstance().getAllData();
+        json_calls = new Gson().toJson(calls);
+
+        progressDialog.setMessage("Пожалуйста подождите. Идет выгрузка данных на сервер");
+        progressDialog.show();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, export,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        progressDialog.dismiss();
+                        Toast.makeText(ActivitySettings.this, ServerResponse, Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(ActivitySettings.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("name_db", name_db_string);
+                params.put("schedule", json_schedule);
+                params.put("subjects", json_subjects);
+                params.put("audiences", json_audiences);
+                params.put("educators", json_educators);
+                params.put("call", json_calls);
+                params.put("current_date", json_date);
+                return params;
             }
-          } catch (Exception e) {
-          }
+        };
+        Volley.newRequestQueue(this).add(stringRequest);
+
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(ActivitySettings.this, MainActivity.class);
+                finish();
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-      }
-      resultSet2.put(rowObject2);
-      cursor2.moveToNext();
     }
-    cursor2.close();
-    json_audiences = resultSet2.toString();
-
-    String searchQuery3 = "SELECT  * FROM " + EDUCATOR;
-    Cursor cursor3 = myDataBase.rawQuery(searchQuery3, null);
-    JSONArray resultSet3 = new JSONArray();
-    cursor3.moveToFirst();
-    while (cursor3.isAfterLast() == false) {
-
-      int totalColumn = cursor3.getColumnCount();
-      JSONObject rowObject3 = new JSONObject();
-
-      for (int i = 0; i < totalColumn; i++) {
-        if (cursor3.getColumnName(i) != null) {
-          try {
-            if (cursor3.getString(i) != null) {
-              rowObject3.put(cursor3.getColumnName(i), cursor3.getString(i));
-            } else {
-              rowObject3.put(cursor3.getColumnName(i), "");
-            }
-          } catch (Exception e) {
-          }
-        }
-      }
-      resultSet3.put(rowObject3);
-      cursor3.moveToNext();
-    }
-    cursor3.close();
-    json_educators = resultSet3.toString();
-
-
-    String searchQuery4 = "SELECT  * FROM " + CALLS;
-    Cursor cursor4 = myDataBase.rawQuery(searchQuery4, null);
-    JSONArray resultSet4 = new JSONArray();
-    cursor4.moveToFirst();
-    while (cursor4.isAfterLast() == false) {
-
-      int totalColumn = cursor4.getColumnCount();
-      JSONObject rowObject4 = new JSONObject();
-
-      for (int i = 0; i < totalColumn; i++) {
-        if (cursor4.getColumnName(i) != null) {
-          try {
-            if (cursor4.getString(i) != null) {
-              rowObject4.put(cursor4.getColumnName(i), cursor4.getString(i));
-            } else {
-              rowObject4.put(cursor4.getColumnName(i), "");
-            }
-          } catch (Exception e) {
-          }
-        }
-      }
-      resultSet4.put(rowObject4);
-      cursor4.moveToNext();
-    }
-    cursor4.close();
-    json_calls = resultSet4.toString();
-
-    String searchQuery5 = "SELECT  * FROM " + DATE_START;
-    Cursor cursor5 = myDataBase.rawQuery(searchQuery5, null);
-    JSONArray resultSet5 = new JSONArray();
-    cursor5.moveToFirst();
-    while (cursor5.isAfterLast() == false) {
-
-      int totalColumn = cursor5.getColumnCount();
-      JSONObject rowObject5 = new JSONObject();
-
-      for (int i = 0; i < totalColumn; i++) {
-        if (cursor5.getColumnName(i) != null) {
-          try {
-            if (cursor5.getString(i) != null) {
-              rowObject5.put(cursor5.getColumnName(i), cursor5.getString(i));
-            } else {
-              rowObject5.put(cursor5.getColumnName(i), "");
-            }
-          } catch (Exception e) {
-          }
-        }
-      }
-      resultSet5.put(rowObject5);
-      cursor5.moveToNext();
-    }
-    cursor5.close();
-    json_date = resultSet5.toString();
-
-    progressDialog.setMessage("Пожалуйста подождите. Идет выгрузка данных на сервер");
-    progressDialog.show();
-
-
-    StringRequest stringRequest = new StringRequest(Request.Method.POST, export,
-        new Response.Listener<String>() {
-          @Override
-          public void onResponse(String ServerResponse) {
-            progressDialog.dismiss();
-            Toast.makeText(ActivitySettings.this, ServerResponse, Toast.LENGTH_LONG).show();
-          }
-        },
-        new Response.ErrorListener() {
-          @Override
-          public void onErrorResponse(VolleyError volleyError) {
-            progressDialog.dismiss();
-            Toast.makeText(ActivitySettings.this, volleyError.toString(), Toast.LENGTH_LONG).show();
-          }
-        }) {
-      @Override
-      protected Map<String, String> getParams() {
-
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("name_db", name_db_string );
-        params.put("schedule", json_schedule);
-        params.put("subjects", json_subjects);
-        params.put("audiences", json_audiences);
-        params.put("educators", json_educators);
-        params.put("call", json_calls);
-        params.put("current_date", json_date);
-        return params;
-      }
-    };
-    Volley.newRequestQueue(this).add(stringRequest);
-
-  }
-
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        Intent intent = new Intent(ActivitySettings.this,MainActivity.class);
-        finish();
-        startActivity(intent);
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
-    }
-  }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ActivitySettings.this,MainActivity.class);
+        Intent intent = new Intent(ActivitySettings.this, MainActivity.class);
         finish();
         startActivity(intent);
     }

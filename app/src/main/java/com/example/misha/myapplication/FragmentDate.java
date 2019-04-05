@@ -12,7 +12,6 @@ import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 
 import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleDB;
 
 import java.util.Calendar;
 

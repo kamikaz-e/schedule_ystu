@@ -3,7 +3,6 @@ package com.example.misha.myapplication.dialog;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -18,8 +17,7 @@ import com.example.misha.myapplication.ActivityEditData;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.ListSubjectsAdapter;
 import com.example.misha.myapplication.adapter.SimpleItemClickListener;
-import com.example.misha.myapplication.data.ScheduleDB;
-import com.example.misha.myapplication.model.Subject;
+import com.example.misha.myapplication.database.entity.Subject;
 
 import java.util.ArrayList;
 

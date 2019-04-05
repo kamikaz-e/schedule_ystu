@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.Lesson;
+import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.model.Audience;
-import com.example.misha.myapplication.model.Educator;
-import com.example.misha.myapplication.model.Subject;
+import com.example.misha.myapplication.database.entity.Audience;
+import com.example.misha.myapplication.database.entity.Educator;
+import com.example.misha.myapplication.database.entity.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,10 +91,10 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         public void onBindView(int position) {
             Lesson lesson = lessonList.get(position);
             number.setText(lesson.getId());
-            timeEdit.setText(lesson.getTime());
-            subjectEdit.setText(lesson.getSubjectEdit());
-            audienceEdit.setText(lesson.getAudienceEdit());
-            educatorEdit.setText(lesson.getEducatorEdit());
+            timeEdit.setText(lesson.getTimeLesson());
+            subjectEdit.setText(lesson.getSubject());
+            audienceEdit.setText(lesson.getAudience());
+            educatorEdit.setText(lesson.getEducator());
             //typeLesson.setText(lesson.getTypeLesson());
         }
 

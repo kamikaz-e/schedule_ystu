@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.model;
+package com.example.misha.myapplication.database.entity;
 
 import android.database.Cursor;
 import android.os.Parcel;
@@ -6,23 +6,23 @@ import android.os.Parcelable;
 
 public class Audience implements Parcelable {
 
-    private final long id;
+    private  String id;
 
-    private final String name;
+    private  String name;
 
-    public Audience(long id, String name) {
+    public Audience(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
     public Audience(Cursor cursor) {
-        this.id = cursor.getLong(0);
+        this.id = cursor.getString(0);
         this.name = cursor.getString(1);
     }
 
 
     protected Audience(Parcel in) {
-        id = in.readLong();
+        id = in.readString();
         name = in.readString();
     }
 
@@ -38,14 +38,30 @@ public class Audience implements Parcelable {
         }
     };
 
+    public Audience() {
+
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public String getName() {
         return name;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
+    public void setId(String id){
+        this.id=id;
+    }
+
+    public void setName(String name){
+        this.name=name;
+    }
     @Override
     public int describeContents() {
         return 0;
@@ -53,7 +69,7 @@ public class Audience implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
+        dest.writeString(id);
         dest.writeString(name);
     }
 }

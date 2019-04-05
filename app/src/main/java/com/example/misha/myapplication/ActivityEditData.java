@@ -2,10 +2,8 @@ package com.example.misha.myapplication;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -18,27 +16,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 
-import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleDB;
-
-import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
-import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience;
-import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
+import com.example.misha.myapplication.database.dao.AudienceDao;
+import com.example.misha.myapplication.database.dao.EducatorDao;
+import com.example.misha.myapplication.database.dao.SubjectDao;
 
 public class ActivityEditData extends AppCompatActivity {
 
 
-    EditText input_subject;
-    ListView list_subjects;
-    private ScheduleDB ScheduleDB;
-    final Context context = this;
-
     Button clear_subjects;
-    Integer position_spinner = 0;
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -48,7 +34,7 @@ public class ActivityEditData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityeditdata);
 
-   /* final Toolbar toolbar = findViewById(R.id.toolbar);
+   /* final Toolbar toolbar = findViewById(R.ID.toolbar);
     setSupportActionBar(toolbar);
     ActionBar actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
@@ -85,19 +71,17 @@ public class ActivityEditData extends AppCompatActivity {
         e.commit();
       }*/
 
-
-        ScheduleDB = new ScheduleDB();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
 
 
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager = findViewById(R.id.viewPager);
         viewPagerAdapter = new Edit_Data_ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = findViewById(R.id.tabs);
 
         tabLayout.setupWithViewPager(viewPager);
 
@@ -125,12 +109,7 @@ public class ActivityEditData extends AppCompatActivity {
 
 
     void clear_subjects() {
-
-        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.execSQL("DROP TABLE " + SUBJECT);
-        db.execSQL("CREATE TABLE " + SUBJECT + " ("
-                + ScheduleClass.subjects.subject_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ScheduleClass.subjects.subject + " STRING UNIQUE ON CONFLICT IGNORE );");
+        SubjectDao.getInstance().deleteAll();
         if (!(viewPagerAdapter == null)) {
             viewPagerAdapter.notifyDataSetChanged();
         }
@@ -153,11 +132,7 @@ public class ActivityEditData extends AppCompatActivity {
     }
 
     void clear_audiences() {
-        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.execSQL("DROP TABLE " +AUDIENCE);
-        db.execSQL("CREATE TABLE " + AUDIENCE + " ("
-                + ScheduleClass.audiences.audience_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
+        AudienceDao.getInstance().deleteAll();
         if (!(viewPagerAdapter == null)) {
             viewPagerAdapter.notifyDataSetChanged();
         }
@@ -183,11 +158,7 @@ public class ActivityEditData extends AppCompatActivity {
 
 
     void clear_educators() {
-        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.execSQL("DROP TABLE " +  EDUCATOR);
-        db.execSQL("CREATE TABLE " + EDUCATOR + " ("
-                + ScheduleClass.educators.educator_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
+        EducatorDao.getInstance().deleteAll();
         if (!(viewPagerAdapter == null)) {
             viewPagerAdapter.notifyDataSetChanged();
         }

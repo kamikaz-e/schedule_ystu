@@ -7,29 +7,30 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:allowBackup="true"
         android:name=".ScheduleApp"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        tools:replace="android:label"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:label">
         <activity
             android:name=".ActivityStartSettings"
-            android:label="@string/title_activity_start_settings"></activity>
+            android:label="@string/title_activity_start_settings" />
         <activity
             android:name=".ActivityStart"
-            android:label="@string/title_activity_welcome_activity"></activity>
+            android:label="@string/title_activity_welcome_activity" />
         <activity
             android:name=".ActivitySettings"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".ActivityCallSchedule"
-            android:label="@string/title_activity_call_schedule"></activity>
+            android:label="@string/title_activity_call_schedule" />
         <activity
             android:name=".ActivityEditData"
-            android:label="Редактор данных"></activity>
+            android:label="Редактор данных" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +39,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ScheduleEditor" />
+
+        <provider
+            android:authorities="com.example.misha.myapplication.provider"
+            android:name=".database.AppContentProvider"
+            android:exported="false"
+            android:multiprocess="true"/>
+
     </application>
 
 </manifest>

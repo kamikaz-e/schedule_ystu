@@ -3,8 +3,6 @@ package com.example.misha.myapplication;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,8 +21,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleDB;
+import com.example.misha.myapplication.database.dao.AudienceDao;
+import com.example.misha.myapplication.database.entity.Audience;
 
 import java.util.ArrayList;
 
@@ -32,22 +30,18 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
-import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
-import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience;
-import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience_id;
-
 
 public class FragmentStartAudience extends android.support.v4.app.Fragment {
 
 
     EditText input_audience;
     ListView list_audiences;
-    private ScheduleDB ScheduleDB;
-    final ArrayList<String> audience_list = new ArrayList<>();
+
+    ArrayList<Audience> audience_list = new ArrayList<>();
     public ArrayAdapter<String> adapter;
     Button clear_audiences;
     Button next;
-    String select_item="";
+    int select_item;
 
     public FragmentStartAudience() {
     }
@@ -66,7 +60,7 @@ public class FragmentStartAudience extends android.support.v4.app.Fragment {
         Toolbar profile_toolbar = view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity)getActivity();
         activity.setSupportActionBar(profile_toolbar);
-        ScheduleDB = new ScheduleDB();
+
 
         clear_audiences = view.findViewById(R.id.clear_audiences);
         next = view.findViewById(R.id.next);
@@ -81,9 +75,7 @@ public class FragmentStartAudience extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
-                TextView textView = (TextView) itemClicked;
-                select_item = textView.getText().toString();
-                onCreateDialogDeleteItem().show();
+                onCreateDialogDeleteItem(position).show();
             }
         });
 
@@ -106,7 +98,7 @@ public class FragmentStartAudience extends android.support.v4.app.Fragment {
                 onCreateDialogClear().show();
             }
         });
-        start();
+        updateList();
 
             new MaterialTapTargetPrompt.Builder(getActivity())
                     .setTarget(input_audience)
@@ -132,15 +124,18 @@ public class FragmentStartAudience extends android.support.v4.app.Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
                     input_audience.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                    String audience = input_audience.getText().toString();
-                    if(TextUtils.isEmpty(audience)) {
+                    String audienceName = input_audience.getText().toString();
+                    if(TextUtils.isEmpty(audienceName)) {
                         input_audience.setError("Введите аудиторию");
                         return true;
                     }
-                    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + AUDIENCE + " (" + ScheduleClass.audiences.audience + ") VALUES ('" + audience + "');");
+                    Audience audience = new Audience();
+                    audience.setName(audienceName);
+                    AudienceDao.getInstance().insertItem(audience);
+
+
                     input_audience.setText("");
-                    start();
+                    updateList();
                     adapter.notifyDataSetChanged();
                     return true;
                 }
@@ -152,15 +147,15 @@ public class FragmentStartAudience extends android.support.v4.app.Fragment {
         return view;
     }
 
-    public Dialog onCreateDialogDeleteItem() {
+    public Dialog onCreateDialogDeleteItem(final int position) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + AUDIENCE + " WHERE "+ ScheduleClass.audiences.audience + "='"+ select_item+"'");
-                start();
+               Audience audience = audience_list.get(position);
+               AudienceDao.getInstance().deleteItemById(Long.parseLong(audience.getId()));
+                updateList();
                 adapter.notifyDataSetChanged();
             }
         }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
@@ -188,30 +183,18 @@ public class FragmentStartAudience extends android.support.v4.app.Fragment {
     }
 
     void clear_audiences(){
-        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.execSQL("DROP TABLE " + AUDIENCE);
-        db.execSQL("CREATE TABLE " + AUDIENCE + " ("
-                + audience_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + audience + " STRING UNIQUE ON CONFLICT IGNORE );");
-        db.execSQL("INSERT INTO " + AUDIENCE + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
+       AudienceDao.getInstance().deleteAll();
         adapter.notifyDataSetChanged();
-        start();
+        updateList();
     }
 
 
-    public void start(){
+    public void updateList(){
 
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
         list_audiences.setAdapter(adapter);
+        audience_list= AudienceDao.getInstance().getAllData();
 
-        SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ audience +" FROM " + AUDIENCE + " WHERE "+ audience_id +">1;";
-        audience_list.clear();
-        Cursor cursor = db.rawQuery(searchQuery, null);
-        while(cursor.moveToNext()) {
-            audience_list.add(cursor.getString(0));
-        }
-        cursor.close();
     }
 
 }

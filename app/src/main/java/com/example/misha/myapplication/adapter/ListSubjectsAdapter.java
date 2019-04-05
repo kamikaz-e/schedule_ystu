@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.model.Subject;
+import com.example.misha.myapplication.database.entity.Subject;
 
 import java.util.ArrayList;
 import java.util.List;

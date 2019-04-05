@@ -27,14 +27,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.data.ScheduleDB;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
  implements NavigationView.OnNavigationItemSelectedListener {
-    private com.example.misha.myapplication.data.ScheduleDB ScheduleDB;
+
     long diff=0;
     long days=0;
     DrawerLayout drawer;
@@ -47,8 +46,6 @@ public class MainActivity extends AppCompatActivity
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ScheduleDB = new ScheduleDB();
         setContentView(R.layout.activity_main);
         text_main = findViewById(R.id.text_main);
         final Toolbar toolbar = findViewById(R.id.toolbar);

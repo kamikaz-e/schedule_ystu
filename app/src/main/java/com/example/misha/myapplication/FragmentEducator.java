@@ -19,7 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleDB;
 
 import java.util.ArrayList;
 
@@ -52,8 +51,6 @@ public class FragmentEducator extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_educator, container, false);
-
-        ScheduleDB = new ScheduleDB();
 
         input_educator = view.findViewById(R.id.input_educator);
         list_educators = view.findViewById(R.id.list_educators);

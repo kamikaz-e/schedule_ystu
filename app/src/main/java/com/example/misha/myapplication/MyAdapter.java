@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.misha.myapplication.database.entity.Lesson;
+
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
@@ -54,10 +56,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public void onBindView(int position) {
             Lesson lesson = schedule.get(position);
             number.setText(lesson.getId());
-            timeEdit.setText(lesson.getTime());
-            subjectEdit.setText((CharSequence) lesson.getSubjectEdit());
-            audienceEdit.setText(lesson.getAudienceEdit());
-            educator.setText(lesson.getEducatorEdit());
+            timeEdit.setText(lesson.getTimeLesson());
+            subjectEdit.setText(lesson.getSubject());
+            audienceEdit.setText(lesson.getAudience());
+            educator.setText(lesson.getEducator());
             typeLesson.setText(lesson.getTypeLesson());
         }
 

@@ -6,8 +6,6 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -19,17 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.example.misha.myapplication.data.ScheduleDB;
-
 import java.util.Calendar;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
-
-import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
-import static com.example.misha.myapplication.data.ScheduleClass.calls.id_call;
-import static com.example.misha.myapplication.data.ScheduleClass.calls.time;
 
 public class ActivityCallSchedule extends AppCompatActivity {
 
@@ -52,7 +44,7 @@ public class ActivityCallSchedule extends AppCompatActivity {
   EditText fourTime;
   EditText fiveTime;
   EditText sixTime;
-  private ScheduleDB ScheduleDB;
+
   Calendar Time=Calendar.getInstance();
   Integer start=1;
   Button button_toolbar;
@@ -84,7 +76,6 @@ public class ActivityCallSchedule extends AppCompatActivity {
     fourTime = findViewById(R.id.FourTime);
     fiveTime = findViewById(R.id.FiveTime);
     sixTime = findViewById(R.id.SixTime);
-    ScheduleDB = new ScheduleDB();
     start();
 
 
@@ -340,7 +331,7 @@ public class ActivityCallSchedule extends AppCompatActivity {
 
 
   void start(){
-    SQLiteDatabase db = ScheduleDB.getReadableDatabase();
+  /*  SQLiteDatabase db = ScheduleDB.getReadableDatabase();
     flag=0;
     String searchQuery = "SELECT "+ time +" FROM " + CALLS;
     Cursor cursor = db.rawQuery(searchQuery, null);
@@ -365,12 +356,12 @@ public class ActivityCallSchedule extends AppCompatActivity {
           select_time_fullSix=(cursor.getString(0));
           flag++;break;}
     }
-    cursor.close();
+    cursor.close();*/
   }
 
 
   void save_calls(){
-    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+  /*  SQLiteDatabase db = ScheduleDB.getWritableDatabase();
     db.beginTransaction();
     try {
       db.execSQL("DROP TABLE " + CALLS);
@@ -387,11 +378,11 @@ public class ActivityCallSchedule extends AppCompatActivity {
       db.setTransactionSuccessful();
     } finally {
       db.endTransaction();
-    }
+    }*/
   }
 
   void clear_calls(){
-    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
+    /*SQLiteDatabase db = ScheduleDB.getWritableDatabase();
     db.execSQL("DROP TABLE " + CALLS);
     String calls_schedule = "CREATE TABLE " + CALLS + " ("
             + id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -410,7 +401,7 @@ public class ActivityCallSchedule extends AppCompatActivity {
     select_time_fullThree="";
     select_time_fullFour="";
     select_time_fullFive="";
-    select_time_fullSix="";
+    select_time_fullSix="";*/
   }
 
   public boolean onOptionsItemSelected(MenuItem item) {

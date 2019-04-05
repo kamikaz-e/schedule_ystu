@@ -21,12 +21,24 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.misha.myapplication.data.ScheduleClass;
-import com.example.misha.myapplication.data.ScheduleDB;
+import com.example.misha.myapplication.database.dao.AudienceDao;
+import com.example.misha.myapplication.database.dao.CallDao;
+import com.example.misha.myapplication.database.dao.EducatorDao;
+import com.example.misha.myapplication.database.dao.LessonDao;
+import com.example.misha.myapplication.database.dao.SubjectDao;
+import com.example.misha.myapplication.database.entity.Audience;
+import com.example.misha.myapplication.database.entity.Calls;
+import com.example.misha.myapplication.database.entity.Educator;
+import com.example.misha.myapplication.database.entity.Lesson;
+import com.example.misha.myapplication.database.entity.Subject;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,7 +72,6 @@ public class ActivityStart extends Activity {
 
   String database_name="";
 
-  private com.example.misha.myapplication.data.ScheduleDB ScheduleDB;
 
 
   final Context context = this;
@@ -69,11 +80,8 @@ public class ActivityStart extends Activity {
 
   @Override
     protected void onCreate(Bundle savedInstanceState) {
-    ScheduleDB = new ScheduleDB();
     super.onCreate(savedInstanceState);
     setContentView(R.layout.welcome_activity);
-
-
 
 
     Button start_buttonOne = findViewById(R.id.start_buttonOne);
@@ -96,50 +104,35 @@ public class ActivityStart extends Activity {
     public Dialog onCreateDialogImport() {
         LayoutInflater li = LayoutInflater.from(context);
         View view = li.inflate(R.layout.dialog_signin, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        final EditText name_db =  view.findViewById(R.id.name_schedule);
+        final EditText name_db = view.findViewById(R.id.name_schedule);
         builder.setCancelable(false).setPositiveButton("Импортировать", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                database_name= name_db.getText().toString();
-                SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DROP TABLE " + SUBJECT);
-                db.execSQL("CREATE TABLE " + SUBJECT + " ("
-                        + subject_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                        + ScheduleClass.subjects.subject + " STRING UNIQUE ON CONFLICT IGNORE );");
-                db.execSQL("INSERT INTO " + SUBJECT + " (" + ScheduleClass.subjects.subject + ") VALUES ('Предмет');");
-                db.execSQL("DROP TABLE " + AUDIENCE);
-                db.execSQL("CREATE TABLE " + AUDIENCE + " ("
-                        + audience_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                        + ScheduleClass.audiences.audience + " STRING UNIQUE ON CONFLICT IGNORE );");
-                db.execSQL("INSERT INTO " + AUDIENCE + " (" + ScheduleClass.audiences.audience + ") VALUES ('Аудитория');");
-                db.execSQL("DROP TABLE " + EDUCATOR);
-                db.execSQL("CREATE TABLE " + EDUCATOR + " ("
-                        + educator_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                        + ScheduleClass.educators.educator + " STRING UNIQUE ON CONFLICT IGNORE );");
-                db.execSQL("INSERT INTO " + EDUCATOR + " (" + ScheduleClass.educators.educator + ") VALUES ('Преподаватель');");
+                database_name = name_db.getText().toString();
+
+                SubjectDao.getInstance().deleteAll();
+                AudienceDao.getInstance().deleteAll();
+                EducatorDao.getInstance().deleteAll();
                 load_db(sub, subjects_import);
-                load_db(aud,audiences_import);
-                load_db(edu,educators_import);
-                load_db(sch,schedule_import);
-                load_db(cal,call_schedule);
-                load_db(dat,date);
+                load_db(aud, audiences_import);
+                load_db(edu, educators_import);
+                load_db(sch, schedule_import);
+                load_db(cal, call_schedule);
+                load_db(dat, date);
                 Intent intent = new Intent(ActivityStart.this, MainActivity.class);
                 finish();
                 startActivity(intent);
             }
         }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                Intent intent = new Intent (ActivityStart.this, ActivityStartSettings.class);
-                finish();
-                startActivity(intent);
             }
         });
         return builder.create();
     }
 
-    void load_db (final String table, final String url) {
+    void load_db(final String table, final String url) {
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -147,63 +140,42 @@ public class ActivityStart extends Activity {
                     public void onResponse(String response) {
                         try {
                             JSONArray jsonArray = new JSONArray(response);
-                            JSONObject obj;
-                            SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                            db.beginTransaction();
-                            try {
+                            String jsonString;
 
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    obj = jsonArray.getJSONObject(i);
-                                    if (table == aud) {
-                                        String audience = obj.getString("audience");
-                                        db.execSQL("insert into " + AUDIENCE + " (" + ScheduleClass.audiences.audience
-                                                + ") values ('" + audience + "');");
-                                    }
-                                    if (table == edu) {
-                                        String educator = obj.getString("educator");
-                                        db.execSQL("insert into " + EDUCATOR + " (" + ScheduleClass.educators.educator
-                                                + ") values ('" + educator + "');");
-                                    }
-                                    if (table == sub) {
-                                        String subject = obj.getString("subject");
-                                        db.execSQL("insert into " + SUBJECT + " (" + ScheduleClass.subjects.subject
-                                                + ") values ('" + subject + "');");
-                                    }
-                                    if (table==sch) {
-                                        String id = obj.getString("id");
-                                        String id_subject = obj.getString("id_subject");
-                                        String id_audience = obj.getString("id_audience");
-                                        String id_educator = obj.getString("id_educator");
-                                        String id_typelesson = obj.getString("id_typelesson");
-                                        db.execSQL(
-                                                "update " + SCHEDULE + " set " + ScheduleClass.schedule.id_subject + " = "
-                                                        + id_subject + ", " + ScheduleClass.schedule.id_audience + " = " + id_audience + ", "
-                                                        + ScheduleClass.schedule.id_educator + " = " + id_educator + ", "
-                                                        + ScheduleClass.schedule.id_typelesson + " = " + id_typelesson + " where "
-                                                        + ScheduleClass.schedule.id + " = " + id);
-                                    }
-                                    if (table == cal) {
-                                        String id_call = obj.getString("id_call");
-                                        String time = obj.getString("time");
-                                        db.execSQL("update " + CALLS + " set " + ScheduleClass.calls.time + " = '" +
-                                                time + "' where " + ScheduleClass.calls.id_call + " = " + id_call);
-                                    }
-                                    if (table == dat) {
-                                        String id_date = obj.getString("id_date");
-                                        String date = obj.getString("date");
-                                        db.execSQL("update " + DATE_START + " set " + ScheduleClass.date_start.date + " = '" +
-                                                date + "' where " + ScheduleClass.date_start.id_date + " = " + id_date);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                jsonString = jsonArray.getString(i);
+
+
+
+                                if (table.equals(aud)) {
+                                    ArrayList<Audience> audiences = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Audience>>(){}.getType());
+                                    AudienceDao.getInstance().insertAll(audiences);
+                                }
+                                if (table == edu) {
+                                    ArrayList<Educator> educators = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Educator>>(){}.getType());
+                                    EducatorDao.getInstance().insertAll(educators);
+                                }
+                                if (table == sub) {
+                                    ArrayList<Subject> subjects = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Subject>>(){}.getType());
+                                    SubjectDao.getInstance().insertAll(subjects);
+                                }
+                                if (table == sch) {
+                                    ArrayList<Lesson> lessons = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Lesson>>(){}.getType());
+                                    LessonDao.getInstance().insertAll(lessons);
+                                }
+                                if (table == cal) {
+                                    ArrayList<Calls> calls = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Calls>>(){}.getType());
+                                    CallDao.getInstance().insertAll(calls);
+                                }
+                                    /*if (table == dat) {
+                                        ArrayList<Date> date = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Date>>(){}.getType());
+                                        DateDao.getInstance().insertAll(date);
 
                                         SharedPreferences settings = getSharedPreferences("week", 0);
                                         SharedPreferences.Editor editor = settings.edit();
-                                        editor.putLong("current_week",Long.valueOf(date).longValue());
+                                        editor.putLong("current_week", Long.valueOf(date).longValue());
                                         editor.commit();
-                                    }
-
-                                } db.setTransactionSuccessful();
-                            } finally {
-
-                                db.endTransaction();
+                                    }*/
                             }
 
                         } catch (JSONException e) {
@@ -222,7 +194,7 @@ public class ActivityStart extends Activity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("name_db",database_name);
+                params.put("name_db", database_name);
                 return params;
             }
         };
