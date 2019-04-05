@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.misha.myapplication.ActivityEditData;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.ListAudienceAdapter;
 import com.example.misha.myapplication.adapter.SimpleItemClickListener;
@@ -74,7 +75,9 @@ public class AudienceList extends DialogFragment {
         Button button_add = view.findViewById(R.id.button_add);
         button_add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                dismiss();
+                Intent intent = new Intent(getActivity(), ActivityEditData.class);
+                getActivity().finish();
+                getActivity().startActivity(intent);
             }
         });
         Button button_cancel = view.findViewById(R.id.button_cancel);

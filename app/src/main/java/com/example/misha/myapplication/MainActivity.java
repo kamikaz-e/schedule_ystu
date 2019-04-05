@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, ActivityStart.class);
             startActivity(intent);
 
-            button_toolbar.setEnabled(false);
+            //button_toolbar.setEnabled(false);
 
            /* new MaterialTapTargetPrompt.Builder(MainActivity.this)
                     .setTarget(spinner)
@@ -169,8 +169,6 @@ public class MainActivity extends AppCompatActivity
 
 
 }
-
-
 
         @Override
         public void onResume() {
