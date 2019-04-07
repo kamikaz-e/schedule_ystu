@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 //apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'com.google.gms.google-services'
 
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -42,6 +43,5 @@ dependencies {
     implementation 'uk.co.samuelwall:material-tap-target-prompt:2.14.0'
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
     implementation 'com.github.stfalcon:androidmvvmhelper:0.4'
-
     implementation 'com.google.code.gson:gson:2.8.5'
 }

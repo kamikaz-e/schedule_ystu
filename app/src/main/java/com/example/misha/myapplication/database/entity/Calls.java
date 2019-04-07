@@ -9,7 +9,6 @@ import android.os.Parcelable;
 public class Calls implements Parcelable {
 
     private String id;
-
     private String name;
 
 
@@ -45,6 +44,12 @@ public class Calls implements Parcelable {
         
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
+
     public String getName() {
         return name;
     }
@@ -57,7 +62,7 @@ public class Calls implements Parcelable {
         this.id=id;
     }
 
-    public void setName(String id){
+    public void setName(String name){
         this.name=name;
     }
 

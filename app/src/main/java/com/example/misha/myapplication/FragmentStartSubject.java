@@ -3,7 +3,6 @@ package com.example.misha.myapplication;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.database.dao.SubjectDao;
 import com.example.misha.myapplication.database.entity.Subject;
 
@@ -31,9 +29,6 @@ import java.util.ArrayList;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
-
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject_id;
 
 
 public class FragmentStartSubject extends android.support.v4.app.Fragment {

@@ -65,44 +65,6 @@
     android:layout_height="1dp"
     android:background="#FFFFFF" />
 
-    <RelativeLayout
-        android:id="@+id/typelessonitem"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#383838"
-        android:padding="3dip">
-
-        <ImageView
-            android:id="@+id/image_typelesson"
-            android:layout_width="40dip"
-            android:layout_height="40dip"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            app:srcCompat="@drawable/ic_editor" />
-
-        <TextView
-            android:id="@+id/typelesson"
-            android:layout_width="wrap_content"
-            android:layout_height="34dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginStart="70dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:gravity="left"
-            android:text="Редактор типа предмета"
-            android:textColor="#FFFFFF"
-            android:textSize="19dp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="10dp"
-            app:srcCompat="@drawable/ic_arrow_right" />
-    </RelativeLayout>
 
     <View
         android:layout_width="fill_parent"

@@ -3,12 +3,10 @@ package com.example.misha.myapplication.database.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.BaseColumns;
 
 import com.example.misha.myapplication.database.AbsDao;
 import com.example.misha.myapplication.database.AppContentProvider;
 import com.example.misha.myapplication.database.entity.Calls;
-import com.example.misha.myapplication.database.entity.Lesson;
 
 public class CallDao extends AbsDao<Calls> {
 
@@ -23,8 +21,8 @@ public class CallDao extends AbsDao<Calls> {
         return instance;
     }
 
-    public final static String ID =  "id_call";
-    public final static String TIME = "time";
+    public final static String ID =  "id";
+    public final static String TIME = "time_lesson";
 
 
     public static final String[] ALL_SET_PROPERTIES = new String[] {ID, TIME};
@@ -36,7 +34,7 @@ public class CallDao extends AbsDao<Calls> {
 
     @Override
     protected Uri getTableUri() {
-        return AppContentProvider.SCHEDULE_URI;
+        return AppContentProvider.CALLS_URI;
     }
 
     @Override

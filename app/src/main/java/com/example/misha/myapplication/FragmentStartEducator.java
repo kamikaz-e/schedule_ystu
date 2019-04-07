@@ -3,8 +3,6 @@ package com.example.misha.myapplication;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +20,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.data.ScheduleClass;
+import com.example.misha.myapplication.database.dao.EducatorDao;
+import com.example.misha.myapplication.database.entity.Educator;
 
 import java.util.ArrayList;
 
@@ -30,20 +29,15 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
-import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
-import static com.example.misha.myapplication.data.ScheduleClass.educators.educator;
-import static com.example.misha.myapplication.data.ScheduleClass.educators.educator_id;
-
 public class FragmentStartEducator extends android.support.v4.app.Fragment {
 
     EditText input_educator;
     ListView list_educators;
-    private ScheduleDB ScheduleDB;
-    final ArrayList<String> educator_list = new ArrayList<>();
+    ArrayList<Educator> educator_list = new ArrayList<>();
     public ArrayAdapter<String> adapter;
     Button next;
     Button clear_educators;
-    String select_item="";
+    String selectId ="";
 
     public FragmentStartEducator() {
 
@@ -63,7 +57,7 @@ public class FragmentStartEducator extends android.support.v4.app.Fragment {
         Toolbar profile_toolbar = view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(profile_toolbar);
-        ScheduleDB = new ScheduleDB();
+
         next = view.findViewById(R.id.next);
         clear_educators = view.findViewById(R.id.clear_educators);
         input_educator = view.findViewById(R.id.input_educator);
@@ -76,7 +70,7 @@ public class FragmentStartEducator extends android.support.v4.app.Fragment {
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
                 TextView textView = (TextView) itemClicked;
-                select_item = textView.getText().toString();
+                selectId = textView.getText().toString();
                 onCreateDialogDeleteItem().show();
             }
         });
@@ -96,7 +90,7 @@ public class FragmentStartEducator extends android.support.v4.app.Fragment {
                 onCreateDialogClear().show();
             }
         });
-        start();
+        updateListView();
 
         new MaterialTapTargetPrompt.Builder(getActivity())
                 .setTarget(input_educator)
@@ -121,15 +115,16 @@ public class FragmentStartEducator extends android.support.v4.app.Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
-                    String educator = input_educator.getText().toString();
-                    if(TextUtils.isEmpty(educator)) {
+                    String educatorName = input_educator.getText().toString();
+                    if(TextUtils.isEmpty(educatorName)) {
                         input_educator.setError("Введите преподавателя");
                         return true;
                     }
-                    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + EDUCATOR + " (" + ScheduleClass.educators.educator + ") VALUES ('" + educator + "');");
+                    Educator educator = new Educator();
+                    educator.setName(educatorName);
+                    EducatorDao.getInstance().insertItem(educator);
                     input_educator.setText("");
-                    start();
+                    updateListView();
                     adapter.notifyDataSetChanged();
                     return true;
                 }
@@ -147,16 +142,15 @@ public class FragmentStartEducator extends android.support.v4.app.Fragment {
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + EDUCATOR + " WHERE "+ ScheduleClass.educators.educator + "='"+ select_item+"'");
-                start();
+                EducatorDao.getInstance().deleteItemById(Long.parseLong(selectId));
+                updateListView();
                 adapter.notifyDataSetChanged();
             }
         }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Удалить преподавателя «"+select_item+"»?");
+        }).setTitle("Удалить преподавателя «"+ selectId +"»?");
         return builder.create();
     }
 
@@ -177,28 +171,13 @@ public class FragmentStartEducator extends android.support.v4.app.Fragment {
     }
 
     void clear_educators(){
-        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.execSQL("DROP TABLE " + EDUCATOR);
-        db.execSQL("CREATE TABLE " + EDUCATOR + " ("
-                + educator_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + educator + " STRING UNIQUE ON CONFLICT IGNORE );");
-        db.execSQL("INSERT INTO " + EDUCATOR + " (" + educator+ ") VALUES ('Преподаватель');");
-        adapter.notifyDataSetChanged();
-        start();
+        EducatorDao.getInstance().deleteAll();
     }
 
-    public void start(){
-
+    public void updateListView(){
+        educator_list= EducatorDao.getInstance().getAllData();
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
         list_educators.setAdapter(adapter);
-
-        SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ educator +" FROM " + EDUCATOR + " WHERE "+ educator_id +">1;";
-        educator_list.clear();
-        Cursor cursor = db.rawQuery(searchQuery, null);
-        while(cursor.moveToNext()) {
-            educator_list.add(cursor.getString(0));
-        }
-        cursor.close();
+        adapter.notifyDataSetChanged();
     }
 }

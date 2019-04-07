@@ -23,8 +23,8 @@ public class AudienceDao extends AbsDao<Audience> {
         return instance;
     }
 
-    public final static String ID = "idd_audience";
-    public final static String AUDIENCE = "audiences";
+    public final static String ID = "id";
+    public final static String AUDIENCE = "audience";
 
     public static final String[] ALL_SET_PROPERTIES = new String[] {ID, AUDIENCE};
 
@@ -36,7 +36,7 @@ public class AudienceDao extends AbsDao<Audience> {
 
     @Override
     protected Uri getTableUri() {
-        return AppContentProvider.SCHEDULE_URI;
+        return AppContentProvider.AUDIENCES_URI;
     }
 
     @Override

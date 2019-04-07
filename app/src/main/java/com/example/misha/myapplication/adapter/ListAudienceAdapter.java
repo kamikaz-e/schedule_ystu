@@ -18,8 +18,8 @@ public class ListAudienceAdapter extends RecyclerView.Adapter<ListAudienceAdapte
 
     private SimpleItemClickListener itemClickListener;
 
-    public ListAudienceAdapter(ArrayList<Audience> schedule, SimpleItemClickListener simpleItemClickListener) {
-        this.listAudience = schedule;
+    public ListAudienceAdapter(ArrayList<Audience> audience, SimpleItemClickListener simpleItemClickListener) {
+        this.listAudience = audience;
         this.itemClickListener = simpleItemClickListener;
     }
 

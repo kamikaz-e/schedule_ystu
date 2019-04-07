@@ -18,14 +18,14 @@ public class AppContentProvider extends ContentProvider {
     private static final Uri PROVIDER_URI
         = Uri.parse("content://com.example.misha.myapplication.provider/");
 
-    public static final Uri SCHEDULE_URI = Uri.parse(PROVIDER_URI + "schedule");
+    public static final Uri LESSONS_URI = Uri.parse(PROVIDER_URI + "lessons");
     public static final Uri SUBJECTS_URI = Uri.parse(PROVIDER_URI + "subjects");
     public static final Uri AUDIENCES_URI = Uri.parse(PROVIDER_URI + "audiences");
     public static final Uri EDUCATORS_URI = Uri.parse(PROVIDER_URI + "educators");
     public static final Uri TYPELESSONS_URI = Uri.parse(PROVIDER_URI + "typelessons");
     public static final Uri CALLS_URI = Uri.parse(PROVIDER_URI + "calls");
 
-    public static final String SCHEDULE_TABLE = "schedule";
+    public static final String LESSONS_TABLE = "lessons";
     public static final String SUBJECTS_TABLE = "subjects";
     public static final String AUDIENCES_TABLE = "audiences";
     public static final String EDUCATORS_TABLE = "educators";
@@ -72,7 +72,6 @@ public class AppContentProvider extends ContentProvider {
         if (recordID == -1) return null;
         getContext().getContentResolver().notifyChange(uri, null);
         return Uri.parse(tableName + "#" + recordID);
-
     }
 
     @Override
@@ -90,10 +89,10 @@ public class AppContentProvider extends ContentProvider {
 
     @Override
     public String getType(@NonNull Uri uri) {
-        if (uri.toString().startsWith(SCHEDULE_URI.toString())) {
-            return SCHEDULE_TABLE;
-        } else if (uri.toString().startsWith(SUBJECTS_URI.toString())) {
+        if (uri.toString().startsWith(SUBJECTS_URI.toString())) {
             return SUBJECTS_TABLE;
+        } else if (uri.toString().startsWith(LESSONS_URI.toString())) {
+            return LESSONS_TABLE;
         } else if (uri.toString().startsWith(AUDIENCES_URI.toString())) {
             return AUDIENCES_TABLE;
         } else if (uri.toString().startsWith(EDUCATORS_URI.toString())) {

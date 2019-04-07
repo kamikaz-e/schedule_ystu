@@ -22,10 +22,7 @@ public class Subject implements Parcelable {
         this.id = cursor.getString(0);
         this.name = cursor.getString(1);
     }
-    @Override
-    public String toString() {
-        return name;
-    }
+
     protected Subject(Parcel in) {
         id = in.readString();
         name = in.readString();
@@ -45,6 +42,11 @@ public class Subject implements Parcelable {
 
     public Subject() {
         
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     public String getName() {

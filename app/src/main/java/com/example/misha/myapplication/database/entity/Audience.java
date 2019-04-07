@@ -7,7 +7,6 @@ import android.os.Parcelable;
 public class Audience implements Parcelable {
 
     private  String id;
-
     private  String name;
 
     public Audience(String id, String name) {

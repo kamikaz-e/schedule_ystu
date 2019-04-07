@@ -3,8 +3,6 @@ package com.example.misha.myapplication;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -18,71 +16,57 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.data.ScheduleClass;
+import com.example.misha.myapplication.database.dao.EducatorDao;
+import com.example.misha.myapplication.database.entity.Educator;
 
 import java.util.ArrayList;
-
-import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
-import static com.example.misha.myapplication.data.ScheduleClass.educators.educator;
-import static com.example.misha.myapplication.data.ScheduleClass.educators.educator_id;
 
 
 public class FragmentEducator extends android.support.v4.app.Fragment {
 
-
     EditText input_educator;
     ListView list_educators;
-    private ScheduleDB ScheduleDB;
-    final ArrayList<String> educator_list = new ArrayList<>();
-    public ArrayAdapter<String> adapter;
-    String select_item="";
+    ArrayList<Educator> educator_list = new ArrayList<>();
+    public ArrayAdapter<Educator> adapter;
 
     public FragmentEducator() {
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_educator, container, false);
-
         input_educator = view.findViewById(R.id.input_educator);
         list_educators = view.findViewById(R.id.list_educators);
-
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
         list_educators.setAdapter(adapter);
-
         list_educators.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
-                TextView textView = (TextView) itemClicked;
-                select_item = textView.getText().toString();
-                onCreateDialogDeleteItem().show();
+                onCreateDialogDeleteItem(position).show();
             }
         });
-
-        start();
-
+        updateListView();
         input_educator.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
-                    String educator = input_educator.getText().toString();
-                    if(TextUtils.isEmpty(educator)) {
+                    String educatorName = input_educator.getText().toString();
+                    if(TextUtils.isEmpty(educatorName)) {
                         input_educator.setError("Введите преподавателя");
                         return true;
                     }
-                    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("INSERT INTO " + EDUCATOR + " (" + ScheduleClass.educators.educator + ") VALUES ('" + educator + "');");
-                    input_educator.setText("");
-                    start();
+                    Educator educator = new Educator();
+                    educator.setName(educatorName);
+                    EducatorDao.getInstance().insertItem(educator);
+                    input_educator.getText().clear();
+                    updateListView();
                     adapter.notifyDataSetChanged();
                     return true;
                 }
@@ -94,39 +78,29 @@ public class FragmentEducator extends android.support.v4.app.Fragment {
         return view;
     }
 
-    public Dialog onCreateDialogDeleteItem() {
-
+    public Dialog onCreateDialogDeleteItem(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                db.execSQL("DELETE FROM " + EDUCATOR + " WHERE "+ ScheduleClass.educators.educator + "='"+ select_item+"'");
-                start();
+                Educator educator = educator_list.get(position);
+                EducatorDao.getInstance().deleteItemById(Long.parseLong(educator.getId()));
+                updateListView();
                 adapter.notifyDataSetChanged();
             }
         }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Удалить преподавателя «"+select_item+"»?");
+        }).setTitle("Удалить преподавателя «"+ educator_list.get(position)+"»?");
         return builder.create();
     }
 
 
-    public void start(){
-
+    public void updateListView() {
+        educator_list= EducatorDao.getInstance().getAllData();
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
         list_educators.setAdapter(adapter);
-
-        SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-        String searchQuery = "SELECT "+ educator +" FROM " + EDUCATOR + " WHERE "+ educator_id +">1;";
-        educator_list.clear();
-        Cursor cursor = db.rawQuery(searchQuery, null);
-        while(cursor.moveToNext()) {
-            educator_list.add(cursor.getString(0));
-        }
-        cursor.close();
     }
 
 }

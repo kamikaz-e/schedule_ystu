@@ -148,4 +148,6 @@ public abstract class AbsDao<T> {
                 new String[] {String.valueOf(id)});
         return affectedRowsNumber == 1;
     }
+
+
 }

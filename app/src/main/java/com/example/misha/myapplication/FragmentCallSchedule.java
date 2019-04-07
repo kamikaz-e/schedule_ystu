@@ -3,7 +3,6 @@ package com.example.misha.myapplication;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,15 +17,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.example.misha.myapplication.data.ScheduleClass;
+import com.example.misha.myapplication.database.dao.CallDao;
+import com.example.misha.myapplication.database.entity.Calls;
 
 import java.util.Calendar;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
-
-import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
 
 
 public class FragmentCallSchedule extends android.support.v4.app.Fragment {
@@ -54,7 +52,7 @@ public class FragmentCallSchedule extends android.support.v4.app.Fragment {
     EditText fourTime;
     EditText fiveTime;
     EditText sixTime;
-    private ScheduleDB ScheduleDB;
+
     Calendar Time=Calendar.getInstance();
     Integer start=1;
     Button button_toolbar;
@@ -94,11 +92,9 @@ public class FragmentCallSchedule extends android.support.v4.app.Fragment {
         fourTime = view.findViewById(R.id.FourTime);
         fiveTime = view.findViewById(R.id.FiveTime);
         sixTime = view.findViewById(R.id.SixTime);
-        ScheduleDB = new ScheduleDB();
 
 
         CardView cardViewOne= view.findViewById(R.id.card_viewOne);
-
 
             new MaterialTapTargetPrompt.Builder(getActivity())
                     .setTarget(cardViewOne)
@@ -347,24 +343,20 @@ public class FragmentCallSchedule extends android.support.v4.app.Fragment {
 
 
     void save_calls(){
-        SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-        db.beginTransaction();
-        try {
-            db.execSQL("DROP TABLE " + CALLS);
-            db.execSQL("CREATE TABLE " + CALLS + " ("
-                    + ScheduleClass.calls.id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + ScheduleClass.calls.time + " STRING );");
-            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullOne +"');");
-            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullTwo +"');");
-            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullThree +"');");
-            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullFour +"');");
-            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullFive +"');");
-            db.execSQL("INSERT INTO " + CALLS + " (" + ScheduleClass.calls.time + ") VALUES ('"+ select_time_fullSix +"');");
-
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
-        }
+        CallDao.getInstance().deleteAll();
+        Calls calls = new Calls();
+        calls.setName(select_time_fullOne);
+        CallDao.getInstance().insertItem(calls);
+        calls.setName(select_time_fullTwo);
+        CallDao.getInstance().insertItem(calls);
+        calls.setName(select_time_fullThree);
+        CallDao.getInstance().insertItem(calls);
+        calls.setName(select_time_fullFour);
+        CallDao.getInstance().insertItem(calls);
+        calls.setName(select_time_fullFive);
+        CallDao.getInstance().insertItem(calls);
+        calls.setName(select_time_fullSix);
+        CallDao.getInstance().insertItem(calls);
     }
 
 

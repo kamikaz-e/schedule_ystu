@@ -8,6 +8,7 @@ import android.provider.BaseColumns;
 import com.example.misha.myapplication.database.AbsDao;
 import com.example.misha.myapplication.database.AppContentProvider;
 import com.example.misha.myapplication.database.entity.Lesson;
+import com.example.misha.myapplication.model.Week;
 
 public class LessonDao extends AbsDao<Lesson> {
 
@@ -22,7 +23,7 @@ public class LessonDao extends AbsDao<Lesson> {
         return instance;
     }
 
-    public final static String ID = "_id";
+    public final static String ID = "id";
     public final static String ID_WEEK = "id_week";
     public final static String ID_DAY = "id_day";
     public final static String ID_SUBJECT = "id_subject";
@@ -41,7 +42,7 @@ public class LessonDao extends AbsDao<Lesson> {
 
     @Override
     protected Uri getTableUri() {
-        return AppContentProvider.SCHEDULE_URI;
+        return AppContentProvider.LESSONS_URI;
     }
 
     @Override
@@ -70,5 +71,9 @@ public class LessonDao extends AbsDao<Lesson> {
         set.put(ID_WEEK, instance.getWeek());
         set.put(TIME_LESSON, instance.getTimeLesson());
         return set;
+    }
+
+    public boolean deleteItemById(long id) {
+        return super.deleteItemById(id, ID_WEEK);
     }
 }

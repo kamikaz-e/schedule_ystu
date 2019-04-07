@@ -6,8 +6,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.misha.myapplication.data.ScheduleClass;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
@@ -36,21 +33,10 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
-import static com.example.misha.myapplication.data.ScheduleClass.audiences.audience_id;
-import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
-import static com.example.misha.myapplication.data.ScheduleClass.date_start.DATE_START;
-import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
-import static com.example.misha.myapplication.data.ScheduleClass.educators.educator_id;
-import static com.example.misha.myapplication.data.ScheduleClass.schedule.SCHEDULE;
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject_id;
 
 
 public class ActivityStart extends Activity {

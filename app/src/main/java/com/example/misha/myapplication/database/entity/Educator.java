@@ -10,8 +10,6 @@ public class Educator implements Parcelable {
 
     private String name;
 
-
-
     public Educator(String id, String name) {
         this.id = id;
         this.name = name;
@@ -43,6 +41,12 @@ public class Educator implements Parcelable {
 
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
+
     public String getName() {
         return name;
     }
@@ -58,7 +62,6 @@ public class Educator implements Parcelable {
     public  void  setName(String name){
         this.name=name;
     }
-
 
     @Override
     public int describeContents() {

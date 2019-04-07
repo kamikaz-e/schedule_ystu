@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -34,17 +35,8 @@ public class ActivityEditData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityeditdata);
 
-   /* final Toolbar toolbar = findViewById(R.ID.toolbar);
-    setSupportActionBar(toolbar);
-    ActionBar actionBar = getSupportActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(true);
-    actionBar.setDisplayShowTitleEnabled(false);
-    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);*/
-
-
-
-     /* SharedPreferences sp = getPreferences(MODE_PRIVATE);
-      String hasVisited = sp.getString("hasVisited", "nope");
+      /* SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+      String hasVisited = sharedPreferences.getString("hasVisited", "nope");
 
       if (hasVisited == "nope") {
         new MaterialTapTargetPrompt.Builder(this)
@@ -66,7 +58,7 @@ public class ActivityEditData extends AppCompatActivity {
                 })
                 .show();
 
-        SharedPreferences.Editor e = sp.edit();
+        SharedPreferences.Editor e = sharedPreferences.edit();
         e.putString("hasVisited", "yes");
         e.commit();
       }*/

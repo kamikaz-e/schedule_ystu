@@ -3,9 +3,7 @@ package com.example.misha.myapplication;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -16,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,10 +23,6 @@ import com.example.misha.myapplication.database.entity.Subject;
 
 import java.util.ArrayList;
 
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject;
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.subject_id;
-
 
 public class FragmentSubject extends android.support.v4.app.Fragment {
 
@@ -38,10 +31,8 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
     ListView list_subjects;
     ArrayList<Subject> subject_list = new ArrayList<>();
     public ArrayAdapter<String> adapter;
-    String select_item="";
-    ViewPager vp;
-    Button clear_subjects;
-    Integer abc=0;
+    String selectId ="";
+    ViewPager viewpager;
     public FragmentSubject() {
 
     }
@@ -56,15 +47,11 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_subject, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_subject, container, false);
         input_subject = view.findViewById(R.id.input_subject);
         list_subjects = view.findViewById(R.id.list_subjects);
-
-
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
         list_subjects.setAdapter(adapter);
-
         list_subjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
@@ -72,10 +59,9 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
                 onCreateDialogDeleteItem(position).show();
             }
         });
+        updateListView();
 
-        updateList();
-
-        vp = getActivity().findViewById(R.id.viewPager); //добавить подсказку
+        viewpager = getActivity().findViewById(R.id.viewPager); //добавить подсказку
 
         input_subject.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -88,12 +74,11 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
                         input_subject.setError("Введите предмет");
                         return true;
                     }
-
                     Subject subject = new Subject();
                     subject.setName(subjectName);
                     SubjectDao.getInstance().insertItem(subject);
                     input_subject.getText().clear();
-                    updateList();
+                    updateListView();
                     adapter.notifyDataSetChanged();
                     return true;
                 }
@@ -102,11 +87,6 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
                 }
             }
         });
-
-
-        TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
-        abc=tabLayout.getSelectedTabPosition();
-
         return view;
     }
     public Dialog onCreateDialogDeleteItem(final int position) {
@@ -117,26 +97,20 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
             public void onClick(DialogInterface dialog, int id) {
                Subject subject = subject_list.get(position);
                SubjectDao.getInstance().deleteItemById(Long.parseLong(subject.getId()));
-                updateList();
+                updateListView();
                 adapter.notifyDataSetChanged();
             }
         }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Удалить предмет «"+select_item+"»?");
+        }).setTitle("Удалить предмет «"+ subject_list.get(position) +"»?");
         return builder.create();
     }
 
-
-
-    public void updateList(){
-
+    public void updateListView(){
+        subject_list= SubjectDao.getInstance().getAllData();
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
         list_subjects.setAdapter(adapter);
-        subject_list= SubjectDao.getInstance().getAllData();
     }
-
-
-
 }

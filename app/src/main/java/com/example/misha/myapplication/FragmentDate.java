@@ -2,7 +2,6 @@ package com.example.misha.myapplication;
 
 import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,15 +10,11 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 
-import com.example.misha.myapplication.data.ScheduleClass;
-
 import java.util.Calendar;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
-
-import static com.example.misha.myapplication.data.ScheduleClass.date_start.DATE_START;
 
 
 public class FragmentDate extends android.support.v4.app.Fragment {
@@ -30,7 +25,6 @@ public class FragmentDate extends android.support.v4.app.Fragment {
 
 
     Calendar Date = Calendar.getInstance();
-    private ScheduleDB ScheduleDB;
     String  current_date;
 
 
@@ -44,7 +38,6 @@ public class FragmentDate extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
 
        View view =inflater.inflate(R.layout.fragment_date, container, false);
-        ScheduleDB = new ScheduleDB();
         layout_pich_week = view.findViewById(R.id.oneitem);
 
         new MaterialTapTargetPrompt.Builder(getActivity())
@@ -88,9 +81,9 @@ public class FragmentDate extends android.support.v4.app.Fragment {
                     Date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     Calendar today = Calendar.getInstance();
                     current_date = String.valueOf(Date.getTimeInMillis());
-                    SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-                    db.execSQL("update " + DATE_START + " set " + ScheduleClass.date_start.date + " = '" +
-                            current_date  + "' where " + ScheduleClass.date_start.id_date + " = " + 1);
+
+                   /* db.execSQL("update " + DATE_START + " set " + ScheduleClass.date_start.date + " = '" +
+                            current_date  + "' where " + ScheduleClass.date_start.id_date + " = " + 1);*/
                     // Toast.makeText(context, String.valueOf(today.getTimeInMillis()), Toast.LENGTH_SHORT).show();
 
                     SharedPreferences settings = getActivity().getSharedPreferences("week", 0);

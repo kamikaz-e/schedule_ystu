@@ -23,7 +23,7 @@ public class TypelessonDao extends AbsDao<Typelesson> {
         return instance;
     }
 
-    public final static String ID = "idd_typelesson";
+    public final static String ID = "id";
     public final static String TYPELESSON = "typelesson";
 
 
@@ -36,7 +36,7 @@ public class TypelessonDao extends AbsDao<Typelesson> {
 
     @Override
     protected Uri getTableUri() {
-        return AppContentProvider.SCHEDULE_URI;
+        return AppContentProvider.TYPELESSONS_URI;
     }
 
     @Override
@@ -54,5 +54,8 @@ public class TypelessonDao extends AbsDao<Typelesson> {
         set.put(TYPELESSON, instance.getName());
 
         return set;
+    }
+    public boolean deleteItemById(long id) {
+        return super.deleteItemById(id, ID);
     }
 }

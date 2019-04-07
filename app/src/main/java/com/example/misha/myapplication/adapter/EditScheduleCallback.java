@@ -4,6 +4,7 @@ package com.example.misha.myapplication.adapter;
 import com.example.misha.myapplication.database.entity.Audience;
 import com.example.misha.myapplication.database.entity.Educator;
 import com.example.misha.myapplication.database.entity.Subject;
+import com.example.misha.myapplication.database.entity.Typelesson;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,8 @@ public interface EditScheduleCallback {
     void onEducatorClick(int position, ArrayList<Educator> educator);
 
     void onSubjectClick(int position, ArrayList<Subject> subject);
+
+    void onTypelessonClick(int position, ArrayList<Typelesson> typelesson);
 
     void onSubjectSetText (int position, ArrayList<Subject> subject);
 

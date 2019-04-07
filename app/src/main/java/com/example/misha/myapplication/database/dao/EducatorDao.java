@@ -3,7 +3,6 @@ package com.example.misha.myapplication.database.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.BaseColumns;
 
 import com.example.misha.myapplication.database.AbsDao;
 import com.example.misha.myapplication.database.AppContentProvider;
@@ -22,8 +21,8 @@ public class EducatorDao extends AbsDao<Educator> {
         return instance;
     }
 
-    public final static String ID =  "idd_educator";
-    public final static String EDUCATOR = "educators";
+    public final static String ID =  "id";
+    public final static String EDUCATOR = "educator";
 
     public static final String[] ALL_SET_PROPERTIES = new String[] {ID, EDUCATOR};
 
@@ -34,7 +33,7 @@ public class EducatorDao extends AbsDao<Educator> {
 
     @Override
     protected Uri getTableUri() {
-        return AppContentProvider.SCHEDULE_URI;
+        return AppContentProvider.EDUCATORS_URI;
     }
 
     @Override
@@ -51,5 +50,8 @@ public class EducatorDao extends AbsDao<Educator> {
         set.put(ID, instance.getId());
         set.put(EDUCATOR, instance.getName());
         return set;
+    }
+    public boolean deleteItemById(long id) {
+        return super.deleteItemById(id, ID);
     }
 }

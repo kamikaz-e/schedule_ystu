@@ -50,7 +50,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
@@ -85,14 +84,12 @@ public class ActivitySettings extends AppCompatActivity {
     String json_calls = "";
     String json_date = "";
     String name_db_string = "database";
-    final Context context = this;
+
     public ArrayAdapter<String> adapter;
     String current_date;
     RelativeLayout layout_pick_week;
-    RelativeLayout typelessonitem;
     RelativeLayout layout_import;
     RelativeLayout layout_export;
-    DialogFragment dlg1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +106,6 @@ public class ActivitySettings extends AppCompatActivity {
         progressDialog = new ProgressDialog(ActivitySettings.this);
 
         layout_pick_week = findViewById(R.id.oneitem);
-        typelessonitem = findViewById(R.id.typelessonitem);
         layout_import = findViewById(R.id.twoitem);
         layout_export = findViewById(R.id.threeitem);
 
@@ -189,12 +185,6 @@ public class ActivitySettings extends AppCompatActivity {
             }
         });
 
-        typelessonitem.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                dlg1 = new SubjectList();
-                dlg1.show(getSupportFragmentManager(), "dlg1");
-            }
-        });
 
         layout_import.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -240,9 +230,9 @@ public class ActivitySettings extends AppCompatActivity {
 
 
     public Dialog onCreateDialogImport() {
-        LayoutInflater li = LayoutInflater.from(context);
+        LayoutInflater li = LayoutInflater.from(this);
         View view = li.inflate(R.layout.dialog_signin, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
         final EditText name_db = view.findViewById(R.id.name_schedule);
         builder.setCancelable(false).setPositiveButton("Импортировать", new DialogInterface.OnClickListener() {
@@ -341,9 +331,9 @@ public class ActivitySettings extends AppCompatActivity {
 
 
     public Dialog onCreateDialogExport() {
-        LayoutInflater li = LayoutInflater.from(context);
+        LayoutInflater li = LayoutInflater.from(this);
         View view = li.inflate(R.layout.dialog_signin, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
         final EditText name_db = view.findViewById(R.id.name_schedule);
         builder.setCancelable(false).setPositiveButton("Экспортировать", new DialogInterface.OnClickListener() {

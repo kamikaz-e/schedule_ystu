@@ -5,18 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.misha.myapplication.database.dao.LessonDao;
-import com.example.misha.myapplication.database.entity.Lesson;
-
 import java.util.ArrayList;
-
-import static com.example.misha.myapplication.data.ScheduleClass.audiences.AUDIENCE;
-import static com.example.misha.myapplication.data.ScheduleClass.calls.CALLS;
-import static com.example.misha.myapplication.data.ScheduleClass.date_start.DATE_START;
-import static com.example.misha.myapplication.data.ScheduleClass.educators.EDUCATOR;
-import static com.example.misha.myapplication.data.ScheduleClass.schedule.SCHEDULE;
-import static com.example.misha.myapplication.data.ScheduleClass.subjects.SUBJECT;
-import static com.example.misha.myapplication.data.ScheduleClass.typelessons.TYPELESSON;
 
 /** Class creates data base if it don't exist. */
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -27,34 +16,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
 
 
-    private static final String CREATE_TABLE_SUBJECTS= "CREATE TABLE  subjects  (" +
-            " idd_subject INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "subject STRING UNIQUE ON CONFLICT IGNORE );";
-    private static final String CREATE_TABLE_AUDIENCES= "CREATE TABLE  audiences  (" +
-            " idd_audience INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "audience STRING UNIQUE ON CONFLICT IGNORE );";
-    private static final String CREATE_TABLE_EDUCATORS= "CREATE TABLE  educators  (" +
-            " idd_educator INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "educators STRING UNIQUE ON CONFLICT IGNORE );";
-    private static final String CREATE_TABLE_TYPELESSONS= "CREATE TABLE  typelessons  ( " +
-            "idd_typelesson INTEGER PRIMARY KEY AUTOINCREMENT," +
-            " typelesson STRING UNIQUE ON CONFLICT IGNORE );";
+    private static final String CREATE_TABLE_SUBJECTS= "CREATE TABLE  subjects " +
+            "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "subject VARCHAR UNIQUE ON CONFLICT IGNORE );";
+    private static final String CREATE_TABLE_AUDIENCES= "CREATE TABLE  audiences  " +
+            "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "audience VARCHAR UNIQUE ON CONFLICT IGNORE );";
+    private static final String CREATE_TABLE_EDUCATORS= "CREATE TABLE  educators  " +
+            "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "educator VARCHAR UNIQUE ON CONFLICT IGNORE );";
+    private static final String CREATE_TABLE_TYPELESSONS= "CREATE TABLE  typelessons  " +
+            "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " typelesson VARCHAR UNIQUE ON CONFLICT IGNORE );";
 
+    private static final String CREATE_CALL_SCHEDULE  = "CREATE TABLE calls " +
+            "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "time_lesson VARCHAR UNIQUE ON CONFLICT IGNORE );";
 
-    private static final String CREATE_TABLE_SCHEDULE = "CREATE TABLE schedule (" +
-            "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "id_week INTEGER, id_day INTEGER, id_subject INTEGER, id_audience INTEGER, id_educator INTEGER, id_typelesson INTEGER, time_lesson LONG," +
-            "FOREIGN KEY (id_subject) REFERENCES subjects (idd_subject), " +
-            "FOREIGN KEY (id_audience) REFERENCES audiences (idd_audience), " +
-            "FOREIGN KEY (id_educator) REFERENCES educators (idd_educator), " +
-            "FOREIGN KEY (id_typelesson) REFERENCES typelessons (idd_typelesson))";
-
-    private static final String CREATE_CALL_SCHEDULE  = "CREATE TABLE calls ( id_call INTEGER PRIMARY KEY AUTOINCREMENT, time  STRING );";
+    private static final String CREATE_TABLE_LESSONS = "CREATE TABLE lessons " +
+            "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "id_week INTEGER, id_day INTEGER, id_subject INTEGER, id_audience INTEGER, id_educator INTEGER, id_typelesson INTEGER, id_time_lesson INTEGER," +
+            "FOREIGN KEY (id_subject) REFERENCES subjects (id), " +
+            "FOREIGN KEY (id_audience) REFERENCES audiences (id), " +
+            "FOREIGN KEY (id_educator) REFERENCES educators (id), " +
+            "FOREIGN KEY (id_typelesson) REFERENCES typelessons (id), " +
+            "FOREIGN KEY (id_time_lesson) REFERENCES calls (id))";
 
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase sdb) {
@@ -89,22 +81,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     private Patch createV1Patch() {
         return new Patch() {
-            @SuppressLint("SQLiteString")
-            @Override
+
             public void apply(SQLiteDatabase sdb) {
-                sdb.execSQL(CREATE_TABLE_SCHEDULE);
                 sdb.execSQL(CREATE_TABLE_SUBJECTS);
                 sdb.execSQL(CREATE_TABLE_AUDIENCES);
                 sdb.execSQL(CREATE_TABLE_EDUCATORS);
                 sdb.execSQL(CREATE_TABLE_TYPELESSONS);
                 sdb.execSQL(CREATE_CALL_SCHEDULE);
-                ArrayList<Lesson> lessons = new ArrayList<>();
-                for (int j = 1; j < 19; j++) {
-                    for (int i = 1; i < 7; i++) {
-                        lessons.add(new Lesson(j, i, "", "", "", "", ""));
+                sdb.execSQL(CREATE_TABLE_LESSONS);
+
+                for (int week = 1; week < 19; week++) {
+                    for (int day = 1; day < 7; day++) {
+                        for (int lesson = 1; lesson < 7; lesson++) {
+                            String sql = "INSERT INTO lessons (" +
+                                    "id_week,  " +
+                                    "id_day," +
+                                    "id_subject," +
+                                    "id_audience," +
+                                    "id_educator, " +
+                                    "id_typelesson, " +
+                                    "id_time_lesson )" +
+                                    " VALUES(" + week + "," + day + ",'','','',''," + lesson+");";
+                            sdb.execSQL(sql);
+                        }
                     }
                 }
-                LessonDao.getInstance().insertAll(lessons);
             }
 
             @Override
@@ -123,13 +124,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             @SuppressLint("SQLiteString")
             @Override
             public void apply(SQLiteDatabase sdb) {
-                sdb.execSQL("DROP TABLE IF EXISTS " + SUBJECT);
-                sdb.execSQL("DROP TABLE IF EXISTS " + AUDIENCE);
-                sdb.execSQL("DROP TABLE IF EXISTS " + EDUCATOR);
-                sdb.execSQL("DROP TABLE IF EXISTS " + TYPELESSON);
-                sdb.execSQL("DROP TABLE IF EXISTS " + SCHEDULE);
-                sdb.execSQL("DROP TABLE IF EXISTS " + CALLS);
-                sdb.execSQL("DROP TABLE IF EXISTS " + DATE_START);
+                sdb.execSQL("DROP TABLE IF EXISTS subjects");
+                sdb.execSQL("DROP TABLE IF EXISTS audiences");
+                sdb.execSQL("DROP TABLE IF EXISTS educators");
+                sdb.execSQL("DROP TABLE IF EXISTS typelessons");
+                sdb.execSQL("DROP TABLE IF EXISTS calls");
+                sdb.execSQL("DROP TABLE IF EXISTS lessons");
                 onCreate(sdb);
             }
 

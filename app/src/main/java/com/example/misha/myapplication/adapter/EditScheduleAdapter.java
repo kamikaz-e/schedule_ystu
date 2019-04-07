@@ -12,6 +12,7 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.entity.Audience;
 import com.example.misha.myapplication.database.entity.Educator;
 import com.example.misha.myapplication.database.entity.Subject;
+import com.example.misha.myapplication.database.entity.Typelesson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     private ArrayList<Subject> subjectList = new ArrayList<>();
     private ArrayList<Audience> audienceList = new ArrayList<>();
     private ArrayList<Educator> educatorList = new ArrayList<>();
+    private ArrayList<Typelesson> typelessonList = new ArrayList<>();
     private EditScheduleCallback callback;
 
     public EditScheduleAdapter(EditScheduleCallback editScheduleCallback) {
@@ -40,6 +42,15 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     public void setAudiences(ArrayList<Audience> audienceList) {
         this.audienceList = audienceList;
     }
+
+    public void setSubjects(ArrayList<Subject> subjectList) {
+        this.subjectList = subjectList;
+    }
+    public void setTypelesson(ArrayList<Typelesson> typelessonList) {
+        this.typelessonList = typelessonList;
+    }
+
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -57,10 +68,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         return lessonList.size();
     }
 
-    public void setSubjects(ArrayList<Subject> subjectList) {
-        this.subjectList = subjectList;
-
-    }
 
 
 
@@ -70,22 +77,22 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         private final TextView subjectEdit;
         private final TextView audienceEdit;
         private final TextView educatorEdit;
-        private final RadioGroup typeLesson;
+        private final TextView typeLessonEdit;
 
 
         public ViewHolder(View view) {
             super(view);
-            number = view.findViewById(R.id.number_monday);
-            timeEdit = view.findViewById(R.id.time_monday);
+            number = view.findViewById(R.id.number);
+            timeEdit = view.findViewById(R.id.time);
             subjectEdit = view.findViewById(R.id.button_subject);
             audienceEdit = view.findViewById(R.id.button_audience);
             educatorEdit = view.findViewById(R.id.button_educator);
-            typeLesson = view.findViewById(R.id.typeEdit_monday);
+            typeLessonEdit = view.findViewById(R.id.button_typelesson);
             subjectEdit.setOnClickListener(this);
             audienceEdit.setOnClickListener(this);
             educatorEdit.setOnClickListener(this);
+            typeLessonEdit.setOnClickListener(this);
             view.setOnClickListener(this);
-
         }
 
         public void onBindView(int position) {
@@ -95,7 +102,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             subjectEdit.setText(lesson.getSubject());
             audienceEdit.setText(lesson.getAudience());
             educatorEdit.setText(lesson.getEducator());
-            //typeLesson.setText(lesson.getTypeLesson());
+            typeLessonEdit.setText(lesson.getTypeLesson());
         }
 
         @Override
@@ -109,7 +116,11 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             }
             if (v.getId() == R.id.button_subject) {
                 callback.onSubjectClick(getAdapterPosition(), subjectList);
-        } }
+            }
+            if (v.getId() == R.id.button_typelesson) {
+                callback.onTypelessonClick(getAdapterPosition(), typelessonList);
+            }
+        }
 
 
 

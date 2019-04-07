@@ -17,6 +17,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.example.misha.myapplication.database.dao.CallDao;
+import com.example.misha.myapplication.database.entity.Calls;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
@@ -25,19 +29,6 @@ import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFoc
 
 public class ActivityCallSchedule extends AppCompatActivity {
 
-  String select_time_partOne;
-  String select_time_fullOne;
-  String select_time_partTwo;
-  String select_time_fullTwo;
-  String select_time_partThree;
-  String select_time_fullThree;
-  String select_time_partFour;
-  String select_time_fullFour;
-  String select_time_partFive;
-  String select_time_fullFive;
-  String select_time_partSix;
-  String select_time_fullSix;
-  Integer flag=0;
   EditText oneTime;
   EditText twoTime;
   EditText threeTime;
@@ -49,10 +40,25 @@ public class ActivityCallSchedule extends AppCompatActivity {
   Integer start=1;
   Button button_toolbar;
   String hasVisited;
-  SharedPreferences sp;
+  SharedPreferences sharedPreferences;
+
+    String select_time_partOne;
+    String select_time_fullOne;
+    String select_time_partTwo;
+    String select_time_fullTwo;
+    String select_time_partThree;
+    String select_time_fullThree;
+    String select_time_partFour;
+    String select_time_fullFour;
+    String select_time_partFive;
+    String select_time_fullFive;
+    String select_time_partSix;
+    String select_time_fullSix;
+
+    ArrayList<Calls> callsList = new ArrayList<>();
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    // STOPSHIP: 23.03.2019
+
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_call_schedule);
     android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
@@ -76,11 +82,11 @@ public class ActivityCallSchedule extends AppCompatActivity {
     fourTime = findViewById(R.id.FourTime);
     fiveTime = findViewById(R.id.FiveTime);
     sixTime = findViewById(R.id.SixTime);
-    start();
+    updateCalls();
 
 
-    sp = getPreferences(MODE_PRIVATE);
-    hasVisited = sp.getString("hasVisited", "nope");
+    sharedPreferences = getPreferences(MODE_PRIVATE);
+    hasVisited = sharedPreferences.getString("hasVisited", "nope");
     if (hasVisited == "nope") {
 
 
@@ -140,6 +146,9 @@ public class ActivityCallSchedule extends AppCompatActivity {
     {   select_time_fullOne= select_time_partOne+DateUtils.formatDateTime(this,
             Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
       oneTime.setText(select_time_fullOne);
+        Calls calls = new Calls();
+        calls.setName(select_time_fullOne);
+        CallDao.getInstance().insertItem(calls);
     }
     if (start==1){
       new TimePickerDialog(ActivityCallSchedule.this, timeone,
@@ -174,6 +183,9 @@ public class ActivityCallSchedule extends AppCompatActivity {
     {   select_time_fullTwo= select_time_partTwo+DateUtils.formatDateTime(this,
             Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
       twoTime.setText(select_time_fullTwo);
+        Calls calls = new Calls();
+        calls.setName(select_time_fullTwo);
+        CallDao.getInstance().insertItem(calls);
       }
     if (start==1){
       new TimePickerDialog(ActivityCallSchedule.this, timetwo,
@@ -209,6 +221,9 @@ public class ActivityCallSchedule extends AppCompatActivity {
     {   select_time_fullThree= select_time_partThree+DateUtils.formatDateTime(this,
             Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
       threeTime.setText(select_time_fullThree);
+      Calls calls = new Calls();
+        calls.setName(select_time_fullThree);
+        CallDao.getInstance().insertItem(calls);
    }
     if (start==1){
       new TimePickerDialog(ActivityCallSchedule.this, timeThree,
@@ -244,6 +259,9 @@ public class ActivityCallSchedule extends AppCompatActivity {
     {   select_time_fullFour= select_time_partFour+DateUtils.formatDateTime(this,
             Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
       fourTime.setText(select_time_fullFour);
+        Calls calls = new Calls();
+        calls.setName(select_time_fullFour);
+        CallDao.getInstance().insertItem(calls);
     }
     if (start==1){
       new TimePickerDialog(ActivityCallSchedule.this, timeFour,
@@ -278,6 +296,9 @@ public class ActivityCallSchedule extends AppCompatActivity {
     {   select_time_fullFive= select_time_partFive+DateUtils.formatDateTime(this,
             Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
       fiveTime.setText(select_time_fullFive);
+        Calls calls = new Calls();
+        calls.setName(select_time_fullFive);
+        CallDao.getInstance().insertItem(calls);
       }
     if (start==1){
       new TimePickerDialog(ActivityCallSchedule.this, timeFive,
@@ -312,6 +333,9 @@ public class ActivityCallSchedule extends AppCompatActivity {
     {   select_time_fullSix= select_time_partSix+DateUtils.formatDateTime(this,
             Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
       sixTime.setText(select_time_fullSix);
+        Calls calls = new Calls();
+        calls.setName(select_time_fullSix);
+        CallDao.getInstance().insertItem(calls);
     }
     if (start==1){
       new TimePickerDialog(ActivityCallSchedule.this, timeSix,
@@ -330,66 +354,41 @@ public class ActivityCallSchedule extends AppCompatActivity {
   };
 
 
-  void start(){
-  /*  SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-    flag=0;
-    String searchQuery = "SELECT "+ time +" FROM " + CALLS;
-    Cursor cursor = db.rawQuery(searchQuery, null);
-    while(cursor.moveToNext()) {
-      switch (flag){
-        case 0: oneTime.setText(String.valueOf(cursor.getString(0)));
-          select_time_fullOne=(cursor.getString(0));
-          flag++;break;
-        case 1: twoTime.setText(String.valueOf(cursor.getString(0)));
-          select_time_fullTwo=(cursor.getString(0));
-          flag++;break;
-        case 2: threeTime.setText(String.valueOf(cursor.getString(0)));
-          select_time_fullThree=(cursor.getString(0));
-          flag++;break;
-        case 3: fourTime.setText(String.valueOf(cursor.getString(0)));
-          select_time_fullFour=(cursor.getString(0));
-          flag++;break;
-        case 4: fiveTime.setText(String.valueOf(cursor.getString(0)));
-          select_time_fullFive=(cursor.getString(0));
-          flag++;break;
-        case 5: sixTime.setText(String.valueOf(cursor.getString(0)));
-          select_time_fullSix=(cursor.getString(0));
-          flag++;break;}
-    }
-    cursor.close();*/
+  void updateCalls(){
+
+
+   /*  callsList= CallDao.getInstance().getAllData();
+
+    callsList.add(0, CallDao.getInstance().getItemByID(1));
+    callsList.add(1, CallDao.getInstance().getItemByID(2));
+    callsList.add(2, CallDao.getInstance().getItemByID(3));
+    callsList.add(3, CallDao.getInstance().getItemByID(4));
+    callsList.add(4, CallDao.getInstance().getItemByID(5));
+    callsList.add(5, CallDao.getInstance().getItemByID(6));
+      if  (callsList.size() > 0) {
+          select_time_fullOne = String.valueOf(callsList.get(0));
+          oneTime.setText(select_time_fullOne);
+
+          select_time_fullTwo = String.valueOf(callsList.get(1));
+          twoTime.setText(select_time_fullTwo);
+
+          select_time_fullThree = String.valueOf(callsList.get(2));
+          threeTime.setText(select_time_fullThree);
+
+          select_time_fullFour = String.valueOf(callsList.get(3));
+          fourTime.setText(select_time_fullFour);
+
+          select_time_fullFive = String.valueOf(callsList.get(4));
+          fiveTime.setText(select_time_fullFive);
+
+          select_time_fullSix = String.valueOf(callsList.get(5));
+          sixTime.setText(select_time_fullSix);
+      }*/
   }
 
-
-  void save_calls(){
-  /*  SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-    db.beginTransaction();
-    try {
-      db.execSQL("DROP TABLE " + CALLS);
-      db.execSQL("CREATE TABLE " + CALLS + " ("
-              + id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-              + time + " STRING );");
-      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullOne +"');");
-      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullTwo +"');");
-      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullThree +"');");
-      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullFour +"');");
-      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullFive +"');");
-      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('"+ select_time_fullSix +"');");
-
-      db.setTransactionSuccessful();
-    } finally {
-      db.endTransaction();
-    }*/
-  }
 
   void clear_calls(){
-    /*SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-    db.execSQL("DROP TABLE " + CALLS);
-    String calls_schedule = "CREATE TABLE " + CALLS + " ("
-            + id_call + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + time + " STRING );";
-    db.execSQL(calls_schedule);
-    for (int i=0;i<6;i++){
-      db.execSQL("INSERT INTO " + CALLS + " (" + time + ") VALUES ('');");}
+    CallDao.getInstance().deleteAll();
     oneTime.setText("");
     twoTime.setText("");
     threeTime.setText("");
@@ -401,15 +400,13 @@ public class ActivityCallSchedule extends AppCompatActivity {
     select_time_fullThree="";
     select_time_fullFour="";
     select_time_fullFive="";
-    select_time_fullSix="";*/
+    select_time_fullSix="";
   }
 
   public boolean onOptionsItemSelected(MenuItem item) {
 
     switch (item.getItemId()) {
       case android.R.id.home:
-
-          save_calls();
           Intent intent = new Intent(ActivityCallSchedule.this, MainActivity.class);
           finish();
           startActivity(intent);

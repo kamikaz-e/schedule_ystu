@@ -3,11 +3,9 @@ package com.example.misha.myapplication.database.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.BaseColumns;
 
 import com.example.misha.myapplication.database.AbsDao;
 import com.example.misha.myapplication.database.AppContentProvider;
-import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
 
 public class SubjectDao extends AbsDao<Subject> {
@@ -17,14 +15,14 @@ public class SubjectDao extends AbsDao<Subject> {
     private SubjectDao() {}
 
     public static SubjectDao getInstance() {
-        if (null == instance){
+        if (instance == null){
             instance = new SubjectDao();
         }
         return instance;
     }
 
-    public final static String ID = "idd_subject";
-    public final static String SUBJECT = "subjects";
+    public final static String ID = "id";
+    public final static String SUBJECT = "subject";
 
 
     public static final String[] ALL_SET_PROPERTIES = new String[] {ID, SUBJECT};
@@ -36,7 +34,7 @@ public class SubjectDao extends AbsDao<Subject> {
 
     @Override
     protected Uri getTableUri() {
-        return AppContentProvider.SCHEDULE_URI;
+        return AppContentProvider.SUBJECTS_URI;
     }
 
     @Override

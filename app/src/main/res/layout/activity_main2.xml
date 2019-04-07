@@ -59,21 +59,5 @@
         app:layout_constraintTop_toBottomOf="@+id/tab_layout">
 
     </android.support.v4.view.ViewPager>
-    <Switch
-      android:id="@+id/switcher_save"
-      android:layout_width="80dp"
-      android:layout_height="27dp"
-      android:layout_marginTop="15dp"
-      android:layout_marginEnd="80dp"
-      android:layout_alignParentTop="true"
-      android:text=""
-      android:drawableLeft="@drawable/ic_save"
-      android:textColor="#FFFFFF"
-      android:textSize="17dp"
-      android:theme="@style/AppCompatAlertDialogStyle"
-      app:layout_constraintEnd_toEndOf="@+id/toolbar"
-      app:layout_constraintTop_toTopOf="parent"
-      />
-
 
 </android.support.constraint.ConstraintLayout>

@@ -44,6 +44,11 @@ public class Typelesson implements Parcelable {
 
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public String getName() {
         return name;
     }

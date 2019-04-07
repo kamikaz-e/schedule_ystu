@@ -19,8 +19,8 @@ public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapte
 
     private SimpleItemClickListener itemClickListener;
 
-    public ListSubjectsAdapter(ArrayList<Subject> schedule, SimpleItemClickListener simpleItemClickListener) {
-        this.listSubjects = schedule;
+    public ListSubjectsAdapter(ArrayList<Subject> subject, SimpleItemClickListener simpleItemClickListener) {
+        this.listSubjects = subject;
         this.itemClickListener = simpleItemClickListener;
     }
 
