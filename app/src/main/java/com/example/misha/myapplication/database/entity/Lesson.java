@@ -23,14 +23,14 @@ public class Lesson {
     }
 
 
-    public Lesson(int day, int week, String subject, String audience, String educator, String typeLesson, String timeLesson) {
+    public Lesson(int day, int week, int subject, String audience, String educator, String typeLesson, int timeLesson) {
         this.day = String.valueOf(day);
-        this.week= String.valueOf(week);
-        this.subject=subject;
-        this.audience=audience;
-        this.educator=educator;
-        this.typeLesson=typeLesson;
-        this.timeLesson=String.valueOf(timeLesson);
+        this.week = String.valueOf(week);
+        this.subject = String.valueOf(subject);
+        this.audience = audience;
+        this.educator = educator;
+        this.typeLesson = typeLesson;
+        this.timeLesson = String.valueOf(timeLesson);
     }
 
     public String getId() {
@@ -40,12 +40,15 @@ public class Lesson {
     public String getSubject() {
         return subject;
     }
+
     public String getAudience() {
         return audience;
     }
+
     public String getEducator() {
         return educator;
     }
+
     public String getTypeLesson() {
         return typeLesson;
     }

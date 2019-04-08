@@ -13,7 +13,7 @@ public class ScheduleApp extends Application {
         appContext = getApplicationContext();
     }
 
-    public final static Context getAppContext() {
+    public static Context getAppContext() {
         return appContext;
     }
 

@@ -3,11 +3,9 @@ package com.example.misha.myapplication.database.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.BaseColumns;
 
 import com.example.misha.myapplication.database.AbsDao;
 import com.example.misha.myapplication.database.AppContentProvider;
-import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Typelesson;
 
 public class TypelessonDao extends AbsDao<Typelesson> {

@@ -1,6 +1,5 @@
 package com.example.misha.myapplication.database;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,6 +13,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Lesson.db";
     /** Database version. */
     public static final int DATABASE_VERSION = 1;
+    /** Migration list. */
+    private final ArrayList<Patch> migrationsList = new ArrayList<Patch>() { {
+        add(createV1Patch());
+    }
+    };
+
 
 
     private static final String CREATE_TABLE_SUBJECTS= "CREATE TABLE  subjects " +
@@ -35,7 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_LESSONS = "CREATE TABLE lessons " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "id_week INTEGER, id_day INTEGER, id_subject INTEGER, id_audience INTEGER, id_educator INTEGER, id_typelesson INTEGER, id_time_lesson INTEGER," +
+            "week INTEGER, day INTEGER, id_subject INTEGER, id_audience INTEGER, id_educator INTEGER, id_typelesson INTEGER, id_time_lesson INTEGER," +
             "FOREIGN KEY (id_subject) REFERENCES subjects (id), " +
             "FOREIGN KEY (id_audience) REFERENCES audiences (id), " +
             "FOREIGN KEY (id_educator) REFERENCES educators (id), " +
@@ -69,11 +74,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    /** Migration list. */
-    private final ArrayList<Patch> migrationsList = new ArrayList<Patch>() { {
-            add(createV1Patch());
-        }
-    };
 
     /**
      * Create v1 patch.
@@ -89,48 +89,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 sdb.execSQL(CREATE_TABLE_TYPELESSONS);
                 sdb.execSQL(CREATE_CALL_SCHEDULE);
                 sdb.execSQL(CREATE_TABLE_LESSONS);
-
-                for (int week = 1; week < 19; week++) {
-                    for (int day = 1; day < 7; day++) {
-                        for (int lesson = 1; lesson < 7; lesson++) {
-                            String sql = "INSERT INTO lessons (" +
-                                    "id_week,  " +
-                                    "id_day," +
-                                    "id_subject," +
-                                    "id_audience," +
-                                    "id_educator, " +
-                                    "id_typelesson, " +
-                                    "id_time_lesson )" +
-                                    " VALUES(" + week + "," + day + ",'','','',''," + lesson+");";
-                            sdb.execSQL(sql);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void revert(SQLiteDatabase sdb) {
-                //do nothing
-            }
-        };
-    }
-
-    /**
-     * Create v1 patch.
-     * @return v1 patch
-     */
-    private Patch createV2Patch() {
-        return new Patch() {
-            @SuppressLint("SQLiteString")
-            @Override
-            public void apply(SQLiteDatabase sdb) {
-                sdb.execSQL("DROP TABLE IF EXISTS subjects");
-                sdb.execSQL("DROP TABLE IF EXISTS audiences");
-                sdb.execSQL("DROP TABLE IF EXISTS educators");
-                sdb.execSQL("DROP TABLE IF EXISTS typelessons");
-                sdb.execSQL("DROP TABLE IF EXISTS calls");
-                sdb.execSQL("DROP TABLE IF EXISTS lessons");
-                onCreate(sdb);
             }
 
             @Override

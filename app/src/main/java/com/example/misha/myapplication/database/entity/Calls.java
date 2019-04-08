@@ -41,7 +41,6 @@ public class Calls implements Parcelable {
     };
 
     public Calls() {
-        
     }
 
     @Override

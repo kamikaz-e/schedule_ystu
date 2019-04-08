@@ -16,9 +16,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.TypelessonDao;
-import com.example.misha.myapplication.database.entity.Educator;
 import com.example.misha.myapplication.database.entity.Typelesson;
 
 import java.util.ArrayList;

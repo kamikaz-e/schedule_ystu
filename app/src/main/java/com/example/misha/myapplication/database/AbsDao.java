@@ -8,24 +8,32 @@ import android.database.CursorIndexOutOfBoundsException;
 import android.net.Uri;
 
 import com.example.misha.myapplication.ScheduleApp;
-import com.example.misha.myapplication.database.entity.Lesson;
 
 import java.util.ArrayList;
 
 /**
  * Abstract data access object.
+ *
  * @param <T> model template
  */
 public abstract class AbsDao<T> {
 
-    /** Equal string. */
+    /**
+     * Equal string.
+     */
     protected static final String EQUALS = "=?";
-    /** Key for 'ID' column in the workouts table. */
+    /**
+     * Key for 'ID' column in the workouts table.
+     */
     protected static final String KEY_ID = "ID";
+    protected static final String KEY_DAY = "day";
+    protected static final String KEY_WEEK = "week";
+
 
     /**
      * Get value for specified value from cursor.
-     * @param cursor Cursor to get value from.
+     *
+     * @param cursor     Cursor to get value from.
      * @param columnName Name of column.
      * @return Value of column from the cursor.
      */
@@ -35,7 +43,8 @@ public abstract class AbsDao<T> {
 
     /**
      * Get value for specified value from cursor for int.
-     * @param cursor cursor
+     *
+     * @param cursor     cursor
      * @param columnName column name
      * @return int column value
      */
@@ -45,18 +54,21 @@ public abstract class AbsDao<T> {
 
     /**
      * Getter for all columns array.
+     *
      * @return all columns array
      */
     protected abstract String[] getAllColumns();
 
     /**
      * Getter for table uri.
+     *
      * @return table uri
      */
     protected abstract Uri getTableUri();
 
     /**
      * Get all records in table.
+     *
      * @return all records in table array
      */
     public ArrayList<T> getAllData() {
@@ -67,6 +79,7 @@ public abstract class AbsDao<T> {
 
     /**
      * Return content resolver to get access to content providers.
+     *
      * @return ContentResolver class instance
      */
     protected ContentResolver getContentResolver() {
@@ -75,6 +88,7 @@ public abstract class AbsDao<T> {
 
     /**
      * Make class instance form cursor.
+     *
      * @param cursor cursor
      * @return class instance
      */
@@ -82,6 +96,7 @@ public abstract class AbsDao<T> {
 
     /**
      * Make content values from class instance.
+     *
      * @param instance instance
      * @return content values
      */
@@ -89,6 +104,7 @@ public abstract class AbsDao<T> {
 
     /**
      * Extract class instances from cursor.
+     *
      * @param cursor Cursor
      * @return class instances array
      */
@@ -110,6 +126,7 @@ public abstract class AbsDao<T> {
 
     /**
      * Getter for class instance by ID.
+     *
      * @param id ID
      * @return class instance
      */
@@ -122,30 +139,37 @@ public abstract class AbsDao<T> {
 
     /**
      * Insert item to table.
+     *
      * @param item item
      */
+
+
     public void insertItem(T item) {
-        getContentResolver().insert(getTableUri(), makeContentValuesFromInstance(item));
+       getContentResolver().insert(getTableUri(), makeContentValuesFromInstance(item));
+
     }
 
     public void insertAll(ArrayList<T> items) {
-        for (T item: items) {
-            getContentResolver().insert(getTableUri(), makeContentValuesFromInstance(item));
+        for (T item : items) {
+            insertItem(item);
         }
     }
 
-    /** Delete all items in table. */
+    /**
+     * Delete all items in table.
+     */
     public void deleteAll() {
         getContentResolver().delete(getTableUri(), null, null);
     }
 
     /**
      * Delete item by ID.
+     *
      * @return true if deleted
      */
-    public boolean deleteItemById(long id , String idKey) {
+    public boolean deleteItemById(long id, String idKey) {
         int affectedRowsNumber = getContentResolver().delete(getTableUri(), idKey + EQUALS,
-                new String[] {String.valueOf(id)});
+                new String[]{String.valueOf(id)});
         return affectedRowsNumber == 1;
     }
 

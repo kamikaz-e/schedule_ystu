@@ -11,7 +11,7 @@ import com.example.misha.myapplication.R;
 
 public class ScheduleMonday extends android.support.v4.app.Fragment {
     Integer position_pager = 0;
-   /* ArrayList<Calls> calls_schedule = new ArrayList<>();*/
+
 
     public ScheduleMonday() {
     }
@@ -21,15 +21,10 @@ public class ScheduleMonday extends android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    void load_calls_schedule() {
-        /*calls_schedule = CallDao.getInstance().getAllData();*/
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-      //  load_calls_schedule();
         SharedPreferences preferences = this.getActivity().getSharedPreferences("choice_week", 0);
         position_pager = Integer.valueOf(preferences.getString("position", "0"));
 

@@ -1,4 +1,4 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +15,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.PopupMenu;
 
+import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.SchedulePagerAdapter;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
@@ -143,14 +145,19 @@ public class ScheduleEditor extends AppCompatActivity {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
 
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_editor_menu);
+
+
         toolbar.setOverflowIcon(drawable);
 
         viewPager = findViewById(R.id.viewpager);
+        PopupMenu menu = new PopupMenu(this, viewPager);
+        menu.setOnMenuItemClickListener(ScheduleEditor.this::onMenuItemClicked);
         pagerAdapter = new SchedulePagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
@@ -161,7 +168,7 @@ public class ScheduleEditor extends AppCompatActivity {
         spinner.setAdapter(arrayAdapter);
 
         SharedPreferences settings = getSharedPreferences("choice_week", 0);
-        Integer current_week = Integer.valueOf(settings.getString("position", "0"));
+        int current_week = Integer.valueOf(settings.getString("position", "0"));
 
         spinner.setText(arrayAdapter.getItem(current_week));
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
@@ -205,6 +212,10 @@ public class ScheduleEditor extends AppCompatActivity {
         super.onResume();
     }
 
+
+    private boolean onMenuItemClicked(MenuItem menuItem) {
+        return  false;
+    }
 
 
 /*

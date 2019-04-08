@@ -25,7 +25,7 @@ public class SchedulePagerAdapter extends FragmentPagerAdapter {
     @SuppressLint("ResourceType")
     @Override
     public Fragment getItem(int position) {
-        return new EditSchedulePageFragment();
+        return EditSchedulePageFragment.newInstance(position);
     }
 
     @Override
@@ -37,14 +37,11 @@ public class SchedulePagerAdapter extends FragmentPagerAdapter {
             title = "ВТ";
         } else if (position == 2) {
             title = "СР";
-        }
-        else if (position == 3) {
+        } else if (position == 3) {
             title = "ЧТ";
-        }
-        else if (position == 4) {
+        } else if (position == 4) {
             title = "ПТ";
-        }
-        else if (position == 5) {
+        } else if (position == 5) {
             title = "СБ";
         }
 

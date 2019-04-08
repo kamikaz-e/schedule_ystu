@@ -19,7 +19,6 @@ public interface EditScheduleCallback {
 
     void onTypelessonClick(int position, ArrayList<Typelesson> typelesson);
 
-    void onSubjectSetText (int position, ArrayList<Subject> subject);
 
 
 }

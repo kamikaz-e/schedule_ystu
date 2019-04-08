@@ -31,14 +31,14 @@
         <activity
             android:name=".ActivityEditData"
             android:label="Редактор данных" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ScheduleEditor" />
+        <activity android:name=".activity.ScheduleEditor" />
 
         <provider
             android:authorities="com.example.misha.myapplication.provider"

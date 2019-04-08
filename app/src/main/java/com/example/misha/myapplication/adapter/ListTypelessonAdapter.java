@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.database.entity.Audience;
 import com.example.misha.myapplication.database.entity.Typelesson;
 
 import java.util.ArrayList;

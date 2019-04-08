@@ -35,15 +35,23 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     private RecyclerView rvLessons;
     private EditScheduleAdapter rvadapter;
     private List<Lesson> lessonList = new ArrayList<>();
-     ArrayList<Subject> subjectList = new ArrayList<>();
-     ArrayList<Audience> audienceList = new ArrayList<>();
-     ArrayList<Educator> educatorList = new ArrayList<>();
-     ArrayList<Typelesson> typelessonList = new ArrayList<>();
+    ArrayList<Subject> subjectList = new ArrayList<>();
+    ArrayList<Audience> audienceList = new ArrayList<>();
+    ArrayList<Educator> educatorList = new ArrayList<>();
+    ArrayList<Typelesson> typelessonList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rvadapter = new EditScheduleAdapter(this);
+    }
+
+    public static EditSchedulePageFragment newInstance(int position) {
+        Bundle args = new Bundle();
+        args.putInt("pos", position);
+        EditSchedulePageFragment fragment = new EditSchedulePageFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -60,18 +68,13 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
 
 
     void initResources() {
+        Bundle bundle = getArguments();
+        int position_day = bundle.getInt("pos");
         subjectList = SubjectDao.getInstance().getAllData();
-        audienceList =  AudienceDao.getInstance().getAllData();
+        audienceList = AudienceDao.getInstance().getAllData();
         educatorList = EducatorDao.getInstance().getAllData();
         typelessonList = TypelessonDao.getInstance().getAllData();
-
-        Lesson lesson = new Lesson();
-        lessonList.add(new Lesson(1,2,lesson.getSubject(),lesson.getAudience(),lesson.getEducator(),lesson.getTypeLesson(),"13:30-15:50"));
-        lessonList.add(new Lesson(2,2,lesson.getSubject(),lesson.getAudience(),lesson.getEducator(),lesson.getTypeLesson(),"13:30-15:50"));
-        lessonList.add(new Lesson(3,2,lesson.getSubject(),lesson.getAudience(),lesson.getEducator(),lesson.getTypeLesson(),"13:30-15:50"));
-        lessonList.add(new Lesson(4,2,lesson.getSubject(),lesson.getAudience(),lesson.getEducator(),lesson.getTypeLesson(),"13:30-15:50"));
-        lessonList.add(new Lesson(5,2,lesson.getSubject(),lesson.getAudience(),lesson.getEducator(),lesson.getTypeLesson(),"13:30-15:50"));
-        lessonList.add(new Lesson(6,2,lesson.getSubject(),lesson.getAudience(),lesson.getEducator(),lesson.getTypeLesson(),"13:30-15:50"));
+        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(0, position_day);
     }
 
     @Override
@@ -99,7 +102,6 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     }
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultOk, Intent data) {
         if (requestCode == SubjectList.SUBJECT_CODE) {
@@ -108,20 +110,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
             lessonList.get(lessonPosition).setSubject(subject.getName());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
-        }
-        if (requestCode == AudienceList.AUDIENCE_CODE) {
-            int lessonPosition = data.getIntExtra(AudienceList.POSITION, 0);
-            Audience audience = data.getParcelableExtra(AudienceList.AUDIENCE_LIST);
-            lessonList.get(lessonPosition).setAudience(audience.getName());
-            rvadapter.setLessonList(lessonList);
-            rvadapter.notifyDataSetChanged();
-        }
-        if (requestCode == EducatorList.EDUCATOR_CODE) {
-            int lessonPosition = data.getIntExtra(EducatorList.POSITION, 0);
-            Educator educator = data.getParcelableExtra(EducatorList.EDUCATOR_LIST);
-            lessonList.get(lessonPosition).setEducatorEdit(educator.getName());
-            rvadapter.setLessonList(lessonList);
-            rvadapter.notifyDataSetChanged();
+            LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
         if (requestCode == TypelessonList.TYPELESSON_CODE) {
             int lessonPosition = data.getIntExtra(TypelessonList.POSITION, 0);
@@ -129,12 +118,26 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
             lessonList.get(lessonPosition).setTypeLesson(typelesson.getName());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
+            LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
+        }
+        if (requestCode == AudienceList.AUDIENCE_CODE) {
+            int lessonPosition = data.getIntExtra(AudienceList.POSITION, 0);
+            Audience audience = data.getParcelableExtra(AudienceList.AUDIENCE_LIST);
+            lessonList.get(lessonPosition).setAudience(audience.getName());
+            rvadapter.setLessonList(lessonList);
+            rvadapter.notifyDataSetChanged();
+            LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
+        }
+        if (requestCode == EducatorList.EDUCATOR_CODE) {
+            int lessonPosition = data.getIntExtra(EducatorList.POSITION, 0);
+            Educator educator = data.getParcelableExtra(EducatorList.EDUCATOR_LIST);
+            lessonList.get(lessonPosition).setEducatorEdit(educator.getName());
+            rvadapter.setLessonList(lessonList);
+            rvadapter.notifyDataSetChanged();
+            LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
     }
 
-    @Override
-    public void onSubjectSetText(int position, ArrayList<Subject> subject) {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

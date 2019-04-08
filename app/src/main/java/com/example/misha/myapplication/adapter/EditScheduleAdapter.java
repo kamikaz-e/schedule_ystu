@@ -4,13 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.database.dao.SubjectDao;
 import com.example.misha.myapplication.database.entity.Audience;
 import com.example.misha.myapplication.database.entity.Educator;
+import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
 import com.example.misha.myapplication.database.entity.Typelesson;
 
@@ -46,6 +46,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     public void setSubjects(ArrayList<Subject> subjectList) {
         this.subjectList = subjectList;
     }
+
     public void setTypelesson(ArrayList<Typelesson> typelessonList) {
         this.typelessonList = typelessonList;
     }
@@ -96,10 +97,19 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         }
 
         public void onBindView(int position) {
+            //timeEdit.setText(lesson.getTimeLesson());
             Lesson lesson = lessonList.get(position);
-            number.setText(lesson.getId());
-            timeEdit.setText(lesson.getTimeLesson());
-            subjectEdit.setText(lesson.getSubject());
+            number.setText(lesson.getTimeLesson());
+
+            if (lesson.getSubject().equals("0")) {
+                subjectEdit.setText("Предмет");
+            } else {
+                Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId()));
+                if (subject != null) {
+                    subjectEdit.setText(subject.getName());
+                }
+            }
+
             audienceEdit.setText(lesson.getAudience());
             educatorEdit.setText(lesson.getEducator());
             typeLessonEdit.setText(lesson.getTypeLesson());
@@ -110,7 +120,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             if (v.getId() == R.id.button_audience) {
                 callback.onAudienceClick(getAdapterPosition(), audienceList);
             }
-
             if (v.getId() == R.id.button_educator) {
                 callback.onEducatorClick(getAdapterPosition(), educatorList);
             }

@@ -1,4 +1,4 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,20 +27,29 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.misha.myapplication.ActivityCallSchedule;
+import com.example.misha.myapplication.ActivityEditData;
+import com.example.misha.myapplication.ActivitySettings;
+import com.example.misha.myapplication.ActivityStart;
+import com.example.misha.myapplication.FragmentScheduleByDays;
+import com.example.misha.myapplication.FragmentTwo;
+import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.database.DatabaseHelper;
+import com.example.misha.myapplication.database.dao.LessonDao;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
- implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    long diff=0;
-    long days=0;
+    long diff = 0;
+    long days = 0;
     DrawerLayout drawer;
     Long current_week;
     TextView text_main;
     Button button_toolbar;
-    Integer curr_week=0;
+    Integer curr_week = 0;
     MaterialBetterSpinner spinner;
 
 
@@ -55,24 +64,24 @@ public class MainActivity extends AppCompatActivity
         actionBar.setDisplayShowTitleEnabled(false);
         drawer = findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-            R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        spinner =  findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line,  getResources().getStringArray(R.array.weeks));
+                android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.weeks));
         spinner.setAdapter(arrayAdapter);
 
-        button_toolbar= findViewById(R.id.toolbar_but);
+        button_toolbar = findViewById(R.id.toolbar_but);
         button_toolbar.setBackgroundResource(R.drawable.ic_editor);
         button_toolbar.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          Intent intent = new Intent(MainActivity.this, ScheduleEditor.class);
-          startActivity(intent);
-        }
-      });
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ScheduleEditor.class);
+                startActivity(intent);
+            }
+        });
 
         spinner.setOnDismissListener(new AutoCompleteTextView.OnDismissListener() {
             @Override
@@ -97,10 +106,9 @@ public class MainActivity extends AppCompatActivity
         displayView(R.id.rasp_day);
 
 
-
         SharedPreferences sp = getPreferences(MODE_PRIVATE);
         String hasVisited = sp.getString("hasVisited", "nope");
-        if (hasVisited=="nope") {
+        if (hasVisited == "nope") {
 
             Intent intent = new Intent(MainActivity.this, ActivityStart.class);
             startActivity(intent);
@@ -154,10 +162,10 @@ public class MainActivity extends AppCompatActivity
         Calendar today = Calendar.getInstance();
         SharedPreferences settings = getSharedPreferences("week", 0);
         current_week = (settings.getLong("current_week", today.getTimeInMillis()));
-        diff= today.getTimeInMillis()- current_week;
+        diff = today.getTimeInMillis() - current_week;
         // Toast.makeText(this, String.valueOf(diff), Toast.LENGTH_SHORT).show();
         days = (diff / (7 * 24 * 60 * 60 * 1000));
-        curr_week= (int) days;
+        curr_week = (int) days;
         spinner.setText(arrayAdapter.getItem(curr_week).toString());
         settings = getSharedPreferences("choice_week", 0);
         Editor editor = settings.edit();
@@ -165,16 +173,24 @@ public class MainActivity extends AppCompatActivity
         editor.commit();
 
 
-}
+    }
 
-        @Override
-        public void onResume() {
+    @Override
+    public void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        new DatabaseHelper(this).getWritableDatabase();
+        LessonDao.getInstance().initTable();
+    }
+
+    @Override
+    public void onResume() {
         super.onResume();
-            Fragment fragment = new FragmentScheduleByDays();
-            if (fragment != null) {
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, fragment);
-                ft.commit();}
+        Fragment fragment = new FragmentScheduleByDays();
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+        }
     }
 
     @Override
@@ -226,7 +242,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
             case R.id.nav_share:
-            onCreateDialog().show();
+                onCreateDialog().show();
                 break;
             default:
                 fragment = new FragmentScheduleByDays();

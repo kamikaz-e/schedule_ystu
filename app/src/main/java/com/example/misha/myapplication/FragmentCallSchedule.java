@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.example.misha.myapplication.activity.MainActivity;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.entity.Calls;
 
@@ -375,7 +376,7 @@ public class FragmentCallSchedule extends android.support.v4.app.Fragment {
                 else
                 {
                     save_calls();
-                    Intent intent = new Intent(getActivity(),MainActivity.class);
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
                     getActivity().finish();
                     startActivity(intent);
                 }

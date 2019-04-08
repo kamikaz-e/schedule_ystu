@@ -3,12 +3,12 @@ package com.example.misha.myapplication.database.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.BaseColumns;
 
 import com.example.misha.myapplication.database.AbsDao;
 import com.example.misha.myapplication.database.AppContentProvider;
 import com.example.misha.myapplication.database.entity.Lesson;
-import com.example.misha.myapplication.model.Week;
+
+import java.util.ArrayList;
 
 public class LessonDao extends AbsDao<Lesson> {
 
@@ -24,20 +24,20 @@ public class LessonDao extends AbsDao<Lesson> {
     }
 
     public final static String ID = "id";
-    public final static String ID_WEEK = "id_week";
-    public final static String ID_DAY = "id_day";
+    public final static String WEEK = "week";
+    public final static String DAY = "day";
     public final static String ID_SUBJECT = "id_subject";
     public final static String ID_AUDIENCE = "id_audience";
     public final static String ID_EDUCATOR = "id_educator";
     public final static String ID_TYPE_LESSON = "id_typelesson";
-    public final static String TIME_LESSON = "time_lesson";
+    public final static String TIME_LESSON = "id_time_lesson";
 
-    public static final String[] ALL_SET_PROPERTIES = new String[] {ID, ID_WEEK,
-            ID_DAY, ID_SUBJECT, ID_AUDIENCE, ID_EDUCATOR, ID_TYPE_LESSON, TIME_LESSON};
+    public static final String[] ALL_LESSONS_PROPERTIES = new String[] {ID, WEEK,
+            DAY, ID_SUBJECT, ID_AUDIENCE, ID_EDUCATOR, ID_TYPE_LESSON, TIME_LESSON};
 
     @Override
     protected String[] getAllColumns() {
-        return ALL_SET_PROPERTIES;
+        return ALL_LESSONS_PROPERTIES;
     }
 
     @Override
@@ -53,8 +53,8 @@ public class LessonDao extends AbsDao<Lesson> {
         lesson.setAudience(getString(cursor, ID_AUDIENCE));
         lesson.setSubject(getString(cursor, ID_SUBJECT));
         lesson.setTypeLesson(getString(cursor, ID_TYPE_LESSON));
-        lesson.setDay(getString(cursor,ID_DAY));
-        lesson.setWeek(getString(cursor, ID_WEEK));
+        lesson.setDay(getString(cursor, DAY));
+        lesson.setWeek(getString(cursor, WEEK));
         lesson.setTimeLesson((getString(cursor,TIME_LESSON)));
         return lesson;
     }
@@ -67,13 +67,41 @@ public class LessonDao extends AbsDao<Lesson> {
         set.put(ID_AUDIENCE, instance.getAudience());
         set.put(ID_SUBJECT, instance.getSubject());
         set.put(ID_TYPE_LESSON, instance.getTimeLesson());
-        set.put(ID_DAY, instance.getDay());
-        set.put(ID_WEEK, instance.getWeek());
+        set.put(DAY, instance.getDay());
+        set.put(WEEK, instance.getWeek());
         set.put(TIME_LESSON, instance.getTimeLesson());
         return set;
     }
 
+    public void initTable() {
+        ArrayList<Lesson> dd = getAllData();
+        if (!dd.isEmpty()) return;
+        ArrayList<Lesson> lessons = new ArrayList<>();
+        for (int week = 0; week < 17; week++) {
+            for (int day = 0; day < 6; day++) {
+                for (int timeLesson = 1; timeLesson < 7; timeLesson++) {
+                    lessons.add(new Lesson(week, day, 0, "aud", "edu", "typ", timeLesson));
+                }
+            }
+        }
+        insertAll(lessons);
+    }
+
+
+    public ArrayList<Lesson> getLessonByWeekAndDay(int week, int day) {
+        Cursor cursor = getContentResolver().query(getTableUri(), getAllColumns(),
+                WEEK + EQUALS + " AND " + DAY + EQUALS, new String[]{String.valueOf(week), String.valueOf(day)}, null);
+        return extractItemsFromCursor(cursor);
+    }
+
+
+    public boolean updateItemByID(Lesson lesson) {
+        int affectedRows = getContentResolver().update(getTableUri(), makeContentValuesFromInstance(lesson),
+                KEY_ID + EQUALS, new String[]{String.valueOf(lesson.getId())});
+        return affectedRows == 1;
+    }
+
     public boolean deleteItemById(long id) {
-        return super.deleteItemById(id, ID_WEEK);
+        return super.deleteItemById(id, ID);
     }
 }

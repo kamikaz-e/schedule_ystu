@@ -18,19 +18,22 @@ public class AppContentProvider extends ContentProvider {
     private static final Uri PROVIDER_URI
         = Uri.parse("content://com.example.misha.myapplication.provider/");
 
-    public static final Uri LESSONS_URI = Uri.parse(PROVIDER_URI + "lessons");
-    public static final Uri SUBJECTS_URI = Uri.parse(PROVIDER_URI + "subjects");
-    public static final Uri AUDIENCES_URI = Uri.parse(PROVIDER_URI + "audiences");
-    public static final Uri EDUCATORS_URI = Uri.parse(PROVIDER_URI + "educators");
-    public static final Uri TYPELESSONS_URI = Uri.parse(PROVIDER_URI + "typelessons");
-    public static final Uri CALLS_URI = Uri.parse(PROVIDER_URI + "calls");
-
     public static final String LESSONS_TABLE = "lessons";
     public static final String SUBJECTS_TABLE = "subjects";
     public static final String AUDIENCES_TABLE = "audiences";
     public static final String EDUCATORS_TABLE = "educators";
     public static final String TYPELESSONS_TABLE = "typelessons";
     public static final String CALLS_TABLE = "calls";
+
+
+    public static final Uri LESSONS_URI = Uri.parse(PROVIDER_URI + LESSONS_TABLE);
+    public static final Uri SUBJECTS_URI = Uri.parse(PROVIDER_URI + SUBJECTS_TABLE);
+    public static final Uri AUDIENCES_URI = Uri.parse(PROVIDER_URI + AUDIENCES_TABLE);
+    public static final Uri EDUCATORS_URI = Uri.parse(PROVIDER_URI + EDUCATORS_TABLE);
+    public static final Uri TYPELESSONS_URI = Uri.parse(PROVIDER_URI + TYPELESSONS_TABLE);
+    public static final Uri CALLS_URI = Uri.parse(PROVIDER_URI + CALLS_TABLE);
+
+
 
     public static final String LIMIT = "limit";
 
