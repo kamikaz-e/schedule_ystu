@@ -35,7 +35,7 @@ public class ScheduleEditor extends AppCompatActivity {
                   try{
                   SubjectEditTwo.setSelection(subject_list.indexOf(Tuesday.get(0).subject()));
                   AudienceEditTwo.setSelection(audience_list.indexOf(Tuesday.get(0).audience));
-                  EducatorEditTwo.setSelection(educator_list.indexOf(Tuesday.get(0).educator));
+                  EducatorEditTwo.setSelection(typelessonList.indexOf(Tuesday.get(0).educator));
                   switch (IdRadioButtonOne){
                       case 0:
                           rb_lectureTwo.setChecked(true);
@@ -59,7 +59,7 @@ public class ScheduleEditor extends AppCompatActivity {
               try{
                   SubjectEditOne.setSelection(subject_list.indexOf(Tuesday.get(1).subjectEdit));
                   AudienceEditOne.setSelection(audience_list.indexOf(Tuesday.get(1).audienceEdit));
-                  EducatorEditOne.setSelection(educator_list.indexOf(Tuesday.get(1).educator));
+                  EducatorEditOne.setSelection(typelessonList.indexOf(Tuesday.get(1).educator));
                   switch (IdRadioButtonTwo){
                       case 0:
                           rb_lecture.setChecked(true);

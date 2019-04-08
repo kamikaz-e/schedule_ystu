@@ -21,6 +21,7 @@ import android.widget.Button;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;
+import com.example.misha.myapplication.database.dao.TypelessonDao;
 
 public class ActivityEditData extends AppCompatActivity {
 
@@ -92,6 +93,9 @@ public class ActivityEditData extends AppCompatActivity {
                         break;
                     case 2:
                         onCreateDialogClearEducators().show();
+                        break;
+                    case 3:
+                        onCreateDialogClearTypelessons().show();
                         break;
                 }
             }
@@ -172,6 +176,28 @@ public class ActivityEditData extends AppCompatActivity {
         return builder.create();
     }
 
+    void clear_typelessons() {
+        TypelessonDao.getInstance().deleteAll();
+        if (!(viewPagerAdapter == null)) {
+            viewPagerAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public Dialog onCreateDialogClearTypelessons() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                clear_typelessons();
+            }
+        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        }).setTitle("Очистить предметы?");
+        return builder.create();
+    }
 
     public class Edit_Data_ViewPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -188,6 +214,8 @@ public class ActivityEditData extends AppCompatActivity {
                 fragment = new FragmentAudience();
             } else if (position == 2) {
                 fragment = new FragmentEducator();
+            } else if (position == 3) {
+                fragment = new FragmentTypelesson();
             }
             return fragment;
 
@@ -200,18 +228,20 @@ public class ActivityEditData extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             String title = null;
             if (position == 0) {
-                title = "Предметы";
+                title = "Предмет";
             } else if (position == 1) {
-                title = "Аудитории";
+                title = "Аудитория";
             } else if (position == 2) {
-                title = "Препод-ли";
+                title = "Преподаватель";
+            } else if (position == 3) {
+                title = "Тип занятия";
             }
             return title;
         }

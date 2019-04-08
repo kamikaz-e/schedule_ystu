@@ -31,8 +31,8 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
     ListView list_subjects;
     ArrayList<Subject> subject_list = new ArrayList<>();
     public ArrayAdapter<String> adapter;
-    String selectId ="";
     ViewPager viewpager;
+
     public FragmentSubject() {
 
     }
