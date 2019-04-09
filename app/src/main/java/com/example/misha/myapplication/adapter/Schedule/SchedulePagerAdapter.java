@@ -1,5 +1,7 @@
 package com.example.misha.myapplication.adapter.Schedule;
 
+import android.annotation.SuppressLint;
+
 import com.example.misha.myapplication.fragments.SchedulePageFragment;
 
 import androidx.fragment.app.Fragment;
@@ -15,18 +17,14 @@ public class SchedulePagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public int getItemPosition(Object object) {
-        return POSITION_NONE;
-    }
-
-    @Override
     public int getCount() {
         return tabTitles.length;
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public Fragment getItem(int position) {
-        return new SchedulePageFragment();
+        return SchedulePageFragment.newInstance(position);
     }
 
     @Override

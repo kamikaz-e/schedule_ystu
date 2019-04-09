@@ -10,6 +10,12 @@ import android.view.ViewGroup;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditSchedule.EditScheduleAdapter;
+import com.example.misha.myapplication.adapter.Schedule.ScheduleAdapter;
+import com.example.misha.myapplication.database.dao.AudienceDao;
+import com.example.misha.myapplication.database.dao.EducatorDao;
+import com.example.misha.myapplication.database.dao.LessonDao;
+import com.example.misha.myapplication.database.dao.SubjectDao;
+import com.example.misha.myapplication.database.dao.TypelessonDao;
 import com.example.misha.myapplication.database.entity.Audience;
 import com.example.misha.myapplication.database.entity.Educator;
 import com.example.misha.myapplication.database.entity.Lesson;
@@ -23,7 +29,7 @@ public class SchedulePageFragment extends Fragment {
 
     private View fragmentView;
     private RecyclerView rvLessons;
-    private EditScheduleAdapter rvadapter;
+    private ScheduleAdapter rvadapter;
     private List<Lesson> lessonList = new ArrayList<>();
     ArrayList<Subject> subjectList = new ArrayList<>();
     ArrayList<Audience> audienceList = new ArrayList<>();
@@ -33,7 +39,31 @@ public class SchedulePageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // rvadapter = new ScheduleAdapter();
+        rvadapter = new ScheduleAdapter();
+    }
+
+    public static SchedulePageFragment newInstance(int position) {
+        Bundle args = new Bundle();
+        args.putInt("positionPager", position);
+        SchedulePageFragment fragment = new SchedulePageFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initResources();
+        rvadapter.setLessonList(lessonList);
+        rvadapter.notifyDataSetChanged();
+    }
+
+
+    void initResources() {
+        Bundle bundle = getArguments();
+        int position_day = bundle.getInt("positionPager");
+        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(0, position_day);
     }
 
     @Override

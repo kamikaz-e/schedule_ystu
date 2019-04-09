@@ -16,27 +16,28 @@ import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
 import com.example.misha.myapplication.database.entity.Typelesson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyViewHolder> {
+public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
 
     private List<Lesson> lessonList;
 
-    public ScheduleAdapter(List<Lesson> schedule) {
-        this.lessonList = schedule;
-    }
-
     @Override
-    public ScheduleAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_item, parent, false);
-        return new MyViewHolder(view);
+        return new ViewHolder(view);
+    }
+
+    public void setLessonList(List<Lesson> lessonList) {
+        this.lessonList = lessonList;
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.onBindView(position);
     }
 
@@ -45,7 +46,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
         return lessonList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView number;
         private final TextView timeEdit;
         private final TextView subjectEdit;
@@ -53,7 +54,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
         private final TextView educatorEdit;
         private final TextView typeLessonEdit;
 
-        public MyViewHolder(View view) {
+        public ViewHolder(View view) {
             super(view);
             number = view.findViewById(R.id.number);
             timeEdit = view.findViewById(R.id.time);
