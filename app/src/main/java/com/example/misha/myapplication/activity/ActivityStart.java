@@ -1,4 +1,4 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,7 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.misha.myapplication.activity.MainActivity;
+import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;

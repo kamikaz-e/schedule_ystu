@@ -9,6 +9,11 @@ import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.example.misha.myapplication.FragmentTwo;
+import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.activity_schedule.FragmentScheduleByDays;
+import com.example.misha.myapplication.activity_schedule.ScheduleEditor;
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -27,13 +32,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.ActivityCallSchedule;
-import com.example.misha.myapplication.ActivityEditData;
-import com.example.misha.myapplication.ActivitySettings;
-import com.example.misha.myapplication.ActivityStart;
-import com.example.misha.myapplication.FragmentScheduleByDays;
-import com.example.misha.myapplication.FragmentTwo;
-import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.DatabaseHelper;
 import com.example.misha.myapplication.database.dao.LessonDao;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;

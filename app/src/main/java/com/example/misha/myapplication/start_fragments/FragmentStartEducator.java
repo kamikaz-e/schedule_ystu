@@ -1,4 +1,4 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.start_fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.entity.Educator;
 

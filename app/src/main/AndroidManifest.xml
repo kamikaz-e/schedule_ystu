@@ -19,19 +19,19 @@
         android:appComponentFactory="whateverString"
        >
         <activity
-            android:name=".ActivityStartSettings"
+            android:name=".activity.ActivityStartSettings"
             android:label="@string/title_activity_start_settings" />
         <activity
-            android:name=".ActivityStart"
+            android:name=".activity.ActivityStart"
             android:label="@string/title_activity_welcome_activity" />
         <activity
-            android:name=".ActivitySettings"
+            android:name=".activity.ActivitySettings"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".ActivityCallSchedule"
+            android:name=".activity.ActivityCallSchedule"
             android:label="@string/title_activity_call_schedule" />
         <activity
-            android:name=".ActivityEditData"
+            android:name=".activity.ActivityEditData"
             android:label="Редактор данных" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
@@ -40,7 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ScheduleEditor" />
+        <activity android:name=".activity_schedule.ScheduleEditor" />
 
         <provider
             android:authorities="com.example.misha.myapplication.provider"

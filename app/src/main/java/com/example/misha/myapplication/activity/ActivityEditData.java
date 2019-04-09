@@ -1,10 +1,16 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.misha.myapplication.EditData.FragmentAudience;
+import com.example.misha.myapplication.EditData.FragmentEducator;
+import com.example.misha.myapplication.EditData.FragmentSubject;
+import com.example.misha.myapplication.EditData.FragmentTypelesson;
+import com.example.misha.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,7 +23,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.misha.myapplication.activity.MainActivity;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;

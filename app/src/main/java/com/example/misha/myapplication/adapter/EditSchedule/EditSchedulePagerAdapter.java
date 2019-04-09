@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter;
+package com.example.misha.myapplication.adapter.EditSchedule;
 
 import android.annotation.SuppressLint;
 import androidx.fragment.app.Fragment;
@@ -7,12 +7,12 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.misha.myapplication.fragments.EditSchedulePageFragment;
 
-public class SchedulePagerAdapter extends FragmentPagerAdapter {
+public class EditSchedulePagerAdapter extends FragmentPagerAdapter {
 
     String tabTitles[] = new String[]{"ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"};
 
     @SuppressLint("ResourceType")
-    public SchedulePagerAdapter(FragmentManager fm) {
+    public EditSchedulePagerAdapter(FragmentManager fm) {
         super(fm);
     }
 

@@ -6,7 +6,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ScheduleEditor">
+    tools:context=".activity_schedule.ScheduleEditor">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

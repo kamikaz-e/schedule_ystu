@@ -1,10 +1,9 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.EditData;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,23 +16,23 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.database.dao.AudienceDao;
-import com.example.misha.myapplication.database.entity.Audience;
+import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.database.dao.EducatorDao;
+import com.example.misha.myapplication.database.entity.Educator;
 
 import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
 
 
-public class FragmentAudience extends Fragment {
+public class FragmentEducator extends Fragment {
 
-    EditText input_audience;
-    ListView list_audiences;
+    EditText input_educator;
+    ListView list_educators;
+    ArrayList<Educator> educator_list = new ArrayList<>();
+    public ArrayAdapter<Educator> adapter;
 
-    ArrayList<Audience> audience_list = new ArrayList<>();
-    public ArrayAdapter<String> adapter;
-
-    public FragmentAudience() {
+    public FragmentEducator() {
     }
 
     @Override
@@ -44,12 +43,12 @@ public class FragmentAudience extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_audience, container, false);
-        input_audience = view.findViewById(R.id.input_audience);
-        list_audiences = view.findViewById(R.id.list_audiences);
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
-        list_audiences.setAdapter(adapter);
-        list_audiences.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        View view = inflater.inflate(R.layout.fragment_educator, container, false);
+        input_educator = view.findViewById(R.id.input_educator);
+        list_educators = view.findViewById(R.id.list_educators);
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
+        list_educators.setAdapter(adapter);
+        list_educators.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
@@ -57,25 +56,23 @@ public class FragmentAudience extends Fragment {
             }
         });
         updateListView();
-        input_audience.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        input_educator.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
-                    input_audience.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                    String audienceName = input_audience.getText().toString();
-                    if(TextUtils.isEmpty(audienceName)) {
-                        input_audience.setError("Введите аудиторию");
+                if ((actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
+                    String educatorName = input_educator.getText().toString();
+                    if (TextUtils.isEmpty(educatorName)) {
+                        input_educator.setError("Введите преподавателя");
                         return true;
                     }
-                    Audience audience = new Audience();
-                    audience.setName(audienceName);
-                    AudienceDao.getInstance().insertItem(audience);
-                    input_audience.getText().clear();
+                    Educator educator = new Educator();
+                    educator.setName(educatorName);
+                    EducatorDao.getInstance().insertItem(educator);
+                    input_educator.getText().clear();
                     updateListView();
                     adapter.notifyDataSetChanged();
                     return true;
-                }
-                else{
+                } else {
                     return false;
                 }
             }
@@ -88,22 +85,24 @@ public class FragmentAudience extends Fragment {
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-               Audience audience = audience_list.get(position);
-                AudienceDao.getInstance().deleteItemById(Long.parseLong(audience.getId()));
+                Educator educator = educator_list.get(position);
+                EducatorDao.getInstance().deleteItemById(Long.parseLong(educator.getId()));
                 updateListView();
+                adapter.notifyDataSetChanged();
             }
         }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Удалить аудиторию «"+audience_list.get(position) +"»?");
+        }).setTitle("Удалить преподавателя «" + educator_list.get(position) + "»?");
         return builder.create();
     }
 
+
     public void updateListView() {
-        audience_list = AudienceDao.getInstance().getAllData();
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
-        list_audiences.setAdapter(adapter);
+        educator_list = EducatorDao.getInstance().getAllData();
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
+        list_educators.setAdapter(adapter);
     }
 
 }

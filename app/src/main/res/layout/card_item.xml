@@ -56,7 +56,6 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/typelesson"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,6 +67,7 @@
                 android:layout_marginEnd="10dp"
                 android:text="Тип занятия:"
                 android:textSize="20sp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 />
 
 

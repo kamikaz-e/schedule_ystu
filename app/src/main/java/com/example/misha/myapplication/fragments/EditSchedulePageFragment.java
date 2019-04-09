@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.EditScheduleAdapter;
-import com.example.misha.myapplication.adapter.EditScheduleCallback;
+import com.example.misha.myapplication.adapter.EditSchedule.EditScheduleAdapter;
+import com.example.misha.myapplication.adapter.EditSchedule.EditScheduleCallback;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.LessonDao;

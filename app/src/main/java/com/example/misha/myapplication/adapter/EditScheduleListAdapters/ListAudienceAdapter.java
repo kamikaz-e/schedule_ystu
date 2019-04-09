@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter;
+package com.example.misha.myapplication.adapter.EditScheduleListAdapters;
 
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,24 +7,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.database.entity.Typelesson;
+import com.example.misha.myapplication.SimpleItemClickListener;
+import com.example.misha.myapplication.database.entity.Audience;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListTypelessonAdapter extends RecyclerView.Adapter<ListTypelessonAdapter.ViewHolder> {
+public class ListAudienceAdapter extends RecyclerView.Adapter<ListAudienceAdapter.ViewHolder> {
 
-    private List<Typelesson> listTypelesson;
+    private List<Audience> listAudience;
 
     private SimpleItemClickListener itemClickListener;
 
-    public ListTypelessonAdapter(ArrayList<Typelesson> typelesson, SimpleItemClickListener simpleItemClickListener) {
-        this.listTypelesson = typelesson;
+    public ListAudienceAdapter(ArrayList<Audience> audience, SimpleItemClickListener simpleItemClickListener) {
+        this.listAudience = audience;
         this.itemClickListener = simpleItemClickListener;
     }
 
     @Override
-    public ListTypelessonAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListAudienceAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_row, parent, false);
         return new ViewHolder(view);
@@ -37,22 +38,22 @@ public class ListTypelessonAdapter extends RecyclerView.Adapter<ListTypelessonAd
 
     @Override
     public int getItemCount() {
-        return listTypelesson.size();
+        return listAudience.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView typelesson;
+        private final TextView audience;
 
         public ViewHolder(View view) {
             super(view);
-            typelesson = view.findViewById(R.id.item);
+            audience = view.findViewById(R.id.item);
             view.setOnClickListener(this);
 
         }
 
         public void onBindView(int position) {
-            Typelesson typ = listTypelesson.get(position);
-            typelesson.setText(typ.getName());
+            Audience aud = listAudience.get(position);
+            audience.setText(aud.getName());
 
         }
 

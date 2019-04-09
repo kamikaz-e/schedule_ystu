@@ -14,10 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.ActivityEditData;
+import com.example.misha.myapplication.activity.ActivityEditData;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.ListTypelessonAdapter;
-import com.example.misha.myapplication.adapter.SimpleItemClickListener;
+import com.example.misha.myapplication.adapter.EditScheduleListAdapters.ListTypelessonAdapter;
+import com.example.misha.myapplication.SimpleItemClickListener;
 import com.example.misha.myapplication.database.entity.Typelesson;
 
 import java.util.ArrayList;

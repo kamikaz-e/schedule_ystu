@@ -1,4 +1,4 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.start_fragments;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 import com.example.misha.myapplication.activity.MainActivity;
+import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.entity.Calls;
 

@@ -1,4 +1,4 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.activity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -29,7 +28,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.misha.myapplication.activity.MainActivity;
+import com.example.misha.myapplication.Preferences;
+import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;

@@ -1,12 +1,9 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.EditData;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -20,11 +17,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.SubjectDao;
 import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
 
 import java.util.ArrayList;
+
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 
 public class FragmentSubject extends Fragment {
@@ -70,11 +71,11 @@ public class FragmentSubject extends Fragment {
         input_subject.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
+                if ((actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
                     input_subject.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
                     String subjectName = input_subject.getText().toString();
                     subjectName = subjectName.trim().replaceAll(" +", " ");
-                    if(TextUtils.isEmpty(subjectName)|| subjectName ==" ") {
+                    if (TextUtils.isEmpty(subjectName) || subjectName == " ") {
                         input_subject.setError("Введите предмет");
                         return true;
                     }
@@ -85,22 +86,22 @@ public class FragmentSubject extends Fragment {
                     updateListView();
                     adapter.notifyDataSetChanged();
                     return true;
-                }
-                else{
+                } else {
                     return false;
                 }
             }
         });
         return view;
     }
+
     public Dialog onCreateDialogDeleteItem(final int position) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-               Subject subject = subject_list.get(position);
-               SubjectDao.getInstance().deleteItemById(Long.parseLong(subject.getId()));
+                Subject subject = subject_list.get(position);
+                SubjectDao.getInstance().deleteItemById(Long.parseLong(subject.getId()));
                 updateListView();
                 adapter.notifyDataSetChanged();
             }
@@ -108,12 +109,12 @@ public class FragmentSubject extends Fragment {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Удалить предмет «"+ subject_list.get(position) +"»?");
+        }).setTitle("Удалить предмет «" + subject_list.get(position) + "»?");
         return builder.create();
     }
 
-    public void updateListView(){
-        subject_list= SubjectDao.getInstance().getAllData();
+    public void updateListView() {
+        subject_list = SubjectDao.getInstance().getAllData();
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
         list_subjects.setAdapter(adapter);
     }

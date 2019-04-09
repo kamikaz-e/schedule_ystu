@@ -1,4 +1,4 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.EditData;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,22 +16,23 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.database.dao.EducatorDao;
-import com.example.misha.myapplication.database.entity.Educator;
+import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.database.dao.TypelessonDao;
+import com.example.misha.myapplication.database.entity.Typelesson;
 
 import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
 
 
-public class FragmentEducator extends Fragment {
+public class FragmentTypelesson extends Fragment {
 
-    EditText input_educator;
-    ListView list_educators;
-    ArrayList<Educator> educator_list = new ArrayList<>();
-    public ArrayAdapter<Educator> adapter;
+    EditText inputTypelesson;
+    ListView typelessonListView;
+    ArrayList<Typelesson> typelessonList = new ArrayList<>();
+    public ArrayAdapter<Typelesson> adapter;
 
-    public FragmentEducator() {
+    public FragmentTypelesson() {
     }
 
     @Override
@@ -42,12 +43,12 @@ public class FragmentEducator extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_educator, container, false);
-        input_educator = view.findViewById(R.id.input_educator);
-        list_educators = view.findViewById(R.id.list_educators);
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
-        list_educators.setAdapter(adapter);
-        list_educators.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        View view = inflater.inflate(R.layout.fragment_typelesson, container, false);
+        inputTypelesson = view.findViewById(R.id.input_typelesson);
+        typelessonListView = view.findViewById(R.id.list_typelesson);
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, typelessonList);
+        typelessonListView.setAdapter(adapter);
+        typelessonListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
@@ -55,24 +56,23 @@ public class FragmentEducator extends Fragment {
             }
         });
         updateListView();
-        input_educator.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        inputTypelesson.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
-                    String educatorName = input_educator.getText().toString();
-                    if(TextUtils.isEmpty(educatorName)) {
-                        input_educator.setError("Введите преподавателя");
+                if ((actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
+                    String typelessonName = inputTypelesson.getText().toString();
+                    if (TextUtils.isEmpty(typelessonName)) {
+                        inputTypelesson.setError("Введите тип занятия");
                         return true;
                     }
-                    Educator educator = new Educator();
-                    educator.setName(educatorName);
-                    EducatorDao.getInstance().insertItem(educator);
-                    input_educator.getText().clear();
+                    Typelesson typelesson = new Typelesson();
+                    typelesson.setName(typelessonName);
+                    TypelessonDao.getInstance().insertItem(typelesson);
+                    inputTypelesson.getText().clear();
                     updateListView();
                     adapter.notifyDataSetChanged();
                     return true;
-                }
-                else{
+                } else {
                     return false;
                 }
             }
@@ -85,8 +85,8 @@ public class FragmentEducator extends Fragment {
         builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                Educator educator = educator_list.get(position);
-                EducatorDao.getInstance().deleteItemById(Long.parseLong(educator.getId()));
+                Typelesson typelesson = typelessonList.get(position);
+                TypelessonDao.getInstance().deleteItemById(Long.parseLong(typelesson.getId()));
                 updateListView();
                 adapter.notifyDataSetChanged();
             }
@@ -94,15 +94,15 @@ public class FragmentEducator extends Fragment {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
-        }).setTitle("Удалить преподавателя «"+ educator_list.get(position)+"»?");
+        }).setTitle("Удалить тип занятия «" + typelessonList.get(position) + "»?");
         return builder.create();
     }
 
 
     public void updateListView() {
-        educator_list= EducatorDao.getInstance().getAllData();
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
-        list_educators.setAdapter(adapter);
+        typelessonList = TypelessonDao.getInstance().getAllData();
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, typelessonList);
+        typelessonListView.setAdapter(adapter);
     }
 
 }

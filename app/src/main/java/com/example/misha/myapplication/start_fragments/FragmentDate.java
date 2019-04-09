@@ -1,4 +1,4 @@
-package com.example.misha.myapplication;
+package com.example.misha.myapplication.start_fragments;
 
 import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
+
+import com.example.misha.myapplication.R;
 
 import java.util.Calendar;
 
