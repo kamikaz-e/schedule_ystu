@@ -6,9 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.misha.myapplication.database.dao.AudienceDao;
+import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;
+import com.example.misha.myapplication.database.dao.TypelessonDao;
 import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
+import com.example.misha.myapplication.database.entity.Typelesson;
 
 import java.util.List;
 
@@ -59,11 +63,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             Lesson lesson = schedule.get(position);
             number.setText(lesson.getId());
             timeEdit.setText(lesson.getTimeLesson());
-
             subjectEdit.setText(SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId())).getName());
-            audienceEdit.setText(lesson.getAudience());
-            educator.setText(lesson.getEducator());
-            typeLesson.setText(lesson.getTypeLesson());
+            audienceEdit.setText(AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId())).getName());
+            educator.setText(EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId())).getName());
+            typeLesson.setText(TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId())).getName());
         }
 
     }

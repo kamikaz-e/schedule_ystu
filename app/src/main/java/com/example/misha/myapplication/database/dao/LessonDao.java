@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import com.example.misha.myapplication.database.AbsDao;
 import com.example.misha.myapplication.database.AppContentProvider;
+import com.example.misha.myapplication.database.DatabaseHelper;
 import com.example.misha.myapplication.database.entity.Lesson;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class LessonDao extends AbsDao<Lesson> {
         set.put(ID_EDUCATOR, instance.getEducator());
         set.put(ID_AUDIENCE, instance.getAudience());
         set.put(ID_SUBJECT, instance.getSubject());
-        set.put(ID_TYPE_LESSON, instance.getTimeLesson());
+        set.put(ID_TYPE_LESSON, instance.getTypeLesson());
         set.put(DAY, instance.getDay());
         set.put(WEEK, instance.getWeek());
         set.put(TIME_LESSON, instance.getTimeLesson());

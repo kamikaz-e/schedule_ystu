@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:persistentDrawingCache="scrolling"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:background="@color/tab_background_selected"
         android:paddingBottom="65dp"
+        android:persistentDrawingCache="scrolling"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
     <Button
-        android:id="@+id/button_cancel"
+        android:id="@+id/button_add"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:text="Закрыть"
+        android:text="Добавить"
         android:paddingStart="25sp"
         android:paddingEnd="25sp"
         android:textSize="18sp"
@@ -29,13 +34,13 @@
         android:layout_marginStart="15sp" />
 
     <Button
-        android:id="@+id/button_add"
+        android:id="@+id/button_cancel"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:paddingStart="25sp"
         android:paddingEnd="25sp"
         android:textSize="18sp"
-        android:text="Добавить"
+        android:text="Закрыть"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="15sp" />

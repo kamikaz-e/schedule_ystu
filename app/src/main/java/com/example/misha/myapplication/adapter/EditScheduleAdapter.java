@@ -73,8 +73,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     }
 
 
-
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView number;
         private final TextView timeEdit;
@@ -103,41 +101,30 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             //timeEdit.setText(lesson.getTimeLesson());
             Lesson lesson = lessonList.get(position);
             number.setText(lesson.getTimeLesson());
-           if (lesson.getSubject().equals("0")||lesson.getSubject().equals("")) {
+            Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
+            Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
+            Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
+            Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
+
+            if (subject == null) {
                 subjectEdit.setText("Предмет");
             } else {
-                 Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
-
-                if (subject != null) {
-                      subjectEdit.setText(subject.getName());
-                }
+                subjectEdit.setText(subject.getName());
             }
-            if (lesson.getAudience().equals("0")||lesson.getAudience().equals("")) {
+            if (audience == null) {
                 audienceEdit.setText("Аудитория");
             } else {
-                Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
-
-                if (audience != null) {
-                    audienceEdit.setText(audience.getName());
-                }
+                audienceEdit.setText(audience.getName());
             }
-            if (lesson.getEducator().equals("0")||lesson.getEducator().equals("")) {
+            if (educator == null) {
                 educatorEdit.setText("Преподаватель");
             } else {
-                Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
-
-                if (educator != null) {
-                    educatorEdit.setText(educator.getName());
-                }
+                educatorEdit.setText(educator.getName());
             }
-            if (lesson.getTypeLesson().equals("0")||lesson.getTypeLesson().equals("")) {
+            if (typelesson == null) {
                 typeLessonEdit.setText("Тип занятия");
             } else {
-                Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
-
-                if (typelesson != null) {
-                    typeLessonEdit.setText(typelesson.getName());
-                }
+                typeLessonEdit.setText(typelesson.getName());
             }
 
 
@@ -158,7 +145,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
                 callback.onTypelessonClick(getAdapterPosition(), typelessonList);
             }
         }
-
 
 
     }

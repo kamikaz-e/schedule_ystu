@@ -37,6 +37,7 @@ public class AppContentProvider extends ContentProvider {
 
     public static final String LIMIT = "limit";
 
+
     @Override
     public boolean onCreate() {
         database = new DatabaseHelper(getContext());

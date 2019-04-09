@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.misha.myapplication.ActivityEditData;
 import com.example.misha.myapplication.R;
@@ -51,8 +52,12 @@ public class TypelessonList extends DialogFragment {
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
         View view = layoutInflater.inflate(R.layout.rv_list, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.AppCompatAlertDialogStyle);
+        View layoutTitleDialog = layoutInflater.inflate(R.layout.title_dialog, null);
+        TextView title_dialog = layoutTitleDialog.findViewById(R.id.textViewDialog);
+        title_dialog.setText("Тип занятия");
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
+        builder.setCustomTitle(layoutTitleDialog);
         rvTypelesson =  view.findViewById(R.id.rv);
         listTypelessonAdapter =  new ListTypelessonAdapter(listTypelesson, new SimpleItemClickListener() {
             @Override

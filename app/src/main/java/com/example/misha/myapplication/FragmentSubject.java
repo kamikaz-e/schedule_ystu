@@ -18,7 +18,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.misha.myapplication.database.dao.LessonDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;
+import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class FragmentSubject extends android.support.v4.app.Fragment {
     EditText input_subject;
     ListView list_subjects;
     ArrayList<Subject> subject_list = new ArrayList<>();
+    ArrayList<Lesson> lessonList = new ArrayList<>();
     public ArrayAdapter<String> adapter;
     ViewPager viewpager;
 

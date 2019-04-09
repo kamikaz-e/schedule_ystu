@@ -20,7 +20,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     };
 
 
-
     private static final String CREATE_TABLE_SUBJECTS= "CREATE TABLE  subjects " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "subject VARCHAR UNIQUE ON CONFLICT IGNORE );";
@@ -31,8 +30,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "educator VARCHAR UNIQUE ON CONFLICT IGNORE );";
     private static final String CREATE_TABLE_TYPELESSONS= "CREATE TABLE  typelessons  " +
-            "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
-            " typelesson VARCHAR UNIQUE ON CONFLICT IGNORE );";
+            "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "typelesson VARCHAR UNIQUE ON CONFLICT IGNORE );";
 
     private static final String CREATE_CALL_SCHEDULE  = "CREATE TABLE calls " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +

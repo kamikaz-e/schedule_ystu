@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.misha.myapplication.ActivityEditData;
 import com.example.misha.myapplication.R;
@@ -53,10 +54,14 @@ public class SubjectList extends DialogFragment {
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
         View view = layoutInflater.inflate(R.layout.rv_list, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.AppCompatAlertDialogStyle);
+        View layoutTitleDialog = layoutInflater.inflate(R.layout.title_dialog, null);
+        TextView title_dialog = layoutTitleDialog.findViewById(R.id.textViewDialog);
+        title_dialog.setText("Предмет");
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        rvSubject =  view.findViewById(R.id.rv);
-        listSubjectAdapter =  new ListSubjectsAdapter(listSubjects, new SimpleItemClickListener() {
+        builder.setCustomTitle(layoutTitleDialog);
+        rvSubject = view.findViewById(R.id.rv);
+        listSubjectAdapter = new ListSubjectsAdapter(listSubjects, new SimpleItemClickListener() {
             @Override
             public void onItemClick(int position, View view) {
                 Intent intent = new Intent();
