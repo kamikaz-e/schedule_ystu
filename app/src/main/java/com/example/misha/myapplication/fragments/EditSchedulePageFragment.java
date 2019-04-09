@@ -107,7 +107,8 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         if (requestCode == SubjectList.SUBJECT_CODE) {
             int lessonPosition = data.getIntExtra(SubjectList.POSITION, 0);
             Subject subject = data.getParcelableExtra(SubjectList.SUBJECT_LIST);
-            lessonList.get(lessonPosition).setSubject(subject.getName());
+
+            lessonList.get(lessonPosition).setSubject(subject.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));

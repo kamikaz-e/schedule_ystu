@@ -100,13 +100,13 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             //timeEdit.setText(lesson.getTimeLesson());
             Lesson lesson = lessonList.get(position);
             number.setText(lesson.getTimeLesson());
-
-            if (lesson.getSubject().equals("0")) {
+           if (lesson.getSubject().equals("0")) {
                 subjectEdit.setText("Предмет");
             } else {
-                Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId()));
+                 Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
+
                 if (subject != null) {
-                    subjectEdit.setText(subject.getName());
+                      subjectEdit.setText(subject.getName());
                 }
             }
 

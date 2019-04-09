@@ -157,7 +157,7 @@ public class ScheduleEditor extends AppCompatActivity {
 
         viewPager = findViewById(R.id.viewpager);
         PopupMenu menu = new PopupMenu(this, viewPager);
-        menu.setOnMenuItemClickListener(ScheduleEditor.this::onMenuItemClicked);
+       // menu.setOnMenuItemClickListener(ScheduleEditor.this::onMenuItemClicked);
         pagerAdapter = new SchedulePagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
