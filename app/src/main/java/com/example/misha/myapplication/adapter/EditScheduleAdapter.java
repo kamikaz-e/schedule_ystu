@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.database.dao.AudienceDao;
+import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;
+import com.example.misha.myapplication.database.dao.TypelessonDao;
 import com.example.misha.myapplication.database.entity.Audience;
 import com.example.misha.myapplication.database.entity.Educator;
 import com.example.misha.myapplication.database.entity.Lesson;
@@ -100,7 +103,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             //timeEdit.setText(lesson.getTimeLesson());
             Lesson lesson = lessonList.get(position);
             number.setText(lesson.getTimeLesson());
-           if (lesson.getSubject().equals("0")) {
+           if (lesson.getSubject().equals("0")||lesson.getSubject().equals("")) {
                 subjectEdit.setText("Предмет");
             } else {
                  Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
@@ -109,10 +112,35 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
                       subjectEdit.setText(subject.getName());
                 }
             }
+            if (lesson.getAudience().equals("0")||lesson.getAudience().equals("")) {
+                audienceEdit.setText("Аудитория");
+            } else {
+                Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
 
-            audienceEdit.setText(lesson.getAudience());
-            educatorEdit.setText(lesson.getEducator());
-            typeLessonEdit.setText(lesson.getTypeLesson());
+                if (audience != null) {
+                    audienceEdit.setText(audience.getName());
+                }
+            }
+            if (lesson.getEducator().equals("0")||lesson.getEducator().equals("")) {
+                educatorEdit.setText("Преподаватель");
+            } else {
+                Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
+
+                if (educator != null) {
+                    educatorEdit.setText(educator.getName());
+                }
+            }
+            if (lesson.getTypeLesson().equals("0")||lesson.getTypeLesson().equals("")) {
+                typeLessonEdit.setText("Тип занятия");
+            } else {
+                Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
+
+                if (typelesson != null) {
+                    typeLessonEdit.setText(typelesson.getName());
+                }
+            }
+
+
         }
 
         @Override

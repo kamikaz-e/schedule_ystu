@@ -107,7 +107,6 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         if (requestCode == SubjectList.SUBJECT_CODE) {
             int lessonPosition = data.getIntExtra(SubjectList.POSITION, 0);
             Subject subject = data.getParcelableExtra(SubjectList.SUBJECT_LIST);
-
             lessonList.get(lessonPosition).setSubject(subject.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
@@ -116,7 +115,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         if (requestCode == TypelessonList.TYPELESSON_CODE) {
             int lessonPosition = data.getIntExtra(TypelessonList.POSITION, 0);
             Typelesson typelesson = data.getParcelableExtra(TypelessonList.TYPELESSON_LIST);
-            lessonList.get(lessonPosition).setTypeLesson(typelesson.getName());
+            lessonList.get(lessonPosition).setTypeLesson(typelesson.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
@@ -124,7 +123,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         if (requestCode == AudienceList.AUDIENCE_CODE) {
             int lessonPosition = data.getIntExtra(AudienceList.POSITION, 0);
             Audience audience = data.getParcelableExtra(AudienceList.AUDIENCE_LIST);
-            lessonList.get(lessonPosition).setAudience(audience.getName());
+            lessonList.get(lessonPosition).setAudience(audience.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
@@ -132,7 +131,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         if (requestCode == EducatorList.EDUCATOR_CODE) {
             int lessonPosition = data.getIntExtra(EducatorList.POSITION, 0);
             Educator educator = data.getParcelableExtra(EducatorList.EDUCATOR_LIST);
-            lessonList.get(lessonPosition).setEducatorEdit(educator.getName());
+            lessonList.get(lessonPosition).setEducatorEdit(educator.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));

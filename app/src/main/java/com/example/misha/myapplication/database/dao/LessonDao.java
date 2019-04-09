@@ -80,7 +80,7 @@ public class LessonDao extends AbsDao<Lesson> {
         for (int week = 0; week < 17; week++) {
             for (int day = 0; day < 6; day++) {
                 for (int timeLesson = 1; timeLesson < 7; timeLesson++) {
-                    lessons.add(new Lesson(week, day,  0, "aud", "edu", "typ", timeLesson));
+                    lessons.add(new Lesson(week, day,  0, 0, 0, 0, timeLesson));
                 }
             }
         }

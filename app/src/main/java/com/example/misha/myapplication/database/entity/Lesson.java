@@ -23,13 +23,13 @@ public class Lesson {
     }
 
 
-    public Lesson(int day, int week, int subject, String audience, String educator, String typeLesson, int timeLesson) {
+    public Lesson(int day, int week, int subject, int audience, int educator, int typeLesson, int timeLesson) {
         this.day = String.valueOf(day);
         this.week = String.valueOf(week);
         this.subject = String.valueOf(subject);
-        this.audience = audience;
-        this.educator = educator;
-        this.typeLesson = typeLesson;
+        this.audience =  String.valueOf(audience);
+        this.educator =  String.valueOf(educator);
+        this.typeLesson =  String.valueOf(typeLesson);
         this.timeLesson = String.valueOf(timeLesson);
     }
 
