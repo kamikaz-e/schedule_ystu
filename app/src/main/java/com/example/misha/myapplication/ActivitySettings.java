@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -69,7 +71,6 @@ public class ActivitySettings extends AppCompatActivity {
     final String cal = "calls";
     final String dat = "date_start";
 
-    Calendar Date = Calendar.getInstance();
 
     String database_name = "";
 
@@ -85,7 +86,6 @@ public class ActivitySettings extends AppCompatActivity {
     String name_db_string = "database";
 
     public ArrayAdapter<String> adapter;
-    String current_date;
     RelativeLayout layout_pick_week;
     RelativeLayout layout_import;
     RelativeLayout layout_export;
@@ -94,7 +94,7 @@ public class ActivitySettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -108,9 +108,7 @@ public class ActivitySettings extends AppCompatActivity {
         layout_import = findViewById(R.id.twoitem);
         layout_export = findViewById(R.id.threeitem);
 
-        SharedPreferences sp = getPreferences(MODE_PRIVATE);
-        String hasVisited = sp.getString("hasVisited", "nope");
-        if (hasVisited == "nope") {
+        if (!Preferences.getInstance().isHintsOpened()) {
 
 
             new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
@@ -170,9 +168,7 @@ public class ActivitySettings extends AppCompatActivity {
                     })
                     .show();
 
-            SharedPreferences.Editor e = sp.edit();
-            e.putString("hasVisited", "yes");
-            e.commit();
+            Preferences.getInstance().setHintsOpened();
         }
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
@@ -200,32 +196,21 @@ public class ActivitySettings extends AppCompatActivity {
 
 
     void get_current_week() {
-        new DatePickerDialog(ActivitySettings.this, dateone,
-                Date.get(Calendar.YEAR),
-                Date.get(Calendar.MONTH),
-                Date.get(Calendar.DAY_OF_MONTH)).show();
+        Calendar calendar = Calendar.getInstance();
+        final Calendar selectedDate = Calendar.getInstance();
+        new DatePickerDialog(ActivitySettings.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                selectedDate.set(Calendar.YEAR, year);
+                selectedDate.set(Calendar.MONTH, month);
+                selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                Preferences.getInstance().setSemesterStart(selectedDate.getTimeInMillis());
+            }
+        },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
-
-    DatePickerDialog.OnDateSetListener dateone = new DatePickerDialog.OnDateSetListener() {
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            Date.set(Calendar.YEAR, year);
-            Date.set(Calendar.MONTH, monthOfYear);
-            Date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            Calendar today = Calendar.getInstance();
-            current_date = String.valueOf(Date.getTimeInMillis());
-            //todo to PReferences
-            /** SQLiteDatabase db = ScheduleDB.getWritableDatabase();
-             db.execSQL("update " + DATE_START + " set " + date_start.date + " = '" +
-             current_date + "' where " + date_start.id_date + " = " + 1);
-             */
-
-            SharedPreferences settings = getSharedPreferences("week", 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putLong("current_week", (Date.getTimeInMillis()));
-            editor.commit();
-
-        }
-    };
 
 
     public Dialog onCreateDialogImport() {
@@ -269,31 +254,35 @@ public class ActivitySettings extends AppCompatActivity {
                             JSONArray jsonArray = new JSONArray(response);
                             String jsonString;
 
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    jsonString = jsonArray.getString(i);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                jsonString = jsonArray.getString(i);
 
 
-
-                                    if (table.equals(aud)) {
-                                        ArrayList<Audience> audiences = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Audience>>(){}.getType());
-                                        AudienceDao.getInstance().insertAll(audiences);
-                                    }
-                                    if (table == edu) {
-                                        ArrayList<Educator> educators = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Educator>>(){}.getType());
-                                        EducatorDao.getInstance().insertAll(educators);
-                                    }
-                                    if (table == sub) {
-                                        ArrayList<Subject> subjects = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Subject>>(){}.getType());
-                                        SubjectDao.getInstance().insertAll(subjects);
-                                    }
-                                    if (table == sch) {
-                                        ArrayList<Lesson> lessons = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Lesson>>(){}.getType());
-                                        LessonDao.getInstance().insertAll(lessons);
-                                    }
-                                    if (table == cal) {
-                                        ArrayList<Calls> calls = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Calls>>(){}.getType());
-                                        CallDao.getInstance().insertAll(calls);
-                                    }
+                                if (table.equals(aud)) {
+                                    ArrayList<Audience> audiences = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Audience>>() {
+                                    }.getType());
+                                    AudienceDao.getInstance().insertAll(audiences);
+                                }
+                                if (table == edu) {
+                                    ArrayList<Educator> educators = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Educator>>() {
+                                    }.getType());
+                                    EducatorDao.getInstance().insertAll(educators);
+                                }
+                                if (table == sub) {
+                                    ArrayList<Subject> subjects = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Subject>>() {
+                                    }.getType());
+                                    SubjectDao.getInstance().insertAll(subjects);
+                                }
+                                if (table == sch) {
+                                    ArrayList<Lesson> lessons = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Lesson>>() {
+                                    }.getType());
+                                    LessonDao.getInstance().insertAll(lessons);
+                                }
+                                if (table == cal) {
+                                    ArrayList<Calls> calls = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Calls>>() {
+                                    }.getType());
+                                    CallDao.getInstance().insertAll(calls);
+                                }
                                     /*if (table == dat) {
                                         ArrayList<Date> date = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Date>>(){}.getType());
                                         DateDao.getInstance().insertAll(date);
@@ -303,7 +292,7 @@ public class ActivitySettings extends AppCompatActivity {
                                         editor.putLong("current_week", Long.valueOf(date).longValue());
                                         editor.commit();
                                     }*/
-                                }
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -394,7 +383,7 @@ public class ActivitySettings extends AppCompatActivity {
                 params.put("audiences", json_audiences);
                 params.put("educators", json_educators);
                 params.put("call", json_calls);
-                params.put("current_date", json_date);
+                params.put("selectedDate", json_date);
                 return params;
             }
         };

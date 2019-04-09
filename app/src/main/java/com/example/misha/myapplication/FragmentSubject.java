@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -18,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.database.dao.LessonDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;
 import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
@@ -26,7 +27,7 @@ import com.example.misha.myapplication.database.entity.Subject;
 import java.util.ArrayList;
 
 
-public class FragmentSubject extends android.support.v4.app.Fragment {
+public class FragmentSubject extends Fragment {
 
 
     EditText input_subject;

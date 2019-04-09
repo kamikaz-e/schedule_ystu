@@ -12,12 +12,13 @@ import android.widget.RelativeLayout;
 
 import java.util.Calendar;
 
+import androidx.fragment.app.Fragment;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 
-public class FragmentDate extends android.support.v4.app.Fragment {
+public class FragmentDate extends Fragment {
 
 
     RelativeLayout layout_pich_week;
@@ -83,7 +84,7 @@ public class FragmentDate extends android.support.v4.app.Fragment {
                     current_date = String.valueOf(Date.getTimeInMillis());
 
                    /* db.execSQL("update " + DATE_START + " set " + ScheduleClass.date_start.date + " = '" +
-                            current_date  + "' where " + ScheduleClass.date_start.id_date + " = " + 1);*/
+                            selectedDate  + "' where " + ScheduleClass.date_start.id_date + " = " + 1);*/
                     // Toast.makeText(context, String.valueOf(today.getTimeInMillis()), Toast.LENGTH_SHORT).show();
 
                     SharedPreferences settings = getActivity().getSharedPreferences("week", 0);

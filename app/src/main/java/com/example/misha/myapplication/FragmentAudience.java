@@ -22,8 +22,10 @@ import com.example.misha.myapplication.database.entity.Audience;
 
 import java.util.ArrayList;
 
+import androidx.fragment.app.Fragment;
 
-public class FragmentAudience extends android.support.v4.app.Fragment {
+
+public class FragmentAudience extends Fragment {
 
     EditText input_audience;
     ListView list_audiences;

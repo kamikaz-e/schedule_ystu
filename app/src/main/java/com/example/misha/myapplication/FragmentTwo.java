@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentTwo extends android.support.v4.app.Fragment {
+import androidx.fragment.app.Fragment;
+
+public class FragmentTwo extends Fragment {
 
     public FragmentTwo() {
     }

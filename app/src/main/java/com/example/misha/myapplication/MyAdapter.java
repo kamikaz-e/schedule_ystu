@@ -1,6 +1,6 @@
 package com.example.misha.myapplication;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +11,6 @@ import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;
 import com.example.misha.myapplication.database.dao.TypelessonDao;
 import com.example.misha.myapplication.database.entity.Lesson;
-import com.example.misha.myapplication.database.entity.Subject;
-import com.example.misha.myapplication.database.entity.Typelesson;
 
 import java.util.List;
 

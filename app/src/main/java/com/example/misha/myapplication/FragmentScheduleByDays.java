@@ -2,17 +2,19 @@ package com.example.misha.myapplication;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.misha.myapplication.fragments.ScheduleMonday;
 
-public class FragmentScheduleByDays extends android.support.v4.app.Fragment {
+public class FragmentScheduleByDays extends Fragment {
 
     public FragmentScheduleByDays() {
     }
@@ -60,7 +62,7 @@ public class FragmentScheduleByDays extends android.support.v4.app.Fragment {
         }
 
         @Override
-        public android.support.v4.app.Fragment getItem(int position) {
+        public Fragment getItem(int position) {
             return new ScheduleMonday();
         }
 

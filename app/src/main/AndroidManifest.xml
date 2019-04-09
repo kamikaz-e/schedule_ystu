@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
-        tools:replace="android:label">
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory="whateverString"
+       >
         <activity
             android:name=".ActivityStartSettings"
             android:label="@string/title_activity_start_settings" />

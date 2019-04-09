@@ -21,8 +21,10 @@ import com.example.misha.myapplication.database.entity.Educator;
 
 import java.util.ArrayList;
 
+import androidx.fragment.app.Fragment;
 
-public class FragmentEducator extends android.support.v4.app.Fragment {
+
+public class FragmentEducator extends Fragment {
 
     EditText input_educator;
     ListView list_educators;

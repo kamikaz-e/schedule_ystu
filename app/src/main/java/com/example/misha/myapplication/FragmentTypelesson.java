@@ -21,8 +21,10 @@ import com.example.misha.myapplication.database.entity.Typelesson;
 
 import java.util.ArrayList;
 
+import androidx.fragment.app.Fragment;
 
-public class FragmentTypelesson extends android.support.v4.app.Fragment {
+
+public class FragmentTypelesson extends Fragment {
 
     EditText inputTypelesson;
     ListView typelessonListView;
