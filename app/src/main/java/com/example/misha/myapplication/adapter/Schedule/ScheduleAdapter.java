@@ -15,8 +15,8 @@ import com.example.misha.myapplication.database.entity.Educator;
 import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
 import com.example.misha.myapplication.database.entity.Typelesson;
+import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,7 +52,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         private final TextView subjectEdit;
         private final TextView audienceEdit;
         private final TextView educatorEdit;
-        private final TextView typeLessonEdit;
+        private final TextView typelessonEdit;
+        private final TextInputLayout subjectHint;
+        private final TextInputLayout audienceHint;
+        private final TextInputLayout educatorHint;
+        private final TextInputLayout typelessonHint;
 
         public ViewHolder(View view) {
             super(view);
@@ -61,7 +65,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             subjectEdit = view.findViewById(R.id.subject);
             audienceEdit = view.findViewById(R.id.audience);
             educatorEdit = view.findViewById(R.id.educator);
-            typeLessonEdit = view.findViewById(R.id.typelesson);
+            typelessonEdit = view.findViewById(R.id.typelesson);
+            subjectHint = view.findViewById(R.id.subjectHint);
+            audienceHint = view.findViewById(R.id.audienceHint);
+            educatorHint = view.findViewById(R.id.educatorHint);
+            typelessonHint = view.findViewById(R.id.typelessonHint);
         }
 
         public void onBindView(int position) {
@@ -73,24 +81,32 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
 
             if (subject == null) {
+                subjectHint.setHint("");
                 subjectEdit.setText("Предмет");
             } else {
+                subjectHint.setHint("Предмет");
                 subjectEdit.setText(subject.getName());
             }
             if (audience == null) {
+                audienceHint.setHint("");
                 audienceEdit.setText("Аудитория");
             } else {
+                audienceHint.setHint("Аудитория");
                 audienceEdit.setText(audience.getName());
             }
             if (educator == null) {
+                educatorHint.setHint("");
                 educatorEdit.setText("Преподаватель");
             } else {
+                educatorHint.setHint("Преподаватель");
                 educatorEdit.setText(educator.getName());
             }
             if (typelesson == null) {
-                typeLessonEdit.setText("Тип занятия");
+                typelessonHint.setHint("");
+                typelessonEdit.setText("Тип занятия");
             } else {
-                typeLessonEdit.setText(typelesson.getName());
+                typelessonHint.setHint("Тип занятия");
+                typelessonEdit.setText(typelesson.getName());
             }
         }
 

@@ -72,13 +72,12 @@
     <string name="title_activity_welcome_activity">welcome_activity</string>
     <string name="title_activity_start_settings">start_settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="subtitle">Расписание звонков</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
     <string name="maybe">maybe</string>
     <string name="message_text">message</string>
-
 
 </resources>
