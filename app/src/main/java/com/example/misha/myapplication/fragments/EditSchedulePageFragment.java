@@ -141,7 +141,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        fragmentView = inflater.inflate(R.layout.card_item_edit_monday_for_recycler, container, false);
+        fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
         rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
         rvLessons.setAdapter(rvadapter);
         return fragmentView;

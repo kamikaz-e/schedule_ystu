@@ -18,25 +18,19 @@
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-                <com.google.android.material.tabs.TabLayout
-
-                    android:id="@+id/tab_layout"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_below="@+id/toolbar"
-                    app:tabGravity="center"
-                    app:tabBackground="@drawable/tab_color"
-                    app:tabIndicatorColor="#FFA500"
-                    app:tabTextAppearance="@style/TabLayoutTextAppearance"
-                    app:tabSelectedTextColor="@color/color_secondary_text"
-                    app:tabTextColor="@color/color_primary_text"
-                    app:tabMode="fixed"
-                    app:tabMinWidth="62dp"/>
+                    />
 
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tab_layout" />
+                    android:layout_below="@+id/recycler_view" />
         </RelativeLayout>
 </FrameLayout>

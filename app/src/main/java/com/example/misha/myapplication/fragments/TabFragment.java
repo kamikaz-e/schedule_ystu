@@ -6,33 +6,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.Schedule.ScheduleAdapter;
-import com.example.misha.myapplication.database.dao.LessonDao;
-import com.example.misha.myapplication.database.entity.Lesson;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.misha.myapplication.adapter.TabDays.TabDaysAdapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SchedulePageFragment extends Fragment {
+public class TabFragment extends Fragment {
 
     private View fragmentView;
     private RecyclerView rvLessons;
-    private ScheduleAdapter rvadapter;
-    private List<Lesson> lessonList = new ArrayList<>();
+    private TabDaysAdapter rvadapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rvadapter = new ScheduleAdapter();
+        rvadapter = new TabDaysAdapter();
     }
 
-    public static SchedulePageFragment newInstance(int position) {
+    public static TabFragment newInstance(int position) {
         Bundle args = new Bundle();
-        args.putInt("positionPager", position);
-        SchedulePageFragment fragment = new SchedulePageFragment();
+        args.putInt("positionTab", position);
+        TabFragment fragment = new TabFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,22 +37,20 @@ public class SchedulePageFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initResources();
-        rvadapter.setLessonList(lessonList);
         rvadapter.notifyDataSetChanged();
     }
 
 
     void initResources() {
         Bundle bundle = getArguments();
-        int position_day = bundle.getInt("positionPager");
-        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(0, position_day);
+        int position_day = bundle.getInt("positionTab");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
-        rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
+        fragmentView = inflater.inflate(R.layout.item_tabs_recycler, container, false);
+        rvLessons = fragmentView.findViewById(R.id.rv_tab);
         rvLessons.setAdapter(rvadapter);
         return fragmentView;
     }
