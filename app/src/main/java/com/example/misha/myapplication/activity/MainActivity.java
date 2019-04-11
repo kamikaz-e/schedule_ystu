@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -8,13 +9,17 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
+import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.FragmentTwo;
+import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.activity_schedule.FragmentScheduleByDays;
+import com.example.misha.myapplication.activitySchedule.FragmentScheduleByDays;
 import com.example.misha.myapplication.activity_schedule.ScheduleEditor;
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.view.GravityCompat;
@@ -23,6 +28,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,17 +44,20 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    long diff = 0;
-    long days = 0;
+    public static final int WEEK_CODE = 2221;
+
+
+
     DrawerLayout drawer;
-    Long current_week;
     TextView text_main;
     Button button_toolbar;
-    Integer curr_week = 0;
     MaterialBetterSpinner spinner;
+
+    long differentBetweenDate = 0;
+    long selectDate = 0;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -67,35 +76,27 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         spinner = findViewById(R.id.spinner);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.weeks));
         spinner.setAdapter(arrayAdapter);
 
         button_toolbar = findViewById(R.id.toolbar_but);
         button_toolbar.setBackgroundResource(R.drawable.ic_editor);
-        button_toolbar.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ScheduleEditor.class);
-                startActivity(intent);
-            }
+        button_toolbar.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ScheduleEditor.class);
+            startActivity(intent);
         });
 
-        spinner.setOnDismissListener(new AutoCompleteTextView.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                spinner.clearFocus();
-            }
-        });
-        final AdapterView.OnItemClickListener itemSelectedListener = new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SharedPreferences settings = getSharedPreferences("choice_week", 0);
-                Editor editor = settings.edit();
-                editor.putString("position", String.valueOf(position));
-                editor.commit();
-                displayView(R.id.rasp_day);
+        spinner.setOnDismissListener(() -> spinner.clearFocus());
+        final AdapterView.OnItemClickListener itemSelectedListener = (parent, view, position, id) -> {
+          /**  SharedPreferences settings = getSharedPreferences("choice_week", 0);
+            Editor editor = settings.edit();
+            editor.putString("position", String.valueOf(position));
+            editor.commit();*/
+            Intent intent = new Intent();
+            intent.putExtra(Constants.SELECTED_WEEK, position);
+            sendResultToTarget(FragmentScheduleByDays.class,  WEEK_CODE, Activity.RESULT_OK, intent);
 
-            }
         };
         spinner.setOnItemClickListener(itemSelectedListener);
 
@@ -157,21 +158,13 @@ public class MainActivity extends AppCompatActivity
             e.commit();
         }
 
-        Calendar today = Calendar.getInstance();
-        SharedPreferences settings = getSharedPreferences("week", 0);
-        current_week = (settings.getLong("current_week", today.getTimeInMillis()));
-        diff = today.getTimeInMillis() - current_week;
-        // Toast.makeText(this, String.valueOf(diff), Toast.LENGTH_SHORT).show();
-        days = (diff / (7 * 24 * 60 * 60 * 1000));
-        curr_week = (int) days;
-        spinner.setText(arrayAdapter.getItem(curr_week).toString());
-        settings = getSharedPreferences("choice_week", 0);
-        Editor editor = settings.edit();
-        editor.putString("position", String.valueOf(curr_week));
-        editor.commit();
-
-
+        Calendar calendar = Calendar.getInstance();
+        selectDate = Preferences.getInstance().getSemestStart();
+        differentBetweenDate = calendar.getTimeInMillis() - selectDate;
+        long curr_week = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
+        spinner.setText(arrayAdapter.getItem((int) curr_week));
     }
+
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
@@ -249,11 +242,8 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content_frame, fragment);
-            ft.commit();
+            replaceFragment(fragment);
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
@@ -261,24 +251,14 @@ public class MainActivity extends AppCompatActivity
     public Dialog onCreateDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-        builder.setPositiveButton("Профиль Вконтакте", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/mikhailvolkov1"));
-                finish();
-                startActivity(browserIntent);
-            }
-        }).setNeutralButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setNegativeButton("Электронная почта", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:mikhailvolkov2014-2014@ya.ru"));
-                finish();
-                startActivity(browserIntent);
-            }
+        builder.setPositiveButton("Профиль Вконтакте", (dialog, id) -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/mikhailvolkov1"));
+            finish();
+            startActivity(browserIntent);
+        }).setNeutralButton("Отмена", (dialog, id) -> dialog.cancel()).setNegativeButton("Электронная почта", (dialog, id) -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:mikhailvolkov2014-2014@ya.ru"));
+            finish();
+            startActivity(browserIntent);
         }).setTitle("Обратная связь с разработчиком");
         return builder.create();
     }

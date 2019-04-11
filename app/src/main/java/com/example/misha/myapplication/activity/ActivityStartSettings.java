@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ActivityStartSettings extends AppCompatActivity
+public class ActivityStartSettings extends BaseActivity
      {
 
     @Override

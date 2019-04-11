@@ -1,11 +1,18 @@
 package com.example.misha.myapplication.activity_schedule;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import com.example.misha.myapplication.Constants;
+import com.example.misha.myapplication.Preferences;
+import com.example.misha.myapplication.activity.BaseActivity;
 import com.example.misha.myapplication.activity.MainActivity;
+import com.example.misha.myapplication.activitySchedule.FragmentScheduleByDays;
+import com.example.misha.myapplication.fragments.EditSchedulePageFragment;
+import com.example.misha.myapplication.fragments.SchedulePageFragment;
 import com.google.android.material.tabs.TabLayout;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -13,18 +20,18 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.PopupMenu;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditSchedule.EditSchedulePagerAdapter;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
+import static com.example.misha.myapplication.activity.MainActivity.WEEK_CODE;
 
-public class ScheduleEditor extends AppCompatActivity {
+
+public class ScheduleEditor extends BaseActivity {
 
     Integer position_week = 0;
     Integer position_day = 0;
@@ -83,23 +90,25 @@ public class ScheduleEditor extends AppCompatActivity {
             }
         });
 
-        spinner.setOnDismissListener(new AutoCompleteTextView.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                spinner.clearFocus();
-            }
-        });
+        spinner.setOnDismissListener(() -> spinner.clearFocus());
 
-        final AdapterView.OnItemClickListener itemClickdListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (flag_autosave == 1) {
-                }
-                position_week = position;
+        final AdapterView.OnItemClickListener itemClickListener = (parent, view, position, id) -> {
+            if (flag_autosave == 1) {
             }
+            Intent intent = new Intent();
+            intent.putExtra(Constants.SELECTED_WEEK, position);
+            sendResultToTarget(ScheduleEditor.class,  WEEK_CODE, Activity.RESULT_OK, intent);
         };
-        spinner.setOnItemClickListener(itemClickdListener);
+        spinner.setOnItemClickListener(itemClickListener);
+        final AdapterView.OnItemClickListener itemSelectedListener = (parent, view, position, id) -> {
+
+
+
+        };
+        spinner.setOnItemClickListener(itemSelectedListener);
+
     }
+
 
     @Override
     public void onResume() {
@@ -110,24 +119,6 @@ public class ScheduleEditor extends AppCompatActivity {
     private boolean onMenuItemClicked(MenuItem menuItem) {
         return  false;
     }
-
-
-/*
-    public Dialog () {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Очистить расписание полностью?");
-        return builder.create();
-    }*/
-
 
 
     @Override

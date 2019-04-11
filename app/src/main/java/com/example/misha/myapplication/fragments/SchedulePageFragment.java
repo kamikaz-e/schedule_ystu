@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.Schedule.ScheduleAdapter;
 import com.example.misha.myapplication.database.dao.LessonDao;
@@ -23,34 +24,24 @@ public class SchedulePageFragment extends Fragment {
     private ScheduleAdapter rvadapter;
     private List<Lesson> lessonList = new ArrayList<>();
 
+    private int positionWeek;
+    private int day;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rvadapter = new ScheduleAdapter();
+        day = getArguments().getInt(Constants.DAY);
+        positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
     }
 
-    public static SchedulePageFragment newInstance(int position) {
+    public static SchedulePageFragment newInstance(int selectedWeek, int position) {
         Bundle args = new Bundle();
-        args.putInt("positionPager", position);
+        args.putInt(Constants.DAY, position);
+        args.putInt(Constants.SELECTED_WEEK, selectedWeek);
         SchedulePageFragment fragment = new SchedulePageFragment();
         fragment.setArguments(args);
         return fragment;
-    }
-
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initResources();
-        rvadapter.setLessonList(lessonList);
-        rvadapter.notifyDataSetChanged();
-    }
-
-
-    void initResources() {
-        Bundle bundle = getArguments();
-        int position_day = bundle.getInt("positionPager");
-        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(0, position_day);
     }
 
     @Override
@@ -60,5 +51,22 @@ public class SchedulePageFragment extends Fragment {
         rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
         rvLessons.setAdapter(rvadapter);
         return fragmentView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        updateList();
+    }
+
+    private void updateList() {
+        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
+        rvadapter.setLessonList(lessonList);
+        rvadapter.notifyDataSetChanged();
+    }
+
+    public void setWeek(int selectedWeek) {
+        this.positionWeek = selectedWeek;
+        updateList();
     }
 }

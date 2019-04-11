@@ -28,7 +28,7 @@ import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;
 import com.example.misha.myapplication.database.dao.TypelessonDao;
 
-public class ActivityEditData extends AppCompatActivity {
+public class ActivityEditData extends BaseActivity {
 
 
     Button clear_subjects;

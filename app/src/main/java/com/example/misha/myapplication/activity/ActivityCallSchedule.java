@@ -28,7 +28,7 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
-public class ActivityCallSchedule extends AppCompatActivity {
+public class ActivityCallSchedule extends BaseActivity {
 
   EditText oneTime;
   EditText twoTime;
@@ -71,12 +71,8 @@ public class ActivityCallSchedule extends AppCompatActivity {
 
     button_toolbar = findViewById(R.id.toolbar_but);
     button_toolbar.setBackgroundResource(R.drawable.ic_clear);
-    button_toolbar.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        onCreateDialogClear().show();
-      }
-    });
+    button_toolbar.setOnClickListener(v -> onCreateDialogClear().show());
+
     oneTime = findViewById(R.id.OneTime);
     twoTime = findViewById(R.id.TwoTime);
     threeTime = findViewById(R.id.ThreeTime);
@@ -118,16 +114,7 @@ public class ActivityCallSchedule extends AppCompatActivity {
   public Dialog onCreateDialogClear() {
 
     AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-    builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int id) {
-        clear_calls();
-      }
-    }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface dialog, int id) {
-        dialog.cancel();
-      }
-    }).setTitle("Очистить расписание звонков?");
+    builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> clear_calls()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить расписание звонков?");
     return builder.create();
   }
 

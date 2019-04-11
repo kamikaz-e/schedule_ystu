@@ -40,7 +40,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class ActivityStart extends Activity {
+public class ActivityStart extends BaseActivity {
   private static final String schedule_import= "http://schedu1e.h1n.ru/schedule.php";
   private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
   private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditSchedule.EditScheduleAdapter;
 import com.example.misha.myapplication.adapter.EditSchedule.EditScheduleCallback;
@@ -48,7 +49,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
 
     public static EditSchedulePageFragment newInstance(int position) {
         Bundle args = new Bundle();
-        args.putInt("pos", position);
+        args.putInt("posDay", position);
         EditSchedulePageFragment fragment = new EditSchedulePageFragment();
         fragment.setArguments(args);
         return fragment;
@@ -67,14 +68,13 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     }
 
 
-    void initResources() {
+        void initResources() {
         Bundle bundle = getArguments();
-        int position_day = bundle.getInt("pos");
         subjectList = SubjectDao.getInstance().getAllData();
         audienceList = AudienceDao.getInstance().getAllData();
         educatorList = EducatorDao.getInstance().getAllData();
         typelessonList = TypelessonDao.getInstance().getAllData();
-        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(0, position_day);
+        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(Preferences.getInstance().getSelectedWeekEditSchedule(), bundle.getInt("posDay"));
     }
 
     @Override
