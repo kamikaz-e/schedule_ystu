@@ -6,11 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.fragments.SchedulePageFragment;
 
+import java.util.Calendar;
+
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHolder> {
@@ -31,13 +36,13 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
         holder.onBindView(position);
         holder.dayRelLay.setOnClickListener(view -> {
             index = position;
-
-            notifyDataSetChanged();
+                    notifyDataSetChanged();
         });
         if (index == position) {
             holder.dayRelLay.setBackgroundColor(Color.parseColor("#FF4081"));
         } else {
             holder.dayRelLay.setBackgroundColor(Color.TRANSPARENT);
+
         }
     }
 
@@ -62,9 +67,11 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
 
         public ViewHolder(View view) {
             super(view);
+
             date = view.findViewById(R.id.date);
             dateWeek = view.findViewById(R.id.day_week);
             dayRelLay = view.findViewById(R.id.tab_day);
+
         }
 
         public void onBindView(int position) {
