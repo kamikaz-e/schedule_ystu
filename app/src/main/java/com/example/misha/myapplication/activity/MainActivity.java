@@ -3,7 +3,6 @@ package com.example.misha.myapplication.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -16,8 +15,8 @@ import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.FragmentTwo;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.activitySchedule.FragmentEditSchedule;
 import com.example.misha.myapplication.activitySchedule.FragmentScheduleByDays;
-import com.example.misha.myapplication.activity_schedule.ScheduleEditor;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.Fragment;
@@ -26,15 +25,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -83,8 +78,7 @@ public class MainActivity extends BaseActivity
         button_toolbar = findViewById(R.id.toolbar_but);
         button_toolbar.setBackgroundResource(R.drawable.ic_editor);
         button_toolbar.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ScheduleEditor.class);
-            startActivity(intent);
+            replaceFragment(new FragmentEditSchedule());
         });
 
         spinner.setOnDismissListener(() -> spinner.clearFocus());
@@ -213,12 +207,10 @@ public class MainActivity extends BaseActivity
                 text_main.setText("Списком");
                 break;
             case R.id.edit_schedule:
-                Intent intent = new Intent(this, ScheduleEditor.class);
-                finish();
-                startActivity(intent);
+                fragment = new FragmentEditSchedule();
                 break;
             case R.id.edit_data:
-                intent = new Intent(this, ActivityEditData.class);
+                Intent intent = new Intent(this, ActivityEditData.class);
                 finish();
                 startActivity(intent);
                 break;

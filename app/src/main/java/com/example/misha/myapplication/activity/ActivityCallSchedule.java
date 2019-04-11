@@ -87,7 +87,7 @@ public class ActivityCallSchedule extends BaseActivity {
     if (hasVisited == "nope") {
 
 
-      new MaterialTapTargetPrompt.Builder(ActivityCallSchedule.this)
+      /*new MaterialTapTargetPrompt.Builder(ActivityCallSchedule.this)
               .setTarget(R.id.card_viewOneTime)
               .setPromptBackground(new RectanglePromptBackground())
               .setPromptFocal(new RectanglePromptFocal())
@@ -104,7 +104,7 @@ public class ActivityCallSchedule extends BaseActivity {
                   }
                 }
               })
-              .show();
+              .show();*/
 
     }
 

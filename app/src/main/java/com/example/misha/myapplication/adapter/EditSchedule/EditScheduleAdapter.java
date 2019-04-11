@@ -62,6 +62,8 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         return new ViewHolder(view);
     }
 
+
+
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.onBindView(position);

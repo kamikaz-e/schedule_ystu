@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditSchedule.EditScheduleAdapter;
@@ -41,24 +42,41 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     ArrayList<Educator> educatorList = new ArrayList<>();
     ArrayList<Typelesson> typelessonList = new ArrayList<>();
 
+    private int positionWeek;
+    private int day;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rvadapter = new EditScheduleAdapter(this);
+        day = getArguments().getInt(Constants.DAY);
+        positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
     }
 
-    public static EditSchedulePageFragment newInstance(int position) {
+    public static EditSchedulePageFragment newInstance(int selectedWeek, int position) {
         Bundle args = new Bundle();
-        args.putInt("posDay", position);
+        args.putInt(Constants.DAY, position);
+        args.putInt(Constants.SELECTED_WEEK, selectedWeek);
         EditSchedulePageFragment fragment = new EditSchedulePageFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
+        rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
+        rvLessons.setAdapter(rvadapter);
+        return fragmentView;
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initResources();
+        updateList();
+    }
+
+    private void updateList() {
+        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
         rvadapter.setLessonList(lessonList);
         rvadapter.setAudiences(audienceList);
         rvadapter.setEducators(educatorList);
@@ -67,15 +85,11 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         rvadapter.notifyDataSetChanged();
     }
 
-
-        void initResources() {
-        Bundle bundle = getArguments();
-        subjectList = SubjectDao.getInstance().getAllData();
-        audienceList = AudienceDao.getInstance().getAllData();
-        educatorList = EducatorDao.getInstance().getAllData();
-        typelessonList = TypelessonDao.getInstance().getAllData();
-        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(Preferences.getInstance().getSelectedWeekEditSchedule(), bundle.getInt("posDay"));
+    public void setWeek(int selectedWeek) {
+        this.positionWeek = selectedWeek;
+        updateList();
     }
+
 
     @Override
     public void onAudienceClick(int position, ArrayList<Audience> audience) {
@@ -139,11 +153,5 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     }
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
-        rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
-        rvLessons.setAdapter(rvadapter);
-        return fragmentView;
-    }
+
 }

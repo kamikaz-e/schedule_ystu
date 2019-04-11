@@ -1,3 +1,4 @@
+/*
 package com.example.misha.myapplication.adapter.EditSchedule;
 
 import android.annotation.SuppressLint;
@@ -50,3 +51,4 @@ public class EditSchedulePagerAdapter extends FragmentPagerAdapter {
 
 
 }
+*/

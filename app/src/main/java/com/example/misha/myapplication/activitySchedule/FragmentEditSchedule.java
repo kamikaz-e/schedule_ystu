@@ -9,18 +9,18 @@ import android.view.ViewGroup;
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.activity.MainActivity;
-import com.example.misha.myapplication.adapter.TabDays.TabDaysAdapter;
-import com.example.misha.myapplication.adapter.TabDays.TabDaysPagerAdapter;
+import com.example.misha.myapplication.adapter.TabDays.EditTabDaysAdapter;
+import com.example.misha.myapplication.adapter.TabDays.EditTabDaysPagerAdapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-public class FragmentScheduleByDays extends Fragment {
+public class FragmentEditSchedule extends Fragment {
 
-    TabDaysPagerAdapter pagerAdapter;
-    TabDaysAdapter adapterTabDays;
+    EditTabDaysPagerAdapter pagerAdapter;
+    EditTabDaysAdapter adapterTabDays;
     RecyclerView dayTabs;
 
     private ViewPager viewPager;
@@ -30,7 +30,7 @@ public class FragmentScheduleByDays extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapterTabDays = new TabDaysAdapter((position, view) -> {
+        adapterTabDays = new EditTabDaysAdapter((position, view) -> {
             viewPager.setCurrentItem(position);
         });
     }
@@ -42,10 +42,10 @@ public class FragmentScheduleByDays extends Fragment {
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-        adapterTabDays.setSelection(position);
+                adapterTabDays.setSelection(position);
             }
         });
-        pagerAdapter = new TabDaysPagerAdapter(getChildFragmentManager());
+        pagerAdapter = new EditTabDaysPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.recycler_view);
