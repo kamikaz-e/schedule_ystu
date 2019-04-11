@@ -83,13 +83,11 @@ public class MainActivity extends BaseActivity
 
         spinner.setOnDismissListener(() -> spinner.clearFocus());
         final AdapterView.OnItemClickListener itemSelectedListener = (parent, view, position, id) -> {
-          /**  SharedPreferences settings = getSharedPreferences("choice_week", 0);
-            Editor editor = settings.edit();
-            editor.putString("position", String.valueOf(position));
-            editor.commit();*/
+
             Intent intent = new Intent();
             intent.putExtra(Constants.SELECTED_WEEK, position);
             sendResultToTarget(FragmentScheduleByDays.class,  WEEK_CODE, Activity.RESULT_OK, intent);
+            sendResultToTarget(FragmentEditSchedule.class,  WEEK_CODE, Activity.RESULT_OK, intent);
 
         };
         spinner.setOnItemClickListener(itemSelectedListener);
