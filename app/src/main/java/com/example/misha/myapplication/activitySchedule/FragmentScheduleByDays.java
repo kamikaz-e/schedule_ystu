@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
@@ -13,6 +14,7 @@ import com.example.misha.myapplication.adapter.tabDays.TabDaysAdapter;
 import com.example.misha.myapplication.adapter.tabDays.TabDaysPagerAdapter;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
@@ -22,7 +24,6 @@ public class FragmentScheduleByDays extends Fragment {
     TabDaysPagerAdapter pagerAdapter;
     TabDaysAdapter adapterTabDays;
     RecyclerView dayTabs;
-
     private ViewPager viewPager;
 
     private int selectedWeek;
@@ -51,6 +52,15 @@ public class FragmentScheduleByDays extends Fragment {
         dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
 
+        Button toEditSchedule = getActivity().findViewById(R.id.toolbar_but);
+        toEditSchedule.setBackgroundResource(R.drawable.ic_editor);
+        toEditSchedule.setOnClickListener(v -> {
+            FragmentEditSchedule fragment= new FragmentEditSchedule();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
         return view;
     }
 
@@ -61,4 +71,6 @@ public class FragmentScheduleByDays extends Fragment {
             pagerAdapter.setWeek(selectedWeek);
         }
     }
+
+
 }

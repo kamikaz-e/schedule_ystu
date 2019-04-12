@@ -28,9 +28,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.database.DatabaseHelper;
@@ -45,14 +47,13 @@ public class MainActivity extends BaseActivity
     public static final int WEEK_CODE = 2221;
     DrawerLayout drawer;
     TextView text_main;
-    Button button_toolbar;
-    MaterialBetterSpinner spinner;
-
+    Spinner spinner;
     long differentBetweenDate = 0;
     long selectDate = 0;
 
 
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         text_main = findViewById(R.id.text_main);
@@ -72,22 +73,28 @@ public class MainActivity extends BaseActivity
                 android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.weeks));
         spinner.setAdapter(arrayAdapter);
 
-        button_toolbar = findViewById(R.id.toolbar_but);
-        button_toolbar.setBackgroundResource(R.drawable.ic_editor);
-        button_toolbar.setOnClickListener(v -> {
-            replaceFragment(new FragmentEditSchedule());
+        Calendar calendar = Calendar.getInstance();
+        selectDate = Preferences.getInstance().getSemestStart();
+        differentBetweenDate = calendar.getTimeInMillis() - selectDate;
+        long curr_week = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
+
+        spinner.setSelection((int)curr_week);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                Intent intent = new Intent();
+                intent.putExtra(Constants.SELECTED_WEEK, position);
+                sendResultToTarget(FragmentScheduleByDays.class,  WEEK_CODE, Activity.RESULT_OK, intent);
+                sendResultToTarget(FragmentEditSchedule.class,  WEEK_CODE, Activity.RESULT_OK, intent);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
         });
 
-        spinner.setOnDismissListener(() -> spinner.clearFocus());
-        final AdapterView.OnItemClickListener itemSelectedListener = (parent, view, position, id) -> {
-
-            Intent intent = new Intent();
-            intent.putExtra(Constants.SELECTED_WEEK, position);
-            sendResultToTarget(FragmentScheduleByDays.class,  WEEK_CODE, Activity.RESULT_OK, intent);
-            sendResultToTarget(FragmentEditSchedule.class,  WEEK_CODE, Activity.RESULT_OK, intent);
-
-        };
-        spinner.setOnItemClickListener(itemSelectedListener);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -146,12 +153,6 @@ public class MainActivity extends BaseActivity
             e.putString("hasVisited", "yes");
             e.commit();
         }
-
-        Calendar calendar = Calendar.getInstance();
-        selectDate = Preferences.getInstance().getSemestStart();
-        differentBetweenDate = calendar.getTimeInMillis() - selectDate;
-        long curr_week = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
-        spinner.setText(arrayAdapter.getItem((int) curr_week));
     }
 
 

@@ -18,7 +18,7 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme">
 
-            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

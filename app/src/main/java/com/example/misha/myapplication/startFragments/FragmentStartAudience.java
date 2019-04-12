@@ -83,15 +83,12 @@ public class FragmentStartAudience extends Fragment {
 
         clear_audiences.setBackgroundResource(R.drawable.ic_clear);
         next.setBackgroundResource(R.drawable.ic_start_settings_ok);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentStartEducator fragment= new FragmentStartEducator();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, fragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
+        next.setOnClickListener(v -> {
+            FragmentStartEducator fragment= new FragmentStartEducator();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
         clear_audiences.setOnClickListener(new View.OnClickListener() {

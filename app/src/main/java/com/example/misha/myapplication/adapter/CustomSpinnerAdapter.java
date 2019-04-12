@@ -1,4 +1,4 @@
-/*package com.example.misha.myapplication.adapter;
+package com.example.misha.myapplication.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -20,15 +20,16 @@ public class CustomSpinnerAdapter extends ArrayAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-
-
-        return row;
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View view = inflater.inflate(R.layout.spinner_custom, parent,false);
+        return view;
     }
 
 
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
-
-
+   /* public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = getLayoutInflater();
+        View row = inflater.inflate(yourRowlayout, parent,
+                false);
         return row;
-    }
-}*/
+    }*/
+}

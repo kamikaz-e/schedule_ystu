@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
@@ -50,7 +51,15 @@ public class FragmentEditSchedule extends Fragment {
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
-
+        Button toSchedule = getActivity().findViewById(R.id.toolbar_but);
+        toSchedule.setBackgroundResource(R.drawable.ic_ok);
+        toSchedule.setOnClickListener(v -> {
+            FragmentScheduleByDays fragment= new FragmentScheduleByDays();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
         return view;
     }
 
