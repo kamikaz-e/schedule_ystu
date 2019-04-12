@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter.TabDays;
+package com.example.misha.myapplication.adapter.tabDays;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -25,7 +25,7 @@ public class EditTabDaysAdapter extends RecyclerView.Adapter<EditTabDaysAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.item_tab_day, parent, false);
+                .inflate(R.layout.item_tab_day, parent, false);
         return new ViewHolder(view);
     }
 

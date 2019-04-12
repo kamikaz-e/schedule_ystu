@@ -43,9 +43,6 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final int WEEK_CODE = 2221;
-
-
-
     DrawerLayout drawer;
     TextView text_main;
     Button button_toolbar;

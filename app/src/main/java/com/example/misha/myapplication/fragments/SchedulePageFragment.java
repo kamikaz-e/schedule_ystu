@@ -60,7 +60,7 @@ public class SchedulePageFragment extends Fragment {
     }
 
     private void updateList() {
-        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
+        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(day, positionWeek);
         rvadapter.setLessonList(lessonList);
         rvadapter.notifyDataSetChanged();
     }

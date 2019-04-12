@@ -77,7 +77,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     }
 
     private void updateList() {
-        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
+        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(day, positionWeek);
         subjectList = SubjectDao.getInstance().getAllData();
         audienceList = AudienceDao.getInstance().getAllData();
         educatorList = EducatorDao.getInstance().getAllData();

@@ -41,7 +41,7 @@ public final class Preferences {
     }
 
     public long getSemestStart() {
-        return  mPrefs.getLong(PREF_KEY_SEMESTER_START, calendar.getTimeInMillis());
+        return mPrefs.getLong(PREF_KEY_SEMESTER_START, calendar.getTimeInMillis());
     }
 
     public void setSelectedWeekEditSchedule(int position) {
@@ -49,8 +49,8 @@ public final class Preferences {
     }
 
     public int getSelectedWeekEditSchedule() {
-        return  mPrefs.getInt(PREF_KEY_SELECT_WEEK, 0);
+        return mPrefs.getInt(PREF_KEY_SELECT_WEEK, 0);
     }
 
-    
+
 }

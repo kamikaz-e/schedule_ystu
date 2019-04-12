@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter.TabDays;
+package com.example.misha.myapplication.adapter.tabDays;
 
 import android.annotation.SuppressLint;
 
@@ -22,7 +22,7 @@ public class EditTabDaysPagerAdapter extends FragmentPagerAdapter {
         super(fragmentManager);
         selectedWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
         for (int day = 0; day < 6; day++) {
-            fragments.add(EditSchedulePageFragment.newInstance(selectedWeek, day));
+            fragments.add(EditSchedulePageFragment.newInstance(day, selectedWeek));
         }
     }
 

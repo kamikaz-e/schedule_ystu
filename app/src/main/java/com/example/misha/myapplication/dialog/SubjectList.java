@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.example.misha.myapplication.activity.ActivityEditData;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.editScheduleListAdapters.ListSubjectsAdapter;
-import com.example.misha.myapplication.SimpleItemClickListener;
 import com.example.misha.myapplication.database.entity.Subject;
 
 import java.util.ArrayList;

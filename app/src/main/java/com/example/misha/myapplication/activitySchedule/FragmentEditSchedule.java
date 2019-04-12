@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.activity.MainActivity;
-import com.example.misha.myapplication.adapter.TabDays.EditTabDaysAdapter;
-import com.example.misha.myapplication.adapter.TabDays.EditTabDaysPagerAdapter;
+import com.example.misha.myapplication.adapter.tabDays.EditTabDaysAdapter;
+import com.example.misha.myapplication.adapter.tabDays.EditTabDaysPagerAdapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
