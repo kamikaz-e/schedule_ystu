@@ -6,10 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.misha.myapplication.EditData.FragmentAudience;
-import com.example.misha.myapplication.EditData.FragmentEducator;
-import com.example.misha.myapplication.EditData.FragmentSubject;
-import com.example.misha.myapplication.EditData.FragmentTypelesson;
+import com.example.misha.myapplication.editData.FragmentAudience;
+import com.example.misha.myapplication.editData.FragmentEducator;
+import com.example.misha.myapplication.editData.FragmentSubject;
+import com.example.misha.myapplication.editData.FragmentTypelesson;
 import com.example.misha.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
@@ -259,7 +259,6 @@ public class ActivityEditData extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(ActivityEditData.this, MainActivity.class);
-                finish();
                 startActivity(intent);
                 return true;
 
@@ -270,9 +269,8 @@ public class ActivityEditData extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ActivityEditData.this, MainActivity.class);
         finish();
-        startActivity(intent);
+
     }
 
 

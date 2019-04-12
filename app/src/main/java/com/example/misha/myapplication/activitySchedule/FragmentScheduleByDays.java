@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.activity.MainActivity;
-import com.example.misha.myapplication.adapter.TabDays.TabDaysAdapter;
-import com.example.misha.myapplication.adapter.TabDays.TabDaysPagerAdapter;
+import com.example.misha.myapplication.adapter.tabDays.TabDaysAdapter;
+import com.example.misha.myapplication.adapter.tabDays.TabDaysPagerAdapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +48,7 @@ public class FragmentScheduleByDays extends Fragment {
         pagerAdapter = new TabDaysPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
-        dayTabs = view.findViewById(R.id.recycler_view);
+        dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
 
         return view;

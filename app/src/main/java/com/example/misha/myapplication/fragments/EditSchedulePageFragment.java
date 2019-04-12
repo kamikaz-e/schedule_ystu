@@ -2,17 +2,14 @@ package com.example.misha.myapplication.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.misha.myapplication.Constants;
-import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.EditSchedule.EditScheduleAdapter;
-import com.example.misha.myapplication.adapter.EditSchedule.EditScheduleCallback;
+import com.example.misha.myapplication.adapter.editSchedule.EditScheduleAdapter;
+import com.example.misha.myapplication.adapter.editSchedule.EditScheduleCallback;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.LessonDao;
@@ -31,6 +28,9 @@ import com.example.misha.myapplication.dialog.TypelessonList;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class EditSchedulePageFragment extends Fragment implements EditScheduleCallback {
 
     private View fragmentView;
@@ -44,6 +44,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
 
     private int positionWeek;
     private int day;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +78,10 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
 
     private void updateList() {
         lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
+        subjectList = SubjectDao.getInstance().getAllData();
+        audienceList = AudienceDao.getInstance().getAllData();
+        educatorList = EducatorDao.getInstance().getAllData();
+        typelessonList = TypelessonDao.getInstance().getAllData();
         rvadapter.setLessonList(lessonList);
         rvadapter.setAudiences(audienceList);
         rvadapter.setEducators(educatorList);
@@ -151,7 +156,6 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
     }
-
 
 
 }

@@ -209,17 +209,14 @@ public class MainActivity extends BaseActivity
                 break;
             case R.id.edit_data:
                 Intent intent = new Intent(this, ActivityEditData.class);
-                finish();
                 startActivity(intent);
                 break;
             case R.id.call_schedule:
                 intent = new Intent(this, ActivityCallSchedule.class);
-                finish();
                 startActivity(intent);
                 break;
             case R.id.settings:
                 intent = new Intent(this, ActivitySettings.class);
-                finish();
                 startActivity(intent);
                 break;
             case R.id.nav_share:

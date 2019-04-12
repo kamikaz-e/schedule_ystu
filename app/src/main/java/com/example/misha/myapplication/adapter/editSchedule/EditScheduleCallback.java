@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter.EditSchedule;
+package com.example.misha.myapplication.adapter.editSchedule;
 
 
 import com.example.misha.myapplication.database.entity.Audience;

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.Schedule.ScheduleAdapter;
+import com.example.misha.myapplication.adapter.schedule.ScheduleAdapter;
 import com.example.misha.myapplication.database.dao.LessonDao;
 import com.example.misha.myapplication.database.entity.Lesson;
 

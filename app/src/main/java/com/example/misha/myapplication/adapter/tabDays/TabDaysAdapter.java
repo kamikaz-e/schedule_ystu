@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter.TabDays;
+package com.example.misha.myapplication.adapter.tabDays;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;

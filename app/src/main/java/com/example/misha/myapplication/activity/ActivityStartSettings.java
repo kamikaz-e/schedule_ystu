@@ -3,7 +3,7 @@ package com.example.misha.myapplication.activity;
 import android.os.Bundle;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.start_fragments.FragmentDate;
+import com.example.misha.myapplication.startFragments.FragmentDate;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;

@@ -48,7 +48,7 @@ public class FragmentEditSchedule extends Fragment {
         pagerAdapter = new EditTabDaysPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
-        dayTabs = view.findViewById(R.id.recycler_view);
+        dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
 
         return view;

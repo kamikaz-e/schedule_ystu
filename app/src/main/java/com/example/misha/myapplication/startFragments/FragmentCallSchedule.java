@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.start_fragments;
+package com.example.misha.myapplication.startFragments;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.start_fragments;
+package com.example.misha.myapplication.startFragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -24,7 +24,6 @@ import android.widget.TextView;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.entity.Audience;
-import com.example.misha.myapplication.start_fragments.FragmentStartEducator;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.EditData;
+package com.example.misha.myapplication.editData;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

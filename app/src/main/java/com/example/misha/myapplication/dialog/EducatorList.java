@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.misha.myapplication.activity.ActivityEditData;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.EditScheduleListAdapters.ListEducatorAdapter;
+import com.example.misha.myapplication.adapter.editScheduleListAdapters.ListEducatorAdapter;
 import com.example.misha.myapplication.SimpleItemClickListener;
 import com.example.misha.myapplication.database.entity.Educator;
 
@@ -60,33 +60,24 @@ public class EducatorList extends DialogFragment {
         builder.setView(view);
         builder.setCustomTitle(layoutTitleDialog);
         rvEducatorR =  view.findViewById(R.id.rv);
-        listEDUCATORAdapter =  new ListEducatorAdapter(listEducator, new SimpleItemClickListener() {
-            @Override
-            public void onItemClick(int position, View view) {
-                Intent intent = new Intent();
-                intent.putExtra(POSITION, clickedPosition);
-                intent.putExtra(EDUCATOR_LIST, listEducator.get(position));
-                getParentFragment().onActivityResult(EDUCATOR_CODE, Activity.RESULT_OK, intent);
-                dismiss();
-            }
+        listEDUCATORAdapter =  new ListEducatorAdapter(listEducator, (position, view1) -> {
+            Intent intent = new Intent();
+            intent.putExtra(POSITION, clickedPosition);
+            intent.putExtra(EDUCATOR_LIST, listEducator.get(position));
+            getParentFragment().onActivityResult(EDUCATOR_CODE, Activity.RESULT_OK, intent);
+            dismiss();
         });
         rvEducatorR.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
         rvEducatorR.setAdapter(listEDUCATORAdapter);
 
         Button button_add = view.findViewById(R.id.button_add);
-        button_add.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ActivityEditData.class);
-                getActivity().finish();
-                getActivity().startActivity(intent);
-            }
+        button_add.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ActivityEditData.class);
+            getActivity().finish();
+            getActivity().startActivity(intent);
         });
         Button button_cancel = view.findViewById(R.id.button_cancel);
-        button_cancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        button_cancel.setOnClickListener(v -> dismiss());
         return builder.create();
     }
 
