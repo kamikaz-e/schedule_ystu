@@ -1,23 +1,30 @@
 package com.example.misha.myapplication.activitySchedule;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.example.misha.myapplication.Constants;
+import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.activity.MainActivity;
 import com.example.misha.myapplication.adapter.tabDays.TabDaysAdapter;
 import com.example.misha.myapplication.adapter.tabDays.TabDaysPagerAdapter;
+
+import java.util.Calendar;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
+
+import static com.example.misha.myapplication.activity.MainActivity.WEEK_CODE;
 
 public class FragmentScheduleByDays extends Fragment {
 
@@ -52,21 +59,12 @@ public class FragmentScheduleByDays extends Fragment {
         dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
 
-        Button toEditSchedule = getActivity().findViewById(R.id.toolbar_but);
-        toEditSchedule.setBackgroundResource(R.drawable.ic_editor);
-        toEditSchedule.setOnClickListener(v -> {
-            FragmentEditSchedule fragment= new FragmentEditSchedule();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        });
         return view;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MainActivity.WEEK_CODE) {
+        if (requestCode == WEEK_CODE) {
             selectedWeek = data.getIntExtra(Constants.SELECTED_WEEK, 0);
             pagerAdapter.setWeek(selectedWeek);
         }

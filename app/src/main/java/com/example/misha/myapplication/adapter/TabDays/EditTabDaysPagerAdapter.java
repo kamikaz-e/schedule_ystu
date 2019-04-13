@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.fragments.EditSchedulePageFragment;
-import com.example.misha.myapplication.fragments.SchedulePageFragment;
 
 import java.util.ArrayList;
 

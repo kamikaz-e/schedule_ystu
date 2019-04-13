@@ -8,8 +8,12 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.FragmentTwo;
@@ -17,29 +21,24 @@ import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.activitySchedule.FragmentEditSchedule;
 import com.example.misha.myapplication.activitySchedule.FragmentScheduleByDays;
+import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
+import com.example.misha.myapplication.database.DatabaseHelper;
+import com.example.misha.myapplication.database.dao.LessonDao;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
+
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
-
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-import com.example.misha.myapplication.database.DatabaseHelper;
-import com.example.misha.myapplication.database.dao.LessonDao;
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
-
-import java.util.Calendar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,6 +49,12 @@ public class MainActivity extends BaseActivity
     Spinner spinner;
     long differentBetweenDate = 0;
     long selectDate = 0;
+    long curr_week = 0;
+
+
+    TextView output = null;
+    CustomSpinnerAdapter adapter;
+
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -69,32 +74,72 @@ public class MainActivity extends BaseActivity
         toggle.syncState();
 
         spinner = findViewById(R.id.spinner);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.weeks));
-        spinner.setAdapter(arrayAdapter);
 
-        Calendar calendar = Calendar.getInstance();
-        selectDate = Preferences.getInstance().getSemestStart();
-        differentBetweenDate = calendar.getTimeInMillis() - selectDate;
-        long curr_week = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
 
-        spinner.setSelection((int)curr_week);
+        Calendar mCalendar = Calendar.getInstance();
+        mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
+        ArrayList<String> allDays = new ArrayList<>();
+        SimpleDateFormat mFormat = new SimpleDateFormat("dd.MM");
+        for(int week = 0; week < 17; week++){
+            for(int day = 0; day < 7; day++){
+            String startWeek = mFormat.format(mCalendar.getTime());
+            mCalendar.add(Calendar.WEEK_OF_YEAR, 1);
+            mCalendar.add(Calendar.DAY_OF_YEAR, -1);
+            allDays.add(startWeek + " - " + mFormat.format(mCalendar.getTime()));
+            mCalendar.add(Calendar.DAY_OF_YEAR, 1);
+            break;
+        }}
+
+        CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(this,
+               allDays);
+
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(customSpinnerAdapter);
+
+
+
+        calculateDate();
+
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 Intent intent = new Intent();
                 intent.putExtra(Constants.SELECTED_WEEK, position);
-                sendResultToTarget(FragmentScheduleByDays.class,  WEEK_CODE, Activity.RESULT_OK, intent);
-                sendResultToTarget(FragmentEditSchedule.class,  WEEK_CODE, Activity.RESULT_OK, intent);
+                sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
+                sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });
+        spinner.setSelection((int) curr_week);
 
+        Button buttonToolbar = findViewById(R.id.toolbar_but);
+        buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
+        buttonToolbar.setOnClickListener(v -> {
+
+
+            Fragment f = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+
+            if (f instanceof FragmentScheduleByDays) {
+                replaceFragment(new FragmentEditSchedule());
+                Intent intent = new Intent();
+                intent.putExtra(Constants.SELECTED_WEEK, (int) curr_week);
+                sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
+                buttonToolbar.setBackgroundResource(R.drawable.ic_ok);
+
+            } else {
+                replaceFragment(new FragmentScheduleByDays());
+                Intent intent = new Intent();
+                intent.putExtra(Constants.SELECTED_WEEK, Preferences.getInstance().getSelectedWeekEditSchedule());
+                sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
+                buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
+            }
+        });
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -108,46 +153,6 @@ public class MainActivity extends BaseActivity
             Intent intent = new Intent(MainActivity.this, ActivityStart.class);
             startActivity(intent);
 
-            //button_toolbar.setEnabled(false);
-
-           /* new MaterialTapTargetPrompt.Builder(MainActivity.this)
-                    .setTarget(spinner)
-                    .setPromptBackground(new CirclePromptBackground())
-                    .setPromptFocal(new RectanglePromptFocal())
-                    .setPrimaryText("Выбор недели")
-                    .setSecondaryText("Вы можете выбрать номер недели при просмотре расписания. В настройках также можно выбрать дату начала семестра для автоопределения текущей учебной недели")
-                    .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170,170,255))
-                    .setBackgroundColour(Color.rgb(100,100,255))
-                    .setPrimaryTextColour(Color.rgb(255,255,255))
-                    .setSecondaryTextColour(Color.rgb(255,255,255))
-                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
-                    {
-                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                            button_toolbar.setEnabled(true);
-                            if (state == MaterialTapTargetPrompt.STATE_FINISHED || state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
-                                new MaterialTapTargetPrompt.Builder(MainActivity.this)
-                                        .setTarget(button_toolbar)
-                                        .setPromptBackground(new CirclePromptBackground())
-                                        .setPromptFocal(new CirclePromptFocal())
-                                        .setPrimaryText("Редактор расписания")
-                                        .setSecondaryText("Нажав эту кнопку, Вы перейдете в окно редактирования расписания")
-                                        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170,170,255))
-                                        .setBackgroundColour(Color.rgb(100,100,255))
-                                        .setPrimaryTextColour(Color.rgb(255,255,255))
-                                        .setSecondaryTextColour(Color.rgb(255,255,255))
-                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
-                                        {
-                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                                                if (state == MaterialTapTargetPrompt.STATE_FINISHED || state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
-                                                   //         drawer.openDrawer(Gravity.LEFT);
-
-                                                }
-                                            }})
-                                        .show();
-                            }
-
-                        }})
-                    .show();*/
 
             Editor e = sp.edit();
             e.putString("hasVisited", "yes");
@@ -156,6 +161,14 @@ public class MainActivity extends BaseActivity
     }
 
 
+    private void calculateDate() {
+        Calendar calendar = Calendar.getInstance();
+        selectDate = Preferences.getInstance().getSemestStart();
+        differentBetweenDate = calendar.getTimeInMillis() - selectDate;
+        curr_week = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
+        Preferences.getInstance().setSelectedWeekEditSchedule((int) curr_week);
+    }
+
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -163,16 +176,6 @@ public class MainActivity extends BaseActivity
         LessonDao.getInstance().initTable();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Fragment fragment = new FragmentScheduleByDays();
-        if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content_frame, fragment);
-            ft.commit();
-        }
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -247,5 +250,46 @@ public class MainActivity extends BaseActivity
         }).setTitle("Обратная связь с разработчиком");
         return builder.create();
     }
+
+    //button_toolbar.setEnabled(false);
+
+           /* new MaterialTapTargetPrompt.Builder(MainActivity.this)
+                    .setTarget(spinner)
+                    .setPromptBackground(new CirclePromptBackground())
+                    .setPromptFocal(new RectanglePromptFocal())
+                    .setPrimaryText("Выбор недели")
+                    .setSecondaryText("Вы можете выбрать номер недели при просмотре расписания. В настройках также можно выбрать дату начала семестра для автоопределения текущей учебной недели")
+                    .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170,170,255))
+                    .setBackgroundColour(Color.rgb(100,100,255))
+                    .setPrimaryTextColour(Color.rgb(255,255,255))
+                    .setSecondaryTextColour(Color.rgb(255,255,255))
+                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
+                    {
+                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                            button_toolbar.setEnabled(true);
+                            if (state == MaterialTapTargetPrompt.STATE_FINISHED || state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
+                                new MaterialTapTargetPrompt.Builder(MainActivity.this)
+                                        .setTarget(button_toolbar)
+                                        .setPromptBackground(new CirclePromptBackground())
+                                        .setPromptFocal(new CirclePromptFocal())
+                                        .setPrimaryText("Редактор расписания")
+                                        .setSecondaryText("Нажав эту кнопку, Вы перейдете в окно редактирования расписания")
+                                        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170,170,255))
+                                        .setBackgroundColour(Color.rgb(100,100,255))
+                                        .setPrimaryTextColour(Color.rgb(255,255,255))
+                                        .setSecondaryTextColour(Color.rgb(255,255,255))
+                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
+                                        {
+                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                                if (state == MaterialTapTargetPrompt.STATE_FINISHED || state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
+                                                   //         drawer.openDrawer(Gravity.LEFT);
+
+                                                }
+                                            }})
+                                        .show();
+                            }
+
+                        }})
+                    .show();*/
 
 }

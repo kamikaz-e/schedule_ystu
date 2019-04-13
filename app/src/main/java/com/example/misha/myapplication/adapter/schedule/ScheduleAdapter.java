@@ -21,6 +21,8 @@ import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import static androidx.viewpager.widget.PagerAdapter.POSITION_NONE;
+
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
 
     private List<Lesson> lessonList;

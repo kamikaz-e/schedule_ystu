@@ -20,6 +20,8 @@ import com.example.misha.myapplication.database.entity.Typelesson;
 import java.util.ArrayList;
 import java.util.List;
 
+import static androidx.viewpager.widget.PagerAdapter.POSITION_NONE;
+
 public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapter.ViewHolder> {
 
     private List<Lesson> lessonList;
@@ -61,7 +63,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
                 .inflate(R.layout.item_lesson, parent, false);
         return new ViewHolder(view);
     }
-
 
 
     @Override

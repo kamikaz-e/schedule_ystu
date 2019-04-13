@@ -6,12 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.example.misha.myapplication.Constants;
+import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.activity.MainActivity;
 import com.example.misha.myapplication.adapter.tabDays.EditTabDaysAdapter;
 import com.example.misha.myapplication.adapter.tabDays.EditTabDaysPagerAdapter;
+
+import java.util.Calendar;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +27,7 @@ public class FragmentEditSchedule extends Fragment {
     EditTabDaysPagerAdapter pagerAdapter;
     EditTabDaysAdapter adapterTabDays;
     RecyclerView dayTabs;
-
+    Spinner spinner;
     private ViewPager viewPager;
 
     private int selectedWeek;
@@ -46,20 +50,13 @@ public class FragmentEditSchedule extends Fragment {
                 adapterTabDays.setSelection(position);
             }
         });
+
+
         pagerAdapter = new EditTabDaysPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
-        Button toSchedule = getActivity().findViewById(R.id.toolbar_but);
-        toSchedule.setBackgroundResource(R.drawable.ic_ok);
-        toSchedule.setOnClickListener(v -> {
-            FragmentScheduleByDays fragment= new FragmentScheduleByDays();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        });
         return view;
     }
 
