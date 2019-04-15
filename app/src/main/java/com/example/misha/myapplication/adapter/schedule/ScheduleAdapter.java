@@ -21,8 +21,6 @@ import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import static androidx.viewpager.widget.PagerAdapter.POSITION_NONE;
-
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
 
     private List<Lesson> lessonList;
@@ -30,7 +28,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_item, parent, false);
+                .inflate(R.layout.card_item_schedule, parent, false);
         return new ViewHolder(view);
     }
 

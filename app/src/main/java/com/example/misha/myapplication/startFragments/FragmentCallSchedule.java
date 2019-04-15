@@ -56,11 +56,9 @@ public class FragmentCallSchedule extends Fragment {
     EditText fiveTime;
     EditText sixTime;
 
-    Calendar Time=Calendar.getInstance();
+    Calendar calendarTimeCalls =Calendar.getInstance();
     Integer start=1;
     Button button_toolbar;
-    String hasVisited;
-    SharedPreferences sp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,16 +76,13 @@ public class FragmentCallSchedule extends Fragment {
 
         button_toolbar = view.findViewById(R.id.toolbar_but);
         button_toolbar.setBackgroundResource(R.drawable.ic_start_settings_ok);
-        button_toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                save_calls();
-                FragmentStartSubject fragment= new FragmentStartSubject();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, fragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
+        button_toolbar.setOnClickListener(v -> {
+            save_calls();
+            FragmentStartSubject fragment= new FragmentStartSubject();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null)
+                    .commit();
         });
         oneTime = view.findViewById(R.id.OneTime);
         twoTime = view.findViewById(R.id.TwoTime);
@@ -97,87 +92,53 @@ public class FragmentCallSchedule extends Fragment {
         sixTime = view.findViewById(R.id.SixTime);
 
 
-        CardView cardViewOne= view.findViewById(R.id.card_viewOne);
 
-            new MaterialTapTargetPrompt.Builder(getActivity())
-                    .setTarget(cardViewOne)
-                    .setPromptBackground(new RectanglePromptBackground())
-                    .setPromptFocal(new RectanglePromptFocal())
-                    .setPrimaryText("Расписание звонков")
-                    .setSecondaryText("Вы можете задать расписание звонков для занятий. При нажатии на кнопку «Выбрать» укажите время начала занятия, нажмите кнопку «Ок», затем укажите время окончания занятия и так же нажмите кнопку «Ок»")
-                    .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                    .setBackgroundColour(Color.rgb(100, 100, 255))
-                    .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                    .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                            if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-
-                            }
-                        }
-                    })
+        oneTime.setOnClickListener(v -> {
+            new TimePickerDialog(getActivity(), timeOne,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
-
-
-
-        oneTime.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new TimePickerDialog(getActivity(), timeOne,
-                        Time.get(Calendar.HOUR_OF_DAY),
-                        Time.get(Calendar.MINUTE), true)
-                        .show();
-                start=1;
-            }
+            start=1;
         });
 
-        twoTime.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new TimePickerDialog(getActivity(), timeTwo,
-                        Time.get(Calendar.HOUR_OF_DAY),
-                        Time.get(Calendar.MINUTE), true)
-                        .show();
-                start=1;
-            }
+        twoTime.setOnClickListener(v -> {
+            new TimePickerDialog(getActivity(), timeTwo,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
+                    .show();
+            start=1;
         });
 
-        threeTime.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new TimePickerDialog(getActivity(), timeThree,
-                        Time.get(Calendar.HOUR_OF_DAY),
-                        Time.get(Calendar.MINUTE), true)
-                        .show();
-                start=1;
-            }
+        threeTime.setOnClickListener(v -> {
+            new TimePickerDialog(getActivity(), timeThree,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
+                    .show();
+            start=1;
         });
 
-        fourTime.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new TimePickerDialog(getActivity(), timeFour,
-                        Time.get(Calendar.HOUR_OF_DAY),
-                        Time.get(Calendar.MINUTE), true)
-                        .show();
-                start=1;
-            }
+        fourTime.setOnClickListener(v -> {
+            new TimePickerDialog(getActivity(), timeFour,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
+                    .show();
+            start=1;
         });
 
-        fiveTime.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new TimePickerDialog(getActivity(), timeFive,
-                        Time.get(Calendar.HOUR_OF_DAY),
-                        Time.get(Calendar.MINUTE), true)
-                        .show();
-                start=1;
-            }
+        fiveTime.setOnClickListener(v -> {
+            new TimePickerDialog(getActivity(), timeFive,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
+                    .show();
+            start=1;
         });
 
-        sixTime.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new TimePickerDialog(getActivity(), timeSix,
-                        Time.get(Calendar.HOUR_OF_DAY),
-                        Time.get(Calendar.MINUTE), true)
-                        .show();
-                start=1;
-            }
+        sixTime.setOnClickListener(v -> {
+            new TimePickerDialog(getActivity(), timeSix,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
+                    .show();
+            start=1;
         });
 
         return view;
@@ -189,26 +150,24 @@ public class FragmentCallSchedule extends Fragment {
     private void setInitialTimeOne() {
         if (start==1) {
             select_time_partOne=(DateUtils.formatDateTime(getActivity(),
-                    Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
         }  else
         {   select_time_fullOne= select_time_partOne+DateUtils.formatDateTime(getActivity(),
-                Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+                calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
             oneTime.setText(select_time_fullOne);
         }
         if (start==1){
             new TimePickerDialog(getActivity(), timeOne,
-                    Time.get(Calendar.HOUR_OF_DAY),
-                    Time.get(Calendar.MINUTE), true)
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
             start=0; }
     }
 
-    TimePickerDialog.OnTimeSetListener timeOne=new TimePickerDialog.OnTimeSetListener() {
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            Time.set(Calendar.MINUTE, minute);
-            setInitialTimeOne();
-        }
+    TimePickerDialog.OnTimeSetListener timeOne= (view, hourOfDay, minute) -> {
+        calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendarTimeCalls.set(Calendar.MINUTE, minute);
+        setInitialTimeOne();
     };
 
 
@@ -216,26 +175,24 @@ public class FragmentCallSchedule extends Fragment {
     private void setInitialTimeTwo() {
         if (start==1) {
             select_time_partTwo=(DateUtils.formatDateTime(getActivity(),
-                    Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
         }  else
         {   select_time_fullTwo= select_time_partTwo+DateUtils.formatDateTime(getActivity(),
-                Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+                calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
             twoTime.setText(select_time_fullTwo);
         }
         if (start==1){
             new TimePickerDialog(getActivity(), timeTwo,
-                    Time.get(Calendar.HOUR_OF_DAY),
-                    Time.get(Calendar.MINUTE), true)
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
             start=0; }
     }
 
-    TimePickerDialog.OnTimeSetListener timeTwo=new TimePickerDialog.OnTimeSetListener() {
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            Time.set(Calendar.MINUTE, minute);
-            setInitialTimeTwo();
-        }
+    TimePickerDialog.OnTimeSetListener timeTwo= (view, hourOfDay, minute) -> {
+        calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendarTimeCalls.set(Calendar.MINUTE, minute);
+        setInitialTimeTwo();
     };
 
 
@@ -243,26 +200,24 @@ public class FragmentCallSchedule extends Fragment {
     private void setInitialTimeThree() {
         if (start==1) {
             select_time_partThree=(DateUtils.formatDateTime(getActivity(),
-                    Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
         }  else
         {   select_time_fullThree= select_time_partThree+DateUtils.formatDateTime(getActivity(),
-                Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+                calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
             threeTime.setText(select_time_fullThree);
         }
         if (start==1){
             new TimePickerDialog(getActivity(), timeThree,
-                    Time.get(Calendar.HOUR_OF_DAY),
-                    Time.get(Calendar.MINUTE), true)
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
             start=0; }
     }
 
-    TimePickerDialog.OnTimeSetListener timeThree=new TimePickerDialog.OnTimeSetListener() {
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            Time.set(Calendar.MINUTE, minute);
-            setInitialTimeThree();
-        }
+    TimePickerDialog.OnTimeSetListener timeThree= (view, hourOfDay, minute) -> {
+        calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendarTimeCalls.set(Calendar.MINUTE, minute);
+        setInitialTimeThree();
     };
 
 
@@ -270,78 +225,72 @@ public class FragmentCallSchedule extends Fragment {
     private void setInitialTimeFour() {
         if (start==1) {
             select_time_partFour=(DateUtils.formatDateTime(getActivity(),
-                    Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
         }  else
         {   select_time_fullFour= select_time_partFour+DateUtils.formatDateTime(getActivity(),
-                Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+                calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
             fourTime.setText(select_time_fullFour);
         }
         if (start==1){
             new TimePickerDialog(getActivity(), timeFour,
-                    Time.get(Calendar.HOUR_OF_DAY),
-                    Time.get(Calendar.MINUTE), true)
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
             start=0; }
     }
 
-    TimePickerDialog.OnTimeSetListener timeFour=new TimePickerDialog.OnTimeSetListener() {
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            Time.set(Calendar.MINUTE, minute);
-            setInitialTimeFour();
-        }
+    TimePickerDialog.OnTimeSetListener timeFour= (view, hourOfDay, minute) -> {
+        calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendarTimeCalls.set(Calendar.MINUTE, minute);
+        setInitialTimeFour();
     };
 
 
     private void setInitialTimeFive() {
         if (start==1) {
             select_time_partFive=(DateUtils.formatDateTime(getActivity(),
-                    Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
         }  else
         {   select_time_fullFive= select_time_partFive+DateUtils.formatDateTime(getActivity(),
-                Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+                calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
             fiveTime.setText(select_time_fullFive);
         }
         if (start==1){
             new TimePickerDialog(getActivity(), timeFive,
-                    Time.get(Calendar.HOUR_OF_DAY),
-                    Time.get(Calendar.MINUTE), true)
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
             start=0; }
     }
 
-    TimePickerDialog.OnTimeSetListener timeFive=new TimePickerDialog.OnTimeSetListener() {
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            Time.set(Calendar.MINUTE, minute);
-            setInitialTimeFive();
-        }
+    TimePickerDialog.OnTimeSetListener timeFive= (view, hourOfDay, minute) -> {
+        calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendarTimeCalls.set(Calendar.MINUTE, minute);
+        setInitialTimeFive();
     };
 
 
     private void setInitialTimeSix() {
         if (start==1) {
             select_time_partSix=(DateUtils.formatDateTime(getActivity(),
-                    Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
         }  else
         {   select_time_fullSix= select_time_partSix+DateUtils.formatDateTime(getActivity(),
-                Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+                calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
             sixTime.setText(select_time_fullSix);
         }
         if (start==1){
             new TimePickerDialog(getActivity(), timeSix,
-                    Time.get(Calendar.HOUR_OF_DAY),
-                    Time.get(Calendar.MINUTE), true)
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
             start=0; }
     }
 
-    TimePickerDialog.OnTimeSetListener timeSix=new TimePickerDialog.OnTimeSetListener() {
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            Time.set(Calendar.MINUTE, minute);
-            setInitialTimeSix();
-        }
+    TimePickerDialog.OnTimeSetListener timeSix= (view, hourOfDay, minute) -> {
+        calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendarTimeCalls.set(Calendar.MINUTE, minute);
+        setInitialTimeSix();
     };
 
 
@@ -367,21 +316,11 @@ public class FragmentCallSchedule extends Fragment {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (hasVisited == "nope"
-                ) {
-                    save_calls();
-                    getActivity().finish();
-                    SharedPreferences.Editor e = sp.edit();
-                    e.putString("hasVisited", "yes");
-                    e.commit();
-                }
-                else
-                {
                     save_calls();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     getActivity().finish();
                     startActivity(intent);
-                }
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

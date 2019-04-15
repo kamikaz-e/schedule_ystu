@@ -23,12 +23,12 @@
 
             <TextView
                 android:id="@+id/number"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="#393939"
                 android:gravity="center_vertical|center_horizontal|center"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/time"
@@ -36,10 +36,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
                 android:layout_toEndOf="@+id/number"
                 android:text="Время"
-                android:textSize="19sp" />
+                android:textSize="16sp" />
 
             <RelativeLayout
                 android:id="@+id/subjectRelLay"
@@ -69,7 +68,7 @@
                         android:maxLines="1"
                         android:paddingTop="10sp"
                         android:singleLine="true"
-                        android:textSize="19sp"
+                        android:textSize="16sp"
                         android:translationY="-10dp"
                         android:inputType="textNoSuggestions"
                    />
@@ -103,7 +102,7 @@
                         android:maxLines="1"
                         android:paddingTop="10sp"
                         android:singleLine="true"
-                        android:textSize="19sp"
+                        android:textSize="16sp"
                         android:translationY="-10dp"
                         android:inputType="textNoSuggestions"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -137,7 +136,7 @@
                         android:maxLines="1"
                         android:paddingTop="10sp"
                         android:singleLine="true"
-                        android:textSize="19sp"
+                        android:textSize="16sp"
                         android:translationY="-10dp"
                         android:inputType="textNoSuggestions"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -173,9 +172,9 @@
                     android:maxLines="1"
                     android:paddingTop="10sp"
                     android:singleLine="true"
-                    android:textSize="19sp"
+                    android:textSize="16sp"
                     android:translationY="-10dp"
-                    android:inputType="textNoSuggestions"/>
+                    android:inputType="textNoSuggestions" />
             </com.google.android.material.textfield.TextInputLayout>
           </RelativeLayout>
 

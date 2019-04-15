@@ -1,10 +1,8 @@
 package com.example.misha.myapplication.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.misha.myapplication.R;
@@ -68,22 +64,16 @@ public class ActivityStart extends BaseActivity {
   @Override
     protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.welcome_activity);
+    setContentView(R.layout.start_activity);
 
 
     Button start_buttonOne = findViewById(R.id.start_buttonOne);
-    start_buttonOne.setOnClickListener(new View.OnClickListener() {
-      public void onClick(View v) {
-        onCreateDialogImport().show();
-      }
-    });
+    start_buttonOne.setOnClickListener(v -> onCreateDialogImport().show());
     Button start_buttonTwo = findViewById(R.id.start_buttonTwo);
-    start_buttonTwo.setOnClickListener(new View.OnClickListener() {
-      public void onClick(View v) {
-        Intent intent = new Intent (ActivityStart.this, ActivityStartSettings.class);
-        finish();
-        startActivity(intent);
-      }
+    start_buttonTwo.setOnClickListener(v -> {
+      Intent intent = new Intent (ActivityStart.this, ActivityStartSettings.class);
+      finish();
+      startActivity(intent);
     });
 
   }
@@ -94,27 +84,22 @@ public class ActivityStart extends BaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
         final EditText name_db = view.findViewById(R.id.name_schedule);
-        builder.setCancelable(false).setPositiveButton("Импортировать", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                database_name = name_db.getText().toString();
+        builder.setCancelable(false).setPositiveButton("Импортировать", (dialog, id) -> {
+            database_name = name_db.getText().toString();
 
-                SubjectDao.getInstance().deleteAll();
-                AudienceDao.getInstance().deleteAll();
-                EducatorDao.getInstance().deleteAll();
-                load_db(sub, subjects_import);
-                load_db(aud, audiences_import);
-                load_db(edu, educators_import);
-                load_db(sch, schedule_import);
-                load_db(cal, call_schedule);
-                load_db(dat, date);
-                Intent intent = new Intent(ActivityStart.this, MainActivity.class);
-                finish();
-                startActivity(intent);
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-            }
+            SubjectDao.getInstance().deleteAll();
+            AudienceDao.getInstance().deleteAll();
+            EducatorDao.getInstance().deleteAll();
+            load_db(sub, subjects_import);
+            load_db(aud, audiences_import);
+            load_db(edu, educators_import);
+            load_db(sch, schedule_import);
+            load_db(cal, call_schedule);
+            load_db(dat, date);
+            Intent intent = new Intent(ActivityStart.this, MainActivity.class);
+            finish();
+            startActivity(intent);
+        }).setNegativeButton("Отмена", (dialog, id) -> {
         });
         return builder.create();
     }
@@ -122,60 +107,52 @@ public class ActivityStart extends BaseActivity {
     void load_db(final String table, final String url) {
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            String jsonString;
+                response -> {
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        String jsonString;
 
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                jsonString = jsonArray.getString(i);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            jsonString = jsonArray.getString(i);
 
 
 
-                                if (table.equals(aud)) {
-                                    ArrayList<Audience> audiences = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Audience>>(){}.getType());
-                                    AudienceDao.getInstance().insertAll(audiences);
-                                }
-                                if (table == edu) {
-                                    ArrayList<Educator> educators = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Educator>>(){}.getType());
-                                    EducatorDao.getInstance().insertAll(educators);
-                                }
-                                if (table == sub) {
-                                    ArrayList<Subject> subjects = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Subject>>(){}.getType());
-                                    SubjectDao.getInstance().insertAll(subjects);
-                                }
-                                if (table == sch) {
-                                    ArrayList<Lesson> lessons = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Lesson>>(){}.getType());
-                                    LessonDao.getInstance().insertAll(lessons);
-                                }
-                                if (table == cal) {
-                                    ArrayList<Calls> calls = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Calls>>(){}.getType());
-                                    CallDao.getInstance().insertAll(calls);
-                                }
-                                    /*if (table == dat) {
-                                        ArrayList<Date> date = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Date>>(){}.getType());
-                                        DateDao.getInstance().insertAll(date);
-
-                                        SharedPreferences settings = getSharedPreferences("week", 0);
-                                        SharedPreferences.Editor editor = settings.edit();
-                                        editor.putLong("current_week", Long.valueOf(date).longValue());
-                                        editor.commit();
-                                    }*/
+                            if (table.equals(aud)) {
+                                ArrayList<Audience> audiences = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Audience>>(){}.getType());
+                                AudienceDao.getInstance().insertAll(audiences);
                             }
+                            if (table == edu) {
+                                ArrayList<Educator> educators = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Educator>>(){}.getType());
+                                EducatorDao.getInstance().insertAll(educators);
+                            }
+                            if (table == sub) {
+                                ArrayList<Subject> subjects = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Subject>>(){}.getType());
+                                SubjectDao.getInstance().insertAll(subjects);
+                            }
+                            if (table == sch) {
+                                ArrayList<Lesson> lessons = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Lesson>>(){}.getType());
+                                LessonDao.getInstance().insertAll(lessons);
+                            }
+                            if (table == cal) {
+                                ArrayList<Calls> calls = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Calls>>(){}.getType());
+                                CallDao.getInstance().insertAll(calls);
+                            }
+                                /*if (table == dat) {
+                                    ArrayList<Date> date = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Date>>(){}.getType());
+                                    DateDao.getInstance().insertAll(date);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                                    SharedPreferences settings = getSharedPreferences("week", 0);
+                                    SharedPreferences.Editor editor = settings.edit();
+                                    editor.putLong("current_week", Long.valueOf(date).longValue());
+                                    editor.commit();
+                                }*/
                         }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                }
+                error -> error.printStackTrace()
         ) {
 
             @Override

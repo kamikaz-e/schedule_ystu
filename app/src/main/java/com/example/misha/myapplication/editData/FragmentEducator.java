@@ -48,33 +48,25 @@ public class FragmentEducator extends Fragment {
         list_educators = view.findViewById(R.id.list_educators);
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
         list_educators.setAdapter(adapter);
-        list_educators.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
-                                    long id) {
-                onCreateDialogDeleteItem(position).show();
-            }
-        });
+        list_educators.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());
         updateListView();
-        input_educator.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
-                    String educatorName = input_educator.getText().toString();
-                    if (TextUtils.isEmpty(educatorName)) {
-                        input_educator.setError("Введите преподавателя");
-                        return true;
-                    }
-                    Educator educator = new Educator();
-                    educator.setName(educatorName);
-                    EducatorDao.getInstance().insertItem(educator);
-                    input_educator.getText().clear();
-                    updateListView();
-                    adapter.notifyDataSetChanged();
+        input_educator.setOnEditorActionListener((v, actionId, event) -> {
+            if ((actionId == EditorInfo.IME_ACTION_DONE) ||
+                    ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
+                String educatorName = input_educator.getText().toString();
+                if (TextUtils.isEmpty(educatorName)) {
+                    input_educator.setError("Введите преподавателя");
                     return true;
-                } else {
-                    return false;
                 }
+                Educator educator = new Educator();
+                educator.setName(educatorName);
+                EducatorDao.getInstance().insertItem(educator);
+                input_educator.getText().clear();
+                updateListView();
+                adapter.notifyDataSetChanged();
+                return true;
+            } else {
+                return false;
             }
         });
         return view;
@@ -82,19 +74,13 @@ public class FragmentEducator extends Fragment {
 
     public Dialog onCreateDialogDeleteItem(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                Educator educator = educator_list.get(position);
-                EducatorDao.getInstance().deleteItemById(Long.parseLong(educator.getId()));
-                updateListView();
-                adapter.notifyDataSetChanged();
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Удалить преподавателя «" + educator_list.get(position) + "»?");
+        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
+            Educator educator = educator_list.get(position);
+            EducatorDao.getInstance().deleteItemById(Long.parseLong(educator.getId()));
+            updateListView();
+            adapter.notifyDataSetChanged();
+        }).setNegativeButton("Отмена", (dialog, id) ->
+                dialog.cancel()).setTitle("Удалить преподавателя «" + educator_list.get(position) + "»?");
         return builder.create();
     }
 

@@ -34,6 +34,15 @@
         <item>17 неделя</item>
     </string-array>
 
+    <string-array name="dayWeek">
+        <item>ПН</item>
+        <item>ВТ</item>
+        <item>СР</item>
+        <item>ЧТ</item>
+        <item>ПТ</item>
+        <item>СБ</item>
+    </string-array>
+
     <string-array name="selection">
         <item>Предметы</item>
         <item>Аудитории</item>

@@ -71,37 +71,25 @@ public class FragmentStartSubject extends Fragment {
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
         list_subjects.setAdapter(adapter);
 
-        list_subjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
-                                    long id) {
-                TextView textView = (TextView) itemClicked;
-                select_item = position;
-                onCreateDialogDeleteItem(position).show();
-            }
+        list_subjects.setOnItemClickListener((parent, itemClicked, position, id) -> {
+            TextView textView = (TextView) itemClicked;
+            select_item = position;
+            onCreateDialogDeleteItem(position).show();
         });
 
 
         next= view.findViewById(R.id.next);
         clear_subjects.setBackgroundResource(R.drawable.ic_clear);
         next.setBackgroundResource(R.drawable.ic_start_settings_ok);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentStartAudience fragment= new FragmentStartAudience();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, fragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
+        next.setOnClickListener(v -> {
+            FragmentStartAudience fragment= new FragmentStartAudience();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
-        clear_subjects.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCreateDialogClear().show();
-            }
-        });
+        clear_subjects.setOnClickListener(v -> onCreateDialogClear().show());
         updateList();
 
 
@@ -158,28 +146,25 @@ public class FragmentStartSubject extends Fragment {
                     })
                     .show();
 
-        input_subject.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
-                    input_subject.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                    String subjectName = input_subject.getText().toString();
-                    subjectName = subjectName.trim().replaceAll(" +", " ");
-                    if(TextUtils.isEmpty(subjectName)|| subjectName ==" ") {
-                        input_subject.setError("Введите предмет");
-                        return true;
-                    }
-                    Subject subject = new Subject();
-                    subject.setName(subjectName);
-                    SubjectDao.getInstance().insertItem(subject);
-                    input_subject.getText().clear();
-                    updateList();
-                    adapter.notifyDataSetChanged();
+        input_subject.setOnEditorActionListener((v, actionId, event) -> {
+            if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
+                input_subject.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+                String subjectName = input_subject.getText().toString();
+                subjectName = subjectName.trim().replaceAll(" +", " ");
+                if(TextUtils.isEmpty(subjectName)|| subjectName ==" ") {
+                    input_subject.setError("Введите предмет");
                     return true;
                 }
-                else{
-                    return false;
-                }
+                Subject subject = new Subject();
+                subject.setName(subjectName);
+                SubjectDao.getInstance().insertItem(subject);
+                input_subject.getText().clear();
+                updateList();
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+            else{
+                return false;
             }
         });
         return view;

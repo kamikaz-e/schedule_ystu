@@ -13,13 +13,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.FragmentTwo;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.activitySchedule.FragmentEditSchedule;
+import com.example.misha.myapplication.fragments.CallsSchedule;
 import com.example.misha.myapplication.activitySchedule.FragmentScheduleByDays;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.database.DatabaseHelper;
@@ -29,8 +29,6 @@ import com.google.android.material.navigation.NavigationView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -45,23 +43,16 @@ public class MainActivity extends BaseActivity
 
     public static final int WEEK_CODE = 2221;
     DrawerLayout drawer;
-    TextView text_main;
     Spinner spinner;
     long differentBetweenDate = 0;
     long selectDate = 0;
     long curr_week = 0;
 
 
-    TextView output = null;
-    CustomSpinnerAdapter adapter;
-
-
-
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        text_main = findViewById(R.id.text_main);
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -80,27 +71,23 @@ public class MainActivity extends BaseActivity
         mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
         ArrayList<String> allDays = new ArrayList<>();
         SimpleDateFormat mFormat = new SimpleDateFormat("dd.MM");
-        for(int week = 0; week < 17; week++){
-            for(int day = 0; day < 7; day++){
-            String startWeek = mFormat.format(mCalendar.getTime());
-            mCalendar.add(Calendar.WEEK_OF_YEAR, 1);
-            mCalendar.add(Calendar.DAY_OF_YEAR, -1);
-            allDays.add(startWeek + " - " + mFormat.format(mCalendar.getTime()));
-            mCalendar.add(Calendar.DAY_OF_YEAR, 1);
-            break;
-        }}
+        for (int week = 0; week < 17; week++) {
+            for (int day = 0; day < 7; day++) {
+                String startWeek = mFormat.format(mCalendar.getTime());
+                mCalendar.add(Calendar.WEEK_OF_YEAR, 1);
+                mCalendar.add(Calendar.DAY_OF_YEAR, -1);
+                allDays.add(startWeek + " - " + mFormat.format(mCalendar.getTime()));
+                mCalendar.add(Calendar.DAY_OF_YEAR, 1);
+                break;
+            }
+        }
 
         CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(this,
-               allDays);
+                allDays);
 
 
-        // attaching data adapter to spinner
         spinner.setAdapter(customSpinnerAdapter);
-
-
-
         calculateDate();
-
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -109,6 +96,8 @@ public class MainActivity extends BaseActivity
                 intent.putExtra(Constants.SELECTED_WEEK, position);
                 sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
                 sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
+                Preferences.getInstance().setSelectedWeekEditSchedule(position);
+
             }
 
             @Override
@@ -146,17 +135,14 @@ public class MainActivity extends BaseActivity
         displayView(R.id.rasp_day);
 
 
-        SharedPreferences sp = getPreferences(MODE_PRIVATE);
-        String hasVisited = sp.getString("hasVisited", "nope");
-        if (hasVisited == "nope") {
+       Boolean firstOpen =Preferences.getInstance().isHintsOpened();
+        if (firstOpen.equals(false)) {
 
             Intent intent = new Intent(MainActivity.this, ActivityStart.class);
             startActivity(intent);
 
 
-            Editor e = sp.edit();
-            e.putString("hasVisited", "yes");
-            e.commit();
+            Preferences.getInstance().setHintsOpened();
         }
     }
 
@@ -166,7 +152,6 @@ public class MainActivity extends BaseActivity
         selectDate = Preferences.getInstance().getSemestStart();
         differentBetweenDate = calendar.getTimeInMillis() - selectDate;
         curr_week = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
-        Preferences.getInstance().setSelectedWeekEditSchedule((int) curr_week);
     }
 
     @Override
@@ -195,26 +180,23 @@ public class MainActivity extends BaseActivity
 
     public void displayView(int viewId) {
 
-        Fragment fragment = null;
+
         switch (viewId) {
             case R.id.rasp_day:
-                fragment = new FragmentScheduleByDays();
-                text_main.setText("По дням");
+               replaceFragment(new FragmentScheduleByDays());
                 break;
             case R.id.rasp_list:
-                fragment = new FragmentTwo();
-                text_main.setText("Списком");
+                replaceFragment(new FragmentTwo());
                 break;
             case R.id.edit_schedule:
-                fragment = new FragmentEditSchedule();
+                replaceFragment(new FragmentEditSchedule());
                 break;
             case R.id.edit_data:
                 Intent intent = new Intent(this, ActivityEditData.class);
                 startActivity(intent);
                 break;
             case R.id.call_schedule:
-                intent = new Intent(this, ActivityCallSchedule.class);
-                startActivity(intent);
+                replaceFragment(new CallsSchedule());
                 break;
             case R.id.settings:
                 intent = new Intent(this, ActivitySettings.class);
@@ -224,14 +206,13 @@ public class MainActivity extends BaseActivity
                 onCreateDialog().show();
                 break;
             default:
-                fragment = new FragmentScheduleByDays();
-                setTitle("По дням");
+                new FragmentScheduleByDays();
                 break;
         }
 
-        if (fragment != null) {
-            replaceFragment(fragment);
-        }
+
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
@@ -250,46 +231,5 @@ public class MainActivity extends BaseActivity
         }).setTitle("Обратная связь с разработчиком");
         return builder.create();
     }
-
-    //button_toolbar.setEnabled(false);
-
-           /* new MaterialTapTargetPrompt.Builder(MainActivity.this)
-                    .setTarget(spinner)
-                    .setPromptBackground(new CirclePromptBackground())
-                    .setPromptFocal(new RectanglePromptFocal())
-                    .setPrimaryText("Выбор недели")
-                    .setSecondaryText("Вы можете выбрать номер недели при просмотре расписания. В настройках также можно выбрать дату начала семестра для автоопределения текущей учебной недели")
-                    .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170,170,255))
-                    .setBackgroundColour(Color.rgb(100,100,255))
-                    .setPrimaryTextColour(Color.rgb(255,255,255))
-                    .setSecondaryTextColour(Color.rgb(255,255,255))
-                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
-                    {
-                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                            button_toolbar.setEnabled(true);
-                            if (state == MaterialTapTargetPrompt.STATE_FINISHED || state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
-                                new MaterialTapTargetPrompt.Builder(MainActivity.this)
-                                        .setTarget(button_toolbar)
-                                        .setPromptBackground(new CirclePromptBackground())
-                                        .setPromptFocal(new CirclePromptFocal())
-                                        .setPrimaryText("Редактор расписания")
-                                        .setSecondaryText("Нажав эту кнопку, Вы перейдете в окно редактирования расписания")
-                                        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(170,170,255))
-                                        .setBackgroundColour(Color.rgb(100,100,255))
-                                        .setPrimaryTextColour(Color.rgb(255,255,255))
-                                        .setSecondaryTextColour(Color.rgb(255,255,255))
-                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
-                                        {
-                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                                                if (state == MaterialTapTargetPrompt.STATE_FINISHED || state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
-                                                   //         drawer.openDrawer(Gravity.LEFT);
-
-                                                }
-                                            }})
-                                        .show();
-                            }
-
-                        }})
-                    .show();*/
 
 }

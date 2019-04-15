@@ -57,38 +57,30 @@ public class FragmentSubject extends Fragment {
         list_subjects = view.findViewById(R.id.list_subjects);
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
         list_subjects.setAdapter(adapter);
-        list_subjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
-                                    long id) {
-                onCreateDialogDeleteItem(position).show();
-            }
-        });
+        list_subjects.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());
         updateListView();
 
         viewpager = getActivity().findViewById(R.id.viewPager); //добавить подсказку
 
-        input_subject.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
-                    input_subject.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                    String subjectName = input_subject.getText().toString();
-                    subjectName = subjectName.trim().replaceAll(" +", " ");
-                    if (TextUtils.isEmpty(subjectName) || subjectName == " ") {
-                        input_subject.setError("Введите предмет");
-                        return true;
-                    }
-                    Subject subject = new Subject();
-                    subject.setName(subjectName);
-                    SubjectDao.getInstance().insertItem(subject);
-                    input_subject.getText().clear();
-                    updateListView();
-                    adapter.notifyDataSetChanged();
+        input_subject.setOnEditorActionListener((v, actionId, event) -> {
+            if ((actionId == EditorInfo.IME_ACTION_DONE) ||
+                    ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
+                input_subject.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+                String subjectName = input_subject.getText().toString();
+                subjectName = subjectName.trim().replaceAll(" +", " ");
+                if (TextUtils.isEmpty(subjectName) || subjectName == " ") {
+                    input_subject.setError("Введите предмет");
                     return true;
-                } else {
-                    return false;
                 }
+                Subject subject = new Subject();
+                subject.setName(subjectName);
+                SubjectDao.getInstance().insertItem(subject);
+                input_subject.getText().clear();
+                updateListView();
+                adapter.notifyDataSetChanged();
+                return true;
+            } else {
+                return false;
             }
         });
         return view;
@@ -97,19 +89,13 @@ public class FragmentSubject extends Fragment {
     public Dialog onCreateDialogDeleteItem(final int position) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                Subject subject = subject_list.get(position);
-                SubjectDao.getInstance().deleteItemById(Long.parseLong(subject.getId()));
-                updateListView();
-                adapter.notifyDataSetChanged();
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Удалить предмет «" + subject_list.get(position) + "»?");
+        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
+            Subject subject = subject_list.get(position);
+            SubjectDao.getInstance().deleteItemById(Long.parseLong(subject.getId()));
+            updateListView();
+            adapter.notifyDataSetChanged();
+        }).setNegativeButton("Отмена", (dialog, id) ->
+                dialog.cancel()).setTitle("Удалить предмет «" + subject_list.get(position) + "»?");
         return builder.create();
     }
 

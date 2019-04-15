@@ -50,35 +50,27 @@ public class FragmentAudience extends Fragment {
         list_audiences = view.findViewById(R.id.list_audiences);
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
         list_audiences.setAdapter(adapter);
-        list_audiences.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
-                                    long id) {
-                onCreateDialogDeleteItem(position).show();
-            }
-        });
+        list_audiences.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());
         updateListView();
-        input_audience.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
-                    input_audience.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                    String audienceName = input_audience.getText().toString();
-                    if(TextUtils.isEmpty(audienceName)) {
-                        input_audience.setError("Введите аудиторию");
-                        return true;
-                    }
-                    Audience audience = new Audience();
-                    audience.setName(audienceName);
-                    AudienceDao.getInstance().insertItem(audience);
-                    input_audience.getText().clear();
-                    updateListView();
-                    adapter.notifyDataSetChanged();
+        input_audience.setOnEditorActionListener((v, actionId, event) -> {
+            if ( (actionId == EditorInfo.IME_ACTION_DONE) ||
+                    ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
+                input_audience.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+                String audienceName = input_audience.getText().toString();
+                if(TextUtils.isEmpty(audienceName)) {
+                    input_audience.setError("Введите аудиторию");
                     return true;
                 }
-                else{
-                    return false;
-                }
+                Audience audience = new Audience();
+                audience.setName(audienceName);
+                AudienceDao.getInstance().insertItem(audience);
+                input_audience.getText().clear();
+                updateListView();
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+            else{
+                return false;
             }
         });
         return view;
@@ -86,18 +78,11 @@ public class FragmentAudience extends Fragment {
 
     public Dialog onCreateDialogDeleteItem(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-               Audience audience = audience_list.get(position);
-                AudienceDao.getInstance().deleteItemById(Long.parseLong(audience.getId()));
-                updateListView();
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Удалить аудиторию «"+audience_list.get(position) +"»?");
+        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
+           Audience audience = audience_list.get(position);
+            AudienceDao.getInstance().deleteItemById(Long.parseLong(audience.getId()));
+            updateListView();
+        }).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Удалить аудиторию «"+audience_list.get(position) +"»?");
         return builder.create();
     }
 

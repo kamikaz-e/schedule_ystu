@@ -3,13 +3,8 @@ package com.example.misha.myapplication.activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.entity.Calls;
@@ -24,24 +20,22 @@ import com.example.misha.myapplication.database.entity.Calls;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
-import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
-import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
+import androidx.appcompat.app.ActionBar;
 
 public class ActivityCallSchedule extends BaseActivity {
 
-  EditText oneTime;
-  EditText twoTime;
-  EditText threeTime;
-  EditText fourTime;
-  EditText fiveTime;
-  EditText sixTime;
+    EditText oneTime;
+    EditText twoTime;
+    EditText threeTime;
+    EditText fourTime;
+    EditText fiveTime;
+    EditText sixTime;
 
-  Calendar Time=Calendar.getInstance();
-  Integer start=1;
-  Button button_toolbar;
-  String hasVisited;
-  SharedPreferences sharedPreferences;
+    Calendar calendarTimeCalls = Calendar.getInstance();
+    Integer start = 1;
+    Button button_toolbar;
+    Boolean hasVisited;
+
 
     String select_time_partOne;
     String select_time_fullOne;
@@ -56,35 +50,35 @@ public class ActivityCallSchedule extends BaseActivity {
     String select_time_partSix;
     String select_time_fullSix;
 
-    ArrayList<Calls> callsList = new ArrayList<>();
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
 
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_call_schedule);
-    androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-    ActionBar actionBar = getSupportActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(true);
-    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
 
-
-    button_toolbar = findViewById(R.id.toolbar_but);
-    button_toolbar.setBackgroundResource(R.drawable.ic_clear);
-    button_toolbar.setOnClickListener(v -> onCreateDialogClear().show());
-
-    oneTime = findViewById(R.id.OneTime);
-    twoTime = findViewById(R.id.TwoTime);
-    threeTime = findViewById(R.id.ThreeTime);
-    fourTime = findViewById(R.id.FourTime);
-    fiveTime = findViewById(R.id.FiveTime);
-    sixTime = findViewById(R.id.SixTime);
-    updateCalls();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_call_schedule);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
 
 
-    sharedPreferences = getPreferences(MODE_PRIVATE);
-    hasVisited = sharedPreferences.getString("hasVisited", "nope");
-    if (hasVisited == "nope") {
+        button_toolbar = findViewById(R.id.toolbar_but);
+        button_toolbar.setBackgroundResource(R.drawable.ic_clear);
+        button_toolbar.setOnClickListener(v -> onCreateDialogClear().show());
+
+
+        oneTime = findViewById(R.id.OneTime);
+        twoTime = findViewById(R.id.TwoTime);
+        threeTime = findViewById(R.id.ThreeTime);
+        fourTime = findViewById(R.id.FourTime);
+        fiveTime = findViewById(R.id.FiveTime);
+        sixTime = findViewById(R.id.SixTime);
+        updateCalls();
+
+
+        hasVisited = Preferences.getInstance().isHintsOpened();
+        if (hasVisited.equals(false)) {
 
 
       /*new MaterialTapTargetPrompt.Builder(ActivityCallSchedule.this)
@@ -105,244 +99,250 @@ public class ActivityCallSchedule extends BaseActivity {
                 }
               })
               .show();*/
+            Preferences.getInstance().setHintsOpened();
+        }
 
     }
 
-  }
 
+    public Dialog onCreateDialogClear() {
 
-  public Dialog onCreateDialogClear() {
-
-    AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-    builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> clear_calls()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить расписание звонков?");
-    return builder.create();
-  }
-
-  public void getTimeOne(View v) {
-    new TimePickerDialog(ActivityCallSchedule.this, timeone,
-            Time.get(Calendar.HOUR_OF_DAY),
-            Time.get(Calendar.MINUTE), true)
-            .show();
-    start=1;
-  }
-
-  private void setInitialTimeOne() {
-    if (start==1) {
-      select_time_partOne=(DateUtils.formatDateTime(this,
-              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
-    }  else
-    {   select_time_fullOne= select_time_partOne+DateUtils.formatDateTime(this,
-            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      oneTime.setText(select_time_fullOne);
-        Calls calls = new Calls();
-        calls.setName(select_time_fullOne);
-        CallDao.getInstance().insertItem(calls);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> clear_calls()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить расписание звонков?");
+        return builder.create();
     }
-    if (start==1){
-      new TimePickerDialog(ActivityCallSchedule.this, timeone,
-              Time.get(Calendar.HOUR_OF_DAY),
-              Time.get(Calendar.MINUTE), true)
-              .show();
-      start=0; }
-  }
 
-  TimePickerDialog.OnTimeSetListener timeone=new TimePickerDialog.OnTimeSetListener() {
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-      Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-      Time.set(Calendar.MINUTE, minute);
-      setInitialTimeOne();
+    public void getTimeOne(View v) {
+        new TimePickerDialog(ActivityCallSchedule.this, timeone,
+                calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                calendarTimeCalls.get(Calendar.MINUTE), true)
+                .show();
+        start = 1;
     }
-  };
 
-  public void getTimeTwo(View v) {
-    new TimePickerDialog(ActivityCallSchedule.this, timetwo,
-            Time.get(Calendar.HOUR_OF_DAY),
-            Time.get(Calendar.MINUTE), true)
-            .show();
-    start=1;
-  }
-
-
-  private void setInitialTimeTwo() {
-    if (start==1) {
-      select_time_partTwo=(DateUtils.formatDateTime(this,
-              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
-    }  else
-    {   select_time_fullTwo= select_time_partTwo+DateUtils.formatDateTime(this,
-            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      twoTime.setText(select_time_fullTwo);
-        Calls calls = new Calls();
-        calls.setName(select_time_fullTwo);
-        CallDao.getInstance().insertItem(calls);
-      }
-    if (start==1){
-      new TimePickerDialog(ActivityCallSchedule.this, timetwo,
-              Time.get(Calendar.HOUR_OF_DAY),
-              Time.get(Calendar.MINUTE), true)
-              .show();
-      start=0; }
-  }
-
-  TimePickerDialog.OnTimeSetListener timetwo=new TimePickerDialog.OnTimeSetListener() {
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-      Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-      Time.set(Calendar.MINUTE, minute);
-      setInitialTimeTwo();
+    private void setInitialTimeOne() {
+        if (start == 1) {
+            select_time_partOne = (DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME) + " - ");
+        } else {
+            select_time_fullOne = select_time_partOne + DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+            oneTime.setText(select_time_fullOne);
+            Calls calls = new Calls();
+            calls.setName(select_time_fullOne);
+            CallDao.getInstance().insertItem(calls);
+        }
+        if (start == 1) {
+            new TimePickerDialog(ActivityCallSchedule.this, timeone,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
+                    .show();
+            start = 0;
+        }
     }
-  };
 
+    TimePickerDialog.OnTimeSetListener timeone = new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calendarTimeCalls.set(Calendar.MINUTE, minute);
+            setInitialTimeOne();
+        }
+    };
 
-  public void getTimeThree(View v) {
-    new TimePickerDialog(ActivityCallSchedule.this, timeThree,
-            Time.get(Calendar.HOUR_OF_DAY),
-            Time.get(Calendar.MINUTE), true)
-            .show();
-    start=1;
-  }
-
-
-  private void setInitialTimeThree() {
-    if (start==1) {
-      select_time_partThree=(DateUtils.formatDateTime(this,
-              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
-    }  else
-    {   select_time_fullThree= select_time_partThree+DateUtils.formatDateTime(this,
-            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      threeTime.setText(select_time_fullThree);
-      Calls calls = new Calls();
-        calls.setName(select_time_fullThree);
-        CallDao.getInstance().insertItem(calls);
-   }
-    if (start==1){
-      new TimePickerDialog(ActivityCallSchedule.this, timeThree,
-              Time.get(Calendar.HOUR_OF_DAY),
-              Time.get(Calendar.MINUTE), true)
-              .show();
-      start=0; }
-  }
-
-  TimePickerDialog.OnTimeSetListener timeThree=new TimePickerDialog.OnTimeSetListener() {
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-      Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-      Time.set(Calendar.MINUTE, minute);
-      setInitialTimeThree();
+    public void getTimeTwo(View v) {
+        new TimePickerDialog(ActivityCallSchedule.this, timetwo,
+                calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                calendarTimeCalls.get(Calendar.MINUTE), true)
+                .show();
+        start = 1;
     }
-  };
 
 
-  public void getTimeFour(View v) {
-    new TimePickerDialog(ActivityCallSchedule.this, timeFour,
-            Time.get(Calendar.HOUR_OF_DAY),
-            Time.get(Calendar.MINUTE), true)
-            .show();
-    start=1;
-  }
-
-
-  private void setInitialTimeFour() {
-    if (start==1) {
-      select_time_partFour=(DateUtils.formatDateTime(this,
-              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
-    }  else
-    {   select_time_fullFour= select_time_partFour+DateUtils.formatDateTime(this,
-            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      fourTime.setText(select_time_fullFour);
-        Calls calls = new Calls();
-        calls.setName(select_time_fullFour);
-        CallDao.getInstance().insertItem(calls);
+    private void setInitialTimeTwo() {
+        if (start == 1) {
+            select_time_partTwo = (DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME) + " - ");
+        } else {
+            select_time_fullTwo = select_time_partTwo + DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+            twoTime.setText(select_time_fullTwo);
+            Calls calls = new Calls();
+            calls.setName(select_time_fullTwo);
+            CallDao.getInstance().insertItem(calls);
+        }
+        if (start == 1) {
+            new TimePickerDialog(ActivityCallSchedule.this, timetwo,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
+                    .show();
+            start = 0;
+        }
     }
-    if (start==1){
-      new TimePickerDialog(ActivityCallSchedule.this, timeFour,
-              Time.get(Calendar.HOUR_OF_DAY),
-              Time.get(Calendar.MINUTE), true)
-              .show();
-      start=0; }
-  }
 
-  TimePickerDialog.OnTimeSetListener timeFour=new TimePickerDialog.OnTimeSetListener() {
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-      Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-      Time.set(Calendar.MINUTE, minute);
-      setInitialTimeFour();
+    TimePickerDialog.OnTimeSetListener timetwo = new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calendarTimeCalls.set(Calendar.MINUTE, minute);
+            setInitialTimeTwo();
+        }
+    };
+
+
+    public void getTimeThree(View v) {
+        new TimePickerDialog(ActivityCallSchedule.this, timeThree,
+                calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                calendarTimeCalls.get(Calendar.MINUTE), true)
+                .show();
+        start = 1;
     }
-  };
 
 
-  public void getTimeFive(View v) {
-    new TimePickerDialog(ActivityCallSchedule.this, timeFive,
-            Time.get(Calendar.HOUR_OF_DAY),
-            Time.get(Calendar.MINUTE), true)
-            .show();
-    start=1;
-  }
-
-  private void setInitialTimeFive() {
-    if (start==1) {
-      select_time_partFive=(DateUtils.formatDateTime(this,
-              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
-    }  else
-    {   select_time_fullFive= select_time_partFive+DateUtils.formatDateTime(this,
-            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      fiveTime.setText(select_time_fullFive);
-        Calls calls = new Calls();
-        calls.setName(select_time_fullFive);
-        CallDao.getInstance().insertItem(calls);
-      }
-    if (start==1){
-      new TimePickerDialog(ActivityCallSchedule.this, timeFive,
-              Time.get(Calendar.HOUR_OF_DAY),
-              Time.get(Calendar.MINUTE), true)
-              .show();
-      start=0; }
-  }
-
-  TimePickerDialog.OnTimeSetListener timeFive=new TimePickerDialog.OnTimeSetListener() {
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-      Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-      Time.set(Calendar.MINUTE, minute);
-      setInitialTimeFive();
+    private void setInitialTimeThree() {
+        if (start == 1) {
+            select_time_partThree = (DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME) + " - ");
+        } else {
+            select_time_fullThree = select_time_partThree + DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+            threeTime.setText(select_time_fullThree);
+            Calls calls = new Calls();
+            calls.setName(select_time_fullThree);
+            CallDao.getInstance().insertItem(calls);
+        }
+        if (start == 1) {
+            new TimePickerDialog(ActivityCallSchedule.this, timeThree,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
+                    .show();
+            start = 0;
+        }
     }
-  };
 
-  public void getTimeSix(View v) {
-    new TimePickerDialog(ActivityCallSchedule.this, timeSix,
-            Time.get(Calendar.HOUR_OF_DAY),
-            Time.get(Calendar.MINUTE), true)
-            .show();
-    start=1;
-  }
+    TimePickerDialog.OnTimeSetListener timeThree = new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calendarTimeCalls.set(Calendar.MINUTE, minute);
+            setInitialTimeThree();
+        }
+    };
 
 
-  private void setInitialTimeSix() {
-    if (start==1) {
-      select_time_partSix=(DateUtils.formatDateTime(this,
-              Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME)+ " - ");
-    }  else
-    {   select_time_fullSix= select_time_partSix+DateUtils.formatDateTime(this,
-            Time.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-      sixTime.setText(select_time_fullSix);
-        Calls calls = new Calls();
-        calls.setName(select_time_fullSix);
-        CallDao.getInstance().insertItem(calls);
+    public void getTimeFour(View v) {
+        new TimePickerDialog(ActivityCallSchedule.this, timeFour,
+                calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                calendarTimeCalls.get(Calendar.MINUTE), true)
+                .show();
+        start = 1;
     }
-    if (start==1){
-      new TimePickerDialog(ActivityCallSchedule.this, timeSix,
-              Time.get(Calendar.HOUR_OF_DAY),
-              Time.get(Calendar.MINUTE), true)
-              .show();
-      start=0; }
-  }
 
-  TimePickerDialog.OnTimeSetListener timeSix=new TimePickerDialog.OnTimeSetListener() {
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-      Time.set(Calendar.HOUR_OF_DAY, hourOfDay);
-      Time.set(Calendar.MINUTE, minute);
-      setInitialTimeSix();
+
+    private void setInitialTimeFour() {
+        if (start == 1) {
+            select_time_partFour = (DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME) + " - ");
+        } else {
+            select_time_fullFour = select_time_partFour + DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+            fourTime.setText(select_time_fullFour);
+            Calls calls = new Calls();
+            calls.setName(select_time_fullFour);
+            CallDao.getInstance().insertItem(calls);
+        }
+        if (start == 1) {
+            new TimePickerDialog(ActivityCallSchedule.this, timeFour,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
+                    .show();
+            start = 0;
+        }
     }
-  };
+
+    TimePickerDialog.OnTimeSetListener timeFour = new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calendarTimeCalls.set(Calendar.MINUTE, minute);
+            setInitialTimeFour();
+        }
+    };
 
 
-  void updateCalls(){
+    public void getTimeFive(View v) {
+        new TimePickerDialog(ActivityCallSchedule.this, timeFive,
+                calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                calendarTimeCalls.get(Calendar.MINUTE), true)
+                .show();
+        start = 1;
+    }
+
+    private void setInitialTimeFive() {
+        if (start == 1) {
+            select_time_partFive = (DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME) + " - ");
+        } else {
+            select_time_fullFive = select_time_partFive + DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+            fiveTime.setText(select_time_fullFive);
+            Calls calls = new Calls();
+            calls.setName(select_time_fullFive);
+            CallDao.getInstance().insertItem(calls);
+        }
+        if (start == 1) {
+            new TimePickerDialog(ActivityCallSchedule.this, timeFive,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
+                    .show();
+            start = 0;
+        }
+    }
+
+    TimePickerDialog.OnTimeSetListener timeFive = new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calendarTimeCalls.set(Calendar.MINUTE, minute);
+            setInitialTimeFive();
+        }
+    };
+
+    public void getTimeSix(View v) {
+        new TimePickerDialog(ActivityCallSchedule.this, timeSix,
+                calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                calendarTimeCalls.get(Calendar.MINUTE), true)
+                .show();
+        start = 1;
+    }
+
+
+    private void setInitialTimeSix() {
+        if (start == 1) {
+            select_time_partSix = (DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME) + " - ");
+        } else {
+            select_time_fullSix = select_time_partSix + DateUtils.formatDateTime(this,
+                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+            sixTime.setText(select_time_fullSix);
+            Calls calls = new Calls();
+            calls.setName(select_time_fullSix);
+            CallDao.getInstance().insertItem(calls);
+        }
+        if (start == 1) {
+            new TimePickerDialog(ActivityCallSchedule.this, timeSix,
+                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                    calendarTimeCalls.get(Calendar.MINUTE), true)
+                    .show();
+            start = 0;
+        }
+    }
+
+    TimePickerDialog.OnTimeSetListener timeSix = new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calendarTimeCalls.set(Calendar.MINUTE, minute);
+            setInitialTimeSix();
+        }
+    };
+
+
+    void updateCalls() {
 
 
    /*  callsList= CallDao.getInstance().getAllData();
@@ -372,38 +372,39 @@ public class ActivityCallSchedule extends BaseActivity {
           select_time_fullSix = String.valueOf(callsList.get(5));
           sixTime.setText(select_time_fullSix);
       }*/
-  }
-
-
-  void clear_calls(){
-    CallDao.getInstance().deleteAll();
-    oneTime.setText("");
-    twoTime.setText("");
-    threeTime.setText("");
-    fourTime.setText("");
-    fiveTime.setText("");
-    sixTime.setText("");
-    select_time_fullOne="";
-    select_time_fullTwo="";
-    select_time_fullThree="";
-    select_time_fullFour="";
-    select_time_fullFive="";
-    select_time_fullSix="";
-  }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-
-    switch (item.getItemId()) {
-      case android.R.id.home:
-          Intent intent = new Intent(ActivityCallSchedule.this, MainActivity.class);
-          finish();
-          startActivity(intent);
-
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
     }
-  }
+
+
+    void clear_calls() {
+        CallDao.getInstance().deleteAll();
+        oneTime.setText("");
+        twoTime.setText("");
+        threeTime.setText("");
+        fourTime.setText("");
+        fiveTime.setText("");
+        sixTime.setText("");
+        select_time_fullOne = "";
+        select_time_fullTwo = "";
+        select_time_fullThree = "";
+        select_time_fullFour = "";
+        select_time_fullFive = "";
+        select_time_fullSix = "";
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(ActivityCallSchedule.this, MainActivity.class);
+                finish();
+                startActivity(intent);
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(ActivityCallSchedule.this, MainActivity.class);

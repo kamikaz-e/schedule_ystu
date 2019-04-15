@@ -3,7 +3,8 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -23,12 +24,12 @@
 
             <TextView
                 android:id="@+id/number"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="#393939"
                 android:gravity="center_vertical|center_horizontal|center"
                 android:textAlignment="center"
-                android:textSize="19sp" />
+                android:textSize="16sp" />
 
 
             <TextView
@@ -37,72 +38,75 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
                 android:layout_toEndOf="@+id/number"
                 android:text="Время"
-                android:textSize="19sp" />
+                android:textSize="16sp" />
 
 
                 <TextView
                     android:id="@+id/button_subject"
                     android:layout_width="match_parent"
-                    android:layout_height="36dp"
+                    android:layout_height="23dp"
                     android:layout_alignTop="@+id/time"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="36dp"
+                    android:layout_marginTop="27dp"
                     android:layout_marginEnd="10dp"
                     android:background="#0000"
                     android:gravity="center_vertical"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="16sp"
+                    tools:text="asdsadd"/>
 
 
             <TextView
                 android:id="@+id/button_educator"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="23dp"
                 android:background="#0000"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="77sp"
+                android:layout_marginTop="51sp"
                 android:layout_marginStart="10sp"
                 android:layout_marginEnd="10dp"
                 android:gravity="center_vertical"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                tools:text="asdsadd"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/button_subject"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginTop="82dp">
+                android:layout_marginTop="53dp"
+                android:paddingBottom="2sp">
 
                 <TextView
                     android:id="@+id/button_audience"
                     android:layout_width="177dp"
-                    android:layout_height="36dp"
+                    android:layout_height="23dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="2dp"
                     android:background="#0000"
                     android:gravity="center_vertical"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="16sp"
+                    tools:text="asdsadd"/>
 
                 <TextView
                     android:id="@+id/button_typelesson"
                     android:layout_width="match_parent"
-                    android:layout_height="36dp"
+                    android:layout_height="23dp"
                     android:layout_toEndOf="@+id/button_audience"
                     android:background="#0000"
                     android:gravity="center_vertical"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textSize="20sp" />
+                    android:textSize="16sp"
+                    tools:text="asdsadd"/>
             </RelativeLayout>
 
         </RelativeLayout>

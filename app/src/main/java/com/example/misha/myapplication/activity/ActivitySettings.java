@@ -98,78 +98,14 @@ public class ActivitySettings extends BaseActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-/*
-    SQLiteDatabase db = ScheduleDB.getReadableDatabase();
-    db.isOpen();*/
+
         requestQueue = Volley.newRequestQueue(ActivitySettings.this);
         progressDialog = new ProgressDialog(ActivitySettings.this);
 
         layout_pick_week = findViewById(R.id.oneitem);
         layout_import = findViewById(R.id.twoitem);
         layout_export = findViewById(R.id.threeitem);
-/*
-        if (!Preferences.getInstance().isHintsOpened()) {
 
-
-            new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
-                    .setTarget(layout_pick_week)
-                    .setPromptBackground(new RectanglePromptBackground())
-                    .setPromptFocal(new RectanglePromptFocal())
-                    .setPrimaryText("Дата начала семестра")
-                    .setSecondaryText("Выберите дату начала семестра для автоматического определения текущей учебной недели")
-                    .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                    .setBackgroundColour(Color.rgb(100, 100, 255))
-                    .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                    .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                            if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-
-                                new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
-                                        .setTarget(layout_import)
-                                        .setPromptBackground(new RectanglePromptBackground())
-                                        .setPromptFocal(new RectanglePromptFocal())
-                                        .setPrimaryText("Импорт расписания")
-                                        .setSecondaryText("Загрузка готового расписания по названию с сервера")
-                                        .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                                        .setBackgroundColour(Color.rgb(100, 100, 255))
-                                        .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                                        .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-
-
-                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                                                if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                                    new MaterialTapTargetPrompt.Builder(ActivitySettings.this)
-                                                            .setTarget(layout_export)
-                                                            .setPromptBackground(new RectanglePromptBackground())
-                                                            .setPromptFocal(new RectanglePromptFocal())
-                                                            .setPrimaryText("Экспорт расписания")
-                                                            .setSecondaryText("Выгрузка расписания с заданным названием на сервер")
-                                                            .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                                                            .setBackgroundColour(Color.rgb(100, 100, 255))
-                                                            .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                                                            .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                                                            .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-
-
-                                                                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                                                                    if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                                                    }
-                                                                }
-                                                            })
-                                                            .show();
-                                                }
-                                            }
-                                        })
-                                        .show();
-                            }
-                        }
-                    })
-                    .show();
-
-            Preferences.getInstance().setHintsOpened();
-        }*/
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
 

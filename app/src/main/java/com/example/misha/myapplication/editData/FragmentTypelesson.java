@@ -48,33 +48,25 @@ public class FragmentTypelesson extends Fragment {
         typelessonListView = view.findViewById(R.id.list_typelesson);
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, typelessonList);
         typelessonListView.setAdapter(adapter);
-        typelessonListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
-                                    long id) {
-                onCreateDialogDeleteItem(position).show();
-            }
-        });
+        typelessonListView.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());
         updateListView();
-        inputTypelesson.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
-                    String typelessonName = inputTypelesson.getText().toString();
-                    if (TextUtils.isEmpty(typelessonName)) {
-                        inputTypelesson.setError("Введите тип занятия");
-                        return true;
-                    }
-                    Typelesson typelesson = new Typelesson();
-                    typelesson.setName(typelessonName);
-                    TypelessonDao.getInstance().insertItem(typelesson);
-                    inputTypelesson.getText().clear();
-                    updateListView();
-                    adapter.notifyDataSetChanged();
+        inputTypelesson.setOnEditorActionListener((v, actionId, event) -> {
+            if ((actionId == EditorInfo.IME_ACTION_DONE) ||
+                    ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
+                String typelessonName = inputTypelesson.getText().toString();
+                if (TextUtils.isEmpty(typelessonName)) {
+                    inputTypelesson.setError("Введите тип занятия");
                     return true;
-                } else {
-                    return false;
                 }
+                Typelesson typelesson = new Typelesson();
+                typelesson.setName(typelessonName);
+                TypelessonDao.getInstance().insertItem(typelesson);
+                inputTypelesson.getText().clear();
+                updateListView();
+                adapter.notifyDataSetChanged();
+                return true;
+            } else {
+                return false;
             }
         });
         return view;
@@ -82,19 +74,13 @@ public class FragmentTypelesson extends Fragment {
 
     public Dialog onCreateDialogDeleteItem(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                Typelesson typelesson = typelessonList.get(position);
-                TypelessonDao.getInstance().deleteItemById(Long.parseLong(typelesson.getId()));
-                updateListView();
-                adapter.notifyDataSetChanged();
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Удалить тип занятия «" + typelessonList.get(position) + "»?");
+        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
+            Typelesson typelesson = typelessonList.get(position);
+            TypelessonDao.getInstance().deleteItemById(Long.parseLong(typelesson.getId()));
+            updateListView();
+            adapter.notifyDataSetChanged();
+        }).setNegativeButton("Отмена", (dialog, id) ->
+                dialog.cancel()).setTitle("Удалить тип занятия «" + typelessonList.get(position) + "»?");
         return builder.create();
     }
 

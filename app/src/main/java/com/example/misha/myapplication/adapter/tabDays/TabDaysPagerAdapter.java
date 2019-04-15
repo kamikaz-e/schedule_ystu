@@ -3,6 +3,7 @@ package com.example.misha.myapplication.adapter.tabDays;
 import android.annotation.SuppressLint;
 
 import com.example.misha.myapplication.Preferences;
+import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.fragments.SchedulePageFragment;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class TabDaysPagerAdapter extends FragmentPagerAdapter {
 
@@ -35,6 +37,7 @@ public class TabDaysPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         return fragments.get(position);
     }
+
 
     public void setWeek(int selectedWeek) {
         for (SchedulePageFragment fragment : fragments) {

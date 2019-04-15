@@ -7,8 +7,16 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
+import com.example.misha.myapplication.activity.MainActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +24,9 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
 
     private int selectedPos;
     private SimpleItemClickListener callback;
-
+    Integer getCurrentWeek;
+    ArrayList<String> dayYear = new ArrayList<>();
+    List<String> arrayDayWeeks;
     public TabDaysAdapter(SimpleItemClickListener simpleItemClickListener) {
         this.callback = simpleItemClickListener;
     }
@@ -26,6 +36,18 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_tab_day, parent, false);
+
+      arrayDayWeeks=  Arrays.asList(view.getResources().getStringArray(R.array.dayWeek));
+
+        Calendar mCalendar = Calendar.getInstance();
+        mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
+        getCurrentWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
+        SimpleDateFormat mFormatDay = new SimpleDateFormat("dd");
+        mCalendar.add(Calendar.WEEK_OF_YEAR, getCurrentWeek);
+        for(int day = 0; day < 6; day++){
+            dayYear.add(mFormatDay.format(mCalendar.getTime()));
+            mCalendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
         return new ViewHolder(view);
     }
 
@@ -61,9 +83,10 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
         }
 
         public void onBindView(int position) {
-            date.setText("31");
-            dateWeek.setText("ПН");
+            date.setText(dayYear.get(position));
+            dateWeek.setText(arrayDayWeeks.get(position));
             dayRelLay.setBackgroundColor(selectedPos == position ? Color.parseColor("#FF4081") : Color.TRANSPARENT);
+
         }
 
 

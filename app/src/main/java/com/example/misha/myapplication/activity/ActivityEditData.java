@@ -2,7 +2,6 @@ package com.example.misha.myapplication.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,10 +16,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.misha.myapplication.database.dao.AudienceDao;
@@ -39,35 +36,8 @@ public class ActivityEditData extends BaseActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activityeditdata);
+        setContentView(R.layout.activity_edit_data);
 
-      /* SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-      String hasVisited = sharedPreferences.getString("hasVisited", "nope");
-
-      if (hasVisited == "nope") {
-        new MaterialTapTargetPrompt.Builder(this)
-                .setTarget(spinner)
-                .setPromptBackground(new RectanglePromptBackground())
-                .setPromptFocal(new RectanglePromptFocal())
-                .setPrimaryText("Переключение между данными")
-                .setSecondaryText("Нажав на раскрывающийся список, Вы можете выбрать нужный раздел редактирования данных")
-                .setBackButtonDismissEnabled(true).setFocalColour(Color.rgb(200, 200, 255))
-                .setBackgroundColour(Color.rgb(100, 100, 255))
-                .setPrimaryTextColour(Color.rgb(255, 255, 255))
-                .setSecondaryTextColour(Color.rgb(255, 255, 255))
-                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
-                  public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                    if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
-
-                    }
-                  }
-                })
-                .show();
-
-        SharedPreferences.Editor e = sharedPreferences.edit();
-        e.putString("hasVisited", "yes");
-        e.commit();
-      }*/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -85,24 +55,21 @@ public class ActivityEditData extends BaseActivity {
 
         clear_subjects = findViewById(R.id.clear_subjects);
         clear_subjects.setBackgroundResource(R.drawable.ic_clear);
-        clear_subjects.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        clear_subjects.setOnClickListener(v -> {
 
-                switch (tabLayout.getSelectedTabPosition()) {
-                    case 0:
-                        onCreateDialogClearSubjects().show();
-                        break;
-                    case 1:
-                        onCreateDialogClearAudiences().show();
-                        break;
-                    case 2:
-                        onCreateDialogClearEducators().show();
-                        break;
-                    case 3:
-                        onCreateDialogClearTypelessons().show();
-                        break;
-                }
+            switch (tabLayout.getSelectedTabPosition()) {
+                case 0:
+                    onCreateDialogClearSubjects().show();
+                    break;
+                case 1:
+                    onCreateDialogClearAudiences().show();
+                    break;
+                case 2:
+                    onCreateDialogClearEducators().show();
+                    break;
+                case 3:
+                    onCreateDialogClearTypelessons().show();
+                    break;
             }
         });
 
@@ -119,16 +86,8 @@ public class ActivityEditData extends BaseActivity {
     public Dialog onCreateDialogClearSubjects() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                clear_subjects();
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Очистить предметы?");
+        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
+                clear_subjects()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить предметы?");
         return builder.create();
     }
 
@@ -143,17 +102,8 @@ public class ActivityEditData extends BaseActivity {
     public Dialog onCreateDialogClearAudiences() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                clear_audiences();
-
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Очистить аудитории?");
+        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
+                clear_audiences()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить аудитории?");
         return builder.create();
     }
 
@@ -168,16 +118,8 @@ public class ActivityEditData extends BaseActivity {
     public Dialog onCreateDialogClearEducators() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                clear_educators();
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Очистить преподавателей?");
+        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
+                clear_educators()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить преподавателей?");
         return builder.create();
     }
 
@@ -191,16 +133,8 @@ public class ActivityEditData extends BaseActivity {
     public Dialog onCreateDialogClearTypelessons() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                clear_typelessons();
-            }
-        }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        }).setTitle("Очистить предметы?");
+        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
+                clear_typelessons()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить предметы?");
         return builder.create();
     }
 

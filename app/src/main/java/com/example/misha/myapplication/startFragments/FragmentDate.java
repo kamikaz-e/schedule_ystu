@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 
+import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 
 import java.util.Calendar;
@@ -27,8 +28,8 @@ public class FragmentDate extends Fragment {
     public FragmentDate(){}
 
 
-    Calendar Date = Calendar.getInstance();
-    String  current_date;
+    private Calendar calendarDate = Calendar.getInstance();
+    private String  current_date;
 
 
     @Override
@@ -53,19 +54,14 @@ public class FragmentDate extends Fragment {
                 .setBackgroundColour(Color.rgb(100,100,255))
                 .setPrimaryTextColour(Color.rgb(255,255,255))
                 .setSecondaryTextColour(Color.rgb(255,255,255))
-                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener()
-                {
-                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
-                        if (state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
-                            FragmentCallSchedule fragment= new FragmentCallSchedule();
-                            getActivity().getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.content_frame, fragment)
-                                    .addToBackStack(null)
-                                    .commit();
-                        }
+                .setPromptStateChangeListener((prompt, state) -> {
+                    if (state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
+                        FragmentCallSchedule fragment= new FragmentCallSchedule();
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.content_frame, fragment)
+                                .addToBackStack(null)
+                                .commit();
                     }
-
-
                 })
                 .show();
 
@@ -73,26 +69,22 @@ public class FragmentDate extends Fragment {
 
             public void onClick(View v) {
                 new DatePickerDialog(getActivity(), dateone,
-                        Date.get(Calendar.YEAR),
-                        Date.get(Calendar.MONTH),
-                        Date.get(Calendar.DAY_OF_MONTH)).show();
+                        calendarDate.get(Calendar.YEAR),
+                        calendarDate.get(Calendar.MONTH),
+                        calendarDate.get(Calendar.DAY_OF_MONTH)).show();
             }
             DatePickerDialog.OnDateSetListener dateone = new DatePickerDialog.OnDateSetListener() {
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    Date.set(Calendar.YEAR, year);
-                    Date.set(Calendar.MONTH, monthOfYear);
-                    Date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                    Calendar today = Calendar.getInstance();
-                    current_date = String.valueOf(Date.getTimeInMillis());
+                    calendarDate.set(Calendar.YEAR, year);
+                    calendarDate.set(Calendar.MONTH, monthOfYear);
+                    calendarDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    current_date = String.valueOf(calendarDate.getTimeInMillis());
 
                    /* db.execSQL("update " + DATE_START + " set " + ScheduleClass.date_start.date + " = '" +
                             selectedDate  + "' where " + ScheduleClass.date_start.id_date + " = " + 1);*/
                     // Toast.makeText(context, String.valueOf(today.getTimeInMillis()), Toast.LENGTH_SHORT).show();
 
-                    SharedPreferences settings = getActivity().getSharedPreferences("week", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putLong("current_week", (Date.getTimeInMillis()));
-                    editor.commit();
+                    Preferences.getInstance().setSemesterStart(calendarDate.getTimeInMillis());
                     FragmentCallSchedule fragment= new FragmentCallSchedule();
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.content_frame, fragment)
