@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter.tabDays;
+package com.example.misha.myapplication.adapter.tabDays.editSchedule;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
-import com.example.misha.myapplication.activity.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,14 +19,15 @@ import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHolder> {
+public class TabDaysAdapterEditSchedule extends RecyclerView.Adapter<TabDaysAdapterEditSchedule.ViewHolder> {
 
     private int selectedPos;
     private SimpleItemClickListener callback;
     Integer getCurrentWeek;
     ArrayList<String> dayYear = new ArrayList<>();
     List<String> arrayDayWeeks;
-    public TabDaysAdapter(SimpleItemClickListener simpleItemClickListener) {
+
+    public TabDaysAdapterEditSchedule(SimpleItemClickListener simpleItemClickListener) {
         this.callback = simpleItemClickListener;
     }
 
@@ -36,7 +36,6 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_tab_day, parent, false);
-
         arrayDayWeeks=  Arrays.asList(view.getResources().getStringArray(R.array.dayWeek));
 
         Calendar mCalendar = Calendar.getInstance();
@@ -86,7 +85,6 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
             date.setText(dayYear.get(position));
             dateWeek.setText(arrayDayWeeks.get(position));
             dayRelLay.setBackgroundColor(selectedPos == position ? Color.parseColor("#FF4081") : Color.TRANSPARENT);
-
         }
 
 

@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.activitySchedule;
+package com.example.misha.myapplication.fragmentsSchedule;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.activity.MainActivity;
-import com.example.misha.myapplication.adapter.tabDays.EditTabDaysAdapter;
-import com.example.misha.myapplication.adapter.tabDays.EditTabDaysPagerAdapter;
+import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysAdapterEditSchedule;
+import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysPagerAdapterEditSchedule;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,8 +19,8 @@ import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 public class FragmentEditSchedule extends Fragment {
 
-    EditTabDaysPagerAdapter pagerAdapter;
-    EditTabDaysAdapter adapterTabDays;
+    TabDaysPagerAdapterEditSchedule pagerAdapter;
+    TabDaysAdapterEditSchedule adapterTabDays;
     RecyclerView dayTabs;
     private ViewPager viewPager;
 
@@ -29,7 +29,7 @@ public class FragmentEditSchedule extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapterTabDays = new EditTabDaysAdapter((position, view) -> {
+        adapterTabDays = new TabDaysAdapterEditSchedule((position, view) -> {
             viewPager.setCurrentItem(position);
         });
     }
@@ -46,7 +46,7 @@ public class FragmentEditSchedule extends Fragment {
         });
 
 
-        pagerAdapter = new EditTabDaysPagerAdapter(getChildFragmentManager());
+        pagerAdapter = new TabDaysPagerAdapterEditSchedule(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.rv_tab);
@@ -59,7 +59,7 @@ public class FragmentEditSchedule extends Fragment {
         if (requestCode == MainActivity.WEEK_CODE) {
             selectedWeek = data.getIntExtra(Constants.SELECTED_WEEK, 0);
             pagerAdapter.setWeek(selectedWeek);
-            adapterTabDays = new EditTabDaysAdapter((position, view) ->
+            adapterTabDays = new TabDaysAdapterEditSchedule((position, view) ->
                     viewPager.setCurrentItem(position));
             dayTabs.setAdapter(adapterTabDays);
         }

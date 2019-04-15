@@ -4,21 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.activitySchedule.FragmentEditSchedule;
 import com.example.misha.myapplication.adapter.schedule.ScheduleAdapter;
 import com.example.misha.myapplication.database.dao.LessonDao;
 import com.example.misha.myapplication.database.entity.Lesson;
-import com.example.misha.myapplication.startFragments.FragmentStartEducator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SchedulePageFragment extends Fragment {

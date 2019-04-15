@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter.tabDays;
+package com.example.misha.myapplication.adapter.tabDays.schedule;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -19,15 +19,14 @@ import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class EditTabDaysAdapter extends RecyclerView.Adapter<EditTabDaysAdapter.ViewHolder> {
+public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHolder> {
 
     private int selectedPos;
     private SimpleItemClickListener callback;
     Integer getCurrentWeek;
     ArrayList<String> dayYear = new ArrayList<>();
     List<String> arrayDayWeeks;
-
-    public EditTabDaysAdapter(SimpleItemClickListener simpleItemClickListener) {
+    public TabDaysAdapter(SimpleItemClickListener simpleItemClickListener) {
         this.callback = simpleItemClickListener;
     }
 
@@ -36,6 +35,7 @@ public class EditTabDaysAdapter extends RecyclerView.Adapter<EditTabDaysAdapter.
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_tab_day, parent, false);
+
         arrayDayWeeks=  Arrays.asList(view.getResources().getStringArray(R.array.dayWeek));
 
         Calendar mCalendar = Calendar.getInstance();
@@ -85,6 +85,7 @@ public class EditTabDaysAdapter extends RecyclerView.Adapter<EditTabDaysAdapter.
             date.setText(dayYear.get(position));
             dateWeek.setText(arrayDayWeeks.get(position));
             dayRelLay.setBackgroundColor(selectedPos == position ? Color.parseColor("#FF4081") : Color.TRANSPARENT);
+
         }
 
 

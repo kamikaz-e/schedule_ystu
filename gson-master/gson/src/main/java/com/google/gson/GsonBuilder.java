@@ -97,7 +97,7 @@ public final class GsonBuilder {
 
   /**
    * Creates a GsonBuilder instance that can be used to build Gson with various configuration
-   * settings. GsonBuilder follows the builder pattern, and it is typically used by first
+   * activity_settings. GsonBuilder follows the builder pattern, and it is typically used by first
    * invoking various configuration methods to set desired options, and finally calling
    * {@link #create()}.
    */

@@ -24,7 +24,7 @@
     </LinearLayout>
 
     <include
-        layout="@layout/app_bar_main"
+        layout="@layout/toolbar_main_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </include>
@@ -36,7 +36,7 @@
       android:layout_height="match_parent"
       android:layout_gravity="start"
       android:fitsSystemWindows="true"
-      app:headerLayout="@layout/nav_header_main"
+      app:headerLayout="@layout/nav_header"
       app:theme="@style/NavigationViewStyle"
       android:background="@color/background_colorTwo"
       app:menu="@menu/menu_nav_drawer">

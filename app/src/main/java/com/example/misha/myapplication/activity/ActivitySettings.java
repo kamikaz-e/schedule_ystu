@@ -4,28 +4,21 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.misha.myapplication.Preferences;
@@ -51,17 +44,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
-import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
-import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
-
 public class ActivitySettings extends BaseActivity {
 
     private static final String schedule_import = "http://schedu1e.h1n.ru/schedule.php";
     private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
     private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
     private static final String educators_import = "http://schedu1e.h1n.ru/educators.php";
-    private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallSchedule.php";
+    private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallsSchedule.php";
     private static final String date = "http://schedu1e.h1n.ru/date_start.php";
     private static final String export = "http://schedu1e.h1n.ru/export.php";
     final String sch = "schedule";
@@ -93,7 +82,7 @@ public class ActivitySettings extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
+        setContentView(R.layout.activity_settings);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -198,8 +187,8 @@ public class ActivitySettings extends BaseActivity {
                                     ArrayList<Date> date = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Date>>(){}.getType());
                                     DateDao.getInstance().insertAll(date);
 
-                                    SharedPreferences settings = getSharedPreferences("week", 0);
-                                    SharedPreferences.Editor editor = settings.edit();
+                                    SharedPreferences activity_settings = getSharedPreferences("week", 0);
+                                    SharedPreferences.Editor editor = activity_settings.edit();
                                     editor.putLong("current_week", Long.valueOf(date).longValue());
                                     editor.commit();
                                 }*/

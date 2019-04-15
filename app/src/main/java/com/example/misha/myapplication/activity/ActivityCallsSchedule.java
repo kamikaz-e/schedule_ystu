@@ -17,12 +17,11 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.entity.Calls;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import androidx.appcompat.app.ActionBar;
 
-public class ActivityCallSchedule extends BaseActivity {
+public class ActivityCallsSchedule extends BaseActivity {
 
     EditText oneTime;
     EditText twoTime;
@@ -81,7 +80,7 @@ public class ActivityCallSchedule extends BaseActivity {
         if (hasVisited.equals(false)) {
 
 
-      /*new MaterialTapTargetPrompt.Builder(ActivityCallSchedule.this)
+      /*new MaterialTapTargetPrompt.Builder(ActivityCallsSchedule.this)
               .setTarget(R.id.card_viewOneTime)
               .setPromptBackground(new RectanglePromptBackground())
               .setPromptFocal(new RectanglePromptFocal())
@@ -113,7 +112,7 @@ public class ActivityCallSchedule extends BaseActivity {
     }
 
     public void getTimeOne(View v) {
-        new TimePickerDialog(ActivityCallSchedule.this, timeone,
+        new TimePickerDialog(ActivityCallsSchedule.this, timeone,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                 calendarTimeCalls.get(Calendar.MINUTE), true)
                 .show();
@@ -133,7 +132,7 @@ public class ActivityCallSchedule extends BaseActivity {
             CallDao.getInstance().insertItem(calls);
         }
         if (start == 1) {
-            new TimePickerDialog(ActivityCallSchedule.this, timeone,
+            new TimePickerDialog(ActivityCallsSchedule.this, timeone,
                     calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                     calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
@@ -150,7 +149,7 @@ public class ActivityCallSchedule extends BaseActivity {
     };
 
     public void getTimeTwo(View v) {
-        new TimePickerDialog(ActivityCallSchedule.this, timetwo,
+        new TimePickerDialog(ActivityCallsSchedule.this, timetwo,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                 calendarTimeCalls.get(Calendar.MINUTE), true)
                 .show();
@@ -171,7 +170,7 @@ public class ActivityCallSchedule extends BaseActivity {
             CallDao.getInstance().insertItem(calls);
         }
         if (start == 1) {
-            new TimePickerDialog(ActivityCallSchedule.this, timetwo,
+            new TimePickerDialog(ActivityCallsSchedule.this, timetwo,
                     calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                     calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
@@ -189,7 +188,7 @@ public class ActivityCallSchedule extends BaseActivity {
 
 
     public void getTimeThree(View v) {
-        new TimePickerDialog(ActivityCallSchedule.this, timeThree,
+        new TimePickerDialog(ActivityCallsSchedule.this, timeThree,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                 calendarTimeCalls.get(Calendar.MINUTE), true)
                 .show();
@@ -210,7 +209,7 @@ public class ActivityCallSchedule extends BaseActivity {
             CallDao.getInstance().insertItem(calls);
         }
         if (start == 1) {
-            new TimePickerDialog(ActivityCallSchedule.this, timeThree,
+            new TimePickerDialog(ActivityCallsSchedule.this, timeThree,
                     calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                     calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
@@ -228,7 +227,7 @@ public class ActivityCallSchedule extends BaseActivity {
 
 
     public void getTimeFour(View v) {
-        new TimePickerDialog(ActivityCallSchedule.this, timeFour,
+        new TimePickerDialog(ActivityCallsSchedule.this, timeFour,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                 calendarTimeCalls.get(Calendar.MINUTE), true)
                 .show();
@@ -249,7 +248,7 @@ public class ActivityCallSchedule extends BaseActivity {
             CallDao.getInstance().insertItem(calls);
         }
         if (start == 1) {
-            new TimePickerDialog(ActivityCallSchedule.this, timeFour,
+            new TimePickerDialog(ActivityCallsSchedule.this, timeFour,
                     calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                     calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
@@ -267,7 +266,7 @@ public class ActivityCallSchedule extends BaseActivity {
 
 
     public void getTimeFive(View v) {
-        new TimePickerDialog(ActivityCallSchedule.this, timeFive,
+        new TimePickerDialog(ActivityCallsSchedule.this, timeFive,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                 calendarTimeCalls.get(Calendar.MINUTE), true)
                 .show();
@@ -287,7 +286,7 @@ public class ActivityCallSchedule extends BaseActivity {
             CallDao.getInstance().insertItem(calls);
         }
         if (start == 1) {
-            new TimePickerDialog(ActivityCallSchedule.this, timeFive,
+            new TimePickerDialog(ActivityCallsSchedule.this, timeFive,
                     calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                     calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
@@ -304,7 +303,7 @@ public class ActivityCallSchedule extends BaseActivity {
     };
 
     public void getTimeSix(View v) {
-        new TimePickerDialog(ActivityCallSchedule.this, timeSix,
+        new TimePickerDialog(ActivityCallsSchedule.this, timeSix,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                 calendarTimeCalls.get(Calendar.MINUTE), true)
                 .show();
@@ -325,7 +324,7 @@ public class ActivityCallSchedule extends BaseActivity {
             CallDao.getInstance().insertItem(calls);
         }
         if (start == 1) {
-            new TimePickerDialog(ActivityCallSchedule.this, timeSix,
+            new TimePickerDialog(ActivityCallsSchedule.this, timeSix,
                     calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                     calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
@@ -395,7 +394,7 @@ public class ActivityCallSchedule extends BaseActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(ActivityCallSchedule.this, MainActivity.class);
+                Intent intent = new Intent(ActivityCallsSchedule.this, MainActivity.class);
                 finish();
                 startActivity(intent);
 
@@ -407,7 +406,7 @@ public class ActivityCallSchedule extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ActivityCallSchedule.this, MainActivity.class);
+        Intent intent = new Intent(ActivityCallsSchedule.this, MainActivity.class);
         finish();
         startActivity(intent);
     }

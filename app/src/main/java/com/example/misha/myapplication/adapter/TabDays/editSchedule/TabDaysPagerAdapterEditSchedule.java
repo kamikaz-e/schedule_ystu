@@ -1,33 +1,29 @@
-package com.example.misha.myapplication.adapter.tabDays;
+package com.example.misha.myapplication.adapter.tabDays.editSchedule;
 
 import android.annotation.SuppressLint;
 
 import com.example.misha.myapplication.Preferences;
-import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.fragments.SchedulePageFragment;
+import com.example.misha.myapplication.fragments.EditSchedulePageFragment;
 
 import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.RecyclerView;
 
-public class TabDaysPagerAdapter extends FragmentPagerAdapter {
+public class TabDaysPagerAdapterEditSchedule extends FragmentPagerAdapter {
 
-    private ArrayList<SchedulePageFragment> fragments = new ArrayList<>();
+    private ArrayList<EditSchedulePageFragment> fragments = new ArrayList<>();
 
     private int selectedWeek;
 
-    public TabDaysPagerAdapter(FragmentManager fragmentManager) {
+    public TabDaysPagerAdapterEditSchedule(FragmentManager fragmentManager) {
         super(fragmentManager);
         selectedWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
         for (int day = 0; day < 6; day++) {
-            fragments.add(SchedulePageFragment.newInstance(day, selectedWeek));
+            fragments.add(EditSchedulePageFragment.newInstance(day, selectedWeek));
         }
     }
-
-
 
     @Override
     public int getCount() {
@@ -40,9 +36,8 @@ public class TabDaysPagerAdapter extends FragmentPagerAdapter {
         return fragments.get(position);
     }
 
-
     public void setWeek(int selectedWeek) {
-        for (SchedulePageFragment fragment : fragments) {
+        for (EditSchedulePageFragment fragment: fragments) {
             fragment.setWeek(selectedWeek);
         }
     }

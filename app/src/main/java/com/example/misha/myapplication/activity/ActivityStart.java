@@ -41,7 +41,7 @@ public class ActivityStart extends BaseActivity {
   private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
   private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
   private static final String educators_import= "http://schedu1e.h1n.ru/educators.php";
-  private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallSchedule.php";
+  private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallsSchedule.php";
   private static final String date = "http://schedu1e.h1n.ru/date_start.php";
 
 
@@ -141,8 +141,8 @@ public class ActivityStart extends BaseActivity {
                                     ArrayList<Date> date = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Date>>(){}.getType());
                                     DateDao.getInstance().insertAll(date);
 
-                                    SharedPreferences settings = getSharedPreferences("week", 0);
-                                    SharedPreferences.Editor editor = settings.edit();
+                                    SharedPreferences activity_settings = getSharedPreferences("week", 0);
+                                    SharedPreferences.Editor editor = activity_settings.edit();
                                     editor.putLong("current_week", Long.valueOf(date).longValue());
                                     editor.commit();
                                 }*/

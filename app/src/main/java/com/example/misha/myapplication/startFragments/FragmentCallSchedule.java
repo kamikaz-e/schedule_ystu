@@ -2,11 +2,8 @@ package com.example.misha.myapplication.startFragments;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.appcompat.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -15,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TimePicker;
 
 import com.example.misha.myapplication.activity.MainActivity;
 import com.example.misha.myapplication.R;
@@ -25,9 +21,6 @@ import com.example.misha.myapplication.database.entity.Calls;
 import java.util.Calendar;
 
 import androidx.fragment.app.Fragment;
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
-import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground;
-import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 
 public class FragmentCallSchedule extends Fragment {
