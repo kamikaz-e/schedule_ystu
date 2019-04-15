@@ -1,7 +1,5 @@
 package com.example.misha.myapplication.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +12,12 @@ import com.example.misha.myapplication.database.entity.Calls;
 import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 public class CallsSchedule extends Fragment {
 
-
-    public RecyclerView rvCalls;
 
     public static final int CALLS_CODE = 3434;
 
@@ -32,7 +27,7 @@ public class CallsSchedule extends Fragment {
 
 
     private ArrayList<Calls> listCalls;
-    CallsScheduleAdapter listCallsAdapter;
+    private RecyclerView rvCalls;
 
 
     @Override
@@ -44,20 +39,11 @@ public class CallsSchedule extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-      View  view = inflater.inflate(R.layout.activity_call_schedule, container, false);
+        View view = inflater.inflate(R.layout.activity_call_schedule, container, false);
 
         rvCalls = view.findViewById(R.id.rv_calls);
-
-      /*  listCallsAdapter =  new CallsScheduleAdapter(listCalls, (position, view1) -> {
-            Intent intent = new Intent();
-            intent.putExtra(POSITION, clickedPosition);
-            intent.putExtra(CALLS_LIST, listCalls.get(position));
-            getParentFragment().onActivityResult(CALLS_CODE, Activity.RESULT_OK, intent);
-        });
-        //rvCalls.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-       */
-
-       rvCalls.setAdapter(listCallsAdapter);
+        rvCalls.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvCalls.setAdapter(new CallsScheduleAdapter(getActivity()));
 
         return view;
     }

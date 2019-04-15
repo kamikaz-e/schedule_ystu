@@ -37,7 +37,7 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_tab_day, parent, false);
 
-      arrayDayWeeks=  Arrays.asList(view.getResources().getStringArray(R.array.dayWeek));
+        arrayDayWeeks=  Arrays.asList(view.getResources().getStringArray(R.array.dayWeek));
 
         Calendar mCalendar = Calendar.getInstance();
         mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());

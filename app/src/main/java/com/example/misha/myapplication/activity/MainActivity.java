@@ -19,6 +19,8 @@ import com.example.misha.myapplication.FragmentTwo;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.activitySchedule.FragmentEditSchedule;
+import com.example.misha.myapplication.adapter.tabDays.TabDaysAdapter;
+import com.example.misha.myapplication.adapter.tabDays.TabDaysPagerAdapter;
 import com.example.misha.myapplication.fragments.CallsSchedule;
 import com.example.misha.myapplication.activitySchedule.FragmentScheduleByDays;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
@@ -37,6 +39,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,7 +51,10 @@ public class MainActivity extends BaseActivity
     long differentBetweenDate = 0;
     long selectDate = 0;
     long curr_week = 0;
-
+    TabDaysPagerAdapter pagerAdapter;
+    TabDaysAdapter adapterTabDays;
+    RecyclerView dayTabs;
+    private ViewPager viewPager;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -97,9 +104,7 @@ public class MainActivity extends BaseActivity
                 sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
                 sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
                 Preferences.getInstance().setSelectedWeekEditSchedule(position);
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
             }

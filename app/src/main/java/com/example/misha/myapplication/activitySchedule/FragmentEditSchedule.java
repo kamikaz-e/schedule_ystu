@@ -59,6 +59,9 @@ public class FragmentEditSchedule extends Fragment {
         if (requestCode == MainActivity.WEEK_CODE) {
             selectedWeek = data.getIntExtra(Constants.SELECTED_WEEK, 0);
             pagerAdapter.setWeek(selectedWeek);
+            adapterTabDays = new EditTabDaysAdapter((position, view) ->
+                    viewPager.setCurrentItem(position));
+            dayTabs.setAdapter(adapterTabDays);
         }
     }
 }
