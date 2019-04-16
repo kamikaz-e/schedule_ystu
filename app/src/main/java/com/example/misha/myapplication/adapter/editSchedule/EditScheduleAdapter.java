@@ -105,7 +105,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         }
 
         public void onBindView(int position) {
-
             Lesson lesson = lessonList.get(position);
             number.setText(lesson.getTimeLesson());
             timeEdit.setText((lesson.getTimeLesson()));
@@ -114,8 +113,9 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
             Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
             Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
-            timeEdit.setText(calls.getName());
 
+
+            timeEdit.setText(calls.getName());
             if (subject == null) {
                 subjectEdit.setText("Предмет");
             } else {

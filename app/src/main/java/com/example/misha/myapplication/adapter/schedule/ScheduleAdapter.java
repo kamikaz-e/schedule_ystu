@@ -7,10 +7,12 @@ import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.AudienceDao;
+import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;
 import com.example.misha.myapplication.database.dao.TypelessonDao;
 import com.example.misha.myapplication.database.entity.Audience;
+import com.example.misha.myapplication.database.entity.Calls;
 import com.example.misha.myapplication.database.entity.Educator;
 import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
@@ -75,11 +77,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         public void onBindView(int position) {
             Lesson lesson = lessonList.get(position);
             number.setText(lesson.getTimeLesson());
+            timeEdit.setText((lesson.getTimeLesson()));
             Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
             Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
             Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
             Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
 
+            Calls calls = CallDao.getInstance().getItemByID(Long.parseLong(lesson.getTimeLesson()));
+            timeEdit.setText(calls.getName());
             if (subject == null) {
                 subjectHint.setHint("");
                 subjectEdit.setText("Предмет");

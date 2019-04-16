@@ -1,22 +1,16 @@
 package com.example.misha.myapplication.fragments;
 
-import android.app.Activity;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.CallsScheduleAdapter;
 import com.example.misha.myapplication.adapter.editSchedule.CallScheduleCallback;
 import com.example.misha.myapplication.database.dao.CallDao;
-import com.example.misha.myapplication.database.dao.LessonDao;
 import com.example.misha.myapplication.database.entity.Calls;
 import com.example.misha.myapplication.database.entity.Lesson;
 
@@ -32,47 +26,23 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CallsSchedule extends Fragment implements CallScheduleCallback {
 
 
-    public static final int CALLS_CODE = 3434;
-    Calendar calendarTimeCalls = Calendar.getInstance();
-    public static final String CALLS = "CALLS";
-    public static final String CALLS_LIST = "CALLS_LIST";
-    public static final String POSITION = "POSITION";
-
 
     private RecyclerView rvCalls;
-    CallsScheduleAdapter callsAdapter;
+    private CallsScheduleAdapter callsAdapter;
 
-    private View fragmentView;
-    private List<Lesson> lessonList = new ArrayList<>();
+    Calendar calendarTimeCalls = Calendar.getInstance();
     ArrayList<Calls> callsList = new ArrayList<>();
     Integer start = 1;
 
-    private int clickedPosition;
-    private ArrayList<Calls> listCalls;
-    private RecyclerView rvAudience;
+    String selectPartTime = "";
+    String selectFullTime = "";
 
-    private int positionWeek;
-    private int day;
-
-    String select_time_partOne = "";
-    String select_time_fullOne = "";
-    String select_time_partTwo = "";
-    String select_time_fullTwo = "";
-    String select_time_partThree = "";
-    String select_time_fullThree = "";
-    String select_time_partFour = "";
-    String select_time_fullFour = "";
-    String select_time_partFive = "";
-    String select_time_fullFive = "";
-    String select_time_partSix = "";
-    String select_time_fullSix = "";
     Integer lesPos = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       /* clickedPosition = getArguments().getInt(POSITION);
-        listCalls = getArguments().getParcelableArrayList(CALLS);*/
+        callsAdapter = new CallsScheduleAdapter(this);
     }
 
     @Override
@@ -80,11 +50,9 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_call_schedule, container, false);
-
         rvCalls = view.findViewById(R.id.rv_calls);
         rvCalls.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //ADAPTER
-        rvCalls.setAdapter(new CallsScheduleAdapter(this));
+        rvCalls.setAdapter(callsAdapter);
         return view;
     }
 
@@ -98,7 +66,7 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
     @Override
     public void onCallClick(int position) {
         lesPos = position;
-
+        start=1;
 
         new TimePickerDialog(getActivity(), timeOne,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
@@ -108,19 +76,16 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
 
     private void setInitialTimeOne() {
         if (start == 1) {
-            select_time_partOne = (DateUtils.formatDateTime(getActivity(),
+            selectPartTime = (DateUtils.formatDateTime(getActivity(),
                     calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME) + " - ");
         } else {
-            select_time_fullOne = select_time_partOne + DateUtils.formatDateTime(getActivity(),
+            selectFullTime = selectPartTime + DateUtils.formatDateTime(getActivity(),
                     calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
             callsList = CallDao.getInstance().getAllData();
-            callsList.get(lesPos).setName(select_time_fullOne);
+            callsList.get(lesPos).setName(selectFullTime);
+            callsAdapter.setCallsList(callsList);
+            callsAdapter.notifyDataSetChanged();
             CallDao.getInstance().updateItemByID(callsList.get(lesPos));
-
-          /*  Intent intent = new Intent();
-            intent.putExtra(POSITION, clickedPosition);
-            intent.putExtra(CALLS_LIST, listCalls.get(lesPos));*/
-          /*  getParentFragment().onActivityResult(CALLS_CODE, Activity.RESULT_OK, intent);*/
 
         }
         if (start == 1) {
@@ -138,17 +103,5 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
         setInitialTimeOne();
     };
 
-
-    @Override
-    public void onActivityResult(int requestCode, int resultOk, Intent data) {
-
-            int lessonPosition = data.getIntExtra(POSITION, 0);
-            Calls calls = data.getParcelableExtra(CALLS_LIST);
-            lessonList.get(lessonPosition).setSubject(calls.getId());
-            /*rvCalls.setLessonList(lessonList);
-            rvCalls.notifyDataSetChanged();*/
-            CallDao.getInstance().updateItemByID(callsList.get(lessonPosition));
-
-    }
 
 }

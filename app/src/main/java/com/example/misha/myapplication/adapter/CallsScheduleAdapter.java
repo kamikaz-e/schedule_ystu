@@ -5,30 +5,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.SimpleItemClickListener;
-import com.example.misha.myapplication.activity.MainActivity;
 import com.example.misha.myapplication.adapter.editSchedule.CallScheduleCallback;
 import com.example.misha.myapplication.database.dao.CallDao;
-import com.example.misha.myapplication.database.entity.Audience;
 import com.example.misha.myapplication.database.entity.Calls;
-import com.example.misha.myapplication.database.entity.Lesson;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 public class CallsScheduleAdapter extends RecyclerView.Adapter<CallsScheduleAdapter.ViewHolder> {
 
-    private List<Calls> listAudience;
-    private ArrayList<Audience> audienceList = new ArrayList<>();
+
+    private ArrayList<Calls> callsList = new ArrayList<>();
 
     private CallScheduleCallback itemClickListener;
-    Context context;
+
+
     public CallsScheduleAdapter(CallScheduleCallback callsScheduleCallback) {
         this.itemClickListener = callsScheduleCallback;
     }
@@ -45,8 +41,8 @@ public class CallsScheduleAdapter extends RecyclerView.Adapter<CallsScheduleAdap
         holder.onBindView(position);
     }
 
-    public void setAudiences(ArrayList<Audience> audienceList) {
-        this.audienceList = audienceList;
+    public void setCallsList(ArrayList<Calls> callsList) {
+        this.callsList = callsList;
     }
 
     @Override
@@ -55,25 +51,33 @@ public class CallsScheduleAdapter extends RecyclerView.Adapter<CallsScheduleAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView audience;
+        private final CardView cardViewCall;
+        private final TextView numberCall;
+        private final TextView timeCall;
 
         public ViewHolder(View view) {
             super(view);
-            audience = view.findViewById(R.id.time_row);
-            audience.setOnClickListener(this);
+            cardViewCall = view.findViewById(R.id.cardViewCall);
+            numberCall = view.findViewById(R.id.numberCall);
+            timeCall = view.findViewById(R.id.timeCall);
+            cardViewCall.setOnClickListener(this);
+            timeCall.setOnClickListener(this);
             view.setOnClickListener(this);
 
         }
 
         public void onBindView(int position) {
+            callsList = CallDao.getInstance().getAllData();
+            Calls calls = callsList.get(position);
+            numberCall.setText(calls.getId());
+            timeCall.setText(calls.getName());
 
-            audience.setText("asdasd");
 
         }
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.time_row) {
+            if (v.getId() == R.id.timeCall || v.getId() == R.id.cardViewCall) {
                 itemClickListener.onCallClick(getAdapterPosition());
             }
         }

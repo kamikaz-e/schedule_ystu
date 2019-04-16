@@ -56,11 +56,11 @@ public class FragmentDate extends Fragment {
                 .setSecondaryTextColour(Color.rgb(255,255,255))
                 .setPromptStateChangeListener((prompt, state) -> {
                     if (state== MaterialTapTargetPrompt.STATE_DISMISSED ) {
-                        FragmentCallSchedule fragment= new FragmentCallSchedule();
+                      /*  FragmentCallSchedule fragment= new FragmentCallSchedule();
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.content_frame, fragment)
                                 .addToBackStack(null)
-                                .commit();
+                                .commit();*/
                     }
                 })
                 .show();
@@ -84,12 +84,12 @@ public class FragmentDate extends Fragment {
                             selectedDate  + "' where " + ScheduleClass.date_start.id_date + " = " + 1);*/
                     // Toast.makeText(context, String.valueOf(today.getTimeInMillis()), Toast.LENGTH_SHORT).show();
 
-                    Preferences.getInstance().setSemesterStart(calendarDate.getTimeInMillis());
+                /*    Preferences.getInstance().setSemesterStart(calendarDate.getTimeInMillis());
                     FragmentCallSchedule fragment= new FragmentCallSchedule();
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.content_frame, fragment)
                             .addToBackStack(null)
-                            .commit();
+                            .commit();*/
 
                 }
             };});
