@@ -30,7 +30,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_item_schedule, parent, false);
+                .inflate(R.layout.item_lesson, parent, false);
         return new ViewHolder(view);
     }
 

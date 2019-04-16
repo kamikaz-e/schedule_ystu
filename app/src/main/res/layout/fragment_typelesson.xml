@@ -17,7 +17,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:hint="Тип занятия"
-            android:maxLength="80"
+            android:maxLength="20"
             android:imeOptions="actionDone"
             android:inputType="textCapWords"
             android:textSize="18sp"

@@ -2,7 +2,6 @@ package com.example.misha.myapplication.adapter.editSchedule;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +22,6 @@ import com.example.misha.myapplication.database.entity.Typelesson;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static androidx.viewpager.widget.PagerAdapter.POSITION_NONE;
 
 public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapter.ViewHolder> {
 
@@ -64,7 +61,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_lesson, parent, false);
+                .inflate(R.layout.item_edit_lesson, parent, false);
         return new ViewHolder(view);
     }
 

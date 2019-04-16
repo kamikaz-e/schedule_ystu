@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_marginStart="10sp">
 
@@ -11,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="1sp"
         android:textColor="#FFFFFF"
-        android:textSize="11sp" />
+        android:textSize="11sp"
+        tools:text="20.04 - 20.04"/>
 
     <TextView
         android:id="@+id/currentDaysWeekRange"
@@ -19,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="6sp"
         android:textColor="#FFFFFF"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="1 неделя"/>
 
 </LinearLayout>

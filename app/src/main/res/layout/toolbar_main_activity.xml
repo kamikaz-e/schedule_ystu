@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="7dp"
-                android:layout_marginEnd="100sp"
+                android:layout_marginEnd="200sp"
                 android:background="@android:color/transparent"
                 android:dropDownWidth="100sp"
                 />
@@ -37,5 +37,7 @@
               android:layout_gravity="right"
               />
         </androidx.appcompat.widget.Toolbar>
+
+
     </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
