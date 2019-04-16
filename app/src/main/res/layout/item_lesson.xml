@@ -2,13 +2,11 @@
 <RelativeLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +56,8 @@
                     android:id="@+id/subjectHint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5sp">
+                    android:layout_marginBottom="-5sp"
+                    tools:hint="Предмет">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/subject"
@@ -68,122 +67,138 @@
                         android:checkable="false"
                         android:clickable="false"
                         android:focusable="false"
+                        android:inputType="textNoSuggestions"
                         android:longClickable="false"
                         android:maxLines="1"
                         android:paddingTop="9sp"
                         android:singleLine="true"
                         android:textSize="16sp"
                         android:translationY="-10dp"
-                        android:inputType="textNoSuggestions"
-                   />
+                        tools:text="Предмет" />
                 </com.google.android.material.textfield.TextInputLayout>
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/typelessonRelLay"
-                android:layout_width="match_parent"
+                android:id="@+id/relLayAudEdu"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/subjectRelLay"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp">
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="-3sp"
+                >
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/typelessonHint"
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:id="@+id/typelessonRelLay"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5sp">
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/typelesson"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/typelessonHint"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:checkable="false"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:longClickable="false"
-                        android:maxLines="1"
-                        android:paddingTop="9sp"
-                        android:singleLine="true"
-                        android:textSize="16sp"
-                        android:translationY="-10dp"
-                        android:inputType="textNoSuggestions"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="-5sp"
+                        tools:hint="Тип занятия">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/typelesson"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth = "75sp"
+                            android:background="@null"
+                            android:checkable="false"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:inputType="textNoSuggestions"
+                            android:longClickable="false"
+                            android:maxLines="1"
+                            android:paddingTop="9sp"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:translationY="-10dp"
+                            tools:text="Тип занятия" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/audienceRelLay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_toEndOf="@+id/typelessonRelLay">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/audienceHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5sp"
+                        tools:hint="Аудитория"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/audience"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:minWidth = "65sp"
+                            android:checkable="false"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:inputType="textNoSuggestions"
+                            android:longClickable="false"
+                            android:maxLines="1"
+                            android:paddingTop="10sp"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:translationY="-10dp"
+                            tools:text="Аудитория" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </RelativeLayout>
             </RelativeLayout>
 
-
             <RelativeLayout
-                android:id="@+id/audienceRelLay"
+                android:id="@+id/educatorRelLay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/typelessonRelLay"
+                android:layout_below="@+id/relLayAudEdu"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp">
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="-4sp"
+                android:layout_marginBottom="-3sp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/audienceHint"
+                    android:id="@+id/educatorHint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5sp">
+                    android:layout_marginBottom="-8sp"
+                    tools:hint="Преподаватель">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/audience"
+                        android:id="@+id/educator"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:checkable="false"
                         android:clickable="false"
                         android:focusable="false"
+                        android:inputType="textNoSuggestions"
                         android:longClickable="false"
                         android:maxLines="1"
                         android:paddingTop="10sp"
                         android:singleLine="true"
                         android:textSize="16sp"
                         android:translationY="-10dp"
-                        android:inputType="textNoSuggestions"/>
+                        tools:text="Преподаватель" />
                 </com.google.android.material.textfield.TextInputLayout>
             </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/educatorRelLay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/audienceRelLay"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="-5sp"
-            android:layout_marginEnd="10dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/educatorHint"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="-5sp"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/educator"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:checkable="false"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:longClickable="false"
-                    android:maxLines="1"
-                    android:paddingTop="10sp"
-                    android:singleLine="true"
-                    android:textSize="16sp"
-                    android:translationY="-10dp"
-                    android:inputType="textNoSuggestions" />
-            </com.google.android.material.textfield.TextInputLayout>
-          </RelativeLayout>
 
 
         </RelativeLayout>

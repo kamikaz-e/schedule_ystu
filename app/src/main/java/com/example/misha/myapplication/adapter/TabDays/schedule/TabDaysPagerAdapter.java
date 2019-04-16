@@ -23,7 +23,7 @@ public class TabDaysPagerAdapter extends FragmentPagerAdapter {
         super(fragmentManager);
         selectedWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
         for (int day = 0; day < 6; day++) {
-            fragments.add(SchedulePageFragment.newInstance(day, selectedWeek));
+            fragments.add(SchedulePageFragment.newInstance(selectedWeek, day));
         }
     }
 

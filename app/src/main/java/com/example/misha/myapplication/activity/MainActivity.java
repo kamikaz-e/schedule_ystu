@@ -102,7 +102,6 @@ public class MainActivity extends BaseActivity
                 intent.putExtra(Constants.SELECTED_WEEK, position);
                 sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
                 sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
-                Preferences.getInstance().setSelectedWeekEditSchedule(position);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
