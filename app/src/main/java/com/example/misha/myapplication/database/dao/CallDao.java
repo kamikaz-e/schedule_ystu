@@ -7,6 +7,9 @@ import android.net.Uri;
 import com.example.misha.myapplication.database.AbsDao;
 import com.example.misha.myapplication.database.AppContentProvider;
 import com.example.misha.myapplication.database.entity.Calls;
+import com.example.misha.myapplication.database.entity.Lesson;
+
+import java.util.ArrayList;
 
 public class CallDao extends AbsDao<Calls> {
 
@@ -45,6 +48,8 @@ public class CallDao extends AbsDao<Calls> {
         return calls;
     }
 
+
+
     @Override
     protected ContentValues makeContentValuesFromInstance(Calls instance) {
         ContentValues set = new ContentValues();
@@ -52,4 +57,26 @@ public class CallDao extends AbsDao<Calls> {
         set.put(TIME, instance.getName());
         return set;
     }
+
+    public void initTable() {
+        ArrayList<Calls> dd = getAllData();
+        if (!dd.isEmpty()) return;
+        ArrayList<Calls> calls = new ArrayList<>();
+
+            calls.add(new Calls( String.valueOf(1), "типа время1"));
+            calls.add(new Calls( String.valueOf(2), "типа время2"));
+            calls.add(new Calls( String.valueOf(3), "типа время3"));
+            calls.add(new Calls( String.valueOf(4), "типа время4"));
+            calls.add(new Calls( String.valueOf(5), "типа время5"));
+            calls.add(new Calls( String.valueOf(6), "типа время6"));
+
+        insertAll(calls);
+    }
+
+    public boolean updateItemByID(Calls calls) {
+        int affectedRows = getContentResolver().update(getTableUri(), makeContentValuesFromInstance(calls),
+                KEY_ID + EQUALS, new String[]{String.valueOf(calls.getId())});
+        return affectedRows == 1;
+    }
+
 }

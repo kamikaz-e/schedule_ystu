@@ -52,7 +52,7 @@ public class SubjectList extends DialogFragment {
         listSubjects = getArguments().getParcelableArrayList(SUBJECTS);
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
-        View view = layoutInflater.inflate(R.layout.rv_list, null);
+        View view = layoutInflater.inflate(R.layout.dialog_rv_list, null);
         View layoutTitleDialog = layoutInflater.inflate(R.layout.title_dialog, null);
         TextView title_dialog = layoutTitleDialog.findViewById(R.id.textViewDialog);
         title_dialog.setText("Предмет");

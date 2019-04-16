@@ -16,6 +16,7 @@ import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.FragmentTwo;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.fragmentsSchedule.FragmentEditSchedule;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysAdapter;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysPagerAdapter;
@@ -161,7 +162,9 @@ public class MainActivity extends BaseActivity
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         new DatabaseHelper(this).getWritableDatabase();
+        CallDao.getInstance().initTable();
         LessonDao.getInstance().initTable();
+
     }
 
 

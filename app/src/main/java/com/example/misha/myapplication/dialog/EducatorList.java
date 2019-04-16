@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.example.misha.myapplication.activity.ActivityEditData;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.editScheduleListAdapters.ListEducatorAdapter;
-import com.example.misha.myapplication.SimpleItemClickListener;
 import com.example.misha.myapplication.database.entity.Educator;
 
 import java.util.ArrayList;
@@ -52,7 +51,7 @@ public class EducatorList extends DialogFragment {
         listEducator = getArguments().getParcelableArrayList(EDUCATORS);
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
-        View view = layoutInflater.inflate(R.layout.rv_list, null);
+        View view = layoutInflater.inflate(R.layout.dialog_rv_list, null);
         View layoutTitleDialog = layoutInflater.inflate(R.layout.title_dialog, null);
         TextView title_dialog = layoutTitleDialog.findViewById(R.id.textViewDialog);
         title_dialog.setText("Преподаватель");

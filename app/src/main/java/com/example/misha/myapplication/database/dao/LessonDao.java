@@ -6,7 +6,7 @@ import android.net.Uri;
 
 import com.example.misha.myapplication.database.AbsDao;
 import com.example.misha.myapplication.database.AppContentProvider;
-import com.example.misha.myapplication.database.DatabaseHelper;
+import com.example.misha.myapplication.database.entity.Calls;
 import com.example.misha.myapplication.database.entity.Lesson;
 
 import java.util.ArrayList;
@@ -15,10 +15,11 @@ public class LessonDao extends AbsDao<Lesson> {
 
     private static volatile LessonDao instance;
 
-    private LessonDao() {}
+    private LessonDao() {
+    }
 
     public static LessonDao getInstance() {
-        if (null == instance){
+        if (null == instance) {
             instance = new LessonDao();
         }
         return instance;
@@ -33,7 +34,7 @@ public class LessonDao extends AbsDao<Lesson> {
     public final static String ID_TYPE_LESSON = "id_typelesson";
     public final static String TIME_LESSON = "id_time_lesson";
 
-    public static final String[] ALL_LESSONS_PROPERTIES = new String[] {ID, WEEK,
+    public static final String[] ALL_LESSONS_PROPERTIES = new String[]{ID, WEEK,
             DAY, ID_SUBJECT, ID_AUDIENCE, ID_EDUCATOR, ID_TYPE_LESSON, TIME_LESSON};
 
     @Override
@@ -56,7 +57,7 @@ public class LessonDao extends AbsDao<Lesson> {
         lesson.setTypeLesson(getString(cursor, ID_TYPE_LESSON));
         lesson.setDay(getString(cursor, DAY));
         lesson.setWeek(getString(cursor, WEEK));
-        lesson.setTimeLesson((getString(cursor,TIME_LESSON)));
+        lesson.setTimeLesson((getString(cursor, TIME_LESSON)));
         return lesson;
     }
 
@@ -81,7 +82,7 @@ public class LessonDao extends AbsDao<Lesson> {
         for (int week = 0; week < 17; week++) {
             for (int day = 0; day < 6; day++) {
                 for (int timeLesson = 1; timeLesson < 7; timeLesson++) {
-                    lessons.add(new Lesson(week, day,  0, 0, 0, 0, timeLesson));
+                    lessons.add(new Lesson(week, day, 0, 0, 0, 0, timeLesson));
                 }
             }
         }
