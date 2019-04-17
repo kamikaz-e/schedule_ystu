@@ -128,6 +128,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         lessonList.get(position-1).setSubject(lessonList.get(position).getSubject());
         lessonList.get(position-1).setAudience(lessonList.get(position).getAudience());
         lessonList.get(position-1).setTypeLesson(lessonList.get(position).getTypeLesson());
+        lessonList.get(position-1).setEducator(lessonList.get(position).getEducator());
         rvadapter.setLessonList(lessonList);
         rvadapter.notifyDataSetChanged();
         LessonDao.getInstance().updateItemByID(lessonList.get(position-1));
