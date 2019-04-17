@@ -11,6 +11,7 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysAdapter;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysPagerAdapter;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -38,6 +39,7 @@ public class FragmentScheduleByDays extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_schedule_by_days, container, false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
         viewPager = view.findViewById(R.id.viewpager);
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override

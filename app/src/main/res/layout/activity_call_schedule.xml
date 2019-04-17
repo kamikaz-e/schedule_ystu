@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
@@ -11,12 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <include
+            layout="@layout/toolbar_fragments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </include>
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_calls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="55sp"
+            android:layout_marginTop="60sp"
             android:layout_marginStart="3sp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </RelativeLayout>

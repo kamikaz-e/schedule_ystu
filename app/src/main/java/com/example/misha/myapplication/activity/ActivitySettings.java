@@ -87,6 +87,7 @@ public class ActivitySettings extends BaseActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
 
         requestQueue = Volley.newRequestQueue(ActivitySettings.this);
         progressDialog = new ProgressDialog(ActivitySettings.this);
@@ -96,7 +97,6 @@ public class ActivitySettings extends BaseActivity {
         layout_export = findViewById(R.id.threeitem);
 
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
 
 
         layout_pick_week.setOnClickListener(v -> get_current_week());

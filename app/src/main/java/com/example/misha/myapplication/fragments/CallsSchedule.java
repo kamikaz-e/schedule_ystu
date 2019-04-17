@@ -6,18 +6,25 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.activity.BaseActivity;
 import com.example.misha.myapplication.adapter.CallsScheduleAdapter;
 import com.example.misha.myapplication.adapter.editSchedule.CallScheduleCallback;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.entity.Calls;
 import com.example.misha.myapplication.database.entity.Lesson;
+import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,6 +57,19 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_call_schedule, container, false);
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        Button buttonHome = view.findViewById(R.id.buttonHome);
+        TextView title = view.findViewById(R.id.title);
+        title.setText("Расписание звонков");
+        buttonHome.setBackgroundResource(R.drawable.ic_home);
+        buttonHome.setOnClickListener(v -> {
+            FragmentScheduleByDays fragment= new FragmentScheduleByDays();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+        });
+
         rvCalls = view.findViewById(R.id.rv_calls);
         rvCalls.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvCalls.setAdapter(callsAdapter);

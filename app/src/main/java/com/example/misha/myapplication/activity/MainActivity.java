@@ -34,6 +34,7 @@ import java.util.Calendar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -50,20 +51,16 @@ public class MainActivity extends BaseActivity
     long differentBetweenDate = 0;
     long selectDate = 0;
     long curr_week = 0;
-    TabDaysPagerAdapter pagerAdapter;
-    TabDaysAdapter adapterTabDays;
-    RecyclerView dayTabs;
-    private ViewPager viewPager;
+
 
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Toolbar toolbar = findViewById(R.id.toolbar);
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(false);
+
         drawer = findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -102,6 +99,7 @@ public class MainActivity extends BaseActivity
                 intent.putExtra(Constants.SELECTED_WEEK, position);
                 sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
                 sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
+                Preferences.getInstance().setSelectedWeekEditSchedule(position);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {

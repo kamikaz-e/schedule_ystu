@@ -176,11 +176,11 @@ public class ActivityEditData extends BaseActivity {
             if (position == 0) {
                 title = "Предмет";
             } else if (position == 1) {
-                title = "Аудитория";
+                title = "Аудитор";
             } else if (position == 2) {
-                title = "Преподаватель";
+                title = "Преп-ль";
             } else if (position == 3) {
-                title = "Тип занятия";
+                title = "Тип/зан";
             }
             return title;
         }

@@ -35,13 +35,13 @@
             android:layout_height="wrap_content"
             app:tabBackground="@drawable/tab_color"
             app:tabGravity="center"
-            app:tabIndicatorColor="#FFA500"
+            app:tabIndicatorColor="#FFFFFF"
+            app:tabMinWidth="100sp"
             app:tabMode="fixed"
-            app:tabPaddingStart="0dp"
-            app:tabPaddingEnd="0dp"
-            app:tabSelectedTextColor="@color/color_secondary_text"
+            app:tabSelectedTextColor="@color/color_primary_text"
             app:tabTextAppearance="@style/TabLayoutTextAppearance"
-            app:tabTextColor="@color/color_primary_text" />
+            app:tabTextColor="@color/color_primary_text"
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
 
