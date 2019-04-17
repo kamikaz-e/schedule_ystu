@@ -5,10 +5,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +15,11 @@ import com.example.misha.myapplication.adapter.editScheduleListAdapters.ListSubj
 import com.example.misha.myapplication.database.entity.Subject;
 
 import java.util.ArrayList;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 //Todo прочитать про наследование инкапсуляцию интерфейсы абстрактные классы и generic.

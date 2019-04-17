@@ -16,16 +16,15 @@ import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.FragmentTwo;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.database.dao.CallDao;
-import com.example.misha.myapplication.fragments.EditData;
-import com.example.misha.myapplication.fragmentsSchedule.FragmentEditSchedule;
-import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysAdapter;
-import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysPagerAdapter;
-import com.example.misha.myapplication.fragments.CallsSchedule;
-import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.database.DatabaseHelper;
+import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.dao.LessonDao;
+import com.example.misha.myapplication.fragments.CallsSchedule;
+import com.example.misha.myapplication.fragments.EditData;
+import com.example.misha.myapplication.fragments.Settings;
+import com.example.misha.myapplication.fragmentsSchedule.FragmentEditSchedule;
+import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
 import com.google.android.material.navigation.NavigationView;
 
 import java.text.SimpleDateFormat;
@@ -33,15 +32,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -102,6 +96,7 @@ public class MainActivity extends BaseActivity
                 sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
                 Preferences.getInstance().setSelectedWeekEditSchedule(position);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
             }
@@ -137,7 +132,7 @@ public class MainActivity extends BaseActivity
         displayView(R.id.rasp_day);
 
 
-       Boolean firstOpen =Preferences.getInstance().isHintsOpened();
+        Boolean firstOpen = Preferences.getInstance().isHintsOpened();
         if (firstOpen.equals(false)) {
 
             Intent intent = new Intent(MainActivity.this, ActivityStart.class);
@@ -185,7 +180,7 @@ public class MainActivity extends BaseActivity
 
         switch (viewId) {
             case R.id.rasp_day:
-               replaceFragment(new FragmentScheduleByDays());
+                replaceFragment(new FragmentScheduleByDays());
                 break;
             case R.id.rasp_list:
                 replaceFragment(new FragmentTwo());
@@ -194,14 +189,13 @@ public class MainActivity extends BaseActivity
                 replaceFragment(new FragmentEditSchedule());
                 break;
             case R.id.edit_data:
-              replaceFragment(new EditData());
+                replaceFragment(new EditData());
                 break;
             case R.id.call_schedule:
                 replaceFragment(new CallsSchedule());
                 break;
             case R.id.settings:
-               Intent intent = new Intent(this, ActivitySettings.class);
-                startActivity(intent);
+                replaceFragment(new Settings());
                 break;
             case R.id.nav_share:
                 onCreateDialog().show();

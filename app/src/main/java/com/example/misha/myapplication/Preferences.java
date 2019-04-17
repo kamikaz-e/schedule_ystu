@@ -14,7 +14,6 @@ public final class Preferences {
     private static final String PREF_KEY_FIRST_OPEN_HINT = "PREF_KEY_FIRST_OPEN_HINT";
     private static final String PREF_KEY_SEMESTER_START = "PREF_KEY_SEMESTER_START";
     private static final String PREF_KEY_SELECT_WEEK = "PREF_KEY_SELECT_WEEK";
-    private static final String PREF_KEY_SELECT_DAY = "PREF_KEY_SELECT_DAY";
 
     public static Preferences getInstance() {
         if (instance != null) return instance;

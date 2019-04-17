@@ -1,20 +1,18 @@
-package com.example.misha.myapplication.activity;
+package com.example.misha.myapplication.fragments;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.appcompat.app.ActionBar;
-
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,6 +31,7 @@ import com.example.misha.myapplication.database.entity.Calls;
 import com.example.misha.myapplication.database.entity.Educator;
 import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
+import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -44,7 +43,12 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActivitySettings extends BaseActivity {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+
+public class Settings extends Fragment {
+
 
     private static final String schedule_import = "http://schedu1e.h1n.ru/schedule.php";
     private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
@@ -80,35 +84,47 @@ public class ActivitySettings extends BaseActivity {
     RelativeLayout layout_export;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
+    }
 
-        requestQueue = Volley.newRequestQueue(ActivitySettings.this);
-        progressDialog = new ProgressDialog(ActivitySettings.this);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        layout_pick_week = findViewById(R.id.oneitem);
-        layout_import = findViewById(R.id.twoitem);
-        layout_export = findViewById(R.id.threeitem);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
+        Button buttonHome = view.findViewById(R.id.buttonHome);
+        TextView title = view.findViewById(R.id.title);
+        title.setText("Настройки");
+        buttonHome.setBackgroundResource(R.drawable.ic_home);
+        buttonHome.setOnClickListener(v -> {
+            FragmentScheduleByDays fragment = new FragmentScheduleByDays();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+        });
 
+        requestQueue = Volley.newRequestQueue(getContext());
+        progressDialog = new ProgressDialog(getContext());
+
+        layout_pick_week = view.findViewById(R.id.oneitem);
+        layout_import = view.findViewById(R.id.twoitem);
+        layout_export = view.findViewById(R.id.threeitem);
 
 
         layout_pick_week.setOnClickListener(v -> get_current_week());
         layout_import.setOnClickListener(v -> onCreateDialogImport().show());
         layout_export.setOnClickListener(v -> onCreateDialogExport().show());
+        return view;
     }
 
 
     void get_current_week() {
         Calendar calendar = Calendar.getInstance();
         final Calendar selectedDate = Calendar.getInstance();
-        new DatePickerDialog(ActivitySettings.this, (view, year, month, dayOfMonth) -> {
+        new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) -> {
             selectedDate.set(Calendar.YEAR, year);
             selectedDate.set(Calendar.MONTH, month);
             selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -121,9 +137,9 @@ public class ActivitySettings extends BaseActivity {
 
 
     public Dialog onCreateDialogImport() {
-        LayoutInflater li = LayoutInflater.from(this);
+        LayoutInflater li = LayoutInflater.from(getContext());
         View view = li.inflate(R.layout.dialog_signin, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
         final EditText name_db = view.findViewById(R.id.name_schedule);
         builder.setCancelable(false).setPositiveButton("Импортировать", (dialog, id) -> {
@@ -138,9 +154,7 @@ public class ActivitySettings extends BaseActivity {
             load_db(sch, schedule_import);
             load_db(cal, call_schedule);
             load_db(dat, date);
-            Intent intent = new Intent(ActivitySettings.this, MainActivity.class);
-            finish();
-            startActivity(intent);
+
         }).setNegativeButton("Отмена", (dialog, id) -> {
         });
         return builder.create();
@@ -187,8 +201,8 @@ public class ActivitySettings extends BaseActivity {
                                     ArrayList<Date> date = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Date>>(){}.getType());
                                     DateDao.getInstance().insertAll(date);
 
-                                    SharedPreferences activity_settings = getSharedPreferences("week", 0);
-                                    SharedPreferences.Editor editor = activity_settings.edit();
+                                    SharedPreferences fragment_settings = getSharedPreferences("week", 0);
+                                    SharedPreferences.Editor editor = fragment_settings.edit();
                                     editor.putLong("current_week", Long.valueOf(date).longValue());
                                     editor.commit();
                                 }*/
@@ -208,14 +222,14 @@ public class ActivitySettings extends BaseActivity {
                 return params;
             }
         };
-        Volley.newRequestQueue(this).add(postRequest);
+        Volley.newRequestQueue(getContext()).add(postRequest);
     }
 
 
     public Dialog onCreateDialogExport() {
-        LayoutInflater li = LayoutInflater.from(this);
+        LayoutInflater li = LayoutInflater.from(getContext());
         View view = li.inflate(R.layout.dialog_signin, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
         final EditText name_db = view.findViewById(R.id.name_schedule);
         builder.setCancelable(false).setPositiveButton("Экспортировать", (dialog, id) -> {
@@ -250,11 +264,11 @@ public class ActivitySettings extends BaseActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, export,
                 ServerResponse -> {
                     progressDialog.dismiss();
-                    Toast.makeText(ActivitySettings.this, ServerResponse, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), ServerResponse, Toast.LENGTH_LONG).show();
                 },
                 volleyError -> {
                     progressDialog.dismiss();
-                    Toast.makeText(ActivitySettings.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), volleyError.toString(), Toast.LENGTH_LONG).show();
                 }) {
             @Override
             protected Map<String, String> getParams() {
@@ -270,28 +284,8 @@ public class ActivitySettings extends BaseActivity {
                 return params;
             }
         };
-        Volley.newRequestQueue(this).add(stringRequest);
+        Volley.newRequestQueue(getContext()).add(stringRequest);
 
-    }
-
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent = new Intent(ActivitySettings.this, MainActivity.class);
-                finish();
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(ActivitySettings.this, MainActivity.class);
-        finish();
-        startActivity(intent);
     }
 
 }

@@ -2,7 +2,6 @@ package com.example.misha.myapplication.editData;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -11,11 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.AudienceDao;
@@ -53,11 +50,11 @@ public class FragmentAudience extends Fragment {
         list_audiences.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());
         updateListView();
         input_audience.setOnEditorActionListener((v, actionId, event) -> {
-            if ( (actionId == EditorInfo.IME_ACTION_DONE) ||
-                    ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
+            if ((actionId == EditorInfo.IME_ACTION_DONE) ||
+                    ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
                 input_audience.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
                 String audienceName = input_audience.getText().toString();
-                if(TextUtils.isEmpty(audienceName)) {
+                if (TextUtils.isEmpty(audienceName)) {
                     input_audience.setError("Введите аудиторию");
                     return true;
                 }
@@ -68,8 +65,7 @@ public class FragmentAudience extends Fragment {
                 updateListView();
                 adapter.notifyDataSetChanged();
                 return true;
-            }
-            else{
+            } else {
                 return false;
             }
         });
@@ -79,10 +75,10 @@ public class FragmentAudience extends Fragment {
     public Dialog onCreateDialogDeleteItem(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
-           Audience audience = audience_list.get(position);
+            Audience audience = audience_list.get(position);
             AudienceDao.getInstance().deleteItemById(Long.parseLong(audience.getId()));
             updateListView();
-        }).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Удалить аудиторию «"+audience_list.get(position) +"»?");
+        }).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Удалить аудиторию «" + audience_list.get(position) + "»?");
         return builder.create();
     }
 

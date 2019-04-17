@@ -20,6 +20,4 @@ public interface EditScheduleCallback {
     void onTypelessonClick(int position, ArrayList<Typelesson> typelesson);
 
 
-
-
 }

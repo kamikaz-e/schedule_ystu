@@ -38,8 +38,8 @@ public class FragmentScheduleByDays extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_schedule_by_days, container, false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        View view = inflater.inflate(R.layout.fragment_schedule_by_days, container, false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         viewPager = view.findViewById(R.id.viewpager);
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override

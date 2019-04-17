@@ -7,10 +7,8 @@ import com.example.misha.myapplication.startFragments.FragmentDate;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class ActivityStartSettings extends BaseActivity
-     {
+public class ActivityStartSettings extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +16,7 @@ public class ActivityStartSettings extends BaseActivity
         setContentView(R.layout.start_settings);
 
         Fragment fragment = new FragmentDate();
-            if (fragment != null) {
+        if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();

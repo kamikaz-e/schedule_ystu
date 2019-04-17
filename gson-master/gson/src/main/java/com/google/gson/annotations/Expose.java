@@ -52,7 +52,7 @@ import java.lang.annotation.Target;
  *
  * <p>Note that another way to achieve the same effect would have been to just mark the
  * {@code password} field as {@code transient}, and Gson would have excluded it even with default
- * activity_settings. The {@code @Expose} annotation is useful in a style of programming where you want to
+ * fragment_settings. The {@code @Expose} annotation is useful in a style of programming where you want to
  * explicitly specify all fields that should get considered for serialization or deserialization.
  *
  * @author Inderjeet Singh

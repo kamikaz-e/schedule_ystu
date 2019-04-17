@@ -25,7 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 ? getSupportFragmentManager()
                 : root.getChildFragmentManager());
         if (activeFragments == null) return;
-        for (Fragment fragment: activeFragments) {
+        for (Fragment fragment : activeFragments) {
             if (fragment == null) continue;
             Class fragmentClass = fragment.getClass();
             boolean instance = target.isInstance(fragment);

@@ -30,6 +30,7 @@ public class EditData extends Fragment {
     TabLayout tabLayout;
     ViewPager viewPager;
     EditDataViewPagerAdapter viewPagerAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,7 @@ public class EditData extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_edit_data, container, false);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         Button buttonHome = view.findViewById(R.id.buttonHome);
 
         viewPager = view.findViewById(R.id.viewPager);
@@ -54,7 +55,7 @@ public class EditData extends Fragment {
 
         buttonHome.setBackgroundResource(R.drawable.ic_home);
         buttonHome.setOnClickListener(v -> {
-            FragmentScheduleByDays fragment= new FragmentScheduleByDays();
+            FragmentScheduleByDays fragment = new FragmentScheduleByDays();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .commit();

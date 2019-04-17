@@ -6,5 +6,6 @@ public final class Constants {
 
     public static final String DAY = "DAY";
 
-    private Constants() {}
+    private Constants() {
+    }
 }

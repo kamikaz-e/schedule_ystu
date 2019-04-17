@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CallsSchedule extends Fragment implements CallScheduleCallback {
 
 
-
     private RecyclerView rvCalls;
     private CallsScheduleAdapter callsAdapter;
 
@@ -53,14 +52,14 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
 
         View view = inflater.inflate(R.layout.fragment_call_schedule, container, false);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
         Button buttonHome = view.findViewById(R.id.buttonHome);
         TextView title = view.findViewById(R.id.title);
         title.setText("Расписание звонков");
-
         buttonHome.setBackgroundResource(R.drawable.ic_home);
         buttonHome.setOnClickListener(v -> {
-            FragmentScheduleByDays fragment= new FragmentScheduleByDays();
+            FragmentScheduleByDays fragment = new FragmentScheduleByDays();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .commit();
@@ -82,7 +81,7 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
     @Override
     public void onCallClick(int position) {
         lesPos = position;
-        start=1;
+        start = 1;
 
         new TimePickerDialog(getActivity(), timeOne,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),

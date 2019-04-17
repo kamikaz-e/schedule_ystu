@@ -37,46 +37,44 @@ import java.util.Map;
 
 
 public class ActivityStart extends BaseActivity {
-  private static final String schedule_import= "http://schedu1e.h1n.ru/schedule.php";
-  private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
-  private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
-  private static final String educators_import= "http://schedu1e.h1n.ru/educators.php";
-  private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallsSchedule.php";
-  private static final String date = "http://schedu1e.h1n.ru/date_start.php";
+    private static final String schedule_import = "http://schedu1e.h1n.ru/schedule.php";
+    private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
+    private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
+    private static final String educators_import = "http://schedu1e.h1n.ru/educators.php";
+    private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallsSchedule.php";
+    private static final String date = "http://schedu1e.h1n.ru/date_start.php";
 
 
+    final String sch = "schedule";
+    final String sub = "subject";
+    final String aud = "audience";
+    final String edu = "educator";
+    final String cal = "calls";
+    final String dat = "date_start";
 
-  final String sch="schedule";
-  final String sub="subject";
-  final String aud="audience";
-  final String edu="educator";
-  final String cal="calls";
-  final String dat="date_start";
-
-  String database_name="";
-
+    String database_name = "";
 
 
-  final Context context = this;
-  public ArrayAdapter<String> adapter;
+    final Context context = this;
+    public ArrayAdapter<String> adapter;
 
 
-  @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.start_activity);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.start_activity);
 
 
-    Button start_buttonOne = findViewById(R.id.start_buttonOne);
-    start_buttonOne.setOnClickListener(v -> onCreateDialogImport().show());
-    Button start_buttonTwo = findViewById(R.id.start_buttonTwo);
-    start_buttonTwo.setOnClickListener(v -> {
-      Intent intent = new Intent (ActivityStart.this, ActivityStartSettings.class);
-      finish();
-      startActivity(intent);
-    });
+        Button start_buttonOne = findViewById(R.id.start_buttonOne);
+        start_buttonOne.setOnClickListener(v -> onCreateDialogImport().show());
+        Button start_buttonTwo = findViewById(R.id.start_buttonTwo);
+        start_buttonTwo.setOnClickListener(v -> {
+            Intent intent = new Intent(ActivityStart.this, ActivityStartSettings.class);
+            finish();
+            startActivity(intent);
+        });
 
-  }
+    }
 
     public Dialog onCreateDialogImport() {
         LayoutInflater li = LayoutInflater.from(context);
@@ -116,33 +114,37 @@ public class ActivityStart extends BaseActivity {
                             jsonString = jsonArray.getString(i);
 
 
-
                             if (table.equals(aud)) {
-                                ArrayList<Audience> audiences = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Audience>>(){}.getType());
+                                ArrayList<Audience> audiences = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Audience>>() {
+                                }.getType());
                                 AudienceDao.getInstance().insertAll(audiences);
                             }
                             if (table == edu) {
-                                ArrayList<Educator> educators = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Educator>>(){}.getType());
+                                ArrayList<Educator> educators = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Educator>>() {
+                                }.getType());
                                 EducatorDao.getInstance().insertAll(educators);
                             }
                             if (table == sub) {
-                                ArrayList<Subject> subjects = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Subject>>(){}.getType());
+                                ArrayList<Subject> subjects = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Subject>>() {
+                                }.getType());
                                 SubjectDao.getInstance().insertAll(subjects);
                             }
                             if (table == sch) {
-                                ArrayList<Lesson> lessons = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Lesson>>(){}.getType());
+                                ArrayList<Lesson> lessons = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Lesson>>() {
+                                }.getType());
                                 LessonDao.getInstance().insertAll(lessons);
                             }
                             if (table == cal) {
-                                ArrayList<Calls> calls = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Calls>>(){}.getType());
+                                ArrayList<Calls> calls = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Calls>>() {
+                                }.getType());
                                 CallDao.getInstance().insertAll(calls);
                             }
                                 /*if (table == dat) {
                                     ArrayList<Date> date = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Date>>(){}.getType());
                                     DateDao.getInstance().insertAll(date);
 
-                                    SharedPreferences activity_settings = getSharedPreferences("week", 0);
-                                    SharedPreferences.Editor editor = activity_settings.edit();
+                                    SharedPreferences fragment_settings = getSharedPreferences("week", 0);
+                                    SharedPreferences.Editor editor = fragment_settings.edit();
                                     editor.putLong("current_week", Long.valueOf(date).longValue());
                                     editor.commit();
                                 }*/
