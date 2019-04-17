@@ -88,5 +88,6 @@
     <string name="no">no</string>
     <string name="maybe">maybe</string>
     <string name="message_text">message</string>
+    <string name="textViewOptions">⋮</string>
 
 </resources>

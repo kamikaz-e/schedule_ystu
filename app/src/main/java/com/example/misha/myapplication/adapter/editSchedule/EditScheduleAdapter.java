@@ -3,7 +3,9 @@ package com.example.misha.myapplication.adapter.editSchedule;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.AudienceDao;
@@ -36,6 +38,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         this.callback = editScheduleCallback;
     }
 
+    String abc;
 
     public void setLessonList(List<Lesson> lessonList) {
         this.lessonList = lessonList;
@@ -69,6 +72,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.onBindView(position);
+
     }
 
     @Override
@@ -84,6 +88,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         private final TextView audienceEdit;
         private final TextView educatorEdit;
         private final TextView typeLessonEdit;
+        private final TextView textViewOptions;
 
 
         public ViewHolder(View view) {
@@ -94,6 +99,8 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             audienceEdit = view.findViewById(R.id.button_audience);
             educatorEdit = view.findViewById(R.id.button_educator);
             typeLessonEdit = view.findViewById(R.id.button_typelesson);
+            textViewOptions = view.findViewById(R.id.textViewOptions);
+
             subjectEdit.setOnClickListener(this);
             audienceEdit.setOnClickListener(this);
             educatorEdit.setOnClickListener(this);
@@ -137,6 +144,29 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
 
         @Override
         public void onClick(View v) {
+
+            textViewOptions.setOnClickListener(view -> {
+
+
+                PopupMenu popup = new PopupMenu(view.getContext(), textViewOptions);
+                popup.inflate(R.menu.menu_item_edit_lesson);
+                popup.setOnMenuItemClickListener(item -> {
+                    switch (item.getItemId()) {
+                        case R.id.item1:
+                            callback.onMenuClick(getAdapterPosition());
+                            return true;
+                        case R.id.item2:
+                            return true;
+                        case R.id.item3:
+                            return true;
+                        default:
+                            return false;
+                    }
+                });
+                popup.show();
+
+            });
+
             if (v.getId() == R.id.button_audience) {
                 callback.onAudienceClick(getAdapterPosition(), audienceList);
             }
@@ -150,7 +180,5 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
                 callback.onTypelessonClick(getAdapterPosition(), typelessonList);
             }
         }
-
-
     }
 }

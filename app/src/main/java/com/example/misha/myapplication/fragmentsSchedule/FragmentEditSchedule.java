@@ -3,8 +3,12 @@ package com.example.misha.myapplication.fragmentsSchedule;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
@@ -47,6 +51,8 @@ public class FragmentEditSchedule extends Fragment {
             }
         });
 
+        PopupMenu menu = new PopupMenu(getContext(), viewPager);
+        menu.setOnMenuItemClickListener(FragmentEditSchedule.this::onMenuItemClicked);
 
         pagerAdapter = new TabDaysPagerAdapterEditSchedule(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
@@ -66,4 +72,18 @@ public class FragmentEditSchedule extends Fragment {
             dayTabs.setAdapter(adapterTabDays);
         }
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_item_edit_lesson, menu);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+
+    private boolean onMenuItemClicked(MenuItem menuItem) {
+        return  false;
+    }
+
+
+
 }

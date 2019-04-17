@@ -1,10 +1,12 @@
 package com.example.misha.myapplication.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
@@ -41,9 +43,10 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     ArrayList<Audience> audienceList = new ArrayList<>();
     ArrayList<Educator> educatorList = new ArrayList<>();
     ArrayList<Typelesson> typelessonList = new ArrayList<>();
-
+    String abc;
     private int positionWeek;
     private int day;
+    public int MENU_CODE = 3436;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -120,6 +123,16 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         dialogFragment.show(getChildFragmentManager(), TypelessonList.class.getSimpleName());
     }
 
+    @Override
+    public void onMenuClick(int position) {
+        lessonList.get(position-1).setSubject(lessonList.get(position).getSubject());
+        lessonList.get(position-1).setAudience(lessonList.get(position).getAudience());
+        lessonList.get(position-1).setTypeLesson(lessonList.get(position).getTypeLesson());
+        rvadapter.setLessonList(lessonList);
+        rvadapter.notifyDataSetChanged();
+        LessonDao.getInstance().updateItemByID(lessonList.get(position-1));
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultOk, Intent data) {
@@ -154,6 +167,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
+
         }
     }
 
