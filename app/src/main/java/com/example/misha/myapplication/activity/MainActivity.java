@@ -17,6 +17,7 @@ import com.example.misha.myapplication.FragmentTwo;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.CallDao;
+import com.example.misha.myapplication.fragments.EditData;
 import com.example.misha.myapplication.fragmentsSchedule.FragmentEditSchedule;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysAdapter;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysPagerAdapter;
@@ -141,8 +142,6 @@ public class MainActivity extends BaseActivity
 
             Intent intent = new Intent(MainActivity.this, ActivityStart.class);
             startActivity(intent);
-
-
             Preferences.getInstance().setHintsOpened();
         }
     }
@@ -195,14 +194,13 @@ public class MainActivity extends BaseActivity
                 replaceFragment(new FragmentEditSchedule());
                 break;
             case R.id.edit_data:
-                Intent intent = new Intent(this, ActivityEditData.class);
-                startActivity(intent);
+              replaceFragment(new EditData());
                 break;
             case R.id.call_schedule:
                 replaceFragment(new CallsSchedule());
                 break;
             case R.id.settings:
-                intent = new Intent(this, ActivitySettings.class);
+               Intent intent = new Intent(this, ActivitySettings.class);
                 startActivity(intent);
                 break;
             case R.id.nav_share:
@@ -212,8 +210,6 @@ public class MainActivity extends BaseActivity
                 new FragmentScheduleByDays();
                 break;
         }
-
-
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

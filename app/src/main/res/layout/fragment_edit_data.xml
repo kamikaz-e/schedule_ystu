@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".activity.ActivityEditData">
+    android:fitsSystemWindows="true">
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -12,22 +12,43 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="55sp"
+            android:background="?attr/colorPrimary"
+            android:orientation="horizontal">
 
             <Button
-                android:id="@+id/clear_subjects"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="17dp" />
+                android:id="@+id/buttonHome"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/buttonHome"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:text="Редактор данных"
+                />
+
+            <Button
+                android:id="@+id/buttonClear"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="17sp"
+                android:layout_marginTop="15dp"
+                />
+
         </RelativeLayout>
+
+
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"

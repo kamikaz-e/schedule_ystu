@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.activity.ActivityEditData;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.editScheduleListAdapters.ListAudienceAdapter;
 import com.example.misha.myapplication.database.entity.Audience;
@@ -69,8 +68,7 @@ public class AudienceList extends DialogFragment {
         rvAudience.setAdapter(listAudienceAdapter);
         Button button_add = view.findViewById(R.id.button_add);
         button_add.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ActivityEditData.class);
-            getActivity().startActivity(intent);
+
         });
         Button button_cancel = view.findViewById(R.id.button_cancel);
         button_cancel.setOnClickListener(v -> dismiss());

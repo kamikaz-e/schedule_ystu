@@ -9,8 +9,8 @@
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
-        <item name="android:background">#282828</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:background">#303030</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
     <style name="TabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
