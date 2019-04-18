@@ -37,8 +37,8 @@ public class SchedulePageFragment extends Fragment {
 
     public static SchedulePageFragment newInstance(int selectedWeek, int position) {
         Bundle args = new Bundle();
-        args.putInt(Constants.DAY, position);
         args.putInt(Constants.SELECTED_WEEK, selectedWeek);
+        args.putInt(Constants.DAY, position);
         SchedulePageFragment fragment = new SchedulePageFragment();
         fragment.setArguments(args);
         return fragment;
@@ -60,7 +60,7 @@ public class SchedulePageFragment extends Fragment {
     }
 
     private void updateList() {
-        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(day, positionWeek);
+        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
         rvadapter.setLessonList(lessonList);
         rvadapter.notifyDataSetChanged();
     }

@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupMenu;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
@@ -41,7 +39,7 @@ public class FragmentEditSchedule extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_schedule_by_days, container, false);
+        View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         viewPager = view.findViewById(R.id.viewpager);
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
@@ -50,9 +48,6 @@ public class FragmentEditSchedule extends Fragment {
                 adapterTabDays.setSelection(position);
             }
         });
-
-       /* PopupMenu menu = new PopupMenu(getContext(), viewPager);
-        menu.setOnMenuItemClickListener(FragmentEditSchedule.this::onMenuItemClicked);*/
 
         pagerAdapter = new TabDaysPagerAdapterEditSchedule(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
@@ -76,14 +71,8 @@ public class FragmentEditSchedule extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_item_edit_lesson, menu);
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
     }
-
-
-    /*private boolean onMenuItemClicked(MenuItem menuItem) {
-        return  false;
-    }*/
-
 
 
 }

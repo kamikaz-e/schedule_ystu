@@ -26,8 +26,6 @@ public abstract class AbsDao<T> {
      * Key for 'ID' column in the workouts table.
      */
     protected static final String KEY_ID = "ID";
-    protected static final String KEY_DAY = "day";
-    protected static final String KEY_WEEK = "week";
 
 
     /**

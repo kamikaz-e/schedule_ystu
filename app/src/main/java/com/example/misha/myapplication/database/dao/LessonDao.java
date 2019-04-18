@@ -36,6 +36,7 @@ public class LessonDao extends AbsDao<Lesson> {
 
     public static final String[] ALL_LESSONS_PROPERTIES = new String[]{ID, WEEK,
             DAY, ID_SUBJECT, ID_AUDIENCE, ID_EDUCATOR, ID_TYPE_LESSON, TIME_LESSON};
+    public static final String[] ALL_LESSONS_PROPERTIES2 = new String[]{ID_SUBJECT, ID_AUDIENCE, ID_EDUCATOR, ID_TYPE_LESSON, TIME_LESSON};
 
     @Override
     protected String[] getAllColumns() {
@@ -51,12 +52,12 @@ public class LessonDao extends AbsDao<Lesson> {
     protected Lesson makeInstanceFromCursor(Cursor cursor) {
         Lesson lesson = new Lesson();
         lesson.setId(getString(cursor, ID));
-        lesson.setEducator(getString(cursor, ID_EDUCATOR));
-        lesson.setAudience(getString(cursor, ID_AUDIENCE));
-        lesson.setSubject(getString(cursor, ID_SUBJECT));
-        lesson.setTypeLesson(getString(cursor, ID_TYPE_LESSON));
-        lesson.setDay(getString(cursor, DAY));
         lesson.setWeek(getString(cursor, WEEK));
+        lesson.setDay(getString(cursor, DAY));
+        lesson.setSubject(getString(cursor, ID_SUBJECT));
+        lesson.setAudience(getString(cursor, ID_AUDIENCE));
+        lesson.setEducator(getString(cursor, ID_EDUCATOR));
+        lesson.setTypeLesson(getString(cursor, ID_TYPE_LESSON));
         lesson.setTimeLesson((getString(cursor, TIME_LESSON)));
         return lesson;
     }
@@ -65,12 +66,12 @@ public class LessonDao extends AbsDao<Lesson> {
     protected ContentValues makeContentValuesFromInstance(Lesson instance) {
         ContentValues set = new ContentValues();
         set.put(ID, instance.getId());
-        set.put(ID_EDUCATOR, instance.getEducator());
-        set.put(ID_AUDIENCE, instance.getAudience());
-        set.put(ID_SUBJECT, instance.getSubject());
-        set.put(ID_TYPE_LESSON, instance.getTypeLesson());
-        set.put(DAY, instance.getDay());
         set.put(WEEK, instance.getWeek());
+        set.put(DAY, instance.getDay());
+        set.put(ID_SUBJECT, instance.getSubject());
+        set.put(ID_AUDIENCE, instance.getAudience());
+        set.put(ID_EDUCATOR, instance.getEducator());
+        set.put(ID_TYPE_LESSON, instance.getTypeLesson());
         set.put(TIME_LESSON, instance.getTimeLesson());
         return set;
     }
@@ -97,11 +98,27 @@ public class LessonDao extends AbsDao<Lesson> {
     }
 
 
+    public ArrayList<Lesson> getLessonByWeek(int week) {
+        Cursor cursor = getContentResolver().query(getTableUri(), getAllColumns(),
+                WEEK + EQUALS, new String[]{String.valueOf(week)}, null);
+        return extractItemsFromCursor(cursor);
+    }
+
+
     public boolean updateItemByID(Lesson lesson) {
         int affectedRows = getContentResolver().update(getTableUri(), makeContentValuesFromInstance(lesson),
-                KEY_ID + EQUALS, new String[]{String.valueOf(lesson.getId())});
+                ID + EQUALS, new String[]{String.valueOf(lesson.getId())});
         return affectedRows == 1;
     }
+
+
+    public boolean updateEvenWeek(Lesson lesson) {
+        int affectedRows = getContentResolver().update(getTableUri(), makeContentValuesFromInstance(lesson),
+                WEEK + EQUALS, new String[]{String.valueOf(lesson.getWeek())});
+        return affectedRows == 1;
+    }
+
+
 
     public boolean deleteItemById(long id) {
         return super.deleteItemById(id, ID);

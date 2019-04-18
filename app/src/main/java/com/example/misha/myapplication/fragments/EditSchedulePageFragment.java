@@ -12,6 +12,8 @@ import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.editSchedule.EditScheduleAdapter;
 import com.example.misha.myapplication.adapter.editSchedule.EditScheduleCallback;
+import com.example.misha.myapplication.database.AbsDao;
+import com.example.misha.myapplication.database.AppContentProvider;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.LessonDao;
@@ -58,8 +60,8 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
 
     public static EditSchedulePageFragment newInstance(int selectedWeek, int position) {
         Bundle args = new Bundle();
-        args.putInt(Constants.DAY, position);
         args.putInt(Constants.SELECTED_WEEK, selectedWeek);
+        args.putInt(Constants.DAY, position);
         EditSchedulePageFragment fragment = new EditSchedulePageFragment();
         fragment.setArguments(args);
         return fragment;
@@ -80,7 +82,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     }
 
     private void updateList() {
-        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(day, positionWeek);
+        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
         subjectList = SubjectDao.getInstance().getAllData();
         audienceList = AudienceDao.getInstance().getAllData();
         educatorList = EducatorDao.getInstance().getAllData();
