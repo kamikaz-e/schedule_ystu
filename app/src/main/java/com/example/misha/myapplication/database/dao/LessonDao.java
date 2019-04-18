@@ -36,7 +36,6 @@ public class LessonDao extends AbsDao<Lesson> {
 
     public static final String[] ALL_LESSONS_PROPERTIES = new String[]{ID, WEEK,
             DAY, ID_SUBJECT, ID_AUDIENCE, ID_EDUCATOR, ID_TYPE_LESSON, TIME_LESSON};
-    public static final String[] ALL_LESSONS_PROPERTIES2 = new String[]{ID_SUBJECT, ID_AUDIENCE, ID_EDUCATOR, ID_TYPE_LESSON, TIME_LESSON};
 
     @Override
     protected String[] getAllColumns() {
@@ -76,6 +75,7 @@ public class LessonDao extends AbsDao<Lesson> {
         return set;
     }
 
+
     public void initTable() {
         ArrayList<Lesson> dd = getAllData();
         if (!dd.isEmpty()) return;
@@ -105,19 +105,12 @@ public class LessonDao extends AbsDao<Lesson> {
     }
 
 
+
     public boolean updateItemByID(Lesson lesson) {
         int affectedRows = getContentResolver().update(getTableUri(), makeContentValuesFromInstance(lesson),
                 ID + EQUALS, new String[]{String.valueOf(lesson.getId())});
         return affectedRows == 1;
     }
-
-
-    public boolean updateEvenWeek(Lesson lesson) {
-        int affectedRows = getContentResolver().update(getTableUri(), makeContentValuesFromInstance(lesson),
-                WEEK + EQUALS, new String[]{String.valueOf(lesson.getWeek())});
-        return affectedRows == 1;
-    }
-
 
 
     public boolean deleteItemById(long id) {

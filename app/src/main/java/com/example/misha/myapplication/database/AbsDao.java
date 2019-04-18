@@ -144,7 +144,6 @@ public abstract class AbsDao<T> {
 
     public void insertItem(T item) {
        getContentResolver().insert(getTableUri(), makeContentValuesFromInstance(item));
-
     }
 
     public void insertAll(ArrayList<T> items) {

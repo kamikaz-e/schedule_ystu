@@ -2,7 +2,6 @@ package com.example.misha.myapplication.fragmentsSchedule;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.example.misha.myapplication.Constants;
+import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysAdapter;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysPagerAdapter;
 import com.example.misha.myapplication.database.dao.LessonDao;
 import com.example.misha.myapplication.database.entity.Lesson;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +35,12 @@ public class FragmentScheduleByDays extends Fragment implements View.OnClickList
     RecyclerView dayTabs;
     private ViewPager viewPager;
     private Boolean isFabOpen = false;
-    private FloatingActionButton fab,fab1,fab2;
-    private Animation fab_open,fab_close,rotate_forward,rotate_backward;
+    private FloatingActionButton fab, fab1, fab2;
+    private Animation fab_open, fab_close, rotate_forward, rotate_backward;
     private int selectedWeek;
     private List<Lesson> lessonListWeek = new ArrayList<>();
     private List<Lesson> lessonListWeekCurrent = new ArrayList<>();
+    Integer currentWeek=0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,21 +73,20 @@ public class FragmentScheduleByDays extends Fragment implements View.OnClickList
         fab1 = view.findViewById(R.id.fab1);
         fab2 = view.findViewById(R.id.fab2);
         fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getContext(),R.anim.fab_close);
-        rotate_forward = AnimationUtils.loadAnimation(getContext(),R.anim.rotate_forward);
-        rotate_backward = AnimationUtils.loadAnimation(getContext(),R.anim.rotate_backward);
+        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
+        rotate_forward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
         fab.setOnClickListener(this);
         fab1.setOnClickListener(this);
         fab2.setOnClickListener(this);
 
 
-
         return view;
     }
 
-    public void animateFAB(){
+    public void animateFAB() {
 
-        if(isFabOpen){
+        if (isFabOpen) {
 
             fab.startAnimation(rotate_backward);
             fab1.startAnimation(fab_close);
@@ -124,22 +123,34 @@ public class FragmentScheduleByDays extends Fragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
+        switch (id) {
             case R.id.fab:
                 animateFAB();
                 break;
             case R.id.fab1:
-                lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(0);
-                lessonListWeek = LessonDao.getInstance().getLessonByWeek(1);
-                lessonListWeek.get(0).setData(lessonListWeekCurrent.get(0).getSubject(), lessonListWeekCurrent.get(0).getAudience(),
-                        lessonListWeekCurrent.get(0).getEducator(), lessonListWeekCurrent.get(0).getTypeLesson());
-                lessonListWeek.get(1).setData(lessonListWeekCurrent.get(1).getSubject(), lessonListWeekCurrent.get(1).getAudience(),
-                        lessonListWeekCurrent.get(1).getEducator(), lessonListWeekCurrent.get(1).getTypeLesson());
-                LessonDao.getInstance().updateItemByID(lessonListWeek.get(0));
-                LessonDao.getInstance().updateItemByID(lessonListWeek.get(1));
+                currentWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
+                for (int idWeek = 0; idWeek < 17; idWeek+=2) {
+                lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
+                lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
+
+                for (int idRowWeek = 0; idRowWeek < 36; idRowWeek++) {
+                    lessonListWeek.get(idRowWeek).setData(lessonListWeekCurrent.get(idRowWeek).getSubject(), lessonListWeekCurrent.get(idRowWeek).getAudience(),
+                            lessonListWeekCurrent.get(idRowWeek).getEducator(), lessonListWeekCurrent.get(idRowWeek).getTypeLesson());
+                    LessonDao.getInstance().updateItemByID(lessonListWeek.get(idRowWeek));
+                }
+            }
                 break;
             case R.id.fab2:
+                for (int idWeek = 1; idWeek < 17; idWeek+=2) {
+                    lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
+                    lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
 
+                    for (int idRowWeek = 0; idRowWeek < 36; idRowWeek++) {
+                        lessonListWeek.get(idRowWeek).setData(lessonListWeekCurrent.get(idRowWeek).getSubject(), lessonListWeekCurrent.get(idRowWeek).getAudience(),
+                                lessonListWeekCurrent.get(idRowWeek).getEducator(), lessonListWeekCurrent.get(idRowWeek).getTypeLesson());
+                        LessonDao.getInstance().updateItemByID(lessonListWeek.get(idRowWeek));
+                    }
+                }
                 break;
         }
     }

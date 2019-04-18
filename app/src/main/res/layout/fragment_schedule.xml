@@ -15,7 +15,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="55sp"
-                    android:layout_marginStart="3sp"
+                    android:layout_marginStart="2sp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <androidx.viewpager.widget.ViewPager
