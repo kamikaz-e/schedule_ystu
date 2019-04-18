@@ -43,10 +43,10 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     ArrayList<Audience> audienceList = new ArrayList<>();
     ArrayList<Educator> educatorList = new ArrayList<>();
     ArrayList<Typelesson> typelessonList = new ArrayList<>();
-    String abc;
+
     private int positionWeek;
     private int day;
-    public int MENU_CODE = 3436;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,7 +124,7 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     }
 
     @Override
-    public void onMenuClick(int position) {
+    public void onCopyUpClick(int position) {
         lessonList.get(position-1).setSubject(lessonList.get(position).getSubject());
         lessonList.get(position-1).setAudience(lessonList.get(position).getAudience());
         lessonList.get(position-1).setTypeLesson(lessonList.get(position).getTypeLesson());
@@ -132,6 +132,28 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         rvadapter.setLessonList(lessonList);
         rvadapter.notifyDataSetChanged();
         LessonDao.getInstance().updateItemByID(lessonList.get(position-1));
+    }
+
+    @Override
+    public void onCopyDownClick(int position) {
+        lessonList.get(position+1).setSubject(lessonList.get(position).getSubject());
+        lessonList.get(position+1).setAudience(lessonList.get(position).getAudience());
+        lessonList.get(position+1).setTypeLesson(lessonList.get(position).getTypeLesson());
+        lessonList.get(position+1).setEducator(lessonList.get(position).getEducator());
+        rvadapter.setLessonList(lessonList);
+        rvadapter.notifyDataSetChanged();
+        LessonDao.getInstance().updateItemByID(lessonList.get(position+1));
+    }
+
+    @Override
+    public void onClearLessonClick(int position) {
+        lessonList.get(position).setSubject("0");
+        lessonList.get(position).setAudience("0");
+        lessonList.get(position).setTypeLesson("0");
+        lessonList.get(position).setEducator("0");
+        rvadapter.setLessonList(lessonList);
+        rvadapter.notifyDataSetChanged();
+        LessonDao.getInstance().updateItemByID(lessonList.get(position));
     }
 
 

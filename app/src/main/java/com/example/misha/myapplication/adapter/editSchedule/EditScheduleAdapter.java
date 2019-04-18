@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.AudienceDao;
@@ -73,6 +72,34 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.onBindView(position);
 
+            holder.textViewOptions.setOnClickListener(view -> {
+
+                PopupMenu popup = new PopupMenu(view.getContext(), holder.textViewOptions);
+                popup.inflate(R.menu.menu_item_edit_lesson);
+                if (position==0) {
+                    popup.getMenu().removeItem(R.id.copyUp);
+                }
+                if (position==5) {
+                    popup.getMenu().removeItem(R.id.copyDown);
+                }
+                popup.setOnMenuItemClickListener(item -> {
+                    switch (item.getItemId()) {
+                        case R.id.copyUp:
+                            callback.onCopyUpClick(position);
+                            return true;
+                        case R.id.copyDown:
+                            callback.onCopyDownClick(position);
+                            return true;
+                        case R.id.cleearLesson:
+                            callback.onClearLessonClick(position);
+                            return true;
+                        default:
+                            return false;
+                    }
+                });
+                popup.show();
+            });
+
     }
 
     @Override
@@ -100,7 +127,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             educatorEdit = view.findViewById(R.id.button_educator);
             typeLessonEdit = view.findViewById(R.id.button_typelesson);
             textViewOptions = view.findViewById(R.id.textViewOptions);
-
             subjectEdit.setOnClickListener(this);
             audienceEdit.setOnClickListener(this);
             educatorEdit.setOnClickListener(this);
@@ -144,28 +170,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
 
         @Override
         public void onClick(View v) {
-
-            textViewOptions.setOnClickListener(view -> {
-
-
-                PopupMenu popup = new PopupMenu(view.getContext(), textViewOptions);
-                popup.inflate(R.menu.menu_item_edit_lesson);
-                popup.setOnMenuItemClickListener(item -> {
-                    switch (item.getItemId()) {
-                        case R.id.item1:
-                            callback.onMenuClick(getAdapterPosition());
-                            return true;
-                        case R.id.item2:
-                            return true;
-                        case R.id.item3:
-                            return true;
-                        default:
-                            return false;
-                    }
-                });
-                popup.show();
-
-            });
 
             if (v.getId() == R.id.button_audience) {
                 callback.onAudienceClick(getAdapterPosition(), audienceList);

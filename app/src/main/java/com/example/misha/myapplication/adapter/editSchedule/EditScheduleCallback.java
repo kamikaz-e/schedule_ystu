@@ -19,7 +19,11 @@ public interface EditScheduleCallback {
 
     void onTypelessonClick(int position, ArrayList<Typelesson> typelesson);
 
-    void onMenuClick(int position);
+    void onCopyUpClick(int position);
+
+    void onCopyDownClick(int position);
+
+    void onClearLessonClick(int position);
 
 
 }

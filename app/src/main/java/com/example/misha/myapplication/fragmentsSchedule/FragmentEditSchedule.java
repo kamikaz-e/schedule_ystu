@@ -51,8 +51,8 @@ public class FragmentEditSchedule extends Fragment {
             }
         });
 
-        PopupMenu menu = new PopupMenu(getContext(), viewPager);
-        menu.setOnMenuItemClickListener(FragmentEditSchedule.this::onMenuItemClicked);
+       /* PopupMenu menu = new PopupMenu(getContext(), viewPager);
+        menu.setOnMenuItemClickListener(FragmentEditSchedule.this::onMenuItemClicked);*/
 
         pagerAdapter = new TabDaysPagerAdapterEditSchedule(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
@@ -80,9 +80,9 @@ public class FragmentEditSchedule extends Fragment {
     }
 
 
-    private boolean onMenuItemClicked(MenuItem menuItem) {
+    /*private boolean onMenuItemClicked(MenuItem menuItem) {
         return  false;
-    }
+    }*/
 
 
 
