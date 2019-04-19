@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -17,6 +18,7 @@ import com.example.misha.myapplication.FragmentTwo;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
+import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysAdapterEditSchedule;
 import com.example.misha.myapplication.database.DatabaseHelper;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.dao.LessonDao;
@@ -36,6 +38,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,7 +49,7 @@ public class MainActivity extends BaseActivity
     long differentBetweenDate = 0;
     long selectDate = 0;
     long curr_week = 0;
-
+    TabDaysAdapterEditSchedule adapterTabDays;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -67,11 +70,14 @@ public class MainActivity extends BaseActivity
 
         Calendar mCalendar = Calendar.getInstance();
         mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
+        mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
+        mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         ArrayList<String> allDays = new ArrayList<>();
         SimpleDateFormat mFormat = new SimpleDateFormat("dd.MM");
         for (int week = 0; week < 17; week++) {
             for (int day = 0; day < 7; day++) {
                 String startWeek = mFormat.format(mCalendar.getTime());
+
                 mCalendar.add(Calendar.WEEK_OF_YEAR, 1);
                 mCalendar.add(Calendar.DAY_OF_YEAR, -1);
                 allDays.add(startWeek + " - " + mFormat.format(mCalendar.getTime()));
@@ -83,7 +89,7 @@ public class MainActivity extends BaseActivity
         CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(this,
                 allDays);
 
-
+        ViewPager vp = findViewById(R.id.viewpager);
         spinner.setAdapter(customSpinnerAdapter);
         calculateDate();
 
@@ -118,12 +124,14 @@ public class MainActivity extends BaseActivity
                 sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
                 buttonToolbar.setBackgroundResource(R.drawable.ic_ok);
 
+
             } else {
                 replaceFragment(new FragmentScheduleByDays());
                 Intent intent = new Intent();
                 intent.putExtra(Constants.SELECTED_WEEK, Preferences.getInstance().getSelectedWeekEditSchedule());
                 sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
                 buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
+
             }
         });
 

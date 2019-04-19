@@ -23,48 +23,5 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rv_tab" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="55sp"
-                    android:layout_gravity="bottom|end"
-                    android:visibility="invisible"
-                    android:layout_alignBottom="@+id/fab1"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="25dp"
-                    app:elevation="7sp"
-                    app:backgroundTint="#707070"
-                    app:pressedTranslationZ="12dp"
-                    android:src="@drawable/ic_home" />
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="65dp"
-                    android:layout_gravity="bottom|end"
-                    android:visibility="invisible"
-                    android:layout_alignBottom="@+id/fab"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="25dp"
-                    app:elevation="7sp"
-                    app:backgroundTint="#707070"
-                    app:pressedTranslationZ="12dp"
-                    android:src="@drawable/ic_home" />
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    app:elevation="7sp"
-                    android:layout_alignBottom="@+id/viewpager"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="25dp"
-                    app:backgroundTint="#707070"
-                    app:pressedTranslationZ="12dp"
-                    android:src="@drawable/ic_start_settings_ok"/>
-
         </RelativeLayout>
 </FrameLayout>

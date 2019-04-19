@@ -26,6 +26,7 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
     Integer getCurrentWeek;
     ArrayList<String> dayYear = new ArrayList<>();
     List<String> arrayDayWeeks;
+
     public TabDaysAdapter(SimpleItemClickListener simpleItemClickListener) {
         this.callback = simpleItemClickListener;
     }
@@ -36,14 +37,16 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_tab_day, parent, false);
 
-        arrayDayWeeks=  Arrays.asList(view.getResources().getStringArray(R.array.dayWeek));
+        arrayDayWeeks = Arrays.asList(view.getResources().getStringArray(R.array.dayWeek));
 
         Calendar mCalendar = Calendar.getInstance();
         mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
+        mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
+        mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         getCurrentWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
         SimpleDateFormat mFormatDay = new SimpleDateFormat("dd");
         mCalendar.add(Calendar.WEEK_OF_YEAR, getCurrentWeek);
-        for(int day = 0; day < 6; day++){
+        for (int day = 0; day < 6; day++) {
             dayYear.add(mFormatDay.format(mCalendar.getTime()));
             mCalendar.add(Calendar.DAY_OF_YEAR, 1);
         }

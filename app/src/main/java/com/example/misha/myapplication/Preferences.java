@@ -14,6 +14,7 @@ public final class Preferences {
     private static final String PREF_KEY_FIRST_OPEN_HINT = "PREF_KEY_FIRST_OPEN_HINT";
     private static final String PREF_KEY_SEMESTER_START = "PREF_KEY_SEMESTER_START";
     private static final String PREF_KEY_SELECT_WEEK = "PREF_KEY_SELECT_WEEK";
+    private static final String PREF_KEY_SELECT_TAB_DAYS = "PREF_KEY_SELECT_TAB_DAYS";
 
     public static Preferences getInstance() {
         if (instance != null) return instance;
@@ -52,4 +53,12 @@ public final class Preferences {
     }
 
 
-}
+    public void setSelectedPositionTabDays(int position) {
+        mPrefs.edit().putInt(PREF_KEY_SELECT_TAB_DAYS, position).apply();
+    }
+
+    public int getSelectedPositionTabDays() {
+        return mPrefs.getInt(PREF_KEY_SELECT_TAB_DAYS, 0);
+    }
+    }
+

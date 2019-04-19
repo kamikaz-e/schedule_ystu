@@ -40,6 +40,8 @@ public class TabDaysAdapterEditSchedule extends RecyclerView.Adapter<TabDaysAdap
 
         Calendar mCalendar = Calendar.getInstance();
         mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
+        mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
+        mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         getCurrentWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
         SimpleDateFormat mFormatDay = new SimpleDateFormat("dd");
         mCalendar.add(Calendar.WEEK_OF_YEAR, getCurrentWeek);

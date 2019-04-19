@@ -28,26 +28,22 @@ import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import static com.example.misha.myapplication.activity.MainActivity.WEEK_CODE;
 
-public class FragmentScheduleByDays extends Fragment implements View.OnClickListener {
+public class FragmentScheduleByDays extends Fragment{
 
     TabDaysPagerAdapter pagerAdapter;
     TabDaysAdapter adapterTabDays;
     RecyclerView dayTabs;
     private ViewPager viewPager;
-    private Boolean isFabOpen = false;
-    private FloatingActionButton fab, fab1, fab2;
-    private Animation fab_open, fab_close, rotate_forward, rotate_backward;
     private int selectedWeek;
-    private List<Lesson> lessonListWeek = new ArrayList<>();
-    private List<Lesson> lessonListWeekCurrent = new ArrayList<>();
-    Integer currentWeek=0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapterTabDays = new TabDaysAdapter((position, view) -> {
             viewPager.setCurrentItem(position);
+
         });
+
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +55,7 @@ public class FragmentScheduleByDays extends Fragment implements View.OnClickList
             @Override
             public void onPageSelected(int position) {
                 adapterTabDays.setSelection(position);
+                Preferences.getInstance().setSelectedPositionTabDays(position);
             }
         });
         pagerAdapter = new TabDaysPagerAdapter(getChildFragmentManager());
@@ -67,46 +64,10 @@ public class FragmentScheduleByDays extends Fragment implements View.OnClickList
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
-
-
-        fab = view.findViewById(R.id.fab);
-        fab1 = view.findViewById(R.id.fab1);
-        fab2 = view.findViewById(R.id.fab2);
-        fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
-        rotate_forward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
-        rotate_backward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
-        fab.setOnClickListener(this);
-        fab1.setOnClickListener(this);
-        fab2.setOnClickListener(this);
-
-
         return view;
     }
 
-    public void animateFAB() {
 
-        if (isFabOpen) {
-
-            fab.startAnimation(rotate_backward);
-            fab1.startAnimation(fab_close);
-            fab2.startAnimation(fab_close);
-            fab1.setClickable(false);
-            fab2.setClickable(false);
-            isFabOpen = false;
-
-
-        } else {
-
-            fab.startAnimation(rotate_forward);
-            fab1.startAnimation(fab_open);
-            fab2.startAnimation(fab_open);
-            fab1.setClickable(true);
-            fab2.setClickable(true);
-            isFabOpen = true;
-
-        }
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -115,44 +76,11 @@ public class FragmentScheduleByDays extends Fragment implements View.OnClickList
             pagerAdapter.setWeek(selectedWeek);
             adapterTabDays = new TabDaysAdapter((position, view) ->
                     viewPager.setCurrentItem(position));
+            adapterTabDays.setSelection(viewPager.getCurrentItem());
             dayTabs.setAdapter(adapterTabDays);
+
         }
     }
 
-
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id) {
-            case R.id.fab:
-                animateFAB();
-                break;
-            case R.id.fab1:
-                currentWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
-                for (int idWeek = 0; idWeek < 17; idWeek+=2) {
-                lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
-                lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
-
-                for (int idRowWeek = 0; idRowWeek < 36; idRowWeek++) {
-                    lessonListWeek.get(idRowWeek).setData(lessonListWeekCurrent.get(idRowWeek).getSubject(), lessonListWeekCurrent.get(idRowWeek).getAudience(),
-                            lessonListWeekCurrent.get(idRowWeek).getEducator(), lessonListWeekCurrent.get(idRowWeek).getTypeLesson());
-                    LessonDao.getInstance().updateItemByID(lessonListWeek.get(idRowWeek));
-                }
-            }
-                break;
-            case R.id.fab2:
-                for (int idWeek = 1; idWeek < 17; idWeek+=2) {
-                    lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
-                    lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
-
-                    for (int idRowWeek = 0; idRowWeek < 36; idRowWeek++) {
-                        lessonListWeek.get(idRowWeek).setData(lessonListWeekCurrent.get(idRowWeek).getSubject(), lessonListWeekCurrent.get(idRowWeek).getAudience(),
-                                lessonListWeekCurrent.get(idRowWeek).getEducator(), lessonListWeekCurrent.get(idRowWeek).getTypeLesson());
-                        LessonDao.getInstance().updateItemByID(lessonListWeek.get(idRowWeek));
-                    }
-                }
-                break;
-        }
-    }
 
 }
