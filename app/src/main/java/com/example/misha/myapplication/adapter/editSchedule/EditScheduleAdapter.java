@@ -90,7 +90,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
                         case R.id.copyDown:
                             callback.onCopyDownClick(position);
                             return true;
-                        case R.id.cleearLesson:
+                        case R.id.clearLesson:
                             callback.onClearLessonClick(position);
                             return true;
                         default:

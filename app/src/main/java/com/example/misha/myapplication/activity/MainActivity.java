@@ -38,7 +38,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,7 +48,6 @@ public class MainActivity extends BaseActivity
     long differentBetweenDate = 0;
     long selectDate = 0;
     long curr_week = 0;
-    TabDaysAdapterEditSchedule adapterTabDays;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -88,8 +86,6 @@ public class MainActivity extends BaseActivity
 
         CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(this,
                 allDays);
-
-        ViewPager vp = findViewById(R.id.viewpager);
         spinner.setAdapter(customSpinnerAdapter);
         calculateDate();
 

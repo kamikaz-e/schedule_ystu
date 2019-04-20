@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
@@ -38,6 +41,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -82,6 +86,9 @@ public class Settings extends Fragment {
     RelativeLayout layout_pick_week;
     RelativeLayout layout_import;
     RelativeLayout layout_export;
+    long differentBetweenDate = 0;
+    long selectDate = 0;
+    long curr_week = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -129,6 +136,33 @@ public class Settings extends Fragment {
             selectedDate.set(Calendar.MONTH, month);
             selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             Preferences.getInstance().setSemesterStart(selectedDate.getTimeInMillis());
+            Spinner spinner = getActivity().findViewById(R.id.spinner);
+
+
+            Calendar mCalendar = Calendar.getInstance();
+            mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
+            mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
+            mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+            ArrayList<String> allDays = new ArrayList<>();
+            SimpleDateFormat mFormat = new SimpleDateFormat("dd.MM");
+            for (int week = 0; week < 17; week++) {
+                for (int day = 0; day < 7; day++) {
+                    String startWeek = mFormat.format(mCalendar.getTime());
+
+                    mCalendar.add(Calendar.WEEK_OF_YEAR, 1);
+                    mCalendar.add(Calendar.DAY_OF_YEAR, -1);
+                    allDays.add(startWeek + " - " + mFormat.format(mCalendar.getTime()));
+                    mCalendar.add(Calendar.DAY_OF_YEAR, 1);
+                    break;
+                }
+            }
+
+            CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(getActivity(),
+                    allDays);
+            spinner.setAdapter(customSpinnerAdapter);
+            calculateDate();
+            spinner.setSelection((int) curr_week);
+
         },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -158,6 +192,13 @@ public class Settings extends Fragment {
         }).setNegativeButton("Отмена", (dialog, id) -> {
         });
         return builder.create();
+    }
+
+    private void calculateDate() {
+        Calendar calendar = Calendar.getInstance();
+        selectDate = Preferences.getInstance().getSemestStart();
+        differentBetweenDate = calendar.getTimeInMillis() - selectDate;
+        curr_week = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
     }
 
     void load_db(final String table, final String url) {

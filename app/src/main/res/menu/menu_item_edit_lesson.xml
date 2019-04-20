@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <group android:id="@+id/colours_menu" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/colours_menu">
         <item android:id="@+id/copyUp"
-            android:title="Скопировать в предыдущее" />
+            android:title="Скопировать в предыдущее занятие" />
         <item android:id="@+id/copyDown"
-            android:title="Скопировать в следующее" />
-        <item android:id="@+id/cleearLesson"
+            android:title="Скопировать в следующее занятие" />
+        <item android:id="@+id/clearLesson"
             android:title="Очистить занятие" />
     </group>
 </menu>
