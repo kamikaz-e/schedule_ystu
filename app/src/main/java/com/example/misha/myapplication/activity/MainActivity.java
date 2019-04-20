@@ -131,6 +131,7 @@ public class MainActivity extends BaseActivity
                 intent.putExtra(Constants.SELECTED_WEEK, Preferences.getInstance().getSelectedWeekEditSchedule());
                 sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
                 buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
+                Preferences.getInstance().setSelectedPositionTabDays(0);
 
             }
         });

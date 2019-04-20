@@ -38,7 +38,6 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
     TabDaysAdapterEditSchedule adapterTabDays;
     RecyclerView dayTabs;
     private ViewPager viewPager;
-    private Boolean isFabOpen = false;
     private FloatingActionButton fab, fab1, fab2;
     private Animation fab_open, fab_close, rotate_forward, rotate_backward;
     private int selectedWeek;
@@ -92,8 +91,10 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
         fab1.setOnClickListener(this);
         fab2.setOnClickListener(this);
 
+
         return view;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -110,14 +111,14 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
 
     public void animateFAB() {
 
-        if (isFabOpen) {
+        if (Preferences.getInstance().getFabOpen()) {
 
             fab.startAnimation(rotate_backward);
             fab1.startAnimation(fab_close);
             fab2.startAnimation(fab_close);
             fab1.setClickable(false);
             fab2.setClickable(false);
-            isFabOpen = false;
+            Preferences.getInstance().setFabOpen(false);
 
 
         } else {
@@ -127,7 +128,7 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
             fab2.startAnimation(fab_open);
             fab1.setClickable(true);
             fab2.setClickable(true);
-            isFabOpen = true;
+            Preferences.getInstance().setFabOpen(true);
 
         }
     }

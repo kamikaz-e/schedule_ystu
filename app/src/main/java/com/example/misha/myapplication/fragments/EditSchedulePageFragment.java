@@ -1,19 +1,18 @@
 package com.example.misha.myapplication.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.example.misha.myapplication.Constants;
+import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.editSchedule.EditScheduleAdapter;
 import com.example.misha.myapplication.adapter.editSchedule.EditScheduleCallback;
-import com.example.misha.myapplication.database.AbsDao;
-import com.example.misha.myapplication.database.AppContentProvider;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.LessonDao;
@@ -28,6 +27,7 @@ import com.example.misha.myapplication.dialog.AudienceList;
 import com.example.misha.myapplication.dialog.EducatorList;
 import com.example.misha.myapplication.dialog.SubjectList;
 import com.example.misha.myapplication.dialog.TypelessonList;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,8 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     ArrayList<Audience> audienceList = new ArrayList<>();
     ArrayList<Educator> educatorList = new ArrayList<>();
     ArrayList<Typelesson> typelessonList = new ArrayList<>();
-
+    FloatingActionButton fab, fab1, fab2;
+    private Animation fab_open, fab_close, rotate_forward, rotate_backward;
     private int positionWeek;
     private int day;
 
@@ -71,7 +72,39 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
         rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
+        fab = getActivity().findViewById(R.id.fab);
+        fab1 = getActivity().findViewById(R.id.fab1);
+        fab2 = getActivity().findViewById(R.id.fab2);
+        fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
+        rotate_forward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
         rvLessons.setAdapter(rvadapter);
+
+        rvLessons.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && fab.getVisibility() == View.VISIBLE) {
+                    if (Preferences.getInstance().getFabOpen()){
+                    fab.hide();
+                    fab.setClickable(false);
+                    fab1.startAnimation(fab_close);
+                    fab2.startAnimation(fab_close);
+                    fab1.setClickable(false);
+                    fab2.setClickable(false);
+                    Preferences.getInstance().setFabOpen(false);}
+                    else {
+                        fab.hide();
+                        fab.setClickable(false);
+                    }
+                } else if (dy < 0 && fab.getVisibility() != View.VISIBLE) {
+                        fab.show();
+                        fab.setClickable(true);
+                }
+            }
+        });
+
         return fragmentView;
     }
 
@@ -127,24 +160,24 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
 
     @Override
     public void onCopyUpClick(int position) {
-        lessonList.get(position-1).setSubject(lessonList.get(position).getSubject());
-        lessonList.get(position-1).setAudience(lessonList.get(position).getAudience());
-        lessonList.get(position-1).setTypeLesson(lessonList.get(position).getTypeLesson());
-        lessonList.get(position-1).setEducator(lessonList.get(position).getEducator());
+        lessonList.get(position - 1).setSubject(lessonList.get(position).getSubject());
+        lessonList.get(position - 1).setAudience(lessonList.get(position).getAudience());
+        lessonList.get(position - 1).setTypeLesson(lessonList.get(position).getTypeLesson());
+        lessonList.get(position - 1).setEducator(lessonList.get(position).getEducator());
         rvadapter.setLessonList(lessonList);
         rvadapter.notifyDataSetChanged();
-        LessonDao.getInstance().updateItemByID(lessonList.get(position-1));
+        LessonDao.getInstance().updateItemByID(lessonList.get(position - 1));
     }
 
     @Override
     public void onCopyDownClick(int position) {
-        lessonList.get(position+1).setSubject(lessonList.get(position).getSubject());
-        lessonList.get(position+1).setAudience(lessonList.get(position).getAudience());
-        lessonList.get(position+1).setTypeLesson(lessonList.get(position).getTypeLesson());
-        lessonList.get(position+1).setEducator(lessonList.get(position).getEducator());
+        lessonList.get(position + 1).setSubject(lessonList.get(position).getSubject());
+        lessonList.get(position + 1).setAudience(lessonList.get(position).getAudience());
+        lessonList.get(position + 1).setTypeLesson(lessonList.get(position).getTypeLesson());
+        lessonList.get(position + 1).setEducator(lessonList.get(position).getEducator());
         rvadapter.setLessonList(lessonList);
         rvadapter.notifyDataSetChanged();
-        LessonDao.getInstance().updateItemByID(lessonList.get(position+1));
+        LessonDao.getInstance().updateItemByID(lessonList.get(position + 1));
     }
 
     @Override

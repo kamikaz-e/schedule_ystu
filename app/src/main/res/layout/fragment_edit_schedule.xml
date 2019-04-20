@@ -48,6 +48,7 @@
                     android:layout_alignBottom="@+id/fab"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="25dp"
+                    app:layout_anchorGravity="bottom|end"
                     app:elevation="7sp"
                     app:backgroundTint="#707070"
                     app:pressedTranslationZ="12dp"
@@ -62,6 +63,10 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="25dp"
+                    android:scaleType="center"
+                    app:layout_behavior="com.dev2qa.example.material_design.floatingactionbutton.FloatingActionButtonScrollBehavior"
+                    app:layout_anchor="@id/rv_tab"
+                    app:layout_anchorGravity="bottom|right|end"
                     app:backgroundTint="#707070"
                     app:pressedTranslationZ="12dp"
                     android:src="@drawable/ic_start_settings_ok"/>

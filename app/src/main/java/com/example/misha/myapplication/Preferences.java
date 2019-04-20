@@ -15,6 +15,7 @@ public final class Preferences {
     private static final String PREF_KEY_SEMESTER_START = "PREF_KEY_SEMESTER_START";
     private static final String PREF_KEY_SELECT_WEEK = "PREF_KEY_SELECT_WEEK";
     private static final String PREF_KEY_SELECT_TAB_DAYS = "PREF_KEY_SELECT_TAB_DAYS";
+    private static final String PREF_KEY_FAB_OPEN = "PREF_KEY_FAB_OPEN";
 
     public static Preferences getInstance() {
         if (instance != null) return instance;
@@ -60,5 +61,13 @@ public final class Preferences {
     public int getSelectedPositionTabDays() {
         return mPrefs.getInt(PREF_KEY_SELECT_TAB_DAYS, 0);
     }
+
+
+    public void setFabOpen(boolean state) {
+        mPrefs.edit().putBoolean(PREF_KEY_FAB_OPEN, state).apply();
     }
 
+    public boolean getFabOpen() {
+        return mPrefs.getBoolean(PREF_KEY_FAB_OPEN, true);
+    }
+}
