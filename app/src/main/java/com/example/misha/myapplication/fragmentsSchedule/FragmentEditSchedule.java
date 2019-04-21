@@ -2,12 +2,9 @@ package com.example.misha.myapplication.fragmentsSchedule;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -43,7 +40,7 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
     private int selectedWeek;
     private List<Lesson> lessonListWeek = new ArrayList<>();
     private List<Lesson> lessonListWeekCurrent = new ArrayList<>();
-    Integer currentWeek=0;
+    Integer currentWeek = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,9 +55,7 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.fragment_edit_schedule, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         viewPager = view.findViewById(R.id.viewpager);
-        int selectedDayTab= Preferences.getInstance().getSelectedPositionTabDays();
-
-
+        int selectedDayTab = Preferences.getInstance().getSelectedPositionTabDays();
 
 
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
@@ -155,7 +150,7 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
             currentWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
-            for (int idWeek = 0; idWeek < 17; idWeek+=2) {
+            for (int idWeek = 0; idWeek < 17; idWeek += 2) {
                 lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
                 lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
 
@@ -173,7 +168,7 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
     public Dialog onCreateDialogCopyEvenWeek() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
-            for (int idWeek = 1; idWeek < 17; idWeek+=2) {
+            for (int idWeek = 1; idWeek < 17; idWeek += 2) {
                 lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
                 lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
 

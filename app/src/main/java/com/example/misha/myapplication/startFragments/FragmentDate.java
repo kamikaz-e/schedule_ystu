@@ -41,7 +41,7 @@ public class FragmentDate extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_date, container, false);
-        layout_pich_week = view.findViewById(R.id.oneitem);
+        layout_pich_week = view.findViewById(R.id.currentDate);
 
         new MaterialTapTargetPrompt.Builder(getActivity())
                 .setTarget(layout_pich_week)

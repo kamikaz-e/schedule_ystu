@@ -39,7 +39,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_LESSONS = "CREATE TABLE lessons " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "week INTEGER, day INTEGER, id_subject INTEGER, id_audience INTEGER, id_educator INTEGER, id_typelesson INTEGER, id_time_lesson INTEGER," +
+            "week INTEGER, day INTEGER, id_subject INTEGER," +
+            " id_audience INTEGER, id_educator INTEGER, " +
+            "id_typelesson INTEGER, id_time_lesson INTEGER," +
             "FOREIGN KEY (id_subject) REFERENCES subjects (id), " +
             "FOREIGN KEY (id_audience) REFERENCES audiences (id), " +
             "FOREIGN KEY (id_educator) REFERENCES educators (id), " +

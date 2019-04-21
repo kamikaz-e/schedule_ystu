@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -19,6 +18,8 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.misha.myapplication.Preferences;
@@ -29,13 +30,17 @@ import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.LessonDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;
+import com.example.misha.myapplication.database.dao.TypelessonDao;
 import com.example.misha.myapplication.database.entity.Audience;
 import com.example.misha.myapplication.database.entity.Calls;
 import com.example.misha.myapplication.database.entity.Educator;
 import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
+import com.example.misha.myapplication.database.entity.Typelesson;
 import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
+import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
@@ -45,6 +50,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,34 +64,36 @@ public class Settings extends Fragment {
     private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
     private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
     private static final String educators_import = "http://schedu1e.h1n.ru/educators.php";
-    private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallsSchedule.php";
+    private static final String call_schedule = "http://schedu1e.h1n.ru/call_schedule.php";
     private static final String date = "http://schedu1e.h1n.ru/date_start.php";
     private static final String export = "http://schedu1e.h1n.ru/export.php";
-    final String sch = "schedule";
-    final String sub = "subject";
-    final String aud = "audience";
-    final String edu = "educator";
+    final String sch = "lessons";
+    final String sub = "subjects";
+    final String aud = "audiences";
+    final String edu = "educators";
+    final String typ = "typelessons";
     final String cal = "calls";
-    final String dat = "date_start";
-
+    final String dat = "selectedDate";
+    ArrayList<Audience> audience_list = new ArrayList<>();
 
     String database_name = "";
 
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
-    String json_schedule = "";
-    String json_subjects = "";
-    String json_audiences = "";
-    String json_educators = "";
-    String json_calls = "";
-    String json_date = "";
+    String json_lessons = "lessons";
+    String json_subjects = "subjects";
+    String json_audiences = "audiences";
+    String json_educators = "educators";
+    String json_typelessons = "typelessons";
+    String json_calls = "calls";
+  //  String json_date = "";
     String name_db_string = "database";
 
     public ArrayAdapter<String> adapter;
-    RelativeLayout layout_pick_week;
-    RelativeLayout layout_import;
-    RelativeLayout layout_export;
+    RelativeLayout layoutPickWeek;
+    RelativeLayout layoutImport;
+    RelativeLayout layoutExport;
     long differentBetweenDate = 0;
     long selectDate = 0;
     long curr_week = 0;
@@ -113,17 +121,17 @@ public class Settings extends Fragment {
                     .commit();
         });
 
-        requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue = Volley.newRequestQueue(getActivity());
         progressDialog = new ProgressDialog(getContext());
 
-        layout_pick_week = view.findViewById(R.id.oneitem);
-        layout_import = view.findViewById(R.id.twoitem);
-        layout_export = view.findViewById(R.id.threeitem);
+        layoutPickWeek = view.findViewById(R.id.currentDate);
+        layoutImport = view.findViewById(R.id.importData);
+        layoutExport = view.findViewById(R.id.exportData);
 
 
-        layout_pick_week.setOnClickListener(v -> get_current_week());
-        layout_import.setOnClickListener(v -> onCreateDialogImport().show());
-        layout_export.setOnClickListener(v -> onCreateDialogExport().show());
+        layoutPickWeek.setOnClickListener(v -> get_current_week());
+        layoutImport.setOnClickListener(v -> onCreateDialogImport().show());
+        layoutExport.setOnClickListener(v -> onCreateDialogExport().show());
         return view;
     }
 
@@ -212,7 +220,6 @@ public class Settings extends Fragment {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             jsonString = jsonArray.getString(i);
 
-
                             if (table.equals(aud)) {
                                 ArrayList<Audience> audiences = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Audience>>() {
                                 }.getType());
@@ -283,21 +290,19 @@ public class Settings extends Fragment {
 
 
     void upload() {
-        ArrayList<Lesson> lessons = LessonDao.getInstance().getAllData();
-        json_schedule = new Gson().toJson(lessons);
 
         ArrayList<Subject> subjects = SubjectDao.getInstance().getAllData();
         json_subjects = new Gson().toJson(subjects);
-
-        ArrayList<Audience> audiences = AudienceDao.getInstance().getAllData();
-        json_audiences = new Gson().toJson(audiences);
-
+        ArrayList<Lesson> lessons = LessonDao.getInstance().getAllData();
+        json_lessons = new Gson().toJson(lessons);
+        audience_list =  AudienceDao.getInstance().getAllData();
+        json_audiences = new Gson().toJson(audience_list);
         ArrayList<Educator> educators = EducatorDao.getInstance().getAllData();
         json_educators = new Gson().toJson(educators);
-
+        ArrayList<Typelesson> typelessons = TypelessonDao.getInstance().getAllData();
+        json_typelessons = new Gson().toJson(typelessons);
         ArrayList<Calls> calls = CallDao.getInstance().getAllData();
         json_calls = new Gson().toJson(calls);
-
         progressDialog.setMessage("Пожалуйста подождите. Идет выгрузка данных на сервер");
         progressDialog.show();
 
@@ -305,23 +310,25 @@ public class Settings extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, export,
                 ServerResponse -> {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(), ServerResponse, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), ServerResponse, Toast.LENGTH_LONG).show();
                 },
                 volleyError -> {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(), volleyError.toString(), Toast.LENGTH_LONG).show();
-                }) {
+                    Toast.makeText(getActivity(), volleyError.toString(), Toast.LENGTH_LONG).show();
+                })
+        {
             @Override
             protected Map<String, String> getParams() {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("name_db", name_db_string);
-                params.put("schedule", json_schedule);
+                params.put("name_db", name_db_string );
+                params.put("lessons", json_lessons);
                 params.put("subjects", json_subjects);
                 params.put("audiences", json_audiences);
                 params.put("educators", json_educators);
-                params.put("call", json_calls);
-                params.put("selectedDate", json_date);
+                params.put("typelessons", json_typelessons);
+                params.put("calls", json_calls);
+               // params.put("selectedDate", json_date);
                 return params;
             }
         };

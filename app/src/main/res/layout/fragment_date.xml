@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/oneitem"
+        android:id="@+id/currentDate"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

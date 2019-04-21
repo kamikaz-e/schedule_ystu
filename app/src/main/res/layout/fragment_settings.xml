@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize" />
 
     <RelativeLayout
-        android:id="@+id/oneitem"
+        android:id="@+id/currentDate"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#383838"
@@ -63,7 +63,7 @@
         android:background="#FFFFFF" />
 
     <RelativeLayout
-        android:id="@+id/twoitem"
+        android:id="@+id/importData"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#383838"
@@ -109,7 +109,7 @@
         android:background="#FFFFFF" />
 
     <RelativeLayout
-        android:id="@+id/threeitem"
+        android:id="@+id/exportData"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#383838"
