@@ -18,6 +18,7 @@ import com.example.misha.myapplication.database.entity.Lesson;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +29,7 @@ import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import static com.example.misha.myapplication.activity.MainActivity.WEEK_CODE;
 
-public class FragmentScheduleByDays extends Fragment{
+public class FragmentScheduleByDays extends Fragment {
 
     TabDaysPagerAdapter pagerAdapter;
     TabDaysAdapter adapterTabDays;
@@ -64,10 +65,23 @@ public class FragmentScheduleByDays extends Fragment{
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
+        currentDay();
+
         return view;
     }
+       private void currentDay(){
+            Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_WEEK);
+            if (day!=calendar.SUNDAY) {
+                viewPager.setCurrentItem(day);
+                adapterTabDays.setSelection(day);
+            }
+            else {
+                viewPager.setCurrentItem(0);
+                adapterTabDays.setSelection(0);
+            }
 
-
+}
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

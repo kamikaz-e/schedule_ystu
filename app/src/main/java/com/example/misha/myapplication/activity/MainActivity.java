@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -18,7 +17,6 @@ import com.example.misha.myapplication.FragmentTwo;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
-import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysAdapterEditSchedule;
 import com.example.misha.myapplication.database.DatabaseHelper;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.dao.LessonDao;
@@ -47,7 +45,7 @@ public class MainActivity extends BaseActivity
     Spinner spinner;
     long differentBetweenDate = 0;
     long selectDate = 0;
-    long curr_week = 0;
+    long currWeek = 0;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -104,7 +102,7 @@ public class MainActivity extends BaseActivity
             }
 
         });
-        spinner.setSelection((int) curr_week);
+        spinner.setSelection((int) currWeek);
 
         Button buttonToolbar = findViewById(R.id.toolbar_but);
         buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
@@ -116,7 +114,7 @@ public class MainActivity extends BaseActivity
             if (f instanceof FragmentScheduleByDays) {
                 replaceFragment(new FragmentEditSchedule());
                 Intent intent = new Intent();
-                intent.putExtra(Constants.SELECTED_WEEK, (int) curr_week);
+                intent.putExtra(Constants.SELECTED_WEEK, (int) currWeek);
                 sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
                 buttonToolbar.setBackgroundResource(R.drawable.ic_ok);
 
@@ -151,7 +149,7 @@ public class MainActivity extends BaseActivity
         Calendar calendar = Calendar.getInstance();
         selectDate = Preferences.getInstance().getSemestStart();
         differentBetweenDate = calendar.getTimeInMillis() - selectDate;
-        curr_week = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
+        currWeek = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
     }
 
     @Override

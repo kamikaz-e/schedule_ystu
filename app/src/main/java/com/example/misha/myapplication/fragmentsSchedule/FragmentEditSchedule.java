@@ -58,7 +58,7 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.fragment_edit_schedule, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         viewPager = view.findViewById(R.id.viewpager);
-        int abc= Preferences.getInstance().getSelectedPositionTabDays();
+        int selectedDayTab= Preferences.getInstance().getSelectedPositionTabDays();
 
 
 
@@ -73,16 +73,16 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
 
         pagerAdapter = new TabDaysPagerAdapterEditSchedule(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
-        viewPager.setCurrentItem(abc);
-        adapterTabDays.setSelection(abc);
+        viewPager.setCurrentItem(selectedDayTab);
+        adapterTabDays.setSelection(selectedDayTab);
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
 
 
-        fab = view.findViewById(R.id.fab);
-        fab1 = view.findViewById(R.id.fab1);
-        fab2 = view.findViewById(R.id.fab2);
+        fab = view.findViewById(R.id.mainFab);
+        fab1 = view.findViewById(R.id.evenWeekFab);
+        fab2 = view.findViewById(R.id.unevenWeekFab);
         fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
@@ -138,14 +138,14 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.fab:
+            case R.id.mainFab:
                 animateFAB();
                 break;
-            case R.id.fab1:
-                onCreateDialogCopyUnevenWeek().show();
-                break;
-            case R.id.fab2:
+            case R.id.evenWeekFab:
                 onCreateDialogCopyEvenWeek().show();
+                break;
+            case R.id.unevenWeekFab:
+                onCreateDialogCopyUnevenWeek().show();
                 break;
         }
     }
