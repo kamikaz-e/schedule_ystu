@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.misha.myapplication.APIService;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.RetrofitClient;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.CallDao;
@@ -48,6 +52,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,6 +60,7 @@ import androidx.fragment.app.Fragment;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -99,6 +105,8 @@ public class Settings extends Fragment {
     long differentBetweenDate = 0;
     long selectDate = 0;
     long curr_week = 0;
+    private static Retrofit retrofit;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -213,66 +221,22 @@ public class Settings extends Fragment {
 
     void load_db(final String table, final String url) {
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                response -> {
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        String jsonString;
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            jsonString = jsonArray.getString(i);
-
-                            if (table.equals(aud)) {
-                                ArrayList<Audience> audiences = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Audience>>() {
-                                }.getType());
-                                AudienceDao.getInstance().insertAll(audiences);
-                            }
-                            if (table == edu) {
-                                ArrayList<Educator> educators = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Educator>>() {
-                                }.getType());
-                                EducatorDao.getInstance().insertAll(educators);
-                            }
-                            if (table == sub) {
-                                ArrayList<Subject> subjects = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Subject>>() {
-                                }.getType());
-                                SubjectDao.getInstance().insertAll(subjects);
-                            }
-                            if (table == sch) {
-                                ArrayList<Lesson> lessons = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Lesson>>() {
-                                }.getType());
-                                LessonDao.getInstance().insertAll(lessons);
-                            }
-                            if (table == cal) {
-                                ArrayList<Calls> calls = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Calls>>() {
-                                }.getType());
-                                CallDao.getInstance().insertAll(calls);
-                            }
-                                /*if (table == dat) {
-                                    ArrayList<Date> date = new Gson().fromJson(jsonString, new TypeToken<ArrayList<Date>>(){}.getType());
-                                    DateDao.getInstance().insertAll(date);
-
-                                    SharedPreferences fragment_settings = getSharedPreferences("week", 0);
-                                    SharedPreferences.Editor editor = fragment_settings.edit();
-                                    editor.putLong("current_week", Long.valueOf(date).longValue());
-                                    editor.commit();
-                                }*/
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                },
-                error -> error.printStackTrace()
-        ) {
-
+        Retrofit retrofit = RetrofitClient.getRetrofitClient();
+        APIService weatherAPIs = retrofit.create(APIService.class);
+        Call call = weatherAPIs.getSubjects(database_name);
+        call.enqueue(new Callback() {
             @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("name_db", database_name);
-                return params;
+            public void onResponse(Call call, Response response) {
+
+                if (response.body() != null) {
+                  //  Log.d("response " + response.body());
+                }
             }
-        };
-        Volley.newRequestQueue(getContext()).add(postRequest);
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
     }
 
 
