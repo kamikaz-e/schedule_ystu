@@ -14,14 +14,12 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.misha.myapplication.APIService;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
@@ -38,7 +36,6 @@ import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
 import com.example.misha.myapplication.database.entity.Typelesson;
 import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
-import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -46,15 +43,20 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class Settings extends Fragment {
@@ -77,7 +79,7 @@ public class Settings extends Fragment {
     ArrayList<Audience> audience_list = new ArrayList<>();
 
     String database_name = "";
-
+    private APIService mAPIService;
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
@@ -87,7 +89,7 @@ public class Settings extends Fragment {
     String json_educators = "educators";
     String json_typelessons = "typelessons";
     String json_calls = "calls";
-  //  String json_date = "";
+    String json_date = "";
     String name_db_string = "database";
 
     public ArrayAdapter<String> adapter;
@@ -289,51 +291,50 @@ public class Settings extends Fragment {
     }
 
 
+
     void upload() {
-
         ArrayList<Subject> subjects = SubjectDao.getInstance().getAllData();
-        json_subjects = new Gson().toJson(subjects);
-        ArrayList<Lesson> lessons = LessonDao.getInstance().getAllData();
-        json_lessons = new Gson().toJson(lessons);
-        audience_list =  AudienceDao.getInstance().getAllData();
-        json_audiences = new Gson().toJson(audience_list);
+        ArrayList<Audience> audiences = AudienceDao.getInstance().getAllData();
         ArrayList<Educator> educators = EducatorDao.getInstance().getAllData();
-        json_educators = new Gson().toJson(educators);
-        ArrayList<Typelesson> typelessons = TypelessonDao.getInstance().getAllData();
-        json_typelessons = new Gson().toJson(typelessons);
+        ArrayList<Typelesson>  typelessons = TypelessonDao.getInstance().getAllData();
         ArrayList<Calls> calls = CallDao.getInstance().getAllData();
+        ArrayList<Lesson> lessons = LessonDao.getInstance().getAllData();
+        json_subjects = new Gson().toJson(subjects);
+        json_audiences = new Gson().toJson(audiences);
+        json_educators = new Gson().toJson(educators);
+        json_typelessons = new Gson().toJson(typelessons);
         json_calls = new Gson().toJson(calls);
-        progressDialog.setMessage("Пожалуйста подождите. Идет выгрузка данных на сервер");
-        progressDialog.show();
+        json_lessons = new Gson().toJson(lessons);
+        json_date = Long.toString(Preferences.getInstance().getSemestStart());
+                OkHttpClient client = new OkHttpClient();
+                Gson gson = new GsonBuilder()
+                        .setLenient()
+                        .create();
+
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("http://schedu1e.h1n.ru")
+                        .client(client)
+                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .build();
+                APIService service = retrofit.create(APIService.class);
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, export,
-                ServerResponse -> {
-                    progressDialog.dismiss();
-                    Toast.makeText(getActivity(), ServerResponse, Toast.LENGTH_LONG).show();
-                },
-                volleyError -> {
-                    progressDialog.dismiss();
-                    Toast.makeText(getActivity(), volleyError.toString(), Toast.LENGTH_LONG).show();
-                })
-        {
-            @Override
-            protected Map<String, String> getParams() {
+                Call<Throwable> call = service.insertData(name_db_string,json_subjects,json_audiences, json_educators,json_typelessons, json_calls, json_lessons, json_date);
+                call.enqueue(new Callback<Throwable>() {
 
-                Map<String, String> params = new HashMap<>();
-                params.put("name_db", name_db_string );
-                params.put("lessons", json_lessons);
-                params.put("subjects", json_subjects);
-                params.put("audiences", json_audiences);
-                params.put("educators", json_educators);
-                params.put("typelessons", json_typelessons);
-                params.put("calls", json_calls);
-               // params.put("selectedDate", json_date);
-                return params;
-            }
-        };
-        Volley.newRequestQueue(getContext()).add(stringRequest);
+                    @Override
+                    public void onResponse(Call<Throwable> call, retrofit2.Response<Throwable> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Throwable> call, Throwable t) {
+
+                    }
+                });
+
 
     }
+
 
 }
