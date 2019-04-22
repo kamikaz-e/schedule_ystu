@@ -37,7 +37,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         this.callback = editScheduleCallback;
     }
 
-    String abc;
 
     public void setLessonList(List<Lesson> lessonList) {
         this.lessonList = lessonList;
@@ -122,10 +121,10 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             super(view);
             number = view.findViewById(R.id.number);
             timeEdit = view.findViewById(R.id.time);
-            subjectEdit = view.findViewById(R.id.button_subject);
-            audienceEdit = view.findViewById(R.id.button_audience);
-            educatorEdit = view.findViewById(R.id.button_educator);
-            typeLessonEdit = view.findViewById(R.id.button_typelesson);
+            subjectEdit = view.findViewById(R.id.buttonSubject);
+            audienceEdit = view.findViewById(R.id.buttonAudience);
+            educatorEdit = view.findViewById(R.id.buttonEducator);
+            typeLessonEdit = view.findViewById(R.id.buttonTypelesson);
             textViewOptions = view.findViewById(R.id.textViewOptions);
             subjectEdit.setOnClickListener(this);
             audienceEdit.setOnClickListener(this);
@@ -171,16 +170,16 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         @Override
         public void onClick(View v) {
 
-            if (v.getId() == R.id.button_audience) {
+            if (v.getId() == R.id.buttonAudience) {
                 callback.onAudienceClick(getAdapterPosition(), audienceList);
             }
-            if (v.getId() == R.id.button_educator) {
+            if (v.getId() == R.id.buttonEducator) {
                 callback.onEducatorClick(getAdapterPosition(), educatorList);
             }
-            if (v.getId() == R.id.button_subject) {
+            if (v.getId() == R.id.buttonSubject) {
                 callback.onSubjectClick(getAdapterPosition(), subjectList);
             }
-            if (v.getId() == R.id.button_typelesson) {
+            if (v.getId() == R.id.buttonTypelesson) {
                 callback.onTypelessonClick(getAdapterPosition(), typelessonList);
             }
         }

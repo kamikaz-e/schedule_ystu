@@ -5,21 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysAdapter;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysPagerAdapter;
-import com.example.misha.myapplication.database.dao.LessonDao;
-import com.example.misha.myapplication.database.entity.Lesson;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -69,19 +62,41 @@ public class FragmentScheduleByDays extends Fragment {
 
         return view;
     }
-       private void currentDay(){
-            Calendar calendar = Calendar.getInstance();
-            int day = calendar.get(Calendar.DAY_OF_WEEK);
-            if (day!=calendar.SUNDAY) {
-                viewPager.setCurrentItem(day);
-                adapterTabDays.setSelection(day);
-            }
-            else {
+
+    private void currentDay() {
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        switch (day) {
+            case 1:
                 viewPager.setCurrentItem(0);
                 adapterTabDays.setSelection(0);
-            }
-
-}
+                break;
+            case 2:
+                viewPager.setCurrentItem(0);
+                adapterTabDays.setSelection(0);
+                break;
+            case 3:
+                viewPager.setCurrentItem(1);
+                adapterTabDays.setSelection(1);
+                break;
+            case 4:
+                viewPager.setCurrentItem(2);
+                adapterTabDays.setSelection(2);
+                break;
+            case 5:
+                viewPager.setCurrentItem(3);
+                adapterTabDays.setSelection(3);
+                break;
+            case 6:
+                viewPager.setCurrentItem(4);
+                adapterTabDays.setSelection(4);
+                break;
+            case 7:
+                viewPager.setCurrentItem(5);
+                adapterTabDays.setSelection(5);
+                break;
+        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

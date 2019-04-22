@@ -3,11 +3,13 @@ package com.example.misha.myapplication.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -36,6 +38,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -180,32 +183,39 @@ public class MainActivity extends BaseActivity
 
     public void displayView(int viewId) {
 
+        Fragment fragment = null;
 
         switch (viewId) {
             case R.id.rasp_day:
-                replaceFragment(new FragmentScheduleByDays());
+                fragment = new FragmentScheduleByDays();
                 break;
             case R.id.rasp_list:
-                replaceFragment(new FragmentTwo());
+                fragment = new FragmentTwo();
                 break;
             case R.id.edit_schedule:
-                replaceFragment(new FragmentEditSchedule());
+                fragment = new FragmentEditSchedule();
                 break;
             case R.id.edit_data:
-                replaceFragment(new EditData());
+                fragment = new EditData();
                 break;
             case R.id.call_schedule:
-                replaceFragment(new CallsSchedule());
+                fragment = new CallsSchedule();
                 break;
             case R.id.settings:
-                replaceFragment(new Settings());
+                fragment = new Settings();
                 break;
             case R.id.nav_share:
                 onCreateDialog().show();
                 break;
-            default:
-                new FragmentScheduleByDays();
-                break;
+        }
+
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+            InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
+            if (getCurrentFocus() != null)
+                imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
 
 

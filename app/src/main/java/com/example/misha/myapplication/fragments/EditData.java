@@ -2,11 +2,14 @@ package com.example.misha.myapplication.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditDataViewPagerAdapter;
@@ -52,13 +55,16 @@ public class EditData extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
 
-
         buttonHome.setBackgroundResource(R.drawable.ic_home);
         buttonHome.setOnClickListener(v -> {
             FragmentScheduleByDays fragment = new FragmentScheduleByDays();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .commit();
+            InputMethodManager inputManager = (InputMethodManager) getContext().getSystemService(
+                    Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
         });
 
         clear_subjects = view.findViewById(R.id.buttonClear);

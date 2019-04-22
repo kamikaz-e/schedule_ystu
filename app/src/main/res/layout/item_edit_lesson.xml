@@ -7,7 +7,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_medium"
@@ -53,7 +53,7 @@
                 android:textAppearance="?android:textAppearanceLarge" />
 
                 <TextView
-                    android:id="@+id/button_subject"
+                    android:id="@+id/buttonSubject"
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:layout_alignTop="@+id/time"
@@ -70,7 +70,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/button_subject"
+                android:layout_alignTop="@+id/buttonSubject"
                 android:id="@+id/relLay"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
@@ -78,12 +78,12 @@
                 android:paddingBottom="2sp">
 
                 <TextView
-                    android:id="@+id/button_typelesson"
+                    android:id="@+id/buttonTypelesson"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/button_audience"
+                    android:layout_toStartOf="@+id/buttonAudience"
                     android:background="#0000"
                     android:gravity="center_vertical"
                     android:maxLines="1"
@@ -92,7 +92,7 @@
                     tools:text="Лабораторная работа" />
 
                 <TextView
-                    android:id="@+id/button_audience"
+                    android:id="@+id/buttonAudience"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:background="#0000"
@@ -107,7 +107,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/button_educator"
+                android:id="@+id/buttonEducator"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:background="#0000"
