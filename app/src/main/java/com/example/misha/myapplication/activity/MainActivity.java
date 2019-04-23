@@ -57,6 +57,27 @@ public class MainActivity extends BaseActivity
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawerLayout);
+        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                hideKeyboard();
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+                hideKeyboard();
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -107,29 +128,7 @@ public class MainActivity extends BaseActivity
 
         Button buttonToolbar = findViewById(R.id.toolbarButt);
         buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
-        buttonToolbar.setOnClickListener(v -> {
 
-
-            Fragment f = getSupportFragmentManager().findFragmentById(R.id.contentFrame);
-
-            if (f instanceof FragmentScheduleByDays) {
-                replaceFragment(new FragmentEditSchedule());
-                Intent intent = new Intent();
-                intent.putExtra(Constants.SELECTED_WEEK, (int) currWeek);
-                sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
-                buttonToolbar.setBackgroundResource(R.drawable.ic_ok);
-
-
-            } else {
-                replaceFragment(new FragmentScheduleByDays());
-                Intent intent = new Intent();
-                intent.putExtra(Constants.SELECTED_WEEK, Preferences.getInstance().getSelectedWeekEditSchedule());
-                sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
-                buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
-                Preferences.getInstance().setSelectedPositionTabDays(0);
-
-            }
-        });
 
         NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
@@ -143,6 +142,12 @@ public class MainActivity extends BaseActivity
             startActivity(intent);
             Preferences.getInstance().setHintsOpened();
         }
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
+        if (getCurrentFocus() != null)
+            imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
 
@@ -211,9 +216,7 @@ public class MainActivity extends BaseActivity
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.contentFrame, fragment);
             ft.commit();
-            InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
-            if (getCurrentFocus() != null)
-                imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            hideKeyboard();
         }
 
 

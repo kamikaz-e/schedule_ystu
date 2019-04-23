@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.fragmentsSchedule;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -9,10 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.activity.BaseFragment;
 import com.example.misha.myapplication.activity.MainActivity;
 import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysAdapterEditSchedule;
 import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysPagerAdapterEditSchedule;
@@ -29,7 +32,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-public class FragmentEditSchedule extends Fragment implements View.OnClickListener {
+import static com.example.misha.myapplication.activity.MainActivity.WEEK_CODE;
+
+public class FragmentEditSchedule extends BaseFragment implements View.OnClickListener {
 
     TabDaysPagerAdapterEditSchedule pagerAdapter;
     TabDaysAdapterEditSchedule adapterTabDays;
@@ -65,6 +70,15 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
             }
         });
 
+        Button buttonToolbar = getActivity().findViewById(R.id.toolbarButt);
+        buttonToolbar.setOnClickListener(v -> {
+                replaceFragment(new FragmentScheduleByDays(),true);
+                Intent intent = new Intent();
+                intent.putExtra(Constants.SELECTED_WEEK, Preferences.getInstance().getSelectedWeekEditSchedule());
+                sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
+                buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
+                Preferences.getInstance().setSelectedPositionTabDays(0);
+        });
 
         pagerAdapter = new TabDaysPagerAdapterEditSchedule(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
@@ -93,7 +107,7 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MainActivity.WEEK_CODE) {
+        if (requestCode == WEEK_CODE) {
             selectedWeek = data.getIntExtra(Constants.SELECTED_WEEK, 0);
             pagerAdapter.setWeek(selectedWeek);
 
