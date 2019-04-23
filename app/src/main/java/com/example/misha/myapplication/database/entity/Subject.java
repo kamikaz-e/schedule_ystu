@@ -4,12 +4,19 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 
 //Todo прочитать про сериализацию и Parcelable
 public class Subject implements Parcelable {
 
+    @Expose
+    @SerializedName("id")
     private  String id;
 
+    @Expose
+    @SerializedName("subject")
     private  String name;
 
     public Subject(String id, String name) {

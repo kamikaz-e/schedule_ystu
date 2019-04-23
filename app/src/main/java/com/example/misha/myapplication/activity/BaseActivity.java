@@ -58,9 +58,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         return activeFragments;
     }
 
-    public void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment, boolean toBackStack) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        if (toBackStack) {
+            fragmentTransaction.addToBackStack(Fragment.class.getSimpleName());
+        }
         fragmentTransaction.replace(R.id.contentFrame, fragment, fragment.getClass().getName())
                 .commitAllowingStateLoss();
+    }
+
+    public void replaceFragment(Fragment fragment) {
+        replaceFragment(fragment, false);
     }
 }

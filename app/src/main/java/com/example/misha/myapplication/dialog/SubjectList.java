@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.editScheduleListAdapters.ListSubjectsAdapter;
 import com.example.misha.myapplication.database.entity.Subject;
+import com.example.misha.myapplication.fragments.EditData;
 
 import java.util.ArrayList;
 
@@ -72,7 +73,10 @@ public class SubjectList extends DialogFragment {
 
         Button button_add = view.findViewById(R.id.buttonAdd);
         button_add.setOnClickListener(v -> {
-
+            EditData fragment = new EditData();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentFrame, fragment)
+                    .commit();
         });
         Button button_cancel = view.findViewById(R.id.buttonCancel);
         button_cancel.setOnClickListener(v -> dismiss());

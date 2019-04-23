@@ -17,10 +17,10 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.example.misha.myapplication.APIService;
+import com.example.misha.myapplication.network.APIService;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.RetrofitClient;
+import com.example.misha.myapplication.network.RetrofitClient;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.CallDao;
@@ -35,6 +35,8 @@ import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
 import com.example.misha.myapplication.database.entity.Typelesson;
 import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
+import com.example.misha.myapplication.network.request.InsertRequest;
+import com.example.misha.myapplication.network.request.ScheduleRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -74,7 +76,7 @@ public class Settings extends Fragment {
     final String dat = "selectedDate";
     ArrayList<Audience> audience_list = new ArrayList<>();
 
-    String database_name = "";
+    String database_name = "scheduleSubjects";
     private APIService mAPIService;
 
     RequestQueue requestQueue;
@@ -95,8 +97,7 @@ public class Settings extends Fragment {
     long differentBetweenDate = 0;
     long selectDate = 0;
     long curr_week = 0;
-    private static Retrofit retrofit;
-    private List<Subject> userList =null;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -185,7 +186,6 @@ public class Settings extends Fragment {
         builder.setView(view);
         final EditText name_db = view.findViewById(R.id.nameSchedule);
         builder.setCancelable(false).setPositiveButton("Импортировать", (dialog, id) -> {
-            database_name = name_db.getText().toString();
 
             SubjectDao.getInstance().deleteAll();
             AudienceDao.getInstance().deleteAll();
@@ -210,21 +210,14 @@ public class Settings extends Fragment {
     }
 
     void load_db(final String table, final String url) {
-
-        Retrofit retrofit = RetrofitClient.getRetrofitClient();
-        APIService weatherAPIs = retrofit.create(APIService.class);
-        Map<String, String> params = new HashMap<>();
-        params.put("name_db", database_name);
-        Call<List<Subject>> call  = weatherAPIs.getSubject(database_name);
-        call.enqueue(new Callback<List<Subject>>() {
+        RetrofitClient.getInstance().getRequestInterface().getSubjects(new ScheduleRequest(database_name)).enqueue(new Callback<ArrayList<Subject>>() {
             @Override
-            public void onResponse(Call<List<Subject>> call, Response<List<Subject>> response) {
-              userList = response.body();
-
+            public void onResponse(Call<ArrayList<Subject>> call, Response<ArrayList<Subject>> response) {
+                SubjectDao.getInstance().insertAll(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<Subject>> call, Throwable t)  {
+            public void onFailure(Call<ArrayList<Subject>> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -246,14 +239,14 @@ public class Settings extends Fragment {
     }
 
 
-
     void upload() {
         ArrayList<Subject> subjects = SubjectDao.getInstance().getAllData();
         ArrayList<Audience> audiences = AudienceDao.getInstance().getAllData();
         ArrayList<Educator> educators = EducatorDao.getInstance().getAllData();
-        ArrayList<Typelesson>  typelessons = TypelessonDao.getInstance().getAllData();
+        ArrayList<Typelesson> typelessons = TypelessonDao.getInstance().getAllData();
         ArrayList<Calls> calls = CallDao.getInstance().getAllData();
         ArrayList<Lesson> lessons = LessonDao.getInstance().getAllData();
+
         json_subjects = new Gson().toJson(subjects);
         json_audiences = new Gson().toJson(audiences);
         json_educators = new Gson().toJson(educators);
@@ -261,35 +254,25 @@ public class Settings extends Fragment {
         json_calls = new Gson().toJson(calls);
         json_lessons = new Gson().toJson(lessons);
         json_date = Long.toString(Preferences.getInstance().getSemestStart());
-                OkHttpClient client = new OkHttpClient();
-                Gson gson = new GsonBuilder()
-                        .setLenient()
-                        .create();
 
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://schedu1e.h1n.ru")
-                        .client(client)
-                        .addConverterFactory(GsonConverterFactory.create(gson))
-                        .build();
-                APIService service = retrofit.create(APIService.class);
+        InsertRequest request = new InsertRequest();
+        request.setAudiences(json_audiences);
+        request.setSubjects(json_subjects);
+        request.setEducators(json_educators);
+        request.setTypelessons(json_typelessons);
+        request.setCalls(json_calls);
+        request.setLessons(json_lessons);
+        request.setDate(json_date);
+        RetrofitClient.getInstance().getRequestInterface().insertData(request).enqueue(new Callback<Throwable>() {
+            @Override
+            public void onResponse(Call<Throwable> call, Response<Throwable> response) {
 
+            }
 
-                Call<Throwable> call = service.insertData(name_db_string,json_subjects,json_audiences, json_educators,json_typelessons, json_calls, json_lessons, json_date);
-                call.enqueue(new Callback<Throwable>() {
+            @Override
+            public void onFailure(Call<Throwable> call, Throwable t) {
 
-                    @Override
-                    public void onResponse(Call<Throwable> call, retrofit2.Response<Throwable> response) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Throwable> call, Throwable t) {
-
-                    }
-                });
-
-
+            }
+        });
     }
-
-
 }

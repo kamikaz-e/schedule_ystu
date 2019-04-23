@@ -69,9 +69,7 @@ public class ActivityStart extends BaseActivity {
         start_buttonOne.setOnClickListener(v -> onCreateDialogImport().show());
         Button start_buttonTwo = findViewById(R.id.startButtonTwo);
         start_buttonTwo.setOnClickListener(v -> {
-            Intent intent = new Intent(ActivityStart.this, ActivityStartSettings.class);
-            finish();
-            startActivity(intent);
+
         });
 
     }
