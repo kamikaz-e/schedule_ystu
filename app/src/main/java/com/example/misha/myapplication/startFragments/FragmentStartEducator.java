@@ -61,9 +61,9 @@ public class FragmentStartEducator extends Fragment {
         activity.setSupportActionBar(profile_toolbar);
 
         next = view.findViewById(R.id.next);
-        clear_educators = view.findViewById(R.id.clear_educators);
-        input_educator = view.findViewById(R.id.input_educator);
-        list_educators = view.findViewById(R.id.list_educators);
+        clear_educators = view.findViewById(R.id.clearEducators);
+        input_educator = view.findViewById(R.id.inputEducator);
+        list_educators = view.findViewById(R.id.listEducators);
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
         list_educators.setAdapter(adapter);
 

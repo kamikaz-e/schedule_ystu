@@ -61,11 +61,11 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
         buttonHome.setOnClickListener(v -> {
             FragmentScheduleByDays fragment = new FragmentScheduleByDays();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, fragment)
+                    .replace(R.id.contentFrame, fragment)
                     .commit();
         });
 
-        rvCalls = view.findViewById(R.id.rv_calls);
+        rvCalls = view.findViewById(R.id.rvCalls);
         rvCalls.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvCalls.setAdapter(callsAdapter);
         return view;

@@ -35,14 +35,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.misha.myapplication.Constants.audiences_import;
+import static com.example.misha.myapplication.Constants.call_schedule;
+import static com.example.misha.myapplication.Constants.educators_import;
+import static com.example.misha.myapplication.Constants.schedule_import;
+import static com.example.misha.myapplication.Constants.subjects_import;
+
 
 public class ActivityStart extends BaseActivity {
-    private static final String schedule_import = "http://schedu1e.h1n.ru/schedule.php";
-    private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
-    private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
-    private static final String educators_import = "http://schedu1e.h1n.ru/educators.php";
-    private static final String call_schedule = "http://schedu1e.h1n.ru/ActivityCallsSchedule.php";
-    private static final String date = "http://schedu1e.h1n.ru/date_start.php";
 
 
     final String sch = "schedule";
@@ -65,9 +65,9 @@ public class ActivityStart extends BaseActivity {
         setContentView(R.layout.start_activity);
 
 
-        Button start_buttonOne = findViewById(R.id.start_buttonOne);
+        Button start_buttonOne = findViewById(R.id.startButtonOne);
         start_buttonOne.setOnClickListener(v -> onCreateDialogImport().show());
-        Button start_buttonTwo = findViewById(R.id.start_buttonTwo);
+        Button start_buttonTwo = findViewById(R.id.startButtonTwo);
         start_buttonTwo.setOnClickListener(v -> {
             Intent intent = new Intent(ActivityStart.this, ActivityStartSettings.class);
             finish();
@@ -81,7 +81,7 @@ public class ActivityStart extends BaseActivity {
         View view = li.inflate(R.layout.dialog_signin, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        final EditText name_db = view.findViewById(R.id.name_schedule);
+        final EditText name_db = view.findViewById(R.id.nameSchedule);
         builder.setCancelable(false).setPositiveButton("Импортировать", (dialog, id) -> {
             database_name = name_db.getText().toString();
 
@@ -93,7 +93,7 @@ public class ActivityStart extends BaseActivity {
             load_db(edu, educators_import);
             load_db(sch, schedule_import);
             load_db(cal, call_schedule);
-            load_db(dat, date);
+           // load_db(dat, date);
             Intent intent = new Intent(ActivityStart.this, MainActivity.class);
             finish();
             startActivity(intent);

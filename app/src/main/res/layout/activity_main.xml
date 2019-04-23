@@ -2,43 +2,41 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
     <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:id="@+id/container">
+        android:orientation="horizontal">
 
         <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/content_frame">
-        </FrameLayout>
+            android:id="@+id/contentFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
 
     </LinearLayout>
 
     <include
         layout="@layout/toolbar_main_activity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </include>
+        android:layout_height="match_parent"></include>
 
 
     <com.google.android.material.navigation.NavigationView
-      android:id="@+id/nav_view"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:layout_gravity="start"
-      android:fitsSystemWindows="true"
-      app:headerLayout="@layout/nav_header"
-      app:theme="@style/NavigationViewStyle"
-      android:background="@color/background_colorTwo"
-      app:menu="@menu/menu_nav_drawer">
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/background_colorTwo"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/menu_nav_drawer"
+        app:theme="@style/NavigationViewStyle">
 
     </com.google.android.material.navigation.NavigationView>
 

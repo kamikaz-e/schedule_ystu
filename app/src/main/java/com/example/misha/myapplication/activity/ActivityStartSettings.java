@@ -18,7 +18,7 @@ public class ActivityStartSettings extends BaseActivity {
         Fragment fragment = new FragmentDate();
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content_frame, fragment);
+            ft.replace(R.id.contentFrame, fragment);
             ft.commit();
 
         }

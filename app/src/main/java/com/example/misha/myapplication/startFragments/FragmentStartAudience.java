@@ -64,10 +64,10 @@ public class FragmentStartAudience extends Fragment {
         activity.setSupportActionBar(profile_toolbar);
 
 
-        clear_audiences = view.findViewById(R.id.clear_audiences);
+        clear_audiences = view.findViewById(R.id.clearAudiences);
         next = view.findViewById(R.id.next);
-        input_audience = view.findViewById(R.id.input_audience);
-        list_audiences = view.findViewById(R.id.list_audiences);
+        input_audience = view.findViewById(R.id.inputAudience);
+        list_audiences = view.findViewById(R.id.listAudiences);
 
 
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
@@ -86,7 +86,7 @@ public class FragmentStartAudience extends Fragment {
         next.setOnClickListener(v -> {
             FragmentStartEducator fragment= new FragmentStartEducator();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, fragment)
+                    .replace(R.id.contentFrame, fragment)
                     .addToBackStack(null)
                     .commit();
         });

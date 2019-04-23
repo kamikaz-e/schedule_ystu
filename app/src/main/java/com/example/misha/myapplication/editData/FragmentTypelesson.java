@@ -41,8 +41,8 @@ public class FragmentTypelesson extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_typelesson, container, false);
-        inputTypelesson = view.findViewById(R.id.input_typelesson);
-        typelessonListView = view.findViewById(R.id.list_typelesson);
+        inputTypelesson = view.findViewById(R.id.inputTypelesson);
+        typelessonListView = view.findViewById(R.id.listTypelesson);
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, typelessonList);
         typelessonListView.setAdapter(adapter);
         typelessonListView.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());

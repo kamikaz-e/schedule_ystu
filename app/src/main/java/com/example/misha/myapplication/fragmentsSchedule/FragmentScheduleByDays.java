@@ -56,7 +56,7 @@ public class FragmentScheduleByDays extends Fragment {
 
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
-        dayTabs = view.findViewById(R.id.rv_tab);
+        dayTabs = view.findViewById(R.id.rvTab);
         dayTabs.setAdapter(adapterTabDays);
         currentDay();
 

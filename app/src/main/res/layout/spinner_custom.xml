@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_marginStart="10sp">
+    android:layout_marginStart="10sp"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/currentNumberWeek"
@@ -13,7 +13,7 @@
         android:layout_marginTop="1sp"
         android:textColor="#FFFFFF"
         android:textSize="11sp"
-        tools:text="20.04 - 20.04"/>
+        tools:text="20.04 - 20.04" />
 
     <TextView
         android:id="@+id/currentDaysWeekRange"
@@ -22,6 +22,6 @@
         android:layout_marginBottom="6sp"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        tools:text="1 неделя"/>
+        tools:text="1 неделя" />
 
 </LinearLayout>

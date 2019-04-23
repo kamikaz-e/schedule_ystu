@@ -3,7 +3,6 @@ package com.example.misha.myapplication.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,7 +57,7 @@ public class MainActivity extends BaseActivity
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawerLayout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -107,12 +106,12 @@ public class MainActivity extends BaseActivity
         });
         spinner.setSelection((int) currWeek);
 
-        Button buttonToolbar = findViewById(R.id.toolbar_but);
+        Button buttonToolbar = findViewById(R.id.toolbarButt);
         buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
         buttonToolbar.setOnClickListener(v -> {
 
 
-            Fragment f = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+            Fragment f = getSupportFragmentManager().findFragmentById(R.id.contentFrame);
 
             if (f instanceof FragmentScheduleByDays) {
                 replaceFragment(new FragmentEditSchedule());
@@ -133,7 +132,7 @@ public class MainActivity extends BaseActivity
             }
         });
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
         displayView(R.id.rasp_day);
 
@@ -175,7 +174,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.settings) {
         } else if (id == R.id.nav_share) {
         }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
         displayView(item.getItemId());
         return true;
@@ -211,7 +210,7 @@ public class MainActivity extends BaseActivity
 
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content_frame, fragment);
+            ft.replace(R.id.contentFrame, fragment);
             ft.commit();
             InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
             if (getCurrentFocus() != null)
@@ -219,7 +218,7 @@ public class MainActivity extends BaseActivity
         }
 
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
     }
 

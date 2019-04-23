@@ -71,7 +71,7 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
         viewPager.setCurrentItem(selectedDayTab);
         adapterTabDays.setSelection(selectedDayTab);
         viewPager.setOffscreenPageLimit(6);
-        dayTabs = view.findViewById(R.id.rv_tab);
+        dayTabs = view.findViewById(R.id.rvTab);
         dayTabs.setAdapter(adapterTabDays);
 
 

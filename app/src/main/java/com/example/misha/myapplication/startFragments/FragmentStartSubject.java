@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,9 +62,9 @@ public class FragmentStartSubject extends Fragment {
         AppCompatActivity activity = (AppCompatActivity)getActivity();
         activity.setSupportActionBar(profile_toolbar);
 
-        clear_subjects= view.findViewById(R.id.clear_subjects);
-        input_subject = view.findViewById(R.id.input_subject);
-        list_subjects = view.findViewById(R.id.list_subjects);
+        clear_subjects= view.findViewById(R.id.clearSubjects);
+        input_subject = view.findViewById(R.id.inputSubject);
+        list_subjects = view.findViewById(R.id.listSubjects);
 
 
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
@@ -84,7 +83,7 @@ public class FragmentStartSubject extends Fragment {
         next.setOnClickListener(v -> {
             FragmentStartAudience fragment= new FragmentStartAudience();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, fragment)
+                    .replace(R.id.contentFrame, fragment)
                     .addToBackStack(null)
                     .commit();
         });

@@ -86,9 +86,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="-3sp"
-                >
+                android:layout_marginEnd="10dp">
 
                 <RelativeLayout
                     android:id="@+id/typelessonRelLay"
@@ -108,7 +107,6 @@
                             android:id="@+id/typelesson"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:minWidth = "75sp"
                             android:background="@null"
                             android:checkable="false"
                             android:clickable="false"
@@ -116,6 +114,7 @@
                             android:inputType="textNoSuggestions"
                             android:longClickable="false"
                             android:maxLines="1"
+                            android:minWidth="75sp"
                             android:paddingTop="9sp"
                             android:singleLine="true"
                             android:textSize="16sp"
@@ -138,21 +137,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="-5sp"
-                        tools:hint="Аудитория"
-                        >
+                        tools:hint="Аудитория">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/audience"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:minWidth = "65sp"
                             android:checkable="false"
                             android:clickable="false"
                             android:focusable="false"
                             android:inputType="textNoSuggestions"
                             android:longClickable="false"
                             android:maxLines="1"
+                            android:minWidth="65sp"
                             android:paddingTop="10sp"
                             android:singleLine="true"
                             android:textSize="16sp"
@@ -170,8 +168,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="-4sp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="-3sp">
 
                 <com.google.android.material.textfield.TextInputLayout

@@ -20,7 +20,7 @@
         android:padding="3dip">
 
         <ImageView
-            android:id="@+id/ic_current_week"
+            android:id="@+id/imageCurrentWeek"
             android:layout_width="40dip"
             android:layout_height="40dip"
             android:layout_marginStart="5dp"
@@ -28,7 +28,7 @@
             app:srcCompat="@drawable/ic_week" />
 
         <TextView
-            android:id="@+id/text_current_week"
+            android:id="@+id/textCurrentWeek"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_alignParentStart="true"

@@ -5,8 +5,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +14,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.misha.myapplication.APIService;
 import com.example.misha.myapplication.Preferences;
@@ -42,12 +37,7 @@ import com.example.misha.myapplication.database.entity.Typelesson;
 import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -106,7 +96,7 @@ public class Settings extends Fragment {
     long selectDate = 0;
     long curr_week = 0;
     private static Retrofit retrofit;
-
+    private List<Subject> userList =null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,7 +117,7 @@ public class Settings extends Fragment {
         buttonHome.setOnClickListener(v -> {
             FragmentScheduleByDays fragment = new FragmentScheduleByDays();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, fragment)
+                    .replace(R.id.contentFrame, fragment)
                     .commit();
         });
 
@@ -193,7 +183,7 @@ public class Settings extends Fragment {
         View view = li.inflate(R.layout.dialog_signin, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        final EditText name_db = view.findViewById(R.id.name_schedule);
+        final EditText name_db = view.findViewById(R.id.nameSchedule);
         builder.setCancelable(false).setPositiveButton("Импортировать", (dialog, id) -> {
             database_name = name_db.getText().toString();
 
@@ -223,18 +213,19 @@ public class Settings extends Fragment {
 
         Retrofit retrofit = RetrofitClient.getRetrofitClient();
         APIService weatherAPIs = retrofit.create(APIService.class);
-        Call call = weatherAPIs.getSubjects(database_name);
-        call.enqueue(new Callback() {
+        Map<String, String> params = new HashMap<>();
+        params.put("name_db", database_name);
+        Call<List<Subject>> call  = weatherAPIs.getSubject(database_name);
+        call.enqueue(new Callback<List<Subject>>() {
             @Override
-            public void onResponse(Call call, Response response) {
+            public void onResponse(Call<List<Subject>> call, Response<List<Subject>> response) {
+              userList = response.body();
 
-                if (response.body() != null) {
-                  //  Log.d("response " + response.body());
-                }
             }
-            @Override
-            public void onFailure(Call call, Throwable t) {
 
+            @Override
+            public void onFailure(Call<List<Subject>> call, Throwable t)  {
+                t.printStackTrace();
             }
         });
     }
@@ -245,7 +236,7 @@ public class Settings extends Fragment {
         View view = li.inflate(R.layout.dialog_signin, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        final EditText name_db = view.findViewById(R.id.name_schedule);
+        final EditText name_db = view.findViewById(R.id.nameSchedule);
         builder.setCancelable(false).setPositiveButton("Экспортировать", (dialog, id) -> {
             name_db_string = name_db.getText().toString();
             upload();

@@ -3,20 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ActivityStartSettings"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.ActivityStartSettings">
 
     <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:id="@+id/container">
+        android:orientation="horizontal">
 
         <FrameLayout
+            android:id="@+id/contentFrame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/content_frame">
-        </FrameLayout>
+            android:layout_height="match_parent"></FrameLayout>
 
     </LinearLayout>
 

@@ -60,7 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void replaceFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.content_frame, fragment, fragment.getClass().getName())
+        fragmentTransaction.replace(R.id.contentFrame, fragment, fragment.getClass().getName())
                 .commitAllowingStateLoss();
     }
 }

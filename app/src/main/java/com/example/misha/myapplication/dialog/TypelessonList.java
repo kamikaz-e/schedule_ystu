@@ -57,7 +57,7 @@ public class TypelessonList extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
         builder.setCustomTitle(layoutTitleDialog);
-        rvTypelesson = view.findViewById(R.id.rv);
+        rvTypelesson = view.findViewById(R.id.rvDialog);
         listTypelessonAdapter = new ListTypelessonAdapter(listTypelesson, (position, view1) -> {
             Intent intent = new Intent();
             intent.putExtra(POSITION, clickedPosition);
@@ -68,11 +68,11 @@ public class TypelessonList extends DialogFragment {
         rvTypelesson.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
         rvTypelesson.setAdapter(listTypelessonAdapter);
 
-        Button button_add = view.findViewById(R.id.button_add);
+        Button button_add = view.findViewById(R.id.buttonAdd);
         button_add.setOnClickListener(v -> {
 
         });
-        Button button_cancel = view.findViewById(R.id.button_cancel);
+        Button button_cancel = view.findViewById(R.id.buttonCancel);
         button_cancel.setOnClickListener(v -> dismiss());
         return builder.create();
     }
