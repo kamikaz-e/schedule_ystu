@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_medium"
+        card_view:cardCornerRadius="4dp"
+        card_view:elevation="14dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium">
+
+            <TextView
+                android:id="@+id/number"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="#393939"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:textAlignment="center"
+                android:textSize="17sp"
+                tools:text="1" />
+
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="2sp"
+                android:layout_toEndOf="@+id/number"
+                android:textSize="16sp"
+                tools:text="Время" />
+
+            <TextView
+                android:id="@+id/textViewOptions"
+                android:layout_width="31sp"
+                android:layout_height="35sp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="-3sp"
+                android:layout_marginEnd="-5sp"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:text="@string/textViewOptions"
+                android:textAppearance="?android:textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/buttonSubject"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_alignTop="@+id/time"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="10dp"
+                android:background="#0000"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="16sp"
+                tools:text="Предмет" />
+
+            <RelativeLayout
+                android:id="@+id/relLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/buttonSubject"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="10dp"
+                android:paddingBottom="2sp">
+
+                <TextView
+                    android:id="@+id/buttonTypelesson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toStartOf="@+id/buttonAudience"
+                    android:background="#0000"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="16sp"
+                    tools:text="Лабораторная работа" />
+
+                <TextView
+                    android:id="@+id/buttonAudience"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5sp"
+                    android:layout_marginEnd="10sp"
+                    android:background="#0000"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="16sp"
+                    tools:text="Аудитория" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/buttonEducator"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_alignTop="@+id/relLay"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="32sp"
+                android:layout_marginEnd="10dp"
+                android:background="#0000"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="16sp"
+                tools:text="Преподаватель" />
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

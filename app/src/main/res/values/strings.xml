@@ -34,6 +34,15 @@
         <item>17 неделя</item>
     </string-array>
 
+    <string-array name="dayWeek">
+        <item>ПН</item>
+        <item>ВТ</item>
+        <item>СР</item>
+        <item>ЧТ</item>
+        <item>ПТ</item>
+        <item>СБ</item>
+    </string-array>
+
     <string-array name="selection">
         <item>Предметы</item>
         <item>Аудитории</item>
@@ -72,9 +81,13 @@
     <string name="title_activity_welcome_activity">welcome_activity</string>
     <string name="title_activity_start_settings">start_settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="subtitle">Расписание звонков</string>
-
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="maybe">maybe</string>
+    <string name="message_text">message</string>
+    <string name="textViewOptions">⋮</string>
 
 </resources>

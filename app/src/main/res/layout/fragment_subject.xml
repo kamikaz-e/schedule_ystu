@@ -9,13 +9,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <EditText
-            android:id="@+id/input_subject"
+            android:id="@+id/inputSubject"
             android:layout_width="375dp"
             android:layout_height="66dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:hint="Предмет"
-            android:maxLength="50"
+            android:maxLength="60"
             android:imeOptions="actionDone"
             android:inputType="textCapSentences"
             android:textSize="18sp"
@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
         <ListView
-            android:id="@+id/list_subjects"
+            android:id="@+id/listSubjects"
             android:layout_width="397dp"
             android:layout_height="589dp"
             android:layout_marginBottom="8dp"
@@ -33,6 +33,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_subject"/>
+            app:layout_constraintTop_toBottomOf="@+id/inputSubject"/>
     </LinearLayout>
 </FrameLayout>

@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentTwo extends android.support.v4.app.Fragment {
+import androidx.fragment.app.Fragment;
+
+public class FragmentTwo extends Fragment {
 
     public FragmentTwo() {
     }
@@ -19,7 +21,7 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragmen_two, container, false);
+        View view = inflater.inflate(R.layout.fragment_schedule_list, container, false);
 
         return view;
     }
