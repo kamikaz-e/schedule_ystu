@@ -12,10 +12,11 @@ public class AudienceDao extends AbsDao<Audience> {
 
     private static volatile AudienceDao instance;
 
-    private AudienceDao() {}
+    private AudienceDao() {
+    }
 
     public static AudienceDao getInstance() {
-        if (null == instance){
+        if (null == instance) {
             instance = new AudienceDao();
         }
         return instance;
@@ -24,7 +25,7 @@ public class AudienceDao extends AbsDao<Audience> {
     public final static String ID = "id";
     public final static String AUDIENCE = "audience";
 
-    public static final String[] ALL_SET_PROPERTIES = new String[] {ID, AUDIENCE};
+    public static final String[] ALL_SET_PROPERTIES = new String[]{ID, AUDIENCE};
 
     @Override
     protected String[] getAllColumns() {

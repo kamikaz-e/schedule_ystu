@@ -4,11 +4,18 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Educator implements Parcelable {
 
-    private String id;
+    @Expose
+    @SerializedName("id")
+    private  String id;
 
-    private String name;
+    @Expose
+    @SerializedName("educators")
+    private  String name;
 
     public Educator(String id, String name) {
         this.id = id;

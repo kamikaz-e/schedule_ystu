@@ -89,6 +89,7 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
                 .show();
     }
 
+
     private void setInitialTimeOne() {
         if (start == 1) {
             selectPartTime = (DateUtils.formatDateTime(getActivity(),

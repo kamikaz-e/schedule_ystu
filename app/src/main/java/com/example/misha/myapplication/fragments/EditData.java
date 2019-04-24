@@ -9,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toolbar;
 
+import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditDataViewPagerAdapter;
 import com.example.misha.myapplication.database.dao.AudienceDao;
@@ -32,7 +35,8 @@ public class EditData extends Fragment {
     TabLayout tabLayout;
     ViewPager viewPager;
     EditDataViewPagerAdapter viewPagerAdapter;
-
+    Spinner spinner;
+    androidx.appcompat.widget.Toolbar toolbar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +48,10 @@ public class EditData extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_edit_data, container, false);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-        Button buttonHome = view.findViewById(R.id.buttonHome);
+        spinner = getActivity().findViewById(R.id.spinner);
+
+        spinner.setVisibility(View.GONE);
+
 
         viewPager = view.findViewById(R.id.viewPager);
         viewPagerAdapter = new EditDataViewPagerAdapter(getChildFragmentManager());
@@ -54,7 +60,7 @@ public class EditData extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        buttonHome.setBackgroundResource(R.drawable.ic_home);
+      /*  buttonHome.setBackgroundResource(R.drawable.ic_home);
         buttonHome.setOnClickListener(v -> {
             FragmentScheduleByDays fragment = new FragmentScheduleByDays();
             getActivity().getSupportFragmentManager().beginTransaction()
@@ -64,9 +70,9 @@ public class EditData extends Fragment {
                     Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
                     InputMethodManager.HIDE_NOT_ALWAYS);
-        });
+        });*/
 
-        clear_subjects = view.findViewById(R.id.buttonClear);
+      /*  clear_subjects = view.findViewById(R.id.buttonClear);
         clear_subjects.setBackgroundResource(R.drawable.ic_clear);
         clear_subjects.setOnClickListener(v -> {
 
@@ -84,7 +90,7 @@ public class EditData extends Fragment {
                     onCreateDialogClearTypelessons().show();
                     break;
             }
-        });
+        });*/
         return view;
     }
 

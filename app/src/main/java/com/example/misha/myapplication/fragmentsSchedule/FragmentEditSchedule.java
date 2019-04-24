@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Spinner;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.Preferences;
@@ -53,9 +54,10 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_schedule, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+     //   ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         viewPager = view.findViewById(R.id.viewpager);
         int selectedDayTab = Preferences.getInstance().getSelectedPositionTabDays();
+
 
 
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {

@@ -17,10 +17,8 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.example.misha.myapplication.network.APIService;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.network.RetrofitClient;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.CallDao;
@@ -35,26 +33,21 @@ import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
 import com.example.misha.myapplication.database.entity.Typelesson;
 import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
+import com.example.misha.myapplication.network.APIService;
+import com.example.misha.myapplication.network.RetrofitClient;
 import com.example.misha.myapplication.network.request.InsertRequest;
 import com.example.misha.myapplication.network.request.ScheduleRequest;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class Settings extends Fragment {
@@ -67,17 +60,11 @@ public class Settings extends Fragment {
     private static final String call_schedule = "http://schedu1e.h1n.ru/call_schedule.php";
     private static final String date = "http://schedu1e.h1n.ru/date_start.php";
     private static final String export = "http://schedu1e.h1n.ru/export.php";
-    final String sch = "lessons";
-    final String sub = "subjects";
-    final String aud = "audiences";
-    final String edu = "educators";
-    final String typ = "typelessons";
-    final String cal = "calls";
-    final String dat = "selectedDate";
-    ArrayList<Audience> audience_list = new ArrayList<>();
 
-    String database_name = "scheduleSubjects";
-    private APIService mAPIService;
+
+
+    String database_name = "schedule";
+
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
@@ -89,7 +76,6 @@ public class Settings extends Fragment {
     String json_calls = "calls";
     String json_date = "";
     String name_db_string = "database";
-
     public ArrayAdapter<String> adapter;
     RelativeLayout layoutPickWeek;
     RelativeLayout layoutImport;
@@ -186,16 +172,11 @@ public class Settings extends Fragment {
         builder.setView(view);
         final EditText name_db = view.findViewById(R.id.nameSchedule);
         builder.setCancelable(false).setPositiveButton("Импортировать", (dialog, id) -> {
-
+            database_name = name_db.getText().toString();
             SubjectDao.getInstance().deleteAll();
             AudienceDao.getInstance().deleteAll();
             EducatorDao.getInstance().deleteAll();
-            load_db(sub, subjects_import);
-            load_db(aud, audiences_import);
-            load_db(edu, educators_import);
-            load_db(sch, schedule_import);
-            load_db(cal, call_schedule);
-            load_db(dat, date);
+            load_db();
 
         }).setNegativeButton("Отмена", (dialog, id) -> {
         });
@@ -209,7 +190,7 @@ public class Settings extends Fragment {
         curr_week = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
     }
 
-    void load_db(final String table, final String url) {
+    void load_db() {
         RetrofitClient.getInstance().getRequestInterface().getSubjects(new ScheduleRequest(database_name)).enqueue(new Callback<ArrayList<Subject>>() {
             @Override
             public void onResponse(Call<ArrayList<Subject>> call, Response<ArrayList<Subject>> response) {
@@ -218,6 +199,17 @@ public class Settings extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<Subject>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+       RetrofitClient.getInstance().getRequestInterface().getAudiences(new ScheduleRequest(database_name)).enqueue(new Callback<ArrayList<Audience>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Audience>> call, Response<ArrayList<Audience>> response) {
+            AudienceDao.getInstance().insertAll(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Audience>> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -255,15 +247,8 @@ public class Settings extends Fragment {
         json_lessons = new Gson().toJson(lessons);
         json_date = Long.toString(Preferences.getInstance().getSemestStart());
 
-        InsertRequest request = new InsertRequest();
-        request.setAudiences(json_audiences);
-        request.setSubjects(json_subjects);
-        request.setEducators(json_educators);
-        request.setTypelessons(json_typelessons);
-        request.setCalls(json_calls);
-        request.setLessons(json_lessons);
-        request.setDate(json_date);
-        RetrofitClient.getInstance().getRequestInterface().insertData(request).enqueue(new Callback<Throwable>() {
+
+        RetrofitClient.getInstance().getRequestInterface().insertData(name_db_string, json_subjects, json_audiences, json_educators, json_typelessons, json_calls, json_lessons, json_date).enqueue(new Callback<Throwable>() {
             @Override
             public void onResponse(Call<Throwable> call, Response<Throwable> response) {
 

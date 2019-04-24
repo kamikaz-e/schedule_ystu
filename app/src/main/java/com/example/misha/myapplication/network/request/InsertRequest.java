@@ -21,6 +21,7 @@ public class InsertRequest {
     @SerializedName("date")
     private String date;
 
+
     public String getGet_name() {
         return get_name;
     }
@@ -28,6 +29,7 @@ public class InsertRequest {
     public void setGet_name(String get_name) {
         this.get_name = get_name;
     }
+
 
     public String getSubjects() {
         return subjects;
@@ -37,6 +39,7 @@ public class InsertRequest {
         this.subjects = subjects;
     }
 
+
     public String getAudiences() {
         return audiences;
     }
@@ -44,6 +47,7 @@ public class InsertRequest {
     public void setAudiences(String audiences) {
         this.audiences = audiences;
     }
+
 
     public String getEducators() {
         return educators;
@@ -53,6 +57,7 @@ public class InsertRequest {
         this.educators = educators;
     }
 
+
     public String getTypelessons() {
         return typelessons;
     }
@@ -60,6 +65,7 @@ public class InsertRequest {
     public void setTypelessons(String typelessons) {
         this.typelessons = typelessons;
     }
+
 
     public String getCalls() {
         return calls;
@@ -69,6 +75,7 @@ public class InsertRequest {
         this.calls = calls;
     }
 
+
     public String getLessons() {
         return lessons;
     }
@@ -76,6 +83,7 @@ public class InsertRequest {
     public void setLessons(String lessons) {
         this.lessons = lessons;
     }
+
 
     public String getDate() {
         return date;

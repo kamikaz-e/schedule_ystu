@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.Preferences;
@@ -29,7 +30,8 @@ public class FragmentScheduleByDays extends Fragment {
     RecyclerView dayTabs;
     private ViewPager viewPager;
     private int selectedWeek;
-
+    Spinner spinner;
+    androidx.appcompat.widget.Toolbar toolbar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,10 @@ public class FragmentScheduleByDays extends Fragment {
             }
         });
         pagerAdapter = new TabDaysPagerAdapter(getChildFragmentManager());
+
+        spinner = getActivity().findViewById(R.id.spinner);
+      spinner.setVisibility(View.VISIBLE);
+
 
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);

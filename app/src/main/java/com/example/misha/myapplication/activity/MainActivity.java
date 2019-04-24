@@ -53,16 +53,31 @@ public class MainActivity extends BaseActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        spinner = findViewById(R.id.spinner);
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         drawer = findViewById(R.id.drawerLayout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                hintKeyboard();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                hintKeyboard();
+            }
+        };
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        spinner = findViewById(R.id.spinner);
 
 
         Calendar mCalendar = Calendar.getInstance();
@@ -87,6 +102,9 @@ public class MainActivity extends BaseActivity
                 allDays);
         spinner.setAdapter(customSpinnerAdapter);
         calculateDate();
+
+
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -168,7 +186,6 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.rasp_day) {
-        } else if (id == R.id.rasp_list) {
         } else if (id == R.id.edit_schedule) {
         } else if (id == R.id.settings) {
         } else if (id == R.id.nav_share) {
@@ -186,9 +203,6 @@ public class MainActivity extends BaseActivity
         switch (viewId) {
             case R.id.rasp_day:
                 fragment = new FragmentScheduleByDays();
-                break;
-            case R.id.rasp_list:
-                fragment = new FragmentTwo();
                 break;
             case R.id.edit_schedule:
                 fragment = new FragmentEditSchedule();
@@ -211,14 +225,18 @@ public class MainActivity extends BaseActivity
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.contentFrame, fragment);
             ft.commit();
-            InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
-            if (getCurrentFocus() != null)
-                imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
         }
 
 
         DrawerLayout drawer = findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    public void hintKeyboard(){
+        InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
+        if (getCurrentFocus() != null)
+            imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     public Dialog onCreateDialog() {

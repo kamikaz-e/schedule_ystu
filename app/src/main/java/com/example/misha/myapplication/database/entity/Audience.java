@@ -4,9 +4,17 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Audience implements Parcelable {
 
+    @Expose
+    @SerializedName("id")
     private  String id;
+
+    @Expose
+    @SerializedName("audience")
     private  String name;
 
     public Audience(String id, String name) {
