@@ -1,13 +1,19 @@
 package com.example.misha.myapplication.network.request;
 
+import com.example.misha.myapplication.database.entity.Subject;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class InsertRequest {
 
     @SerializedName("name_db")
     private String get_name;
+
+    @Expose
     @SerializedName("subjects")
-    private String subjects;
+    private ArrayList<Subject> subjects;
     @SerializedName("audiences")
     private String audiences;
     @SerializedName("educators")
@@ -31,11 +37,11 @@ public class InsertRequest {
     }
 
 
-    public String getSubjects() {
+    public ArrayList<Subject> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(String subjects) {
+    public void setSubjects(ArrayList<Subject> subjects) {
         this.subjects = subjects;
     }
 

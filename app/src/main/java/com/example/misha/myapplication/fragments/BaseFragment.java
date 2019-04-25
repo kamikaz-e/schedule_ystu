@@ -1,19 +1,41 @@
-package com.example.misha.myapplication.activity;
+package com.example.misha.myapplication.fragments;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.activity.BaseActivity;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 public abstract class BaseFragment extends Fragment {
+
+    private boolean toolbarEnabled;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getContext().setToolbarVisibility(toolbarEnabled);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setToolbarEnabled(true);
+    }
+
+    public void setToolbarEnabled(boolean state) {
+        this.toolbarEnabled = state;
+    }
 
     private void sendResultToTarget(Class target, Fragment root, int request,
                                     int result, Intent data) {
@@ -64,6 +86,10 @@ public abstract class BaseFragment extends Fragment {
         }
         fragmentTransaction.replace(R.id.content_frame, fragment, fragment.getClass().getName())
                 .commitAllowingStateLoss();
+    }
+
+    public BaseActivity getContext() {
+        return (BaseActivity) getActivity();
     }
 
     public void replaceFragment(Fragment fragment) {

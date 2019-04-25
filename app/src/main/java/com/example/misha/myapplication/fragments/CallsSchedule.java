@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class CallsSchedule extends Fragment implements CallScheduleCallback {
+public class CallsSchedule extends BaseFragment implements CallScheduleCallback {
 
 
     private RecyclerView rvCalls;
@@ -39,6 +39,12 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
     Integer lesPos = 0;
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getContext().setCurrentTitle("Расписание звонков");
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         callsAdapter = new CallsScheduleAdapter(this);
@@ -49,10 +55,6 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_call_schedule, container, false);
-
-        Spinner spinner = getActivity().findViewById(R.id.spinner);
-        spinner.setVisibility(View.GONE);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Расписание звонков");
 
         rvCalls = view.findViewById(R.id.rv_calls);
         rvCalls.setLayoutManager(new LinearLayoutManager(getActivity()));

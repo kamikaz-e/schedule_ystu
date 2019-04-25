@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.fragmentsSchedule;
+package com.example.misha.myapplication.fragments.fragmentsSchedule;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,24 +14,24 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Spinner;
 
-import com.example.misha.myapplication.Constants;
-import com.example.misha.myapplication.Preferences;
-import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.activity.BaseFragment;
-import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysAdapterEditSchedule;
-import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysPagerAdapterEditSchedule;
-import com.example.misha.myapplication.database.dao.LessonDao;
-import com.example.misha.myapplication.database.entity.Lesson;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
+
+import com.example.misha.myapplication.Constants;
+import com.example.misha.myapplication.Preferences;
+import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysAdapterEditSchedule;
+import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysPagerAdapterEditSchedule;
+import com.example.misha.myapplication.database.dao.LessonDao;
+import com.example.misha.myapplication.database.entity.Lesson;
+import com.example.misha.myapplication.fragments.BaseFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.misha.myapplication.activity.MainActivity.WEEK_CODE;
 
@@ -47,7 +47,8 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     private int selectedWeek;
     private List<Lesson> lessonListWeek = new ArrayList<>();
     private List<Lesson> lessonListWeekCurrent = new ArrayList<>();
-    Integer currentWeek = 0;
+    int currentWeek = 0;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,10 +64,10 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
 
         viewPager = view.findViewById(R.id.viewPager);
         int selectedDayTab = Preferences.getInstance().getSelectedPositionTabDays();
-        Spinner spinner = getActivity().findViewById(R.id.spinner);
+        Spinner spinner = new Spinner(getContext());
         spinner.setVisibility(View.VISIBLE);
         setHasOptionsMenu(true);
-        toolbar =  getActivity().findViewById(R.id.toolbar);
+        toolbar = getActivity().findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(null);
 
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
@@ -110,7 +111,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
         int id = item.getItemId();
 
         if (id == R.id.button) {
-            replaceFragment(new FragmentScheduleByDays(),true);
+            replaceFragment(new FragmentScheduleByDays(), true);
             Intent intent = new Intent();
             intent.putExtra(Constants.SELECTED_WEEK, Preferences.getInstance().getSelectedWeekEditSchedule());
             sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, FragmentActivity.RESULT_OK, intent);

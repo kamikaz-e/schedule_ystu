@@ -25,16 +25,20 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 
-public class EditData extends Fragment {
+public class EditData extends BaseFragment {
 
 
-    Button clear_subjects;
 
     TabLayout tabLayout;
     ViewPager viewPager;
     EditDataViewPagerAdapter viewPagerAdapter;
-    Spinner spinner;
-    androidx.appcompat.widget.Toolbar toolbar;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getContext().setCurrentTitle("Редактор данных");
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,16 +51,13 @@ public class EditData extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_edit_data, container, false);
 
-        spinner = getActivity().findViewById(R.id.spinner);
 
-        spinner.setVisibility(View.GONE);
         setHasOptionsMenu(true);
 
         viewPager = view.findViewById(R.id.viewPager);
         viewPagerAdapter = new EditDataViewPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = view.findViewById(R.id.tabs);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Редактор данных");
         tabLayout.setupWithViewPager(viewPager);
 
       /*  buttonHome.setBackgroundResource(R.drawable.ic_home);

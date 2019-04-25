@@ -1,6 +1,8 @@
 package com.example.misha.myapplication.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 
 import com.example.misha.myapplication.R;
 
@@ -9,13 +11,54 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.LayoutRes;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    protected CharSequence currentTitle;
+
+    protected Toolbar toolbar;
+
+    protected ActionBar actionBar;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        initToolbar();
+    }
+
+    @LayoutRes
+    protected abstract int getLayoutId();
+
+    protected void initToolbar() {
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        setupActionBar();
+    }
+
+    protected void setupActionBar() {
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_right);
+    }
+
+    public void setCurrentTitle(String title) {
+        toolbar.setTitle(title);
+        actionBar.setTitle(title);
+        currentTitle = title;
+    }
+
+    public void setToolbarVisibility(boolean toolbarEnabled) {
+        findViewById(R.id.toolbar).setVisibility(toolbarEnabled ? View.VISIBLE : View.GONE);
+    }
     private void sendResultToTarget(Class target, Fragment root, int request,
                                     int result, Intent data) {
         if (root != null) {

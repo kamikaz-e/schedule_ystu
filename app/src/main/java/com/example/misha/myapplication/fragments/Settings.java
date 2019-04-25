@@ -45,17 +45,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Settings extends Fragment {
-
-
-    private static final String schedule_import = "http://schedu1e.h1n.ru/schedule.php";
-    private static final String subjects_import = "http://schedu1e.h1n.ru/subjects.php";
-    private static final String audiences_import = "http://schedu1e.h1n.ru/audiences.php";
-    private static final String educators_import = "http://schedu1e.h1n.ru/educators.php";
-    private static final String call_schedule = "http://schedu1e.h1n.ru/call_schedule.php";
-    private static final String date = "http://schedu1e.h1n.ru/date_start.php";
-    private static final String export = "http://schedu1e.h1n.ru/export.php";
-
+public class Settings extends BaseFragment {
 
 
     String database_name = "schedule";
@@ -63,7 +53,7 @@ public class Settings extends Fragment {
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
-    String json_lessons = "lessons";
+    private String json_lessons = "lessons";
     String json_subjects = "subjects";
     String json_audiences = "audiences";
     String json_educators = "educators";
@@ -75,10 +65,12 @@ public class Settings extends Fragment {
     RelativeLayout layoutPickWeek;
     RelativeLayout layoutImport;
     RelativeLayout layoutExport;
-    long differentBetweenDate = 0;
-    long selectDate = 0;
-    long curr_week = 0;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getContext().setCurrentTitle("Настройки");
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,10 +81,6 @@ public class Settings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-
-        Spinner spinner = getActivity().findViewById(R.id.spinner);
-        spinner.setVisibility(View.GONE);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Настройки");
 
         requestQueue = Volley.newRequestQueue(getActivity());
         progressDialog = new ProgressDialog(getContext());
@@ -117,7 +105,7 @@ public class Settings extends Fragment {
             selectedDate.set(Calendar.MONTH, month);
             selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             Preferences.getInstance().setSemesterStart(selectedDate.getTimeInMillis());
-            Spinner spinner = getActivity().findViewById(R.id.spinner);
+
 
 
             Calendar mCalendar = Calendar.getInstance();
@@ -137,12 +125,6 @@ public class Settings extends Fragment {
                     break;
                 }
             }
-
-            CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(getActivity(),
-                    allDays);
-            spinner.setAdapter(customSpinnerAdapter);
-            calculateDate();
-            spinner.setSelection((int) curr_week);
 
         },
                 calendar.get(Calendar.YEAR),
@@ -167,13 +149,6 @@ public class Settings extends Fragment {
         }).setNegativeButton("Отмена", (dialog, id) -> {
         });
         return builder.create();
-    }
-
-    private void calculateDate() {
-        Calendar calendar = Calendar.getInstance();
-        selectDate = Preferences.getInstance().getSemestStart();
-        differentBetweenDate = calendar.getTimeInMillis() - selectDate;
-        curr_week = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
     }
 
     void load_db() {

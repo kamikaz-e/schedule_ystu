@@ -7,10 +7,13 @@ import android.widget.BaseAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
+import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class CustomSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {
@@ -20,8 +23,25 @@ public class CustomSpinnerAdapter extends BaseAdapter implements SpinnerAdapter 
     private ArrayList<String> listItems;
 
 
-    public CustomSpinnerAdapter(Context context, ArrayList<String> listItems) {
-        this.listItems = listItems;
+    public CustomSpinnerAdapter(Context context) {
+        Calendar mCalendar = Calendar.getInstance();
+        mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
+        mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
+        mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        ArrayList<String> allDays = new ArrayList<>();
+        SimpleDateFormat mFormat = new SimpleDateFormat("dd.MM");
+        for (int week = 0; week < 17; week++) {
+            for (int day = 0; day < 7; day++) {
+                String startWeek = mFormat.format(mCalendar.getTime());
+
+                mCalendar.add(Calendar.WEEK_OF_YEAR, 1);
+                mCalendar.add(Calendar.DAY_OF_YEAR, -1);
+                allDays.add(startWeek + " - " + mFormat.format(mCalendar.getTime()));
+                mCalendar.add(Calendar.DAY_OF_YEAR, 1);
+                break;
+            }
+        }
+        this.listItems = allDays;
         activity = context;
     }
 

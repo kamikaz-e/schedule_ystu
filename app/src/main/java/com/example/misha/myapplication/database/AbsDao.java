@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @param <T> model template
  */
-public abstract class AbsDao<T> {
+public abstract class AbsDao<T> implements DaoInterface<T> {
 
     /**
      * Equal string.
@@ -122,12 +122,7 @@ public abstract class AbsDao<T> {
         return items;
     }
 
-    /**
-     * Getter for class instance by ID.
-     *
-     * @param id ID
-     * @return class instance
-     */
+    @Override
     public T getItemByID(long id) {
         Cursor cursor = getContentResolver().query(getTableUri(), getAllColumns(),
                 KEY_ID + EQUALS, new String[]{String.valueOf(id)}, null);
@@ -135,40 +130,27 @@ public abstract class AbsDao<T> {
         return models.isEmpty() ? null : models.get(0);
     }
 
-    /**
-     * Insert item to table.
-     *
-     * @param item item
-     */
-
-
+    @Override
     public void insertItem(T item) {
        getContentResolver().insert(getTableUri(), makeContentValuesFromInstance(item));
     }
 
+    @Override
     public void insertAll(ArrayList<T> items) {
         for (T item : items) {
             insertItem(item);
         }
     }
 
-    /**
-     * Delete all items in table.
-     */
+    @Override
     public void deleteAll() {
         getContentResolver().delete(getTableUri(), null, null);
     }
 
-    /**
-     * Delete item by ID.
-     *
-     * @return true if deleted
-     */
+    @Override
     public boolean deleteItemById(long id, String idKey) {
         int affectedRowsNumber = getContentResolver().delete(getTableUri(), idKey + EQUALS,
                 new String[]{String.valueOf(id)});
         return affectedRowsNumber == 1;
     }
-
-
 }
