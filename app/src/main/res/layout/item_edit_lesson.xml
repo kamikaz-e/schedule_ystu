@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_medium"
+    card_view:cardCornerRadius="4dp"
+    card_view:elevation="4dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_medium"
-        card_view:cardCornerRadius="4dp"
-        card_view:elevation="14dp">
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_normal">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/spacing_medium">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/number"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:background="#393939"
                 android:gravity="center_vertical|center_horizontal|center"
                 android:textAlignment="center"
@@ -40,87 +44,74 @@
                 android:textSize="16sp"
                 tools:text="Время" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/menuOptions"
-                android:layout_width="31sp"
-                android:layout_height="35sp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="-3sp"
-                android:layout_marginEnd="-5sp"
-                android:gravity="center_vertical|center_horizontal|center"
-                android:text="@string/textViewOptions"
-                android:textAppearance="?android:textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/subject"
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:layout_alignTop="@+id/time"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="10dp"
-                android:background="#0000"
-                android:gravity="center_vertical"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textSize="16sp"
-                tools:text="Предмет" />
-
-            <RelativeLayout
-                android:id="@+id/audience_educator_relLays"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/subject"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="10dp"
-                android:paddingBottom="2sp">
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:src="@drawable/ic_more_vert_black_24dp"
+                android:textAppearance="?android:textAppearanceLarge" />
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/typelesson"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/audience"
-                    android:background="#0000"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textSize="16sp"
-                    tools:text="Лабораторная работа" />
 
-                <TextView
-                    android:id="@+id/audience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="5sp"
-                    android:layout_marginEnd="10sp"
-                    android:background="#0000"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textSize="16sp"
-                    tools:text="Аудитория" />
-            </RelativeLayout>
+        <TextView
+            android:id="@+id/subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:background="#0000"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="16sp"
+            tools:text="Предмет" />
+
+        <RelativeLayout
+            android:id="@+id/audience_educator_relLays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium">
 
             <TextView
-                android:id="@+id/educator"
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:layout_alignTop="@+id/audience_educator_relLays"
+                android:id="@+id/typelesson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="10sp"
-                android:layout_marginTop="32sp"
-                android:layout_marginEnd="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/audience"
                 android:background="#0000"
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textSize="16sp"
-                tools:text="Преподаватель" />
+                tools:text="Лабораторная работа" />
 
+            <TextView
+                android:id="@+id/audience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="#0000"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="16sp"
+                tools:text="Аудитория" />
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+
+        <TextView
+            android:id="@+id/educator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:background="#0000"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="16sp"
+            tools:text="Преподаватель" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

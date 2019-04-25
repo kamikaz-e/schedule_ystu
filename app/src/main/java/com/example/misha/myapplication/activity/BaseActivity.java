@@ -101,6 +101,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         return activeFragments;
     }
 
+
+    public Toolbar getToolbar() {
+        return toolbar;
+    }
+
     public void replaceFragment(Fragment fragment, boolean toBackStack) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (toBackStack) {

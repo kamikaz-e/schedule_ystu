@@ -114,7 +114,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         private final TextView audienceEdit;
         private final TextView educatorEdit;
         private final TextView typeLessonEdit;
-        private final TextView textViewOptions;
+        private final View textViewOptions;
 
 
         public ViewHolder(View view) {

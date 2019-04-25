@@ -1,6 +1,5 @@
 package com.example.misha.myapplication.fragments.fragmentsSchedule;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -41,7 +38,6 @@ public class FragmentScheduleByDays extends BaseFragment {
     private ViewPager viewPager;
     private Spinner spinner;
     private long currWeek = 0;
-    private Toolbar toolbar;
 
     private CustomSpinnerAdapter customSpinnerAdapter;
 
@@ -49,7 +45,6 @@ public class FragmentScheduleByDays extends BaseFragment {
     public void onResume() {
         super.onResume();
         Preferences.getInstance().setSelectedWeekEditSchedule((int) DateUtil.getCurrWeek());
-        toolbar = getActivity().findViewById(R.id.toolbar);
         if (spinner == null) {
             spinner = new Spinner(getContext());
             spinner.setAdapter(customSpinnerAdapter);
@@ -71,7 +66,7 @@ public class FragmentScheduleByDays extends BaseFragment {
             });
 
         }
-        toolbar.addView(spinner);
+        getContext().getToolbar().addView(spinner);
         getContext().setCurrentTitle(null);
         spinner.setSelection((int) DateUtil.getCurrWeek());
     }
@@ -141,6 +136,6 @@ public class FragmentScheduleByDays extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-        toolbar.removeView(spinner);
+        getContext().getToolbar().removeView(spinner);
     }
 }
