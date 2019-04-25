@@ -41,7 +41,7 @@
                 tools:text="Время" />
 
             <TextView
-                android:id="@+id/textViewOptions"
+                android:id="@+id/menuOptions"
                 android:layout_width="31sp"
                 android:layout_height="35sp"
                 android:layout_alignParentEnd="true"
@@ -52,7 +52,7 @@
                 android:textAppearance="?android:textAppearanceLarge" />
 
             <TextView
-                android:id="@+id/buttonSubject"
+                android:id="@+id/subject"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:layout_alignTop="@+id/time"
@@ -67,22 +67,22 @@
                 tools:text="Предмет" />
 
             <RelativeLayout
-                android:id="@+id/relLay"
+                android:id="@+id/audience_educator_relLays"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/buttonSubject"
+                android:layout_alignTop="@+id/subject"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="10dp"
                 android:paddingBottom="2sp">
 
                 <TextView
-                    android:id="@+id/buttonTypelesson"
+                    android:id="@+id/typelesson"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/buttonAudience"
+                    android:layout_toStartOf="@+id/audience"
                     android:background="#0000"
                     android:gravity="center_vertical"
                     android:maxLines="1"
@@ -91,7 +91,7 @@
                     tools:text="Лабораторная работа" />
 
                 <TextView
-                    android:id="@+id/buttonAudience"
+                    android:id="@+id/audience"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
@@ -106,10 +106,10 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/buttonEducator"
+                android:id="@+id/educator"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
-                android:layout_alignTop="@+id/relLay"
+                android:layout_alignTop="@+id/audience_educator_relLays"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10sp"
                 android:layout_marginTop="32sp"
@@ -120,7 +120,6 @@
                 android:singleLine="true"
                 android:textSize="16sp"
                 tools:text="Преподаватель" />
-
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

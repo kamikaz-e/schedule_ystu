@@ -121,11 +121,11 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             super(view);
             number = view.findViewById(R.id.number);
             timeEdit = view.findViewById(R.id.time);
-            subjectEdit = view.findViewById(R.id.buttonSubject);
-            audienceEdit = view.findViewById(R.id.buttonAudience);
-            educatorEdit = view.findViewById(R.id.buttonEducator);
-            typeLessonEdit = view.findViewById(R.id.buttonTypelesson);
-            textViewOptions = view.findViewById(R.id.textViewOptions);
+            subjectEdit = view.findViewById(R.id.subject);
+            audienceEdit = view.findViewById(R.id.audience);
+            educatorEdit = view.findViewById(R.id.educator);
+            typeLessonEdit = view.findViewById(R.id.typelesson);
+            textViewOptions = view.findViewById(R.id.menuOptions);
             subjectEdit.setOnClickListener(this);
             audienceEdit.setOnClickListener(this);
             educatorEdit.setOnClickListener(this);
@@ -170,16 +170,16 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         @Override
         public void onClick(View v) {
 
-            if (v.getId() == R.id.buttonAudience) {
+            if (v.getId() == R.id.audience) {
                 callback.onAudienceClick(getAdapterPosition(), audienceList);
             }
-            if (v.getId() == R.id.buttonEducator) {
+            if (v.getId() == R.id.educator) {
                 callback.onEducatorClick(getAdapterPosition(), educatorList);
             }
-            if (v.getId() == R.id.buttonSubject) {
+            if (v.getId() == R.id.subject) {
                 callback.onSubjectClick(getAdapterPosition(), subjectList);
             }
-            if (v.getId() == R.id.buttonTypelesson) {
+            if (v.getId() == R.id.typelesson) {
                 callback.onTypelessonClick(getAdapterPosition(), typelessonList);
             }
         }

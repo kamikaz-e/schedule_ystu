@@ -25,7 +25,7 @@
             android:text="" />
 
         <Button
-            android:id="@+id/clearEducators"
+            android:id="@+id/clear_educators"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="right"
@@ -40,7 +40,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/inputEducator"
+            android:id="@+id/input_educator"
             android:layout_width="375dp"
             android:layout_height="66dp"
             android:layout_marginStart="10dp"
@@ -56,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <ListView
-            android:id="@+id/listEducators"
+            android:id="@+id/list_educators"
             android:layout_width="397dp"
             android:layout_height="589dp"
             android:layout_marginStart="8dp"
@@ -65,7 +65,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputEducator" />
+            app:layout_constraintTop_toBottomOf="@+id/input_educator" />
 
     </LinearLayout>
 </FrameLayout>

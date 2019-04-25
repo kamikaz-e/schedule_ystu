@@ -9,9 +9,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -64,7 +62,7 @@ public abstract class BaseFragment extends Fragment {
         if (toBackStack) {
             fragmentTransaction.addToBackStack(Fragment.class.getSimpleName());
         }
-        fragmentTransaction.replace(R.id.contentFrame, fragment, fragment.getClass().getName())
+        fragmentTransaction.replace(R.id.content_frame, fragment, fragment.getClass().getName())
                 .commitAllowingStateLoss();
     }
 

@@ -56,9 +56,9 @@ public class CallsScheduleAdapter extends RecyclerView.Adapter<CallsScheduleAdap
 
         public ViewHolder(View view) {
             super(view);
-            cardViewCall = view.findViewById(R.id.cardViewCall);
-            numberCall = view.findViewById(R.id.numberCall);
-            timeCall = view.findViewById(R.id.timeCall);
+            cardViewCall = view.findViewById(R.id.call_cardView);
+            numberCall = view.findViewById(R.id.call_number);
+            timeCall = view.findViewById(R.id.call_time);
             cardViewCall.setOnClickListener(this);
             timeCall.setOnClickListener(this);
             view.setOnClickListener(this);
@@ -76,7 +76,7 @@ public class CallsScheduleAdapter extends RecyclerView.Adapter<CallsScheduleAdap
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.timeCall || v.getId() == R.id.cardViewCall) {
+            if (v.getId() == R.id.call_time || v.getId() == R.id.call_cardView) {
                 itemClickListener.onCallClick(getAdapterPosition());
             }
         }

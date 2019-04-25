@@ -63,11 +63,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (toBackStack) {
             fragmentTransaction.addToBackStack(Fragment.class.getSimpleName());
         }
-        fragmentTransaction.replace(R.id.contentFrame, fragment, fragment.getClass().getName())
+        fragmentTransaction.replace(R.id.content_frame, fragment, fragment.getClass().getName())
                 .commitAllowingStateLoss();
     }
 
     public void replaceFragment(Fragment fragment) {
-        replaceFragment(fragment, false);
+        replaceFragment(fragment, true);
     }
 }

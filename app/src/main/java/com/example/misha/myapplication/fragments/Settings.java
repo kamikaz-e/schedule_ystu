@@ -9,11 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -32,10 +30,7 @@ import com.example.misha.myapplication.database.entity.Educator;
 import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
 import com.example.misha.myapplication.database.entity.Typelesson;
-import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
-import com.example.misha.myapplication.network.APIService;
 import com.example.misha.myapplication.network.RetrofitClient;
-import com.example.misha.myapplication.network.request.InsertRequest;
 import com.example.misha.myapplication.network.request.ScheduleRequest;
 import com.google.gson.Gson;
 
@@ -102,9 +97,9 @@ public class Settings extends Fragment {
         requestQueue = Volley.newRequestQueue(getActivity());
         progressDialog = new ProgressDialog(getContext());
 
-        layoutPickWeek = view.findViewById(R.id.currentDate);
-        layoutImport = view.findViewById(R.id.importData);
-        layoutExport = view.findViewById(R.id.exportData);
+        layoutPickWeek = view.findViewById(R.id.current_date);
+        layoutImport = view.findViewById(R.id.import_data);
+        layoutExport = view.findViewById(R.id.export_data);
 
 
         layoutPickWeek.setOnClickListener(v -> get_current_week());
@@ -161,7 +156,7 @@ public class Settings extends Fragment {
         View view = li.inflate(R.layout.dialog_signin, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        final EditText name_db = view.findViewById(R.id.nameSchedule);
+        final EditText name_db = view.findViewById(R.id.name_schedule);
         builder.setCancelable(false).setPositiveButton("Импортировать", (dialog, id) -> {
             database_name = name_db.getText().toString();
             SubjectDao.getInstance().deleteAll();
@@ -212,7 +207,7 @@ public class Settings extends Fragment {
         View view = li.inflate(R.layout.dialog_signin, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        final EditText name_db = view.findViewById(R.id.nameSchedule);
+        final EditText name_db = view.findViewById(R.id.name_schedule);
         builder.setCancelable(false).setPositiveButton("Экспортировать", (dialog, id) -> {
             name_db_string = name_db.getText().toString();
             upload();

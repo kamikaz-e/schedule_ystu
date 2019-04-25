@@ -6,16 +6,13 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.CallsScheduleAdapter;
 import com.example.misha.myapplication.adapter.editSchedule.CallScheduleCallback;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.entity.Calls;
-import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -57,7 +54,7 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
         spinner.setVisibility(View.GONE);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Расписание звонков");
 
-        rvCalls = view.findViewById(R.id.rvCalls);
+        rvCalls = view.findViewById(R.id.rv_calls);
         rvCalls.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvCalls.setAdapter(callsAdapter);
         return view;

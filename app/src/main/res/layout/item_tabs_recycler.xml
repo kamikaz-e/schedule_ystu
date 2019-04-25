@@ -7,7 +7,7 @@
     android:focusableInTouchMode="true">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTab"
+        android:id="@+id/rv_tab"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"

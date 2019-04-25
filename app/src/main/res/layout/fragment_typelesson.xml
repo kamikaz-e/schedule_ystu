@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/inputTypelesson"
+            android:id="@+id/input_typelesson"
             android:layout_width="375dp"
             android:layout_height="66dp"
             android:layout_marginStart="10dp"
@@ -26,7 +26,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <ListView
-            android:id="@+id/listTypelesson"
+            android:id="@+id/list_typelesson"
             android:layout_width="397dp"
             android:layout_height="589dp"
             android:layout_marginStart="8dp"
@@ -35,7 +35,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputTypelesson" />
+            app:layout_constraintTop_toBottomOf="@+id/input_typelesson" />
 
     </LinearLayout>
 </FrameLayout>

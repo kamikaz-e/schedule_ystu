@@ -77,7 +77,7 @@ public class EditTabDaysAdapter extends RecyclerView.Adapter<EditTabDaysAdapter.
             view.setOnClickListener(this);
             date = view.findViewById(R.id.date);
             dateWeek = view.findViewById(R.id.dayWeek);
-            dayRelLay = view.findViewById(R.id.dayRelLay);
+            dayRelLay = view.findViewById(R.id.day_relLay);
 
         }
 

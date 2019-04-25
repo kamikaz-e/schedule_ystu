@@ -18,7 +18,6 @@ import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.activity.BaseFragment;
-import com.example.misha.myapplication.activity.MainActivity;
 import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysAdapterEditSchedule;
 import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysPagerAdapterEditSchedule;
 import com.example.misha.myapplication.database.dao.LessonDao;
@@ -29,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -63,7 +61,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_schedule, container, false);
 
-        viewPager = view.findViewById(R.id.viewpager);
+        viewPager = view.findViewById(R.id.viewPager);
         int selectedDayTab = Preferences.getInstance().getSelectedPositionTabDays();
         Spinner spinner = getActivity().findViewById(R.id.spinner);
         spinner.setVisibility(View.VISIBLE);
@@ -83,13 +81,13 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
         viewPager.setCurrentItem(selectedDayTab);
         adapterTabDays.setSelection(selectedDayTab);
         viewPager.setOffscreenPageLimit(6);
-        dayTabs = view.findViewById(R.id.rvTab);
+        dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
 
 
-        mainFab = view.findViewById(R.id.mainFab);
-        evenWeekFab = view.findViewById(R.id.evenWeekFab);
-        unevenWeekFab = view.findViewById(R.id.unevenWeekFab);
+        mainFab = view.findViewById(R.id.main_fab);
+        evenWeekFab = view.findViewById(R.id.even_weekFab);
+        unevenWeekFab = view.findViewById(R.id.uneven_weekFab);
         fabOpen = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
         rotateForward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
@@ -112,10 +110,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
         int id = item.getItemId();
 
         if (id == R.id.button) {
-            FragmentScheduleByDays fragment = new FragmentScheduleByDays();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentFrame, fragment)
-                    .commit();
+            replaceFragment(new FragmentScheduleByDays(),true);
             Intent intent = new Intent();
             intent.putExtra(Constants.SELECTED_WEEK, Preferences.getInstance().getSelectedWeekEditSchedule());
             sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, FragmentActivity.RESULT_OK, intent);
@@ -167,13 +162,13 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.mainFab:
+            case R.id.main_fab:
                 animateFAB();
                 break;
-            case R.id.evenWeekFab:
+            case R.id.even_weekFab:
                 onCreateDialogCopyEvenWeek().show();
                 break;
-            case R.id.unevenWeekFab:
+            case R.id.uneven_weekFab:
                 onCreateDialogCopyUnevenWeek().show();
                 break;
         }

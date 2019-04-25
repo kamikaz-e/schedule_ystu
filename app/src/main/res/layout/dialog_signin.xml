@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textDialog"
+        android:id="@+id/text_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
@@ -17,7 +17,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/nameSchedule"
+        android:id="@+id/name_schedule"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="15dp"

@@ -6,7 +6,7 @@
     android:paddingTop="6sp">
 
     <TextView
-        android:id="@+id/numberWeekTextView"
+        android:id="@+id/number_week_textView"
         android:layout_width="wrap_content"
         android:layout_height="20sp"
         android:paddingStart="10sp"
@@ -15,7 +15,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/dayRangeTextView"
+        android:id="@+id/day_range_textView"
         android:layout_width="wrap_content"
         android:layout_height="20sp"
         android:layout_marginTop="4sp"

@@ -65,9 +65,9 @@ public class ActivityStart extends BaseActivity {
         setContentView(R.layout.start_activity);
 
 
-        Button start_buttonOne = findViewById(R.id.startButtonOne);
+        Button start_buttonOne = findViewById(R.id.start_buttonOne);
         start_buttonOne.setOnClickListener(v -> onCreateDialogImport().show());
-        Button start_buttonTwo = findViewById(R.id.startButtonTwo);
+        Button start_buttonTwo = findViewById(R.id.startbuttonTwo);
         start_buttonTwo.setOnClickListener(v -> {
 
         });
@@ -79,7 +79,7 @@ public class ActivityStart extends BaseActivity {
         View view = li.inflate(R.layout.dialog_signin, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        final EditText name_db = view.findViewById(R.id.nameSchedule);
+        final EditText name_db = view.findViewById(R.id.name_schedule);
         builder.setCancelable(false).setPositiveButton("Импортировать", (dialog, id) -> {
             database_name = name_db.getText().toString();
 

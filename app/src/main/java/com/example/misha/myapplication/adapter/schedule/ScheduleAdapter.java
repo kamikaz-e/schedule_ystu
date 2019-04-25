@@ -68,10 +68,10 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             audienceEdit = view.findViewById(R.id.audience);
             educatorEdit = view.findViewById(R.id.educator);
             typelessonEdit = view.findViewById(R.id.typelesson);
-            subjectHint = view.findViewById(R.id.subjectHint);
-            audienceHint = view.findViewById(R.id.audienceHint);
-            educatorHint = view.findViewById(R.id.educatorHint);
-            typelessonHint = view.findViewById(R.id.typelessonHint);
+            subjectHint = view.findViewById(R.id.subject_hint);
+            audienceHint = view.findViewById(R.id.audience_hint);
+            educatorHint = view.findViewById(R.id.educator_hint);
+            typelessonHint = view.findViewById(R.id.typelesson_hint);
         }
 
         public void onBindView(int position) {

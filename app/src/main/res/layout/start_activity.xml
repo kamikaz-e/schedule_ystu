@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/startText"
+            android:id="@+id/start_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
@@ -23,7 +23,7 @@
 
 
         <Button
-            android:id="@+id/startButtonOne"
+            android:id="@+id/start_buttonOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
@@ -36,7 +36,7 @@
 
 
         <Button
-            android:id="@+id/startButtonTwo"
+            android:id="@+id/startbuttonTwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

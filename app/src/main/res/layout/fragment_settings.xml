@@ -8,7 +8,7 @@
 
 
     <RelativeLayout
-        android:id="@+id/currentDate"
+        android:id="@+id/current_date"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#383838"
@@ -16,7 +16,7 @@
         android:padding="3dip">
 
         <ImageView
-            android:id="@+id/imageCurrentWeek"
+            android:id="@+id/image_currentWeek"
             android:layout_width="40dip"
             android:layout_height="40dip"
             android:layout_marginStart="5dp"
@@ -24,7 +24,7 @@
             app:srcCompat="@drawable/ic_week" />
 
         <TextView
-            android:id="@+id/textCurrentWeek"
+            android:id="@+id/text_currentWeek"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_alignParentStart="true"
@@ -59,7 +59,7 @@
         android:background="#FFFFFF" />
 
     <RelativeLayout
-        android:id="@+id/importData"
+        android:id="@+id/import_data"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#383838"
@@ -105,7 +105,7 @@
         android:background="#FFFFFF" />
 
     <RelativeLayout
-        android:id="@+id/exportData"
+        android:id="@+id/export_data"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#383838"

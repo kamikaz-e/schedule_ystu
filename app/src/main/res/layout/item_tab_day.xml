@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/dayRelLay"
+        android:id="@+id/day_relLay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/tab_background_selected"

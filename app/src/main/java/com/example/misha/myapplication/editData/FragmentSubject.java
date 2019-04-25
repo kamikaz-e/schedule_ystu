@@ -50,8 +50,8 @@ public class FragmentSubject extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
-        input_subject = view.findViewById(R.id.inputSubject);
-        list_subjects = view.findViewById(R.id.listSubjects);
+        input_subject = view.findViewById(R.id.input_subject);
+        list_subjects = view.findViewById(R.id.list_subjects);
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
         list_subjects.setAdapter(adapter);
         list_subjects.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());

@@ -10,7 +10,7 @@
             android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvTab"
+                    android:id="@+id/rv_tab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -19,9 +19,9 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewpager"
+                    android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/rvTab" />
+                    android:layout_below="@+id/rv_tab" />
         </RelativeLayout>
 </FrameLayout>

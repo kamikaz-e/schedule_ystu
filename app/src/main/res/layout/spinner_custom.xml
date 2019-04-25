@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/currentNumberWeek"
+        android:id="@+id/current_numberWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="1sp"
@@ -16,7 +16,7 @@
         tools:text="20.04 - 20.04" />
 
     <TextView
-        android:id="@+id/currentDaysWeekRange"
+        android:id="@+id/current_daysWeekRange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6sp"

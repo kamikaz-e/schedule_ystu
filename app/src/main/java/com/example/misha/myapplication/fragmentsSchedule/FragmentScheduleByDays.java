@@ -1,7 +1,6 @@
 package com.example.misha.myapplication.fragmentsSchedule;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.Preferences;
@@ -20,11 +18,8 @@ import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysAdapter;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysPagerAdapter;
 
 import java.util.Calendar;
-import java.util.zip.Inflater;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -58,7 +53,7 @@ public class FragmentScheduleByDays extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
 
-        viewPager = view.findViewById(R.id.viewpager);
+        viewPager = view.findViewById(R.id.viewPager);
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -77,7 +72,7 @@ public class FragmentScheduleByDays extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(null);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
-        dayTabs = view.findViewById(R.id.rvTab);
+        dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
         currentDay();
 
@@ -131,10 +126,7 @@ public class FragmentScheduleByDays extends BaseFragment {
         int id = item.getItemId();
 
         if (id == R.id.button) {
-            FragmentEditSchedule fragment = new FragmentEditSchedule();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentFrame, fragment)
-                    .commit();
+            replaceFragment(new FragmentEditSchedule(),true);
             Intent intent = new Intent();
             intent.putExtra(Constants.SELECTED_WEEK, (int) currWeek);
             sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, FragmentActivity.RESULT_OK, intent);

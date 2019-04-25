@@ -10,11 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.misha.myapplication.Constants;
-import com.example.misha.myapplication.FragmentTwo;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
@@ -58,7 +56,7 @@ public class MainActivity extends BaseActivity
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawer = findViewById(R.id.drawerLayout);
+        drawer = findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 
@@ -151,7 +149,7 @@ public class MainActivity extends BaseActivity
         });
 */
 
-        NavigationView navigationView = findViewById(R.id.navView);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         displayView(R.id.rasp_day);
 
@@ -192,7 +190,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.settings) {
         } else if (id == R.id.nav_share) {
         }
-        DrawerLayout drawer = findViewById(R.id.drawerLayout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         displayView(item.getItemId());
         return true;
@@ -225,13 +223,13 @@ public class MainActivity extends BaseActivity
 
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.contentFrame, fragment);
+            ft.replace(R.id.content_frame, fragment);
             ft.commit();
 
         }
 
 
-        DrawerLayout drawer = findViewById(R.id.drawerLayout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
 

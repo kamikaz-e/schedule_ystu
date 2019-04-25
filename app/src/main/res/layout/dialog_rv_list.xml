@@ -9,7 +9,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDialog"
+        android:id="@+id/rv_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
@@ -21,7 +21,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <Button
-        android:id="@+id/buttonAdd"
+        android:id="@+id/buttot_add"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_alignParentStart="true"
@@ -33,7 +33,7 @@
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/buttonCancel"
+        android:id="@+id/button_cancel"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_alignParentEnd="true"

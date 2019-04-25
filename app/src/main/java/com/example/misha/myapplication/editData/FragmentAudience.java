@@ -43,8 +43,8 @@ public class FragmentAudience extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_audience, container, false);
-        input_audience = view.findViewById(R.id.inputAudience);
-        list_audiences = view.findViewById(R.id.listAudiences);
+        input_audience = view.findViewById(R.id.input_audience);
+        list_audiences = view.findViewById(R.id.list_audiences);
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
         list_audiences.setAdapter(adapter);
         list_audiences.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());

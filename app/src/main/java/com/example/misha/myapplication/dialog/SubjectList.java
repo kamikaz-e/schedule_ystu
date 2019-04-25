@@ -55,12 +55,12 @@ public class SubjectList extends DialogFragment {
 
         View view = layoutInflater.inflate(R.layout.dialog_rv_list, null);
         View layoutTitleDialog = layoutInflater.inflate(R.layout.title_dialog, null);
-        TextView title_dialog = layoutTitleDialog.findViewById(R.id.textViewDialog);
+        TextView title_dialog = layoutTitleDialog.findViewById(R.id.dialog_textView);
         title_dialog.setText("Предмет");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
         builder.setCustomTitle(layoutTitleDialog);
-        rvSubject = view.findViewById(R.id.rvDialog);
+        rvSubject = view.findViewById(R.id.rv_dialog);
         listSubjectAdapter = new ListSubjectsAdapter(listSubjects, (position, view1) -> {
             Intent intent = new Intent();
             intent.putExtra(POSITION, clickedPosition);
@@ -71,14 +71,14 @@ public class SubjectList extends DialogFragment {
         rvSubject.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
         rvSubject.setAdapter(listSubjectAdapter);
 
-        Button button_add = view.findViewById(R.id.buttonAdd);
+        Button button_add = view.findViewById(R.id.buttot_add);
         button_add.setOnClickListener(v -> {
             EditData fragment = new EditData();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentFrame, fragment)
+                    .replace(R.id.content_frame, fragment)
                     .commit();
         });
-        Button button_cancel = view.findViewById(R.id.buttonCancel);
+        Button button_cancel = view.findViewById(R.id.button_cancel);
         button_cancel.setOnClickListener(v -> dismiss());
         return builder.create();
     }

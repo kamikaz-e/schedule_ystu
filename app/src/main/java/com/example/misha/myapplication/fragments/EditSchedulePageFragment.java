@@ -72,9 +72,9 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
         rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
-        fab = getActivity().findViewById(R.id.mainFab);
-        fab1 = getActivity().findViewById(R.id.evenWeekFab);
-        fab2 = getActivity().findViewById(R.id.unevenWeekFab);
+        fab = getActivity().findViewById(R.id.main_fab);
+        fab1 = getActivity().findViewById(R.id.even_weekFab);
+        fab2 = getActivity().findViewById(R.id.uneven_weekFab);
         fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);

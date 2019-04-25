@@ -42,7 +42,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/subjectRelLay"
+                android:id="@+id/subject_relLay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/time"
@@ -53,7 +53,7 @@
                 android:layout_marginEnd="10dp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/subjectHint"
+                    android:id="@+id/subject_hint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="-5sp"
@@ -79,10 +79,10 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/relLayAudEdu"
+                android:id="@+id/audience_educator_relLays"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/subjectRelLay"
+                android:layout_below="@+id/subject_relLay"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
@@ -90,14 +90,14 @@
                 android:layout_marginEnd="10dp">
 
                 <RelativeLayout
-                    android:id="@+id/typelessonRelLay"
+                    android:id="@+id/typelesson_relLay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/typelessonHint"
+                        android:id="@+id/typelesson_hint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="-5sp"
@@ -124,16 +124,16 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/audienceRelLay"
+                    android:id="@+id/audience_relLay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="15sp"
                     android:layout_marginEnd="10sp"
-                    android:layout_toEndOf="@+id/typelessonRelLay">
+                    android:layout_toEndOf="@+id/typelesson_relLay">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/audienceHint"
+                        android:id="@+id/audience_hint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="-5sp"
@@ -161,10 +161,10 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/educatorRelLay"
+                android:id="@+id/educator_relLay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/relLayAudEdu"
+                android:layout_below="@+id/audience_educator_relLays"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
@@ -173,7 +173,7 @@
                 android:layout_marginBottom="-3sp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/educatorHint"
+                    android:id="@+id/educator_hint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="-8sp"

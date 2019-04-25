@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/currentDate"
+        android:id="@+id/current_date"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
@@ -14,7 +14,7 @@
         android:padding="3dip">
 
         <ImageView
-            android:id="@+id/imageCurrentWeek"
+            android:id="@+id/image_currentWeek"
             android:layout_width="50dip"
             android:layout_height="50dip"
             android:layout_marginStart="10dp"
@@ -22,7 +22,7 @@
             app:srcCompat="@drawable/ic_week" />
 
         <TextView
-            android:id="@+id/textCurrentWeek"
+            android:id="@+id/text_currentWeek"
             android:layout_width="305dp"
             android:layout_height="34dp"
             android:layout_alignParentTop="true"
