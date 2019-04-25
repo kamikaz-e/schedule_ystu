@@ -48,6 +48,7 @@ public class FragmentScheduleByDays extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        Preferences.getInstance().setSelectedWeekEditSchedule((int) DateUtil.getCurrWeek());
         toolbar = getActivity().findViewById(R.id.toolbar);
         if (spinner == null) {
             spinner = new Spinner(getContext());
@@ -55,10 +56,11 @@ public class FragmentScheduleByDays extends BaseFragment {
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    Intent intent = new Intent();
-                    intent.putExtra(Constants.SELECTED_WEEK, position);
-                    sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
-                    sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
+                    pagerAdapter.setWeek(position);
+                    adapterTabDays = new TabDaysAdapter((position1, view) ->
+                            viewPager.setCurrentItem(position1));
+                    adapterTabDays.setSelection(viewPager.getCurrentItem());
+                    dayTabs.setAdapter(adapterTabDays);
                     Preferences.getInstance().setSelectedWeekEditSchedule(position);
                 }
 
@@ -67,11 +69,11 @@ public class FragmentScheduleByDays extends BaseFragment {
                 }
 
             });
-            spinner.setSelection((int) DateUtil.getCurrWeek());
+
         }
         toolbar.addView(spinner);
-
-
+        getContext().setCurrentTitle(null);
+        spinner.setSelection((int) DateUtil.getCurrWeek());
     }
 
     @Override
@@ -95,7 +97,6 @@ public class FragmentScheduleByDays extends BaseFragment {
                 Preferences.getInstance().setSelectedPositionTabDays(position);
             }
         });
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(null);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.rv_tab);
@@ -108,7 +109,6 @@ public class FragmentScheduleByDays extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
     }
 
 
@@ -128,30 +128,15 @@ public class FragmentScheduleByDays extends BaseFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.button) {
+        if (item.getItemId() == R.id.button) {
             replaceFragment(new FragmentEditSchedule(), true);
             Intent intent = new Intent();
             intent.putExtra(Constants.SELECTED_WEEK, (int) currWeek);
             sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, FragmentActivity.RESULT_OK, intent);
-
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == WEEK_CODE) {
-            int selectedWeek = data.getIntExtra(Constants.SELECTED_WEEK, 0);
-            pagerAdapter.setWeek(selectedWeek);
-            adapterTabDays = new TabDaysAdapter((position, view) ->
-                    viewPager.setCurrentItem(position));
-            adapterTabDays.setSelection(viewPager.getCurrentItem());
-            dayTabs.setAdapter(adapterTabDays);
-
-        }
-    }
 
     @Override
     public void onPause() {
