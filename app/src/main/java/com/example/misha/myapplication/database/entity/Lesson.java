@@ -1,21 +1,33 @@
 package com.example.misha.myapplication.database.entity;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Lesson {
 
+    @Expose
+    @SerializedName("id")
     private String id;
-
+    @Expose
+    @SerializedName("week")
     private String week;
-
+    @Expose
+    @SerializedName("day")
     private String day;
-
+    @Expose
+    @SerializedName("subject")
     private String subject;
-
+    @Expose
+    @SerializedName("audience")
     private String audience;
-
+    @Expose
+    @SerializedName("educator")
     private String educator;
-
+    @Expose
+    @SerializedName("typeLesson")
     private String typeLesson;
-
+    @Expose
+    @SerializedName("timeLesson")
     private String timeLesson;
 
     public Lesson() {

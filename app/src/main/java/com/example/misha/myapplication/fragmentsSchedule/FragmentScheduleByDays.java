@@ -1,7 +1,7 @@
 package com.example.misha.myapplication.fragmentsSchedule;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,7 +9,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.Preferences;
@@ -19,31 +20,33 @@ import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysAdapter;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysPagerAdapter;
 
 import java.util.Calendar;
+import java.util.zip.Inflater;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import static com.example.misha.myapplication.activity.MainActivity.WEEK_CODE;
 
-public class FragmentScheduleByDays extends BaseFragment implements Toolbar.OnMenuItemClickListener {
+public class FragmentScheduleByDays extends BaseFragment {
 
     TabDaysPagerAdapter pagerAdapter;
     TabDaysAdapter adapterTabDays;
     RecyclerView dayTabs;
     private ViewPager viewPager;
     private int selectedWeek;
+    Spinner spinner;
     long differentBetweenDate = 0;
     long selectDate = 0;
     long currWeek = 0;
+    androidx.appcompat.widget.Toolbar toolbar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
         adapterTabDays = new TabDaysAdapter((position, view) -> {
             viewPager.setCurrentItem(position);
 
@@ -54,7 +57,7 @@ public class FragmentScheduleByDays extends BaseFragment implements Toolbar.OnMe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+
         viewPager = view.findViewById(R.id.viewpager);
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
@@ -64,9 +67,14 @@ public class FragmentScheduleByDays extends BaseFragment implements Toolbar.OnMe
             }
         });
         pagerAdapter = new TabDaysPagerAdapter(getChildFragmentManager());
-        calculateDate();
-        Toolbar buttonToolbar = getActivity().findViewById(R.id.toolbar);
-        buttonToolbar.setOnMenuItemClickListener(this);
+
+        spinner = getActivity().findViewById(R.id.spinner);
+        spinner.setVisibility(View.VISIBLE);
+        setHasOptionsMenu(true);
+       toolbar =  getActivity().findViewById(R.id.toolbar);
+
+       calculateDate();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(null);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.rvTab);
@@ -112,8 +120,27 @@ public class FragmentScheduleByDays extends BaseFragment implements Toolbar.OnMe
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-       //inflater.inflate();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_empty, menu);
+        menu.findItem(R.id.button).setIcon(R.drawable.ic_editor);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.button) {
+            FragmentEditSchedule fragment = new FragmentEditSchedule();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentFrame, fragment)
+                    .commit();
+            Intent intent = new Intent();
+            intent.putExtra(Constants.SELECTED_WEEK, (int) currWeek);
+            sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, FragmentActivity.RESULT_OK, intent);
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -128,8 +155,6 @@ public class FragmentScheduleByDays extends BaseFragment implements Toolbar.OnMe
 
         }
     }
-
-
     private void calculateDate() {
         Calendar calendar = Calendar.getInstance();
         selectDate = Preferences.getInstance().getSemestStart();
@@ -137,13 +162,4 @@ public class FragmentScheduleByDays extends BaseFragment implements Toolbar.OnMe
         currWeek = (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
     }
 
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        replaceFragment(new FragmentEditSchedule(),true);
-        Intent intent = new Intent();
-        intent.putExtra(Constants.SELECTED_WEEK, (int) currWeek);
-        sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
-        //buttonToolbar.setBackgroundResource(R.drawable.ic_ok);
-        return false;
-    }
 }

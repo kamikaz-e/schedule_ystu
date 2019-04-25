@@ -1,7 +1,6 @@
 package com.example.misha.myapplication.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 
 import com.example.misha.myapplication.R;
 
@@ -12,16 +11,11 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 public abstract class BaseFragment extends Fragment {
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(false);
-    }
 
     private void sendResultToTarget(Class target, Fragment root, int request,
                                     int result, Intent data) {

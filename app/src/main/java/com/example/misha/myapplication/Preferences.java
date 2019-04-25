@@ -70,4 +70,7 @@ public final class Preferences {
     public boolean getFabOpen() {
         return mPrefs.getBoolean(PREF_KEY_FAB_OPEN, true);
     }
+
+
+
 }

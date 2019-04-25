@@ -53,37 +53,31 @@ public class MainActivity extends BaseActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        spinner = findViewById(R.id.spinner);
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         drawer = findViewById(R.id.drawerLayout);
-        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-
-            }
-
-            @Override
-            public void onDrawerOpened(@NonNull View drawerView) {
-                hideKeyboard();
-            }
-
-            @Override
-            public void onDrawerClosed(@NonNull View drawerView) {
-                hideKeyboard();
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
-            }
-        });
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                hintKeyboard();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                hintKeyboard();
+            }
+        };
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        spinner = findViewById(R.id.spinner);
 
 
         Calendar mCalendar = Calendar.getInstance();
@@ -109,6 +103,9 @@ public class MainActivity extends BaseActivity
         spinner.setAdapter(customSpinnerAdapter);
         calculateDate();
 
+
+
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -125,10 +122,34 @@ public class MainActivity extends BaseActivity
 
         });
         spinner.setSelection((int) currWeek);
+/*
 
         Button buttonToolbar = findViewById(R.id.toolbarButt);
-        buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
+            buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
+            buttonToolbar.setOnClickListener(v -> {
 
+
+            Fragment f = getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+
+            if (f instanceof FragmentScheduleByDays) {
+                replaceFragment(new FragmentEditSchedule());
+                Intent intent = new Intent();
+                intent.putExtra(Constants.SELECTED_WEEK, (int) currWeek);
+                sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, Activity.RESULT_OK, intent);
+                buttonToolbar.setBackgroundResource(R.drawable.ic_ok);
+
+
+            } else {
+                replaceFragment(new FragmentScheduleByDays());
+                Intent intent = new Intent();
+                intent.putExtra(Constants.SELECTED_WEEK, Preferences.getInstance().getSelectedWeekEditSchedule());
+                sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, Activity.RESULT_OK, intent);
+                buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
+                Preferences.getInstance().setSelectedPositionTabDays(0);
+
+            }
+        });
+*/
 
         NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
@@ -142,12 +163,6 @@ public class MainActivity extends BaseActivity
             startActivity(intent);
             Preferences.getInstance().setHintsOpened();
         }
-    }
-
-    private void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
-        if (getCurrentFocus() != null)
-            imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
 
@@ -173,7 +188,6 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.rasp_day) {
-        } else if (id == R.id.rasp_list) {
         } else if (id == R.id.edit_schedule) {
         } else if (id == R.id.settings) {
         } else if (id == R.id.nav_share) {
@@ -191,9 +205,6 @@ public class MainActivity extends BaseActivity
         switch (viewId) {
             case R.id.rasp_day:
                 fragment = new FragmentScheduleByDays();
-                break;
-            case R.id.rasp_list:
-                fragment = new FragmentTwo();
                 break;
             case R.id.edit_schedule:
                 fragment = new FragmentEditSchedule();
@@ -216,12 +227,18 @@ public class MainActivity extends BaseActivity
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.contentFrame, fragment);
             ft.commit();
-            hideKeyboard();
+
         }
 
 
         DrawerLayout drawer = findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    public void hintKeyboard(){
+        InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
+        if (getCurrentFocus() != null)
+            imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     public Dialog onCreateDialog() {

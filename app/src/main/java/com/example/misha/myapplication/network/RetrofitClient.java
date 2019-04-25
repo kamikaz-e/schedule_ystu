@@ -48,11 +48,12 @@ public final class RetrofitClient {
     }
 
     private RetrofitClient() {
+
         okHttpClient = buildOkHttpClient();
         retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(provideGson()))
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         requestInterface = retrofit.create(APIService.class);
@@ -82,7 +83,6 @@ public final class RetrofitClient {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return loggingInterceptor;
     }
-
 
 
     private Gson provideGson() {

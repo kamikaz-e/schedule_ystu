@@ -2,13 +2,15 @@ package com.example.misha.myapplication.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditDataViewPagerAdapter;
@@ -16,7 +18,6 @@ import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;
 import com.example.misha.myapplication.database.dao.TypelessonDao;
-import com.example.misha.myapplication.fragmentsSchedule.FragmentScheduleByDays;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,8 @@ public class EditData extends Fragment {
     TabLayout tabLayout;
     ViewPager viewPager;
     EditDataViewPagerAdapter viewPagerAdapter;
+    Spinner spinner;
+    androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,17 +47,19 @@ public class EditData extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_edit_data, container, false);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-        Button buttonHome = view.findViewById(R.id.buttonHome);
+        spinner = getActivity().findViewById(R.id.spinner);
+
+        spinner.setVisibility(View.GONE);
+        setHasOptionsMenu(true);
 
         viewPager = view.findViewById(R.id.viewPager);
         viewPagerAdapter = new EditDataViewPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = view.findViewById(R.id.tabs);
-
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Редактор данных");
         tabLayout.setupWithViewPager(viewPager);
 
-        buttonHome.setBackgroundResource(R.drawable.ic_home);
+      /*  buttonHome.setBackgroundResource(R.drawable.ic_home);
         buttonHome.setOnClickListener(v -> {
             FragmentScheduleByDays fragment = new FragmentScheduleByDays();
             getActivity().getSupportFragmentManager().beginTransaction()
@@ -64,9 +69,9 @@ public class EditData extends Fragment {
                     Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
                     InputMethodManager.HIDE_NOT_ALWAYS);
-        });
+        });*/
 
-        clear_subjects = view.findViewById(R.id.buttonClear);
+      /*  clear_subjects = view.findViewById(R.id.buttonClear);
         clear_subjects.setBackgroundResource(R.drawable.ic_clear);
         clear_subjects.setOnClickListener(v -> {
 
@@ -84,9 +89,40 @@ public class EditData extends Fragment {
                     onCreateDialogClearTypelessons().show();
                     break;
             }
-        });
+        });*/
         return view;
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_empty, menu);
+        menu.findItem(R.id.button).setIcon(R.drawable.ic_clear);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.button) {
+                switch (tabLayout.getSelectedTabPosition()) {
+                    case 0:
+                        onCreateDialogClearSubjects().show();
+                        break;
+                    case 1:
+                        onCreateDialogClearAudiences().show();
+                        break;
+                    case 2:
+                        onCreateDialogClearEducators().show();
+                        break;
+                    case 3:
+                        onCreateDialogClearTypelessons().show();
+                        break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     void clear_subjects() {
         SubjectDao.getInstance().deleteAll();
