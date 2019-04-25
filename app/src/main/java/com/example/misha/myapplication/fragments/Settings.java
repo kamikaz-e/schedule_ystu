@@ -95,18 +95,9 @@ public class Settings extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-
-        Button buttonHome = view.findViewById(R.id.buttonHome);
-        TextView title = view.findViewById(R.id.title);
-        title.setText("Настройки");
-        buttonHome.setBackgroundResource(R.drawable.ic_home);
-        buttonHome.setOnClickListener(v -> {
-            FragmentScheduleByDays fragment = new FragmentScheduleByDays();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentFrame, fragment)
-                    .commit();
-        });
+        Spinner spinner = getActivity().findViewById(R.id.spinner);
+        spinner.setVisibility(View.GONE);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Настройки");
 
         requestQueue = Volley.newRequestQueue(getActivity());
         progressDialog = new ProgressDialog(getContext());

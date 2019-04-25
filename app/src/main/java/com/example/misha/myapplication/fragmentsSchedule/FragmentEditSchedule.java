@@ -5,6 +5,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -14,6 +17,7 @@ import android.widget.Spinner;
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.activity.BaseFragment;
 import com.example.misha.myapplication.activity.MainActivity;
 import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysAdapterEditSchedule;
 import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysPagerAdapterEditSchedule;
@@ -26,18 +30,22 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-public class FragmentEditSchedule extends Fragment implements View.OnClickListener {
+import static com.example.misha.myapplication.activity.MainActivity.WEEK_CODE;
+
+public class FragmentEditSchedule extends BaseFragment implements View.OnClickListener {
 
     TabDaysPagerAdapterEditSchedule pagerAdapter;
     TabDaysAdapterEditSchedule adapterTabDays;
     RecyclerView dayTabs;
+    androidx.appcompat.widget.Toolbar toolbar;
     private ViewPager viewPager;
-    private FloatingActionButton fab, fab1, fab2;
-    private Animation fab_open, fab_close, rotate_forward, rotate_backward;
+    private FloatingActionButton mainFab, evenWeekFab, unevenWeekFab;
+    private Animation fabOpen, fabClose, rotateForward, rotateBackward;
     private int selectedWeek;
     private List<Lesson> lessonListWeek = new ArrayList<>();
     private List<Lesson> lessonListWeekCurrent = new ArrayList<>();
@@ -54,11 +62,14 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_schedule, container, false);
-     //   ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+
         viewPager = view.findViewById(R.id.viewpager);
         int selectedDayTab = Preferences.getInstance().getSelectedPositionTabDays();
-
-
+        Spinner spinner = getActivity().findViewById(R.id.spinner);
+        spinner.setVisibility(View.VISIBLE);
+        setHasOptionsMenu(true);
+        toolbar =  getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(null);
 
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
@@ -66,7 +77,6 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
                 adapterTabDays.setSelection(position);
             }
         });
-
 
         pagerAdapter = new TabDaysPagerAdapterEditSchedule(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
@@ -77,25 +87,47 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
         dayTabs.setAdapter(adapterTabDays);
 
 
-        fab = view.findViewById(R.id.mainFab);
-        fab1 = view.findViewById(R.id.evenWeekFab);
-        fab2 = view.findViewById(R.id.unevenWeekFab);
-        fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
-        rotate_forward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
-        rotate_backward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
-        fab.setOnClickListener(this);
-        fab1.setOnClickListener(this);
-        fab2.setOnClickListener(this);
-
-
+        mainFab = view.findViewById(R.id.mainFab);
+        evenWeekFab = view.findViewById(R.id.evenWeekFab);
+        unevenWeekFab = view.findViewById(R.id.unevenWeekFab);
+        fabOpen = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
+        fabClose = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
+        rotateForward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
+        rotateBackward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
+        mainFab.setOnClickListener(this);
+        evenWeekFab.setOnClickListener(this);
+        unevenWeekFab.setOnClickListener(this);
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_empty, menu);
+        menu.findItem(R.id.button).setIcon(R.drawable.ic_ok);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.button) {
+            FragmentScheduleByDays fragment = new FragmentScheduleByDays();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentFrame, fragment)
+                    .commit();
+            Intent intent = new Intent();
+            intent.putExtra(Constants.SELECTED_WEEK, Preferences.getInstance().getSelectedWeekEditSchedule());
+            sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, FragmentActivity.RESULT_OK, intent);
+            Preferences.getInstance().setSelectedPositionTabDays(0);
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MainActivity.WEEK_CODE) {
+        if (requestCode == WEEK_CODE) {
             selectedWeek = data.getIntExtra(Constants.SELECTED_WEEK, 0);
             pagerAdapter.setWeek(selectedWeek);
 
@@ -110,21 +142,21 @@ public class FragmentEditSchedule extends Fragment implements View.OnClickListen
 
         if (Preferences.getInstance().getFabOpen()) {
 
-            fab.startAnimation(rotate_backward);
-            fab1.startAnimation(fab_close);
-            fab2.startAnimation(fab_close);
-            fab1.setClickable(false);
-            fab2.setClickable(false);
+            mainFab.startAnimation(rotateBackward);
+            evenWeekFab.startAnimation(fabClose);
+            unevenWeekFab.startAnimation(fabClose);
+            evenWeekFab.setClickable(false);
+            unevenWeekFab.setClickable(false);
             Preferences.getInstance().setFabOpen(false);
 
 
         } else {
 
-            fab.startAnimation(rotate_forward);
-            fab1.startAnimation(fab_open);
-            fab2.startAnimation(fab_open);
-            fab1.setClickable(true);
-            fab2.setClickable(true);
+            mainFab.startAnimation(rotateForward);
+            evenWeekFab.startAnimation(fabOpen);
+            unevenWeekFab.startAnimation(fabOpen);
+            evenWeekFab.setClickable(true);
+            unevenWeekFab.setClickable(true);
             Preferences.getInstance().setFabOpen(true);
 
         }

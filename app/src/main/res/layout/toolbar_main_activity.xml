@@ -18,22 +18,14 @@
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="200sp"
+                android:layout_marginEnd="150sp"
+                android:layout_marginStart="10sp"
                 android:layout_marginBottom="7dp"
                 android:background="@android:color/transparent"
                 android:dropDownWidth="100sp" />
-
-            <Button
-                android:id="@+id/toolbarButt"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="3dp" />
         </androidx.appcompat.widget.Toolbar>
-
 
     </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

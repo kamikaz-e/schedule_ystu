@@ -122,10 +122,11 @@ public class MainActivity extends BaseActivity
 
         });
         spinner.setSelection((int) currWeek);
+/*
 
         Button buttonToolbar = findViewById(R.id.toolbarButt);
-        buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
-        buttonToolbar.setOnClickListener(v -> {
+            buttonToolbar.setBackgroundResource(R.drawable.ic_editor);
+            buttonToolbar.setOnClickListener(v -> {
 
 
             Fragment f = getSupportFragmentManager().findFragmentById(R.id.contentFrame);
@@ -148,6 +149,7 @@ public class MainActivity extends BaseActivity
 
             }
         });
+*/
 
         NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);

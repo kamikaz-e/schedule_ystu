@@ -3,13 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="55sp"
     android:orientation="vertical">
 
-
-    <include
-        layout="@layout/toolbar_fragments"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
 
     <RelativeLayout
         android:id="@+id/currentDate"

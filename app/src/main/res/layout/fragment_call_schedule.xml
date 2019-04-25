@@ -7,11 +7,6 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/toolbar_fragments"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></include>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCalls"

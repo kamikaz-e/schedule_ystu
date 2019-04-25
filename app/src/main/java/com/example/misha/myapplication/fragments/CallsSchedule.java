@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
@@ -52,18 +53,9 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
 
         View view = inflater.inflate(R.layout.fragment_call_schedule, container, false);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-
-        Button buttonHome = view.findViewById(R.id.buttonHome);
-        TextView title = view.findViewById(R.id.title);
-        title.setText("Расписание звонков");
-        buttonHome.setBackgroundResource(R.drawable.ic_home);
-        buttonHome.setOnClickListener(v -> {
-            FragmentScheduleByDays fragment = new FragmentScheduleByDays();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentFrame, fragment)
-                    .commit();
-        });
+        Spinner spinner = getActivity().findViewById(R.id.spinner);
+        spinner.setVisibility(View.GONE);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Расписание звонков");
 
         rvCalls = view.findViewById(R.id.rvCalls);
         rvCalls.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -74,7 +66,6 @@ public class CallsSchedule extends Fragment implements CallScheduleCallback {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
     }
 
 

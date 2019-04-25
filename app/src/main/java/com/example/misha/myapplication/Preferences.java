@@ -16,7 +16,6 @@ public final class Preferences {
     private static final String PREF_KEY_SELECT_WEEK = "PREF_KEY_SELECT_WEEK";
     private static final String PREF_KEY_SELECT_TAB_DAYS = "PREF_KEY_SELECT_TAB_DAYS";
     private static final String PREF_KEY_FAB_OPEN = "PREF_KEY_FAB_OPEN";
-    private static final String PREF_KEY_TOOLBAR_OPEN = "PREF_KEY_TOOLBAR_OPEN";
 
     public static Preferences getInstance() {
         if (instance != null) return instance;
@@ -70,15 +69,6 @@ public final class Preferences {
 
     public boolean getFabOpen() {
         return mPrefs.getBoolean(PREF_KEY_FAB_OPEN, true);
-    }
-
-
-    public void setHideToolbar(boolean state) {
-        mPrefs.edit().putBoolean(PREF_KEY_TOOLBAR_OPEN, state).apply();
-    }
-
-    public boolean getHideToolbar() {
-        return mPrefs.getBoolean(PREF_KEY_TOOLBAR_OPEN, true);
     }
 
 
