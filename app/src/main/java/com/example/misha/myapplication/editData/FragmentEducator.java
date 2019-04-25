@@ -41,7 +41,7 @@ public class FragmentEducator extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_educator, container, false);
-        input_educator = view.findViewById(R.id.input_educator);
+        input_educator = view.findViewById(R.id.input_educators);
         list_educators = view.findViewById(R.id.list_educators);
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
         list_educators.setAdapter(adapter);

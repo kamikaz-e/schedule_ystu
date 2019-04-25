@@ -71,7 +71,7 @@ public class SubjectList extends DialogFragment {
         rvSubject.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
         rvSubject.setAdapter(listSubjectAdapter);
 
-        Button button_add = view.findViewById(R.id.buttot_add);
+        Button button_add = view.findViewById(R.id.button_add);
         button_add.setOnClickListener(v -> {
             EditData fragment = new EditData();
             getActivity().getSupportFragmentManager().beginTransaction()

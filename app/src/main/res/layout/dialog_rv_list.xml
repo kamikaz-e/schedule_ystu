@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:background="@color/tab_background_selected"
         android:paddingTop="3sp"
-        android:paddingBottom="65dp"
+        android:paddingBottom="@dimen/spacing_medium"
         android:persistentDrawingCache="scrolling"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -25,17 +25,16 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/button_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавить"
+            android:textSize="14sp" />
+        <Button
             android:id="@+id/button_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Закрыть"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/buttot_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Добавить"
             android:textSize="14sp" />
 
     </LinearLayout>

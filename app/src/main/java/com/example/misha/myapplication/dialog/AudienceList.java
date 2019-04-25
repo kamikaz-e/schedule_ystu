@@ -68,7 +68,7 @@ public class AudienceList extends DialogFragment {
         });
         rvAudience.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         rvAudience.setAdapter(listAudienceAdapter);
-        Button button_add = view.findViewById(R.id.buttot_add);
+        Button button_add = view.findViewById(R.id.button_add);
         button_add.setOnClickListener(v -> {
             EditData fragment = new EditData();
             getActivity().getSupportFragmentManager().beginTransaction()

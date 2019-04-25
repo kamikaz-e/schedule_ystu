@@ -70,7 +70,7 @@ public class EducatorList extends DialogFragment {
         rvEducatorR.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
         rvEducatorR.setAdapter(listEDUCATORAdapter);
 
-        Button button_add = view.findViewById(R.id.buttot_add);
+        Button button_add = view.findViewById(R.id.button_add);
         button_add.setOnClickListener(v -> {
             EditData fragment = new EditData();
             getActivity().getSupportFragmentManager().beginTransaction()

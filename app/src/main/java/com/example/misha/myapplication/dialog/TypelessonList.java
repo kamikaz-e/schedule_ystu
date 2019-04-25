@@ -69,7 +69,7 @@ public class TypelessonList extends DialogFragment {
         rvTypelesson.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
         rvTypelesson.setAdapter(listTypelessonAdapter);
 
-        Button button_add = view.findViewById(R.id.buttot_add);
+        Button button_add = view.findViewById(R.id.button_add);
         button_add.setOnClickListener(v -> {
             EditData fragment = new EditData();
             getActivity().getSupportFragmentManager().beginTransaction()
