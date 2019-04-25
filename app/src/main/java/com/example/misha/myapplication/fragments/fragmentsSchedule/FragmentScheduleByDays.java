@@ -27,7 +27,6 @@ import com.example.misha.myapplication.util.DateUtil;
 
 import java.util.Calendar;
 
-import static com.example.misha.myapplication.activity.MainActivity.WEEK_CODE;
 
 
 public class FragmentScheduleByDays extends BaseFragment {
@@ -37,7 +36,6 @@ public class FragmentScheduleByDays extends BaseFragment {
     private RecyclerView dayTabs;
     private ViewPager viewPager;
     private Spinner spinner;
-    private long currWeek = 0;
 
     private CustomSpinnerAdapter customSpinnerAdapter;
 
@@ -45,7 +43,7 @@ public class FragmentScheduleByDays extends BaseFragment {
     public void onResume() {
         super.onResume();
         Preferences.getInstance().setSelectedWeekEditSchedule((int) DateUtil.getCurrWeek());
-        if (spinner == null) {
+
             spinner = new Spinner(getContext());
             spinner.setAdapter(customSpinnerAdapter);
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -65,7 +63,7 @@ public class FragmentScheduleByDays extends BaseFragment {
 
             });
 
-        }
+
         getContext().getToolbar().addView(spinner);
         getContext().setCurrentTitle(null);
         spinner.setSelection((int) DateUtil.getCurrWeek());
@@ -125,9 +123,6 @@ public class FragmentScheduleByDays extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.button) {
             replaceFragment(new FragmentEditSchedule(), true);
-            Intent intent = new Intent();
-            intent.putExtra(Constants.SELECTED_WEEK, (int) currWeek);
-            sendResultToTarget(FragmentEditSchedule.class, WEEK_CODE, FragmentActivity.RESULT_OK, intent);
         }
         return super.onOptionsItemSelected(item);
     }

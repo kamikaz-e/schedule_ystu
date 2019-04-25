@@ -1,9 +1,7 @@
 package com.example.misha.myapplication.fragments.fragmentsSchedule;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,14 +14,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
@@ -32,13 +26,10 @@ import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysPager
 import com.example.misha.myapplication.database.dao.LessonDao;
 import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.fragments.BaseFragment;
-import com.example.misha.myapplication.util.DateUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.misha.myapplication.activity.MainActivity.WEEK_CODE;
 
 public class FragmentEditSchedule extends BaseFragment implements View.OnClickListener {
 
@@ -46,10 +37,8 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     private TabDaysAdapterEditSchedule adapterTabDays;
     private RecyclerView dayTabs;
     private Spinner spinner;
-    private Toolbar toolbar;
     private ViewPager viewPager;
     int currentWeek = 0;
-
     private FloatingActionButton mainFab, evenWeekFab, unevenWeekFab;
     private Animation fabOpen, fabClose, rotateForward, rotateBackward;
     private List<Lesson> lessonListWeek = new ArrayList<>();
@@ -59,29 +48,25 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     @Override
     public void onResume() {
         super.onResume();
-        toolbar = getActivity().findViewById(R.id.toolbar);
-        if (spinner == null) {
-            spinner = new Spinner(getContext());
-            spinner.setAdapter(customSpinnerAdapter);
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    pagerAdapter.setWeek(position);
+        spinner = new Spinner(getContext());
+        spinner.setAdapter(customSpinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                pagerAdapter.setWeek(position);
+                adapterTabDays = new TabDaysAdapterEditSchedule((position1, view) ->
+                        viewPager.setCurrentItem(position1));
+                adapterTabDays.setSelection(viewPager.getCurrentItem());
+                dayTabs.setAdapter(adapterTabDays);
+            }
 
-                    adapterTabDays = new TabDaysAdapterEditSchedule((position1, view) ->
-                            viewPager.setCurrentItem(position1));
-                    adapterTabDays.setSelection(viewPager.getCurrentItem());
-                    dayTabs.setAdapter(adapterTabDays);
-                }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parentView) {
-                }
+        });
 
-            });
-
-        }
-        toolbar.addView(spinner);
+        getContext().getToolbar().addView(spinner);
         getContext().setCurrentTitle(null);
         spinner.setSelection(Preferences.getInstance().getSelectedWeekEditSchedule());
     }
@@ -108,7 +93,6 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
             }
         });
 
-        pagerAdapter = new TabDaysPagerAdapterEditSchedule(getChildFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(selectedDayTab);
         adapterTabDays.setSelection(selectedDayTab);
@@ -144,17 +128,13 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     @Override
     public void onPause() {
         super.onPause();
-        toolbar.removeView(spinner);
+        getContext().getToolbar().removeView(spinner);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.button) {
             replaceFragment(new FragmentScheduleByDays(), true);
-            Intent intent = new Intent();
-            intent.putExtra(Constants.SELECTED_WEEK, Preferences.getInstance().getSelectedWeekEditSchedule());
-            sendResultToTarget(FragmentScheduleByDays.class, WEEK_CODE, FragmentActivity.RESULT_OK, intent);
-            Preferences.getInstance().setSelectedPositionTabDays(0);
         }
         return super.onOptionsItemSelected(item);
     }
