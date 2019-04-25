@@ -58,7 +58,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void replaceFragment(Fragment fragment, boolean toBackStack) {
-        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         if (toBackStack) {
             fragmentTransaction.addToBackStack(Fragment.class.getSimpleName());
         }
@@ -67,6 +67,6 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void replaceFragment(Fragment fragment) {
-        replaceFragment(fragment, false);
+        replaceFragment(fragment, true);
     }
 }
