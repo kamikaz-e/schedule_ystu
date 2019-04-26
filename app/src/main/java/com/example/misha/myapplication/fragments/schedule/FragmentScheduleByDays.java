@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.fragments.schedule;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,6 +42,7 @@ public class FragmentScheduleByDays extends BaseFragment {
         Preferences.getInstance().setSelectedWeekEditSchedule((int) DateUtil.getCurrWeek());
 
         spinner = new Spinner(getContext());
+        spinner.setBackgroundColor(Color.TRANSPARENT);
         spinner.setAdapter(customSpinnerAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

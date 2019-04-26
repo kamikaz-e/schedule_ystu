@@ -54,12 +54,10 @@ public class SubjectList extends DialogFragment {
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
         View view = layoutInflater.inflate(R.layout.dialog_rv_list, null);
-        View layoutTitleDialog = layoutInflater.inflate(R.layout.title_dialog, null);
-        TextView title_dialog = layoutTitleDialog.findViewById(R.id.dialog_textView);
+        TextView title_dialog = view.findViewById(R.id.dialog_textView);
         title_dialog.setText("Предмет");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        builder.setCustomTitle(layoutTitleDialog);
         rvSubject = view.findViewById(R.id.rv_dialog);
         listSubjectAdapter = new ListSubjectsAdapter(listSubjects, (position, view1) -> {
             Intent intent = new Intent();

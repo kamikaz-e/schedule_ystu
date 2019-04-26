@@ -2,6 +2,7 @@ package com.example.misha.myapplication.fragments.schedule;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,7 +21,6 @@ import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.activity.DrawerActivity;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysAdapterEditSchedule;
 import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysPagerAdapterEditSchedule;
@@ -50,6 +50,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     public void onResume() {
         super.onResume();
         spinner = new Spinner(getContext());
+        spinner.setBackgroundColor(Color.TRANSPARENT);
         spinner.setAdapter(customSpinnerAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

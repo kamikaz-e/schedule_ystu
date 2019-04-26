@@ -10,17 +10,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.editScheduleListAdapters.ListEducatorAdapter;
 import com.example.misha.myapplication.database.entity.Educator;
 import com.example.misha.myapplication.fragments.EditData;
 
 import java.util.ArrayList;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 //Todo прочитать про наследование инкапсуляцию интерфейсы абстрактные классы и generic.
@@ -53,12 +53,10 @@ public class EducatorList extends DialogFragment {
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
         View view = layoutInflater.inflate(R.layout.dialog_rv_list, null);
-        View layoutTitleDialog = layoutInflater.inflate(R.layout.title_dialog, null);
-        TextView title_dialog = layoutTitleDialog.findViewById(R.id.dialog_textView);
+        TextView title_dialog = view.findViewById(R.id.dialog_textView);
         title_dialog.setText("Преподаватель");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        builder.setCustomTitle(layoutTitleDialog);
         rvEducatorR = view.findViewById(R.id.rv_dialog);
         listEDUCATORAdapter = new ListEducatorAdapter(listEducator, (position, view1) -> {
             Intent intent = new Intent();
