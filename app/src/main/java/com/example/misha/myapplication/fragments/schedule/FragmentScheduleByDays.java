@@ -1,6 +1,5 @@
-package com.example.misha.myapplication.fragments.fragmentsSchedule;
+package com.example.misha.myapplication.fragments.schedule;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,16 +10,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
-import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysAdapter;
+import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysAdapterEditSchedule;
 import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysPagerAdapter;
 import com.example.misha.myapplication.fragments.BaseFragment;
 import com.example.misha.myapplication.util.DateUtil;
@@ -28,11 +25,10 @@ import com.example.misha.myapplication.util.DateUtil;
 import java.util.Calendar;
 
 
-
 public class FragmentScheduleByDays extends BaseFragment {
 
     private TabDaysPagerAdapter pagerAdapter;
-    private TabDaysAdapter adapterTabDays;
+    private TabDaysAdapterEditSchedule adapterTabDays;
     private RecyclerView dayTabs;
     private ViewPager viewPager;
     private Spinner spinner;
@@ -44,24 +40,23 @@ public class FragmentScheduleByDays extends BaseFragment {
         super.onResume();
         Preferences.getInstance().setSelectedWeekEditSchedule((int) DateUtil.getCurrWeek());
 
-            spinner = new Spinner(getContext());
-            spinner.setAdapter(customSpinnerAdapter);
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    pagerAdapter.setWeek(position);
-                    adapterTabDays = new TabDaysAdapter((position1, view) ->
-                            viewPager.setCurrentItem(position1));
-                    adapterTabDays.setSelection(viewPager.getCurrentItem());
-                    dayTabs.setAdapter(adapterTabDays);
-                    Preferences.getInstance().setSelectedWeekEditSchedule(position);
-                }
+        spinner = new Spinner(getContext());
+        spinner.setAdapter(customSpinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                pagerAdapter.setWeek(position);
+                adapterTabDays.updateData(position);
+                adapterTabDays.setSelection(viewPager.getCurrentItem());
+                dayTabs.setAdapter(adapterTabDays);
+                Preferences.getInstance().setSelectedWeekEditSchedule(position);
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parentView) {
-                }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
 
-            });
+        });
 
 
         getContext().getToolbar().addView(spinner);
@@ -75,7 +70,7 @@ public class FragmentScheduleByDays extends BaseFragment {
         setHasOptionsMenu(true);
         customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
         pagerAdapter = new TabDaysPagerAdapter(getChildFragmentManager());
-        adapterTabDays = new TabDaysAdapter((position, view) -> viewPager.setCurrentItem(position));
+        adapterTabDays = new TabDaysAdapterEditSchedule((position, view) -> viewPager.setCurrentItem(position));
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,7 +117,7 @@ public class FragmentScheduleByDays extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.button) {
-            replaceFragment(new FragmentEditSchedule(), true);
+            getContext().replaceFragment(new FragmentEditSchedule(), true);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -1,38 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tool="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+<RelativeLayout
 
-    <RelativeLayout
-        android:id="@+id/day_relLay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/tab_background_selected"
-        android:paddingStart="8sp"
-        android:paddingEnd="8sp">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
-            android:layout_height="40sp"
+            android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:maxLines="2"
-            android:scrollHorizontally="false"
+            android:maxLines="1"
+            android:layout_centerInParent="true"
             android:textColor="@color/color_primary_text"
             android:textSize="16sp"
             tool:text="31" />
-
-        <TextView
-            android:id="@+id/dayWeek"
-            android:layout_width="wrap_content"
-            android:layout_height="40sp"
-            android:layout_marginStart="7sp"
-            android:layout_toEndOf="@id/date"
-            android:gravity="center_vertical"
-            android:textColor="@color/color_primary_text"
-            android:textSize="16sp"
-            tool:text="ПН" />
-    </RelativeLayout>
 
 </RelativeLayout>

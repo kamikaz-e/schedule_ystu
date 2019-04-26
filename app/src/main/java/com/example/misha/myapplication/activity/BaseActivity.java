@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.fragments.BaseFragment;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,6 +19,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import static com.example.misha.myapplication.fragments.BaseFragment.handleBackPressed;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -40,7 +43,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
+        toolbar.setNavigationOnClickListener(createDrawerClick());
         setupActionBar();
+    }
+
+    protected View.OnClickListener createDrawerClick() {
+        return view -> onBackPressed();
     }
 
     protected void setupActionBar() {
@@ -54,6 +62,30 @@ public abstract class BaseActivity extends AppCompatActivity {
         toolbar.setTitle(title);
         actionBar.setTitle(title);
         currentTitle = title;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!handleBackPressed(getSupportFragmentManager())) {
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                super.onBackPressed();
+            } else {
+                finish();
+            }
+        }
+    }
+
+    public boolean handleBackPressed(FragmentManager manager) {
+        if (manager.getFragments() == null) return false;
+        for (Fragment frag : manager.getFragments()) {
+            if (frag == null) continue;
+            if (frag.isVisible() && frag instanceof BaseFragment) {
+                if (((BaseFragment) frag).onBackPressed()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void setToolbarVisibility(boolean toolbarEnabled) {
@@ -111,6 +143,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (toBackStack) {
             fragmentTransaction.addToBackStack(Fragment.class.getSimpleName());
         }
+
         fragmentTransaction.replace(R.id.content_frame, fragment, fragment.getClass().getName())
                 .commitAllowingStateLoss();
     }

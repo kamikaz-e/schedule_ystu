@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.fragments.fragmentsSchedule;
+package com.example.misha.myapplication.fragments.schedule;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -20,6 +20,7 @@ import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.activity.DrawerActivity;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysAdapterEditSchedule;
 import com.example.misha.myapplication.adapter.tabDays.editSchedule.TabDaysPagerAdapterEditSchedule;
@@ -54,10 +55,9 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 pagerAdapter.setWeek(position);
-                adapterTabDays = new TabDaysAdapterEditSchedule((position1, view) ->
-                        viewPager.setCurrentItem(position1));
+                adapterTabDays.updateData(position);
                 adapterTabDays.setSelection(viewPager.getCurrentItem());
-                dayTabs.setAdapter(adapterTabDays);
+                Preferences.getInstance().setSelectedWeekEditSchedule(position);
             }
 
             @Override
@@ -75,6 +75,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        setDrawerEnabled(false);
         customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
         pagerAdapter = new TabDaysPagerAdapterEditSchedule(getChildFragmentManager());
         adapterTabDays = new TabDaysAdapterEditSchedule((position, view) -> viewPager.setCurrentItem(position));
@@ -134,7 +135,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.button) {
-            replaceFragment(new FragmentScheduleByDays(), true);
+            getContext().getSupportFragmentManager().popBackStack();
         }
         return super.onOptionsItemSelected(item);
     }

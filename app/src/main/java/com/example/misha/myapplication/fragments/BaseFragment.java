@@ -3,38 +3,49 @@ package com.example.misha.myapplication.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.activity.BaseActivity;
+import com.example.misha.myapplication.activity.DrawerActivity;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 public abstract class BaseFragment extends Fragment {
 
     private boolean toolbarEnabled;
+
+    private boolean drawerEnabled;
 
     @Override
     public void onStart() {
         super.onStart();
         getContext().setToolbarVisibility(toolbarEnabled);
+        if (drawerEnabled) {
+            ((DrawerActivity) getContext()).enable();
+        } else {
+            ((DrawerActivity) getContext()).disable();
+        }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolbarEnabled(true);
+        setDrawerEnabled(true);
     }
 
     public void setToolbarEnabled(boolean state) {
         this.toolbarEnabled = state;
+    }
+
+    public void setDrawerEnabled(boolean drawerEnabled) {
+        this.drawerEnabled = drawerEnabled;
     }
 
     private void sendResultToTarget(Class target, Fragment root, int request,
@@ -56,6 +67,35 @@ public abstract class BaseFragment extends Fragment {
             }
             sendResultToTarget(target, fragment, request, result, data);
         }
+    }
+
+    /**
+     * Handle on back pressed.
+     * @param manager manager
+     * @return true if manger or child manager pop back stack
+     */
+    public static boolean handleBackPressed(FragmentManager manager) {
+        if (manager.getFragments() != null) {
+            for (Fragment frag : manager.getFragments()) {
+                if (frag != null && frag.isVisible() && frag instanceof BaseFragment) {
+                    if (((BaseFragment) frag).onBackPressed()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean onBackPressed() {
+        FragmentManager childFragmentManager = getChildFragmentManager();
+        if (handleBackPressed(childFragmentManager)) {
+            return true;
+        } else if (getUserVisibleHint() && childFragmentManager.getBackStackEntryCount() > 0) {
+            childFragmentManager.popBackStack();
+            return true;
+        }
+        return false;
     }
 
     public void sendResultToTarget(Class target, int request, int result, Intent data) {

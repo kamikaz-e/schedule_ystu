@@ -11,8 +11,9 @@
         android:id="@+id/rv_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:orientation="vertical"
+        app:spanCount="6"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
