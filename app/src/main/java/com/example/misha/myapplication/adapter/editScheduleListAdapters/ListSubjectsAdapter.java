@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter.editScheduleListAdapters;
+package com.example.misha.myapplication.adapter.EditScheduleListAdapters;
 
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;

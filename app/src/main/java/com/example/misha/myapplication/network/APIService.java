@@ -15,14 +15,13 @@ import retrofit2.http.POST;
 public interface APIService {
     @FormUrlEncoded
     @POST("export.php")
-    Call<Throwable> insertData(@Field("name_db") String get_name,
+    Call<Throwable> insertData(@Field("name_db") String nameGroup,
                                @Field("subjects") String subjects,
                                @Field("audiences") String audiences,
                                @Field("educators") String educators,
                                @Field("typelessons") String typelessons,
                                @Field("calls") String calls,
-                               @Field("lessons") String lessons,
-                               @Field("date") String date);
+                               @Field("lessons") String lessons);
 
     @POST("subjects.php")
     Call<ArrayList<Subject>> getSubjects(@Body ScheduleRequest request);

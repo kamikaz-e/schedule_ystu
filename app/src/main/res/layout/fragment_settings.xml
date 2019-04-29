@@ -89,45 +89,4 @@
         android:layout_height="1dp"
         android:background="#FFFFFF" />
 
-
-    <RelativeLayout
-        android:id="@+id/export_data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#383838"
-        android:orientation="horizontal">
-
-
-        <ImageView
-            android:id="@+id/image_export"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:layout_margin="@dimen/spacing_medium"
-            app:srcCompat="@drawable/ic_export" />
-
-        <TextView
-            android:id="@+id/text_export"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_normal"
-            android:layout_toEndOf="@+id/image_export"
-            android:text="@string/settings_export_title"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="15sp"
-            android:layout_marginBottom="@dimen/spacing_normal"
-            app:srcCompat="@drawable/ic_arrow_right" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="#FFFFFF" />
-
 </LinearLayout>

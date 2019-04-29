@@ -95,9 +95,8 @@
     <string name="navigation_view_title">Расписание</string>
     <string name="call_title">Выбрать</string>
     <string name="settings_date_start_title">Дата начала семестра</string>
-    <string name="settings_import_title">Выгрузить расписание с сервера</string>
-    <string name="settings_export_title">Загрузить расписание на сервер</string>
-    <string name="dialog_title">Название расписания</string>
+    <string name="settings_import_title">Загрузить расписание с сервера</string>
+    <string name="dialog_title">Название группы</string>
     <string name="dialog_edittext">Введите название</string>
     <string name="dialog_button_add">Добавить</string>
     <string name="dialog_button_close">Закрыть</string>
