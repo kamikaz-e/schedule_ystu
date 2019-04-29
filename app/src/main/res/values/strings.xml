@@ -89,5 +89,22 @@
     <string name="maybe">maybe</string>
     <string name="message_text">message</string>
     <string name="textViewOptions">⋮</string>
+    <string name="start_activity_title">УЧЕБНОЕ  РАСПИСАНИЕ</string>
+    <string name="start_button_import_schedule">Загрузить расписание</string>
+    <string name="start_button_create_schedule">Создать новое расписание</string>
+    <string name="navigation_view_title">Расписание</string>
+    <string name="call_title">Выбрать</string>
+    <string name="settings_date_start_title">Дата начала семестра</string>
+    <string name="settings_import_title">Выгрузить расписание с сервера</string>
+    <string name="settings_export_title">Загрузить расписание на сервер</string>
+    <string name="dialog_title">Название расписания</string>
+    <string name="dialog_edittext">Введите название</string>
+    <string name="dialog_button_add">Добавить</string>
+    <string name="dialog_button_close">Закрыть</string>
+    <string name="audience_edittext">Аудитория</string>
+    <string name="data_start">Дата начала семестра</string>
+    <string name="educator_edittext">Преподаватель</string>
+    <string name="typelesson_edittext">Тип занятия</string>
+    <string name="subject_edittext">Предмет</string>
 
 </resources>

@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.misha.myapplication.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.CallDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
@@ -31,15 +29,12 @@ import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.database.entity.Subject;
 import com.example.misha.myapplication.database.entity.Typelesson;
 import com.example.misha.myapplication.network.RetrofitClient;
-import com.example.misha.myapplication.network.request.ScheduleRequest;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -107,7 +102,6 @@ public class Settings extends BaseFragment {
             Preferences.getInstance().setSemesterStart(selectedDate.getTimeInMillis());
 
 
-
             Calendar mCalendar = Calendar.getInstance();
             mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
             mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
@@ -144,14 +138,14 @@ public class Settings extends BaseFragment {
             SubjectDao.getInstance().deleteAll();
             AudienceDao.getInstance().deleteAll();
             EducatorDao.getInstance().deleteAll();
-            load_db();
+            // load_db();
 
         }).setNegativeButton("Отмена", (dialog, id) -> {
         });
         return builder.create();
     }
 
-    void load_db() {
+  /*  void load_db() {
         RetrofitClient.getInstance().getRequestInterface().getSubjects(new ScheduleRequest(database_name)).enqueue(new Callback<ArrayList<Subject>>() {
             @Override
             public void onResponse(Call<ArrayList<Subject>> call, Response<ArrayList<Subject>> response) {
@@ -175,7 +169,7 @@ public class Settings extends BaseFragment {
             }
         });
     }
-
+*/
 
     public Dialog onCreateDialogExport() {
         LayoutInflater li = LayoutInflater.from(getContext());

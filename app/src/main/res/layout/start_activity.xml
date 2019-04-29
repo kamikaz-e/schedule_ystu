@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:background="#6464ff"
-        android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6464ff"
+    android:gravity="center"
+    android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/start_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="УЧЕБНОЕ \nРАСПИСАНИЕ"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="36dp" />
-
-
-        <Button
-            android:id="@+id/start_buttonOne"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="#4646B3"
-            android:padding="@dimen/spacing_normal"
-            android:text="Загрузить расписание"
-            android:textSize="18dp" />
+    <TextView
+        android:id="@+id/start_activity_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/start_activity_title"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp" />
 
 
-        <Button
-            android:id="@+id/start_buttonTwo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="#4646B3"
-            android:padding="@dimen/spacing_normal"
-            android:text="Создать новое расписание"
-            android:textSize="18dp" />
+    <Button
+        android:id="@+id/start_button_import_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="#4646B3"
+        android:padding="@dimen/spacing_normal"
+        android:text="@string/start_button_import_schedule"
+        android:textSize="18sp" />
 
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/start_button_create_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:background="#4646B3"
+        android:padding="@dimen/spacing_normal"
+        android:text="@string/start_button_create_schedule"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

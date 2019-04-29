@@ -28,9 +28,9 @@ public class ActivityStart extends AppCompatActivity {
         setContentView(R.layout.start_activity);
 
 
-        Button start_buttonOne = findViewById(R.id.start_buttonOne);
+        Button start_buttonOne = findViewById(R.id.start_button_import_schedule);
         start_buttonOne.setOnClickListener(v -> onCreateDialogImport().show());
-        Button start_buttonTwo = findViewById(R.id.start_buttonTwo);
+        Button start_buttonTwo = findViewById(R.id.start_button_create_schedule);
         start_buttonTwo.setOnClickListener(v -> {
 
         });

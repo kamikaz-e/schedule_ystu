@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:padding="@dimen/spacing_medium">
 
     <TextView
         android:id="@+id/dialog_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_medium"
-
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/spacing_small"
         android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_small"
         android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_medium"
         android:textSize="19sp"
         tools:text="Преподаватель" />
 
@@ -25,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/relLay"
         android:layout_below="@+id/dialog_textView"
-        android:background="@color/tab_background_selected"
         android:layout_margin="@dimen/spacing_small"
+        android:background="@color/tab_background_selected"
         android:minHeight="100sp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -34,16 +32,16 @@
         android:id="@+id/relLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end"
         android:layout_alignParentBottom="true"
+        android:gravity="end"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/button_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Добавить"
             android:padding="@dimen/spacing_medium"
+            android:text="@string/dialog_button_add"
             android:textSize="14sp" />
 
         <Button
@@ -51,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacing_medium"
-            android:text="Закрыть"
+            android:text="@string/dialog_button_close"
             android:textSize="14sp" />
     </LinearLayout>
 

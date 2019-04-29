@@ -15,16 +15,16 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_medium"
-            android:paddingBottom="@dimen/spacing_normal"
-            android:hint="Тип занятия"
+            android:hint="@string/typelesson_edittext"
             android:imeOptions="actionDone"
             android:inputType="textCapSentences"
             android:maxLength="20"
+            android:paddingBottom="@dimen/spacing_normal"
             android:textSize="18sp" />
 
         <ListView
             android:id="@+id/list_typelesson"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </FrameLayout>

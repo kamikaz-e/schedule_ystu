@@ -15,16 +15,16 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_medium"
-            android:paddingBottom="@dimen/spacing_normal"
-            android:hint="Преподаватель"
+            android:hint="@string/educator_edittext"
             android:imeOptions="actionDone"
             android:inputType="textCapSentences"
             android:maxLength="60"
+            android:paddingBottom="@dimen/spacing_normal"
             android:textSize="18sp" />
 
         <ListView
             android:id="@+id/list_educators"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </FrameLayout>

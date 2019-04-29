@@ -16,7 +16,7 @@
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_medium"
             android:paddingBottom="@dimen/spacing_normal"
-            android:hint="Предмет"
+            android:hint="@string/subject_edittext"
             android:imeOptions="actionDone"
             android:inputType="textCapSentences"
             android:maxLength="60"
