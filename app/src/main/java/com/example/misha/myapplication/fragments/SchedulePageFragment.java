@@ -17,12 +17,11 @@ import java.util.List;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 public class SchedulePageFragment extends Fragment {
 
-    private View fragmentView;
-    private RecyclerView rvLessons;
     private ScheduleAdapter rvadapter;
-    private List<Lesson> lessonList = new ArrayList<>();
 
     private int positionWeek;
     private int day;
@@ -45,10 +44,10 @@ public class SchedulePageFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
-        rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
+        View fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
+        RecyclerView rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
         rvLessons.setAdapter(rvadapter);
         return fragmentView;
     }
@@ -60,7 +59,7 @@ public class SchedulePageFragment extends Fragment {
     }
 
     private void updateList() {
-        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
+        List<Lesson> lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
         rvadapter.setLessonList(lessonList);
         rvadapter.notifyDataSetChanged();
     }

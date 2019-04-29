@@ -11,9 +11,10 @@ import com.example.misha.myapplication.SimpleItemClickListener;
 import com.example.misha.myapplication.database.entity.Educator;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class ListEducatorAdapter extends RecyclerView.Adapter<ListEducatorAdapter.ViewHolder> {
 

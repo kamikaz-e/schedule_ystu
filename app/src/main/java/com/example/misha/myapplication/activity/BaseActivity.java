@@ -4,14 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.fragments.BaseFragment;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,14 +12,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import static com.example.misha.myapplication.fragments.BaseFragment.handleBackPressed;
+import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.fragments.BaseFragment;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected CharSequence currentTitle;
-
     protected Toolbar toolbar;
-
     protected ActionBar actionBar;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -91,6 +87,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void setToolbarVisibility(boolean toolbarEnabled) {
         findViewById(R.id.toolbar).setVisibility(toolbarEnabled ? View.VISIBLE : View.GONE);
     }
+
     private void sendResultToTarget(Class target, Fragment root, int request,
                                     int result, Intent data) {
         if (root != null) {

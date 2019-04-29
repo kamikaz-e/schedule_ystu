@@ -13,6 +13,4 @@ public interface DaoInterface<T> {
     void deleteAll();
 
     boolean deleteItemById(long id, String idKey);
-
-
 }

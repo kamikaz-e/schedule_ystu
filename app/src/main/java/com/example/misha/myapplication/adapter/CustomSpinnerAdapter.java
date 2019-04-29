@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ public class CustomSpinnerAdapter extends BaseAdapter implements SpinnerAdapter 
         mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
         mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         ArrayList<String> allDays = new ArrayList<>();
-        SimpleDateFormat mFormat = new SimpleDateFormat("dd.MM");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat mFormat = new SimpleDateFormat("dd.MM");
         for (int week = 0; week < 17; week++) {
             for (int day = 0; day < 7; day++) {
                 String startWeek = mFormat.format(mCalendar.getTime());

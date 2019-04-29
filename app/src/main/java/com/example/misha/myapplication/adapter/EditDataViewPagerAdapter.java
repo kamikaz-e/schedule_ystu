@@ -1,21 +1,25 @@
 package com.example.misha.myapplication.adapter;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+
 import com.example.misha.myapplication.editData.FragmentAudience;
 import com.example.misha.myapplication.editData.FragmentEducator;
 import com.example.misha.myapplication.editData.FragmentSubject;
 import com.example.misha.myapplication.editData.FragmentTypelesson;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import org.jetbrains.annotations.NotNull;
 
 
 public class EditDataViewPagerAdapter extends FragmentStatePagerAdapter {
+
 
     public EditDataViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
+    @NotNull
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
@@ -33,7 +37,7 @@ public class EditDataViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public int getItemPosition(Object object) {
+    public int getItemPosition(@NotNull Object object) {
         return POSITION_NONE;
     }
 

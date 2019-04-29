@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 
 //Todo прочитать про наследование инкапсуляцию интерфейсы абстрактные классы и generic.
 public class AudienceList extends DialogFragment {
@@ -46,6 +48,7 @@ public class AudienceList extends DialogFragment {
         return fragment;
     }
 
+    @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         clickedPosition = getArguments().getInt(POSITION);
         listAudience = getArguments().getParcelableArrayList(AUDIENCES);

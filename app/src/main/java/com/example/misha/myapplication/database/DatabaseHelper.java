@@ -6,34 +6,43 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
-/** Class creates data base if it don't exist. */
+/**
+ * Class creates data base if it don't exist.
+ */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    /** Name of database file. */
+    /**
+     * Name of database file.
+     */
     public static final String DATABASE_NAME = "Lesson.db";
-    /** Database version. */
+    /**
+     * Database version.
+     */
     public static final int DATABASE_VERSION = 1;
-    /** Migration list. */
-    private final ArrayList<Patch> migrationsList = new ArrayList<Patch>() { {
-        add(createV1Patch());
-    }
+    /**
+     * Migration list.
+     */
+    private final ArrayList<Patch> migrationsList = new ArrayList<Patch>() {
+        {
+            add(createV1Patch());
+        }
     };
 
 
-    private static final String CREATE_TABLE_SUBJECTS= "CREATE TABLE  subjects " +
+    private static final String CREATE_TABLE_SUBJECTS = "CREATE TABLE  subjects " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "subject VARCHAR UNIQUE ON CONFLICT IGNORE );";
-    private static final String CREATE_TABLE_AUDIENCES= "CREATE TABLE  audiences  " +
+    private static final String CREATE_TABLE_AUDIENCES = "CREATE TABLE  audiences  " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "audience VARCHAR UNIQUE ON CONFLICT IGNORE );";
-    private static final String CREATE_TABLE_EDUCATORS= "CREATE TABLE  educators  " +
+    private static final String CREATE_TABLE_EDUCATORS = "CREATE TABLE  educators  " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "educator VARCHAR UNIQUE ON CONFLICT IGNORE );";
-    private static final String CREATE_TABLE_TYPELESSONS= "CREATE TABLE  typelessons  " +
+    private static final String CREATE_TABLE_TYPELESSONS = "CREATE TABLE  typelessons  " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "typelesson VARCHAR UNIQUE ON CONFLICT IGNORE );";
 
-    private static final String CREATE_CALL_SCHEDULE  = "CREATE TABLE calls " +
+    private static final String CREATE_CALL_SCHEDULE = "CREATE TABLE calls " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "time_lesson VARCHAR UNIQUE ON CONFLICT IGNORE );";
 
@@ -78,6 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /**
      * Create v1 patch.
+     *
      * @return v1 patch
      */
     private Patch createV1Patch() {
@@ -99,17 +109,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         };
     }
 
-    /** Database patch abstract class. */
+    /**
+     * Database patch abstract class.
+     */
     abstract class Patch {
 
         /**
          * Apply patch.
+         *
          * @param sdb database
          */
         public abstract void apply(SQLiteDatabase sdb);
 
         /**
          * Revert patch.
+         *
          * @param sdb database
          */
         public abstract void revert(SQLiteDatabase sdb);

@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.CallDao;
@@ -21,8 +23,6 @@ import com.example.misha.myapplication.database.entity.Typelesson;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapter.ViewHolder> {
 
@@ -71,33 +71,33 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.onBindView(position);
 
-            holder.textViewOptions.setOnClickListener(view -> {
+        holder.textViewOptions.setOnClickListener(view -> {
 
-                PopupMenu popup = new PopupMenu(view.getContext(), holder.textViewOptions);
-                popup.inflate(R.menu.menu_item_edit_lesson);
-                if (position==0) {
-                    popup.getMenu().removeItem(R.id.copyUp);
+            PopupMenu popup = new PopupMenu(view.getContext(), holder.textViewOptions);
+            popup.inflate(R.menu.menu_item_edit_lesson);
+            if (position == 0) {
+                popup.getMenu().removeItem(R.id.copyUp);
+            }
+            if (position == 5) {
+                popup.getMenu().removeItem(R.id.copyDown);
+            }
+            popup.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.copyUp:
+                        callback.onCopyUpClick(position);
+                        return true;
+                    case R.id.copyDown:
+                        callback.onCopyDownClick(position);
+                        return true;
+                    case R.id.clearLesson:
+                        callback.onClearLessonClick(position);
+                        return true;
+                    default:
+                        return false;
                 }
-                if (position==5) {
-                    popup.getMenu().removeItem(R.id.copyDown);
-                }
-                popup.setOnMenuItemClickListener(item -> {
-                    switch (item.getItemId()) {
-                        case R.id.copyUp:
-                            callback.onCopyUpClick(position);
-                            return true;
-                        case R.id.copyDown:
-                            callback.onCopyDownClick(position);
-                            return true;
-                        case R.id.clearLesson:
-                            callback.onClearLessonClick(position);
-                            return true;
-                        default:
-                            return false;
-                    }
-                });
-                popup.show();
             });
+            popup.show();
+        });
 
     }
 

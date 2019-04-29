@@ -1,7 +1,6 @@
 package com.example.misha.myapplication.activity;
 
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 
@@ -17,12 +16,9 @@ import com.google.android.material.navigation.NavigationView;
 import static com.example.misha.myapplication.util.DateUtil.hintKeyboard;
 
 public abstract class DrawerActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    /** Fragment managing navigation drawer. */
+    
     protected NavigationView navigationView;
-
     protected DrawerLayout drawerLayout;
-
     private ActionBarDrawerToggle toggle;
 
     @Override
@@ -102,12 +98,9 @@ public abstract class DrawerActivity extends BaseActivity implements NavigationV
         }
     }
 
-
-    /* Open drawer. */
     public void openDrawer() {
         drawerLayout.openDrawer(GravityCompat.START);
     }
-
 
 
     public void disable() {
@@ -123,10 +116,6 @@ public abstract class DrawerActivity extends BaseActivity implements NavigationV
         drawerLayout.setEnabled(true);
     }
 
-    /**
-     * Mark partition as selected.
-     * @param id selected id
-     */
     public void markPartition(int id) {
         navigationView.setCheckedItem(id);
     }

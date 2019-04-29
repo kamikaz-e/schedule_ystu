@@ -9,7 +9,7 @@ public final class Preferences {
 
     private static volatile Preferences instance;
     private final SharedPreferences mPrefs;
-    Calendar calendar = Calendar.getInstance();
+    private Calendar calendar = Calendar.getInstance();
 
     private static final String PREF_KEY_FIRST_OPEN_HINT = "PREF_KEY_FIRST_OPEN_HINT";
     private static final String PREF_KEY_SEMESTER_START = "PREF_KEY_SEMESTER_START";
@@ -70,7 +70,6 @@ public final class Preferences {
     public boolean getFabOpen() {
         return mPrefs.getBoolean(PREF_KEY_FAB_OPEN, true);
     }
-
 
 
 }

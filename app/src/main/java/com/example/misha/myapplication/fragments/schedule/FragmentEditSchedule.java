@@ -39,7 +39,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     private RecyclerView dayTabs;
     private Spinner spinner;
     private ViewPager viewPager;
-    int currentWeek = 0;
+    private int currentWeek = 0;
     private FloatingActionButton mainFab, evenWeekFab, unevenWeekFab;
     private Animation fabOpen, fabClose, rotateForward, rotateBackward;
     private List<Lesson> lessonListWeek = new ArrayList<>();

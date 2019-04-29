@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -19,8 +18,6 @@ public class ActivityStart extends AppCompatActivity {
 
 
     final Context context = this;
-    private ArrayAdapter<String> adapter;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,13 +39,12 @@ public class ActivityStart extends AppCompatActivity {
         View view = li.inflate(R.layout.dialog_signin, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        builder.setCancelable(false).setPositiveButton("Импортировать", (dialog, id) -> {
-            Toast.makeText(context, "Позже здесь будет импорт расписания", Toast.LENGTH_SHORT).show();
+        builder.setCancelable(false).setPositiveButton("Загрузить расписание", (dialog, id) -> {
+            Toast.makeText(context, "Позже здесь будет загрузка расписания", Toast.LENGTH_SHORT).show();
         }).setNegativeButton("Отмена", (dialog, id) -> {
         });
         return builder.create();
     }
-
 
 
 }

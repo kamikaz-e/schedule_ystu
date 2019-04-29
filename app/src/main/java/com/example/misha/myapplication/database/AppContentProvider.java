@@ -6,17 +6,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+
 import androidx.annotation.NonNull;
 
-/** Class provides access to application data. */
+/**
+ * Class provides access to application data.
+ */
 @SuppressWarnings("PMD")
 public class AppContentProvider extends ContentProvider {
 
-    /** Database helper object. */
+    /**
+     * Database helper object.
+     */
     private SQLiteOpenHelper database;
-    /** Application Content provider URI. */
+    /**
+     * Application Content provider URI.
+     */
     private static final Uri PROVIDER_URI
-        = Uri.parse("content://com.example.misha.myapplication.provider/");
+            = Uri.parse("content://com.example.misha.myapplication.provider/");
 
     public static final String LESSONS_TABLE = "lessons";
     public static final String SUBJECTS_TABLE = "subjects";
@@ -32,7 +39,6 @@ public class AppContentProvider extends ContentProvider {
     public static final Uri EDUCATORS_URI = Uri.parse(PROVIDER_URI + EDUCATORS_TABLE);
     public static final Uri TYPELESSONS_URI = Uri.parse(PROVIDER_URI + TYPELESSONS_TABLE);
     public static final Uri CALLS_URI = Uri.parse(PROVIDER_URI + CALLS_TABLE);
-
 
 
     public static final String LIMIT = "limit";

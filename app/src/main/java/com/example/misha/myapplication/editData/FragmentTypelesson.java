@@ -24,9 +24,9 @@ import androidx.fragment.app.Fragment;
 
 public class FragmentTypelesson extends Fragment {
 
-    EditText inputTypelesson;
-    ListView typelessonListView;
-    ArrayList<Typelesson> typelessonList = new ArrayList<>();
+    private EditText inputTypelesson;
+    private ListView typelessonListView;
+    private ArrayList<Typelesson> typelessonList = new ArrayList<>();
     public ArrayAdapter<Typelesson> adapter;
 
     public FragmentTypelesson() {
@@ -43,7 +43,7 @@ public class FragmentTypelesson extends Fragment {
         View view = inflater.inflate(R.layout.fragment_typelesson, container, false);
         inputTypelesson = view.findViewById(R.id.input_typelesson);
         typelessonListView = view.findViewById(R.id.list_typelesson);
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, typelessonList);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, typelessonList);
         typelessonListView.setAdapter(adapter);
         typelessonListView.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());
         updateListView();
@@ -69,7 +69,7 @@ public class FragmentTypelesson extends Fragment {
         return view;
     }
 
-    public Dialog onCreateDialogDeleteItem(final int position) {
+    private Dialog onCreateDialogDeleteItem(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
             Typelesson typelesson = typelessonList.get(position);
@@ -82,9 +82,9 @@ public class FragmentTypelesson extends Fragment {
     }
 
 
-    public void updateListView() {
+    private void updateListView() {
         typelessonList = TypelessonDao.getInstance().getAllData();
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, typelessonList);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, typelessonList);
         typelessonListView.setAdapter(adapter);
     }
 

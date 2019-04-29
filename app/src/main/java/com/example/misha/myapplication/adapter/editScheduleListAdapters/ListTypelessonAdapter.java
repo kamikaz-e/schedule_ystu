@@ -19,9 +19,9 @@ import java.util.List;
 public class ListTypelessonAdapter extends RecyclerView.Adapter<ListTypelessonAdapter.ViewHolder> {
 
     private List<Typelesson> listTypelesson;
-
     private SimpleItemClickListener itemClickListener;
 
+    
     public ListTypelessonAdapter(ArrayList<Typelesson> typelesson, SimpleItemClickListener simpleItemClickListener) {
         this.listTypelesson = typelesson;
         this.itemClickListener = simpleItemClickListener;

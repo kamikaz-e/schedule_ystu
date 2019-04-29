@@ -15,12 +15,13 @@ import java.util.ArrayList;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 
 public class CallsScheduleAdapter extends RecyclerView.Adapter<CallsScheduleAdapter.ViewHolder> {
 
 
     private ArrayList<Calls> callsList = new ArrayList<>();
-
     private CallScheduleCallback itemClickListener;
 
 
@@ -28,6 +29,7 @@ public class CallsScheduleAdapter extends RecyclerView.Adapter<CallsScheduleAdap
         this.itemClickListener = callsScheduleCallback;
     }
 
+    @NotNull
     @Override
     public CallsScheduleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
