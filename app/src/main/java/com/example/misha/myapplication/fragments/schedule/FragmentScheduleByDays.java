@@ -23,6 +23,8 @@ import com.example.misha.myapplication.adapter.tabDays.schedule.TabDaysPagerAdap
 import com.example.misha.myapplication.fragments.BaseFragment;
 import com.example.misha.myapplication.util.DateUtil;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Calendar;
 
 
@@ -39,6 +41,7 @@ public class FragmentScheduleByDays extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+
         Preferences.getInstance().setSelectedWeekEditSchedule((int) DateUtil.getCurrWeek());
 
         spinner = new Spinner(getContext());
@@ -75,7 +78,7 @@ public class FragmentScheduleByDays extends BaseFragment {
         adapterTabDays = new TabDaysAdapterEditSchedule((position, view) -> viewPager.setCurrentItem(position));
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
 
@@ -111,7 +114,7 @@ public class FragmentScheduleByDays extends BaseFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_empty, menu);
         menu.findItem(R.id.button).setIcon(R.drawable.ic_editor);
     }

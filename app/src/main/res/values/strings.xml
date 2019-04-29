@@ -105,5 +105,9 @@
     <string name="educator_edittext">Преподаватель</string>
     <string name="typelesson_edittext">Тип занятия</string>
     <string name="subject_edittext">Предмет</string>
+    <string name="clear_subjects">Очистить предметы?</string>
+    <string name="clear_audience">Очистить аудитории?</string>
+    <string name="clear_educators">Очистить преподавателей?</string>
+    <string name="clear_typelessons">Очистить типы предметов?</string>
 
 </resources>

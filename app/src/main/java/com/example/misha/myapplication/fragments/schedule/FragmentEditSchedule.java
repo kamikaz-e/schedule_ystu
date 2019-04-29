@@ -29,6 +29,8 @@ import com.example.misha.myapplication.database.entity.Lesson;
 import com.example.misha.myapplication.fragments.BaseFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,15 +38,15 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
 
     private TabDaysPagerAdapterEditSchedule pagerAdapter;
     private TabDaysAdapterEditSchedule adapterTabDays;
-    private RecyclerView dayTabs;
     private Spinner spinner;
     private ViewPager viewPager;
-    private int currentWeek = 0;
     private FloatingActionButton mainFab, evenWeekFab, unevenWeekFab;
     private Animation fabOpen, fabClose, rotateForward, rotateBackward;
     private List<Lesson> lessonListWeek = new ArrayList<>();
     private List<Lesson> lessonListWeekCurrent = new ArrayList<>();
     private CustomSpinnerAdapter customSpinnerAdapter;
+    private int currentWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
+
 
     @Override
     public void onResume() {
@@ -82,7 +84,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
         adapterTabDays = new TabDaysAdapterEditSchedule((position, view) -> viewPager.setCurrentItem(position));
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_schedule, container, false);
 
@@ -99,7 +101,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
         viewPager.setCurrentItem(selectedDayTab);
         adapterTabDays.setSelection(selectedDayTab);
         viewPager.setOffscreenPageLimit(6);
-        dayTabs = view.findViewById(R.id.rv_tab);
+        RecyclerView dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
 
 
@@ -117,7 +119,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_empty, menu);
         menu.findItem(R.id.button).setIcon(R.drawable.ic_ok);
     }
@@ -134,7 +136,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         if (item.getItemId() == R.id.button) {
             getContext().getSupportFragmentManager().popBackStack();
         }
@@ -142,7 +144,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     }
 
 
-    public void animateFAB() {
+    private void animateFAB() {
 
         if (Preferences.getInstance().getFabOpen()) {
 
@@ -184,10 +186,9 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     }
 
 
-    public Dialog onCreateDialogCopyUnevenWeek() {
+    private Dialog onCreateDialogCopyUnevenWeek() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
-            currentWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
             for (int idWeek = 0; idWeek < 17; idWeek += 2) {
                 lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
                 lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
@@ -203,7 +204,7 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     }
 
 
-    public Dialog onCreateDialogCopyEvenWeek() {
+    private Dialog onCreateDialogCopyEvenWeek() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
             for (int idWeek = 1; idWeek < 17; idWeek += 2) {

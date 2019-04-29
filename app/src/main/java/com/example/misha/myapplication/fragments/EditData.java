@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditDataViewPagerAdapter;
+import com.example.misha.myapplication.database.AbsDao;
 import com.example.misha.myapplication.database.dao.AudienceDao;
 import com.example.misha.myapplication.database.dao.EducatorDao;
 import com.example.misha.myapplication.database.dao.SubjectDao;
@@ -73,16 +74,16 @@ public class EditData extends BaseFragment {
         if (id == R.id.button) {
             switch (tabLayout.getSelectedTabPosition()) {
                 case 0:
-                    onCreateDialogClearSubjects().show();
+                    onCreateDialogClear(SubjectDao.getInstance(), R.string.clear_subjects).show();
                     break;
                 case 1:
-                    onCreateDialogClearAudiences().show();
+                    onCreateDialogClear(AudienceDao.getInstance(), R.string.clear_audience).show();
                     break;
                 case 2:
-                    onCreateDialogClearEducators().show();
+                    onCreateDialogClear(EducatorDao.getInstance(), R.string.clear_educators).show();
                     break;
                 case 3:
-                    onCreateDialogClearTypelessons().show();
+                    onCreateDialogClear(TypelessonDao.getInstance(), R.string.clear_typelessons).show();
                     break;
             }
         }
@@ -90,67 +91,21 @@ public class EditData extends BaseFragment {
     }
 
 
-    private void clear_subjects() {
-        SubjectDao.getInstance().deleteAll();
-        if (!(viewPagerAdapter == null)) {
-            viewPagerAdapter.notifyDataSetChanged();
-        }
-    }
-
-    private Dialog onCreateDialogClearSubjects() {
+    private Dialog onCreateDialogClear(AbsDao dao, int titleClear) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
-                clear_subjects()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить предметы?");
+                clear(dao)).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle(titleClear);
         return builder.create();
     }
 
-    private void clear_audiences() {
-        AudienceDao.getInstance().deleteAll();
+    private void clear(AbsDao dao) {
+        dao.deleteAll();
         if (!(viewPagerAdapter == null)) {
             viewPagerAdapter.notifyDataSetChanged();
         }
 
     }
 
-    private Dialog onCreateDialogClearAudiences() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
-                clear_audiences()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить аудитории?");
-        return builder.create();
-    }
-
-
-    private void clear_educators() {
-        EducatorDao.getInstance().deleteAll();
-        if (!(viewPagerAdapter == null)) {
-            viewPagerAdapter.notifyDataSetChanged();
-        }
-    }
-
-    private Dialog onCreateDialogClearEducators() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
-                clear_educators()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить преподавателей?");
-        return builder.create();
-    }
-
-    private void clear_typelessons() {
-        TypelessonDao.getInstance().deleteAll();
-        if (!(viewPagerAdapter == null)) {
-            viewPagerAdapter.notifyDataSetChanged();
-        }
-    }
-
-    private Dialog onCreateDialogClearTypelessons() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
-                clear_typelessons()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить предметы?");
-        return builder.create();
-
-    }
 
 }

@@ -11,7 +11,7 @@ android {
         versionCode 7
         versionName '2.0'
 
-        buildConfigField("String", "BASE_URL", "\"http://schedu1e.h1n.ru/\"")
+        buildConfigField("String", "BASE_URL", "\"http://192.168.0.194\"")
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
