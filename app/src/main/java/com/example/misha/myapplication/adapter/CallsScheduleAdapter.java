@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.editSchedule.CallScheduleCallback;
+import com.example.misha.myapplication.module.schedule.edit.page.CallScheduleCallback;
 import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.entity.Calls;
 

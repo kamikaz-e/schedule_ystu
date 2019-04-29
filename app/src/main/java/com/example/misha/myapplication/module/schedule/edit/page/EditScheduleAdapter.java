@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter.editSchedule;
+package com.example.misha.myapplication.module.schedule.edit.page;
 
 import android.view.LayoutInflater;
 import android.view.View;

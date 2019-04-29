@@ -22,7 +22,7 @@ import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.module.schedule.edit.TabDaysAdapterEditSchedule;
-import com.example.misha.myapplication.module.schedule.edit.FragmentEditSchedule;
+import com.example.misha.myapplication.module.schedule.edit.EditScheduleFragment;
 import com.example.misha.myapplication.util.DateUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +48,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleView, 
         spinner.setAdapter(customSpinnerAdapter);
         spinner.setOnItemSelectedListener(this);
         getContext().getToolbar().addView(spinner);
-        getContext().setCurrentTitle("");
+        getContext().setCurrentTitle(null);
         presenter.selectDefaultWeek();
         Preferences.getInstance().setSelectedWeekEditSchedule((int) DateUtil.getCurrWeek());
 
@@ -112,7 +112,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleView, 
 
     @Override
     public void openEditor() {
-        getContext().replaceFragment(new FragmentEditSchedule());
+        getContext().replaceFragment(new EditScheduleFragment());
     }
 
     @Override
