@@ -11,15 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.misha.myapplication.Preferences;
+import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.database.DatabaseHelper;
-import com.example.misha.myapplication.database.dao.CallDao;
-import com.example.misha.myapplication.database.dao.LessonDao;
+import com.example.misha.myapplication.data.database.DatabaseHelper;
+import com.example.misha.myapplication.data.database.dao.CallDao;
+import com.example.misha.myapplication.data.database.dao.LessonDao;
 import com.example.misha.myapplication.fragments.CallsSchedule;
 import com.example.misha.myapplication.fragments.EditData;
 import com.example.misha.myapplication.fragments.Settings;
-import com.example.misha.myapplication.fragments.schedule.FragmentScheduleByDays;
+import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;
 
 public class MainActivity extends DrawerActivity {
 
@@ -32,7 +32,7 @@ public class MainActivity extends DrawerActivity {
             startActivity(intent);
             Preferences.getInstance().setHintsOpened();
         }
-        replaceFragment(new FragmentScheduleByDays(), false);
+        replaceFragment(new ScheduleFragment());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class MainActivity extends DrawerActivity {
         }
         selectedFragmentId = id;
         if (id == R.id.rasp_day) {
-            fragment = new FragmentScheduleByDays();
+            fragment = new ScheduleFragment();
         } else if (id == R.id.edit_data) {
             fragment = new EditData();
         } else if (id == R.id.call_schedule) {
@@ -69,7 +69,7 @@ public class MainActivity extends DrawerActivity {
             onCreateDialog().show();
         }
         if (fragment != null) {
-            replaceFragment(fragment, false);
+            replaceFragment(fragment);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

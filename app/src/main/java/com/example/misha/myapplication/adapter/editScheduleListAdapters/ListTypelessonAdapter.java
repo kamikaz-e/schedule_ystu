@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
-import com.example.misha.myapplication.database.entity.Typelesson;
+import com.example.misha.myapplication.data.database.entity.Typelesson;
 
 import org.jetbrains.annotations.NotNull;
 

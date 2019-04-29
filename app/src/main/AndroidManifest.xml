@@ -27,7 +27,7 @@
         </activity>
 
         <provider
-            android:name=".database.AppContentProvider"
+            android:name=".data.database.AppContentProvider"
             android:authorities="com.example.misha.myapplication.provider"
             android:exported="false"
             android:multiprocess="true" />

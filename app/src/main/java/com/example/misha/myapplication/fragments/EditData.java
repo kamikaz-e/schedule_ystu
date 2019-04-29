@@ -14,11 +14,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditDataViewPagerAdapter;
-import com.example.misha.myapplication.database.AbsDao;
-import com.example.misha.myapplication.database.dao.AudienceDao;
-import com.example.misha.myapplication.database.dao.EducatorDao;
-import com.example.misha.myapplication.database.dao.SubjectDao;
-import com.example.misha.myapplication.database.dao.TypelessonDao;
+import com.example.misha.myapplication.data.database.AbsDao;
+import com.example.misha.myapplication.data.database.dao.AudienceDao;
+import com.example.misha.myapplication.data.database.dao.EducatorDao;
+import com.example.misha.myapplication.data.database.dao.SubjectDao;
+import com.example.misha.myapplication.data.database.dao.TypelessonDao;
 import com.google.android.material.tabs.TabLayout;
 
 import org.jetbrains.annotations.NotNull;
@@ -63,7 +63,7 @@ public class EditData extends BaseFragment {
     @Override
     public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_empty, menu);
-        menu.findItem(R.id.button).setIcon(R.drawable.ic_clear);
+        menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_clear);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -71,7 +71,7 @@ public class EditData extends BaseFragment {
     public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.button) {
+        if (id == R.id.btn_edit) {
             switch (tabLayout.getSelectedTabPosition()) {
                 case 0:
                     onCreateDialogClear(SubjectDao.getInstance(), R.string.clear_subjects).show();

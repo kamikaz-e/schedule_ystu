@@ -12,15 +12,15 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-import com.example.misha.myapplication.Preferences;
+import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.database.dao.AudienceDao;
-import com.example.misha.myapplication.database.dao.EducatorDao;
-import com.example.misha.myapplication.database.dao.SubjectDao;
-import com.example.misha.myapplication.database.entity.Audience;
-import com.example.misha.myapplication.database.entity.Subject;
-import com.example.misha.myapplication.network.RetrofitClient;
-import com.example.misha.myapplication.network.request.ScheduleRequest;
+import com.example.misha.myapplication.data.database.dao.AudienceDao;
+import com.example.misha.myapplication.data.database.dao.EducatorDao;
+import com.example.misha.myapplication.data.database.dao.SubjectDao;
+import com.example.misha.myapplication.data.database.entity.Audience;
+import com.example.misha.myapplication.data.database.entity.Subject;
+import com.example.misha.myapplication.data.network.RetrofitClient;
+import com.example.misha.myapplication.data.network.request.ScheduleRequest;
 
 import org.jetbrains.annotations.NotNull;
 

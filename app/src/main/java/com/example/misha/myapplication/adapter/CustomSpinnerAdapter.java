@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.Preferences;
+import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.R;
 
 import java.text.SimpleDateFormat;

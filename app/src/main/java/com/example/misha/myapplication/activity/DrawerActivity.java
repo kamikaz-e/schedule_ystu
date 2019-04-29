@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.common.core.BaseActivity;
 import com.example.misha.myapplication.fragments.BaseFragment;
 import com.example.misha.myapplication.util.DateUtil;
 import com.google.android.material.navigation.NavigationView;
@@ -34,7 +35,7 @@ public abstract class DrawerActivity extends BaseActivity implements NavigationV
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.root_view);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.rasp_day);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,

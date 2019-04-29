@@ -9,17 +9,17 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.database.dao.AudienceDao;
-import com.example.misha.myapplication.database.dao.CallDao;
-import com.example.misha.myapplication.database.dao.EducatorDao;
-import com.example.misha.myapplication.database.dao.SubjectDao;
-import com.example.misha.myapplication.database.dao.TypelessonDao;
-import com.example.misha.myapplication.database.entity.Audience;
-import com.example.misha.myapplication.database.entity.Calls;
-import com.example.misha.myapplication.database.entity.Educator;
-import com.example.misha.myapplication.database.entity.Lesson;
-import com.example.misha.myapplication.database.entity.Subject;
-import com.example.misha.myapplication.database.entity.Typelesson;
+import com.example.misha.myapplication.data.database.dao.AudienceDao;
+import com.example.misha.myapplication.data.database.dao.CallDao;
+import com.example.misha.myapplication.data.database.dao.EducatorDao;
+import com.example.misha.myapplication.data.database.dao.SubjectDao;
+import com.example.misha.myapplication.data.database.dao.TypelessonDao;
+import com.example.misha.myapplication.data.database.entity.Audience;
+import com.example.misha.myapplication.data.database.entity.Calls;
+import com.example.misha.myapplication.data.database.entity.Educator;
+import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.data.database.entity.Subject;
+import com.example.misha.myapplication.data.database.entity.Typelesson;
 
 import java.util.ArrayList;
 import java.util.List;

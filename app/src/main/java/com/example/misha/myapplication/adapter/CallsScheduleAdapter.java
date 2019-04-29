@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.editSchedule.CallScheduleCallback;
-import com.example.misha.myapplication.database.dao.CallDao;
-import com.example.misha.myapplication.database.entity.Calls;
+import com.example.misha.myapplication.data.database.dao.CallDao;
+import com.example.misha.myapplication.data.database.entity.Calls;
 
 import java.util.ArrayList;
 

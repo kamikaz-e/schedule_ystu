@@ -8,8 +8,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.activity.BaseActivity;
 import com.example.misha.myapplication.activity.DrawerActivity;
+import com.example.misha.myapplication.common.core.BaseActivity;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

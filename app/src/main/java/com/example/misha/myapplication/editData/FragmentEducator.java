@@ -16,8 +16,8 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.database.dao.EducatorDao;
-import com.example.misha.myapplication.database.entity.Educator;
+import com.example.misha.myapplication.data.database.dao.EducatorDao;
+import com.example.misha.myapplication.data.database.entity.Educator;
 
 import org.jetbrains.annotations.NotNull;
 

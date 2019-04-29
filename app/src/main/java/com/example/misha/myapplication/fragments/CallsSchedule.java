@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.misha.myapplication.Preferences;
+import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.CallsScheduleAdapter;
 import com.example.misha.myapplication.adapter.editSchedule.CallScheduleCallback;
-import com.example.misha.myapplication.database.dao.CallDao;
-import com.example.misha.myapplication.database.entity.Calls;
+import com.example.misha.myapplication.data.database.dao.CallDao;
+import com.example.misha.myapplication.data.database.entity.Calls;
 
 import org.jetbrains.annotations.NotNull;
 

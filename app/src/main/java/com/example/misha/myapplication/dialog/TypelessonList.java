@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.editScheduleListAdapters.ListTypelessonAdapter;
-import com.example.misha.myapplication.database.entity.Typelesson;
+import com.example.misha.myapplication.data.database.entity.Typelesson;
 import com.example.misha.myapplication.fragments.EditData;
 
 import java.util.ArrayList;

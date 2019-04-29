@@ -17,8 +17,8 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.database.dao.SubjectDao;
-import com.example.misha.myapplication.database.entity.Subject;
+import com.example.misha.myapplication.data.database.dao.SubjectDao;
+import com.example.misha.myapplication.data.database.entity.Subject;
 
 import org.jetbrains.annotations.NotNull;
 
