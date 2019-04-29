@@ -72,7 +72,7 @@ public class CallsSchedule extends BaseFragment implements CallScheduleCallback 
     }
 
 
-    private void setInitialTimeOne() {
+    private void setTime() {
         if (Preferences.getInstance().isCallsOpened()) {
             selectDate = (DateUtils.formatDateTime(getActivity(),
                     calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME) + " - ");
@@ -98,7 +98,7 @@ public class CallsSchedule extends BaseFragment implements CallScheduleCallback 
     private TimePickerDialog.OnTimeSetListener timeOne = (view, hourOfDay, minute) -> {
         calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendarTimeCalls.set(Calendar.MINUTE, minute);
-        setInitialTimeOne();
+        setTime();
     };
 
 
