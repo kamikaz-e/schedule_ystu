@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
 
+import org.jetbrains.annotations.NotNull;
+
 
 public class FragmentTypelesson extends Fragment {
 
@@ -38,7 +40,7 @@ public class FragmentTypelesson extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_typelesson, container, false);
         inputTypelesson = view.findViewById(R.id.input_typelesson);

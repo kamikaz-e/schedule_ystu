@@ -147,7 +147,6 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
     private void animateFAB() {
 
         if (Preferences.getInstance().getFabOpen()) {
-
             mainFab.startAnimation(rotateBackward);
             evenWeekFab.startAnimation(fabClose);
             unevenWeekFab.startAnimation(fabClose);
@@ -155,16 +154,13 @@ public class FragmentEditSchedule extends BaseFragment implements View.OnClickLi
             unevenWeekFab.setClickable(false);
             Preferences.getInstance().setFabOpen(false);
 
-
         } else {
-
             mainFab.startAnimation(rotateForward);
             evenWeekFab.startAnimation(fabOpen);
             unevenWeekFab.startAnimation(fabOpen);
             evenWeekFab.setClickable(true);
             unevenWeekFab.setClickable(true);
             Preferences.getInstance().setFabOpen(true);
-
         }
     }
 

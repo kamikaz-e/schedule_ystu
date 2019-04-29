@@ -20,6 +20,8 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.database.dao.SubjectDao;
 import com.example.misha.myapplication.database.entity.Subject;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 
@@ -43,7 +45,7 @@ public class FragmentSubject extends Fragment {
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
         input_subject = view.findViewById(R.id.input_subject);
