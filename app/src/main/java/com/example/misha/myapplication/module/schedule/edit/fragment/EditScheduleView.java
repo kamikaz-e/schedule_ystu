@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.schedule.edit;
+package com.example.misha.myapplication.module.schedule.edit.fragment;
 
 import com.example.misha.myapplication.common.core.BaseView;
 
@@ -15,4 +15,11 @@ public interface EditScheduleView extends BaseView {
     void swipePage(int position);
 
     void selectPage(int position);
+
+    void animateFAB();
+
+    void evenWeekFab();
+
+    void unevenWeekFab();
+
 }

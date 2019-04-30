@@ -1,18 +1,21 @@
-package com.example.misha.myapplication.fragments;
+package com.example.misha.myapplication.module.schedule.edit.page.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
+
 import com.example.misha.myapplication.Constants;
-import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.module.schedule.edit.page.EditScheduleAdapter;
-import com.example.misha.myapplication.module.schedule.edit.page.EditScheduleCallback;
+import com.example.misha.myapplication.common.core.BaseMainFragment;
+import com.example.misha.myapplication.common.core.BasePresenter;
+import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
@@ -23,51 +26,54 @@ import com.example.misha.myapplication.data.database.entity.Educator;
 import com.example.misha.myapplication.data.database.entity.Lesson;
 import com.example.misha.myapplication.data.database.entity.Subject;
 import com.example.misha.myapplication.data.database.entity.Typelesson;
-import com.example.misha.myapplication.dialog.AudienceList;
-import com.example.misha.myapplication.dialog.EducatorList;
-import com.example.misha.myapplication.dialog.SubjectList;
-import com.example.misha.myapplication.dialog.TypelessonList;
+import com.example.misha.myapplication.module.schedule.edit.page.EditScheduleAdapter;
+import com.example.misha.myapplication.module.schedule.edit.page.dialog.AudienceList;
+import com.example.misha.myapplication.module.schedule.edit.page.dialog.EducatorList;
+import com.example.misha.myapplication.module.schedule.edit.page.dialog.SubjectList;
+import com.example.misha.myapplication.module.schedule.edit.page.dialog.TypelessonList;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
-import org.jetbrains.annotations.NotNull;
-
-public class EditSchedulePageFragment extends Fragment implements EditScheduleCallback {
+public class PageView extends BaseMainFragment implements View, PresenterInterface {
 
     private EditScheduleAdapter rvadapter;
     private List<Lesson> lessonList = new ArrayList<>();
     private FloatingActionButton fab, fab1, fab2;
     private Animation fab_close;
     private Animation rotate_backward;
-    private int positionWeek;
-    private int day;
 
+    private PagePresenter presenter;
+
+    private int day = getArguments().getInt(Constants.DAY);
+    private int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
+    //BottomNavigationView
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rvadapter = new EditScheduleAdapter(this);
         day = getArguments().getInt(Constants.DAY);
         positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
+        presenter = new PagePresenter();
+        rvadapter = new EditScheduleAdapter(this);
+
     }
 
-    public static EditSchedulePageFragment newInstance(int selectedWeek, int position) {
+    public static PageView newInstance(int selectedWeek, int position) {
         Bundle args = new Bundle();
         args.putInt(Constants.SELECTED_WEEK, selectedWeek);
         args.putInt(Constants.DAY, position);
-        EditSchedulePageFragment fragment = new EditSchedulePageFragment();
+        PageView fragment = new PageView();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
+    public android.view.View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        android.view.View fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
         RecyclerView rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
         fab = getActivity().findViewById(R.id.main_fab);
         fab1 = getActivity().findViewById(R.id.even_weekFab);
@@ -76,28 +82,27 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
         rotate_backward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
         rvLessons.setAdapter(rvadapter);
-
-        rvLessons.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvLessons.addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0 && fab.getVisibility() == View.VISIBLE) {
-                    if (Preferences.getInstance().getFabOpen()){
-                    fab.hide();
+                if (dy > 0 && fab.getVisibility() == android.view.View.VISIBLE) {
+                    if (Preferences.getInstance().getFabOpen()) {
+                        fab.hide();
                         fab.startAnimation(rotate_backward);
-                    fab.setClickable(false);
-                    fab1.startAnimation(fab_close);
-                    fab2.startAnimation(fab_close);
-                    fab1.setClickable(false);
-                    fab2.setClickable(false);
-                    Preferences.getInstance().setFabOpen(false);}
-                    else {
+                        fab.setClickable(false);
+                        fab1.startAnimation(fab_close);
+                        fab2.startAnimation(fab_close);
+                        fab1.setClickable(false);
+                        fab2.setClickable(false);
+                        Preferences.getInstance().setFabOpen(false);
+                    } else {
                         fab.hide();
                         fab.setClickable(false);
                     }
-                } else if (dy < 0 && fab.getVisibility() != View.VISIBLE) {
-                        fab.show();
-                        fab.setClickable(true);
+                } else if (dy < 0 && fab.getVisibility() != android.view.View.VISIBLE) {
+                    fab.show();
+                    fab.setClickable(true);
                 }
             }
         });
@@ -108,10 +113,16 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        updateList();
+        presenter.init();
     }
 
-    private void updateList() {
+    @NonNull
+    @Override
+    protected BasePresenter getPresenter() {
+        return presenter;
+    }
+
+    public void updateList() {
         lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
         ArrayList<Subject> subjectList = SubjectDao.getInstance().getAllData();
         ArrayList<Audience> audienceList = AudienceDao.getInstance().getAllData();
@@ -125,9 +136,14 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         rvadapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void initAtOpen() {
+
+    }
+
     public void setWeek(int selectedWeek) {
         this.positionWeek = selectedWeek;
-        updateList();
+        presenter.onWeekSelected(positionWeek);
     }
 
 
@@ -136,6 +152,8 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
         AudienceList dialogFragment = AudienceList.newInstance(position, audience);
         dialogFragment.show(getChildFragmentManager(), Audience.class.getSimpleName());
     }
+
+
 
     @Override
     public void onEducatorClick(int position, ArrayList<Educator> educator) {
@@ -224,6 +242,16 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
 
         }
+    }
+
+    @Override
+    public void onWeekSelected(int position) {
+
+    }
+
+    @Override
+    public void onButtonClicked(int id) {
+
     }
 
 

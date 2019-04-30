@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.schedule.edit.page;
+package com.example.misha.myapplication.module.schedule.edit.page.fragment;
 
 import com.example.misha.myapplication.data.database.entity.Audience;
 import com.example.misha.myapplication.data.database.entity.Educator;
@@ -7,7 +7,13 @@ import com.example.misha.myapplication.data.database.entity.Typelesson;
 
 import java.util.ArrayList;
 
-public interface EditScheduleCallback {
+public interface PresenterInterface {
+
+    void onWeekSelected(int position);
+
+    void onButtonClicked(int id);
+
+    void initAtOpen();
 
     void onAudienceClick(int position, ArrayList<Audience> audience);
 

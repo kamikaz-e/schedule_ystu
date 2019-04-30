@@ -22,7 +22,7 @@ public class SchedulePresenter extends BaseMainPresenter<ScheduleView> implement
     }
 
     @Override
-    public void onEditorButtonClicked() {
+    public void onButtonClicked() {
         getView().openEditor();
     }
 

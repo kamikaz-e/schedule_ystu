@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.schedule.edit;
+package com.example.misha.myapplication.module.schedule.edit.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,6 +27,8 @@ import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
 import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.module.schedule.edit.TabDaysAdapterEditSchedule;
+import com.example.misha.myapplication.module.schedule.edit.TabDaysPagerAdapterEditSchedule;
 import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -49,6 +51,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     private CustomSpinnerAdapter customSpinnerAdapter;
     private int currentWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
     private EditSchedulePresenter presenter;
+
 
     @Override
     public void onResume() {
@@ -76,7 +79,6 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         super.onCreate(savedInstanceState);
         presenter = new EditSchedulePresenter();
         setHasOptionsMenu(true);
-        //setDrawerEnabled(false);
         customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
         pagerAdapter = new TabDaysPagerAdapterEditSchedule(getChildFragmentManager());
         adapterTabDays = new TabDaysAdapterEditSchedule((position, view) -> presenter.onPageSelected(position));
@@ -98,7 +100,6 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
-
 
         mainFab = view.findViewById(R.id.main_fab);
         evenWeekFab = view.findViewById(R.id.even_weekFab);
@@ -122,6 +123,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        presenter.init();
     }
 
     @NonNull
@@ -183,7 +185,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     }
 
 
-    private void animateFAB() {
+    public void animateFAB() {
 
         if (Preferences.getInstance().getFabOpen()) {
             mainFab.startAnimation(rotateBackward);
@@ -203,19 +205,29 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         }
     }
 
+    public void evenWeekFab(){
+        onCreateDialogCopyEvenWeek().show();
+    }
+
+    public void unevenWeekFab(){
+        onCreateDialogCopyUnevenWeek().show();
+    }
+
+
+
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
             case R.id.main_fab:
-                animateFAB();
+                presenter.onButtonClicked(R.id.main_fab);
                 break;
             case R.id.even_weekFab:
-                onCreateDialogCopyEvenWeek().show();
+                presenter.onButtonClicked(R.id.even_weekFab);
                 break;
             case R.id.uneven_weekFab:
-                onCreateDialogCopyUnevenWeek().show();
+                presenter.onButtonClicked(R.id.uneven_weekFab);
                 break;
         }
     }

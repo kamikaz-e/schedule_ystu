@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.module.schedule.edit;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,7 @@ public class TabDaysAdapterEditSchedule extends RecyclerView.Adapter<TabDaysAdap
 
     private int selectedPos;
     private SimpleItemClickListener callback;
-    ArrayList<String> dayYear = new ArrayList<>();
+    private ArrayList<String> dayYear = new ArrayList<>();
 
     public TabDaysAdapterEditSchedule(SimpleItemClickListener simpleItemClickListener) {
         this.callback = simpleItemClickListener;
@@ -33,7 +34,7 @@ public class TabDaysAdapterEditSchedule extends RecyclerView.Adapter<TabDaysAdap
         mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
         mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
         mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        SimpleDateFormat mFormatDay = new SimpleDateFormat("dd EEE");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat mFormatDay = new SimpleDateFormat("dd EEE");
         mCalendar.add(Calendar.WEEK_OF_YEAR, selectedPos);
         for(int day = 0; day < 6; day++){
             dayYear.add(mFormatDay.format(mCalendar.getTime()).toUpperCase());

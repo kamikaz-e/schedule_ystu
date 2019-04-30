@@ -1,10 +1,10 @@
-package com.example.misha.myapplication.module.schedule.edit;
+package com.example.misha.myapplication.module.schedule.edit.fragment;
 
 public interface EditSchedulePresenterInterface {
 
     void onWeekSelected(int position);
 
-    void onEditorButtonClicked();
+    void onButtonClicked(int id);
 
     void onPageSwiped(int position);
 

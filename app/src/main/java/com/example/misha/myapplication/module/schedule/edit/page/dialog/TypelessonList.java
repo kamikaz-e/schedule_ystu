@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.dialog;
+package com.example.misha.myapplication.module.schedule.edit.page.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.editScheduleListAdapters.ListAudienceAdapter;
-import com.example.misha.myapplication.data.database.entity.Audience;
+import com.example.misha.myapplication.module.schedule.edit.page.editScheduleListAdapters.ListTypelessonAdapter;
+import com.example.misha.myapplication.data.database.entity.Typelesson;
 import com.example.misha.myapplication.fragments.EditData;
 
 import java.util.ArrayList;
@@ -22,53 +22,51 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jetbrains.annotations.NotNull;
-
 
 //Todo прочитать про наследование инкапсуляцию интерфейсы абстрактные классы и generic.
-public class AudienceList extends DialogFragment {
+public class TypelessonList extends DialogFragment {
 
-    public static final int AUDIENCE_CODE = 3431;
+    public static final int TYPELESSON_CODE = 3433;
 
-    public static final String AUDIENCES = "AUDIENCES";
-    public static final String AUDIENCE_LIST = "AUDIENCE_LIST";
+    public static final String TYPELESSONS = "TYPELESSONS";
+    public static final String TYPELESSON_LIST = "TYPELESSON_LIST";
     public static final String POSITION = "POSITION";
 
     private int clickedPosition;
-    private ListAudienceAdapter listAudienceAdapter;
-    private ArrayList<Audience> listAudience;
-    private RecyclerView rvAudience;
+    private ListTypelessonAdapter listTypelessonAdapter;
+    private ArrayList<Typelesson> listTypelesson;
+    private RecyclerView rvTypelesson;
 
-    public static AudienceList newInstance(int position, ArrayList<Audience> audiences) {
+    public static TypelessonList newInstance(int position, ArrayList<Typelesson> typelessons) {
         Bundle args = new Bundle();
-        args.putParcelableArrayList(AUDIENCES, audiences);
+        args.putParcelableArrayList(TYPELESSONS, typelessons);
         args.putInt(POSITION, position);
-        AudienceList fragment = new AudienceList();
+        TypelessonList fragment = new TypelessonList();
         fragment.setArguments(args);
         return fragment;
     }
 
-    @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         clickedPosition = getArguments().getInt(POSITION);
-        listAudience = getArguments().getParcelableArrayList(AUDIENCES);
+        listTypelesson = getArguments().getParcelableArrayList(TYPELESSONS);
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
         View view = layoutInflater.inflate(R.layout.dialog_rv_list, null);
         TextView title_dialog = view.findViewById(R.id.dialog_textView);
-        title_dialog.setText("Аудитория");
+        title_dialog.setText("Тип занятия");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        rvAudience = view.findViewById(R.id.rv_dialog);
-        listAudienceAdapter = new ListAudienceAdapter(listAudience, (position, view1) -> {
+        rvTypelesson = view.findViewById(R.id.rv_dialog);
+        listTypelessonAdapter = new ListTypelessonAdapter(listTypelesson, (position, view1) -> {
             Intent intent = new Intent();
             intent.putExtra(POSITION, clickedPosition);
-            intent.putExtra(AUDIENCE_LIST, listAudience.get(position));
-            getParentFragment().onActivityResult(AUDIENCE_CODE, Activity.RESULT_OK, intent);
+            intent.putExtra(TYPELESSON_LIST, listTypelesson.get(position));
+            getParentFragment().onActivityResult(TYPELESSON_CODE, Activity.RESULT_OK, intent);
             dismiss();
         });
-        rvAudience.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        rvAudience.setAdapter(listAudienceAdapter);
+        rvTypelesson.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
+        rvTypelesson.setAdapter(listTypelessonAdapter);
+
         Button button_add = view.findViewById(R.id.button_add);
         button_add.setOnClickListener(v -> {
             EditData fragment = new EditData();

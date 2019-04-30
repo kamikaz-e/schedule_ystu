@@ -1,34 +1,34 @@
-package com.example.misha.myapplication.adapter.editScheduleListAdapters;
+package com.example.misha.myapplication.module.schedule.edit.page.editScheduleListAdapters;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
-import com.example.misha.myapplication.data.database.entity.Educator;
+import com.example.misha.myapplication.data.database.entity.Typelesson;
 
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
+public class ListTypelessonAdapter extends RecyclerView.Adapter<ListTypelessonAdapter.ViewHolder> {
 
-
-public class ListEducatorAdapter extends RecyclerView.Adapter<ListEducatorAdapter.ViewHolder> {
-
-    private List<Educator> listEducators;
-
+    private List<Typelesson> listTypelesson;
     private SimpleItemClickListener itemClickListener;
 
-    public ListEducatorAdapter(ArrayList<Educator> educator, SimpleItemClickListener simpleItemClickListener) {
-        this.listEducators = educator;
+    
+    public ListTypelessonAdapter(ArrayList<Typelesson> typelesson, SimpleItemClickListener simpleItemClickListener) {
+        this.listTypelesson = typelesson;
         this.itemClickListener = simpleItemClickListener;
     }
 
     @Override
-    public ListEducatorAdapter.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+    public ListTypelessonAdapter.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_row, parent, false);
         return new ViewHolder(view);
@@ -41,22 +41,22 @@ public class ListEducatorAdapter extends RecyclerView.Adapter<ListEducatorAdapte
 
     @Override
     public int getItemCount() {
-        return listEducators.size();
+        return listTypelesson.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView educator;
+        private final TextView typelesson;
 
-        private ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
-            educator = view.findViewById(R.id.item);
+            typelesson = view.findViewById(R.id.item);
             view.setOnClickListener(this);
 
         }
 
-        private void onBindView(int position) {
-            Educator educ = listEducators.get(position);
-            educator.setText(educ.getName());
+        void onBindView(int position) {
+            Typelesson typ = listTypelesson.get(position);
+            typelesson.setText(typ.getName());
 
         }
 
