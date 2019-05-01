@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public interface View extends BaseView {
 
-    void updateList();
+    void updateList(int day, int positionWeek);
 
     void initAtOpen();
 

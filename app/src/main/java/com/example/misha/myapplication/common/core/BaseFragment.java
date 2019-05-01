@@ -9,12 +9,13 @@ import com.example.misha.myapplication.common.ErrorView;
 public abstract class BaseFragment extends Fragment {
 
     private boolean collapsible = false;
-
+    private boolean drawerEnabled;
     private boolean toolbarEnabled = true;
 
     public void setToolbarEnabled(boolean state) {
         this.toolbarEnabled = state;
     }
+
 
     @Override
     public void onResume() {
@@ -47,6 +48,10 @@ public abstract class BaseFragment extends Fragment {
             Root baseRouter = (Root) getActivity();
             baseRouter.setOnErrorClick(errorListener);
         }
+    }
+
+    public void setDrawerEnabled(boolean drawerEnabled) {
+        this.drawerEnabled = drawerEnabled;
     }
 
     public void setCollapsible(boolean state) {

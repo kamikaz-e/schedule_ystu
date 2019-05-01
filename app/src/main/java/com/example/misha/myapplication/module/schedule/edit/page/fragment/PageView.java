@@ -48,16 +48,14 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
 
     private PagePresenter presenter;
 
-    private int day = getArguments().getInt(Constants.DAY);
-    private int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
     //BottomNavigationView
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        day = getArguments().getInt(Constants.DAY);
-        positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
-        presenter = new PagePresenter();
+        int day = getArguments().getInt(Constants.DAY);
+        int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
+        presenter = new PagePresenter(day, positionWeek);
         rvadapter = new EditScheduleAdapter(this);
 
     }
@@ -122,7 +120,7 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
         return presenter;
     }
 
-    public void updateList() {
+    public void updateList(int day, int positionWeek) {
         lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
         ArrayList<Subject> subjectList = SubjectDao.getInstance().getAllData();
         ArrayList<Audience> audienceList = AudienceDao.getInstance().getAllData();
@@ -142,8 +140,7 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
     }
 
     public void setWeek(int selectedWeek) {
-        this.positionWeek = selectedWeek;
-        presenter.onWeekSelected(positionWeek);
+        presenter.onWeekSelected(selectedWeek);
     }
 
 
@@ -152,7 +149,6 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
         AudienceList dialogFragment = AudienceList.newInstance(position, audience);
         dialogFragment.show(getChildFragmentManager(), Audience.class.getSimpleName());
     }
-
 
 
     @Override

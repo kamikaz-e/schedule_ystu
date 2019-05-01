@@ -83,7 +83,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleView, 
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                presenter.onPageSwiped(position);
+            presenter.onPageSwiped(position);
             }
         });
         viewPager.setAdapter(pagerAdapter);
@@ -135,6 +135,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleView, 
     @Override
     public void selectPage(int position) {
         viewPager.setCurrentItem(position);
+        Preferences.getInstance().setSelectedPositionTabDays(position);
     }
 
     @NonNull

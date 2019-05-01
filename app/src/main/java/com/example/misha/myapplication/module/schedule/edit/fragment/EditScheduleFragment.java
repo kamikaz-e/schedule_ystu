@@ -205,15 +205,13 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         }
     }
 
-    public void evenWeekFab(){
+    public void evenWeekFab() {
         onCreateDialogCopyEvenWeek().show();
     }
 
-    public void unevenWeekFab(){
+    public void unevenWeekFab() {
         onCreateDialogCopyUnevenWeek().show();
     }
-
-
 
 
     @Override

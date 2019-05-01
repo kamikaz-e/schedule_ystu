@@ -1,6 +1,5 @@
 package com.example.misha.myapplication.module.schedule.edit.page.fragment;
 
-import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.database.entity.Audience;
 import com.example.misha.myapplication.data.database.entity.Educator;
@@ -11,14 +10,22 @@ import java.util.ArrayList;
 
 public class PagePresenter extends BaseMainPresenter<View> implements PresenterInterface {
 
+    private int day;
+    private int positionWeek;
+
+    public PagePresenter(int day, int positionWeek) {
+        this.day = day;
+        this.positionWeek = positionWeek;
+    }
+
     @Override
     public void init() {
-        getView().updateList();
+        getView().updateList(day, positionWeek);
     }
 
     @Override
     public void onWeekSelected(int position) {
-        getView().updateList();
+        getView().updateList(day, positionWeek);
     }
 
     @Override
@@ -28,7 +35,7 @@ public class PagePresenter extends BaseMainPresenter<View> implements PresenterI
 
     @Override
     public void initAtOpen() {
-    getView().initAtOpen();
+        getView().initAtOpen();
     }
 
     @Override

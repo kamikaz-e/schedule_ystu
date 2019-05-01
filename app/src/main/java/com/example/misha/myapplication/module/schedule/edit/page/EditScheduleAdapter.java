@@ -34,7 +34,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     private ArrayList<Educator> educatorList = new ArrayList<>();
     private ArrayList<Typelesson> typelessonList = new ArrayList<>();
     private PresenterInterface callback;
-    private PagePresenter presenter;
 
     public EditScheduleAdapter(PresenterInterface editScheduleCallback) {
         this.callback = editScheduleCallback;
@@ -66,7 +65,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_edit_lesson, parent, false);
-        presenter = new PagePresenter();
         return new ViewHolder(view);
     }
 
@@ -175,7 +173,6 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         public void onClick(View v) {
 
             if (v.getId() == R.id.audience) {
-                presenter.onButtonClicked(R.id.audience);
                 callback.onAudienceClick(getAdapterPosition(), audienceList);
             }
             if (v.getId() == R.id.educator) {
