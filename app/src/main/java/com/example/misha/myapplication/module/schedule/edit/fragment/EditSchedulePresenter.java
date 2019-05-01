@@ -1,5 +1,6 @@
-package com.example.misha.myapplication.module.schedule.edit;
+package com.example.misha.myapplication.module.schedule.edit.fragment;
 
+import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.Preferences;
 
@@ -7,6 +8,8 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleView> i
 
     @Override
     public void init() {
+        int currentDay = Preferences.getInstance().getSelectedPositionTabDays();
+        getView().selectCurrentDay(currentDay);
     }
 
     @Override
@@ -15,8 +18,16 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleView> i
     }
 
     @Override
-    public void onEditorButtonClicked() {
-        getView().openEditor();
+    public void onButtonClicked(int id) {
+        if (id == R.id.main_fab) {
+            getView().animateFAB();
+        }
+        if (id == R.id.even_weekFab) {
+            getView().evenWeekFab();
+        }
+        if (id == R.id.uneven_weekFab) {
+            getView().unevenWeekFab();
+        }
     }
 
     @Override

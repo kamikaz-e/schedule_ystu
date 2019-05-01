@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.schedule.edit.page;
+package com.example.misha.myapplication;
 
 
 public interface CallScheduleCallback {

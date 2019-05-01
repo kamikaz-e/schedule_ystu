@@ -20,6 +20,8 @@ import com.example.misha.myapplication.data.database.entity.Educator;
 import com.example.misha.myapplication.data.database.entity.Lesson;
 import com.example.misha.myapplication.data.database.entity.Subject;
 import com.example.misha.myapplication.data.database.entity.Typelesson;
+import com.example.misha.myapplication.module.schedule.edit.page.fragment.PagePresenter;
+import com.example.misha.myapplication.module.schedule.edit.page.fragment.PresenterInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +33,10 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     private ArrayList<Audience> audienceList = new ArrayList<>();
     private ArrayList<Educator> educatorList = new ArrayList<>();
     private ArrayList<Typelesson> typelessonList = new ArrayList<>();
-    private EditScheduleCallback callback;
+    private PresenterInterface callback;
+    private PagePresenter presenter;
 
-    public EditScheduleAdapter(EditScheduleCallback editScheduleCallback) {
+    public EditScheduleAdapter(PresenterInterface editScheduleCallback) {
         this.callback = editScheduleCallback;
     }
 
@@ -63,6 +66,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_edit_lesson, parent, false);
+        presenter = new PagePresenter();
         return new ViewHolder(view);
     }
 
@@ -171,6 +175,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         public void onClick(View v) {
 
             if (v.getId() == R.id.audience) {
+                presenter.onButtonClicked(R.id.audience);
                 callback.onAudienceClick(getAdapterPosition(), audienceList);
             }
             if (v.getId() == R.id.educator) {

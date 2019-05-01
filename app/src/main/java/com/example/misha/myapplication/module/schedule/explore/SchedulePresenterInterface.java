@@ -4,7 +4,7 @@ public interface SchedulePresenterInterface {
 
     void onWeekSelected(int position);
 
-    void onEditorButtonClicked();
+    void onButtonClicked();
 
     void onPageSwiped(int position);
 
