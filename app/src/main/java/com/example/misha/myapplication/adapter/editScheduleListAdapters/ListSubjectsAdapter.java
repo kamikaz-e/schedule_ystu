@@ -1,14 +1,17 @@
 package com.example.misha.myapplication.adapter.editScheduleListAdapters;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
-import com.example.misha.myapplication.database.entity.Subject;
+import com.example.misha.myapplication.data.database.entity.Subject;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +19,8 @@ import java.util.List;
 public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapter.ViewHolder> {
 
     private List<Subject> listSubjects;
-
     private SimpleItemClickListener itemClickListener;
+
 
     public ListSubjectsAdapter(ArrayList<Subject> subject, SimpleItemClickListener simpleItemClickListener) {
         this.listSubjects = subject;
@@ -25,14 +28,14 @@ public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapte
     }
 
     @Override
-    public ListSubjectsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListSubjectsAdapter.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_row, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NotNull ViewHolder holder, final int position) {
         holder.onBindView(position);
     }
 
@@ -44,14 +47,14 @@ public class ListSubjectsAdapter extends RecyclerView.Adapter<ListSubjectsAdapte
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView subject;
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             super(view);
             subject = view.findViewById(R.id.item);
             view.setOnClickListener(this);
 
         }
 
-        public void onBindView(int position) {
+        private void onBindView(int position) {
             Subject subj = listSubjects.get(position);
             subject.setText(subj.getName());
 

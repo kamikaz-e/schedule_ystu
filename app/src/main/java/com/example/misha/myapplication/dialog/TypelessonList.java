@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.editScheduleListAdapters.ListTypelessonAdapter;
-import com.example.misha.myapplication.database.entity.Typelesson;
+import com.example.misha.myapplication.data.database.entity.Typelesson;
 import com.example.misha.myapplication.fragments.EditData;
 
 import java.util.ArrayList;
@@ -52,12 +52,10 @@ public class TypelessonList extends DialogFragment {
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
         View view = layoutInflater.inflate(R.layout.dialog_rv_list, null);
-        View layoutTitleDialog = layoutInflater.inflate(R.layout.title_dialog, null);
-        TextView title_dialog = layoutTitleDialog.findViewById(R.id.dialog_textView);
+        TextView title_dialog = view.findViewById(R.id.dialog_textView);
         title_dialog.setText("Тип занятия");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        builder.setCustomTitle(layoutTitleDialog);
         rvTypelesson = view.findViewById(R.id.rv_dialog);
         listTypelessonAdapter = new ListTypelessonAdapter(listTypelesson, (position, view1) -> {
             Intent intent = new Intent();

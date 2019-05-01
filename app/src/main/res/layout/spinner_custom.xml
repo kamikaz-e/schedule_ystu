@@ -10,9 +10,9 @@
         android:id="@+id/current_numberWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1sp"
         android:textColor="#FFFFFF"
         android:textSize="11sp"
+        tools:ignore="SmallSp"
         tools:text="20.04 - 20.04" />
 
     <TextView
@@ -23,5 +23,4 @@
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         tools:text="1 неделя" />
-
 </LinearLayout>

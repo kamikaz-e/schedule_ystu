@@ -9,29 +9,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Spinner;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.EditDataViewPagerAdapter;
-import com.example.misha.myapplication.database.dao.AudienceDao;
-import com.example.misha.myapplication.database.dao.EducatorDao;
-import com.example.misha.myapplication.database.dao.SubjectDao;
-import com.example.misha.myapplication.database.dao.TypelessonDao;
+import com.example.misha.myapplication.data.database.AbsDao;
+import com.example.misha.myapplication.data.database.dao.AudienceDao;
+import com.example.misha.myapplication.data.database.dao.EducatorDao;
+import com.example.misha.myapplication.data.database.dao.SubjectDao;
+import com.example.misha.myapplication.data.database.dao.TypelessonDao;
 import com.google.android.material.tabs.TabLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+import org.jetbrains.annotations.NotNull;
 
 
 public class EditData extends BaseFragment {
 
 
-
-    TabLayout tabLayout;
-    ViewPager viewPager;
-    EditDataViewPagerAdapter viewPagerAdapter;
+    private TabLayout tabLayout;
+    private EditDataViewPagerAdapter viewPagerAdapter;
 
     @Override
     public void onResume() {
@@ -46,7 +43,7 @@ public class EditData extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_edit_data, container, false);
@@ -54,138 +51,61 @@ public class EditData extends BaseFragment {
 
         setHasOptionsMenu(true);
 
-        viewPager = view.findViewById(R.id.viewPager);
+        ViewPager viewPager = view.findViewById(R.id.viewPager);
         viewPagerAdapter = new EditDataViewPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-      /*  buttonHome.setBackgroundResource(R.drawable.ic_home);
-        buttonHome.setOnClickListener(v -> {
-            FragmentScheduleByDays fragment = new FragmentScheduleByDays();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentFrame, fragment)
-                    .commit();
-            InputMethodManager inputManager = (InputMethodManager) getContext().getSystemService(
-                    Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
-                    InputMethodManager.HIDE_NOT_ALWAYS);
-        });*/
-
-      /*  clear_subjects = view.findViewById(R.id.buttonClear);
-        clear_subjects.setBackgroundResource(R.drawable.ic_clear);
-        clear_subjects.setOnClickListener(v -> {
-
-            switch (tabLayout.getSelectedTabPosition()) {
-                case 0:
-                    onCreateDialogClearSubjects().show();
-                    break;
-                case 1:
-                    onCreateDialogClearAudiences().show();
-                    break;
-                case 2:
-                    onCreateDialogClearEducators().show();
-                    break;
-                case 3:
-                    onCreateDialogClearTypelessons().show();
-                    break;
-            }
-        });*/
         return view;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_empty, menu);
-        menu.findItem(R.id.button).setIcon(R.drawable.ic_clear);
+        menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_clear);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.button) {
-                switch (tabLayout.getSelectedTabPosition()) {
-                    case 0:
-                        onCreateDialogClearSubjects().show();
-                        break;
-                    case 1:
-                        onCreateDialogClearAudiences().show();
-                        break;
-                    case 2:
-                        onCreateDialogClearEducators().show();
-                        break;
-                    case 3:
-                        onCreateDialogClearTypelessons().show();
-                        break;
+        if (id == R.id.btn_edit) {
+            switch (tabLayout.getSelectedTabPosition()) {
+                case 0:
+                    onCreateDialogClear(SubjectDao.getInstance(), R.string.clear_subjects).show();
+                    break;
+                case 1:
+                    onCreateDialogClear(AudienceDao.getInstance(), R.string.clear_audience).show();
+                    break;
+                case 2:
+                    onCreateDialogClear(EducatorDao.getInstance(), R.string.clear_educators).show();
+                    break;
+                case 3:
+                    onCreateDialogClear(TypelessonDao.getInstance(), R.string.clear_typelessons).show();
+                    break;
             }
         }
         return super.onOptionsItemSelected(item);
     }
 
 
-    void clear_subjects() {
-        SubjectDao.getInstance().deleteAll();
-        if (!(viewPagerAdapter == null)) {
-            viewPagerAdapter.notifyDataSetChanged();
-        }
-    }
-
-    public Dialog onCreateDialogClearSubjects() {
+    private Dialog onCreateDialogClear(AbsDao dao, int titleClear) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
-                clear_subjects()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить предметы?");
+                clear(dao)).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle(titleClear);
         return builder.create();
     }
 
-    void clear_audiences() {
-        AudienceDao.getInstance().deleteAll();
+    private void clear(AbsDao dao) {
+        dao.deleteAll();
         if (!(viewPagerAdapter == null)) {
             viewPagerAdapter.notifyDataSetChanged();
         }
 
     }
 
-    public Dialog onCreateDialogClearAudiences() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
-                clear_audiences()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить аудитории?");
-        return builder.create();
-    }
-
-
-    void clear_educators() {
-        EducatorDao.getInstance().deleteAll();
-        if (!(viewPagerAdapter == null)) {
-            viewPagerAdapter.notifyDataSetChanged();
-        }
-    }
-
-    public Dialog onCreateDialogClearEducators() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
-                clear_educators()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить преподавателей?");
-        return builder.create();
-    }
-
-    void clear_typelessons() {
-        TypelessonDao.getInstance().deleteAll();
-        if (!(viewPagerAdapter == null)) {
-            viewPagerAdapter.notifyDataSetChanged();
-        }
-    }
-
-    public Dialog onCreateDialogClearTypelessons() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
-                clear_typelessons()).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Очистить предметы?");
-        return builder.create();
-
-    }
 
 }

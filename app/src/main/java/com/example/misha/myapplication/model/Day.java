@@ -1,6 +1,6 @@
 package com.example.misha.myapplication.model;
 
-import com.example.misha.myapplication.database.entity.Lesson;
+import com.example.misha.myapplication.data.database.entity.Lesson;
 
 import java.util.List;
 

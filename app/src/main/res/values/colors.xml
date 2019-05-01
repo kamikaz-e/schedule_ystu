@@ -12,4 +12,5 @@
     <color name="background_color">#484848</color>
     <color name="background_colorTwo">#303030</color>
     <color name="background_colorThree">#202020</color>
+    <color name="black">#000000</color>
 </resources>

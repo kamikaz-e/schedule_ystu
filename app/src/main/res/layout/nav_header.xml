@@ -23,9 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="Расписание"
+        android:text="@string/navigation_view_title"
         android:textColor="@color/colorAccent"
-        android:textSize="26dp" />
-
+        android:textSize="26sp" />
 
 </LinearLayout>

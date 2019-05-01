@@ -6,21 +6,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.editSchedule.CallScheduleCallback;
-import com.example.misha.myapplication.database.dao.CallDao;
-import com.example.misha.myapplication.database.entity.Calls;
+import com.example.misha.myapplication.module.schedule.edit.page.CallScheduleCallback;
+import com.example.misha.myapplication.data.database.dao.CallDao;
+import com.example.misha.myapplication.data.database.entity.Calls;
 
 import java.util.ArrayList;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 
 public class CallsScheduleAdapter extends RecyclerView.Adapter<CallsScheduleAdapter.ViewHolder> {
 
 
     private ArrayList<Calls> callsList = new ArrayList<>();
-
     private CallScheduleCallback itemClickListener;
 
 
@@ -28,6 +29,7 @@ public class CallsScheduleAdapter extends RecyclerView.Adapter<CallsScheduleAdap
         this.itemClickListener = callsScheduleCallback;
     }
 
+    @NotNull
     @Override
     public CallsScheduleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())

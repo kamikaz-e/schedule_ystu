@@ -14,22 +14,24 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.database.dao.AudienceDao;
-import com.example.misha.myapplication.database.entity.Audience;
+import com.example.misha.myapplication.data.database.dao.AudienceDao;
+import com.example.misha.myapplication.data.database.entity.Audience;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-
-import androidx.fragment.app.Fragment;
 
 
 public class FragmentAudience extends Fragment {
 
-    EditText input_audience;
-    ListView list_audiences;
+    private EditText input_audience;
+    private ListView list_audiences;
 
-    ArrayList<Audience> audience_list = new ArrayList<>();
-    public ArrayAdapter<String> adapter;
+    private ArrayList<Audience> audience_list = new ArrayList<>();
+    public ArrayAdapter<Audience> adapter;
 
     public FragmentAudience() {
     }
@@ -40,12 +42,12 @@ public class FragmentAudience extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_audience, container, false);
         input_audience = view.findViewById(R.id.input_audience);
         list_audiences = view.findViewById(R.id.list_audiences);
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, audience_list);
         list_audiences.setAdapter(adapter);
         list_audiences.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());
         updateListView();
@@ -72,7 +74,7 @@ public class FragmentAudience extends Fragment {
         return view;
     }
 
-    public Dialog onCreateDialogDeleteItem(final int position) {
+    private Dialog onCreateDialogDeleteItem(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
             Audience audience = audience_list.get(position);
@@ -82,9 +84,9 @@ public class FragmentAudience extends Fragment {
         return builder.create();
     }
 
-    public void updateListView() {
+    private void updateListView() {
         audience_list = AudienceDao.getInstance().getAllData();
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, audience_list);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, audience_list);
         list_audiences.setAdapter(adapter);
     }
 

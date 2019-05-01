@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.editScheduleListAdapters.ListAudienceAdapter;
-import com.example.misha.myapplication.database.entity.Audience;
+import com.example.misha.myapplication.data.database.entity.Audience;
 import com.example.misha.myapplication.fragments.EditData;
 
 import java.util.ArrayList;
@@ -21,6 +21,8 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
 
 
 //Todo прочитать про наследование инкапсуляцию интерфейсы абстрактные классы и generic.
@@ -46,18 +48,17 @@ public class AudienceList extends DialogFragment {
         return fragment;
     }
 
+    @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         clickedPosition = getArguments().getInt(POSITION);
         listAudience = getArguments().getParcelableArrayList(AUDIENCES);
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
         View view = layoutInflater.inflate(R.layout.dialog_rv_list, null);
-        View layoutTitleDialog = layoutInflater.inflate(R.layout.title_dialog, null);
-        TextView title_dialog = layoutTitleDialog.findViewById(R.id.dialog_textView);
+        TextView title_dialog = view.findViewById(R.id.dialog_textView);
         title_dialog.setText("Аудитория");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        builder.setCustomTitle(layoutTitleDialog);
         rvAudience = view.findViewById(R.id.rv_dialog);
         listAudienceAdapter = new ListAudienceAdapter(listAudience, (position, view1) -> {
             Intent intent = new Intent();

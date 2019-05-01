@@ -14,31 +14,29 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.database.dao.SubjectDao;
-import com.example.misha.myapplication.database.entity.Lesson;
-import com.example.misha.myapplication.database.entity.Subject;
+import com.example.misha.myapplication.data.database.dao.SubjectDao;
+import com.example.misha.myapplication.data.database.entity.Subject;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 
 public class FragmentSubject extends Fragment {
 
 
-    EditText input_subject;
-    ListView list_subjects;
-    ArrayList<Subject> subject_list = new ArrayList<>();
-    ArrayList<Lesson> lessonList = new ArrayList<>();
-    public ArrayAdapter<String> adapter;
-    ViewPager viewpager;
+    private EditText input_subject;
+    private ListView list_subjects;
+    private ArrayList<Subject> subject_list = new ArrayList<>();
+
+    public ArrayAdapter<Subject> adapter;
 
     public FragmentSubject() {
 
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,17 +45,15 @@ public class FragmentSubject extends Fragment {
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
         input_subject = view.findViewById(R.id.input_subject);
         list_subjects = view.findViewById(R.id.list_subjects);
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, subject_list);
         list_subjects.setAdapter(adapter);
         list_subjects.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());
         updateListView();
-
-        viewpager = getActivity().findViewById(R.id.viewPager); //добавить подсказку
 
         input_subject.setOnEditorActionListener((v, actionId, event) -> {
             if ((actionId == EditorInfo.IME_ACTION_DONE) ||
@@ -83,7 +79,7 @@ public class FragmentSubject extends Fragment {
         return view;
     }
 
-    public Dialog onCreateDialogDeleteItem(final int position) {
+    private Dialog onCreateDialogDeleteItem(final int position) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
@@ -96,9 +92,9 @@ public class FragmentSubject extends Fragment {
         return builder.create();
     }
 
-    public void updateListView() {
+    private void updateListView() {
         subject_list = SubjectDao.getInstance().getAllData();
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, subject_list);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, subject_list);
         list_subjects.setAdapter(adapter);
     }
 }

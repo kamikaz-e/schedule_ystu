@@ -6,37 +6,29 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.adapter.CallsScheduleAdapter;
-import com.example.misha.myapplication.adapter.editSchedule.CallScheduleCallback;
-import com.example.misha.myapplication.database.dao.CallDao;
-import com.example.misha.myapplication.database.entity.Calls;
+import com.example.misha.myapplication.module.schedule.edit.page.CallScheduleCallback;
+import com.example.misha.myapplication.data.database.dao.CallDao;
+import com.example.misha.myapplication.data.database.entity.Calls;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 public class CallsSchedule extends BaseFragment implements CallScheduleCallback {
 
 
-    private RecyclerView rvCalls;
     private CallsScheduleAdapter callsAdapter;
-
-    Calendar calendarTimeCalls = Calendar.getInstance();
-    ArrayList<Calls> callsList = new ArrayList<>();
-    Integer start = 1;
-
-    String selectPartTime = "";
-    String selectFullTime = "";
-
-    Integer lesPos = 0;
+    private Calendar calendarTimeCalls = Calendar.getInstance();
+    private String selectDate = "";
 
     @Override
     public void onResume() {
@@ -51,12 +43,12 @@ public class CallsSchedule extends BaseFragment implements CallScheduleCallback 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_call_schedule, container, false);
 
-        rvCalls = view.findViewById(R.id.rv_calls);
+        RecyclerView rvCalls = view.findViewById(R.id.rv_calls);
         rvCalls.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvCalls.setAdapter(callsAdapter);
         return view;
@@ -70,8 +62,8 @@ public class CallsSchedule extends BaseFragment implements CallScheduleCallback 
 
     @Override
     public void onCallClick(int position) {
-        lesPos = position;
-        start = 1;
+        Preferences.getInstance().setSelectedPositionLesson(position);
+        Preferences.getInstance().setCallsOpened(true);
 
         new TimePickerDialog(getActivity(), timeOne,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
@@ -80,33 +72,33 @@ public class CallsSchedule extends BaseFragment implements CallScheduleCallback 
     }
 
 
-    private void setInitialTimeOne() {
-        if (start == 1) {
-            selectPartTime = (DateUtils.formatDateTime(getActivity(),
+    private void setTime() {
+        if (Preferences.getInstance().isCallsOpened()) {
+            selectDate = (DateUtils.formatDateTime(getActivity(),
                     calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME) + " - ");
         } else {
-            selectFullTime = selectPartTime + DateUtils.formatDateTime(getActivity(),
+            String selectFullTime = selectDate + DateUtils.formatDateTime(getActivity(),
                     calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-            callsList = CallDao.getInstance().getAllData();
-            callsList.get(lesPos).setName(selectFullTime);
+            ArrayList<Calls> callsList = CallDao.getInstance().getAllData();
+            callsList.get(Preferences.getInstance().getSelectedPositionLesson()).setName(selectFullTime);
             callsAdapter.setCallsList(callsList);
             callsAdapter.notifyDataSetChanged();
-            CallDao.getInstance().updateItemByID(callsList.get(lesPos));
+            CallDao.getInstance().updateItemByID(callsList.get(Preferences.getInstance().getSelectedPositionLesson()));
 
         }
-        if (start == 1) {
+        if (Preferences.getInstance().isCallsOpened()) {
             new TimePickerDialog(getActivity(), timeOne,
                     calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                     calendarTimeCalls.get(Calendar.MINUTE), true)
                     .show();
-            start = 0;
+            Preferences.getInstance().setCallsOpened(false);
         }
     }
 
-    TimePickerDialog.OnTimeSetListener timeOne = (view, hourOfDay, minute) -> {
+    private TimePickerDialog.OnTimeSetListener timeOne = (view, hourOfDay, minute) -> {
         calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendarTimeCalls.set(Calendar.MINUTE, minute);
-        setInitialTimeOne();
+        setTime();
     };
 
 

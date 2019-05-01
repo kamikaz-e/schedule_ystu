@@ -13,20 +13,23 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.database.dao.EducatorDao;
-import com.example.misha.myapplication.database.entity.Educator;
+import com.example.misha.myapplication.data.database.dao.EducatorDao;
+import com.example.misha.myapplication.data.database.entity.Educator;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-
-import androidx.fragment.app.Fragment;
 
 
 public class FragmentEducator extends Fragment {
 
-    EditText input_educator;
-    ListView list_educators;
-    ArrayList<Educator> educator_list = new ArrayList<>();
+    private EditText input_educator;
+    private ListView list_educators;
+
+    private ArrayList<Educator> educator_list = new ArrayList<>();
     public ArrayAdapter<Educator> adapter;
 
     public FragmentEducator() {
@@ -38,12 +41,12 @@ public class FragmentEducator extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_educator, container, false);
         input_educator = view.findViewById(R.id.input_educators);
         list_educators = view.findViewById(R.id.list_educators);
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, educator_list);
         list_educators.setAdapter(adapter);
         list_educators.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());
         updateListView();
@@ -69,7 +72,7 @@ public class FragmentEducator extends Fragment {
         return view;
     }
 
-    public Dialog onCreateDialogDeleteItem(final int position) {
+    private Dialog onCreateDialogDeleteItem(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
             Educator educator = educator_list.get(position);
@@ -82,9 +85,9 @@ public class FragmentEducator extends Fragment {
     }
 
 
-    public void updateListView() {
+    private void updateListView() {
         educator_list = EducatorDao.getInstance().getAllData();
-        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, educator_list);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, educator_list);
         list_educators.setAdapter(adapter);
     }
 

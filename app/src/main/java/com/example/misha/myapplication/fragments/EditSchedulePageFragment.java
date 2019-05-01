@@ -9,20 +9,20 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.example.misha.myapplication.Constants;
-import com.example.misha.myapplication.Preferences;
+import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.editSchedule.EditScheduleAdapter;
-import com.example.misha.myapplication.adapter.editSchedule.EditScheduleCallback;
-import com.example.misha.myapplication.database.dao.AudienceDao;
-import com.example.misha.myapplication.database.dao.EducatorDao;
-import com.example.misha.myapplication.database.dao.LessonDao;
-import com.example.misha.myapplication.database.dao.SubjectDao;
-import com.example.misha.myapplication.database.dao.TypelessonDao;
-import com.example.misha.myapplication.database.entity.Audience;
-import com.example.misha.myapplication.database.entity.Educator;
-import com.example.misha.myapplication.database.entity.Lesson;
-import com.example.misha.myapplication.database.entity.Subject;
-import com.example.misha.myapplication.database.entity.Typelesson;
+import com.example.misha.myapplication.module.schedule.edit.page.EditScheduleAdapter;
+import com.example.misha.myapplication.module.schedule.edit.page.EditScheduleCallback;
+import com.example.misha.myapplication.data.database.dao.AudienceDao;
+import com.example.misha.myapplication.data.database.dao.EducatorDao;
+import com.example.misha.myapplication.data.database.dao.LessonDao;
+import com.example.misha.myapplication.data.database.dao.SubjectDao;
+import com.example.misha.myapplication.data.database.dao.TypelessonDao;
+import com.example.misha.myapplication.data.database.entity.Audience;
+import com.example.misha.myapplication.data.database.entity.Educator;
+import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.data.database.entity.Subject;
+import com.example.misha.myapplication.data.database.entity.Typelesson;
 import com.example.misha.myapplication.dialog.AudienceList;
 import com.example.misha.myapplication.dialog.EducatorList;
 import com.example.misha.myapplication.dialog.SubjectList;
@@ -35,18 +35,15 @@ import java.util.List;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 public class EditSchedulePageFragment extends Fragment implements EditScheduleCallback {
 
-    private View fragmentView;
-    private RecyclerView rvLessons;
     private EditScheduleAdapter rvadapter;
     private List<Lesson> lessonList = new ArrayList<>();
-    ArrayList<Subject> subjectList = new ArrayList<>();
-    ArrayList<Audience> audienceList = new ArrayList<>();
-    ArrayList<Educator> educatorList = new ArrayList<>();
-    ArrayList<Typelesson> typelessonList = new ArrayList<>();
-    FloatingActionButton fab, fab1, fab2;
-    private Animation fab_open, fab_close, rotate_forward, rotate_backward;
+    private FloatingActionButton fab, fab1, fab2;
+    private Animation fab_close;
+    private Animation rotate_backward;
     private int positionWeek;
     private int day;
 
@@ -69,21 +66,20 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
-        rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
+        RecyclerView rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
         fab = getActivity().findViewById(R.id.main_fab);
         fab1 = getActivity().findViewById(R.id.even_weekFab);
         fab2 = getActivity().findViewById(R.id.uneven_weekFab);
-        fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
+
         fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
-        rotate_forward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
         rotate_backward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
         rvLessons.setAdapter(rvadapter);
 
         rvLessons.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy > 0 && fab.getVisibility() == View.VISIBLE) {
                     if (Preferences.getInstance().getFabOpen()){
@@ -117,10 +113,10 @@ public class EditSchedulePageFragment extends Fragment implements EditScheduleCa
 
     private void updateList() {
         lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
-        subjectList = SubjectDao.getInstance().getAllData();
-        audienceList = AudienceDao.getInstance().getAllData();
-        educatorList = EducatorDao.getInstance().getAllData();
-        typelessonList = TypelessonDao.getInstance().getAllData();
+        ArrayList<Subject> subjectList = SubjectDao.getInstance().getAllData();
+        ArrayList<Audience> audienceList = AudienceDao.getInstance().getAllData();
+        ArrayList<Educator> educatorList = EducatorDao.getInstance().getAllData();
+        ArrayList<Typelesson> typelessonList = TypelessonDao.getInstance().getAllData();
         rvadapter.setLessonList(lessonList);
         rvadapter.setAudiences(audienceList);
         rvadapter.setEducators(educatorList);
