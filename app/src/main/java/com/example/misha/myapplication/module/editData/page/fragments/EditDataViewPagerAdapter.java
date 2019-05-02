@@ -1,13 +1,8 @@
-package com.example.misha.myapplication.adapter;
+package com.example.misha.myapplication.module.editData.page.fragments;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-
-import com.example.misha.myapplication.editData.FragmentAudience;
-import com.example.misha.myapplication.editData.FragmentEducator;
-import com.example.misha.myapplication.editData.FragmentSubject;
-import com.example.misha.myapplication.editData.FragmentTypelesson;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +28,6 @@ public class EditDataViewPagerAdapter extends FragmentStatePagerAdapter {
             fragment = new FragmentTypelesson();
         }
         return fragment;
-
     }
 
     @Override

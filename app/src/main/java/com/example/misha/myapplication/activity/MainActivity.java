@@ -16,9 +16,9 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.data.database.DatabaseHelper;
 import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
-import com.example.misha.myapplication.fragments.CallsSchedule;
-import com.example.misha.myapplication.fragments.EditData;
-import com.example.misha.myapplication.fragments.Settings;
+import com.example.misha.myapplication.module.callSchedule.CallsSchedule;
+import com.example.misha.myapplication.module.editData.EditData;
+import com.example.misha.myapplication.module.settings.Settings;
 import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;
 
 public class MainActivity extends DrawerActivity {

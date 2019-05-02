@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.fragments;
+package com.example.misha.myapplication.module.editData;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,25 +10,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.EditDataViewPagerAdapter;
+import com.example.misha.myapplication.common.core.BaseMainFragment;
+import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.database.AbsDao;
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;
 import com.example.misha.myapplication.data.database.dao.SubjectDao;
 import com.example.misha.myapplication.data.database.dao.TypelessonDao;
+import com.example.misha.myapplication.module.editData.page.fragments.EditDataViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import org.jetbrains.annotations.NotNull;
 
 
-public class EditData extends BaseFragment {
-
+public class EditData extends BaseMainFragment implements EditDataView {
 
     private TabLayout tabLayout;
     private EditDataViewPagerAdapter viewPagerAdapter;
+    private EditDataPresenter presenter;
 
     @Override
     public void onResume() {
@@ -40,14 +43,15 @@ public class EditData extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new EditDataPresenter();
     }
+
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_edit_data, container, false);
-
 
         setHasOptionsMenu(true);
 
@@ -93,16 +97,22 @@ public class EditData extends BaseFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
-                clear(dao)).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle(titleClear);
+                presenter.onClearClick(dao)).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle(titleClear);
         return builder.create();
     }
 
-    private void clear(AbsDao dao) {
+    @Override
+    protected BasePresenter getPresenter() {
+        return presenter;
+    }
+
+
+    @Override
+    public void clear(AbsDao dao) {
         dao.deleteAll();
         if (!(viewPagerAdapter == null)) {
             viewPagerAdapter.notifyDataSetChanged();
         }
     }
-
 
 }

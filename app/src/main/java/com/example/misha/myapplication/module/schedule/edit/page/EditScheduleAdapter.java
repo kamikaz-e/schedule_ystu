@@ -118,7 +118,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         private final View textViewOptions;
 
 
-        private ViewHolder(View view) {
+        public ViewHolder(View view) {
             super(view);
             number = view.findViewById(R.id.number);
             timeEdit = view.findViewById(R.id.time);

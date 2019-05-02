@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.module.schedule.edit.page.editScheduleListAdapters.ListSubjectsAdapter;
 import com.example.misha.myapplication.data.database.entity.Subject;
-import com.example.misha.myapplication.fragments.EditData;
+import com.example.misha.myapplication.module.editData.EditData;
 
 import java.util.ArrayList;
 

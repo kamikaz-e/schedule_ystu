@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter;
+package com.example.misha.myapplication.module.callSchedule;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.CallScheduleCallback;
 import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.entity.Calls;
 
@@ -22,10 +21,10 @@ public class CallsScheduleAdapter extends RecyclerView.Adapter<CallsScheduleAdap
 
 
     private ArrayList<Calls> callsList = new ArrayList<>();
-    private CallScheduleCallback itemClickListener;
+    private CallsPresenter itemClickListener;
 
 
-    public CallsScheduleAdapter(CallScheduleCallback callsScheduleCallback) {
+    public CallsScheduleAdapter(CallsPresenter callsScheduleCallback) {
         this.itemClickListener = callsScheduleCallback;
     }
 
@@ -79,7 +78,7 @@ public class CallsScheduleAdapter extends RecyclerView.Adapter<CallsScheduleAdap
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.call_time || v.getId() == R.id.call_cardView) {
-                itemClickListener.onCallClick(getAdapterPosition());
+                itemClickListener.onClick(getAdapterPosition());
             }
         }
     }

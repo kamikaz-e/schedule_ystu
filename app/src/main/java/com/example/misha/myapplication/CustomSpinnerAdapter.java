@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.adapter;
+package com.example.misha.myapplication;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

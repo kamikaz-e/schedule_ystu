@@ -10,14 +10,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseActivity;
-import com.example.misha.myapplication.fragments.BaseFragment;
 import com.example.misha.myapplication.util.DateUtil;
 import com.google.android.material.navigation.NavigationView;
 
 import static com.example.misha.myapplication.util.DateUtil.hintKeyboard;
 
 public abstract class DrawerActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
-    
+
     protected NavigationView navigationView;
     protected DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
@@ -84,20 +83,6 @@ public abstract class DrawerActivity extends BaseActivity implements NavigationV
         };
     }
 
-    @Override
-    public void onBackPressed() {
-        if (!BaseFragment.handleBackPressed(getSupportFragmentManager())) {
-            if (drawerLayout.isEnabled()) {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    super.onBackPressed();
-                } else {
-                    drawerLayout.openDrawer(GravityCompat.START);
-                }
-            } else {
-                super.onBackPressed();
-            }
-        }
-    }
 
     public void openDrawer() {
         drawerLayout.openDrawer(GravityCompat.START);

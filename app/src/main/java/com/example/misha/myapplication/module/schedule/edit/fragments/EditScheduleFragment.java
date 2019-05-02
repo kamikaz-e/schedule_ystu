@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.schedule.edit.fragment;
+package com.example.misha.myapplication.module.schedule.edit.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -21,7 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
+import com.example.misha.myapplication.CustomSpinnerAdapter;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.Preferences;

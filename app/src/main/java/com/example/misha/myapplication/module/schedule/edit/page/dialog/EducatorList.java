@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.module.schedule.edit.page.editScheduleListAdapters.ListEducatorAdapter;
 import com.example.misha.myapplication.data.database.entity.Educator;
-import com.example.misha.myapplication.fragments.EditData;
+import com.example.misha.myapplication.module.editData.EditData;
 
 import java.util.ArrayList;
 

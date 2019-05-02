@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.fragments;
+package com.example.misha.myapplication.module.callSchedule;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -7,13 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.CallsScheduleAdapter;
-import com.example.misha.myapplication.CallScheduleCallback;
+import com.example.misha.myapplication.common.core.BaseMainFragment;
+import com.example.misha.myapplication.common.core.BasePresenter;
+import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.entity.Calls;
 
@@ -23,12 +24,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class CallsSchedule extends BaseFragment implements CallScheduleCallback {
+public class CallsSchedule extends BaseMainFragment implements CallsView {
 
 
     private CallsScheduleAdapter callsAdapter;
     private Calendar calendarTimeCalls = Calendar.getInstance();
     private String selectDate = "";
+    private CallsPresenter presenter;
 
     @Override
     public void onResume() {
@@ -39,15 +41,14 @@ public class CallsSchedule extends BaseFragment implements CallScheduleCallback 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        callsAdapter = new CallsScheduleAdapter(this);
+        presenter = new CallsPresenter();
+        callsAdapter = new CallsScheduleAdapter(presenter);
     }
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_call_schedule, container, false);
-
         RecyclerView rvCalls = view.findViewById(R.id.rv_calls);
         rvCalls.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvCalls.setAdapter(callsAdapter);
@@ -59,9 +60,15 @@ public class CallsSchedule extends BaseFragment implements CallScheduleCallback 
         super.onActivityCreated(savedInstanceState);
     }
 
+    @NonNull
+    @Override
+    protected BasePresenter getPresenter() {
+        return presenter;
+    }
+
 
     @Override
-    public void onCallClick(int position) {
+    public void onClick(int position) {
         Preferences.getInstance().setSelectedPositionLesson(position);
         Preferences.getInstance().setCallsOpened(true);
 
@@ -100,6 +107,5 @@ public class CallsSchedule extends BaseFragment implements CallScheduleCallback 
         calendarTimeCalls.set(Calendar.MINUTE, minute);
         setTime();
     };
-
 
 }

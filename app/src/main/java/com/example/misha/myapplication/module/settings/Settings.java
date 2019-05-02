@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.fragments;
+package com.example.misha.myapplication.module.settings;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -12,8 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-import com.example.misha.myapplication.data.Preferences;
+import androidx.annotation.NonNull;
+
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.common.core.BaseMainFragment;
+import com.example.misha.myapplication.common.core.BasePresenter;
+import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;
 import com.example.misha.myapplication.data.database.dao.SubjectDao;
@@ -21,6 +25,7 @@ import com.example.misha.myapplication.data.database.entity.Audience;
 import com.example.misha.myapplication.data.database.entity.Subject;
 import com.example.misha.myapplication.data.network.RetrofitClient;
 import com.example.misha.myapplication.data.network.request.ScheduleRequest;
+import com.example.misha.myapplication.module.editData.EditDataPresenter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,11 +38,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Settings extends BaseFragment {
+public class Settings extends BaseMainFragment {
 
 
     private String nameGroup;
     public ArrayAdapter<String> adapter;
+    private EditDataPresenter presenter;
 
     @Override
     public void onResume() {
@@ -48,6 +54,12 @@ public class Settings extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @NonNull
+    @Override
+    protected BasePresenter getPresenter() {
+        return presenter;
     }
 
     @Override

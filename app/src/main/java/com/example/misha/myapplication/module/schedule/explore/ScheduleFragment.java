@@ -17,12 +17,12 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
+import com.example.misha.myapplication.CustomSpinnerAdapter;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.Preferences;
 import com.example.misha.myapplication.module.schedule.edit.TabDaysAdapterEditSchedule;
-import com.example.misha.myapplication.module.schedule.edit.fragment.EditScheduleFragment;
+import com.example.misha.myapplication.module.schedule.edit.fragments.EditScheduleFragment;
 import com.example.misha.myapplication.util.DateUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -98,7 +98,6 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleView, 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
     }
 
     @Override

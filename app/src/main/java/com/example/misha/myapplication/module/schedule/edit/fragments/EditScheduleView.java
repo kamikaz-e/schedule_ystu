@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.schedule.edit.fragment;
+package com.example.misha.myapplication.module.schedule.edit.fragments;
 
 import com.example.misha.myapplication.common.core.BaseView;
 
