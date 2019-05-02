@@ -16,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
+import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.Preferences;
-import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.adapter.CustomSpinnerAdapter;
 import com.example.misha.myapplication.module.schedule.edit.TabDaysAdapterEditSchedule;
 import com.example.misha.myapplication.module.schedule.edit.fragment.EditScheduleFragment;
 import com.example.misha.myapplication.util.DateUtil;
@@ -83,7 +83,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleView, 
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-            presenter.onPageSwiped(position);
+                presenter.onPageSwiped(position);
             }
         });
         viewPager.setAdapter(pagerAdapter);
@@ -151,10 +151,9 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleView, 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         if (item.getItemId() == R.id.btn_edit) {
             presenter.onButtonClicked();
-
         }
         return super.onOptionsItemSelected(item);
     }

@@ -12,8 +12,6 @@ public interface View extends BaseView {
 
     void updateList(int day, int positionWeek);
 
-    void initAtOpen();
-
     void onAudienceClick(int position, ArrayList<Audience> audience);
 
     void onEducatorClick(int position, ArrayList<Educator> educator);

@@ -20,7 +20,6 @@ import com.example.misha.myapplication.data.database.entity.Educator;
 import com.example.misha.myapplication.data.database.entity.Lesson;
 import com.example.misha.myapplication.data.database.entity.Subject;
 import com.example.misha.myapplication.data.database.entity.Typelesson;
-import com.example.misha.myapplication.module.schedule.edit.page.fragment.PagePresenter;
 import com.example.misha.myapplication.module.schedule.edit.page.fragment.PresenterInterface;
 
 import java.util.ArrayList;
@@ -119,7 +118,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         private final View textViewOptions;
 
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             super(view);
             number = view.findViewById(R.id.number);
             timeEdit = view.findViewById(R.id.time);
@@ -135,7 +134,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
             view.setOnClickListener(this);
         }
 
-        public void onBindView(int position) {
+        private void onBindView(int position) {
             Lesson lesson = lessonList.get(position);
             number.setText(lesson.getTimeLesson());
             timeEdit.setText((lesson.getTimeLesson()));

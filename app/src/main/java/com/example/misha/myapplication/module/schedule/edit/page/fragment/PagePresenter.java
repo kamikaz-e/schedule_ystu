@@ -28,15 +28,6 @@ public class PagePresenter extends BaseMainPresenter<View> implements PresenterI
         getView().updateList(day, positionWeek);
     }
 
-    @Override
-    public void onButtonClicked(int id) {
-
-    }
-
-    @Override
-    public void initAtOpen() {
-        getView().initAtOpen();
-    }
 
     @Override
     public void onAudienceClick(int position, ArrayList<Audience> audience) {

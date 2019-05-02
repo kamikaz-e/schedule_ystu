@@ -42,10 +42,9 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
 
     private EditScheduleAdapter rvadapter;
     private List<Lesson> lessonList = new ArrayList<>();
-    private FloatingActionButton fab, fab1, fab2;
-    private Animation fab_close;
-    private Animation rotate_backward;
-
+    private FloatingActionButton mainFab, evenWeekFab, unevenWeekFab;
+    private Animation fabClose;
+    private Animation rotateBackward;
     private PagePresenter presenter;
 
     //BottomNavigationView
@@ -57,7 +56,6 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
         int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
         presenter = new PagePresenter(day, positionWeek);
         rvadapter = new EditScheduleAdapter(this);
-
     }
 
     public static PageView newInstance(int selectedWeek, int position) {
@@ -72,39 +70,39 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
     @Override
     public android.view.View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         android.view.View fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
-        RecyclerView rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
-        fab = getActivity().findViewById(R.id.main_fab);
-        fab1 = getActivity().findViewById(R.id.even_weekFab);
-        fab2 = getActivity().findViewById(R.id.uneven_weekFab);
+        mainFab = getActivity().findViewById(R.id.main_fab);
+        evenWeekFab = getActivity().findViewById(R.id.even_weekFab);
+        unevenWeekFab = getActivity().findViewById(R.id.uneven_weekFab);
 
-        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
-        rotate_backward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
+        fabClose = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
+        rotateBackward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
+
+        RecyclerView rvLessons = fragmentView.findViewById(R.id.rv_lessons_edit);
         rvLessons.setAdapter(rvadapter);
         rvLessons.addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0 && fab.getVisibility() == android.view.View.VISIBLE) {
+                if (dy > 0 && mainFab.getVisibility() == android.view.View.VISIBLE) {
                     if (Preferences.getInstance().getFabOpen()) {
-                        fab.hide();
-                        fab.startAnimation(rotate_backward);
-                        fab.setClickable(false);
-                        fab1.startAnimation(fab_close);
-                        fab2.startAnimation(fab_close);
-                        fab1.setClickable(false);
-                        fab2.setClickable(false);
+                        mainFab.hide();
+                        mainFab.startAnimation(rotateBackward);
+                        mainFab.setClickable(false);
+                        evenWeekFab.startAnimation(fabClose);
+                        unevenWeekFab.startAnimation(fabClose);
+                        evenWeekFab.setClickable(false);
+                        unevenWeekFab.setClickable(false);
                         Preferences.getInstance().setFabOpen(false);
                     } else {
-                        fab.hide();
-                        fab.setClickable(false);
+                        mainFab.hide();
+                        mainFab.setClickable(false);
                     }
-                } else if (dy < 0 && fab.getVisibility() != android.view.View.VISIBLE) {
-                    fab.show();
-                    fab.setClickable(true);
+                } else if (dy < 0 && mainFab.getVisibility() != android.view.View.VISIBLE) {
+                    mainFab.show();
+                    mainFab.setClickable(true);
                 }
             }
         });
-
         return fragmentView;
     }
 
@@ -132,11 +130,6 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
         rvadapter.setSubjects(subjectList);
         rvadapter.setTypelesson(typelessonList);
         rvadapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void initAtOpen() {
-
     }
 
     public void setWeek(int selectedWeek) {
@@ -244,11 +237,5 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
     public void onWeekSelected(int position) {
 
     }
-
-    @Override
-    public void onButtonClicked(int id) {
-
-    }
-
 
 }

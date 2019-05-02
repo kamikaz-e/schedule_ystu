@@ -7,15 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.misha.myapplication.data.Preferences;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
+import com.example.misha.myapplication.data.Preferences;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 public class TabDaysAdapterEditSchedule extends RecyclerView.Adapter<TabDaysAdapterEditSchedule.ViewHolder> {
 
@@ -36,7 +38,7 @@ public class TabDaysAdapterEditSchedule extends RecyclerView.Adapter<TabDaysAdap
         mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         @SuppressLint("SimpleDateFormat") SimpleDateFormat mFormatDay = new SimpleDateFormat("dd EEE");
         mCalendar.add(Calendar.WEEK_OF_YEAR, selectedPos);
-        for(int day = 0; day < 6; day++){
+        for (int day = 0; day < 6; day++) {
             dayYear.add(mFormatDay.format(mCalendar.getTime()).toUpperCase());
             mCalendar.add(Calendar.DAY_OF_YEAR, 1);
         }
@@ -44,15 +46,16 @@ public class TabDaysAdapterEditSchedule extends RecyclerView.Adapter<TabDaysAdap
     }
 
 
+    @NotNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_tab_day, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NotNull ViewHolder holder, final int position) {
         holder.onBindView(position);
     }
 
@@ -72,14 +75,14 @@ public class TabDaysAdapterEditSchedule extends RecyclerView.Adapter<TabDaysAdap
         private final TextView date;
 
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             super(view);
             view.setOnClickListener(this);
             date = view.findViewById(R.id.date);
 
         }
 
-        public void onBindView(int position) {
+        private void onBindView(int position) {
             date.setText(dayYear.get(position));
             itemView.setBackgroundColor(selectedPos == position ? Color.parseColor("#FF4081") : Color.TRANSPARENT);
         }

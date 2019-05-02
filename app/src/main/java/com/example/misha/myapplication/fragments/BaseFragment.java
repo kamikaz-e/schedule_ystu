@@ -36,16 +36,16 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolbarEnabled(true);
-        setDrawerEnabled(true);
+        setToolbarEnabled();
+        setDrawerEnabled();
     }
 
-    public void setToolbarEnabled(boolean state) {
-        this.toolbarEnabled = state;
+    private void setToolbarEnabled() {
+        this.toolbarEnabled = true;
     }
 
-    public void setDrawerEnabled(boolean drawerEnabled) {
-        this.drawerEnabled = drawerEnabled;
+    private void setDrawerEnabled() {
+        this.drawerEnabled = true;
     }
 
     private void sendResultToTarget(Class target, Fragment root, int request,
@@ -71,6 +71,7 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * Handle on back pressed.
+     *
      * @param manager manager
      * @return true if manger or child manager pop back stack
      */

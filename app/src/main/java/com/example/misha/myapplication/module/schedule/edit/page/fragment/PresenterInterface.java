@@ -11,10 +11,6 @@ public interface PresenterInterface {
 
     void onWeekSelected(int position);
 
-    void onButtonClicked(int id);
-
-    void initAtOpen();
-
     void onAudienceClick(int position, ArrayList<Audience> audience);
 
     void onEducatorClick(int position, ArrayList<Educator> educator);

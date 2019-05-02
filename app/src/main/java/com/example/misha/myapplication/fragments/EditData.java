@@ -69,9 +69,7 @@ public class EditData extends BaseFragment {
 
     @Override
     public boolean onOptionsItemSelected(@NotNull MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.btn_edit) {
+        if (item.getItemId() == R.id.btn_edit) {
             switch (tabLayout.getSelectedTabPosition()) {
                 case 0:
                     onCreateDialogClear(SubjectDao.getInstance(), R.string.clear_subjects).show();
@@ -104,7 +102,6 @@ public class EditData extends BaseFragment {
         if (!(viewPagerAdapter == null)) {
             viewPagerAdapter.notifyDataSetChanged();
         }
-
     }
 
 

@@ -26,6 +26,7 @@ public class ScheduleApp extends Application {
     public static void showToast(@StringRes int message) {
         Toast.makeText(appContext, getStr(message), Toast.LENGTH_SHORT).show();
     }
+
     public static Drawable getDrwbl(@DrawableRes int drawRes) {
         return ContextCompat.getDrawable(appContext, drawRes);
     }
@@ -42,6 +43,7 @@ public class ScheduleApp extends Application {
     public static int getDimen(@DimenRes int dimenRes) {
         return appContext.getResources().getDimensionPixelSize(dimenRes);
     }
+
     public static String getStr(@StringRes int stringId) {
         return appContext.getResources().getString(stringId);
     }
