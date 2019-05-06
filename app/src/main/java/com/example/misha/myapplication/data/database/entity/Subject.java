@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 
 //Todo прочитать про сериализацию и Parcelable
-public class Subject implements Parcelable {
+public class Subject implements Parcelable, SimpleItem {
 
     @Expose
     @SerializedName("id")

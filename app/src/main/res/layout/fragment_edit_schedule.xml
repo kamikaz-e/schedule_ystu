@@ -22,10 +22,11 @@
         android:id="@+id/uneven_weekFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/even_weekFab"
+
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="55sp"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_above="@+id/even_weekFab"
         android:src="@drawable/ic_uneven_week"
         android:visibility="invisible"
         app:backgroundTint="#707070" />
@@ -34,11 +35,12 @@
         android:id="@+id/even_weekFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/main_fab"
+
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="65dp"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_normal"
         android:src="@drawable/ic_even_week"
+        android:layout_above="@+id/main_fab"
         android:visibility="invisible"
         app:backgroundTint="#707070" />
 
@@ -48,8 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/viewPager"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_normal"
         android:src="@drawable/ic_add"
         app:backgroundTint="#707070"
         app:layout_anchor="@id/rv_tab"

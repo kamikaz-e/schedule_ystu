@@ -3,14 +3,16 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorAccentTransparent">#90FF4081</color>
     <color name="textColor">#ffa500</color>
     <color name="colorControlNormal">#4b0082</color>
     <color name="colorControlActivated">#FFA500</color>
     <color name="color_primary_text">#FFFFFF</color>
     <color name="color_secondary_text">#FF9800</color>
     <color name="tab_background_selected">#404040</color>
-    <color name="background_color">#484848</color>
-    <color name="background_colorTwo">#303030</color>
-    <color name="background_colorThree">#202020</color>
+    <color name="background_color48">#484848</color>
+    <color name="background_color30">#303030</color>
+    <color name="background_color27">#272727</color>
+    <color name="background_color20">#202020</color>
     <color name="black">#000000</color>
 </resources>

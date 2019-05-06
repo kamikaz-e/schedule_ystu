@@ -4,11 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -18,15 +19,12 @@ import androidx.annotation.NonNull;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.data.Preferences;
+import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
-import com.example.misha.myapplication.data.database.dao.EducatorDao;
-import com.example.misha.myapplication.data.database.dao.SubjectDao;
 import com.example.misha.myapplication.data.database.entity.Audience;
 import com.example.misha.myapplication.data.database.entity.Subject;
 import com.example.misha.myapplication.data.network.RetrofitClient;
 import com.example.misha.myapplication.data.network.request.ScheduleRequest;
-import com.example.misha.myapplication.module.editData.EditDataPresenter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -49,7 +47,7 @@ public class Settings extends BaseMainFragment implements SettingsView, View.OnC
     @Override
     public void onResume() {
         super.onResume();
-        getContext().setCurrentTitle("Настройки");
+        getContext().setCurrentTitle(R.string.settings);
     }
 
     @Override
@@ -71,12 +69,13 @@ public class Settings extends BaseMainFragment implements SettingsView, View.OnC
 
         RelativeLayout layoutPickWeek = view.findViewById(R.id.current_date);
         RelativeLayout layoutImport = view.findViewById(R.id.import_data);
+        RelativeLayout layoutAbout = view.findViewById(R.id.about);
 
         layoutPickWeek.setOnClickListener(this);
         layoutImport.setOnClickListener(this);
+        layoutAbout.setOnClickListener(this);
         return view;
     }
-
 
     public void get_current_week() {
         Calendar calendar = Calendar.getInstance();
@@ -118,51 +117,35 @@ public class Settings extends BaseMainFragment implements SettingsView, View.OnC
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
         final EditText name_db = view.findViewById(R.id.name_schedule);
-        builder.setCancelable(false).setPositiveButton("Загрузить", (dialog, id) -> {
-            nameGroup = name_db.getText().toString();
-            SubjectDao.getInstance().deleteAll();
-            AudienceDao.getInstance().deleteAll();
-            EducatorDao.getInstance().deleteAll();
-            load_db();
-
-        }).setNegativeButton("Отмена", (dialog, id) -> {
-        });
+        builder.setCancelable(false).setPositiveButton("Загрузить", (dialog, id) -> presenter.loadSubjects(name_db.getText().toString())).setNegativeButton("Отмена", (dialog, id) -> { });
         return builder.create();
     }
 
-    public void load_db() {
-        RetrofitClient.getInstance().getRequestInterface().getSubjects(new ScheduleRequest(nameGroup)).enqueue(new Callback<ArrayList<Subject>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Subject>> call, Response<ArrayList<Subject>> response) {
-                SubjectDao.getInstance().insertAll(response.body());
-            }
 
-            @Override
-            public void onFailure(Call<ArrayList<Subject>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-        RetrofitClient.getInstance().getRequestInterface().getAudiences(new ScheduleRequest(nameGroup)).enqueue(new Callback<ArrayList<Audience>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Audience>> call, Response<ArrayList<Audience>> response) {
-                AudienceDao.getInstance().insertAll(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Audience>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+    public Dialog onCreateDialogAbout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
+        builder.setPositiveButton("Профиль Вконтакте", (dialog, id) -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/mikhailvolkov1"));
+            startActivity(browserIntent);
+        }).setNeutralButton("Отмена", (dialog, id) -> dialog.cancel()).setNegativeButton("Электронная почта", (dialog, id) -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:mikhailvolkov2014-2014@ya.ru"));
+            startActivity(browserIntent);
+        }).setTitle("Обратная связь с разработчиком");
+        return builder.create();
     }
 
     @Override
     public void onClick(View v) {
-
-        if (v.getId()==R.id.current_date){
-        presenter.onDateClicked();
+        if (v.getId() == R.id.current_date) {
+            presenter.onDateClicked();
         }
-        if (v.getId()==R.id.import_data) {
-        presenter.onCreateDialogImport();
+        if (v.getId() == R.id.import_data) {
+            presenter.onCreateDialogImport();
+        }
+        if (v.getId() == R.id.about) {
+            presenter.onCreateDialogAbout();
         }
     }
+
+
 }

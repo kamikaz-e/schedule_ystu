@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 
 //Todo прочитать про сериализацию и Parcelable
-public class Typelesson implements Parcelable {
+public class Typelesson implements Parcelable, SimpleItem {
 
     @Expose
     @SerializedName("id")
@@ -56,6 +56,7 @@ public class Typelesson implements Parcelable {
         return name;
     }
 
+    @Override
     public String getName() {
         return name;
     }

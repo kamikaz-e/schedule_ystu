@@ -79,8 +79,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Root {
         toolbar = findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
-        setupActionBar();
-        toolbar.setNavigationOnClickListener(createDrawerClick());
     }
 
     /** Disable collapsing. */

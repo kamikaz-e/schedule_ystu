@@ -7,29 +7,31 @@ import android.view.ViewGroup;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.common.core.BaseMainFragment;
+import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
 import com.example.misha.myapplication.data.database.entity.Lesson;
 
 import java.util.List;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
-public class SchedulePageFragment extends Fragment {
+public class SchedulePageFragment extends BaseMainFragment implements com.example.misha.myapplication.module.schedule.explore.page.View {
 
     private ScheduleAdapter rvadapter;
+    private Presenter presenter;
 
-    private int positionWeek;
-    private int day;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rvadapter = new ScheduleAdapter();
-        day = getArguments().getInt(Constants.DAY);
-        positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
+        int day = getArguments().getInt(Constants.DAY);
+        int  positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
+        presenter = new Presenter(day,positionWeek);
     }
 
     public static SchedulePageFragment newInstance(int selectedWeek, int position) {
@@ -53,17 +55,21 @@ public class SchedulePageFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        updateList();
+        presenter.init();
     }
 
-    private void updateList() {
-        List<Lesson> lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
+    @NonNull
+    @Override
+    protected BasePresenter getPresenter() {
+        return presenter;
+    }
+
+    public void updateList(List<Lesson> lessonList) {
         rvadapter.setLessonList(lessonList);
         rvadapter.notifyDataSetChanged();
     }
 
     public void setWeek(int selectedWeek) {
-        this.positionWeek = selectedWeek;
-        updateList();
+
     }
 }

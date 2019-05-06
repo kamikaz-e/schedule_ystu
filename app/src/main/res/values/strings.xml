@@ -113,4 +113,9 @@
     <string name="unknown_error">Произошла ошибка, попробуйте еще раз</string>
     <string name="error_api_unexpected">Неизветсная ошибка при ответе от удаленного сервера</string>
     <string name="retry">Повтороить</string>
+    <string name="menu_settings_string">Настройки</string>
+    <string name="menu_schedule_string">Расписание</string>
+    <string name="menu_what_string">Что-то да будет</string>
+    <string name="developer">Разработчик</string>
+    <string name="settings">Настройки</string>
 </resources>

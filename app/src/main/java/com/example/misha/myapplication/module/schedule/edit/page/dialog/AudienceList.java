@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.data.database.entity.SimpleItem;
 import com.example.misha.myapplication.module.schedule.edit.page.editScheduleListAdapters.ListAudienceAdapter;
-import com.example.misha.myapplication.data.database.entity.Audience;
 import com.example.misha.myapplication.module.editData.EditData;
 
 import java.util.ArrayList;
@@ -36,10 +36,10 @@ public class AudienceList extends DialogFragment {
 
     private int clickedPosition;
     private ListAudienceAdapter listAudienceAdapter;
-    private ArrayList<Audience> listAudience;
+    private ArrayList<SimpleItem> listAudience;
     private RecyclerView rvAudience;
 
-    public static AudienceList newInstance(int position, ArrayList<Audience> audiences) {
+    public static AudienceList newInstance(int position, ArrayList<SimpleItem> audiences) {
         Bundle args = new Bundle();
         args.putParcelableArrayList(AUDIENCES, audiences);
         args.putInt(POSITION, position);
@@ -64,7 +64,7 @@ public class AudienceList extends DialogFragment {
             Intent intent = new Intent();
             intent.putExtra(POSITION, clickedPosition);
             intent.putExtra(AUDIENCE_LIST, listAudience.get(position));
-            getParentFragment().onActivityResult(AUDIENCE_CODE, Activity.RESULT_OK, intent);
+            getParentFragment().onActivityResult(, Activity.RESULT_OK, intent);
             dismiss();
         });
         rvAudience.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));

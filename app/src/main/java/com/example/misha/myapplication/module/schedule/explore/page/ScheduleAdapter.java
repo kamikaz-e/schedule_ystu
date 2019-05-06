@@ -21,11 +21,12 @@ import com.example.misha.myapplication.data.database.entity.Subject;
 import com.example.misha.myapplication.data.database.entity.Typelesson;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
 
-    private List<Lesson> lessonList;
+    private List<Lesson> lessonList = new ArrayList<>();
 
 
     @Override
@@ -46,7 +47,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return lessonList.size();
+        return lessonList == null ? 0 : lessonList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

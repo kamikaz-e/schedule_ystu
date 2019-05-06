@@ -15,7 +15,7 @@ import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.data.Preferences;
+import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;
 import com.example.misha.myapplication.data.database.dao.LessonDao;

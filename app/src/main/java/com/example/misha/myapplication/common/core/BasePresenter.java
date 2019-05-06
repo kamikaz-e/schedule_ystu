@@ -4,7 +4,7 @@ package com.example.misha.myapplication.common.core;
 import com.example.misha.myapplication.common.rx.AppSchedulerProvider;
 import com.example.misha.myapplication.common.rx.SchedulerProvider;
 import com.example.misha.myapplication.data.Repository;
-import com.example.misha.myapplication.data.network.RepositoryManager;
+import com.example.misha.myapplication.data.RepositoryManager;
 
 import io.reactivex.disposables.CompositeDisposable;
 

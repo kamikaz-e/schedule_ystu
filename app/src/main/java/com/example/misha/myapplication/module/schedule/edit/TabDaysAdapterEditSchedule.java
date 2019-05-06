@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
-import com.example.misha.myapplication.data.Preferences;
+import com.example.misha.myapplication.data.preferences.Preferences;
 
 import org.jetbrains.annotations.NotNull;
 

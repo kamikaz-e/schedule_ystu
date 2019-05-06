@@ -2,7 +2,7 @@ package com.example.misha.myapplication.module.schedule.edit.fragments;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
-import com.example.misha.myapplication.data.Preferences;
+import com.example.misha.myapplication.data.preferences.Preferences;
 
 public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleView> implements EditSchedulePresenterInterface {
 

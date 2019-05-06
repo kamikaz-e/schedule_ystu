@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
 import com.example.misha.myapplication.data.database.entity.Audience;
+import com.example.misha.myapplication.data.database.entity.SimpleItem;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -19,11 +20,11 @@ import java.util.List;
 
 public class ListAudienceAdapter extends RecyclerView.Adapter<ListAudienceAdapter.ViewHolder> {
 
-    private List<Audience> listAudience;
+    private List<SimpleItem> listAudience;
 
     private SimpleItemClickListener itemClickListener;
 
-    public ListAudienceAdapter(ArrayList<Audience> audience, SimpleItemClickListener simpleItemClickListener) {
+    public ListAudienceAdapter(ArrayList<SimpleItem> audience, SimpleItemClickListener simpleItemClickListener) {
         this.listAudience = audience;
         this.itemClickListener = simpleItemClickListener;
     }
@@ -56,7 +57,7 @@ public class ListAudienceAdapter extends RecyclerView.Adapter<ListAudienceAdapte
         }
 
         private void onBindView(int position) {
-            Audience aud = listAudience.get(position);
+            SimpleItem aud = listAudience.get(position);
             audience.setText(aud.getName());
 
         }
