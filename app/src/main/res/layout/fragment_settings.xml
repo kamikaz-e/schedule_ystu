@@ -47,7 +47,6 @@
         android:layout_height="1dp"
         android:background="#FFFFFF" />
 
-
     <RelativeLayout
         android:id="@+id/import_data"
         android:layout_width="match_parent"

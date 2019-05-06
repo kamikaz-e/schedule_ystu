@@ -30,6 +30,7 @@ public class MainActivity extends DrawerActivity {
         if (!Preferences.getInstance().isHintsOpened()) {
             Intent intent = new Intent(MainActivity.this, ActivityStart.class);
             startActivity(intent);
+
             Preferences.getInstance().setHintsOpened();
         }
         replaceFragment(new ScheduleFragment());

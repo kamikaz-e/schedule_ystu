@@ -12,17 +12,21 @@
             android:title="Редактор данных" />
         <item
             android:id="@+id/call_schedule"
-            android:title="Расписание звонков" />
+            android:title="Расписание звонков"
+            tools:ignore="HardcodedText" />
         <item
             android:id="@+id/settings"
-            android:title="Настройки" />
+            android:title="Настройки"
+            tools:ignore="HardcodedText" />
     </group>
 
-    <item android:title="Дополнительно">
+    <item android:title="Дополнительно"
+        tools:ignore="HardcodedText">
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:title="Связаться с разработчиком" />
+                android:title="Связаться с разработчиком"
+                tools:ignore="HardcodedText" />
         </menu>
     </item>
 

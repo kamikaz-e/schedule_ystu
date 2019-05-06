@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.misha.myapplication.activity.MainActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Field;
 
 
@@ -18,7 +20,7 @@ public abstract class BaseDialog extends DialogFragment {
     }
 
     @Override
-    public void show(FragmentManager manager, String tag) {
+    public void show(@NotNull FragmentManager manager, String tag) {
         try {
             Field mDismissed = DialogFragment.class.getDeclaredField("mDismissed");
             Field mShownByMe = DialogFragment.class.getDeclaredField("mShownByMe");

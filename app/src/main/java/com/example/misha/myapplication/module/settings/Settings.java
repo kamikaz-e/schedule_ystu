@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -38,12 +39,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Settings extends BaseMainFragment {
+public class Settings extends BaseMainFragment implements SettingsView, View.OnClickListener {
 
 
     private String nameGroup;
     public ArrayAdapter<String> adapter;
-    private EditDataPresenter presenter;
+    private SettingsPresenter presenter;
 
     @Override
     public void onResume() {
@@ -54,6 +55,7 @@ public class Settings extends BaseMainFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new SettingsPresenter();
     }
 
     @NonNull
@@ -70,13 +72,13 @@ public class Settings extends BaseMainFragment {
         RelativeLayout layoutPickWeek = view.findViewById(R.id.current_date);
         RelativeLayout layoutImport = view.findViewById(R.id.import_data);
 
-        layoutPickWeek.setOnClickListener(v -> get_current_week());
-        layoutImport.setOnClickListener(v -> onCreateDialogImport().show());
+        layoutPickWeek.setOnClickListener(this);
+        layoutImport.setOnClickListener(this);
         return view;
     }
 
 
-    private void get_current_week() {
+    public void get_current_week() {
         Calendar calendar = Calendar.getInstance();
         final Calendar selectedDate = Calendar.getInstance();
         new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) -> {
@@ -110,7 +112,7 @@ public class Settings extends BaseMainFragment {
     }
 
 
-    private Dialog onCreateDialogImport() {
+    public Dialog onCreateDialogImport() {
         LayoutInflater li = LayoutInflater.from(getContext());
         @SuppressLint("InflateParams") View view = li.inflate(R.layout.dialog_signin, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
@@ -128,7 +130,7 @@ public class Settings extends BaseMainFragment {
         return builder.create();
     }
 
-    private void load_db() {
+    public void load_db() {
         RetrofitClient.getInstance().getRequestInterface().getSubjects(new ScheduleRequest(nameGroup)).enqueue(new Callback<ArrayList<Subject>>() {
             @Override
             public void onResponse(Call<ArrayList<Subject>> call, Response<ArrayList<Subject>> response) {
@@ -153,5 +155,14 @@ public class Settings extends BaseMainFragment {
         });
     }
 
+    @Override
+    public void onClick(View v) {
 
+        if (v.getId()==R.id.current_date){
+        presenter.onDateClicked();
+        }
+        if (v.getId()==R.id.import_data) {
+        presenter.onCreateDialogImport();
+        }
+    }
 }
