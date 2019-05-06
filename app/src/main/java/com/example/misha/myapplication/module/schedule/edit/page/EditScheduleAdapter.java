@@ -18,9 +18,10 @@ import com.example.misha.myapplication.data.database.entity.Audience;
 import com.example.misha.myapplication.data.database.entity.Calls;
 import com.example.misha.myapplication.data.database.entity.Educator;
 import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.data.database.entity.SimpleItem;
 import com.example.misha.myapplication.data.database.entity.Subject;
 import com.example.misha.myapplication.data.database.entity.Typelesson;
-import com.example.misha.myapplication.module.schedule.edit.page.fragment.PresenterInterface;
+import com.example.misha.myapplication.module.schedule.edit.page.fragment.PageFragmentPresenterInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +29,14 @@ import java.util.List;
 public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapter.ViewHolder> {
 
     private List<Lesson> lessonList;
+
     private ArrayList<Subject> subjectList = new ArrayList<>();
     private ArrayList<Audience> audienceList = new ArrayList<>();
     private ArrayList<Educator> educatorList = new ArrayList<>();
     private ArrayList<Typelesson> typelessonList = new ArrayList<>();
-    private PresenterInterface callback;
+    private PageFragmentPresenterInterface callback;
 
-    public EditScheduleAdapter(PresenterInterface editScheduleCallback) {
+    public EditScheduleAdapter(PageFragmentPresenterInterface editScheduleCallback) {
         this.callback = editScheduleCallback;
     }
 
@@ -43,22 +45,19 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         this.lessonList = lessonList;
     }
 
-    public void setEducators(ArrayList<Educator> educatorList) {
-        this.educatorList = educatorList;
-    }
-
-    public void setAudiences(ArrayList<Audience> audienceList) {
-        this.audienceList = audienceList;
-    }
 
     public void setSubjects(ArrayList<Subject> subjectList) {
         this.subjectList = subjectList;
     }
-
+    public void setAudiences(ArrayList<Audience> audienceList) {
+        this.audienceList = audienceList;
+    }
+    public void setEducators(ArrayList<Educator> educatorList) {
+        this.educatorList = educatorList;
+    }
     public void setTypelesson(ArrayList<Typelesson> typelessonList) {
         this.typelessonList = typelessonList;
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -170,18 +169,17 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
 
         @Override
         public void onClick(View v) {
-
+            if (v.getId() == R.id.subject) {
+                callback.onItemClick(getAdapterPosition(), subjectList);
+            }
             if (v.getId() == R.id.audience) {
-                callback.onAudienceClick(getAdapterPosition(), audienceList);
+                callback.onItemClick(getAdapterPosition(), audienceList);
             }
             if (v.getId() == R.id.educator) {
-                callback.onEducatorClick(getAdapterPosition(), educatorList);
-            }
-            if (v.getId() == R.id.subject) {
-                callback.onSubjectClick(getAdapterPosition(), subjectList);
+                callback.onItemClick(getAdapterPosition(), educatorList);
             }
             if (v.getId() == R.id.typelesson) {
-                callback.onTypelessonClick(getAdapterPosition(), typelessonList);
+                callback.onItemClick(getAdapterPosition(), typelessonList);
             }
         }
     }

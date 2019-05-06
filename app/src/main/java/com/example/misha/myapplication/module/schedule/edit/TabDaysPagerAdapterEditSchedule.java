@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.misha.myapplication.data.preferences.Preferences;
-import com.example.misha.myapplication.module.schedule.edit.page.fragment.PageView;
+import com.example.misha.myapplication.module.schedule.edit.page.fragment.PageFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,13 +15,13 @@ import java.util.ArrayList;
 
 public class TabDaysPagerAdapterEditSchedule extends FragmentPagerAdapter {
 
-    private ArrayList<PageView> fragments = new ArrayList<>();
+    private ArrayList<PageFragment> fragments = new ArrayList<>();
 
     public TabDaysPagerAdapterEditSchedule(FragmentManager fragmentManager) {
         super(fragmentManager);
         int selectedWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
         for (int day = 0; day < 6; day++) {
-            fragments.add(PageView.newInstance(selectedWeek, day));
+            fragments.add(PageFragment.newInstance(selectedWeek, day));
         }
     }
 
@@ -38,7 +38,7 @@ public class TabDaysPagerAdapterEditSchedule extends FragmentPagerAdapter {
     }
 
     public void setWeek(int selectedWeek) {
-        for (PageView fragment : fragments) {
+        for (PageFragment fragment : fragments) {
             fragment.setWeek(selectedWeek);
         }
     }

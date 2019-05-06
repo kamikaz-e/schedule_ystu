@@ -9,41 +9,40 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.data.database.entity.SimpleItem;
-import com.example.misha.myapplication.module.schedule.edit.page.editScheduleListAdapters.ListAudienceAdapter;
-import com.example.misha.myapplication.module.editData.EditData;
-
-import java.util.ArrayList;
-
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.data.database.entity.SimpleItem;
+import com.example.misha.myapplication.module.editData.EditData;
+import com.example.misha.myapplication.module.schedule.edit.page.editScheduleListAdapters.ListAudienceAdapter;
 import org.jetbrains.annotations.NotNull;
-
+import java.util.ArrayList;
 
 //Todo прочитать про наследование инкапсуляцию интерфейсы абстрактные классы и generic.
-public class AudienceList extends DialogFragment {
+public class FragmentList extends DialogFragment {
 
-    public static final int AUDIENCE_CODE = 3431;
+    public static final int FRAGMENT_CODE = 0;
+    public static final String SUBJECT = "4440";
+    public static final String AUDIENCE = "2220";
+    public static final String EDUCATOR = "1110";
+    public static final String TYPELESSON = "3330";
 
-    public static final String AUDIENCES = "AUDIENCES";
-    public static final String AUDIENCE_LIST = "AUDIENCE_LIST";
+    public static final String ITEMS = "ITEMS";
+
+    public static final String ITEMS_LIST = "ITEMS_LIST";
     public static final String POSITION = "POSITION";
 
-    private int clickedPosition;
-    private ListAudienceAdapter listAudienceAdapter;
-    private ArrayList<SimpleItem> listAudience;
-    private RecyclerView rvAudience;
 
-    public static AudienceList newInstance(int position, ArrayList<SimpleItem> audiences) {
+    private int clickedPosition;
+    private ArrayList<SimpleItem> listAudience;
+
+    public static FragmentList newInstance(int position, ArrayList<SimpleItem> item) {
         Bundle args = new Bundle();
-        args.putParcelableArrayList(AUDIENCES, audiences);
+        args.putParcelableArrayList(ITEMS, item);
         args.putInt(POSITION, position);
-        AudienceList fragment = new AudienceList();
+        FragmentList fragment = new FragmentList();
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,20 +50,20 @@ public class AudienceList extends DialogFragment {
     @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         clickedPosition = getArguments().getInt(POSITION);
-        listAudience = getArguments().getParcelableArrayList(AUDIENCES);
+        listAudience = getArguments().getParcelableArrayList(ITEMS);
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
         View view = layoutInflater.inflate(R.layout.dialog_rv_list, null);
         TextView title_dialog = view.findViewById(R.id.dialog_textView);
-        title_dialog.setText("Аудитория");
+        title_dialog.setText("Что-то");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
-        rvAudience = view.findViewById(R.id.rv_dialog);
-        listAudienceAdapter = new ListAudienceAdapter(listAudience, (position, view1) -> {
+        RecyclerView rvAudience = view.findViewById(R.id.rv_dialog);
+        ListAudienceAdapter listAudienceAdapter = new ListAudienceAdapter(listAudience, (position, view1) -> {
             Intent intent = new Intent();
             intent.putExtra(POSITION, clickedPosition);
-            intent.putExtra(AUDIENCE_LIST, listAudience.get(position));
-            getParentFragment().onActivityResult(, Activity.RESULT_OK, intent);
+            intent.putExtra(ITEMS_LIST, listAudience.get(position));
+            getParentFragment().onActivityResult(FRAGMENT_CODE, Activity.RESULT_OK, intent);
             dismiss();
         });
         rvAudience.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));

@@ -15,6 +15,7 @@ import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
+import com.example.misha.myapplication.data.database.entity.SimpleItem;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;
@@ -27,10 +28,7 @@ import com.example.misha.myapplication.data.database.entity.Lesson;
 import com.example.misha.myapplication.data.database.entity.Subject;
 import com.example.misha.myapplication.data.database.entity.Typelesson;
 import com.example.misha.myapplication.module.schedule.edit.page.EditScheduleAdapter;
-import com.example.misha.myapplication.module.schedule.edit.page.dialog.AudienceList;
-import com.example.misha.myapplication.module.schedule.edit.page.dialog.EducatorList;
-import com.example.misha.myapplication.module.schedule.edit.page.dialog.SubjectList;
-import com.example.misha.myapplication.module.schedule.edit.page.dialog.TypelessonList;
+import com.example.misha.myapplication.module.schedule.edit.page.dialog.FragmentList;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
@@ -38,14 +36,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageView extends BaseMainFragment implements View, PresenterInterface {
+public class PageFragment extends BaseMainFragment implements PageFragmentView {
 
     private EditScheduleAdapter rvadapter;
     private List<Lesson> lessonList = new ArrayList<>();
     private FloatingActionButton mainFab, evenWeekFab, unevenWeekFab;
     private Animation fabClose;
     private Animation rotateBackward;
-    private PagePresenter presenter;
+    private PageFragmentPageFragmentPresenter presenter;
 
     //BottomNavigationView
 
@@ -54,15 +52,14 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
         super.onCreate(savedInstanceState);
         int day = getArguments().getInt(Constants.DAY);
         int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
-        presenter = new PagePresenter(day, positionWeek);
-        rvadapter = new EditScheduleAdapter(this);
+        presenter = new PageFragmentPageFragmentPresenter(day, positionWeek);
     }
 
-    public static PageView newInstance(int selectedWeek, int position) {
+    public static PageFragment newInstance(int selectedWeek, int position) {
         Bundle args = new Bundle();
         args.putInt(Constants.SELECTED_WEEK, selectedWeek);
         args.putInt(Constants.DAY, position);
-        PageView fragment = new PageView();
+        PageFragment fragment = new PageFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -132,35 +129,16 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
         rvadapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onItemFragmentClick(int position, ArrayList<SimpleItem> item) {
+        FragmentList dialogFragment = FragmentList.newInstance(position, item);
+        dialogFragment.show(getChildFragmentManager(), FragmentList.class.getSimpleName());
+    }
+
     public void setWeek(int selectedWeek) {
         presenter.onWeekSelected(selectedWeek);
     }
 
-
-    @Override
-    public void onAudienceClick(int position, ArrayList<Audience> audience) {
-        AudienceList dialogFragment = AudienceList.newInstance(position, audience);
-        dialogFragment.show(getChildFragmentManager(), Audience.class.getSimpleName());
-    }
-
-
-    @Override
-    public void onEducatorClick(int position, ArrayList<Educator> educator) {
-        EducatorList dialogFragment = EducatorList.newInstance(position, educator);
-        dialogFragment.show(getChildFragmentManager(), EducatorList.class.getSimpleName());
-    }
-
-    @Override
-    public void onSubjectClick(int position, ArrayList<Subject> subject) {
-        SubjectList dialogFragment = SubjectList.newInstance(position, subject);
-        dialogFragment.show(getChildFragmentManager(), SubjectList.class.getSimpleName());
-    }
-
-    @Override
-    public void onTypelessonClick(int position, ArrayList<Typelesson> typelesson) {
-        TypelessonList dialogFragment = TypelessonList.newInstance(position, typelesson);
-        dialogFragment.show(getChildFragmentManager(), TypelessonList.class.getSimpleName());
-    }
 
     @Override
     public void onCopyUpClick(int position) {
@@ -198,44 +176,39 @@ public class PageView extends BaseMainFragment implements View, PresenterInterfa
 
     @Override
     public void onActivityResult(int requestCode, int resultOk, Intent data) {
-        if (requestCode == SubjectList.SUBJECT_CODE) {
-            int lessonPosition = data.getIntExtra(SubjectList.POSITION, 0);
-            Subject subject = data.getParcelableExtra(SubjectList.SUBJECT_LIST);
+        if (requestCode == FragmentList.SUBJECT_CODE) {
+            int lessonPosition = data.getIntExtra(FragmentList.POSITION, 0);
+            Subject subject = data.getParcelableExtra(FragmentList.SUBJECT_LIST);
             lessonList.get(lessonPosition).setSubject(subject.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
-        if (requestCode == TypelessonList.TYPELESSON_CODE) {
-            int lessonPosition = data.getIntExtra(TypelessonList.POSITION, 0);
-            Typelesson typelesson = data.getParcelableExtra(TypelessonList.TYPELESSON_LIST);
+        if (requestCode == FragmentList.TYPELESSON_CODE) {
+            int lessonPosition = data.getIntExtra(FragmentList.POSITION, 0);
+            Typelesson typelesson = data.getParcelableExtra(FragmentList.TYPELESSON_LIST);
             lessonList.get(lessonPosition).setTypeLesson(typelesson.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
-        if (requestCode == AudienceList.AUDIENCE_CODE) {
-            int lessonPosition = data.getIntExtra(AudienceList.POSITION, 0);
-            Audience audience = data.getParcelableExtra(AudienceList.AUDIENCE_LIST);
+        if (requestCode == FragmentList.AUDIENCE_CODE) {
+            int lessonPosition = data.getIntExtra(FragmentList.POSITION, 0);
+            Audience audience = data.getParcelableExtra(FragmentList.AUDIENCE_LIST);
             lessonList.get(lessonPosition).setAudience(audience.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
-        if (requestCode == EducatorList.EDUCATOR_CODE) {
-            int lessonPosition = data.getIntExtra(EducatorList.POSITION, 0);
-            Educator educator = data.getParcelableExtra(EducatorList.EDUCATOR_LIST);
+        if (requestCode == FragmentList.EDUCATOR_CODE) {
+            int lessonPosition = data.getIntExtra(FragmentList.POSITION, 0);
+            Educator educator = data.getParcelableExtra(FragmentList.EDUCATOR_LIST);
             lessonList.get(lessonPosition).setEducatorEdit(educator.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
 
         }
-    }
-
-    @Override
-    public void onWeekSelected(int position) {
-
     }
 
 }

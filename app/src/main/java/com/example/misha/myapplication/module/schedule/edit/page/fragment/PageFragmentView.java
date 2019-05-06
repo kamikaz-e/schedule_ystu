@@ -1,27 +1,25 @@
 package com.example.misha.myapplication.module.schedule.edit.page.fragment;
 
+import com.example.misha.myapplication.common.core.BaseView;
+import com.example.misha.myapplication.data.database.AbsDao;
 import com.example.misha.myapplication.data.database.entity.Audience;
 import com.example.misha.myapplication.data.database.entity.Educator;
+import com.example.misha.myapplication.data.database.entity.SimpleItem;
 import com.example.misha.myapplication.data.database.entity.Subject;
 import com.example.misha.myapplication.data.database.entity.Typelesson;
 
 import java.util.ArrayList;
 
-public interface PresenterInterface {
+public interface PageFragmentView extends BaseView {
 
-    void onWeekSelected(int position);
+    void updateList(int day, int positionWeek);
 
-    void onAudienceClick(int position, ArrayList<Audience> audience);
-
-    void onEducatorClick(int position, ArrayList<Educator> educator);
-
-    void onSubjectClick(int position, ArrayList<Subject> subject);
-
-    void onTypelessonClick(int position, ArrayList<Typelesson> typelesson);
+    void onItemFragmentClick(int position, ArrayList<SimpleItem> item);
 
     void onCopyUpClick(int position);
 
     void onCopyDownClick(int position);
 
     void onClearLessonClick(int position);
+
 }
