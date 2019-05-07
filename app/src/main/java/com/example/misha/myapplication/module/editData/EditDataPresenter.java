@@ -3,7 +3,7 @@ package com.example.misha.myapplication.module.editData;
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.database.AbsDao;
 
-public class EditDataPresenter extends BaseMainPresenter<EditDataView> implements EditDataPresenterInterface {
+public class EditDataPresenter extends BaseMainPresenter<EditDataFragmentView> implements EditDataPresenterInterface {
 
     @Override
     public void init() {

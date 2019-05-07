@@ -11,10 +11,10 @@ import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.data.database.DatabaseHelper;
 import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
-import com.example.misha.myapplication.module.callSchedule.CallsSchedule;
-import com.example.misha.myapplication.module.editData.EditData;
+import com.example.misha.myapplication.module.calls.CallsFragment;
+import com.example.misha.myapplication.module.editData.EditDataFragment;
 import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;
-import com.example.misha.myapplication.module.settings.Settings;
+import com.example.misha.myapplication.module.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends BaseActivity {
@@ -37,11 +37,11 @@ public class MainActivity extends BaseActivity {
                 item -> {
                     switch (item.getItemId()) {
                         case R.id.what:
-                           Fragment fragment = new CallsSchedule();
+                           Fragment fragment = new CallsFragment();
                             replaceFragment(fragment);
                             return true;
                         case R.id.editData:
-                            fragment = new EditData();
+                            fragment = new EditDataFragment();
                             replaceFragment(fragment);
                             return true;
                         case R.id.raspDay:
@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
                             replaceFragment(fragment);
                             return true;
                         case R.id.settings:
-                            fragment = new Settings();
+                            fragment = new SettingsFragment();
                             replaceFragment(fragment);
                             return true;
                     }

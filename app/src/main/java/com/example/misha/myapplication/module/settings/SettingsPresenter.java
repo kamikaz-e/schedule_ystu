@@ -9,7 +9,7 @@ import com.example.misha.myapplication.data.network.request.ScheduleRequest;
 
 import java.util.ArrayList;
 
-public class SettingsPresenter extends BaseMainPresenter<SettingsView> implements SettingsPresenterInterface {
+public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> implements SettingsPresenterInterface {
 
     @Override
     public void init() {

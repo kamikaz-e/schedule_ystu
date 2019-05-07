@@ -21,17 +21,18 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
-import com.example.misha.myapplication.module.schedule.edit.TabDaysAdapterEditSchedule;
-import com.example.misha.myapplication.module.schedule.edit.fragments.EditScheduleFragment;
-import com.example.misha.myapplication.util.DateUtil;
+import com.example.misha.myapplication.module.schedule.TabDaysAdapter;
+import com.example.misha.myapplication.module.schedule.TabDaysPagerAdapter;
+import com.example.misha.myapplication.module.schedule.edit.EditScheduleFragment;
+import com.example.misha.myapplication.util.DataUtil;
 
 import org.jetbrains.annotations.NotNull;
 
 
-public class ScheduleFragment extends BaseMainFragment implements ScheduleView, AdapterView.OnItemSelectedListener {
+public class ScheduleFragment extends BaseMainFragment implements ScheduleFragmentView, AdapterView.OnItemSelectedListener {
 
-    private TabDaysPagerAdapter pagerAdapter;
-    private TabDaysAdapterEditSchedule adapterTabDays;
+    private TabDaysPagerAdapter pagerAdapterTabDays;
+    private TabDaysAdapter adapterTabDays;
     private RecyclerView dayTabs;
     private ViewPager viewPager;
     private Spinner spinner;
@@ -50,7 +51,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleView, 
         getContext().getToolbar().addView(spinner);
         getContext().setCurrentTitle(null);
         presenter.selectDefaultWeek();
-        Preferences.getInstance().setSelectedWeekEditSchedule((int) DateUtil.getCurrWeek());
+        Preferences.getInstance().setSelectedWeekEditSchedule((int) DataUtil.getCurrWeek());
         presenter.init();
     }
 
@@ -71,8 +72,8 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleView, 
         presenter = new SchedulePresenter();
         setHasOptionsMenu(true);
         customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
-        pagerAdapter = new TabDaysPagerAdapter(getChildFragmentManager());
-        adapterTabDays = new TabDaysAdapterEditSchedule((position, view) -> presenter.onPageSelected(position));
+        pagerAdapterTabDays = new TabDaysPagerAdapter (getChildFragmentManager());
+        adapterTabDays = new TabDaysAdapter((position, view) -> presenter.onPageSelected(position));
     }
 
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -86,7 +87,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleView, 
                 presenter.onPageSwiped(position);
             }
         });
-        viewPager.setAdapter(pagerAdapter);
+        viewPager.setAdapter(pagerAdapterTabDays);
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
@@ -102,7 +103,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleView, 
 
     @Override
     public void selectWeek(int position) {
-        pagerAdapter.setWeek(position);
+        pagerAdapterTabDays.setWeek(position);
         adapterTabDays.updateData(position);
         adapterTabDays.setSelection(viewPager.getCurrentItem());
         dayTabs.setAdapter(adapterTabDays);

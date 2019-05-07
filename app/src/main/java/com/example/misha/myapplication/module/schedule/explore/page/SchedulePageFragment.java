@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,25 +13,24 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.database.entity.Lesson;
-import com.example.misha.myapplication.module.schedule.explore.ScheduleAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class SchedulePageFragment extends BaseMainFragment implements SchedulePageView {
+public class SchedulePageFragment extends BaseMainFragment implements SchedulePageFragmentView {
 
-    private ScheduleAdapter rvadapter;
-    private SchedulePageSchedulePresenter presenter;
+    private ScheduleFragmentPagerAdapter rvadapter;
+    private SchedulePagePagePresenter presenter;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rvadapter = new ScheduleAdapter();
+        rvadapter = new ScheduleFragmentPagerAdapter();
         int day = getArguments().getInt(Constants.DAY);
-        int  positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
-        presenter = new SchedulePageSchedulePresenter(day,positionWeek);
+        int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
+        presenter = new SchedulePagePagePresenter(day, positionWeek);
     }
 
     public static SchedulePageFragment newInstance(int selectedWeek, int position) {

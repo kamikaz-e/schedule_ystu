@@ -1,11 +1,11 @@
 package com.example.misha.myapplication.module.schedule.explore;
 
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
-import com.example.misha.myapplication.util.DateUtil;
+import com.example.misha.myapplication.util.DataUtil;
 
 import java.util.Calendar;
 
-public class SchedulePresenter extends BaseMainPresenter<ScheduleView> implements SchedulePresenterInterface {
+public class SchedulePresenter extends BaseMainPresenter<ScheduleFragmentView> implements SchedulePresenterInterface {
 
 
     @Override
@@ -38,7 +38,7 @@ public class SchedulePresenter extends BaseMainPresenter<ScheduleView> implement
 
     @Override
     public void selectDefaultWeek() {
-        int currentWeek = (int) DateUtil.getCurrWeek();
+        int currentWeek = (int) DataUtil.getCurrWeek();
         getView().selectCurrentWeek(currentWeek);
     }
 }
