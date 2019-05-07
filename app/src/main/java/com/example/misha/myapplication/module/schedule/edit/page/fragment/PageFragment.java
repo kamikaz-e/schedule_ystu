@@ -130,10 +130,30 @@ public class PageFragment extends BaseMainFragment implements PageFragmentView {
     }
 
     @Override
-    public void onItemFragmentClick(int position, ArrayList<SimpleItem> item) {
+    public void onSubjecttClick(int position, ArrayList<Subject> item) {
         FragmentList dialogFragment = FragmentList.newInstance(position, item);
         dialogFragment.show(getChildFragmentManager(), FragmentList.class.getSimpleName());
     }
+
+    @Override
+    public void onAudienceClick(int position, ArrayList<Audience> item) {
+        FragmentList dialogFragment = FragmentList.newInstance(position, item);
+        dialogFragment.show(getChildFragmentManager(), FragmentList.class.getSimpleName());
+    }
+
+    @Override
+    public void onEducatorClick(int position, ArrayList<Educator> item) {
+        FragmentList dialogFragment = FragmentList.newInstance(position, item);
+        dialogFragment.show(getChildFragmentManager(), FragmentList.class.getSimpleName());
+    }
+
+    @Override
+    public void onTypelessonClick(int position, ArrayList<Typelesson> item) {
+        FragmentList dialogFragment = FragmentList.newInstance(position, item);
+        dialogFragment.show(getChildFragmentManager(), FragmentList.class.getSimpleName());
+    }
+
+
 
     public void setWeek(int selectedWeek) {
         presenter.onWeekSelected(selectedWeek);

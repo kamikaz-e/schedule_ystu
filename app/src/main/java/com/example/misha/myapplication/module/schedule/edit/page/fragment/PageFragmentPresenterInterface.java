@@ -1,9 +1,7 @@
 package com.example.misha.myapplication.module.schedule.edit.page.fragment;
 
-import com.example.misha.myapplication.data.database.AbsDao;
 import com.example.misha.myapplication.data.database.entity.Audience;
 import com.example.misha.myapplication.data.database.entity.Educator;
-import com.example.misha.myapplication.data.database.entity.SimpleItem;
 import com.example.misha.myapplication.data.database.entity.Subject;
 import com.example.misha.myapplication.data.database.entity.Typelesson;
 
@@ -13,7 +11,13 @@ public interface PageFragmentPresenterInterface {
 
     void onWeekSelected(int position);
 
-    void onItemClick(int position, ArrayList<SimpleItem> item);
+    void onSubjectClick(int position, ArrayList<Subject> item);
+
+    void onAudienceClick(int position, ArrayList<Audience> item);
+
+    void onEducatorClick(int position, ArrayList<Educator> item);
+
+    void onTypelessonClick(int position, ArrayList<Typelesson> item);
 
     void onCopyUpClick(int position);
 

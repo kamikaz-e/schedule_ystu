@@ -34,6 +34,7 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
     private ArrayList<Audience> audienceList = new ArrayList<>();
     private ArrayList<Educator> educatorList = new ArrayList<>();
     private ArrayList<Typelesson> typelessonList = new ArrayList<>();
+    private ArrayList<SimpleItem> simpleItems = new ArrayList<SimpleItem>();
     private PageFragmentPresenterInterface callback;
 
     public EditScheduleAdapter(PageFragmentPresenterInterface editScheduleCallback) {
@@ -170,16 +171,16 @@ public class EditScheduleAdapter extends RecyclerView.Adapter<EditScheduleAdapte
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.subject) {
-                callback.onItemClick(getAdapterPosition(), subjectList);
+                callback.onSubjectClick(getAdapterPosition(), subjectList);
             }
             if (v.getId() == R.id.audience) {
-                callback.onItemClick(getAdapterPosition(), audienceList);
+                callback.onAudienceClick(getAdapterPosition(), audienceList);
             }
             if (v.getId() == R.id.educator) {
-                callback.onItemClick(getAdapterPosition(), educatorList);
+                callback.onEducatorClick(getAdapterPosition(), educatorList);
             }
             if (v.getId() == R.id.typelesson) {
-                callback.onItemClick(getAdapterPosition(), typelessonList);
+                callback.onTypelessonClick(getAdapterPosition(), typelessonList);
             }
         }
     }
