@@ -5,7 +5,11 @@
         android:icon="@android:drawable/ic_popup_reminder"
         android:title=""/>
     <item
-        android:id="@+id/rasp_day"
+        android:id="@+id/editData"
+        android:icon="@drawable/ic_add_circle_black"
+        android:title="" />
+    <item
+        android:id="@+id/raspDay"
         android:icon="@android:drawable/ic_dialog_dialer"
         android:title="" />
     <item

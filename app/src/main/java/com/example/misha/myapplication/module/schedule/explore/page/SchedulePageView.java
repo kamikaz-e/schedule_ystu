@@ -5,7 +5,7 @@ import com.example.misha.myapplication.data.database.entity.Lesson;
 
 import java.util.List;
 
-public interface View extends BaseView {
+public interface SchedulePageView extends BaseView {
 
     void showProgressBar();
 

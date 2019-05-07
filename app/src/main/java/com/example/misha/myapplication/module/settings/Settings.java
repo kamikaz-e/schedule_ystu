@@ -20,21 +20,12 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
-import com.example.misha.myapplication.data.database.dao.AudienceDao;
-import com.example.misha.myapplication.data.database.entity.Audience;
-import com.example.misha.myapplication.data.database.entity.Subject;
-import com.example.misha.myapplication.data.network.RetrofitClient;
-import com.example.misha.myapplication.data.network.request.ScheduleRequest;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class Settings extends BaseMainFragment implements SettingsView, View.OnClickListener {
@@ -58,7 +49,7 @@ public class Settings extends BaseMainFragment implements SettingsView, View.OnC
 
     @NonNull
     @Override
-    protected BasePresenter getPresenter() {
+    protected BasePresenter getSchedulePagePresenter() {
         return presenter;
     }
 

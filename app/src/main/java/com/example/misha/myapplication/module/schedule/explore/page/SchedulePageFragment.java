@@ -4,25 +4,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.data.database.dao.LessonDao;
 import com.example.misha.myapplication.data.database.entity.Lesson;
-
-import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import com.example.misha.myapplication.module.schedule.explore.ScheduleAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
-public class SchedulePageFragment extends BaseMainFragment implements com.example.misha.myapplication.module.schedule.explore.page.View {
+import java.util.List;
+
+public class SchedulePageFragment extends BaseMainFragment implements SchedulePageView {
 
     private ScheduleAdapter rvadapter;
-    private Presenter presenter;
+    private SchedulePageSchedulePresenter presenter;
 
 
     @Override
@@ -31,7 +32,7 @@ public class SchedulePageFragment extends BaseMainFragment implements com.exampl
         rvadapter = new ScheduleAdapter();
         int day = getArguments().getInt(Constants.DAY);
         int  positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
-        presenter = new Presenter(day,positionWeek);
+        presenter = new SchedulePageSchedulePresenter(day,positionWeek);
     }
 
     public static SchedulePageFragment newInstance(int selectedWeek, int position) {
@@ -60,7 +61,7 @@ public class SchedulePageFragment extends BaseMainFragment implements com.exampl
 
     @NonNull
     @Override
-    protected BasePresenter getPresenter() {
+    protected BasePresenter getSchedulePagePresenter() {
         return presenter;
     }
 
@@ -70,6 +71,6 @@ public class SchedulePageFragment extends BaseMainFragment implements com.exampl
     }
 
     public void setWeek(int selectedWeek) {
-
+        presenter.setWeek(selectedWeek);
     }
 }

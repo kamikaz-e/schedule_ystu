@@ -95,9 +95,9 @@ public abstract class BaseMainFragment extends BaseFragment implements BaseView 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //noinspection unchecked
-        getPresenter().setRoot(getRoot());
+        getSchedulePagePresenter().setRoot(getRoot());
         //noinspection unchecked
-        getPresenter().setView(this);
+        getSchedulePagePresenter().setView(this);
     }
 
     public Root getRoot() {
@@ -181,28 +181,28 @@ public abstract class BaseMainFragment extends BaseFragment implements BaseView 
     public void onDestroyView() {
         super.onDestroyView();
         //noinspection unchecked
-        getPresenter().setRoot(null);
+        getSchedulePagePresenter().setRoot(null);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getPresenter().getCompositeDisposable().dispose();
+        getSchedulePagePresenter().getCompositeDisposable().dispose();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        getPresenter().onStart();
+        getSchedulePagePresenter().onStart();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        getPresenter().onStop();
+        getSchedulePagePresenter().onStop();
 
     }
 
     @NonNull
-    protected abstract BasePresenter getPresenter();
+    protected abstract BasePresenter getSchedulePagePresenter();
 }

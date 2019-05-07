@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.schedule.explore.page;
+package com.example.misha.myapplication.module.schedule.explore;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,7 +80,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             Lesson lesson = lessonList.get(position);
             number.setText(lesson.getTimeLesson());
             timeEdit.setText((lesson.getTimeLesson()));
-            Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
+            Subject subject =  SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
             Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
             Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
             Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));

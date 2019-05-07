@@ -20,13 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.CustomSpinnerAdapter;
+import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
 import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.schedule.edit.TabDaysAdapterEditSchedule;
 import com.example.misha.myapplication.module.schedule.edit.TabDaysPagerAdapterEditSchedule;
 import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;
@@ -128,7 +128,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
 
     @NonNull
     @Override
-    protected BasePresenter getPresenter() {
+    protected BasePresenter getSchedulePagePresenter() {
         return presenter;
     }
 

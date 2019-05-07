@@ -10,12 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-
-import androidx.annotation.NonNull;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
@@ -96,7 +93,7 @@ public class FragmentAudience extends BaseMainFragment implements EditDataFragme
     }
 
     @Override
-    protected BasePresenter getPresenter() {
+    protected BasePresenter getSchedulePagePresenter() {
         return presenter;
     }
 

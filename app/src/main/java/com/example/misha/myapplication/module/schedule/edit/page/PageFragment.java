@@ -1,8 +1,9 @@
-package com.example.misha.myapplication.module.schedule.edit.page.fragment;
+package com.example.misha.myapplication.module.schedule.edit.page;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,19 +16,14 @@ import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.data.database.entity.SimpleItem;
-import com.example.misha.myapplication.data.preferences.Preferences;
-import com.example.misha.myapplication.data.database.dao.AudienceDao;
-import com.example.misha.myapplication.data.database.dao.EducatorDao;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
-import com.example.misha.myapplication.data.database.dao.SubjectDao;
-import com.example.misha.myapplication.data.database.dao.TypelessonDao;
 import com.example.misha.myapplication.data.database.entity.Audience;
 import com.example.misha.myapplication.data.database.entity.Educator;
 import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.data.database.entity.SimpleItem;
 import com.example.misha.myapplication.data.database.entity.Subject;
 import com.example.misha.myapplication.data.database.entity.Typelesson;
-import com.example.misha.myapplication.module.schedule.edit.page.EditScheduleAdapter;
+import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.schedule.edit.page.dialog.FragmentList;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -45,14 +41,13 @@ public class PageFragment extends BaseMainFragment implements PageFragmentView {
     private Animation rotateBackward;
     private PageFragmentPageFragmentPresenter presenter;
 
-    //BottomNavigationView
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int day = getArguments().getInt(Constants.DAY);
         int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
         presenter = new PageFragmentPageFragmentPresenter(day, positionWeek);
+        rvadapter = new EditScheduleAdapter(presenter);
     }
 
     public static PageFragment newInstance(int selectedWeek, int position) {
@@ -65,8 +60,8 @@ public class PageFragment extends BaseMainFragment implements PageFragmentView {
     }
 
     @Override
-    public android.view.View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        android.view.View fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View fragmentView = inflater.inflate(R.layout.item_edit_schedule_recycler, container, false);
         mainFab = getActivity().findViewById(R.id.main_fab);
         evenWeekFab = getActivity().findViewById(R.id.even_weekFab);
         unevenWeekFab = getActivity().findViewById(R.id.uneven_weekFab);
@@ -111,54 +106,19 @@ public class PageFragment extends BaseMainFragment implements PageFragmentView {
 
     @NonNull
     @Override
-    protected BasePresenter getPresenter() {
+    protected BasePresenter getSchedulePagePresenter() {
         return presenter;
     }
 
     public void updateList(int day, int positionWeek) {
         lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
-        ArrayList<Subject> subjectList = SubjectDao.getInstance().getAllData();
-        ArrayList<Audience> audienceList = AudienceDao.getInstance().getAllData();
-        ArrayList<Educator> educatorList = EducatorDao.getInstance().getAllData();
-        ArrayList<Typelesson> typelessonList = TypelessonDao.getInstance().getAllData();
         rvadapter.setLessonList(lessonList);
-        rvadapter.setAudiences(audienceList);
-        rvadapter.setEducators(educatorList);
-        rvadapter.setSubjects(subjectList);
-        rvadapter.setTypelesson(typelessonList);
         rvadapter.notifyDataSetChanged();
     }
-
-    @Override
-    public void onSubjecttClick(int position, ArrayList<Subject> item) {
-        FragmentList dialogFragment = FragmentList.newInstance(position, item);
-        dialogFragment.show(getChildFragmentManager(), FragmentList.class.getSimpleName());
-    }
-
-    @Override
-    public void onAudienceClick(int position, ArrayList<Audience> item) {
-        FragmentList dialogFragment = FragmentList.newInstance(position, item);
-        dialogFragment.show(getChildFragmentManager(), FragmentList.class.getSimpleName());
-    }
-
-    @Override
-    public void onEducatorClick(int position, ArrayList<Educator> item) {
-        FragmentList dialogFragment = FragmentList.newInstance(position, item);
-        dialogFragment.show(getChildFragmentManager(), FragmentList.class.getSimpleName());
-    }
-
-    @Override
-    public void onTypelessonClick(int position, ArrayList<Typelesson> item) {
-        FragmentList dialogFragment = FragmentList.newInstance(position, item);
-        dialogFragment.show(getChildFragmentManager(), FragmentList.class.getSimpleName());
-    }
-
-
 
     public void setWeek(int selectedWeek) {
         presenter.onWeekSelected(selectedWeek);
     }
-
 
     @Override
     public void onCopyUpClick(int position) {
@@ -193,36 +153,45 @@ public class PageFragment extends BaseMainFragment implements PageFragmentView {
         LessonDao.getInstance().updateItemByID(lessonList.get(position));
     }
 
+    @Override
+    public void showEditDialog(ArrayList<? extends SimpleItem> items, int position, int fragmentCode) {
+        Bundle args = new Bundle();
+        args.putParcelableArrayList(ITEMS, items);
+        args.putInt(POSITION, position);
+        args.putInt(FRAGMENT_CODE, fragmentCode);
+        FragmentList dialogFragment = FragmentList.newInstance(args);
+        dialogFragment.show(getChildFragmentManager(), FragmentList.class.getSimpleName());
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultOk, Intent data) {
-        if (requestCode == FragmentList.SUBJECT_CODE) {
+        if (requestCode == SUBJECT) {
             int lessonPosition = data.getIntExtra(FragmentList.POSITION, 0);
-            Subject subject = data.getParcelableExtra(FragmentList.SUBJECT_LIST);
+            Subject subject = data.getParcelableExtra(FragmentList.ITEMS_LIST);
             lessonList.get(lessonPosition).setSubject(subject.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
-        if (requestCode == FragmentList.TYPELESSON_CODE) {
+        if (requestCode == TYPELESSON) {
             int lessonPosition = data.getIntExtra(FragmentList.POSITION, 0);
-            Typelesson typelesson = data.getParcelableExtra(FragmentList.TYPELESSON_LIST);
+            Typelesson typelesson = data.getParcelableExtra(FragmentList.ITEMS_LIST);
             lessonList.get(lessonPosition).setTypeLesson(typelesson.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
-        if (requestCode == FragmentList.AUDIENCE_CODE) {
+        if (requestCode == AUDIENCE) {
             int lessonPosition = data.getIntExtra(FragmentList.POSITION, 0);
-            Audience audience = data.getParcelableExtra(FragmentList.AUDIENCE_LIST);
+            Audience audience = data.getParcelableExtra(FragmentList.ITEMS_LIST);
             lessonList.get(lessonPosition).setAudience(audience.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
-        if (requestCode == FragmentList.EDUCATOR_CODE) {
+        if (requestCode == EDUCATOR) {
             int lessonPosition = data.getIntExtra(FragmentList.POSITION, 0);
-            Educator educator = data.getParcelableExtra(FragmentList.EDUCATOR_LIST);
+            Educator educator = data.getParcelableExtra(FragmentList.ITEMS_LIST);
             lessonList.get(lessonPosition).setEducatorEdit(educator.getId());
             rvadapter.setLessonList(lessonList);
             rvadapter.notifyDataSetChanged();

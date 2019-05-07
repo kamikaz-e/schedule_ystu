@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.misha.myapplication.data.preferences.Preferences;
-import com.example.misha.myapplication.module.schedule.edit.page.fragment.PageFragment;
+import com.example.misha.myapplication.module.schedule.edit.page.PageFragment;
 
 import org.jetbrains.annotations.NotNull;
 

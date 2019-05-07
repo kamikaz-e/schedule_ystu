@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.entity.Calls;
+import com.example.misha.myapplication.data.preferences.Preferences;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -62,7 +62,7 @@ public class CallsSchedule extends BaseMainFragment implements CallsView {
 
     @NonNull
     @Override
-    protected BasePresenter getPresenter() {
+    protected BasePresenter getSchedulePagePresenter() {
         return presenter;
     }
 
