@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.schedule;
+package com.example.misha.myapplication.module.schedule.explore;
 
 import android.annotation.SuppressLint;
 
@@ -11,11 +11,11 @@ import com.example.misha.myapplication.module.schedule.explore.page.SchedulePage
 
 import java.util.ArrayList;
 
-public class TabDaysSchedulePagerAdapter extends FragmentPagerAdapter {
+public class SchedulePagerAdapter extends FragmentPagerAdapter {
 
     private ArrayList<SchedulePageFragment> fragments = new ArrayList<>();
 
-    public TabDaysSchedulePagerAdapter(FragmentManager fragmentManager) {
+    public SchedulePagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
         int selectedWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
         for (int day = 0; day < 6; day++) {

@@ -22,7 +22,6 @@ import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.schedule.TabDaysAdapter;
-import com.example.misha.myapplication.module.schedule.TabDaysSchedulePagerAdapter;
 import com.example.misha.myapplication.module.schedule.edit.EditScheduleFragment;
 import com.example.misha.myapplication.util.DataUtil;
 
@@ -31,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ScheduleFragment extends BaseMainFragment implements ScheduleFragmentView, AdapterView.OnItemSelectedListener {
 
-    private TabDaysSchedulePagerAdapter pagerAdapterTabDays;
+    private SchedulePagerAdapter pagerAdapterTabDays;
     private TabDaysAdapter adapterTabDays;
     private RecyclerView dayTabs;
     private ViewPager viewPager;
@@ -72,7 +71,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
         presenter = new SchedulePresenter();
         setHasOptionsMenu(true);
         customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
-        pagerAdapterTabDays = new TabDaysSchedulePagerAdapter(getChildFragmentManager());
+        pagerAdapterTabDays = new SchedulePagerAdapter(getChildFragmentManager());
         adapterTabDays = new TabDaysAdapter((position, view) -> presenter.onPageSelected(position));
     }
 
