@@ -30,7 +30,7 @@ public class SchedulePagePresenter extends BaseMainPresenter<SchedulePageFragmen
 
     private void loadWeek() {
         getCompositeDisposable().add(getRepositoryManager()
-                .getLessonsByDayWeek(day, positionWeek)
+                .getLessonsByDayWeek(positionWeek, day)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(lessons -> {
