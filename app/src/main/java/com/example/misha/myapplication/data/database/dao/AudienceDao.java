@@ -53,8 +53,4 @@ public class AudienceDao extends AbsDao<Audience> {
         set.put(AUDIENCE, instance.getName());
         return set;
     }
-
-    public boolean deleteItemById(long id) {
-        return super.deleteItemById(id, ID);
-    }
 }

@@ -7,4 +7,8 @@ public interface SimpleItem extends Parcelable {
     String getId();
 
     String getName();
+
+    void setId(String id);
+
+    void setName(String name);
 }

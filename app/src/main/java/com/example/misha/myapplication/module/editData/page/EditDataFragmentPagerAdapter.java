@@ -4,11 +4,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.misha.myapplication.module.editData.page.fragments.FragmentEducator;
-import com.example.misha.myapplication.module.editData.page.fragments.FragmentPageAudience;
-import com.example.misha.myapplication.module.editData.page.fragments.FragmentTypelesson;
-
 import org.jetbrains.annotations.NotNull;
+
+import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_AUDIENCES;
+import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_EDUCATORS;
+import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_SUBJECTS;
+import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_TYPELESSONS;
 
 
 public class EditDataFragmentPagerAdapter extends FragmentStatePagerAdapter {
@@ -23,13 +24,13 @@ public class EditDataFragmentPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment = null;
         if (position == 0) {
-            fragment = new EditDataFragmentPage();
+            fragment = EditDataFragmentPage.newInstance(FRAGMENT_SUBJECTS);
         } else if (position == 1) {
-            fragment = new FragmentPageAudience();
+            fragment = EditDataFragmentPage.newInstance(FRAGMENT_AUDIENCES);
         } else if (position == 2) {
-            fragment = new FragmentEducator();
+            fragment = EditDataFragmentPage.newInstance(FRAGMENT_EDUCATORS);
         } else if (position == 3) {
-            fragment = new FragmentTypelesson();
+            fragment = EditDataFragmentPage.newInstance(FRAGMENT_TYPELESSONS);
         }
         return fragment;
     }

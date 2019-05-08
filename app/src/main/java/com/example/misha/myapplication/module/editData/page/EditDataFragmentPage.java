@@ -13,90 +13,95 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-
-import androidx.fragment.app.Fragment;
+import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.data.database.dao.SubjectDao;
-import com.example.misha.myapplication.data.database.entity.Subject;
+import com.example.misha.myapplication.common.core.BaseMainFragment;
+import com.example.misha.myapplication.common.core.BasePresenter;
+import com.example.misha.myapplication.data.database.AbsDao;
+import com.example.misha.myapplication.data.database.entity.SimpleItem;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 
-public class EditDataFragmentPage extends Fragment {
+public class EditDataFragmentPage extends BaseMainFragment implements EditDataFragmentPageView, TextView.OnEditorActionListener {
 
 
-    private EditText input_subject;
-    private ListView list_subjects;
-    private ArrayList<Subject> subject_list = new ArrayList<>();
-    public ArrayAdapter<Subject> adapter;
 
+    private EditText inputItem;
+    private ListView listViewItems;
+    public ArrayAdapter<SimpleItem> adapter;
     private EditDataPagePresenter presenter;
 
-    public EditDataFragmentPage() {
-
+    public static EditDataFragmentPage newInstance(String currentFragment) {
+        Bundle args = new Bundle();
+        args.putString("sss", currentFragment);
+        EditDataFragmentPage fragment = new EditDataFragmentPage();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new EditDataPagePresenter();
+        String currentFragment = getArguments().getString("sss");
+        presenter = new EditDataPagePresenter(currentFragment);
+    }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        presenter.init();
     }
 
     @Override
     public View onCreateView(@NotNull final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
-        input_subject = view.findViewById(R.id.input_subject);
-        list_subjects = view.findViewById(R.id.list_subjects);
-        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, subject_list);
-        list_subjects.setAdapter(adapter);
-        list_subjects.setOnItemClickListener((parent, itemClicked, position, id) -> onCreateDialogDeleteItem(position).show());
-        updateListView();
-
-        input_subject.setOnEditorActionListener((v, actionId, event) -> {
-            if ((actionId == EditorInfo.IME_ACTION_DONE) ||
-                    ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
-                input_subject.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                String subjectName = input_subject.getText().toString();
-                subjectName = subjectName.trim().replaceAll(" +", " ");
-                if (TextUtils.isEmpty(subjectName) || subjectName == " ") {
-                    input_subject.setError("Введите предмет");
-                    return true;
-                }
-                Subject subject = new Subject();
-                subject.setName(subjectName);
-                SubjectDao.getInstance().insertItem(subject);
-                input_subject.getText().clear();
-                updateListView();
-                adapter.notifyDataSetChanged();
-                return true;
-            } else {
-                return false;
-            }
-        });
+        inputItem = view.findViewById(R.id.input_subject);
+        listViewItems = view.findViewById(R.id.list_subjects);
+        listViewItems.setOnItemClickListener((parent, itemClicked, position, id) -> presenter.onClearClick(position));
+        inputItem.setOnEditorActionListener(this);
         return view;
     }
 
-    private Dialog onCreateDialogDeleteItem(final int position) {
-
+    public Dialog onCreateDialogDeleteItem(int position, AbsDao absDao) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
-            Subject subject = subject_list.get(position);
-            SubjectDao.getInstance().deleteItemById(Long.parseLong(subject.getId()));
-            updateListView();
-            adapter.notifyDataSetChanged();
+            presenter.deleteItem(position);
         }).setNegativeButton("Отмена", (dialog, id) ->
-                dialog.cancel()).setTitle("Удалить предмет «" + subject_list.get(position) + "»?");
+                dialog.cancel()).setTitle("Удалить предмет «" + presenter.getNameAt(position) + "»?");
         return builder.create();
     }
 
-    private void updateListView() {
-        subject_list = SubjectDao.getInstance().getAllData();
-        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, subject_list);
-        list_subjects.setAdapter(adapter);
+    @Override
+    protected BasePresenter getSchedulePagePresenter() {
+        return presenter;
+    }
+
+    public void updateView(ArrayList<SimpleItem> listItems) {
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listItems);
+        listViewItems.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if ((actionId == EditorInfo.IME_ACTION_DONE) ||
+                ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
+            inputItem.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+            String itemName = inputItem.getText().toString();
+            itemName = itemName.trim().replaceAll(" +", " ");
+            if (TextUtils.isEmpty(itemName) || itemName.equals(" ")) {
+                inputItem.setError("Введите предмет");
+                return true;
+            }
+            presenter.insert(itemName);
+            inputItem.getText().clear();
+            return true;
+        } else {
+            return false;
+        }
     }
 }

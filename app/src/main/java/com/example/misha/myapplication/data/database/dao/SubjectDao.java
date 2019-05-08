@@ -53,8 +53,4 @@ public class SubjectDao extends AbsDao<Subject> {
         set.put(SUBJECT, instance.getName());
         return set;
     }
-
-    public boolean deleteItemById(long id) {
-        return super.deleteItemById(id, ID);
-    }
 }

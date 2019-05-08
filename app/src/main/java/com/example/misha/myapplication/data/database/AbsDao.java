@@ -25,7 +25,7 @@ public abstract class AbsDao<T> implements DaoInterface<T> {
     /**
      * Key for 'ID' column in the workouts table.
      */
-    protected static final String KEY_ID = "ID";
+    protected static final String KEY_ID = "id";
 
 
     /**
@@ -148,8 +148,8 @@ public abstract class AbsDao<T> implements DaoInterface<T> {
     }
 
     @Override
-    public boolean deleteItemById(long id, String idKey) {
-        int affectedRowsNumber = getContentResolver().delete(getTableUri(), idKey + EQUALS,
+    public boolean deleteItemById(long id) {
+        int affectedRowsNumber = getContentResolver().delete(getTableUri(), KEY_ID + EQUALS,
                 new String[]{String.valueOf(id)});
         return affectedRowsNumber == 1;
     }

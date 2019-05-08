@@ -20,6 +20,10 @@ public final class Preferences implements PreferencesInterface {
     private static final String PREF_KEY_SELECT_TAB_DAYS = "PREF_KEY_SELECT_TAB_DAYS";
     private static final String PREF_KEY_SELECT_LESSON = "PREF_KEY_SELECT_LESSON";
     private static final String PREF_KEY_FAB_OPEN = "PREF_KEY_FAB_OPEN";
+    public static final String FRAGMENT_SUBJECTS = "SUBJECTS";
+    public static final String FRAGMENT_AUDIENCES = "AUDIENCES";
+    public static final String FRAGMENT_EDUCATORS = "EDUCATORS";
+    public static final String FRAGMENT_TYPELESSONS = "TYPELESSONS";
 
     public static Preferences getInstance() {
         if (instance != null) return instance;

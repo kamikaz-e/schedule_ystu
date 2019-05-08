@@ -2,5 +2,11 @@ package com.example.misha.myapplication.module.editData.page;
 
 public interface EditDataPagePresenterInterface {
 
-    void onUpdateListView();
+    void onClearClick(int position);
+
+    void insert(String item);
+
+    void deleteItem(int position);
+
+    String getNameAt(int position);
 }

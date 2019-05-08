@@ -51,11 +51,6 @@ public class TypelessonDao extends AbsDao<Typelesson> {
         ContentValues set = new ContentValues();
         set.put(ID, instance.getId());
         set.put(TYPELESSON, instance.getName());
-
         return set;
-    }
-
-    public boolean deleteItemById(long id) {
-        return super.deleteItemById(id, ID);
     }
 }

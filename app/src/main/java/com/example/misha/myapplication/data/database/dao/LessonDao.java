@@ -110,8 +110,4 @@ public class LessonDao extends AbsDao<Lesson> {
         return affectedRows == 1;
     }
 
-
-    public boolean deleteItemById(long id) {
-        return super.deleteItemById(id, ID);
-    }
 }

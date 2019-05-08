@@ -69,6 +69,7 @@ public class Subject implements Parcelable, SimpleItem {
         this.id = id;
     }
 
+
     public void setName(String name) {
         this.name = name;
     }

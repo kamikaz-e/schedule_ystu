@@ -14,6 +14,7 @@ public final class Constants {
 
     public static final String POSITION = "POSITION";
 
+
     private Constants() {
     }
 }

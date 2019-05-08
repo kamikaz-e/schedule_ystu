@@ -52,8 +52,4 @@ public class EducatorDao extends AbsDao<Educator> {
         set.put(EDUCATOR, instance.getName());
         return set;
     }
-
-    public boolean deleteItemById(long id) {
-        return super.deleteItemById(id, ID);
-    }
 }
