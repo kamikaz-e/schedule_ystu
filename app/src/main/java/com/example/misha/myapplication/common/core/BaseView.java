@@ -1,9 +1,10 @@
 package com.example.misha.myapplication.common.core;
 
 
+import android.view.View;
+
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
-import android.view.View;
 
 
 public interface BaseView {

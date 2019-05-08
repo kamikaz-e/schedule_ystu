@@ -35,14 +35,17 @@ public final class Preferences implements PreferencesInterface {
     public boolean isHintsOpened() {
         return mPrefs.getBoolean(PREF_KEY_FIRST_OPEN_HINT, false);
     }
+
     @Override
     public void setHintsOpened() {
         mPrefs.edit().putBoolean(PREF_KEY_FIRST_OPEN_HINT, true).apply();
     }
+
     @Override
     public void setSemesterStart(long date) {
         mPrefs.edit().putLong(PREF_KEY_SEMESTER_START, date).apply();
     }
+
     @Override
     public long getSemestStart() {
         return mPrefs.getLong(PREF_KEY_SEMESTER_START, calendar.getTimeInMillis());
@@ -71,10 +74,10 @@ public final class Preferences implements PreferencesInterface {
     public void setSelectedPositionTabDays(int position) {
         mPrefs.edit().putInt(PREF_KEY_SELECT_TAB_DAYS, position).apply();
     }
+
     public int getSelectedPositionTabDays() {
         return mPrefs.getInt(PREF_KEY_SELECT_TAB_DAYS, 0);
     }
-
 
 
     public void setFabOpen(boolean state) {

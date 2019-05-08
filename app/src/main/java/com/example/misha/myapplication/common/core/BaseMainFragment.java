@@ -70,7 +70,7 @@ public abstract class BaseMainFragment extends BaseFragment implements BaseView 
     }
 
     @Override
-    public void showSnack(@StringRes  int message) {
+    public void showSnack(@StringRes int message) {
         if (this.getActivity() != null && getActivity() instanceof BaseActivity) {
             Root baseRouter = (Root) getActivity();
             baseRouter.showSnack(message);
@@ -126,8 +126,6 @@ public abstract class BaseMainFragment extends BaseFragment implements BaseView 
     }
 
 
-
-
     public void sendResultToTarget(Class target, int request, int result, Intent data) {
         sendResultToTarget(target, null, request, result, data);
     }
@@ -139,7 +137,7 @@ public abstract class BaseMainFragment extends BaseFragment implements BaseView 
                 ? getChildFragmentManager()
                 : root.getChildFragmentManager());
         if (activeFragments == null) return;
-        for (Fragment fragment: activeFragments) {
+        for (Fragment fragment : activeFragments) {
             if (fragment == null) continue;
             Class fragmentClass = fragment.getClass();
             if (fragmentClass.equals(target)) {

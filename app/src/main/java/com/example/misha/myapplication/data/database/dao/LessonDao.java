@@ -104,7 +104,6 @@ public class LessonDao extends AbsDao<Lesson> {
     }
 
 
-
     public boolean updateItemByID(Lesson lesson) {
         int affectedRows = getContentResolver().update(getTableUri(), makeContentValuesFromInstance(lesson),
                 ID + EQUALS, new String[]{String.valueOf(lesson.getId())});

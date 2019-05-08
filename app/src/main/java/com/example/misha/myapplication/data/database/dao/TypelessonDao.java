@@ -12,10 +12,11 @@ public class TypelessonDao extends AbsDao<Typelesson> {
 
     private static volatile TypelessonDao instance;
 
-    private TypelessonDao() {}
+    private TypelessonDao() {
+    }
 
     public static TypelessonDao getInstance() {
-        if (null == instance){
+        if (null == instance) {
             instance = new TypelessonDao();
         }
         return instance;
@@ -25,7 +26,7 @@ public class TypelessonDao extends AbsDao<Typelesson> {
     public final static String TYPELESSON = "typelesson";
 
 
-    public static final String[] ALL_SET_PROPERTIES = new String[] {ID, TYPELESSON};
+    public static final String[] ALL_SET_PROPERTIES = new String[]{ID, TYPELESSON};
 
     @Override
     protected String[] getAllColumns() {
@@ -53,6 +54,7 @@ public class TypelessonDao extends AbsDao<Typelesson> {
 
         return set;
     }
+
     public boolean deleteItemById(long id) {
         return super.deleteItemById(id, ID);
     }

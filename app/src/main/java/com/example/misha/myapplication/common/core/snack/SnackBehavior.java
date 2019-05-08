@@ -1,10 +1,11 @@
 package com.example.misha.myapplication.common.core.snack;
 
+import android.view.View;
+
 import androidx.annotation.StringRes;
 
 import com.example.misha.myapplication.ScheduleApp;
 import com.google.android.material.snackbar.Snackbar;
-import android.view.View;
 
 public class SnackBehavior extends AbsSnackBehavior {
 

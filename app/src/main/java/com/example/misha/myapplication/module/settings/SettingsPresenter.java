@@ -14,6 +14,7 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
     @Override
     public void init() {
     }
+
     @Override
     public void onDateClicked() {
         getView().get_current_week();
@@ -21,7 +22,7 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
 
     @Override
     public void onCreateDialogImport() {
-         getView().onCreateDialogImport().show();
+        getView().onCreateDialogImport().show();
     }
 
     @Override

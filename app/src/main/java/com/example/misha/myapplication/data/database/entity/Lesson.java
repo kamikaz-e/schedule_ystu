@@ -39,9 +39,9 @@ public class Lesson {
         this.week = String.valueOf(week);
         this.day = String.valueOf(day);
         this.subject = String.valueOf(subject);
-        this.audience =  String.valueOf(audience);
-        this.educator =  String.valueOf(educator);
-        this.typeLesson =  String.valueOf(typeLesson);
+        this.audience = String.valueOf(audience);
+        this.educator = String.valueOf(educator);
+        this.typeLesson = String.valueOf(typeLesson);
         this.timeLesson = String.valueOf(timeLesson);
     }
 
@@ -92,13 +92,14 @@ public class Lesson {
     public void setEducator(String educator) {
         this.educator = educator;
     }
-    public void setData (String subject, String audience, String educator, String typeLesson)
-    {
-        this.subject=subject;
-        this.audience=audience;
-        this.educator=educator;
-        this.typeLesson=typeLesson;
+
+    public void setData(String subject, String audience, String educator, String typeLesson) {
+        this.subject = subject;
+        this.audience = audience;
+        this.educator = educator;
+        this.typeLesson = typeLesson;
     }
+
     public void setId(String id) {
         this.id = id;
     }

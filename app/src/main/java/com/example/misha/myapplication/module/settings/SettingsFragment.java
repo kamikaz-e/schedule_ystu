@@ -108,7 +108,8 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
         final EditText name_db = view.findViewById(R.id.name_schedule);
-        builder.setCancelable(false).setPositiveButton("Загрузить", (dialog, id) -> presenter.loadSubjects(name_db.getText().toString())).setNegativeButton("Отмена", (dialog, id) -> { });
+        builder.setCancelable(false).setPositiveButton("Загрузить", (dialog, id) -> presenter.loadSubjects(name_db.getText().toString())).setNegativeButton("Отмена", (dialog, id) -> {
+        });
         return builder.create();
     }
 

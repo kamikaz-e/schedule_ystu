@@ -13,11 +13,11 @@ public class Subject implements Parcelable, SimpleItem {
 
     @Expose
     @SerializedName("id")
-    private  String id;
+    private String id;
 
     @Expose
     @SerializedName("subject")
-    private  String name;
+    private String name;
 
     public Subject(String id, String name) {
         this.id = id;
@@ -48,7 +48,7 @@ public class Subject implements Parcelable, SimpleItem {
     };
 
     public Subject() {
-        
+
     }
 
     @Override
@@ -65,11 +65,12 @@ public class Subject implements Parcelable, SimpleItem {
     }
 
 
-    public void setId(String id){
-        this.id=id;
+    public void setId(String id) {
+        this.id = id;
     }
-    public void setName(String name){
-        this.name=name;
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

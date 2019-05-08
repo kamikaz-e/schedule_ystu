@@ -11,11 +11,11 @@ public class Audience implements Parcelable, SimpleItem {
 
     @Expose
     @SerializedName("id")
-    private  String id;
+    private String id;
 
     @Expose
     @SerializedName("audience")
-    private  String name;
+    private String name;
 
     public Audience(String id, String name) {
         this.id = id;
@@ -62,13 +62,14 @@ public class Audience implements Parcelable, SimpleItem {
         return id;
     }
 
-    public void setId(String id){
-        this.id=id;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setName(String name){
-        this.name=name;
+    public void setName(String name) {
+        this.name = name;
     }
+
     @Override
     public int describeContents() {
         return 0;

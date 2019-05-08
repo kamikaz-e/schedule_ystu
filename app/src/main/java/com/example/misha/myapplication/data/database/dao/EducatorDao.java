@@ -12,19 +12,20 @@ public class EducatorDao extends AbsDao<Educator> {
 
     private static volatile EducatorDao instance;
 
-    private EducatorDao() {}
+    private EducatorDao() {
+    }
 
     public static EducatorDao getInstance() {
-        if (null == instance){
+        if (null == instance) {
             instance = new EducatorDao();
         }
         return instance;
     }
 
-    public final static String ID =  "id";
+    public final static String ID = "id";
     public final static String EDUCATOR = "educator";
 
-    public static final String[] ALL_SET_PROPERTIES = new String[] {ID, EDUCATOR};
+    public static final String[] ALL_SET_PROPERTIES = new String[]{ID, EDUCATOR};
 
     @Override
     protected String[] getAllColumns() {
@@ -51,6 +52,7 @@ public class EducatorDao extends AbsDao<Educator> {
         set.put(EDUCATOR, instance.getName());
         return set;
     }
+
     public boolean deleteItemById(long id) {
         return super.deleteItemById(id, ID);
     }

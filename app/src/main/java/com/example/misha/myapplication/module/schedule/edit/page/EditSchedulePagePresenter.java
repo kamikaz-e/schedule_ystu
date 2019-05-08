@@ -23,7 +23,6 @@ public class EditSchedulePagePresenter extends BaseMainPresenter<EditSchedulePag
     private int positionWeek;
     private int day;
 
-
     public EditSchedulePagePresenter(int positionWeek, int day) {
         this.positionWeek = positionWeek;
         this.day = day;
@@ -31,13 +30,9 @@ public class EditSchedulePagePresenter extends BaseMainPresenter<EditSchedulePag
 
     @Override
     public void init() {
-        getView().updateList(positionWeek, day);
+        getView().updateList(day, positionWeek);
     }
 
-    @Override
-    public void onWeekSelected(int position) {
-        getView().updateList(positionWeek, day);
-    }
 
     @Override
     public void onSubjectClick(int position) {
@@ -78,6 +73,7 @@ public class EditSchedulePagePresenter extends BaseMainPresenter<EditSchedulePag
     @Override
     public void setWeek(int positionWeek) {
         this.positionWeek = positionWeek;
+        getView().updateList(day, positionWeek);
     }
 
 }

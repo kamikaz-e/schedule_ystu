@@ -81,7 +81,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Root {
         actionBar = getSupportActionBar();
     }
 
-    /** Disable collapsing. */
+    /**
+     * Disable collapsing.
+     */
     public void disableCollapsing() {
         appBarLayout.setActivated(false);
         collapsingToolbar.setActivated(false);
@@ -113,14 +115,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Root {
 
     /**
      * Send permission to fragments.
-     * @param requestCode request code
-     * @param permissions permissions
+     *
+     * @param requestCode  request code
+     * @param permissions  permissions
      * @param grantResults grant result
      */
     private void sendPermissionToFragment(int requestCode, String[] permissions,
                                           int[] grantResults) {
         List<Fragment> activeFragments = getFragments(getSupportFragmentManager());
-        for (Fragment fragment: activeFragments) {
+        for (Fragment fragment : activeFragments) {
             if (fragment == null) continue;
             fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
             sendToChildes(fragment, requestCode, permissions, grantResults);
@@ -129,16 +132,17 @@ public abstract class BaseActivity extends AppCompatActivity implements Root {
 
     /**
      * Send permission to all child fragments.
+     *
      * @param rootFragment root fragment
-     * @param requestCode request code
-     * @param permissions permissions
+     * @param requestCode  request code
+     * @param permissions  permissions
      * @param grantResults grant results
      */
     private void sendToChildes(Fragment rootFragment, int requestCode,
                                String[] permissions, int[] grantResults) {
         List<Fragment> activeFragments = getFragments(rootFragment.getChildFragmentManager());
         if (activeFragments == null) return;
-        for (Fragment fragment: activeFragments) {
+        for (Fragment fragment : activeFragments) {
             if (fragment == null) continue;
             fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
             sendToChildes(fragment, requestCode, permissions, grantResults);
@@ -147,6 +151,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Root {
 
     /**
      * Enable collapsing.
+     *
      * @param show show flag
      */
     public void enableCollapsing(boolean show) {
@@ -166,7 +171,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Root {
         toolbar.setTitle(currentTitle);
     }
 
-    /** Setup action bar. */
+    /**
+     * Setup action bar.
+     */
     protected void setupActionBar() {
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -273,19 +280,19 @@ public abstract class BaseActivity extends AppCompatActivity implements Root {
     }
 
     public void setToolbarVisibility(boolean toolbarEnabled) {
-       findViewById(R.id.app_bar).setVisibility(toolbarEnabled ? View.VISIBLE : View.GONE);
+        findViewById(R.id.app_bar).setVisibility(toolbarEnabled ? View.VISIBLE : View.GONE);
     }
 
     private void sendResultToTarget(Class target, Fragment root, int request,
                                     int result, Intent data) {
         if (root != null) {
-         //   if (!root.isAdded()) return;
+            //   if (!root.isAdded()) return;
         }
         List<Fragment> activeFragments = getFragments(root == null
                 ? getSupportFragmentManager()
                 : root.getChildFragmentManager());
         if (activeFragments == null) return;
-        for (Fragment fragment: activeFragments) {
+        for (Fragment fragment : activeFragments) {
             if (fragment == null) continue;
             Class fragmentClass = fragment.getClass();
             boolean instance = target.isInstance(fragment);

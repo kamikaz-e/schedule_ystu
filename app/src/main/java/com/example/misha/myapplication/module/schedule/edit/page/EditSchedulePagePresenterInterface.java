@@ -2,8 +2,6 @@ package com.example.misha.myapplication.module.schedule.edit.page;
 
 public interface EditSchedulePagePresenterInterface {
 
-    void onWeekSelected(int position);
-
     void onSubjectClick(int position);
 
     void onAudienceClick(int position);

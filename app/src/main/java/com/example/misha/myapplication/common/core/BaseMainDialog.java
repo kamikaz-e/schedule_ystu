@@ -4,17 +4,17 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.ScheduleApp;
@@ -43,7 +43,7 @@ public abstract class BaseMainDialog extends BaseDialog implements BaseDialogVie
     public void showGlobalError(@StringRes int message) {
         if (getActivity() != null) {
             if (getActivity() instanceof BaseActivity) {
-                ErrorView errorView =  getContext().findViewById(R.id.view_error);
+                ErrorView errorView = getContext().findViewById(R.id.view_error);
                 errorView.setError(message);
             }
         }
@@ -61,7 +61,7 @@ public abstract class BaseMainDialog extends BaseDialog implements BaseDialogVie
     public void showGlobalError(String message) {
         if (getActivity() != null) {
             if (getActivity() instanceof BaseActivity) {
-                ErrorView errorView =  getContext().findViewById(R.id.view_error);
+                ErrorView errorView = getContext().findViewById(R.id.view_error);
                 errorView.setError(message);
             }
         }
@@ -95,7 +95,7 @@ public abstract class BaseMainDialog extends BaseDialog implements BaseDialogVie
 
 
     @Override
-    public void showSnack(@StringRes  int message) {
+    public void showSnack(@StringRes int message) {
         snack.showSnack(message);
     }
 

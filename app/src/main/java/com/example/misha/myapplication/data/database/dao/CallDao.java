@@ -14,20 +14,21 @@ public class CallDao extends AbsDao<Calls> {
 
     private static volatile CallDao instance;
 
-    private CallDao() {}
+    private CallDao() {
+    }
 
     public static CallDao getInstance() {
-        if (null == instance){
+        if (null == instance) {
             instance = new CallDao();
         }
         return instance;
     }
 
-    public final static String ID =  "id";
+    public final static String ID = "id";
     public final static String TIME = "time_lesson";
 
 
-    public static final String[] ALL_SET_PROPERTIES = new String[] {ID, TIME};
+    public static final String[] ALL_SET_PROPERTIES = new String[]{ID, TIME};
 
     @Override
     protected String[] getAllColumns() {
@@ -48,7 +49,6 @@ public class CallDao extends AbsDao<Calls> {
     }
 
 
-
     @Override
     protected ContentValues makeContentValuesFromInstance(Calls instance) {
         ContentValues set = new ContentValues();
@@ -62,12 +62,12 @@ public class CallDao extends AbsDao<Calls> {
         if (!dd.isEmpty()) return;
         ArrayList<Calls> calls = new ArrayList<>();
 
-            calls.add(new Calls( String.valueOf(1), "8:30 - 10:00 "));
-            calls.add(new Calls( String.valueOf(2), "10:10 - 11:40 "));
-            calls.add(new Calls( String.valueOf(3), "12:20 - 13:50 "));
-            calls.add(new Calls( String.valueOf(4), "14:00 - 15:30 "));
-            calls.add(new Calls( String.valueOf(5), "15:40 - 17:10 "));
-            calls.add(new Calls( String.valueOf(6), "17:30 - 19:00 "));
+        calls.add(new Calls(String.valueOf(1), "8:30 - 10:00 "));
+        calls.add(new Calls(String.valueOf(2), "10:10 - 11:40 "));
+        calls.add(new Calls(String.valueOf(3), "12:20 - 13:50 "));
+        calls.add(new Calls(String.valueOf(4), "14:00 - 15:30 "));
+        calls.add(new Calls(String.valueOf(5), "15:40 - 17:10 "));
+        calls.add(new Calls(String.valueOf(6), "17:30 - 19:00 "));
 
         insertAll(calls);
     }

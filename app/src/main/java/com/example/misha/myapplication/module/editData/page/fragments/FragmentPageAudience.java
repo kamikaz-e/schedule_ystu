@@ -19,8 +19,8 @@ import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
 import com.example.misha.myapplication.data.database.entity.Audience;
-import com.example.misha.myapplication.module.editData.page.EditDataPagePresenter;
 import com.example.misha.myapplication.module.editData.page.EditDataFragmentPageView;
+import com.example.misha.myapplication.module.editData.page.EditDataPagePresenter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,7 +46,6 @@ public class FragmentPageAudience extends BaseMainFragment implements EditDataFr
         super.onCreate(savedInstanceState);
         presenter = new EditDataPagePresenter();
     }
-
 
 
     @Override

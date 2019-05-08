@@ -5,5 +5,4 @@ public interface SchedulePagePresenterInterface {
 
     void setWeek(int position);
 
-
 }

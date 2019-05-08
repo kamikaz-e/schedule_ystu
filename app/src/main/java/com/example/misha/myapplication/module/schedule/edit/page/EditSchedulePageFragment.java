@@ -48,7 +48,7 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
         super.onCreate(savedInstanceState);
         int day = getArguments().getInt(Constants.DAY);
         int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
-        presenter = new EditSchedulePagePresenter(day, positionWeek);
+        presenter = new EditSchedulePagePresenter(positionWeek, day);
         rvadapter = new EditScheduleFragmentPagerAdapter(presenter);
     }
 
@@ -119,7 +119,7 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
     }
 
     public void setWeek(int selectedWeek) {
-        presenter.onWeekSelected(selectedWeek);
+        presenter.setWeek(selectedWeek);
     }
 
     @Override

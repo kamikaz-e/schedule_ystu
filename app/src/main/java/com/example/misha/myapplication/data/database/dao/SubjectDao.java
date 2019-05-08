@@ -12,10 +12,11 @@ public class SubjectDao extends AbsDao<Subject> {
 
     private static volatile SubjectDao instance;
 
-    private SubjectDao() {}
+    private SubjectDao() {
+    }
 
     public static SubjectDao getInstance() {
-        if (instance == null){
+        if (instance == null) {
             instance = new SubjectDao();
         }
         return instance;
@@ -25,7 +26,7 @@ public class SubjectDao extends AbsDao<Subject> {
     public final static String SUBJECT = "subject";
 
 
-    public static final String[] ALL_SET_PROPERTIES = new String[] {ID, SUBJECT};
+    public static final String[] ALL_SET_PROPERTIES = new String[]{ID, SUBJECT};
 
     @Override
     protected String[] getAllColumns() {
@@ -41,7 +42,7 @@ public class SubjectDao extends AbsDao<Subject> {
     protected Subject makeInstanceFromCursor(Cursor cursor) {
         Subject subject = new Subject();
         subject.setId(getString(cursor, ID));
-        subject.setName(getString(cursor, SUBJECT ));
+        subject.setName(getString(cursor, SUBJECT));
         return subject;
     }
 
@@ -52,6 +53,7 @@ public class SubjectDao extends AbsDao<Subject> {
         set.put(SUBJECT, instance.getName());
         return set;
     }
+
     public boolean deleteItemById(long id) {
         return super.deleteItemById(id, ID);
     }

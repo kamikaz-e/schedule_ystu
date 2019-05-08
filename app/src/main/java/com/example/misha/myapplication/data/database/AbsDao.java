@@ -132,7 +132,7 @@ public abstract class AbsDao<T> implements DaoInterface<T> {
 
     @Override
     public void insertItem(T item) {
-       getContentResolver().insert(getTableUri(), makeContentValuesFromInstance(item));
+        getContentResolver().insert(getTableUri(), makeContentValuesFromInstance(item));
     }
 
     @Override

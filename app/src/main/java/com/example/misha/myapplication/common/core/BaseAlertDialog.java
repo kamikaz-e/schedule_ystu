@@ -1,12 +1,12 @@
 package com.example.misha.myapplication.common.core;
 
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import android.view.View;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.ScheduleApp;

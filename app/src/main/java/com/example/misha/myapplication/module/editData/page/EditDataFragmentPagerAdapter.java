@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.misha.myapplication.module.editData.page.fragments.FragmentPageAudience;
 import com.example.misha.myapplication.module.editData.page.fragments.FragmentEducator;
+import com.example.misha.myapplication.module.editData.page.fragments.FragmentPageAudience;
 import com.example.misha.myapplication.module.editData.page.fragments.FragmentTypelesson;
 
 import org.jetbrains.annotations.NotNull;
