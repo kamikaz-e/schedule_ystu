@@ -26,4 +26,6 @@ public interface EditSchedulePageFragmentView extends BaseView {
     void onClearLessonClick(int position);
 
     void showEditDialog(ArrayList<? extends SimpleItem> subjectList, int position, int subject);
+
+    void setWeek(int position);
 }

@@ -5,7 +5,7 @@ import com.example.misha.myapplication.data.database.entity.Lesson;
 
 import java.util.List;
 
-public class SchedulePagePagePresenter extends BaseMainPresenter<SchedulePageFragmentView> implements SchedulePagePresenterInterface {
+public class SchedulePagePresenter extends BaseMainPresenter<SchedulePageFragmentView> implements SchedulePagePresenterInterface {
 
     private int day;
 
@@ -13,7 +13,7 @@ public class SchedulePagePagePresenter extends BaseMainPresenter<SchedulePageFra
 
     private List<Lesson> lessons;
 
-    public SchedulePagePagePresenter(int day, int positionWeek) {
+    public SchedulePagePresenter(int day, int positionWeek) {
         this.day = day;
         this.positionWeek = positionWeek;
     }

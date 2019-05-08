@@ -74,4 +74,10 @@ public class EditSchedulePagePresenter extends BaseMainPresenter<EditSchedulePag
         getView().onClearLessonClick(position);
     }
 
+
+    @Override
+    public void setWeek(int positionWeek) {
+        this.positionWeek = positionWeek;
+    }
+
 }

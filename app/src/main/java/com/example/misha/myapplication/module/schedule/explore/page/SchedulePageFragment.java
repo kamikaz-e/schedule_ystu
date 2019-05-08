@@ -21,7 +21,7 @@ import java.util.List;
 public class SchedulePageFragment extends BaseMainFragment implements SchedulePageFragmentView {
 
     private ScheduleFragmentPagerAdapter rvadapter;
-    private SchedulePagePagePresenter presenter;
+    private SchedulePagePresenter presenter;
 
 
     @Override
@@ -30,7 +30,7 @@ public class SchedulePageFragment extends BaseMainFragment implements SchedulePa
         rvadapter = new ScheduleFragmentPagerAdapter();
         int day = getArguments().getInt(Constants.DAY);
         int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
-        presenter = new SchedulePagePagePresenter(day, positionWeek);
+        presenter = new SchedulePagePresenter(day, positionWeek);
     }
 
     public static SchedulePageFragment newInstance(int selectedWeek, int position) {

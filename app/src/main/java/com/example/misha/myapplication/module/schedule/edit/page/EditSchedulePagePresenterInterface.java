@@ -17,4 +17,7 @@ public interface EditSchedulePagePresenterInterface {
     void onCopyDownClick(int position);
 
     void onClearLessonClick(int position);
+
+    void setWeek(int position);
+
 }
