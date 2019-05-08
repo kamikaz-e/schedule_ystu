@@ -11,11 +11,11 @@ import com.example.misha.myapplication.module.schedule.edit.page.EditSchedulePag
 
 import java.util.ArrayList;
 
-public class EditSchedulePagerAdapter extends FragmentPagerAdapter {
+public class EditScheduleFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private ArrayList<EditSchedulePageFragment> fragments = new ArrayList<>();
 
-    public EditSchedulePagerAdapter(FragmentManager fragmentManager) {
+    public EditScheduleFragmentPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
         int selectedWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
         for (int day = 0; day < 6; day++) {

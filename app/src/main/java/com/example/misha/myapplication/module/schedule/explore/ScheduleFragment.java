@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ScheduleFragment extends BaseMainFragment implements ScheduleFragmentView, AdapterView.OnItemSelectedListener {
 
-    private SchedulePagerAdapter pagerAdapterTabDays;
+    private ScheduleFragmentPagerAdapter pagerAdapterTabDays;
     private TabDaysAdapter adapterTabDays;
     private RecyclerView dayTabs;
     private ViewPager viewPager;
@@ -71,7 +71,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
         presenter = new SchedulePresenter();
         setHasOptionsMenu(true);
         customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
-        pagerAdapterTabDays = new SchedulePagerAdapter(getChildFragmentManager());
+        pagerAdapterTabDays = new ScheduleFragmentPagerAdapter(getChildFragmentManager());
         adapterTabDays = new TabDaysAdapter((position, view) -> presenter.onPageSelected(position));
     }
 

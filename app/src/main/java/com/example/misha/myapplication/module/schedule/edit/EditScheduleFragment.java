@@ -38,7 +38,7 @@ import java.util.List;
 
 public class EditScheduleFragment extends BaseMainFragment implements EditScheduleFragmentView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private EditSchedulePagerAdapter pagerAdapter;
+    private EditScheduleFragmentPagerAdapter pagerAdapter;
     private TabDaysAdapter adapterTabDays;
     private Spinner spinner;
     private ViewPager viewPager;
@@ -79,7 +79,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         presenter = new EditSchedulePresenter();
         setHasOptionsMenu(true);
         customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
-        pagerAdapter = new EditSchedulePagerAdapter(getChildFragmentManager());
+        pagerAdapter = new EditScheduleFragmentPagerAdapter(getChildFragmentManager());
         adapterTabDays = new TabDaysAdapter((position, view) -> presenter.onPageSelected(position));
     }
 
