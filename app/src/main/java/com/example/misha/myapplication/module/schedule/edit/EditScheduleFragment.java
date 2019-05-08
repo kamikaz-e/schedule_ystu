@@ -28,7 +28,7 @@ import com.example.misha.myapplication.data.database.dao.LessonDao;
 import com.example.misha.myapplication.data.database.entity.Lesson;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.schedule.TabDaysAdapter;
-import com.example.misha.myapplication.module.schedule.TabDaysPagerAdapter;
+import com.example.misha.myapplication.module.schedule.TabDaysEditSchedulePagerAdapter;
 import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -39,7 +39,7 @@ import java.util.List;
 
 public class EditScheduleFragment extends BaseMainFragment implements EditScheduleFragmentView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private TabDaysPagerAdapter pagerAdapter;
+    private TabDaysEditSchedulePagerAdapter pagerAdapter;
     private TabDaysAdapter adapterTabDays;
     private Spinner spinner;
     private ViewPager viewPager;
@@ -80,7 +80,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         presenter = new EditSchedulePresenter();
         setHasOptionsMenu(true);
         customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
-        pagerAdapter = new TabDaysPagerAdapter(getChildFragmentManager());
+        pagerAdapter = new TabDaysEditSchedulePagerAdapter(getChildFragmentManager());
         adapterTabDays = new TabDaysAdapter((position, view) -> presenter.onPageSelected(position));
     }
 
