@@ -8,6 +8,8 @@ public interface SettingsPresenterInterface {
 
     void onDateClicked();
 
+    void getCurrentWeek();
+
     void onCreateDialogImport();
 
     void onCreateDialogAbout();

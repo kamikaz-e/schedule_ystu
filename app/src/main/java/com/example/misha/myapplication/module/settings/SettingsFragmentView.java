@@ -10,8 +10,6 @@ public interface SettingsFragmentView extends BaseView {
 
     void hideProgressDialog();
 
-    void get_current_week();
-
     Dialog onCreateDialogImport();
 
     Dialog onCreateDialogAbout();

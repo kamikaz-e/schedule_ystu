@@ -24,6 +24,7 @@ public final class Preferences implements PreferencesInterface {
     public static final String FRAGMENT_AUDIENCES = "AUDIENCES";
     public static final String FRAGMENT_EDUCATORS = "EDUCATORS";
     public static final String FRAGMENT_TYPELESSONS = "TYPELESSONS";
+    public static final String SELECT_DATE = "SELECT_DATE";
 
     public static Preferences getInstance() {
         if (instance != null) return instance;
@@ -99,4 +100,15 @@ public final class Preferences implements PreferencesInterface {
     public int getSelectedPositionLesson() {
         return mPrefs.getInt(PREF_KEY_SELECT_LESSON, 0);
     }
+
+    public void setSelectDate(String selectDate) {
+        mPrefs.edit().putString(SELECT_DATE, selectDate).apply();
+    }
+
+    public String getSelectDate() {
+        return mPrefs.getString(SELECT_DATE, String.valueOf(Calendar.getInstance().getTimeInMillis()));
+    }
+
+
+
 }

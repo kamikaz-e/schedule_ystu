@@ -17,7 +17,8 @@ public class EditDataPresenter extends BaseMainPresenter<EditDataFragmentView> i
 
     @Override
     public void onClear(AbsDao absDao) {
-        getView().clear(absDao);
+        absDao.deleteAll();
+        getView().updateView();
     }
 
 

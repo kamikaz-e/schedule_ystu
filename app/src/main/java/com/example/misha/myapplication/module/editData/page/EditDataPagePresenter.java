@@ -27,6 +27,7 @@ public class EditDataPagePresenter extends BaseMainPresenter<EditDataFragmentPag
 
     private AbsDao absDao;
 
+
     public EditDataPagePresenter(String currentFragment) {
         this.currentFragment = currentFragment;
         if (currentFragment.equals(FRAGMENT_SUBJECTS)) {

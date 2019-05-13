@@ -1,7 +1,5 @@
 package com.example.misha.myapplication.module.editData;
 
-import android.view.MenuItem;
-
 import com.example.misha.myapplication.data.database.AbsDao;
 
 public interface EditDataPresenterInterface {

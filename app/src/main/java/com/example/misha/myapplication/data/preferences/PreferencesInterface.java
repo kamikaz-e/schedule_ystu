@@ -29,4 +29,8 @@ public interface PreferencesInterface {
     void setSelectedPositionLesson(int position);
 
     int getSelectedPositionLesson();
+
+    void setSelectDate(String selectDate);
+
+    String getSelectDate();
 }

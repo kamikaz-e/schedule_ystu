@@ -127,4 +127,14 @@ public class Repository implements RepositoryManager {
     public int getSelectedPositionLesson() {
         return preferencesInterface.getSelectedPositionLesson();
     }
+
+    @Override
+    public void setSelectDate(String selectDate) {
+        preferencesInterface.setSelectDate(selectDate);
+    }
+
+    @Override
+    public String getSelectDate() {
+        return preferencesInterface.getSelectDate();
+    }
 }

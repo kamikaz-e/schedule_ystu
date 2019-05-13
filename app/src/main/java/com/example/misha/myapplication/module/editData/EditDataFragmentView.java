@@ -12,5 +12,5 @@ public interface EditDataFragmentView extends BaseView {
 
     Dialog onCreateDialogClear(AbsDao dao, int titleClear);
 
-    void clear(AbsDao dao);
+    void updateView();
 }

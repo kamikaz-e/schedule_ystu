@@ -1,8 +1,13 @@
 package com.example.misha.myapplication.module.calls;
 
 import com.example.misha.myapplication.common.core.BaseView;
+import com.example.misha.myapplication.data.database.entity.Calls;
+
+import java.util.ArrayList;
 
 public interface CallsFragmentView extends BaseView {
 
-    void onClick(int position);
+    void updateView(ArrayList<Calls> callsList);
+
+
 }

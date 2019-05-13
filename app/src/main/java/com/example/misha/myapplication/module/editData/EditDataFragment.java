@@ -66,7 +66,7 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
     @Override
     public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         if (item.getItemId() == R.id.btn_edit) {
-           presenter.onClearClick(tabLayout.getSelectedTabPosition());
+            presenter.onClearClick(tabLayout.getSelectedTabPosition());
         }
         return super.onOptionsItemSelected(item);
     }
@@ -87,8 +87,7 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
 
 
     @Override
-    public void clear(AbsDao dao) {
-        dao.deleteAll();
+    public void updateView() {
         if (!(viewPagerAdapter == null)) {
             viewPagerAdapter.notifyDataSetChanged();
         }
