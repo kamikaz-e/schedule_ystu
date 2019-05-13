@@ -1,8 +1,14 @@
 package com.example.misha.myapplication.module.editData;
 
+import android.view.MenuItem;
+
 import com.example.misha.myapplication.data.database.AbsDao;
 
 public interface EditDataPresenterInterface {
 
-    void onClearClick(AbsDao dao);
+    void onClear(AbsDao absDao);
+
+    void onCreateDialog(AbsDao absDao, int selectedTabPosition);
+
+    void onClearClick(int id);
 }

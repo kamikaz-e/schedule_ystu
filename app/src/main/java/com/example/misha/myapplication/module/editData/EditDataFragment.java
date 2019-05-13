@@ -16,10 +16,6 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.database.AbsDao;
-import com.example.misha.myapplication.data.database.dao.AudienceDao;
-import com.example.misha.myapplication.data.database.dao.EducatorDao;
-import com.example.misha.myapplication.data.database.dao.SubjectDao;
-import com.example.misha.myapplication.data.database.dao.TypelessonDao;
 import com.example.misha.myapplication.module.editData.page.EditDataFragmentPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
@@ -31,6 +27,7 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
     private TabLayout tabLayout;
     private EditDataFragmentPagerAdapter viewPagerAdapter;
     private EditDataPresenter presenter;
+
     @Override
     public void onResume() {
         super.onResume();
@@ -48,11 +45,8 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_edit_data, container, false);
-
         setHasOptionsMenu(true);
-
         ViewPager viewPager = view.findViewById(R.id.viewPager);
         viewPagerAdapter = new EditDataFragmentPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
@@ -72,30 +66,16 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
     @Override
     public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         if (item.getItemId() == R.id.btn_edit) {
-            switch (tabLayout.getSelectedTabPosition()) {
-                case 0:
-                    onCreateDialogClear(SubjectDao.getInstance(), R.string.clear_subjects).show();
-                    break;
-                case 1:
-                    onCreateDialogClear(AudienceDao.getInstance(), R.string.clear_audience).show();
-                    break;
-                case 2:
-                    onCreateDialogClear(EducatorDao.getInstance(), R.string.clear_educators).show();
-                    break;
-                case 3:
-                    onCreateDialogClear(TypelessonDao.getInstance(), R.string.clear_typelessons).show();
-                    break;
-            }
+           presenter.onClearClick(tabLayout.getSelectedTabPosition());
         }
         return super.onOptionsItemSelected(item);
     }
 
 
-    private Dialog onCreateDialogClear(AbsDao dao, int titleClear) {
-
+    public Dialog onCreateDialogClear(AbsDao dao, int titleClear) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
-                presenter.onClearClick(dao)).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle(titleClear);
+                presenter.onClear(dao)).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle(titleClear);
         return builder.create();
     }
 
