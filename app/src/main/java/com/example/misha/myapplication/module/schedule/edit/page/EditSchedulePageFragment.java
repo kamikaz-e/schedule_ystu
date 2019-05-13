@@ -30,14 +30,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.example.misha.myapplication.Constants.ITEMS_LIST;
 
 public class EditSchedulePageFragment extends BaseMainFragment implements EditSchedulePageFragmentView {
 
     private EditScheduleFragmentPagerAdapter rvadapter;
-    private List<Lesson> lessonList = new ArrayList<>();
     private FloatingActionButton mainFab, evenWeekFab, unevenWeekFab;
     private Animation fabClose;
     private Animation rotateBackward;
@@ -46,8 +44,8 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int day = getArguments().getInt(Constants.DAY);
         int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
+        int day = getArguments().getInt(Constants.DAY);
         presenter = new EditSchedulePagePresenter(positionWeek, day);
         rvadapter = new EditScheduleFragmentPagerAdapter(presenter);
     }
@@ -112,47 +110,14 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
         return presenter;
     }
 
-    public void updateList(int day, int positionWeek) {
-        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
+
+    public void updateView(ArrayList<Lesson> lessonList) {
         rvadapter.setLessonList(lessonList);
         rvadapter.notifyDataSetChanged();
     }
 
     public void setWeek(int selectedWeek) {
         presenter.setWeek(selectedWeek);
-    }
-
-    @Override
-    public void onCopyUpClick(int position) {
-        lessonList.get(position - 1).setSubject(lessonList.get(position).getSubject());
-        lessonList.get(position - 1).setAudience(lessonList.get(position).getAudience());
-        lessonList.get(position - 1).setTypeLesson(lessonList.get(position).getTypeLesson());
-        lessonList.get(position - 1).setEducator(lessonList.get(position).getEducator());
-        rvadapter.setLessonList(lessonList);
-        rvadapter.notifyDataSetChanged();
-        LessonDao.getInstance().updateItemByID(lessonList.get(position - 1));
-    }
-
-    @Override
-    public void onCopyDownClick(int position) {
-        lessonList.get(position + 1).setSubject(lessonList.get(position).getSubject());
-        lessonList.get(position + 1).setAudience(lessonList.get(position).getAudience());
-        lessonList.get(position + 1).setTypeLesson(lessonList.get(position).getTypeLesson());
-        lessonList.get(position + 1).setEducator(lessonList.get(position).getEducator());
-        rvadapter.setLessonList(lessonList);
-        rvadapter.notifyDataSetChanged();
-        LessonDao.getInstance().updateItemByID(lessonList.get(position + 1));
-    }
-
-    @Override
-    public void onClearLessonClick(int position) {
-        lessonList.get(position).setSubject("0");
-        lessonList.get(position).setAudience("0");
-        lessonList.get(position).setTypeLesson("0");
-        lessonList.get(position).setEducator("0");
-        rvadapter.setLessonList(lessonList);
-        rvadapter.notifyDataSetChanged();
-        LessonDao.getInstance().updateItemByID(lessonList.get(position));
     }
 
     @Override
@@ -167,36 +132,34 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
 
     @Override
     public void onActivityResult(int requestCode, int resultOk, Intent data) {
+            ArrayList<Lesson> lessonList = presenter.getLessonList();
+
         if (requestCode == SUBJECT) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Subject subject = data.getParcelableExtra(ITEMS_LIST);
             lessonList.get(lessonPosition).setSubject(subject.getId());
-            rvadapter.setLessonList(lessonList);
-            rvadapter.notifyDataSetChanged();
+            updateView(lessonList);
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
         if (requestCode == TYPELESSON) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Typelesson typelesson = data.getParcelableExtra(ITEMS_LIST);
             lessonList.get(lessonPosition).setTypeLesson(typelesson.getId());
-            rvadapter.setLessonList(lessonList);
-            rvadapter.notifyDataSetChanged();
+            updateView(lessonList);
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
         if (requestCode == AUDIENCE) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Audience audience = data.getParcelableExtra(ITEMS_LIST);
             lessonList.get(lessonPosition).setAudience(audience.getId());
-            rvadapter.setLessonList(lessonList);
-            rvadapter.notifyDataSetChanged();
+            updateView(lessonList);
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
         if (requestCode == EDUCATOR) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Educator educator = data.getParcelableExtra(ITEMS_LIST);
             lessonList.get(lessonPosition).setEducatorEdit(educator.getId());
-            rvadapter.setLessonList(lessonList);
-            rvadapter.notifyDataSetChanged();
+            updateView(lessonList);
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
 
         }

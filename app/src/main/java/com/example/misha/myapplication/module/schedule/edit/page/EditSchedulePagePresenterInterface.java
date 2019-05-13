@@ -1,5 +1,9 @@
 package com.example.misha.myapplication.module.schedule.edit.page;
 
+import com.example.misha.myapplication.data.database.entity.Lesson;
+
+import java.util.ArrayList;
+
 public interface EditSchedulePagePresenterInterface {
 
     void onSubjectClick(int position);
@@ -17,5 +21,7 @@ public interface EditSchedulePagePresenterInterface {
     void onClearLessonClick(int position);
 
     void setWeek(int position);
+
+    ArrayList<Lesson> getLessonList();
 
 }

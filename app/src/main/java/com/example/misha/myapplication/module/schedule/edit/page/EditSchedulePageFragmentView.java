@@ -1,6 +1,7 @@
 package com.example.misha.myapplication.module.schedule.edit.page;
 
 import com.example.misha.myapplication.common.core.BaseView;
+import com.example.misha.myapplication.data.database.entity.Lesson;
 import com.example.misha.myapplication.data.database.entity.SimpleItem;
 
 import java.util.ArrayList;
@@ -17,13 +18,8 @@ public interface EditSchedulePageFragmentView extends BaseView {
     String FRAGMENT_CODE = "FRAGMENT_CODE";
     String POSITION = "POSITION";
 
-    void updateList(int day, int positionWeek);
 
-    void onCopyUpClick(int position);
-
-    void onCopyDownClick(int position);
-
-    void onClearLessonClick(int position);
+    void updateView(ArrayList<Lesson> arrayList);
 
     void showEditDialog(ArrayList<? extends SimpleItem> subjectList, int position, int subject);
 

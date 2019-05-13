@@ -48,9 +48,7 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.onBindView(position);
-
         holder.textViewOptions.setOnClickListener(view -> {
-
             PopupMenu popup = new PopupMenu(view.getContext(), holder.textViewOptions);
             popup.inflate(R.menu.menu_item_edit_lesson);
             if (position == 0) {
