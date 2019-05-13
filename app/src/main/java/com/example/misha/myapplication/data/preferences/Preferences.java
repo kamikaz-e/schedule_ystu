@@ -67,12 +67,12 @@ public final class Preferences implements PreferencesInterface {
     }
 
     @Override
-    public void setSelectedWeekEditSchedule(int position) {
+    public void setSelectedWeekSchedule(int position) {
         mPrefs.edit().putInt(PREF_KEY_SELECT_WEEK, position).apply();
     }
 
     @Override
-    public int getSelectedWeekEditSchedule() {
+    public int getSelectedWeekSchedule() {
         return mPrefs.getInt(PREF_KEY_SELECT_WEEK, 0);
     }
 

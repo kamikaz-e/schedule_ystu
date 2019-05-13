@@ -6,8 +6,6 @@ public interface EditScheduleFragmentView extends BaseView {
 
     void selectWeek(int position);
 
-    void openEditor();
-
     void selectCurrentDay(int currentDay);
 
     void selectCurrentWeek(int currentWeek);
@@ -17,9 +15,5 @@ public interface EditScheduleFragmentView extends BaseView {
     void selectPage(int position);
 
     void animateFAB();
-
-    void evenWeekFab();
-
-    void unevenWeekFab();
 
 }

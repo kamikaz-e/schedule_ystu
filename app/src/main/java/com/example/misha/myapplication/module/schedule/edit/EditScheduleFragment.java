@@ -1,7 +1,5 @@
 package com.example.misha.myapplication.module.schedule.edit;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,17 +22,11 @@ import com.example.misha.myapplication.CustomSpinnerAdapter;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.data.database.dao.LessonDao;
-import com.example.misha.myapplication.data.database.entity.Lesson;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.schedule.TabDaysAdapter;
-import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EditScheduleFragment extends BaseMainFragment implements EditScheduleFragmentView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -44,11 +36,8 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     private ViewPager viewPager;
     private FloatingActionButton mainFab, evenWeekFab, unevenWeekFab;
     private Animation fabOpen, fabClose, rotateForward, rotateBackward;
-    private List<Lesson> lessonListWeek = new ArrayList<>();
-    private List<Lesson> lessonListWeekCurrent = new ArrayList<>();
     private RecyclerView dayTabs;
     private CustomSpinnerAdapter customSpinnerAdapter;
-    private int currentWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
     private EditSchedulePresenter presenter;
 
 
@@ -76,7 +65,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new EditSchedulePresenter();
+        presenter = new EditSchedulePresenter(getContext());
         setHasOptionsMenu(true);
         customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
         pagerAdapter = new EditScheduleFragmentPagerAdapter(getChildFragmentManager());
@@ -94,15 +83,13 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
                 presenter.onPageSwiped(position);
             }
         });
-
+        evenWeekFab = view.findViewById(R.id.even_weekFab);
+        unevenWeekFab = view.findViewById(R.id.uneven_weekFab);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(6);
         dayTabs = view.findViewById(R.id.rv_tab);
         dayTabs.setAdapter(adapterTabDays);
-
         mainFab = view.findViewById(R.id.main_fab);
-        evenWeekFab = view.findViewById(R.id.even_weekFab);
-        unevenWeekFab = view.findViewById(R.id.uneven_weekFab);
         fabOpen = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
         rotateForward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
@@ -122,6 +109,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        spinner = new Spinner(getContext());
         presenter.init();
     }
 
@@ -137,13 +125,8 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         adapterTabDays.updateData(position);
         adapterTabDays.setSelection(viewPager.getCurrentItem());
         dayTabs.setAdapter(adapterTabDays);
-        Preferences.getInstance().setSelectedWeekEditSchedule(position);
     }
 
-    @Override
-    public void openEditor() {
-        getContext().replaceFragment(new ScheduleFragment());
-    }
 
     @Override
     public void selectCurrentDay(int currentDay) {
@@ -160,7 +143,6 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     @Override
     public void swipePage(int position) {
         adapterTabDays.setSelection(position);
-        Preferences.getInstance().setSelectedPositionTabDays(position);
     }
 
     @Override
@@ -204,14 +186,6 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         }
     }
 
-    public void evenWeekFab() {
-        onCreateDialogCopyEvenWeek().show();
-    }
-
-    public void unevenWeekFab() {
-        onCreateDialogCopyUnevenWeek().show();
-    }
-
 
     @Override
     public void onClick(View v) {
@@ -227,42 +201,6 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
                 presenter.onButtonClicked(R.id.uneven_weekFab);
                 break;
         }
-    }
-
-
-    private Dialog onCreateDialogCopyUnevenWeek() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
-            for (int idWeek = 0; idWeek < 17; idWeek += 2) {
-                lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
-                lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
-
-                for (int idRowWeek = 0; idRowWeek < 36; idRowWeek++) {
-                    lessonListWeek.get(idRowWeek).setData(lessonListWeekCurrent.get(idRowWeek).getSubject(), lessonListWeekCurrent.get(idRowWeek).getAudience(),
-                            lessonListWeekCurrent.get(idRowWeek).getEducator(), lessonListWeekCurrent.get(idRowWeek).getTypeLesson());
-                    LessonDao.getInstance().updateItemByID(lessonListWeek.get(idRowWeek));
-                }
-            }
-        }).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Скопировать неделю в нечетные недели?");
-        return builder.create();
-    }
-
-
-    private Dialog onCreateDialogCopyEvenWeek() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
-            for (int idWeek = 1; idWeek < 17; idWeek += 2) {
-                lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
-                lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
-
-                for (int idRowWeek = 0; idRowWeek < 36; idRowWeek++) {
-                    lessonListWeek.get(idRowWeek).setData(lessonListWeekCurrent.get(idRowWeek).getSubject(), lessonListWeekCurrent.get(idRowWeek).getAudience(),
-                            lessonListWeekCurrent.get(idRowWeek).getEducator(), lessonListWeekCurrent.get(idRowWeek).getTypeLesson());
-                    LessonDao.getInstance().updateItemByID(lessonListWeek.get(idRowWeek));
-                }
-            }
-        }).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Скопировать неделю в четные недели?");
-        return builder.create();
     }
 
 

@@ -27,7 +27,7 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
 
     public TabDaysAdapter(SimpleItemClickListener simpleItemClickListener) {
         this.callback = simpleItemClickListener;
-        updateData(Preferences.getInstance().getSelectedWeekEditSchedule());
+        updateData(Preferences.getInstance().getSelectedWeekSchedule());
     }
 
     public void updateData(int selectedPos) {

@@ -23,7 +23,6 @@ import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.schedule.TabDaysAdapter;
 import com.example.misha.myapplication.module.schedule.edit.EditScheduleFragment;
-import com.example.misha.myapplication.util.DataUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -50,8 +49,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
         getContext().getToolbar().addView(spinner);
         getContext().setCurrentTitle(null);
         presenter.selectDefaultWeek();
-        Preferences.getInstance().setSelectedWeekEditSchedule((int) DataUtil.getCurrWeek());
-        presenter.init();
+
     }
 
     @Override
@@ -83,7 +81,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                presenter.onPageSwiped(position);
+            presenter.onPageSwiped(position);
             }
         });
         viewPager.setAdapter(pagerAdapterTabDays);
@@ -98,6 +96,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        presenter.init();
     }
 
     @Override
@@ -106,12 +105,11 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
         adapterTabDays.updateData(position);
         adapterTabDays.setSelection(viewPager.getCurrentItem());
         dayTabs.setAdapter(adapterTabDays);
-        Preferences.getInstance().setSelectedWeekEditSchedule(position);
     }
 
     @Override
     public void openEditor() {
-        getContext().replaceFragment(new EditScheduleFragment());
+       getContext().replaceFragment(new EditScheduleFragment());
     }
 
     @Override
@@ -128,13 +126,11 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
     @Override
     public void swipePage(int position) {
         adapterTabDays.setSelection(position);
-        Preferences.getInstance().setSelectedPositionTabDays(position);
     }
 
     @Override
     public void selectPage(int position) {
         viewPager.setCurrentItem(position);
-        Preferences.getInstance().setSelectedPositionTabDays(position);
     }
 
     @NonNull

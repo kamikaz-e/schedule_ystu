@@ -89,13 +89,13 @@ public class Repository implements RepositoryManager {
     }
 
     @Override
-    public void setSelectedWeekEditSchedule(int position) {
-        preferencesInterface.setSelectedWeekEditSchedule(position);
+    public void setSelectedWeekSchedule(int position) {
+        preferencesInterface.setSelectedWeekSchedule(position);
     }
 
     @Override
-    public int getSelectedWeekEditSchedule() {
-        return preferencesInterface.getSelectedWeekEditSchedule();
+    public int getSelectedWeekSchedule() {
+        return preferencesInterface.getSelectedWeekSchedule();
     }
 
     @Override

@@ -10,5 +10,5 @@ public interface EditSchedulePresenterInterface {
 
     void onPageSelected(int position);
 
-    void selectDefaultWeek();
+
 }

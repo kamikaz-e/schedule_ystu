@@ -14,9 +14,9 @@ public interface PreferencesInterface {
 
     void setCallsOpened(boolean state);
 
-    void setSelectedWeekEditSchedule(int position);
+    void setSelectedWeekSchedule(int position);
 
-    int getSelectedWeekEditSchedule();
+    int getSelectedWeekSchedule();
 
     void setSelectedPositionTabDays(int position);
 

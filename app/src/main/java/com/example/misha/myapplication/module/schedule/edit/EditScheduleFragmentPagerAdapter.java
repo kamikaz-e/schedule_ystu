@@ -17,7 +17,7 @@ public class EditScheduleFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public EditScheduleFragmentPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
-        int selectedWeek = Preferences.getInstance().getSelectedWeekEditSchedule();
+        int selectedWeek = Preferences.getInstance().getSelectedWeekSchedule();
         for (int day = 0; day < 6; day++) {
             fragments.add(EditSchedulePageFragment.newInstance(selectedWeek, day));
         }
