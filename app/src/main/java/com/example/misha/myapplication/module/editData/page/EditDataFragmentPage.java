@@ -66,9 +66,9 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
     @Override
     public View onCreateView(@NotNull final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_subject, container, false);
-        inputItem = view.findViewById(R.id.input_subject);
-        listViewItems = view.findViewById(R.id.list_subjects);
+        View view = inflater.inflate(R.layout.fragment_edit_data, container, false);
+        inputItem = view.findViewById(R.id.input_text);
+        listViewItems = view.findViewById(R.id.list_text);
         listViewItems.setOnItemClickListener((parent, itemClicked, position, id) -> presenter.onClearClick(position));
         inputItem.setOnEditorActionListener(this);
         return view;
