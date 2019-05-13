@@ -48,7 +48,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
         spinner.setOnItemSelectedListener(this);
         getContext().getToolbar().addView(spinner);
         getContext().setCurrentTitle(null);
-        presenter.selectDefaultWeek();
+        presenter.init();
 
     }
 
@@ -96,7 +96,6 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter.init();
     }
 
     @Override
