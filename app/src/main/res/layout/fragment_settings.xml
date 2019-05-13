@@ -16,10 +16,13 @@
 
         <ImageView
             android:id="@+id/image_currentWeek"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
+            android:layout_width="33sp"
+            android:layout_height="35sp"
             android:layout_margin="@dimen/spacing_medium"
-            app:srcCompat="@drawable/ic_week" />
+            android:paddingStart="@dimen/spacing_small"
+            android:paddingTop="@dimen/spacing_small"
+            app:srcCompat="@drawable/ic_search_black"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/text_currentWeek"
@@ -59,7 +62,9 @@
             android:id="@+id/image_import"
             android:layout_width="40sp"
             android:layout_height="40sp"
-            android:layout_margin="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:layout_marginLeft="@dimen/spacing_medium"
             app:srcCompat="@drawable/ic_import" />
 
         <TextView
