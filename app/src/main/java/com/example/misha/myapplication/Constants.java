@@ -14,6 +14,8 @@ public final class Constants {
 
     public static final String POSITION = "POSITION";
 
+    public static final String FRAGMENT_EDIT_DATA = "FRAGMENT_EDIT_DATA";
+
 
     private Constants() {
     }

@@ -101,7 +101,7 @@
     <string name="dialog_button_add">Добавить</string>
     <string name="dialog_button_close">Закрыть</string>
     <string name="audience_edittext">Аудитория</string>
-    <string name="data_start">Дата начала семестра</string>
+    <string name="search_free_audience">Поиск свободной аудитории</string>
     <string name="educator_edittext">Преподаватель</string>
     <string name="typelesson_edittext">Тип занятия</string>
     <string name="subject_edittext">Предмет</string>

@@ -31,7 +31,6 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
     private TabLayout tabLayout;
     private EditDataFragmentPagerAdapter viewPagerAdapter;
     private EditDataPresenter presenter;
-
     @Override
     public void onResume() {
         super.onResume();

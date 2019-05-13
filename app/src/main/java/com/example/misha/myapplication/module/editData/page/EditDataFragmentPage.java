@@ -2,6 +2,7 @@ package com.example.misha.myapplication.module.editData.page;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -25,6 +26,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import static com.example.misha.myapplication.Constants.FRAGMENT_EDIT_DATA;
+import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_AUDIENCES;
+import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_EDUCATORS;
+import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_SUBJECTS;
+import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_TYPELESSONS;
+
 
 public class EditDataFragmentPage extends BaseMainFragment implements EditDataFragmentPageView, TextView.OnEditorActionListener {
 
@@ -34,10 +41,10 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
     private ListView listViewItems;
     public ArrayAdapter<SimpleItem> adapter;
     private EditDataPagePresenter presenter;
-
+    String currentFragment;
     public static EditDataFragmentPage newInstance(String currentFragment) {
         Bundle args = new Bundle();
-        args.putString("sss", currentFragment);
+        args.putString(FRAGMENT_EDIT_DATA, currentFragment);
         EditDataFragmentPage fragment = new EditDataFragmentPage();
         fragment.setArguments(args);
         return fragment;
@@ -46,7 +53,7 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String currentFragment = getArguments().getString("sss");
+        currentFragment = getArguments().getString(FRAGMENT_EDIT_DATA);
         presenter = new EditDataPagePresenter(currentFragment);
     }
 
@@ -69,10 +76,9 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
 
     public Dialog onCreateDialogDeleteItem(int position, AbsDao absDao) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
-            presenter.deleteItem(position);
-        }).setNegativeButton("Отмена", (dialog, id) ->
-                dialog.cancel()).setTitle("Удалить предмет «" + presenter.getNameAt(position) + "»?");
+        builder.setCancelable(false)
+                .setPositiveButton("Подтвердить", (dialog, id) -> presenter.deleteItem(position))
+                .setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Удалить «" + presenter.getNameAt(position) + "»?");
         return builder.create();
     }
 
@@ -94,7 +100,10 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
             String itemName = inputItem.getText().toString();
             itemName = itemName.trim().replaceAll(" +", " ");
             if (TextUtils.isEmpty(itemName) || itemName.equals(" ")) {
-                inputItem.setError("Введите предмет");
+                if (currentFragment.equals(FRAGMENT_SUBJECTS)) {inputItem.setError("Введите предмет");}
+                if (currentFragment.equals(FRAGMENT_AUDIENCES)) {inputItem.setError("Введите аудиторию");}
+                if (currentFragment.equals(FRAGMENT_EDUCATORS)) {inputItem.setError("Введите преподавателя");}
+                if (currentFragment.equals(FRAGMENT_TYPELESSONS)) {inputItem.setError("Введите тип предмета");}
                 return true;
             }
             presenter.insert(itemName);

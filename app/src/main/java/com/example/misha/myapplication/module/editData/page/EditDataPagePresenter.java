@@ -71,14 +71,14 @@ public class EditDataPagePresenter extends BaseMainPresenter<EditDataFragmentPag
         item.setName(itemName);
         absDao.insertItem(item);
         listItems.add(item);
-        getView().updateView(listItems);
+        init();
     }
 
     @Override
     public void deleteItem(int position) {
         absDao.deleteItemById(Long.parseLong(listItems.get(position).getId()));
         listItems.remove(position);
-        getView().updateView(listItems);
+        init();
     }
 
     @Override

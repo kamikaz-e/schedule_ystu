@@ -30,9 +30,6 @@ import java.util.Calendar;
 
 public class SettingsFragment extends BaseMainFragment implements SettingsFragmentView, View.OnClickListener {
 
-
-    private String nameGroup;
-    public ArrayAdapter<String> adapter;
     private SettingsPresenter presenter;
 
     @Override
