@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.data.database.entity;
+package com.example.misha.myapplication.entity;
 
 import android.database.Cursor;
 import android.os.Parcel;
@@ -9,45 +9,46 @@ import com.google.gson.annotations.SerializedName;
 
 
 //Todo прочитать про сериализацию и Parcelable
-public class Calls implements Parcelable, SimpleItem {
+public class Subject implements Parcelable, SimpleItem {
 
     @Expose
     @SerializedName("id")
     private String id;
 
     @Expose
-    @SerializedName("calls")
+    @SerializedName("subject")
     private String name;
 
-    public Calls(String id, String name) {
+    public Subject(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
 
-    public Calls(Cursor cursor) {
+    public Subject(Cursor cursor) {
         this.id = cursor.getString(0);
         this.name = cursor.getString(1);
     }
 
-    protected Calls(Parcel in) {
+    protected Subject(Parcel in) {
         id = in.readString();
         name = in.readString();
     }
 
-    public static final Creator<Calls> CREATOR = new Creator<Calls>() {
+    public static final Creator<Subject> CREATOR = new Creator<Subject>() {
         @Override
-        public Calls createFromParcel(Parcel in) {
-            return new Calls(in);
+        public Subject createFromParcel(Parcel in) {
+            return new Subject(in);
         }
 
         @Override
-        public Calls[] newArray(int size) {
-            return new Calls[size];
+        public Subject[] newArray(int size) {
+            return new Subject[size];
         }
     };
 
-    public Calls() {
+    public Subject() {
+
     }
 
     @Override
@@ -55,19 +56,19 @@ public class Calls implements Parcelable, SimpleItem {
         return name;
     }
 
-
     public String getName() {
         return name;
     }
-
 
     public String getId() {
         return id;
     }
 
+
     public void setId(String id) {
         this.id = id;
     }
+
 
     public void setName(String name) {
         this.name = name;

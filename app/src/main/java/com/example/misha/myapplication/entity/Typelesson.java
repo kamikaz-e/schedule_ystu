@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.data.database.entity;
+package com.example.misha.myapplication.entity;
 
 import android.database.Cursor;
 import android.os.Parcel;
@@ -7,45 +7,47 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Audience implements Parcelable, SimpleItem {
+
+//Todo прочитать про сериализацию и Parcelable
+public class Typelesson implements Parcelable, SimpleItem {
 
     @Expose
     @SerializedName("id")
     private String id;
 
     @Expose
-    @SerializedName("audience")
+    @SerializedName("typelessons")
     private String name;
 
-    public Audience(String id, String name) {
+    public Typelesson(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Audience(Cursor cursor) {
+
+    public Typelesson(Cursor cursor) {
         this.id = cursor.getString(0);
         this.name = cursor.getString(1);
     }
 
-
-    protected Audience(Parcel in) {
+    protected Typelesson(Parcel in) {
         id = in.readString();
         name = in.readString();
     }
 
-    public static final Creator<Audience> CREATOR = new Creator<Audience>() {
+    public static final Creator<Typelesson> CREATOR = new Creator<Typelesson>() {
         @Override
-        public Audience createFromParcel(Parcel in) {
-            return new Audience(in);
+        public Typelesson createFromParcel(Parcel in) {
+            return new Typelesson(in);
         }
 
         @Override
-        public Audience[] newArray(int size) {
-            return new Audience[size];
+        public Typelesson[] newArray(int size) {
+            return new Typelesson[size];
         }
     };
 
-    public Audience() {
+    public Typelesson() {
 
     }
 
@@ -54,9 +56,11 @@ public class Audience implements Parcelable, SimpleItem {
         return name;
     }
 
+    @Override
     public String getName() {
         return name;
     }
+
 
     public String getId() {
         return id;
@@ -69,6 +73,7 @@ public class Audience implements Parcelable, SimpleItem {
     public void setName(String name) {
         this.name = name;
     }
+
 
     @Override
     public int describeContents() {

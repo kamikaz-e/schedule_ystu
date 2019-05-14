@@ -1,7 +1,7 @@
 package com.example.misha.myapplication.data.network;
 
-import com.example.misha.myapplication.data.database.entity.Audience;
-import com.example.misha.myapplication.data.database.entity.Subject;
+import com.example.misha.myapplication.entity.Audience;
+import com.example.misha.myapplication.entity.Subject;
 import com.example.misha.myapplication.data.network.request.ScheduleRequest;
 
 import java.util.ArrayList;

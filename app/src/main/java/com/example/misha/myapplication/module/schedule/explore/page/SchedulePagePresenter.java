@@ -1,7 +1,7 @@
 package com.example.misha.myapplication.module.schedule.explore.page;
 
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
-import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.entity.Lesson;
 
 import java.util.List;
 

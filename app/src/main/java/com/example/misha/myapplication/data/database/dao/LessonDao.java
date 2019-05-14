@@ -6,7 +6,7 @@ import android.net.Uri;
 
 import com.example.misha.myapplication.data.database.AbsDao;
 import com.example.misha.myapplication.data.database.AppContentProvider;
-import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.entity.Lesson;
 
 import java.util.ArrayList;
 

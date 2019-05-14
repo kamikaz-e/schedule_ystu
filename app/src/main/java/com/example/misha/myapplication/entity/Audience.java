@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.data.database.entity;
+package com.example.misha.myapplication.entity;
 
 import android.database.Cursor;
 import android.os.Parcel;
@@ -7,44 +7,45 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Educator implements Parcelable, SimpleItem {
+public class Audience implements Parcelable, SimpleItem {
 
     @Expose
     @SerializedName("id")
     private String id;
 
     @Expose
-    @SerializedName("educators")
+    @SerializedName("audience")
     private String name;
 
-    public Educator(String id, String name) {
+    public Audience(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Educator(Cursor cursor) {
+    public Audience(Cursor cursor) {
         this.id = cursor.getString(0);
         this.name = cursor.getString(1);
     }
 
-    protected Educator(Parcel in) {
+
+    protected Audience(Parcel in) {
         id = in.readString();
         name = in.readString();
     }
 
-    public static final Creator<Educator> CREATOR = new Creator<Educator>() {
+    public static final Creator<Audience> CREATOR = new Creator<Audience>() {
         @Override
-        public Educator createFromParcel(Parcel in) {
-            return new Educator(in);
+        public Audience createFromParcel(Parcel in) {
+            return new Audience(in);
         }
 
         @Override
-        public Educator[] newArray(int size) {
-            return new Educator[size];
+        public Audience[] newArray(int size) {
+            return new Audience[size];
         }
     };
 
-    public Educator() {
+    public Audience() {
 
     }
 
@@ -53,12 +54,9 @@ public class Educator implements Parcelable, SimpleItem {
         return name;
     }
 
-
     public String getName() {
         return name;
     }
-
-
 
     public String getId() {
         return id;
@@ -82,5 +80,4 @@ public class Educator implements Parcelable, SimpleItem {
         dest.writeString(id);
         dest.writeString(name);
     }
-
 }

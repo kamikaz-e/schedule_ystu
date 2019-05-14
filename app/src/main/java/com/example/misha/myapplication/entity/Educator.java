@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.data.database.entity;
+package com.example.misha.myapplication.entity;
 
 import android.database.Cursor;
 import android.os.Parcel;
@@ -7,47 +7,44 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
-//Todo прочитать про сериализацию и Parcelable
-public class Typelesson implements Parcelable, SimpleItem {
+public class Educator implements Parcelable, SimpleItem {
 
     @Expose
     @SerializedName("id")
     private String id;
 
     @Expose
-    @SerializedName("typelessons")
+    @SerializedName("educators")
     private String name;
 
-    public Typelesson(String id, String name) {
+    public Educator(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-
-    public Typelesson(Cursor cursor) {
+    public Educator(Cursor cursor) {
         this.id = cursor.getString(0);
         this.name = cursor.getString(1);
     }
 
-    protected Typelesson(Parcel in) {
+    protected Educator(Parcel in) {
         id = in.readString();
         name = in.readString();
     }
 
-    public static final Creator<Typelesson> CREATOR = new Creator<Typelesson>() {
+    public static final Creator<Educator> CREATOR = new Creator<Educator>() {
         @Override
-        public Typelesson createFromParcel(Parcel in) {
-            return new Typelesson(in);
+        public Educator createFromParcel(Parcel in) {
+            return new Educator(in);
         }
 
         @Override
-        public Typelesson[] newArray(int size) {
-            return new Typelesson[size];
+        public Educator[] newArray(int size) {
+            return new Educator[size];
         }
     };
 
-    public Typelesson() {
+    public Educator() {
 
     }
 
@@ -56,10 +53,11 @@ public class Typelesson implements Parcelable, SimpleItem {
         return name;
     }
 
-    @Override
+
     public String getName() {
         return name;
     }
+
 
 
     public String getId() {
@@ -74,7 +72,6 @@ public class Typelesson implements Parcelable, SimpleItem {
         this.name = name;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -85,4 +82,5 @@ public class Typelesson implements Parcelable, SimpleItem {
         dest.writeString(id);
         dest.writeString(name);
     }
+
 }

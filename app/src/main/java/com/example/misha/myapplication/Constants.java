@@ -12,9 +12,17 @@ public final class Constants {
 
     public static final String ITEMS_LIST = "ITEMS_LIST";
 
-    public static final String POSITION = "POSITION";
-
     public static final String FRAGMENT_EDIT_DATA = "FRAGMENT_EDIT_DATA";
+
+    public static final String STATE_EDIT_DATA = "STATE_EDIT_DATA";
+
+    public static final int FRAGMENT_SUBJECTS = 4440;
+
+    public static final int FRAGMENT_AUDIENCES = 4441;
+
+    public static final int FRAGMENT_EDUCATORS = 4442;
+
+    public static final int FRAGMENT_TYPELESSONS = 4443;
 
 
     private Constants() {

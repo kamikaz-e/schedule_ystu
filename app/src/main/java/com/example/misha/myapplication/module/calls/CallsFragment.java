@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.data.database.entity.Calls;
+import com.example.misha.myapplication.entity.Calls;
 
 import org.jetbrains.annotations.NotNull;
 

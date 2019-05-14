@@ -1,6 +1,6 @@
 package com.example.misha.myapplication.module.schedule.edit.page;
 
-import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.entity.Lesson;
 
 import java.util.ArrayList;
 

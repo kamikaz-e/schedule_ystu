@@ -1,7 +1,7 @@
 package com.example.misha.myapplication.data.database;
 
 import com.example.misha.myapplication.data.database.dao.LessonDao;
-import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.entity.Lesson;
 
 import java.util.List;
 

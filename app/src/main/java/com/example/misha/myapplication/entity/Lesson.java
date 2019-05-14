@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.data.database.entity;
+package com.example.misha.myapplication.entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

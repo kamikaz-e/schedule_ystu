@@ -2,8 +2,8 @@ package com.example.misha.myapplication.module.editData.page;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -17,21 +17,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.ScheduleApp;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.database.AbsDao;
-import com.example.misha.myapplication.data.database.entity.SimpleItem;
+import com.example.misha.myapplication.entity.EditDataModel;
+import com.example.misha.myapplication.entity.SimpleItem;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import static com.example.misha.myapplication.Constants.FRAGMENT_AUDIENCES;
 import static com.example.misha.myapplication.Constants.FRAGMENT_EDIT_DATA;
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_AUDIENCES;
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_EDUCATORS;
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_SUBJECTS;
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_TYPELESSONS;
-
+import static com.example.misha.myapplication.Constants.FRAGMENT_EDUCATORS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_SUBJECTS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
 
 public class EditDataFragmentPage extends BaseMainFragment implements EditDataFragmentPageView, TextView.OnEditorActionListener {
 
@@ -39,12 +40,12 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
 
     private EditText inputItem;
     private ListView listViewItems;
-    public ArrayAdapter<SimpleItem> adapter;
     private EditDataPagePresenter presenter;
-    String currentFragment;
-    public static EditDataFragmentPage newInstance(String currentFragment) {
+
+
+    public static EditDataFragmentPage newInstance(EditDataModel editDataModel) {
         Bundle args = new Bundle();
-        args.putString(FRAGMENT_EDIT_DATA, currentFragment);
+        args.putParcelable(FRAGMENT_EDIT_DATA, editDataModel);
         EditDataFragmentPage fragment = new EditDataFragmentPage();
         fragment.setArguments(args);
         return fragment;
@@ -53,8 +54,8 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        currentFragment = getArguments().getString(FRAGMENT_EDIT_DATA);
-        presenter = new EditDataPagePresenter(currentFragment);
+        EditDataModel editDataModel = getArguments().getParcelable(FRAGMENT_EDIT_DATA);
+        presenter = new EditDataPagePresenter(editDataModel);
     }
 
     @Override
@@ -66,11 +67,31 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
     @Override
     public View onCreateView(@NotNull final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_data, container, false);
-        inputItem = view.findViewById(R.id.input_text);
-        listViewItems = view.findViewById(R.id.list_text);
+        View view = inflater.inflate(R.layout.fragment_page_edit_data, container, false);
+        inputItem = view.findViewById(R.id.input_subject);
+        listViewItems = view.findViewById(R.id.list_subjects);
         listViewItems.setOnItemClickListener((parent, itemClicked, position, id) -> presenter.onClearClick(position));
         inputItem.setOnEditorActionListener(this);
+        if (currentFragment == FRAGMENT_SUBJECTS) {
+            inputItem.setHint("Предмет");
+            inputItem.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+            inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(60)});
+        }
+        if (currentFragment == FRAGMENT_AUDIENCES) {
+            inputItem.setHint("Аудитория");
+            inputItem.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+            inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(14)});
+        }
+        if (currentFragment == FRAGMENT_EDUCATORS) {
+            inputItem.setHint("Преподаватель");
+            inputItem.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+            inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(60)});
+        }
+        if (currentFragment == FRAGMENT_TYPELESSONS) {
+            inputItem.setHint("Тип занятия");
+            inputItem.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+            inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
+        }
         return view;
     }
 
@@ -78,7 +99,7 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false)
                 .setPositiveButton("Подтвердить", (dialog, id) -> presenter.deleteItem(position))
-                .setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Удалить «" + presenter.getNameAt(position) + "»?");
+                .setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle(ScheduleApp.getStr(R.string.delete_object, presenter.getNameAt(position)));
         return builder.create();
     }
 
@@ -88,15 +109,22 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
     }
 
     public void updateView(ArrayList<SimpleItem> listItems) {
-        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listItems);
+        getActivity().getResources().getString()
+        ArrayAdapter<SimpleItem> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listViewItems.setAdapter(adapter);
+    }
+
+    @Override
+    public void setupWidgets(EditDataModel editDataModel) {
+        inputItem.setHint(editDataModel.getHint());
+        inputItem.setInputType(editDataModel.getInputType());
+        inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(editDataModel.getMaxLenth())});
     }
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if ((actionId == EditorInfo.IME_ACTION_DONE) ||
                 ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
-            inputItem.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
             String itemName = inputItem.getText().toString();
             itemName = itemName.trim().replaceAll(" +", " ");
             if (TextUtils.isEmpty(itemName) || itemName.equals(" ")) {

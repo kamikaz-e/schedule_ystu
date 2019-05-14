@@ -13,12 +13,12 @@ import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;
 import com.example.misha.myapplication.data.database.dao.SubjectDao;
 import com.example.misha.myapplication.data.database.dao.TypelessonDao;
-import com.example.misha.myapplication.data.database.entity.Audience;
-import com.example.misha.myapplication.data.database.entity.Calls;
-import com.example.misha.myapplication.data.database.entity.Educator;
-import com.example.misha.myapplication.data.database.entity.Lesson;
-import com.example.misha.myapplication.data.database.entity.Subject;
-import com.example.misha.myapplication.data.database.entity.Typelesson;
+import com.example.misha.myapplication.entity.Audience;
+import com.example.misha.myapplication.entity.Calls;
+import com.example.misha.myapplication.entity.Educator;
+import com.example.misha.myapplication.entity.Lesson;
+import com.example.misha.myapplication.entity.Subject;
+import com.example.misha.myapplication.entity.Typelesson;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spacing_medium"
-    card_view:cardCornerRadius="@dimen/spacing_small"
-    card_view:elevation="@dimen/spacing_small">
+    app:cardCornerRadius="@dimen/spacing_small"
+    app:elevation="@dimen/spacing_small">
 
 
     <LinearLayout
@@ -53,6 +53,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/subject_hint"
                 android:layout_width="match_parent"
+                app:hintAnimationEnabled="false"
                 android:layout_height="wrap_content"
                 tools:hint="Предмет">
 
@@ -87,6 +88,7 @@
                     android:id="@+id/typelesson_hint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:hintAnimationEnabled="false"
                     tools:hint="Тип занятия">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -112,13 +114,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="15sp"
+                android:layout_marginStart="@dimen/spacing_normal"
                 android:layout_toEndOf="@+id/typelesson_relLay">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/audience_hint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:hintAnimationEnabled="false"
                     tools:hint="Аудитория">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -148,6 +151,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/educator_hint"
                 android:layout_width="match_parent"
+                app:hintAnimationEnabled="false"
                 android:layout_height="wrap_content"
                 tools:hint="Преподаватель">
 

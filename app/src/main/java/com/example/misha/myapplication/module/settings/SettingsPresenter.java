@@ -9,7 +9,7 @@ import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;
 import com.example.misha.myapplication.data.database.dao.SubjectDao;
-import com.example.misha.myapplication.data.database.entity.Subject;
+import com.example.misha.myapplication.entity.Subject;
 import com.example.misha.myapplication.data.network.request.ScheduleRequest;
 import com.example.misha.myapplication.data.preferences.Preferences;
 

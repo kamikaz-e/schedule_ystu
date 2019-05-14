@@ -8,7 +8,7 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseActivity;
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
-import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.entity.Lesson;
 import com.example.misha.myapplication.data.preferences.Preferences;
 
 import java.util.ArrayList;

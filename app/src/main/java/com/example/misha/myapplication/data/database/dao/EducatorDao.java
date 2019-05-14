@@ -6,7 +6,7 @@ import android.net.Uri;
 
 import com.example.misha.myapplication.data.database.AbsDao;
 import com.example.misha.myapplication.data.database.AppContentProvider;
-import com.example.misha.myapplication.data.database.entity.Educator;
+import com.example.misha.myapplication.entity.Educator;
 
 public class EducatorDao extends AbsDao<Educator> {
 

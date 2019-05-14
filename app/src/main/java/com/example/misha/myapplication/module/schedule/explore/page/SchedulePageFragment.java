@@ -12,7 +12,7 @@ import com.example.misha.myapplication.Constants;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.data.database.entity.Lesson;
+import com.example.misha.myapplication.entity.Lesson;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -27,9 +27,9 @@ public class SchedulePageFragment extends BaseMainFragment implements SchedulePa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rvadapter = new ScheduleFragmentPagerAdapter();
         int day = getArguments().getInt(Constants.DAY);
         int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
+        rvadapter = new ScheduleFragmentPagerAdapter();
         presenter = new SchedulePagePresenter(day, positionWeek);
     }
 

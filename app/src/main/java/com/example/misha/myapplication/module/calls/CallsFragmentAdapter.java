@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.data.database.dao.CallDao;
-import com.example.misha.myapplication.data.database.entity.Calls;
+import com.example.misha.myapplication.entity.Calls;
 
 import org.jetbrains.annotations.NotNull;
 

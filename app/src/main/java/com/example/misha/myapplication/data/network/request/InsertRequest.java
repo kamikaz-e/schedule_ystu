@@ -1,6 +1,6 @@
 package com.example.misha.myapplication.data.network.request;
 
-import com.example.misha.myapplication.data.database.entity.Subject;
+import com.example.misha.myapplication.entity.Subject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

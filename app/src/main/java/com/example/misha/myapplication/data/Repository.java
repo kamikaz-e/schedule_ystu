@@ -2,9 +2,9 @@ package com.example.misha.myapplication.data;
 
 import com.example.misha.myapplication.data.database.DatabaseInterface;
 import com.example.misha.myapplication.data.database.DatabaseManager;
-import com.example.misha.myapplication.data.database.entity.Audience;
-import com.example.misha.myapplication.data.database.entity.Lesson;
-import com.example.misha.myapplication.data.database.entity.Subject;
+import com.example.misha.myapplication.entity.Audience;
+import com.example.misha.myapplication.entity.Lesson;
+import com.example.misha.myapplication.entity.Subject;
 import com.example.misha.myapplication.data.network.APIService;
 import com.example.misha.myapplication.data.network.RetrofitClient;
 import com.example.misha.myapplication.data.network.request.ScheduleRequest;

@@ -2,46 +2,24 @@ package com.example.misha.myapplication.module.editData.page;
 
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.database.AbsDao;
-import com.example.misha.myapplication.data.database.dao.AudienceDao;
-import com.example.misha.myapplication.data.database.dao.EducatorDao;
-import com.example.misha.myapplication.data.database.dao.SubjectDao;
-import com.example.misha.myapplication.data.database.dao.TypelessonDao;
-import com.example.misha.myapplication.data.database.entity.Audience;
-import com.example.misha.myapplication.data.database.entity.Educator;
-import com.example.misha.myapplication.data.database.entity.SimpleItem;
-import com.example.misha.myapplication.data.database.entity.Subject;
-import com.example.misha.myapplication.data.database.entity.Typelesson;
+import com.example.misha.myapplication.entity.EditDataModel;
+import com.example.misha.myapplication.entity.SimpleItem;
+import com.example.misha.myapplication.entity.Subject;
 
 import java.util.ArrayList;
 
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_AUDIENCES;
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_EDUCATORS;
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_SUBJECTS;
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_TYPELESSONS;
-
 public class EditDataPagePresenter extends BaseMainPresenter<EditDataFragmentPageView> implements EditDataPagePresenterInterface {
 
-    private String currentFragment;
+    private final EditDataModel editDataModel;
 
     private ArrayList<SimpleItem> listItems = new ArrayList<>();
 
     private AbsDao absDao;
 
 
-    public EditDataPagePresenter(String currentFragment) {
-        this.currentFragment = currentFragment;
-        if (currentFragment.equals(FRAGMENT_SUBJECTS)) {
-            absDao = SubjectDao.getInstance();
-        }
-        if (currentFragment.equals(FRAGMENT_AUDIENCES)) {
-            absDao = AudienceDao.getInstance();
-        }
-        if (currentFragment.equals(FRAGMENT_EDUCATORS)) {
-            absDao = EducatorDao.getInstance();
-        }
-        if (currentFragment.equals(FRAGMENT_TYPELESSONS)) {
-            absDao = TypelessonDao.getInstance();
-        }
+    public EditDataPagePresenter(EditDataModel editDataModel) {
+        this.editDataModel = editDataModel;
+        absDao = editDataModel.getDao();
     }
 
     public void onClearClick(int position) {
@@ -51,24 +29,13 @@ public class EditDataPagePresenter extends BaseMainPresenter<EditDataFragmentPag
     @Override
     public void init() {
         listItems = absDao.getAllData();
+        getView().setupWidgets(editDataModel);
         getView().updateView(listItems);
     }
 
     @Override
     public void insert(String itemName) {
-        SimpleItem item = null;
-        if (currentFragment.equals(FRAGMENT_SUBJECTS)) {
-            item = new Subject();
-        }
-        if (currentFragment.equals(FRAGMENT_AUDIENCES)) {
-            item = new Audience();
-        }
-        if (currentFragment.equals(FRAGMENT_EDUCATORS)) {
-            item = new Educator();
-        }
-        if (currentFragment.equals(FRAGMENT_TYPELESSONS)) {
-            item = new Typelesson();
-        }
+        SimpleItem item = new Subject();
         item.setName(itemName);
         absDao.insertItem(item);
         listItems.add(item);

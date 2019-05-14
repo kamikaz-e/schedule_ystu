@@ -1,6 +1,6 @@
 package com.example.misha.myapplication.module.settings;
 
-import com.example.misha.myapplication.data.database.entity.Subject;
+import com.example.misha.myapplication.entity.Subject;
 
 import java.util.ArrayList;
 

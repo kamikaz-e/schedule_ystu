@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
-import com.example.misha.myapplication.data.database.entity.SimpleItem;
+import com.example.misha.myapplication.entity.SimpleItem;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,6 +35,11 @@ public class DialogFragmentListItemsAdapter extends RecyclerView.Adapter<DialogF
         return new ViewHolder(view);
     }
 
+    public void setLessonList(List<SimpleItem> lessonList) {
+        this.listItems = lessonList;
+    }
+
+
     @Override
     public void onBindViewHolder(@NotNull ViewHolder holder, final int position) {
         holder.onBindView(position);
@@ -56,8 +61,8 @@ public class DialogFragmentListItemsAdapter extends RecyclerView.Adapter<DialogF
         }
 
         private void onBindView(int position) {
-            SimpleItem aud = listItems.get(position);
-            item.setText(aud.getName());
+            SimpleItem item = listItems.get(position);
+            this.item.setText(item.getName());
 
         }
 

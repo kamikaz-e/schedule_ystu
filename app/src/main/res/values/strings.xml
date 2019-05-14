@@ -118,4 +118,6 @@
     <string name="menu_what_string">Что-то да будет</string>
     <string name="developer">Разработчик</string>
     <string name="settings">Настройки</string>
+
+    <string name="delete_object">Удалить «%1$s»?</string>
 </resources>
