@@ -2,14 +2,14 @@ package com.example.misha.myapplication.data;
 
 import com.example.misha.myapplication.data.database.DatabaseInterface;
 import com.example.misha.myapplication.data.database.DatabaseManager;
-import com.example.misha.myapplication.entity.Audience;
-import com.example.misha.myapplication.entity.Lesson;
-import com.example.misha.myapplication.entity.Subject;
 import com.example.misha.myapplication.data.network.APIService;
 import com.example.misha.myapplication.data.network.RetrofitClient;
 import com.example.misha.myapplication.data.network.request.ScheduleRequest;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.data.preferences.PreferencesInterface;
+import com.example.misha.myapplication.entity.Audience;
+import com.example.misha.myapplication.entity.Lesson;
+import com.example.misha.myapplication.entity.Subject;
 
 import java.util.ArrayList;
 import java.util.List;

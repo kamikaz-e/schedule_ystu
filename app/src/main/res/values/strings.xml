@@ -71,4 +71,6 @@
     <string name="delete_audience">Удалить аудиторию «%1$s»?</string>
     <string name="delete_educator">Удалить преподавателя «%1$s»?</string>
     <string name="delete_typelesson">Удалить тип предмета «%1$s»?</string>
+    <string name="ack">Подтвердить</string>
+    <string name="cancel">Отмена</string>
 </resources>

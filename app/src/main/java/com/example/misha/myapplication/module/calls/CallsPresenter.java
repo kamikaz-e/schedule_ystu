@@ -7,8 +7,8 @@ import android.text.format.DateUtils;
 import com.example.misha.myapplication.common.core.BaseActivity;
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.database.dao.CallDao;
-import com.example.misha.myapplication.entity.Calls;
 import com.example.misha.myapplication.data.preferences.Preferences;
+import com.example.misha.myapplication.entity.Calls;
 
 import java.util.ArrayList;
 import java.util.Calendar;

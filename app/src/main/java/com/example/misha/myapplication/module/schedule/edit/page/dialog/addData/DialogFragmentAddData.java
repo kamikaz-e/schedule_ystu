@@ -23,11 +23,9 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseAlertDialog;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.entity.EditDataModel;
-import com.example.misha.myapplication.module.editData.page.EditDataPagePresenter;
 
 import org.jetbrains.annotations.NotNull;
 
-import static com.example.misha.myapplication.Constants.FRAGMENT_CODE;
 import static com.example.misha.myapplication.Constants.FRAGMENT_EDIT_DATA;
 
 public class DialogFragmentAddData extends BaseAlertDialog implements TextView.OnEditorActionListener {

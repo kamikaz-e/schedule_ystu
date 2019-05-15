@@ -9,9 +9,9 @@ import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;
 import com.example.misha.myapplication.data.database.dao.SubjectDao;
-import com.example.misha.myapplication.entity.Subject;
 import com.example.misha.myapplication.data.network.request.ScheduleRequest;
 import com.example.misha.myapplication.data.preferences.Preferences;
+import com.example.misha.myapplication.entity.Subject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
     private Context context;
 
     public SettingsPresenter(BaseActivity context) {
-        this.context=context;
+        this.context = context;
     }
 
     @Override
@@ -79,6 +79,7 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
                 })
         );
     }
+
     public void getCurrentWeek() {
         Calendar calendar = Calendar.getInstance();
         final Calendar selectedDate = Calendar.getInstance();

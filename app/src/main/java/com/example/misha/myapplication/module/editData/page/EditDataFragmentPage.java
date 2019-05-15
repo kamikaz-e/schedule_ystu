@@ -76,18 +76,18 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
         EditDataModel editDataModel = getArguments().getParcelable(FRAGMENT_EDIT_DATA);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false)
-                .setPositiveButton("Подтвердить", (dialog, id) -> presenter.deleteItem(position))
-                .setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle(ScheduleApp.getStr(editDataModel.getTitle(), presenter.getNameAt(position)));
+                .setPositiveButton(R.string.ack, (dialog, id) -> presenter.deleteItem(position))
+                .setNegativeButton(R.string.cancel, (dialog, id) -> dialog.cancel()).setTitle(ScheduleApp.getStr(editDataModel.getTitle(), presenter.getNameAt(position)));
         return builder.create();
     }
 
+    @NotNull
     @Override
     protected BasePresenter getSchedulePagePresenter() {
         return presenter;
     }
 
     public void updateView(ArrayList<SimpleItem> listItems) {
-        //  getActivity().getResources().getString();
         ArrayAdapter<SimpleItem> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listItems);
         listViewItems.setAdapter(adapter);
     }

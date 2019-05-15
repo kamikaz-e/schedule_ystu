@@ -17,13 +17,13 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
+import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.entity.Audience;
 import com.example.misha.myapplication.entity.Educator;
 import com.example.misha.myapplication.entity.Lesson;
 import com.example.misha.myapplication.entity.SimpleItem;
 import com.example.misha.myapplication.entity.Subject;
 import com.example.misha.myapplication.entity.Typelesson;
-import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.schedule.edit.page.dialog.DialogFragmentListItems;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -136,7 +136,7 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
 
     @Override
     public void onActivityResult(int requestCode, int resultOk, Intent data) {
-            ArrayList<Lesson> lessonList = presenter.getLessonList();
+        ArrayList<Lesson> lessonList = presenter.getLessonList();
 
         if (requestCode == FRAGMENT_SUBJECTS) {
             int lessonPosition = data.getIntExtra(POSITION, 0);

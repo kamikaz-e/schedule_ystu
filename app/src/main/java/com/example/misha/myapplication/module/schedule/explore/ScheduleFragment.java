@@ -20,7 +20,6 @@ import com.example.misha.myapplication.CustomSpinnerAdapter;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.schedule.TabDaysAdapter;
 import com.example.misha.myapplication.module.schedule.edit.EditScheduleFragment;
 
@@ -81,7 +80,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-            presenter.onPageSwiped(position);
+                presenter.onPageSwiped(position);
             }
         });
         viewPager.setAdapter(pagerAdapterTabDays);
@@ -108,7 +107,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
 
     @Override
     public void openEditor() {
-       getContext().replaceFragment(new EditScheduleFragment());
+        getContext().replaceFragment(new EditScheduleFragment());
     }
 
     @Override

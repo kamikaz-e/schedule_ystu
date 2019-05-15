@@ -8,8 +8,8 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseActivity;
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
-import com.example.misha.myapplication.entity.Lesson;
 import com.example.misha.myapplication.data.preferences.Preferences;
+import com.example.misha.myapplication.entity.Lesson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
     private Context context;
 
     public EditSchedulePresenter(BaseActivity context) {
-    this.context=context;
+        this.context = context;
     }
 
     @Override
@@ -45,7 +45,6 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
     public void unevenWeekFab() {
         onCreateDialogCopyUnevenWeek().show();
     }
-
 
 
     @Override
@@ -108,8 +107,6 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
     public void onPageSelected(int position) {
         getView().selectPage(position);
     }
-
-
 
 
 }

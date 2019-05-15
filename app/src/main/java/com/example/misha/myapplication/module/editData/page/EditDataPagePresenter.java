@@ -43,15 +43,19 @@ public class EditDataPagePresenter extends BaseMainPresenter<EditDataFragmentPag
 
     @Override
     public void insert(String itemName, int type) {
-        SimpleItem item=null;
-        if (type==FRAGMENT_SUBJECTS){
-        item = new Subject();}
-        if (type==FRAGMENT_AUDIENCES){
-            item = new Audience();}
-        if (type==FRAGMENT_EDUCATORS){
-            item = new Educator();}
-        if (type==FRAGMENT_TYPELESSONS){
-            item = new Typelesson();}
+        SimpleItem item = null;
+        if (type == FRAGMENT_SUBJECTS) {
+            item = new Subject();
+        }
+        if (type == FRAGMENT_AUDIENCES) {
+            item = new Audience();
+        }
+        if (type == FRAGMENT_EDUCATORS) {
+            item = new Educator();
+        }
+        if (type == FRAGMENT_TYPELESSONS) {
+            item = new Typelesson();
+        }
         item.setName(itemName);
         absDao.insertItem(item);
         listItems.add(item);

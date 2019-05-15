@@ -59,7 +59,6 @@ public class Educator implements Parcelable, SimpleItem {
     }
 
 
-
     public String getId() {
         return id;
     }

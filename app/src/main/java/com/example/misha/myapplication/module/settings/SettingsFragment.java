@@ -2,7 +2,6 @@ package com.example.misha.myapplication.module.settings;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
@@ -19,13 +17,8 @@ import androidx.annotation.NonNull;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.data.preferences.Preferences;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 
 
 public class SettingsFragment extends BaseMainFragment implements SettingsFragmentView, View.OnClickListener {
@@ -72,7 +65,8 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         final EditText name_db = view.findViewById(R.id.name_schedule);
         builder.setCancelable(false).
                 setPositiveButton("Загрузить", (dialog, id) -> presenter.loadSubjects(name_db.getText().toString())).
-                setNegativeButton("Отмена", (dialog, id) -> {});
+                setNegativeButton("Отмена", (dialog, id) -> {
+                });
         return builder.create();
     }
 
@@ -81,12 +75,13 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setPositiveButton("Профиль Вконтакте", (dialog, id) -> {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/mikhailvolkov1"));
-            startActivity(browserIntent); }).
+            startActivity(browserIntent);
+        }).
                 setNeutralButton("Отмена", (dialog, id) -> dialog.cancel()).
                 setNegativeButton("Электронная почта", (dialog, id) -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:mikhailvolkov2014-2014@ya.ru"));
-            startActivity(browserIntent);
-        }).setTitle("Обратная связь с разработчиком");
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:mikhailvolkov2014-2014@ya.ru"));
+                    startActivity(browserIntent);
+                }).setTitle("Обратная связь с разработчиком");
         return builder.create();
     }
 
