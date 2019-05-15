@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -18,14 +19,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseAlertDialog;
 import com.example.misha.myapplication.common.core.BasePresenter;
+import com.example.misha.myapplication.entity.EditDataModel;
 import com.example.misha.myapplication.entity.SimpleItem;
-import com.example.misha.myapplication.module.schedule.edit.page.EditSchedulePageFragmentView;
 import com.example.misha.myapplication.module.schedule.edit.page.dialog.addData.DialogFragmentAddData;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import static com.example.misha.myapplication.Constants.FRAGMENT_AUDIENCES;
+import static com.example.misha.myapplication.Constants.FRAGMENT_EDUCATORS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_SUBJECTS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
 import static com.example.misha.myapplication.Constants.ITEMS_LIST;
 
 //Todo прочитать про наследование инкапсуляцию интерфейсы абстрактные классы и generic.
@@ -49,9 +54,19 @@ public class DialogFragmentListItems extends BaseAlertDialog implements DialogFr
 
     @Override
     public void showAddDataDialog(ArrayList<? extends SimpleItem> items, int fragmentCode) {
-        Bundle args = new Bundle();
-        args.putInt(FRAGMENT_CODE, fragmentCode);
-        DialogFragmentAddData dialogFragment = DialogFragmentAddData.newInstance(args);
+        DialogFragmentAddData dialogFragment = null;
+        if (fragmentCode == FRAGMENT_SUBJECTS) {
+            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_subject, R.string.hint_subject, R.string.title_subject, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 60, FRAGMENT_SUBJECTS));
+        }
+        if (fragmentCode == FRAGMENT_AUDIENCES) {
+            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_audience, R.string.hint_audience, R.string.title_audience, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 14,FRAGMENT_AUDIENCES));
+        }
+        if (fragmentCode == FRAGMENT_EDUCATORS) {
+            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_educator, R.string.hint_educator, R.string.title_educator, InputType.TYPE_TEXT_FLAG_CAP_WORDS, 60, FRAGMENT_EDUCATORS));
+        }
+        if (fragmentCode == FRAGMENT_TYPELESSONS) {
+            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_typelesson, R.string.hint_typelesson, R.string.title_typelesson, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 20, FRAGMENT_TYPELESSONS));
+        }
         dialogFragment.show(getChildFragmentManager(), DialogFragmentAddData.class.getSimpleName());
     }
 
@@ -66,16 +81,16 @@ public class DialogFragmentListItems extends BaseAlertDialog implements DialogFr
 
         View view = layoutInflater.inflate(R.layout.dialog_rv_list, null);
         TextView title_dialog = view.findViewById(R.id.dialog_textView);
-        if (fragmentCode == EditSchedulePageFragmentView.SUBJECT) {
+        if (fragmentCode == FRAGMENT_SUBJECTS) {
             title_dialog.setText("Предметы");
         }
-        if (fragmentCode == EditSchedulePageFragmentView.AUDIENCE) {
+        if (fragmentCode == FRAGMENT_AUDIENCES) {
             title_dialog.setText("Аудитории");
         }
-        if (fragmentCode == EditSchedulePageFragmentView.EDUCATOR) {
+        if (fragmentCode == FRAGMENT_EDUCATORS) {
             title_dialog.setText("Преподаватели");
         }
-        if (fragmentCode == EditSchedulePageFragmentView.TYPELESSON) {
+        if (fragmentCode == FRAGMENT_TYPELESSONS) {
             title_dialog.setText("Тип занятий");
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);

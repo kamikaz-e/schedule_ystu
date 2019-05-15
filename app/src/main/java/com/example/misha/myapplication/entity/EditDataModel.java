@@ -16,27 +16,31 @@ import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
 
 public class EditDataModel implements Parcelable {
 
-    private String error;
+    private int error;
 
-    private String hint;
+    private int hint;
+
+    private int title;
 
     private int inputType;
 
-    private int type;
-
     private int maxLenth;
 
-    public EditDataModel(String error, String hint, int inputType, int maxLenth, int type) {
+    private int type;
+
+    public EditDataModel(int error, int hint, int title, int inputType, int maxLenth, int type) {
         this.error = error;
         this.hint = hint;
+        this.title = title;
         this.inputType = inputType;
         this.maxLenth = maxLenth;
         this.type = type;
     }
 
     protected EditDataModel(Parcel in) {
-        error = in.readString();
-        hint = in.readString();
+        error = in.readInt();
+        hint = in.readInt();
+        title = in.readInt();
         inputType = in.readInt();
         maxLenth = in.readInt();
         type = in.readInt();
@@ -54,20 +58,25 @@ public class EditDataModel implements Parcelable {
         }
     };
 
+
+    public int getError() {
+        return error;
+    }
+
+    public int getHint() {
+        return hint;
+    }
+
+    public int getTitle() {
+        return title;
+    }
+
     public int getInputType() {
         return inputType;
     }
 
     public int getMaxLenth() {
         return maxLenth;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public String getHint() {
-        return hint;
     }
 
     public int getType() {
@@ -81,8 +90,9 @@ public class EditDataModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(error);
-        dest.writeString(hint);
+        dest.writeInt(error);
+        dest.writeInt(hint);
+        dest.writeInt(title);
         dest.writeInt(inputType);
         dest.writeInt(maxLenth);
         dest.writeInt(type);

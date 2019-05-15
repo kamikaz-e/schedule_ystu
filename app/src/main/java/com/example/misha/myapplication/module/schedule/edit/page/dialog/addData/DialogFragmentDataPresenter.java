@@ -15,6 +15,11 @@ import com.example.misha.myapplication.module.schedule.edit.page.EditSchedulePag
 
 import java.util.ArrayList;
 
+import static com.example.misha.myapplication.Constants.FRAGMENT_AUDIENCES;
+import static com.example.misha.myapplication.Constants.FRAGMENT_EDUCATORS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_SUBJECTS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
+
 public class DialogFragmentDataPresenter extends BaseMainPresenter<DialogFragmentAddDataView> implements DialogFragmentDataPresenterInterface {
 
 
@@ -24,16 +29,16 @@ public class DialogFragmentDataPresenter extends BaseMainPresenter<DialogFragmen
 
     public DialogFragmentDataPresenter(int fragmentCode) {
         this.fragmentCode = fragmentCode;
-        if (fragmentCode == EditSchedulePageFragmentView.SUBJECT) {
+        if (fragmentCode == FRAGMENT_SUBJECTS) {
             absDao = SubjectDao.getInstance();
         }
-        if (fragmentCode == EditSchedulePageFragmentView.AUDIENCE) {
+        if (fragmentCode == FRAGMENT_AUDIENCES) {
             absDao = AudienceDao.getInstance();
         }
-        if (fragmentCode == EditSchedulePageFragmentView.EDUCATOR) {
+        if (fragmentCode == FRAGMENT_EDUCATORS) {
             absDao = EducatorDao.getInstance();
         }
-        if (fragmentCode == EditSchedulePageFragmentView.TYPELESSON) {
+        if (fragmentCode == FRAGMENT_TYPELESSONS) {
             absDao = TypelessonDao.getInstance();
         }
     }
@@ -49,16 +54,16 @@ public class DialogFragmentDataPresenter extends BaseMainPresenter<DialogFragmen
     @Override
     public void insert(String itemName) {
         SimpleItem item = null;
-        if (fragmentCode == EditSchedulePageFragmentView.SUBJECT) {
+        if (fragmentCode == FRAGMENT_SUBJECTS) {
             item = new Subject();
         }
-        if (fragmentCode == EditSchedulePageFragmentView.AUDIENCE) {
+        if (fragmentCode == FRAGMENT_AUDIENCES) {
             item = new Audience();
         }
-        if (fragmentCode == EditSchedulePageFragmentView.EDUCATOR) {
+        if (fragmentCode == FRAGMENT_EDUCATORS) {
             item = new Educator();
         }
-        if (fragmentCode == EditSchedulePageFragmentView.TYPELESSON) {
+        if (fragmentCode == FRAGMENT_TYPELESSONS) {
             item = new Typelesson();
         }
         item.setName(itemName);

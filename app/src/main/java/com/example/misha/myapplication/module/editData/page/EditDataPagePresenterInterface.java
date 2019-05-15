@@ -4,7 +4,7 @@ public interface EditDataPagePresenterInterface {
 
     void onClearClick(int position);
 
-    void insert(String item);
+    void insert(String itemName, int type);
 
     void deleteItem(int position);
 

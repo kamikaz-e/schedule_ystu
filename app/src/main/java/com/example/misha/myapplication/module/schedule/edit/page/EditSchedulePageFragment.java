@@ -31,6 +31,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import static com.example.misha.myapplication.Constants.FRAGMENT_AUDIENCES;
+import static com.example.misha.myapplication.Constants.FRAGMENT_EDUCATORS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_SUBJECTS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
 import static com.example.misha.myapplication.Constants.ITEMS_LIST;
 
 public class EditSchedulePageFragment extends BaseMainFragment implements EditSchedulePageFragmentView {
@@ -134,28 +138,28 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
     public void onActivityResult(int requestCode, int resultOk, Intent data) {
             ArrayList<Lesson> lessonList = presenter.getLessonList();
 
-        if (requestCode == SUBJECT) {
+        if (requestCode == FRAGMENT_SUBJECTS) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Subject subject = data.getParcelableExtra(ITEMS_LIST);
             lessonList.get(lessonPosition).setSubject(subject.getId());
             updateView(lessonList);
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
-        if (requestCode == TYPELESSON) {
+        if (requestCode == FRAGMENT_TYPELESSONS) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Typelesson typelesson = data.getParcelableExtra(ITEMS_LIST);
             lessonList.get(lessonPosition).setTypeLesson(typelesson.getId());
             updateView(lessonList);
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
-        if (requestCode == AUDIENCE) {
+        if (requestCode == FRAGMENT_AUDIENCES) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Audience audience = data.getParcelableExtra(ITEMS_LIST);
             lessonList.get(lessonPosition).setAudience(audience.getId());
             updateView(lessonList);
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
-        if (requestCode == EDUCATOR) {
+        if (requestCode == FRAGMENT_EDUCATORS) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Educator educator = data.getParcelableExtra(ITEMS_LIST);
             lessonList.get(lessonPosition).setEducatorEdit(educator.getId());

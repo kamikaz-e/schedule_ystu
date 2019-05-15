@@ -14,10 +14,11 @@ import com.example.misha.myapplication.entity.Typelesson;
 
 import java.util.ArrayList;
 
-import static com.example.misha.myapplication.module.schedule.edit.page.EditSchedulePageFragmentView.AUDIENCE;
-import static com.example.misha.myapplication.module.schedule.edit.page.EditSchedulePageFragmentView.EDUCATOR;
-import static com.example.misha.myapplication.module.schedule.edit.page.EditSchedulePageFragmentView.SUBJECT;
-import static com.example.misha.myapplication.module.schedule.edit.page.EditSchedulePageFragmentView.TYPELESSON;
+import static com.example.misha.myapplication.Constants.FRAGMENT_AUDIENCES;
+import static com.example.misha.myapplication.Constants.FRAGMENT_EDUCATORS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_SUBJECTS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
+
 
 public class EditSchedulePagePresenter extends BaseMainPresenter<EditSchedulePageFragmentView> implements EditSchedulePagePresenterInterface {
 
@@ -43,23 +44,23 @@ public class EditSchedulePagePresenter extends BaseMainPresenter<EditSchedulePag
 
     @Override
     public void onSubjectClick(int position) {
-        getView().showEditDialog(subjectList, position, SUBJECT);
-        updateList(day,positionWeek);
+        getView().showEditDialog(subjectList, position, FRAGMENT_SUBJECTS);
+        updateList(day, positionWeek);
     }
 
     @Override
     public void onAudienceClick(int position) {
-        getView().showEditDialog(audienceList, position, AUDIENCE);
+        getView().showEditDialog(audienceList, position, FRAGMENT_AUDIENCES);
     }
 
     @Override
     public void onEducatorClick(int position) {
-        getView().showEditDialog(educatorList, position, EDUCATOR);
+        getView().showEditDialog(educatorList, position, FRAGMENT_EDUCATORS);
     }
 
     @Override
     public void onTypelessonClick(int position) {
-        getView().showEditDialog(typelessonList, position, TYPELESSON);
+        getView().showEditDialog(typelessonList, position, FRAGMENT_TYPELESSONS);
     }
 
     @Override
@@ -68,8 +69,8 @@ public class EditSchedulePagePresenter extends BaseMainPresenter<EditSchedulePag
         updateList(day, positionWeek);
     }
 
-    public ArrayList<Lesson> getLessonList(){
-    return lessonList;
+    public ArrayList<Lesson> getLessonList() {
+        return lessonList;
     }
 
     @Override

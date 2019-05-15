@@ -22,22 +22,20 @@ import androidx.annotation.NonNull;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseAlertDialog;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.module.schedule.edit.page.EditSchedulePageFragmentView;
+import com.example.misha.myapplication.entity.EditDataModel;
 
 import org.jetbrains.annotations.NotNull;
 
 import static com.example.misha.myapplication.Constants.FRAGMENT_CODE;
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_AUDIENCES;
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_EDUCATORS;
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_SUBJECTS;
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_TYPELESSONS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_EDIT_DATA;
 
-public class DialogFragmentAddData extends BaseAlertDialog  implements  TextView.OnEditorActionListener{
-
+public class DialogFragmentAddData extends BaseAlertDialog implements TextView.OnEditorActionListener {
     private DialogFragmentDataPresenter presenter;
     private EditText inputItem;
 
-    public static DialogFragmentAddData newInstance(Bundle args) {
+    public static DialogFragmentAddData newInstance(EditDataModel editDataModel) {
+        Bundle args = new Bundle();
+        args.putParcelable(FRAGMENT_EDIT_DATA, editDataModel);
         DialogFragmentAddData fragment = new DialogFragmentAddData();
         fragment.setArguments(args);
         return fragment;
@@ -45,7 +43,7 @@ public class DialogFragmentAddData extends BaseAlertDialog  implements  TextView
 
     @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
+        EditDataModel editDataModel = getArguments().getParcelable(FRAGMENT_EDIT_DATA);
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
         int fragmentCode = getArguments().getInt(FRAGMENT_CODE);
         presenter = new DialogFragmentDataPresenter(fragmentCode);
@@ -56,30 +54,12 @@ public class DialogFragmentAddData extends BaseAlertDialog  implements  TextView
         TextView title_dialog = view.findViewById(R.id.dialog_textView);
         inputItem = view.findViewById(R.id.dialog_editText);
         inputItem.setOnEditorActionListener(this);
-        if (fragmentCode == EditSchedulePageFragmentView.SUBJECT) {
-            title_dialog.setText("Добавить предмет");
-            inputItem.setHint("Предмет");
-            inputItem.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-            inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(60)});
-        }
-        if (fragmentCode == EditSchedulePageFragmentView.AUDIENCE) {
-            title_dialog.setText("Добавить аудиторию");
-            inputItem.setHint("Аудитория");
-            inputItem.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-            inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(14)});
-        }
-        if (fragmentCode == EditSchedulePageFragmentView.EDUCATOR) {
-            title_dialog.setText("Добавить преподавателя");
-            inputItem.setHint("Преподаватель");
-            inputItem.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-            inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(60)});
-        }
-        if (fragmentCode == EditSchedulePageFragmentView.TYPELESSON) {
-            title_dialog.setText("Добавить тип занятия");
-            inputItem.setHint("Тип занятия");
-            inputItem.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-            inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
-        }
+
+        title_dialog.setText(editDataModel.getTitle());
+        inputItem.setHint(editDataModel.getHint());
+        inputItem.setInputType(editDataModel.getInputType());
+        inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(editDataModel.getMaxLenth())});
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
         builder.setView(view);
 
@@ -94,17 +74,15 @@ public class DialogFragmentAddData extends BaseAlertDialog  implements  TextView
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        int fragmentCode = getArguments().getInt(FRAGMENT_CODE);
+        EditDataModel editDataModel = getArguments().getParcelable(FRAGMENT_EDIT_DATA);
         if ((actionId == EditorInfo.IME_ACTION_DONE) ||
                 ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
             inputItem.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
             String itemName = inputItem.getText().toString();
             itemName = itemName.trim().replaceAll(" +", " ");
             if (TextUtils.isEmpty(itemName) || itemName.equals(" ")) {
-                if (fragmentCode == EditSchedulePageFragmentView.SUBJECT) {inputItem.setError("Введите предмет");}
-                if (fragmentCode == EditSchedulePageFragmentView.AUDIENCE) {inputItem.setError("Введите аудиторию");}
-                if (fragmentCode == EditSchedulePageFragmentView.EDUCATOR) {inputItem.setError("Введите преподавателя");}
-                if (fragmentCode == EditSchedulePageFragmentView.TYPELESSON) {inputItem.setError("Введите тип предмета");}
+                inputItem.setError(String.valueOf(editDataModel.getError()));
+
                 return true;
             }
             presenter.insert(itemName);

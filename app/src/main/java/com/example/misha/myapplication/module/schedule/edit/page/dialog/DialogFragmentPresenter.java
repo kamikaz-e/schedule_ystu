@@ -7,11 +7,13 @@ import com.example.misha.myapplication.data.database.dao.EducatorDao;
 import com.example.misha.myapplication.data.database.dao.SubjectDao;
 import com.example.misha.myapplication.data.database.dao.TypelessonDao;
 import com.example.misha.myapplication.entity.SimpleItem;
-import com.example.misha.myapplication.module.schedule.edit.page.EditSchedulePageFragment;
 
 import java.util.ArrayList;
 
-import static com.example.misha.myapplication.data.preferences.Preferences.FRAGMENT_TYPELESSONS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_AUDIENCES;
+import static com.example.misha.myapplication.Constants.FRAGMENT_EDUCATORS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_SUBJECTS;
+import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
 
 public class DialogFragmentPresenter extends BaseMainPresenter<DialogFragmentListItemsView> implements DialogFragmentPresenterInterface {
 
@@ -21,16 +23,16 @@ public class DialogFragmentPresenter extends BaseMainPresenter<DialogFragmentLis
 
     public DialogFragmentPresenter(int fragmentCode) {
         this.fragmentCode = fragmentCode;
-        if (fragmentCode == EditSchedulePageFragment.SUBJECT) {
+        if (fragmentCode == FRAGMENT_SUBJECTS) {
             absDao = SubjectDao.getInstance();
         }
-        if (fragmentCode == EditSchedulePageFragment.AUDIENCE) {
+        if (fragmentCode == FRAGMENT_AUDIENCES) {
             absDao = AudienceDao.getInstance();
         }
-        if (fragmentCode == EditSchedulePageFragment.EDUCATOR) {
+        if (fragmentCode == FRAGMENT_EDUCATORS) {
             absDao = EducatorDao.getInstance();
         }
-        if (fragmentCode== EditSchedulePageFragment.TYPELESSON) {
+        if (fragmentCode == FRAGMENT_TYPELESSONS) {
             absDao = TypelessonDao.getInstance();
         }
     }
@@ -51,7 +53,6 @@ public class DialogFragmentPresenter extends BaseMainPresenter<DialogFragmentLis
         listItems = absDao.getAllData();
         return listItems;
     }
-
 
 
     public void updateList() {
