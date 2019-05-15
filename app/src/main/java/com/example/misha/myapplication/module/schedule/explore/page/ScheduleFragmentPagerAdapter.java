@@ -89,28 +89,28 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter<ScheduleF
             timeEdit.setText(calls.getName());
             if (subject == null) {
                 subjectHint.setHint("");
-                subjectEdit.setText("Предмет");
+                subjectEdit.setText(R.string.hint_subject);
             } else {
                 subjectHint.setHint("Предмет");
                 subjectEdit.setText(subject.getName());
             }
             if (audience == null) {
                 audienceHint.setHint("");
-                audienceEdit.setText("Аудитория");
+                audienceEdit.setText(R.string.hint_audience);
             } else {
                 audienceHint.setHint("Аудитория");
                 audienceEdit.setText(audience.getName());
             }
             if (educator == null) {
                 educatorHint.setHint("");
-                educatorEdit.setText("Преподаватель");
+                educatorEdit.setText(R.string.hint_educator);
             } else {
                 educatorHint.setHint("Преподаватель");
                 educatorEdit.setText(educator.getName());
             }
             if (typelesson == null) {
                 typelessonHint.setHint("");
-                typelessonEdit.setText("Тип занятия");
+                typelessonEdit.setText(R.string.hint_typelesson);
             } else {
                 typelessonHint.setHint("Тип занятия");
                 typelessonEdit.setText(typelesson.getName());

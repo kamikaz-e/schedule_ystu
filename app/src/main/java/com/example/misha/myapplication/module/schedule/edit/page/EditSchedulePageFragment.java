@@ -137,7 +137,6 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
     @Override
     public void onActivityResult(int requestCode, int resultOk, Intent data) {
         ArrayList<Lesson> lessonList = presenter.getLessonList();
-
         if (requestCode == FRAGMENT_SUBJECTS) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Subject subject = data.getParcelableExtra(ITEMS_LIST);

@@ -13,7 +13,7 @@ public interface EditDataFragmentPageView extends BaseView {
 
     Dialog onCreateDialogDeleteItem(int position, AbsDao absDao);
 
-    void updateView(ArrayList<SimpleItem> absDao);
+    void updateItemsAdapter(ArrayList<SimpleItem> listItems);
 
     void setupWidgets(EditDataModel editDataModel);
 

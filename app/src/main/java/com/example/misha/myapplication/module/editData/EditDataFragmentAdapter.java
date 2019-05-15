@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.editData.page;
+package com.example.misha.myapplication.module.editData;
 
 import android.text.InputType;
 
@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.entity.EditDataModel;
+import com.example.misha.myapplication.module.editData.page.EditDataFragmentPage;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,10 +18,10 @@ import static com.example.misha.myapplication.Constants.FRAGMENT_SUBJECTS;
 import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
 
 
-public class EditDataFragmentPagerAdapter extends FragmentStatePagerAdapter {
+public class EditDataFragmentAdapter extends FragmentStatePagerAdapter {
 
 
-    public EditDataFragmentPagerAdapter(FragmentManager fm) {
+    public EditDataFragmentAdapter(FragmentManager fm) {
         super(fm);
     }
 

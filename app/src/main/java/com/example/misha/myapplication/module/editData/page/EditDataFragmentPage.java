@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.ScheduleApp;
@@ -32,9 +34,9 @@ import static com.example.misha.myapplication.Constants.FRAGMENT_EDIT_DATA;
 public class EditDataFragmentPage extends BaseMainFragment implements EditDataFragmentPageView, TextView.OnEditorActionListener {
 
     private EditText inputItem;
-    private ListView listViewItems;
     private EditDataPagePresenter presenter;
-
+    private EditDataFragmentPageAdapter editDataFragmentPageAdapter;
+    private RecyclerView rvItems;
 
     public static EditDataFragmentPage newInstance(EditDataModel editDataModel) {
         Bundle args = new Bundle();
@@ -62,9 +64,8 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page_edit_data, container, false);
         EditDataModel editDataModel = getArguments().getParcelable(FRAGMENT_EDIT_DATA);
-        inputItem = view.findViewById(R.id.input_subject);
-        listViewItems = view.findViewById(R.id.list_subjects);
-        listViewItems.setOnItemClickListener((parent, itemClicked, position, id) -> presenter.onClearClick(position));
+        rvItems = view.findViewById(R.id.rv_dialog_edit_data);
+        inputItem = view.findViewById(R.id.input_item);
         inputItem.setOnEditorActionListener(this);
         inputItem.setHint(editDataModel.getHint());
         inputItem.setInputType(editDataModel.getInputType());
@@ -87,9 +88,12 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
         return presenter;
     }
 
-    public void updateView(ArrayList<SimpleItem> listItems) {
-        ArrayAdapter<SimpleItem> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listItems);
-        listViewItems.setAdapter(adapter);
+    public void updateItemsAdapter(ArrayList<SimpleItem> listItems) {
+
+        editDataFragmentPageAdapter = new EditDataFragmentPageAdapter(listItems, (position, view1) -> {
+        });
+        rvItems.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        rvItems.setAdapter(editDataFragmentPageAdapter);
     }
 
     @Override

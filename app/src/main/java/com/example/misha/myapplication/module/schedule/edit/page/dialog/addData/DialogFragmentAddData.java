@@ -81,7 +81,6 @@ public class DialogFragmentAddData extends BaseAlertDialog implements TextView.O
             itemName = itemName.trim().replaceAll(" +", " ");
             if (TextUtils.isEmpty(itemName) || itemName.equals(" ")) {
                 inputItem.setError(getText(editDataModel.getError()));
-
                 return true;
             }
             presenter.insert(itemName, editDataModel.getType());

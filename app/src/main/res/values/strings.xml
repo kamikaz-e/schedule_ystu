@@ -73,4 +73,7 @@
     <string name="delete_typelesson">Удалить тип предмета «%1$s»?</string>
     <string name="ack">Подтвердить</string>
     <string name="cancel">Отмена</string>
+
+    <string name="copy_to_evenweek">Скопировать неделю в четные недели?</string>
+    <string name="copy_to_unevenweek">Скопировать неделю в нечетные недели?</string>
 </resources>

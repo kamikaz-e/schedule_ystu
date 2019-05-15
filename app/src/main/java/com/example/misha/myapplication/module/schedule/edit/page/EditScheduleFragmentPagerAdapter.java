@@ -122,22 +122,22 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
 
             timeEdit.setText(calls.getName());
             if (subject == null) {
-                subjectEdit.setText("Предмет");
+                subjectEdit.setText(R.string.hint_subject);
             } else {
                 subjectEdit.setText(subject.getName());
             }
             if (audience == null) {
-                audienceEdit.setText("Аудитория");
+                audienceEdit.setText(R.string.hint_audience);
             } else {
                 audienceEdit.setText(audience.getName());
             }
             if (educator == null) {
-                educatorEdit.setText("Преподаватель");
+                educatorEdit.setText(R.string.hint_educator);
             } else {
                 educatorEdit.setText(educator.getName());
             }
             if (typelesson == null) {
-                typeLessonEdit.setText("Тип занятия");
+                typeLessonEdit.setText(R.string.hint_typelesson);
             } else {
                 typeLessonEdit.setText(typelesson.getName());
             }

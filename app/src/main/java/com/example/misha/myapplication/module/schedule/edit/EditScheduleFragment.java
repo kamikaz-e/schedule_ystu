@@ -67,7 +67,6 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new EditSchedulePresenter(getContext());
-
         setHasOptionsMenu(true);
         customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
         pagerAdapter = new EditScheduleFragmentPagerAdapter(getChildFragmentManager());
@@ -77,7 +76,6 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_schedule, container, false);
-
         viewPager = view.findViewById(R.id.viewPager);
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override

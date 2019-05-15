@@ -49,7 +49,6 @@ public class DialogFragmentListItems extends BaseAlertDialog implements DialogFr
 
     @Override
     public void updateView(ArrayList<SimpleItem> listItems) {
-
     }
 
     @Override
@@ -110,9 +109,7 @@ public class DialogFragmentListItems extends BaseAlertDialog implements DialogFr
         dialogFragmentListItemsAdapter.setLessonList(subjectList);
         dialogFragmentListItemsAdapter.notifyDataSetChanged();
         updateItemsAdapter(subjectList);
-
     }
-
 
     public void updateItemsAdapter(ArrayList<SimpleItem> subjectList) {
         int fragmentCode = getArguments().getInt(FRAGMENT_CODE);

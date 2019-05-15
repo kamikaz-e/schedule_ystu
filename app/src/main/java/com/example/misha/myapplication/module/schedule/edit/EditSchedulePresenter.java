@@ -69,7 +69,7 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
     private Dialog onCreateDialogCopyEvenWeek() {
         int currentWeek = Preferences.getInstance().getSelectedWeekSchedule();
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
+        builder.setCancelable(false).setPositiveButton(R.string.ack, (dialog, id) -> {
             for (int idWeek = 1; idWeek < 17; idWeek += 2) {
                 lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
                 lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
@@ -80,7 +80,7 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
                     LessonDao.getInstance().updateItemByID(lessonListWeek.get(idRowWeek));
                 }
             }
-        }).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Скопировать неделю в четные недели?");
+        }).setNegativeButton(R.string.cancel, (dialog, id) -> dialog.cancel()).setTitle(R.string.copy_to_evenweek);
         return builder.create();
     }
 
@@ -88,7 +88,7 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
     private Dialog onCreateDialogCopyUnevenWeek() {
         int currentWeek = Preferences.getInstance().getSelectedWeekSchedule();
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
+        builder.setCancelable(false).setPositiveButton(R.string.ack, (dialog, id) -> {
             for (int idWeek = 0; idWeek < 17; idWeek += 2) {
                 lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
                 lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
@@ -99,7 +99,7 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
                     LessonDao.getInstance().updateItemByID(lessonListWeek.get(idRowWeek));
                 }
             }
-        }).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle("Скопировать неделю в нечетные недели?");
+        }).setNegativeButton(R.string.cancel, (dialog, id) -> dialog.cancel()).setTitle(R.string.copy_to_unevenweek);
         return builder.create();
     }
 

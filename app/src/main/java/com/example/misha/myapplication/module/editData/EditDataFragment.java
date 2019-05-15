@@ -16,7 +16,6 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.database.AbsDao;
-import com.example.misha.myapplication.module.editData.page.EditDataFragmentPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 public class EditDataFragment extends BaseMainFragment implements EditDataFragmentView {
 
     private TabLayout tabLayout;
-    private EditDataFragmentPagerAdapter viewPagerAdapter;
+    private EditDataFragmentAdapter viewPagerAdapter;
     private EditDataPresenter presenter;
 
     @Override
@@ -48,7 +47,7 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
         View view = inflater.inflate(R.layout.fragment_edit_data, container, false);
         setHasOptionsMenu(true);
         ViewPager viewPager = view.findViewById(R.id.viewPager);
-        viewPagerAdapter = new EditDataFragmentPagerAdapter(getChildFragmentManager());
+        viewPagerAdapter = new EditDataFragmentAdapter(getChildFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
