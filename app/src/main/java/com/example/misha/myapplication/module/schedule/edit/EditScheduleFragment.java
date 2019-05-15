@@ -48,6 +48,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         spinner.setBackgroundColor(Color.TRANSPARENT);
         spinner.setAdapter(customSpinnerAdapter);
         spinner.setOnItemSelectedListener(this);
+        presenter.init();
         getContext().getToolbar().addView(spinner);
         getContext().setCurrentTitle(null);
     }
@@ -66,6 +67,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new EditSchedulePresenter(getContext());
+
         setHasOptionsMenu(true);
         customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
         pagerAdapter = new EditScheduleFragmentPagerAdapter(getChildFragmentManager());
@@ -109,8 +111,6 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        spinner = new Spinner(getContext());
-        presenter.init();
     }
 
     @NonNull

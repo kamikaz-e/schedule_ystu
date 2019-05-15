@@ -18,7 +18,6 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
 
     private List<Lesson> lessonListWeek = new ArrayList<>();
     private List<Lesson> lessonListWeekCurrent = new ArrayList<>();
-    private int currentWeek = Preferences.getInstance().getSelectedWeekSchedule();
 
     private Context context;
 
@@ -69,6 +68,7 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
     }
 
     private Dialog onCreateDialogCopyEvenWeek() {
+        int currentWeek = Preferences.getInstance().getSelectedWeekSchedule();
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
             for (int idWeek = 1; idWeek < 17; idWeek += 2) {
@@ -87,6 +87,7 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
 
 
     private Dialog onCreateDialogCopyUnevenWeek() {
+        int currentWeek = Preferences.getInstance().getSelectedWeekSchedule();
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) -> {
             for (int idWeek = 0; idWeek < 17; idWeek += 2) {

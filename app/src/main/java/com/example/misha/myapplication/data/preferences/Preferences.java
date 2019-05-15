@@ -32,6 +32,7 @@ public final class Preferences implements PreferencesInterface {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(ScheduleApp.getAppContext());
     }
 
+
     @Override
     public boolean isHintsOpened() {
         return mPrefs.getBoolean(PREF_KEY_FIRST_OPEN_HINT, false);
@@ -42,6 +43,7 @@ public final class Preferences implements PreferencesInterface {
         mPrefs.edit().putBoolean(PREF_KEY_FIRST_OPEN_HINT, true).apply();
     }
 
+
     @Override
     public void setSemesterStart(long date) {
         mPrefs.edit().putLong(PREF_KEY_SEMESTER_START, date).apply();
@@ -51,6 +53,7 @@ public final class Preferences implements PreferencesInterface {
     public long getSemestStart() {
         return mPrefs.getLong(PREF_KEY_SEMESTER_START, calendar.getTimeInMillis());
     }
+
 
     @Override
     public boolean isCallsOpened() {
@@ -72,8 +75,10 @@ public final class Preferences implements PreferencesInterface {
         return mPrefs.getInt(PREF_KEY_SELECT_WEEK, 0);
     }
 
+
     public void setSelectedPositionTabDays(int position) {
         mPrefs.edit().putInt(PREF_KEY_SELECT_TAB_DAYS, position).apply();
+
     }
 
     public int getSelectedPositionTabDays() {
@@ -89,6 +94,7 @@ public final class Preferences implements PreferencesInterface {
         return mPrefs.getBoolean(PREF_KEY_FAB_OPEN, true);
     }
 
+
     public void setSelectedPositionLesson(int position) {
         mPrefs.edit().putInt(PREF_KEY_SELECT_LESSON, position).apply();
     }
@@ -97,6 +103,7 @@ public final class Preferences implements PreferencesInterface {
         return mPrefs.getInt(PREF_KEY_SELECT_LESSON, 0);
     }
 
+
     public void setSelectDate(String selectDate) {
         mPrefs.edit().putString(SELECT_DATE, selectDate).apply();
     }
@@ -104,7 +111,6 @@ public final class Preferences implements PreferencesInterface {
     public String getSelectDate() {
         return mPrefs.getString(SELECT_DATE, String.valueOf(Calendar.getInstance().getTimeInMillis()));
     }
-
 
 
 }
