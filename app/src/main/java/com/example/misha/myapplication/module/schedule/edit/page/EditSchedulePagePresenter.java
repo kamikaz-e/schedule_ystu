@@ -22,10 +22,7 @@ import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
 
 public class EditSchedulePagePresenter extends BaseMainPresenter<EditSchedulePageFragmentView> implements EditSchedulePagePresenterInterface {
 
-    private ArrayList<Subject> subjectList = SubjectDao.getInstance().getAllData();
-    private ArrayList<Audience> audienceList = AudienceDao.getInstance().getAllData();
-    private ArrayList<Educator> educatorList = EducatorDao.getInstance().getAllData();
-    private ArrayList<Typelesson> typelessonList = TypelessonDao.getInstance().getAllData();
+
     private ArrayList<Lesson> lessonList = new ArrayList<>();
 
     private int positionWeek;
@@ -44,22 +41,26 @@ public class EditSchedulePagePresenter extends BaseMainPresenter<EditSchedulePag
 
     @Override
     public void onSubjectClick(int position) {
+        ArrayList<Subject> subjectList = SubjectDao.getInstance().getAllData();
         getView().showEditDialog(subjectList, position, FRAGMENT_SUBJECTS);
         updateList(day, positionWeek);
     }
 
     @Override
     public void onAudienceClick(int position) {
+        ArrayList<Audience> audienceList = AudienceDao.getInstance().getAllData();
         getView().showEditDialog(audienceList, position, FRAGMENT_AUDIENCES);
     }
 
     @Override
     public void onEducatorClick(int position) {
+        ArrayList<Educator> educatorList = EducatorDao.getInstance().getAllData();
         getView().showEditDialog(educatorList, position, FRAGMENT_EDUCATORS);
     }
 
     @Override
     public void onTypelessonClick(int position) {
+        ArrayList<Typelesson> typelessonList = TypelessonDao.getInstance().getAllData();
         getView().showEditDialog(typelessonList, position, FRAGMENT_TYPELESSONS);
     }
 

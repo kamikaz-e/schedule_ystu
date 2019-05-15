@@ -127,7 +127,6 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         dayTabs.setAdapter(adapterTabDays);
     }
 
-
     @Override
     public void selectCurrentDay(int currentDay) {
         int selectedDayTab = Preferences.getInstance().getSelectedPositionTabDays();
