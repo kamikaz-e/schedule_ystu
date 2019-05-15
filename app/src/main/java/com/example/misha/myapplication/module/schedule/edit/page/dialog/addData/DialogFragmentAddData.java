@@ -23,6 +23,7 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseAlertDialog;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.entity.EditDataModel;
+import com.example.misha.myapplication.module.editData.page.EditDataPagePresenter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -43,10 +44,10 @@ public class DialogFragmentAddData extends BaseAlertDialog implements TextView.O
 
     @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        EditDataModel editDataModel = getArguments().getParcelable(FRAGMENT_EDIT_DATA);
+
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        int fragmentCode = getArguments().getInt(FRAGMENT_CODE);
-        presenter = new DialogFragmentDataPresenter(fragmentCode);
+        EditDataModel editDataModel = getArguments().getParcelable(FRAGMENT_EDIT_DATA);
+        presenter = new DialogFragmentDataPresenter(editDataModel);
         presenter.init();
 
         @SuppressLint("InflateParams")
@@ -66,7 +67,7 @@ public class DialogFragmentAddData extends BaseAlertDialog implements TextView.O
         Button button_cancel = view.findViewById(R.id.button_cancel);
         button_cancel.setOnClickListener(v -> {
             Intent intent = new Intent();
-            getParentFragment().onActivityResult(fragmentCode, Activity.RESULT_OK, intent);
+            getParentFragment().onActivityResult(editDataModel.getType(), Activity.RESULT_OK, intent);
             dismiss();
         });
         return builder.create();
@@ -81,11 +82,11 @@ public class DialogFragmentAddData extends BaseAlertDialog implements TextView.O
             String itemName = inputItem.getText().toString();
             itemName = itemName.trim().replaceAll(" +", " ");
             if (TextUtils.isEmpty(itemName) || itemName.equals(" ")) {
-                inputItem.setError(String.valueOf(editDataModel.getError()));
+                inputItem.setError(getText(editDataModel.getError()));
 
                 return true;
             }
-            presenter.insert(itemName);
+            presenter.insert(itemName, editDataModel.getType());
             inputItem.getText().clear();
             return true;
         } else {

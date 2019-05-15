@@ -107,7 +107,7 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
             String itemName = inputItem.getText().toString();
             itemName = itemName.trim().replaceAll(" +", " ");
             if (TextUtils.isEmpty(itemName) || itemName.equals(" ")) {
-                inputItem.setError(String.valueOf(editDataModel.getError()));
+                inputItem.setError(getText(editDataModel.getError()));
                 return true;
             }
             presenter.insert(itemName, editDataModel.getType());
