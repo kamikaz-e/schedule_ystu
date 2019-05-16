@@ -73,7 +73,7 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
         return view;
     }
 
-    public Dialog onCreateDialogDeleteItem(int position, AbsDao absDao) {
+    public Dialog onCreateDialogDeleteItem(int position) {
         EditDataModel editDataModel = getArguments().getParcelable(FRAGMENT_EDIT_DATA);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setCancelable(false)
@@ -89,9 +89,7 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
     }
 
     public void updateItemsAdapter(ArrayList<SimpleItem> listItems) {
-
-        editDataFragmentPageAdapter = new EditDataFragmentPageAdapter(listItems, (position, view1) -> {
-        });
+        editDataFragmentPageAdapter = new EditDataFragmentPageAdapter(listItems, (position, view1) -> presenter.onClearClick(position));
         rvItems.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         rvItems.setAdapter(editDataFragmentPageAdapter);
     }

@@ -20,14 +20,13 @@
             android:imeOptions="actionDone"
             android:inputType="textCapSentences"
             android:maxLength="60"
-            android:textSize="18sp" />
+            android:textSize="18sp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_dialog_edit_data"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/spacing_small"
-
+            android:layout_margin="@dimen/spacing_medium"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </FrameLayout>

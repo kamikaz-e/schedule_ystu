@@ -51,9 +51,7 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
                 .getSubjects(new ScheduleRequest(nameGroup))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(response -> {
-                    loadAudiences(nameGroup, response);
-                }, throwable -> {
+                .subscribe(response -> loadAudiences(nameGroup, response), throwable -> {
                     getView().hideProgressDialog();
                     processSimpleError(throwable);
                 })

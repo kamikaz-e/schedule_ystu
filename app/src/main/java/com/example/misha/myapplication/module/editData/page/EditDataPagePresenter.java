@@ -31,7 +31,7 @@ public class EditDataPagePresenter extends BaseMainPresenter<EditDataFragmentPag
     }
 
     public void onClearClick(int position) {
-        getView().onCreateDialogDeleteItem(position, absDao).show();
+        getView().onCreateDialogDeleteItem(position).show();
     }
 
     @Override

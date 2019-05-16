@@ -16,9 +16,4 @@ public final class DataUtil {
         return (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
     }
 
-    public static void hintKeyboard(Activity contex) {
-        InputMethodManager imm = (InputMethodManager) contex.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        if (contex.getCurrentFocus() != null)
-            imm.hideSoftInputFromWindow(contex.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-    }
 }

@@ -28,6 +28,7 @@
     <string name="call_title">Выбрать</string>
     <string name="settings_date_start_title">Поиск свободной аудитории</string>
     <string name="settings_import_title">Загрузить расписание с сервера</string>
+    <string name="settings_change_theme">Изменить тему приложения</string>
     <string name="dialog_title">Название группы</string>
     <string name="dialog_edittext">Введите название</string>
     <string name="dialog_button_add">Добавить</string>
@@ -44,7 +45,7 @@
     <string name="network_error">Ошибка подключения к сети</string>
     <string name="unknown_error">Произошла ошибка, попробуйте еще раз</string>
     <string name="error_api_unexpected">Неизветсная ошибка при ответе от удаленного сервера</string>
-    <string name="retry">Повтороить</string>
+    <string name="retry">Повторить</string>
     <string name="menu_settings_string">Настройки</string>
     <string name="menu_schedule_string">Расписание</string>
     <string name="menu_what_string">Что-то да будет</string>

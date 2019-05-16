@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public interface EditDataFragmentPageView extends BaseView {
 
-    Dialog onCreateDialogDeleteItem(int position, AbsDao absDao);
+    Dialog onCreateDialogDeleteItem(int position);
 
     void updateItemsAdapter(ArrayList<SimpleItem> listItems);
 
