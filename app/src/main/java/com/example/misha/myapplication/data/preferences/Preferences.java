@@ -21,6 +21,7 @@ public final class Preferences implements PreferencesInterface {
     private static final String PREF_KEY_SELECT_LESSON = "PREF_KEY_SELECT_LESSON";
     private static final String PREF_KEY_FAB_OPEN = "PREF_KEY_FAB_OPEN";
     public static final String SELECT_DATE = "SELECT_DATE";
+    public String SELECT_THEME = "SELECT_THEME";
 
     public static Preferences getInstance() {
         if (instance != null) return instance;
@@ -110,6 +111,16 @@ public final class Preferences implements PreferencesInterface {
 
     public String getSelectDate() {
         return mPrefs.getString(SELECT_DATE, String.valueOf(Calendar.getInstance().getTimeInMillis()));
+    }
+
+    @Override
+    public void setSelectedTheme(String stringTheme) {
+        mPrefs.edit().putString(SELECT_THEME, stringTheme).apply();
+    }
+
+    @Override
+    public String getSelectedTheme() {
+        return mPrefs.getString(SELECT_THEME, "DarkTheme");
     }
 
 

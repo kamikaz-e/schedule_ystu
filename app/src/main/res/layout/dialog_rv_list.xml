@@ -24,7 +24,6 @@
         android:layout_above="@+id/relLay"
         android:layout_below="@+id/dialog_textView"
         android:layout_margin="@dimen/spacing_small"
-        android:background="@color/tab_background_selected"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <LinearLayout

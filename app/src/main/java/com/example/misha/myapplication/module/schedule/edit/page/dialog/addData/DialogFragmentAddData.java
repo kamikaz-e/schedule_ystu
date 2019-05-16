@@ -59,7 +59,7 @@ public class DialogFragmentAddData extends BaseAlertDialog implements TextView.O
         inputItem.setInputType(editDataModel.getInputType());
         inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(editDataModel.getMaxLenth())});
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(view);
 
         Button button_cancel = view.findViewById(R.id.button_cancel);

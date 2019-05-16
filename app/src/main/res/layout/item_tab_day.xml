@@ -11,7 +11,7 @@
         android:layout_centerInParent="true"
         android:gravity="center_vertical"
         android:maxLines="1"
-        android:textColor="@color/color_primary_text"
+        android:background="@null"
         android:textSize="16sp"
         tool:text="31" />
 

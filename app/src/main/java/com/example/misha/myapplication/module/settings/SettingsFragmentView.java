@@ -14,4 +14,6 @@ public interface SettingsFragmentView extends BaseView {
 
     Dialog onCreateDialogAbout();
 
+    void showDialogSelectTheme();
+
 }

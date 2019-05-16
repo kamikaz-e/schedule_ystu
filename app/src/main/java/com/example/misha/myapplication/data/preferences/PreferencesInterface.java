@@ -33,4 +33,8 @@ public interface PreferencesInterface {
     void setSelectDate(String selectDate);
 
     String getSelectDate();
+
+    void setSelectedTheme(String stringTheme);
+
+    String getSelectedTheme();
 }

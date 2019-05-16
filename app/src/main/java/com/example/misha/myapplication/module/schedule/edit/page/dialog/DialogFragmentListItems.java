@@ -92,7 +92,7 @@ public class DialogFragmentListItems extends BaseAlertDialog implements DialogFr
         if (fragmentCode == FRAGMENT_TYPELESSONS) {
             title_dialog.setText("Тип занятий");
         }
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(view);
         rvItems = view.findViewById(R.id.rv_dialog);
         updateItemsAdapter(listItems);

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.data.preferences.Preferences;
 
 
 public class ActivityStart extends AppCompatActivity {
@@ -18,8 +19,8 @@ public class ActivityStart extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_activity);
 
+        setContentView(R.layout.start_activity);
         Button start_buttonOne = findViewById(R.id.start_button_import_schedule);
         start_buttonOne.setOnClickListener(v -> onCreateDialogImport().show());
         Button start_buttonTwo = findViewById(R.id.start_button_create_schedule);
@@ -30,7 +31,7 @@ public class ActivityStart extends AppCompatActivity {
     public Dialog onCreateDialogImport() {
         LayoutInflater li = LayoutInflater.from(this);
         View view = li.inflate(R.layout.dialog_signin, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(view);
         builder.setCancelable(false).setPositiveButton("Загрузить расписание", (dialog, id) -> {
             Toast.makeText(this, "Позже здесь будет загрузка расписания", Toast.LENGTH_SHORT).show();

@@ -13,7 +13,6 @@
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_small"
         android:layout_marginEnd="@dimen/spacing_medium"
-        android:textColor="#FFFFFF"
         android:textSize="16sp"
         tools:text="2 неделя" />
 
@@ -23,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginEnd="@dimen/spacing_medium"
-        android:textColor="#FFFFFF"
         android:textSize="13sp"
         tools:text="22.04 - 28.04" />
 
@@ -31,6 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/spacing_medium"
-        android:background="#888888" />
+        />
 
 </LinearLayout>

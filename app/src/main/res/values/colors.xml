@@ -10,9 +10,15 @@
     <color name="color_primary_text">#FFFFFF</color>
     <color name="color_secondary_text">#FF9800</color>
     <color name="tab_background_selected">#404040</color>
-    <color name="background_color48">#484848</color>
-    <color name="background_color30">#303030</color>
-    <color name="background_color27">#272727</color>
-    <color name="background_color20">#202020</color>
+    <color name="black48">#484848</color>
+    <color name="black30">#303030</color>
+    <color name="black27">#272727</color>
+    <color name="black20">#202020</color>
+    <color name="black10">#101010</color>
     <color name="black">#000000</color>
+    <color name="navy">#000080</color>
+    <color name="red">#ff0000</color>
+    <color name="green">#3cb371</color>
+    <color name="yellow">#ffa500</color>
+    <color name="white">#FFFFFF</color>
 </resources>

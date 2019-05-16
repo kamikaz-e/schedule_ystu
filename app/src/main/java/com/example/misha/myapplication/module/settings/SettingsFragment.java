@@ -11,14 +11,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
+import com.example.misha.myapplication.entity.SimpleItem;
+import com.example.misha.myapplication.module.settings.theme.DialogFragmentSelectTheme;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+
+import static com.example.misha.myapplication.Constants.SELECT_THEME;
 
 
 public class SettingsFragment extends BaseMainFragment implements SettingsFragmentView, View.OnClickListener {
@@ -50,9 +58,11 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         RelativeLayout layoutPickWeek = view.findViewById(R.id.current_date);
         RelativeLayout layoutImport = view.findViewById(R.id.import_data);
         RelativeLayout layoutAbout = view.findViewById(R.id.about);
+        RelativeLayout layoutSelectDate = view.findViewById(R.id.select_theme);
         layoutPickWeek.setOnClickListener(this);
         layoutImport.setOnClickListener(this);
         layoutAbout.setOnClickListener(this);
+        layoutSelectDate.setOnClickListener(this);
         return view;
     }
 
@@ -60,7 +70,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
     public Dialog onCreateDialogImport() {
         LayoutInflater li = LayoutInflater.from(getContext());
         @SuppressLint("InflateParams") View view = li.inflate(R.layout.dialog_signin, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(view);
         final EditText name_db = view.findViewById(R.id.name_schedule);
         builder.setCancelable(false).
@@ -72,7 +82,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
 
 
     public Dialog onCreateDialogAbout() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton("Профиль Вконтакте", (dialog, id) -> {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/mikhailvolkov1"));
             startActivity(browserIntent);
@@ -85,6 +95,19 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         return builder.create();
     }
 
+    public void showDialogSelectTheme() {
+        DialogFragmentSelectTheme dialogFragment = DialogFragmentSelectTheme.newInstance();
+        dialogFragment.show(getChildFragmentManager(), DialogFragmentSelectTheme.class.getSimpleName());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultOk, Intent data) {
+        if (requestCode==SELECT_THEME) {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(this).attach(this).commit();}
+    }
+
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.current_date) {
@@ -92,6 +115,9 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         }
         if (v.getId() == R.id.import_data) {
             presenter.onCreateDialogImport();
+        }
+        if (v.getId() == R.id.select_theme) {
+            presenter.onCreateDialogSelectTheme();
         }
         if (v.getId() == R.id.about) {
             presenter.onCreateDialogAbout();

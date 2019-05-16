@@ -23,6 +23,7 @@ import com.example.misha.myapplication.ScheduleApp;
 import com.example.misha.myapplication.common.ErrorView;
 import com.example.misha.myapplication.common.core.snack.SnackBehavior;
 import com.example.misha.myapplication.common.core.snack.SnackBehaviorInterface;
+import com.example.misha.myapplication.data.preferences.Preferences;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
@@ -57,6 +58,13 @@ public abstract class BaseActivity extends AppCompatActivity implements Root {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         compositeDisposable = new CompositeDisposable();
+        String nameTheme = Preferences.getInstance().getSelectedTheme();
+        if (nameTheme.equals("DarkTheme")) {
+            setTheme(R.style.DarkTheme);
+        }
+        if (nameTheme.equals("LightTheme")) {
+            setTheme(R.style.LightTheme);
+        }
         setContentView(getLayoutId());
         snack = new SnackBehavior(findViewById(R.id.root_view));
         initToolbar();

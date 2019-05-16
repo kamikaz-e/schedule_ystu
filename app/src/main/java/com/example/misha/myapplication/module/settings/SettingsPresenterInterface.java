@@ -12,6 +12,8 @@ public interface SettingsPresenterInterface {
 
     void onCreateDialogImport();
 
+    void onCreateDialogSelectTheme();
+
     void onCreateDialogAbout();
 
     void loadSubjects(String name);

@@ -28,7 +28,6 @@
                 android:id="@+id/number"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="#393939"
                 android:textAlignment="center"
                 android:textSize="17sp"
                 tools:text="1" />

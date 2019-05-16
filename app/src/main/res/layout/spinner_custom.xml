@@ -10,7 +10,6 @@
         android:id="@+id/current_numberWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
         android:textSize="11sp"
         tools:ignore="SmallSp"
         tools:text="20.04 - 20.04" />
@@ -20,7 +19,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_medium"
-        android:textColor="#FFFFFF"
         android:textSize="16sp"
         tools:text="1 неделя" />
 </LinearLayout>

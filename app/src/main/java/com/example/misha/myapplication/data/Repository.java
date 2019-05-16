@@ -137,4 +137,14 @@ public class Repository implements RepositoryManager {
     public String getSelectDate() {
         return preferencesInterface.getSelectDate();
     }
+
+    @Override
+    public void setSelectedTheme(String stringTheme) {
+        preferencesInterface.setSelectedTheme(stringTheme);
+    }
+
+    @Override
+    public String getSelectedTheme() {
+        return preferencesInterface.getSelectedTheme();
+    }
 }

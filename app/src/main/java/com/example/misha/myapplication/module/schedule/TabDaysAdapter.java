@@ -84,7 +84,7 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
 
         private void onBindView(int position) {
             date.setText(dayYear.get(position));
-            itemView.setBackgroundColor(selectedPos == position ? Color.parseColor("#FF4081") : Color.TRANSPARENT);
+            itemView.setBackgroundColor(selectedPos == position ? Color.parseColor(R.color.colorPrimary) : Color.TRANSPARENT);
         }
 
 

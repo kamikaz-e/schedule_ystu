@@ -20,8 +20,6 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            app:elevation="0dp"
             app:expanded="false">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -71,7 +69,6 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
-        android:background="@color/background_color27"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

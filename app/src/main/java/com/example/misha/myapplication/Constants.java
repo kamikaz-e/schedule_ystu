@@ -22,6 +22,7 @@ public final class Constants {
 
     public static final int FRAGMENT_TYPELESSONS = 4443;
 
+    public static final int SELECT_THEME = 5444;
 
     private Constants() {
     }

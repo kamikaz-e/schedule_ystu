@@ -29,7 +29,7 @@
         android:layout_above="@+id/even_weekFab"
         android:src="@drawable/ic_uneven_week"
         android:visibility="invisible"
-        app:backgroundTint="#707070" />
+       />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/even_weekFab"
@@ -40,8 +40,7 @@
         android:layout_marginBottom="@dimen/spacing_normal"
         android:src="@drawable/ic_even_week"
         android:layout_above="@+id/main_fab"
-        android:visibility="invisible"
-        app:backgroundTint="#707070" />
+        android:visibility="invisible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/main_fab"
@@ -52,7 +51,6 @@
         android:layout_marginEnd="@dimen/spacing_normal"
         android:layout_marginBottom="@dimen/spacing_normal"
         android:src="@drawable/ic_add"
-        app:backgroundTint="#707070"
         app:layout_anchor="@id/rv_tab"
         app:layout_behavior="com.dev2qa.example.material_design.floatingactionbutton.FloatingActionButtonScrollBehavior" />
 </RelativeLayout>

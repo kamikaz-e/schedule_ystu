@@ -68,7 +68,7 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
 
     private Dialog onCreateDialogCopyEvenWeek() {
         int currentWeek = Preferences.getInstance().getSelectedWeekSchedule();
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(false).setPositiveButton(R.string.ack, (dialog, id) -> {
             for (int idWeek = 1; idWeek < 17; idWeek += 2) {
                 lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);
@@ -87,7 +87,7 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
 
     private Dialog onCreateDialogCopyUnevenWeek() {
         int currentWeek = Preferences.getInstance().getSelectedWeekSchedule();
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(false).setPositiveButton(R.string.ack, (dialog, id) -> {
             for (int idWeek = 0; idWeek < 17; idWeek += 2) {
                 lessonListWeekCurrent = LessonDao.getInstance().getLessonByWeek(currentWeek);

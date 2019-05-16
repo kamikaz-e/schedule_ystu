@@ -119,7 +119,7 @@ public abstract class BaseMainDialog extends BaseDialog implements BaseDialogVie
         root.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
-        final Dialog dialog = new Dialog(getContext(), R.style.AppTheme);
+        final Dialog dialog = new Dialog(getContext(), R.style.DarkTheme);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(root);
         if (dialog.getWindow() != null) {

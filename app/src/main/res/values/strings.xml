@@ -77,4 +77,5 @@
 
     <string name="copy_to_evenweek">Скопировать неделю в четные недели?</string>
     <string name="copy_to_unevenweek">Скопировать неделю в нечетные недели?</string>
+    <string name="title_select_theme">Выбор темы</string>
 </resources>

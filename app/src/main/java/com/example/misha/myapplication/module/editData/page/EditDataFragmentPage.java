@@ -75,11 +75,13 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
 
     public Dialog onCreateDialogDeleteItem(int position) {
         EditDataModel editDataModel = getArguments().getParcelable(FRAGMENT_EDIT_DATA);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(false)
                 .setPositiveButton(R.string.ack, (dialog, id) -> presenter.deleteItem(position))
                 .setNegativeButton(R.string.cancel, (dialog, id) -> dialog.cancel()).setTitle(ScheduleApp.getStr(editDataModel.getTitle(), presenter.getNameAt(position)));
-        return builder.create();
+        Dialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(true);
+        return dialog;
     }
 
     @NotNull
