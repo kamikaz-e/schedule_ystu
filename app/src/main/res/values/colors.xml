@@ -23,5 +23,5 @@
     <color name="green">@android:color/holo_green_light</color>
     <color name="orange">#ffa500</color>
     <color name="whiteFF">#FFFFFF</color>
-    <color name="whiteF0">#F0F0F0</color>
+    <color name="whiteD3">#D3D3D3</color>
 </resources>
