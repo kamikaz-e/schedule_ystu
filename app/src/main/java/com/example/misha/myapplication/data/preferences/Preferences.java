@@ -21,6 +21,8 @@ public final class Preferences implements PreferencesInterface {
     private static final String PREF_KEY_SELECT_LESSON = "PREF_KEY_SELECT_LESSON";
     private static final String PREF_KEY_FAB_OPEN = "PREF_KEY_FAB_OPEN";
     public static final String SELECT_DATE = "SELECT_DATE";
+    public static final String DARK_THEME = "DARK_THEME";
+    public static final String LIGHT_THEME = "LIGHT_THEME";
     public String SELECT_THEME = "SELECT_THEME";
 
     public static Preferences getInstance() {
@@ -120,7 +122,7 @@ public final class Preferences implements PreferencesInterface {
 
     @Override
     public String getSelectedTheme() {
-        return mPrefs.getString(SELECT_THEME, "DarkTheme");
+        return mPrefs.getString(SELECT_THEME, DARK_THEME);
     }
 
 

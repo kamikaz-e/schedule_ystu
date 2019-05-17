@@ -1,11 +1,13 @@
 package com.example.misha.myapplication.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.ScheduleApp;
 import com.example.misha.myapplication.common.core.BaseActivity;
 import com.example.misha.myapplication.data.database.DatabaseHelper;
 import com.example.misha.myapplication.data.database.dao.CallDao;

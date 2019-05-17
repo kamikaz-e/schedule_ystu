@@ -75,9 +75,9 @@
         app:menu="@menu/menu_nav_drawer"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:labelVisibilityMode="unlabeled"
-        android:foreground="?attr/selectableItemBackground"
-        app:itemTextColor="@drawable/bottom_navigation_colors"
-        app:itemIconTint="@drawable/bottom_navigation_colors"/>
+        android:foreground="@null"
+        style="?attr/navBottomStyle"
+        />
 </RelativeLayout>
 
 

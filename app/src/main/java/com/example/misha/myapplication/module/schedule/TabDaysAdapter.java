@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.ScheduleApp;
 import com.example.misha.myapplication.SimpleItemClickListener;
 import com.example.misha.myapplication.data.preferences.Preferences;
 
@@ -18,6 +19,10 @@ import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
+import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
+
 
 public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHolder> {
 
@@ -84,7 +89,14 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
 
         private void onBindView(int position) {
             date.setText(dayYear.get(position));
-            itemView.setBackgroundColor(selectedPos == position ? Color.parseColor(R.color.colorPrimary) : Color.TRANSPARENT);
+            String nameTheme = Preferences.getInstance().getSelectedTheme();
+            if (nameTheme.equals(DARK_THEME)) {
+                itemView.setBackgroundColor(selectedPos == position ? ScheduleApp.getClr(R.color.colorAccent) : Color.TRANSPARENT);
+            }
+            if (nameTheme.equals(LIGHT_THEME)) {
+                itemView.setBackgroundColor(selectedPos == position ? ScheduleApp.getClr(R.color.orange) : Color.TRANSPARENT);
+            }
+
         }
 
 

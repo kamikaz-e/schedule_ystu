@@ -34,6 +34,9 @@ import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
 
+import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
+import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
+
 
 public abstract class BaseActivity extends AppCompatActivity implements Root {
 
@@ -59,10 +62,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Root {
         super.onCreate(savedInstanceState);
         compositeDisposable = new CompositeDisposable();
         String nameTheme = Preferences.getInstance().getSelectedTheme();
-        if (nameTheme.equals("DarkTheme")) {
+        if (nameTheme.equals(DARK_THEME)) {
             setTheme(R.style.DarkTheme);
         }
-        if (nameTheme.equals("LightTheme")) {
+        if (nameTheme.equals(LIGHT_THEME)) {
             setTheme(R.style.LightTheme);
         }
         setContentView(getLayoutId());
