@@ -12,6 +12,7 @@
     <color name="black65">#656565</color>
     <color name="black56">#565656</color>
     <color name="black48">#484848</color>
+    <color name="black44">#444444</color>
     <color name="black38">#383838</color>
     <color name="black27">#272727</color>
     <color name="black20">#202020</color>
@@ -19,7 +20,8 @@
     <color name="black">#000000</color>
     <color name="navy">#000080</color>
     <color name="red">#ff0000</color>
-    <color name="green">#3cb371</color>
+    <color name="green">@android:color/holo_green_light</color>
     <color name="orange">#ffa500</color>
-    <color name="white">#FFFFFF</color>
+    <color name="whiteFF">#FFFFFF</color>
+    <color name="whiteF0">#F0F0F0</color>
 </resources>

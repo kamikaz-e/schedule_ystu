@@ -26,7 +26,9 @@
             android:id="@+id/rv_dialog_edit_data"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/spacing_medium"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </FrameLayout>

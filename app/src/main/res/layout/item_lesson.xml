@@ -29,6 +29,7 @@
                 android:layout_height="24dp"
                 android:textAlignment="center"
                 android:textSize="17sp"
+                style="?attr/textViewStyle"
                 tools:text="1" />
 
             <TextView

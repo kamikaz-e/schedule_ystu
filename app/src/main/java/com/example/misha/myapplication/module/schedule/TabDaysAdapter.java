@@ -94,7 +94,7 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
                 itemView.setBackgroundColor(selectedPos == position ? ScheduleApp.getClr(R.color.colorAccent) : Color.TRANSPARENT);
             }
             if (nameTheme.equals(LIGHT_THEME)) {
-                itemView.setBackgroundColor(selectedPos == position ? ScheduleApp.getClr(R.color.orange) : Color.TRANSPARENT);
+                itemView.setBackgroundColor(selectedPos == position ? ScheduleApp.getClr(R.color.green) : Color.TRANSPARENT);
             }
 
         }
