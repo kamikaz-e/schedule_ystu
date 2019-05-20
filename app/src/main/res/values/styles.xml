@@ -7,20 +7,20 @@
 
     <style name="DarkTheme" parent="@style/Theme.AppCompat">
         <item name="windowNoTitle">true</item>
-        <item name="tabStyle">@style/TabLayoutDarkStyle</item>
         <item name="toolbarStyle">@style/ToolBarDarkStyle</item>
-        <item name="cardStyle">@style/CardViewStyleDarkStyle</item>
+        <item name="cardStyle">@style/CardViewDarkStyle</item>
         <item name="textViewStyle">@style/TextViewDarkStyle</item>
+        <item name="tabLayoutStyle">@style/TabLayoutDarkStyle</item>
         <item name="navBottomStyle">@style/BottomNavigationViewDarkStyle</item>
         <item name="android:textAppearanceLargePopupMenu">@style/PopupMenuTextAppearanceLarge</item>
-
+        <item name="android:textColorHint">@color/whiteD3</item>
         <item name="colorControlActivated">@color/colorAccent</item>
         <item name="colorControlNormal">@color/colorAccent</item>
         <item name="colorPrimary">@color/colorAccent</item>
         <item name="colorPrimaryDark">@color/black38</item>
         <item name="android:colorBackground">@color/black38</item>
-        <item name="android:textColor">@color/whiteFF</item>
-        <item name="android:textColorPrimary">@color/whiteFF</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
 
     </style>
 
@@ -29,17 +29,18 @@
         <item name="windowNoTitle">true</item>
         <item name="toolbarStyle">@style/ToolBarLightStyle</item>
         <item name="cardStyle">@style/CardViewLightStyle</item>
+        <item name="textViewStyle">@style/TextViewLightStyle</item>
+        <item name="tabLayoutStyle">@style/TabLayoutLightStyle</item>
         <item name="navBottomStyle">@style/BottomNavigationLightView</item>
         <item name="android:textAppearanceLargePopupMenu">@style/PopupMenuTextAppearanceLarge</item>
-
-
+        <item name="android:textColorHint">@color/grey75</item>
         <item name="colorControlActivated">@color/green</item>
         <item name="colorControlNormal">@color/green</item>
         <item name="colorPrimary">@color/green</item>
         <item name="colorPrimaryDark">@color/black48</item>
-        <item name="android:colorBackground">@color/whiteFF</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:textColor">@color/black20</item>
+        <item name="android:textColorPrimary">@color/black20</item>
 
     </style>
 
@@ -59,7 +60,7 @@
         <item name="android:background">@color/black48</item>
     </style>
 
-    <style name="CardViewStyleDarkStyle" parent="CardView">
+    <style name="CardViewDarkStyle" parent="CardView">
         <item name="cardCornerRadius">@dimen/spacing_medium</item>
         <item name="cardElevation">@dimen/spacing_small</item>
         <item name="cardBackgroundColor">@color/black56</item>
@@ -74,10 +75,21 @@
         <item name="android:background">@color/whiteD3</item>
     </style>
 
+    <style name="TabLayoutLightStyle" parent="Widget.Design.TabLayout">
+        <item name="tabSelectedTextColor">@color/green</item>
+        <item name="tabTextColor">@color/black20</item>
+        <item name="tabBackground">@color/white</item>
+        <item name="tabIndicatorColor">@color/green</item>
+    </style>
+
+    <style name="TextViewLightStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@color/white</item>
+    </style>
+
     <style name="CardViewLightStyle" parent="CardView">
         <item name="cardCornerRadius">@dimen/spacing_medium</item>
         <item name="cardElevation">@dimen/spacing_small</item>
-        <item name="cardBackgroundColor">@color/whiteFF</item>
+        <item name="cardBackgroundColor">@color/white</item>
     </style>
 
     <style name="BottomNavigationLightView" parent="Widget.Design.BottomNavigationView">

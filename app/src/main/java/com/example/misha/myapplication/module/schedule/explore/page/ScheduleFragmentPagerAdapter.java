@@ -1,5 +1,7 @@
 package com.example.misha.myapplication.module.schedule.explore.page;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.ScheduleApp;
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
 import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;
