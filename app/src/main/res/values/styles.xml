@@ -70,12 +70,6 @@
     </style>
 
 
-
-
-
-
-
-
     <style name="ToolBarLightStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/whiteD3</item>
     </style>
