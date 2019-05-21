@@ -33,7 +33,7 @@
         <item name="tabLayoutStyle">@style/TabLayoutLightStyle</item>
         <item name="navBottomStyle">@style/BottomNavigationLightView</item>
         <item name="android:textAppearanceLargePopupMenu">@style/PopupMenuTextAppearanceLarge</item>
-        <item name="android:textColorHint">@color/grey75</item>
+        <item name="android:textColorHint">@color/greyB3</item>
         <item name="colorControlActivated">@color/green</item>
         <item name="colorControlNormal">@color/green</item>
         <item name="colorPrimary">@color/green</item>
@@ -68,11 +68,12 @@
 
     <style name="BottomNavigationViewDarkStyle" parent="Widget.Design.BottomNavigationView">
         <item name="itemBackground">@color/black27</item>
+        <item name="itemIconTint">@drawable/nav_bottom_view_dark</item>
     </style>
 
 
     <style name="ToolBarLightStyle" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">@color/whiteD3</item>
+        <item name="android:background">@color/whiteEF</item>
     </style>
 
     <style name="TabLayoutLightStyle" parent="Widget.Design.TabLayout">
@@ -93,7 +94,8 @@
     </style>
 
     <style name="BottomNavigationLightView" parent="Widget.Design.BottomNavigationView">
-        <item name="itemBackground">@color/whiteD3</item>
+        <item name="itemBackground">@color/whiteEF</item>
+        <item name="itemIconTint">@drawable/nav_bottom_view_light</item>
     </style>
 
 

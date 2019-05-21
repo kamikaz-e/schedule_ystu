@@ -2,6 +2,7 @@
 <resources>
 
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorAccentTransparent">#90FF4081</color>
     <color name="textColor">#ffa500</color>
@@ -23,6 +24,7 @@
     <color name="green">@android:color/holo_green_light</color>
     <color name="orange">#ffa500</color>
     <color name="white">#FFFFFF</color>
-    <color name="whiteD3">#9e9e9e</color>
-    <color name="grey75">#757575</color>
+    <color name="whiteD3">#D3D3D3</color>
+    <color name="whiteEF">#efefef</color>
+    <color name="greyB3">#b3b3b3</color>
 </resources>
