@@ -34,7 +34,7 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         int code = 0;
 
-        if (lessonList.get(position).getSubject().equals("0")) {
+        if (lessonList.get(position).getSubject() == null) {
             code = 1;
         }
         if (lessonList.get(position).getAudience().equals("0")) {
@@ -82,13 +82,13 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
                 Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
                 Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
 
+
                 ((ViewHolderLesson) holder).subjectHint.setHint("Предмет");
                 ((ViewHolderLesson) holder).subjectEdit.setText(subject.getName());
                 ((ViewHolderLesson) holder).audienceHint.setHint("Аудитория");
                 ((ViewHolderLesson) holder).audienceEdit.setText(audience.getName());
                 ((ViewHolderLesson) holder).educatorHint.setHint("Преподаватель");
                 ((ViewHolderLesson) holder).educatorEdit.setText(educator.getName());
-                ((ViewHolderLesson) holder).typelessonHint.setHint("Тип занятия");
                 ((ViewHolderLesson) holder).typelessonEdit.setText(typelesson.getName());
 
                 break;
@@ -128,7 +128,7 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
         private final TextInputLayout subjectHint;
         private final TextInputLayout audienceHint;
         private final TextInputLayout educatorHint;
-        private final TextInputLayout typelessonHint;
+
 
         public ViewHolderLesson(View view) {
             super(view);
@@ -141,7 +141,7 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
             subjectHint = view.findViewById(R.id.subject_hint);
             audienceHint = view.findViewById(R.id.audience_hint);
             educatorHint = view.findViewById(R.id.educator_hint);
-            typelessonHint = view.findViewById(R.id.typelesson_hint);
+
         }
     }
 }

@@ -39,10 +39,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "week INTEGER, day INTEGER, id_subject INTEGER," +
             " id_audience INTEGER, id_educator INTEGER, " +
             "id_typelesson INTEGER, id_time_lesson INTEGER," +
-            "FOREIGN KEY (id_subject) REFERENCES subjects (id), " +
-            "FOREIGN KEY (id_audience) REFERENCES audiences (id), " +
-            "FOREIGN KEY (id_educator) REFERENCES educators (id), " +
-            "FOREIGN KEY (id_typelesson) REFERENCES typelessons (id), " +
+            "FOREIGN KEY (id_subject) REFERENCES subjects (id)  ON DELETE SET NULL, " +
+            "FOREIGN KEY (id_audience) REFERENCES audiences (id)   ON DELETE SET NULL, " +
+            "FOREIGN KEY (id_educator) REFERENCES educators (id)   ON DELETE SET NULL, " +
+            "FOREIGN KEY (id_typelesson) REFERENCES typelessons (id)   ON DELETE SET NULL, " +
             "FOREIGN KEY (id_time_lesson) REFERENCES calls (id))";
     /**
      * Migration list.
