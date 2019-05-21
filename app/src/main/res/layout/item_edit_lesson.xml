@@ -44,7 +44,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/spacing_medium"
-                android:src="@drawable/ic_more_vert_black"
                 android:textAppearance="?android:textAppearanceLarge" />
         </RelativeLayout>
 

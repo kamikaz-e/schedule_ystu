@@ -3,6 +3,7 @@ package com.example.misha.myapplication.module.schedule.edit.page;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;
 import com.example.misha.myapplication.data.database.dao.SubjectDao;
 import com.example.misha.myapplication.data.database.dao.TypelessonDao;
+import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.entity.Audience;
 import com.example.misha.myapplication.entity.Calls;
 import com.example.misha.myapplication.entity.Educator;
@@ -22,6 +24,9 @@ import com.example.misha.myapplication.entity.Subject;
 import com.example.misha.myapplication.entity.Typelesson;
 
 import java.util.List;
+
+import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
+import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
 
 public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditScheduleFragmentPagerAdapter.ViewHolder> {
 
@@ -90,7 +95,7 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
         private final TextView audienceEdit;
         private final TextView educatorEdit;
         private final TextView typeLessonEdit;
-        private final View textViewOptions;
+        private final ImageView textViewOptions;
 
 
         public ViewHolder(View view) {
@@ -110,6 +115,7 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
         }
 
         private void onBindView(int position) {
+
             Lesson lesson = lessonList.get(position);
             number.setText(lesson.getTimeLesson());
             timeEdit.setText((lesson.getTimeLesson()));
@@ -118,6 +124,13 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
             Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
             Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
             Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
+
+            if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
+                textViewOptions.setImageResource(R.drawable.ic_more_vert_white);
+            }
+            if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)) {
+                textViewOptions.setImageResource(R.drawable.ic_more_vert_black);
+            }
 
 
             timeEdit.setText(calls.getName());

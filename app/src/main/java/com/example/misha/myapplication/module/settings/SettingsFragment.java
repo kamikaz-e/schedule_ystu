@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -18,11 +19,14 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
+import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.settings.theme.DialogFragmentSelectTheme;
 
 import org.jetbrains.annotations.NotNull;
 
 import static com.example.misha.myapplication.Constants.SELECT_THEME;
+import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
+import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
 
 
 public class SettingsFragment extends BaseMainFragment implements SettingsFragmentView, View.OnClickListener {
@@ -47,6 +51,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         return presenter;
     }
 
+    @SuppressLint("NewApi")
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,6 +60,23 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         RelativeLayout layoutImport = view.findViewById(R.id.import_data);
         RelativeLayout layoutAbout = view.findViewById(R.id.about);
         RelativeLayout layoutSelectDate = view.findViewById(R.id.select_theme);
+        ImageView imageSearchAudience = view.findViewById(R.id.image_searchAudience);
+        ImageView imageImport = view.findViewById(R.id.image_import);
+        ImageView imageTheme = view.findViewById(R.id.image_theme);
+        ImageView imageAbout = view.findViewById(R.id.image_about);
+        if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
+            imageSearchAudience.setImageResource(R.drawable.ic_search_white);
+            imageImport.setImageResource(R.drawable.ic_import_white);
+            imageTheme.setImageResource(R.drawable.ic_palette_white);
+            imageAbout.setImageResource(R.drawable.ic_person_white);
+        }
+        if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)) {
+            imageSearchAudience.setImageResource(R.drawable.ic_search_black);
+            imageImport.setImageResource(R.drawable.ic_import);
+            imageTheme.setImageResource(R.drawable.ic_palette_black);
+            imageAbout.setImageResource(R.drawable.ic_person_black);
+        }
+
         layoutPickWeek.setOnClickListener(this);
         layoutImport.setOnClickListener(this);
         layoutAbout.setOnClickListener(this);

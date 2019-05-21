@@ -19,7 +19,6 @@
             android:layout_height="45sp"
             android:layout_margin="@dimen/spacing_medium"
             android:padding="@dimen/spacing_medium"
-            app:srcCompat="@drawable/ic_search_black"
             tools:ignore="RtlSymmetry" />
 
 
@@ -60,7 +59,6 @@
             android:layout_width="40sp"
             android:layout_height="45sp"
             android:layout_margin="@dimen/spacing_medium"
-            app:srcCompat="@drawable/ic_import"
             tools:ignore="RtlSymmetry" />
 
         <TextView
@@ -100,8 +98,7 @@
             android:layout_width="40sp"
             android:layout_height="45sp"
             android:layout_margin="@dimen/spacing_medium"
-            android:padding="@dimen/spacing_medium"
-            app:srcCompat="@drawable/ic_palette_black" />
+            android:padding="@dimen/spacing_medium" />
 
         <TextView
             android:id="@+id/text_theme"
@@ -141,7 +138,6 @@
             android:layout_height="45sp"
             android:layout_margin="@dimen/spacing_medium"
             android:padding="@dimen/spacing_medium"
-            app:srcCompat="@drawable/ic_person_black"
             tools:ignore="RtlSymmetry" />
 
         <TextView
