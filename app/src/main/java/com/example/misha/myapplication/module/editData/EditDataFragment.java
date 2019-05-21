@@ -16,9 +16,13 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.database.AbsDao;
+import com.example.misha.myapplication.data.preferences.Preferences;
 import com.google.android.material.tabs.TabLayout;
 
 import org.jetbrains.annotations.NotNull;
+
+import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
+import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
 
 
 public class EditDataFragment extends BaseMainFragment implements EditDataFragmentView {
@@ -58,7 +62,10 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
     @Override
     public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_empty, menu);
-        menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_clear);
+        if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)){
+        menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_clear_white);}
+        if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)){
+            menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_clear_black);}
         super.onCreateOptionsMenu(menu, inflater);
     }
 

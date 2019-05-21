@@ -6,7 +6,7 @@
         android:title=""/>
     <item
         android:id="@+id/editData"
-        android:icon="@drawable/ic_add_circle_black"
+        android:icon="@drawable/ic_add_circle"
         android:title="" />
     <item
         android:id="@+id/raspDay"

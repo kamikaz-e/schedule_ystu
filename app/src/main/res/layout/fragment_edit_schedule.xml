@@ -20,34 +20,39 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/uneven_weekFab"
+        style="?attr/floatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_above="@+id/even_weekFab"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/spacing_normal"
+        app:borderWidth="0dp"
         android:layout_marginBottom="@dimen/spacing_normal"
         android:src="@drawable/ic_uneven_week"
         android:visibility="invisible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/even_weekFab"
+        style="?attr/floatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/main_fab"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/spacing_normal"
         android:layout_marginBottom="@dimen/spacing_normal"
+        app:borderWidth="0dp"
         android:src="@drawable/ic_even_week"
         android:visibility="invisible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/main_fab"
+        style="?attr/floatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/viewPager"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/spacing_normal"
+        app:borderWidth="0dp"
         android:layout_marginBottom="@dimen/spacing_normal"
         android:src="@drawable/ic_add"
         app:layout_anchor="@id/rv_tab"

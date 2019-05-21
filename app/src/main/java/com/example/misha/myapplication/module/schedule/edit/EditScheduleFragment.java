@@ -28,6 +28,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
+import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
+import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
+
 public class EditScheduleFragment extends BaseMainFragment implements EditScheduleFragmentView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private EditScheduleFragmentPagerAdapter pagerAdapter;
@@ -103,7 +106,12 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     @Override
     public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_empty, menu);
-        menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_ok);
+        if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
+            menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_ok_white);
+        }
+        if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)) {
+            menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_ok_black);
+        }
     }
 
     @Override
