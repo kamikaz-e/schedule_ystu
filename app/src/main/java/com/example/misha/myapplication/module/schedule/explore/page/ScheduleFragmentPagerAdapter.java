@@ -33,17 +33,22 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         int code = 0;
+        Lesson lesson = lessonList.get(position);
+        Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
+        Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
+        Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
+        Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
 
-        if (lessonList.get(position).getSubject() == null) {
+        if (lessonList.get(position).getSubject().equals("0") || subject==null) {
             code = 1;
         }
-        if (lessonList.get(position).getAudience().equals("0")) {
+        if (lessonList.get(position).getAudience().equals("0") || audience==null) {
             code = 1;
         }
-        if (lessonList.get(position).getEducator().equals("0")) {
+        if (lessonList.get(position).getEducator().equals("0") || educator==null) {
             code = 1;
         }
-        if (lessonList.get(position).getTypeLesson().equals("0")) {
+        if (lessonList.get(position).getTypeLesson().equals("0") || typelesson==null) {
             code = 1;
         }
         return code;
@@ -82,14 +87,30 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
                 Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
                 Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
 
+                if (subject == null) {
+                  break;
+                } else {
+                    ((ViewHolderLesson) holder).subjectHint.setHint("Предмет");
+                    ((ViewHolderLesson) holder).subjectEdit.setText(subject.getName());
+                }
+                if (audience == null) {
+                    break;
+                } else {
+                    ((ViewHolderLesson) holder).audienceHint.setHint("Аудитория");
+                    ((ViewHolderLesson) holder).audienceEdit.setText(audience.getName());
+                }
+                if (educator == null) {
+                    break;
+                } else {
+                    ((ViewHolderLesson) holder).educatorHint.setHint("Преподаватель");
+                    ((ViewHolderLesson) holder).educatorEdit.setText(educator.getName());
+                }
+                if (typelesson == null) {
+                    break;
+                } else {
+                    ((ViewHolderLesson) holder).typelessonEdit.setText(typelesson.getName());
+                }
 
-                ((ViewHolderLesson) holder).subjectHint.setHint("Предмет");
-                ((ViewHolderLesson) holder).subjectEdit.setText(subject.getName());
-                ((ViewHolderLesson) holder).audienceHint.setHint("Аудитория");
-                ((ViewHolderLesson) holder).audienceEdit.setText(audience.getName());
-                ((ViewHolderLesson) holder).educatorHint.setHint("Преподаватель");
-                ((ViewHolderLesson) holder).educatorEdit.setText(educator.getName());
-                ((ViewHolderLesson) holder).typelessonEdit.setText(typelesson.getName());
 
                 break;
             case 1:
