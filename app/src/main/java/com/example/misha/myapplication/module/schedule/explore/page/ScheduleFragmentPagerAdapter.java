@@ -1,7 +1,5 @@
 package com.example.misha.myapplication.module.schedule.explore.page;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +8,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.ScheduleApp;
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
 import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;
@@ -33,46 +30,6 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
 
     private List<Lesson> lessonList = new ArrayList<>();
 
-    public class ViewHolderLesson extends RecyclerView.ViewHolder {
-        private final TextView number;
-        private final TextView timeEdit;
-        private final TextView subjectEdit;
-        private final TextView audienceEdit;
-        private final TextView educatorEdit;
-        private final TextView typelessonEdit;
-        private final TextInputLayout subjectHint;
-        private final TextInputLayout audienceHint;
-        private final TextInputLayout educatorHint;
-        private final TextInputLayout typelessonHint;
-
-        public ViewHolderLesson(View view) {
-            super(view);
-            number = view.findViewById(R.id.number);
-            timeEdit = view.findViewById(R.id.time);
-            subjectEdit = view.findViewById(R.id.subject);
-            audienceEdit = view.findViewById(R.id.audience);
-            educatorEdit = view.findViewById(R.id.educator);
-            typelessonEdit = view.findViewById(R.id.typelesson);
-            subjectHint = view.findViewById(R.id.subject_hint);
-            audienceHint = view.findViewById(R.id.audience_hint);
-            educatorHint = view.findViewById(R.id.educator_hint);
-            typelessonHint = view.findViewById(R.id.typelesson_hint);
-        }
-    }
-
-
-    public static class ViewHolderEmptyLesson extends RecyclerView.ViewHolder {
-
-        private final TextView number;
-        private final TextView timeEdit;
-
-        public ViewHolderEmptyLesson(View view) {
-            super(view);
-            number = view.findViewById(R.id.number);
-            timeEdit = view.findViewById(R.id.time);
-        }
-    }
-
     @Override
     public int getItemViewType(int position) {
         int code = 0;
@@ -92,7 +49,6 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
         return code;
     }
 
-
     @NotNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -107,7 +63,6 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
         }
         return null;
     }
-
 
     public void setLessonList(List<Lesson> lessonList) {
         this.lessonList = lessonList;
@@ -149,5 +104,44 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return lessonList == null ? 0 : lessonList.size();
+    }
+
+    public static class ViewHolderEmptyLesson extends RecyclerView.ViewHolder {
+
+        private final TextView number;
+        private final TextView timeEdit;
+
+        public ViewHolderEmptyLesson(View view) {
+            super(view);
+            number = view.findViewById(R.id.number);
+            timeEdit = view.findViewById(R.id.time);
+        }
+    }
+
+    public class ViewHolderLesson extends RecyclerView.ViewHolder {
+        private final TextView number;
+        private final TextView timeEdit;
+        private final TextView subjectEdit;
+        private final TextView audienceEdit;
+        private final TextView educatorEdit;
+        private final TextView typelessonEdit;
+        private final TextInputLayout subjectHint;
+        private final TextInputLayout audienceHint;
+        private final TextInputLayout educatorHint;
+        private final TextInputLayout typelessonHint;
+
+        public ViewHolderLesson(View view) {
+            super(view);
+            number = view.findViewById(R.id.number);
+            timeEdit = view.findViewById(R.id.time);
+            subjectEdit = view.findViewById(R.id.subject);
+            audienceEdit = view.findViewById(R.id.audience);
+            educatorEdit = view.findViewById(R.id.educator);
+            typelessonEdit = view.findViewById(R.id.typelesson);
+            subjectHint = view.findViewById(R.id.subject_hint);
+            audienceHint = view.findViewById(R.id.audience_hint);
+            educatorHint = view.findViewById(R.id.educator_hint);
+            typelessonHint = view.findViewById(R.id.typelesson_hint);
+        }
     }
 }

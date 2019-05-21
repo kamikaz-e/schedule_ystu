@@ -48,12 +48,6 @@ public class ScheduleApp extends Application {
         return appContext.getResources().getString(stringId);
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        appContext = getApplicationContext();
-    }
-
     public static Context getAppContext() {
         return appContext;
     }
@@ -72,6 +66,12 @@ public class ScheduleApp extends Application {
         }
 
         return false;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        appContext = getApplicationContext();
     }
 
 }

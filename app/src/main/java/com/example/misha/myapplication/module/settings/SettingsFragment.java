@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
@@ -19,12 +18,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.entity.SimpleItem;
 import com.example.misha.myapplication.module.settings.theme.DialogFragmentSelectTheme;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 import static com.example.misha.myapplication.Constants.SELECT_THEME;
 
@@ -102,9 +98,10 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
 
     @Override
     public void onActivityResult(int requestCode, int resultOk, Intent data) {
-        if (requestCode==SELECT_THEME) {
+        if (requestCode == SELECT_THEME) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.detach(this).attach(this).commit();}
+            ft.detach(this).attach(this).commit();
+        }
     }
 
 

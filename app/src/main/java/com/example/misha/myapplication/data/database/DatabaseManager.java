@@ -11,14 +11,14 @@ public class DatabaseManager implements DatabaseInterface {
 
     private static volatile DatabaseManager instance;
 
+    private DatabaseManager() {
+
+    }
+
     public static DatabaseManager getInstance() {
         if (instance != null) return instance;
         instance = new DatabaseManager();
         return instance;
-    }
-
-    private DatabaseManager() {
-
     }
 
     @Override

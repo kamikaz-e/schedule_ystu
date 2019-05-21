@@ -3,6 +3,8 @@
     <attr name="navBottomStyle" format="reference" />
     <attr name="tabLayoutStyle" format="reference" />
     <attr name="textViewStyle" format="reference" />
+    <attr name="lineSpinnerItemStyle" format="reference" />
+    <attr name="textViewNumberCallStyle" format="reference" />
 
 
     <style name="DarkTheme" parent="@style/Theme.AppCompat">
@@ -10,6 +12,8 @@
         <item name="toolbarStyle">@style/ToolBarDarkStyle</item>
         <item name="cardStyle">@style/CardViewDarkStyle</item>
         <item name="textViewStyle">@style/TextViewDarkStyle</item>
+        <item name="lineSpinnerItemStyle">@style/lineSpinnerItemDarkStyle</item>
+        <item name="textViewNumberCallStyle">@style/TextViewNumberCallDarkStyle</item>
         <item name="tabLayoutStyle">@style/TabLayoutDarkStyle</item>
         <item name="navBottomStyle">@style/BottomNavigationViewDarkStyle</item>
         <item name="android:textAppearanceLargePopupMenu">@style/PopupMenuTextAppearanceLarge</item>
@@ -25,11 +29,14 @@
     </style>
 
 
-    <style name="LightTheme" parent="@style/Theme.AppCompat">
+    <style name="LightTheme" parent="@style/Theme.AppCompat.Light">
         <item name="windowNoTitle">true</item>
         <item name="toolbarStyle">@style/ToolBarLightStyle</item>
         <item name="cardStyle">@style/CardViewLightStyle</item>
+        <item name="android:timePickerDialogTheme">@style/TimePickerDialogLightStyle</item>
         <item name="textViewStyle">@style/TextViewLightStyle</item>
+        <item name="lineSpinnerItemStyle">@style/lineSpinnerItemLightStyle</item>
+        <item name="textViewNumberCallStyle">@style/TextViewNumberCallLightStyle</item>
         <item name="tabLayoutStyle">@style/TabLayoutLightStyle</item>
         <item name="navBottomStyle">@style/BottomNavigationLightView</item>
         <item name="android:textAppearanceLargePopupMenu">@style/PopupMenuTextAppearanceLarge</item>
@@ -41,9 +48,7 @@
         <item name="android:colorBackground">@color/white</item>
         <item name="android:textColor">@color/black20</item>
         <item name="android:textColorPrimary">@color/black20</item>
-
     </style>
-
 
     <style name="ToolBarDarkStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/black27</item>
@@ -60,6 +65,14 @@
         <item name="android:background">@color/black48</item>
     </style>
 
+    <style name="TextViewNumberCallDarkStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@color/black44</item>
+    </style>
+
+    <style name="lineSpinnerItemDarkStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@color/whiteD3</item>
+    </style>
+
     <style name="CardViewDarkStyle" parent="CardView">
         <item name="cardCornerRadius">@dimen/spacing_medium</item>
         <item name="cardElevation">@dimen/spacing_small</item>
@@ -71,6 +84,15 @@
         <item name="itemIconTint">@drawable/nav_bottom_view_dark</item>
     </style>
 
+
+    <style name="TimePickerDialogLightStyle" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="showTitle">false</item>
+        <item name="colorControlActivated">@color/green</item>
+        <item name="colorAccent">@color/greyBF</item>
+        <item name="android:textColorPrimary">@color/black20</item>
+        <item name="android:textColorSecondary">@color/black56</item>
+
+    </style>
 
     <style name="ToolBarLightStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/whiteEF</item>
@@ -84,7 +106,15 @@
     </style>
 
     <style name="TextViewLightStyle" parent="Widget.AppCompat.TextView">
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/whiteE6</item>
+    </style>
+
+    <style name="TextViewNumberCallLightStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@color/whiteE6</item>
+    </style>
+
+    <style name="lineSpinnerItemLightStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@color/black20</item>
     </style>
 
     <style name="CardViewLightStyle" parent="CardView">

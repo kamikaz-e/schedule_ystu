@@ -45,15 +45,6 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
     private Animation rotateBackward;
     private EditSchedulePagePresenter presenter;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
-        int day = getArguments().getInt(Constants.DAY);
-        presenter = new EditSchedulePagePresenter(positionWeek, day);
-        rvadapter = new EditScheduleFragmentPagerAdapter(presenter);
-    }
-
     public static EditSchedulePageFragment newInstance(int selectedWeek, int position) {
         Bundle args = new Bundle();
         args.putInt(Constants.SELECTED_WEEK, selectedWeek);
@@ -61,6 +52,15 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
         EditSchedulePageFragment fragment = new EditSchedulePageFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
+        int day = getArguments().getInt(Constants.DAY);
+        presenter = new EditSchedulePagePresenter(positionWeek, day);
+        rvadapter = new EditScheduleFragmentPagerAdapter(presenter);
     }
 
     @Override

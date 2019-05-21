@@ -16,6 +16,12 @@ import java.util.Calendar;
 public class CallsPresenter extends BaseMainPresenter<CallsFragmentView> implements CallsPresenterInterface {
 
     private Context context;
+    private Calendar calendarTimeCalls = Calendar.getInstance();
+    private TimePickerDialog.OnTimeSetListener timeOne = (view, hourOfDay, minute) -> {
+        calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendarTimeCalls.set(Calendar.MINUTE, minute);
+        setTime();
+    };
 
     public CallsPresenter(BaseActivity context) {
         this.context = context;
@@ -24,8 +30,6 @@ public class CallsPresenter extends BaseMainPresenter<CallsFragmentView> impleme
     @Override
     public void init() {
     }
-
-    private Calendar calendarTimeCalls = Calendar.getInstance();
 
     @Override
     public void onClick(int position) {
@@ -37,13 +41,6 @@ public class CallsPresenter extends BaseMainPresenter<CallsFragmentView> impleme
                 calendarTimeCalls.get(Calendar.MINUTE), true)
                 .show();
     }
-
-    private TimePickerDialog.OnTimeSetListener timeOne = (view, hourOfDay, minute) -> {
-        calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        calendarTimeCalls.set(Calendar.MINUTE, minute);
-        setTime();
-    };
-
 
     private void setTime() {
         if (Preferences.getInstance().isCallsOpened()) {

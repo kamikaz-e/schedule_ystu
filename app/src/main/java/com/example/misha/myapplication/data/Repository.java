@@ -26,16 +26,16 @@ public class Repository implements RepositoryManager {
 
     private PreferencesInterface preferencesInterface;
 
-    public static Repository getInstance() {
-        if (instance != null) return instance;
-        instance = new Repository();
-        return instance;
-    }
-
     private Repository() {
         databaseInterface = DatabaseManager.getInstance();
         apiService = RetrofitClient.getInstance().getRequestInterface();
         preferencesInterface = Preferences.getInstance();
+    }
+
+    public static Repository getInstance() {
+        if (instance != null) return instance;
+        instance = new Repository();
+        return instance;
     }
 
     @Override
@@ -89,18 +89,13 @@ public class Repository implements RepositoryManager {
     }
 
     @Override
-    public void setSelectedWeekSchedule(int position) {
-        preferencesInterface.setSelectedWeekSchedule(position);
-    }
-
-    @Override
     public int getSelectedWeekSchedule() {
         return preferencesInterface.getSelectedWeekSchedule();
     }
 
     @Override
-    public void setSelectedPositionTabDays(int position) {
-        preferencesInterface.setSelectedPositionTabDays(position);
+    public void setSelectedWeekSchedule(int position) {
+        preferencesInterface.setSelectedWeekSchedule(position);
     }
 
     @Override
@@ -109,8 +104,8 @@ public class Repository implements RepositoryManager {
     }
 
     @Override
-    public void setFabOpen(boolean state) {
-        preferencesInterface.setFabOpen(state);
+    public void setSelectedPositionTabDays(int position) {
+        preferencesInterface.setSelectedPositionTabDays(position);
     }
 
     @Override
@@ -119,8 +114,8 @@ public class Repository implements RepositoryManager {
     }
 
     @Override
-    public void setSelectedPositionLesson(int position) {
-        preferencesInterface.setSelectedPositionLesson(position);
+    public void setFabOpen(boolean state) {
+        preferencesInterface.setFabOpen(state);
     }
 
     @Override
@@ -129,8 +124,8 @@ public class Repository implements RepositoryManager {
     }
 
     @Override
-    public void setSelectDate(String selectDate) {
-        preferencesInterface.setSelectDate(selectDate);
+    public void setSelectedPositionLesson(int position) {
+        preferencesInterface.setSelectedPositionLesson(position);
     }
 
     @Override
@@ -139,12 +134,17 @@ public class Repository implements RepositoryManager {
     }
 
     @Override
-    public void setSelectedTheme(String stringTheme) {
-        preferencesInterface.setSelectedTheme(stringTheme);
+    public void setSelectDate(String selectDate) {
+        preferencesInterface.setSelectDate(selectDate);
     }
 
     @Override
     public String getSelectedTheme() {
         return preferencesInterface.getSelectedTheme();
+    }
+
+    @Override
+    public void setSelectedTheme(String stringTheme) {
+        preferencesInterface.setSelectedTheme(stringTheme);
     }
 }

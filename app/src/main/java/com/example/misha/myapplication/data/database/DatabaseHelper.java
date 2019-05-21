@@ -19,16 +19,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Database version.
      */
     public static final int DATABASE_VERSION = 1;
-    /**
-     * Migration list.
-     */
-    private final ArrayList<Patch> migrationsList = new ArrayList<Patch>() {
-        {
-            add(createV1Patch());
-        }
-    };
-
-
     private static final String CREATE_TABLE_SUBJECTS = "CREATE TABLE  subjects " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "subject VARCHAR UNIQUE ON CONFLICT IGNORE );";
@@ -41,11 +31,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_TYPELESSONS = "CREATE TABLE  typelessons  " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "typelesson VARCHAR UNIQUE ON CONFLICT IGNORE );";
-
     private static final String CREATE_CALL_SCHEDULE = "CREATE TABLE calls " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "time_lesson VARCHAR UNIQUE ON CONFLICT IGNORE );";
-
     private static final String CREATE_TABLE_LESSONS = "CREATE TABLE lessons " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "week INTEGER, day INTEGER, id_subject INTEGER," +
@@ -56,6 +44,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "FOREIGN KEY (id_educator) REFERENCES educators (id), " +
             "FOREIGN KEY (id_typelesson) REFERENCES typelessons (id), " +
             "FOREIGN KEY (id_time_lesson) REFERENCES calls (id))";
+    /**
+     * Migration list.
+     */
+    private final ArrayList<Patch> migrationsList = new ArrayList<Patch>() {
+        {
+            add(createV1Patch());
+        }
+    };
 
 
     public DatabaseHelper(Context context) {

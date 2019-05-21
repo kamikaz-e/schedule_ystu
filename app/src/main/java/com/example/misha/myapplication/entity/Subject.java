@@ -11,30 +11,6 @@ import com.google.gson.annotations.SerializedName;
 //Todo прочитать про сериализацию и Parcelable
 public class Subject implements Parcelable, SimpleItem {
 
-    @Expose
-    @SerializedName("id")
-    private String id;
-
-    @Expose
-    @SerializedName("subject")
-    private String name;
-
-    public Subject(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-
-    public Subject(Cursor cursor) {
-        this.id = cursor.getString(0);
-        this.name = cursor.getString(1);
-    }
-
-    protected Subject(Parcel in) {
-        id = in.readString();
-        name = in.readString();
-    }
-
     public static final Creator<Subject> CREATOR = new Creator<Subject>() {
         @Override
         public Subject createFromParcel(Parcel in) {
@@ -46,6 +22,28 @@ public class Subject implements Parcelable, SimpleItem {
             return new Subject[size];
         }
     };
+    @Expose
+    @SerializedName("id")
+    private String id;
+    @Expose
+    @SerializedName("subject")
+    private String name;
+
+
+    public Subject(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Subject(Cursor cursor) {
+        this.id = cursor.getString(0);
+        this.name = cursor.getString(1);
+    }
+
+    protected Subject(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+    }
 
     public Subject() {
 
@@ -60,18 +58,16 @@ public class Subject implements Parcelable, SimpleItem {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }
 
-
     public void setId(String id) {
         this.id = id;
-    }
-
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

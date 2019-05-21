@@ -1,8 +1,5 @@
 package com.example.misha.myapplication.util;
 
-import android.app.Activity;
-import android.view.inputmethod.InputMethodManager;
-
 import com.example.misha.myapplication.data.preferences.Preferences;
 
 import java.util.Calendar;

@@ -11,30 +11,6 @@ import com.google.gson.annotations.SerializedName;
 //Todo прочитать про сериализацию и Parcelable
 public class Typelesson implements Parcelable, SimpleItem {
 
-    @Expose
-    @SerializedName("id")
-    private String id;
-
-    @Expose
-    @SerializedName("typelessons")
-    private String name;
-
-    public Typelesson(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-
-    public Typelesson(Cursor cursor) {
-        this.id = cursor.getString(0);
-        this.name = cursor.getString(1);
-    }
-
-    protected Typelesson(Parcel in) {
-        id = in.readString();
-        name = in.readString();
-    }
-
     public static final Creator<Typelesson> CREATOR = new Creator<Typelesson>() {
         @Override
         public Typelesson createFromParcel(Parcel in) {
@@ -46,6 +22,28 @@ public class Typelesson implements Parcelable, SimpleItem {
             return new Typelesson[size];
         }
     };
+    @Expose
+    @SerializedName("id")
+    private String id;
+    @Expose
+    @SerializedName("typelessons")
+    private String name;
+
+
+    public Typelesson(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Typelesson(Cursor cursor) {
+        this.id = cursor.getString(0);
+        this.name = cursor.getString(1);
+    }
+
+    protected Typelesson(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+    }
 
     public Typelesson() {
 
@@ -61,6 +59,9 @@ public class Typelesson implements Parcelable, SimpleItem {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getId() {
         return id;
@@ -69,11 +70,6 @@ public class Typelesson implements Parcelable, SimpleItem {
     public void setId(String id) {
         this.id = id;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 
     @Override
     public int describeContents() {

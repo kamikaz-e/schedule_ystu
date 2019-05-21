@@ -10,11 +10,11 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
+            style="?attr/tabLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="center"
             app:tabMinWidth="100sp"
-            style="?attr/tabLayoutStyle"
             app:tabMode="fixed"
             app:tabTextAppearance="@style/TabLayoutTextAppearance" />
 

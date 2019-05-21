@@ -17,8 +17,8 @@
             android:id="@+id/image_searchAudience"
             android:layout_width="40sp"
             android:layout_height="45sp"
-            android:padding="@dimen/spacing_medium"
             android:layout_margin="@dimen/spacing_medium"
+            android:padding="@dimen/spacing_medium"
             app:srcCompat="@drawable/ic_search_black"
             tools:ignore="RtlSymmetry" />
 
@@ -28,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
-            android:paddingTop="@dimen/spacing_small"
             android:layout_toEndOf="@+id/image_searchAudience"
+            android:paddingTop="@dimen/spacing_small"
             android:text="@string/search_free_audience"
             android:textSize="16sp" />
 
@@ -67,9 +67,9 @@
             android:id="@+id/text_import"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/spacing_small"
             android:layout_margin="@dimen/spacing_normal"
             android:layout_toEndOf="@+id/image_import"
+            android:paddingTop="@dimen/spacing_small"
             android:text="@string/settings_import_title"
             android:textSize="16sp" />
 
@@ -99,8 +99,8 @@
             android:id="@+id/image_theme"
             android:layout_width="40sp"
             android:layout_height="45sp"
-            android:padding="@dimen/spacing_medium"
             android:layout_margin="@dimen/spacing_medium"
+            android:padding="@dimen/spacing_medium"
             app:srcCompat="@drawable/ic_palette_black" />
 
         <TextView
@@ -108,8 +108,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
-            android:paddingTop="@dimen/spacing_small"
             android:layout_toEndOf="@+id/image_theme"
+            android:paddingTop="@dimen/spacing_small"
             android:text="@string/settings_change_theme"
             android:textSize="16sp" />
 
@@ -127,8 +127,7 @@
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="1dp"
-      />
+        android:layout_height="1dp" />
 
     <RelativeLayout
         android:id="@+id/about"
@@ -140,8 +139,8 @@
             android:id="@+id/image_about"
             android:layout_width="40sp"
             android:layout_height="45sp"
-            android:padding="@dimen/spacing_medium"
             android:layout_margin="@dimen/spacing_medium"
+            android:padding="@dimen/spacing_medium"
             app:srcCompat="@drawable/ic_person_black"
             tools:ignore="RtlSymmetry" />
 
@@ -150,8 +149,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
-            android:paddingTop="@dimen/spacing_small"
             android:layout_toEndOf="@+id/image_about"
+            android:paddingTop="@dimen/spacing_small"
             android:text="@string/developer"
             android:textSize="16sp" />
 

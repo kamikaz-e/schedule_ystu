@@ -63,8 +63,8 @@ public class CustomSpinnerAdapter extends BaseAdapter implements SpinnerAdapter 
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = View.inflate(activity, R.layout.spinner_custom, null);
         List<String> arrayWeek = Arrays.asList(view.getResources().getStringArray(R.array.weeks));
-        TextView currentNumberWeek = view.findViewById(R.id.current_numberWeek);
-        TextView currentDaysWeekRange = view.findViewById(R.id.current_daysWeekRange);
+        TextView currentNumberWeek = view.findViewById(R.id.current_daysWeekRange);
+        TextView currentDaysWeekRange = view.findViewById(R.id.current_numberWeek);
         currentNumberWeek.setText(listItems.get(position));
         currentDaysWeekRange.setText(arrayWeek.get(position));
         return view;

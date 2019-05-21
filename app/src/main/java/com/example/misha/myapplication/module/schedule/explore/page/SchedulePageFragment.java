@@ -23,6 +23,14 @@ public class SchedulePageFragment extends BaseMainFragment implements SchedulePa
     private ScheduleFragmentPagerAdapter rvadapter;
     private SchedulePagePresenter presenter;
 
+    public static SchedulePageFragment newInstance(int selectedWeek, int position) {
+        Bundle args = new Bundle();
+        args.putInt(Constants.SELECTED_WEEK, selectedWeek);
+        args.putInt(Constants.DAY, position);
+        SchedulePageFragment fragment = new SchedulePageFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,15 +39,6 @@ public class SchedulePageFragment extends BaseMainFragment implements SchedulePa
         int positionWeek = getArguments().getInt(Constants.SELECTED_WEEK);
         rvadapter = new ScheduleFragmentPagerAdapter();
         presenter = new SchedulePagePresenter(day, positionWeek);
-    }
-
-    public static SchedulePageFragment newInstance(int selectedWeek, int position) {
-        Bundle args = new Bundle();
-        args.putInt(Constants.SELECTED_WEEK, selectedWeek);
-        args.putInt(Constants.DAY, position);
-        SchedulePageFragment fragment = new SchedulePageFragment();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override

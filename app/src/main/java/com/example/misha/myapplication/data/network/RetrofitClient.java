@@ -32,6 +32,18 @@ public final class RetrofitClient {
 
     private final APIService requestInterface;
 
+    private RetrofitClient() {
+
+        okHttpClient = buildOkHttpClient();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BuildConfig.BASE_URL)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+        requestInterface = retrofit.create(APIService.class);
+    }
+
     public static RetrofitClient getInstance() {
         if (instance == null) {
             instance = new RetrofitClient();
@@ -45,18 +57,6 @@ public final class RetrofitClient {
 
     public Retrofit getRetrofit() {
         return retrofit;
-    }
-
-    private RetrofitClient() {
-
-        okHttpClient = buildOkHttpClient();
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-        requestInterface = retrofit.create(APIService.class);
     }
 
     OkHttpClient getOkHttpClient() {

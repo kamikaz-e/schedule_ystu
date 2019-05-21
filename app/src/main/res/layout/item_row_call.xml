@@ -7,6 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/call_cardView"
+        style="?attr/cardStyle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="@dimen/spacing_medium"
@@ -16,7 +17,8 @@
 
         <TextView
             android:id="@+id/call_number"
-            android:layout_width="35dp"
+            style="?attr/textViewNumberCallStyle"
+            android:layout_width="30sp"
             android:layout_height="match_parent"
             android:gravity="center_vertical|center_horizontal|center"
             android:textAlignment="center"
@@ -29,10 +31,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
             android:layout_marginTop="12dp"
-            android:cursorVisible="false"
-            android:checkable="false"
             android:background="@null"
+            android:checkable="false"
             android:clickable="false"
+            android:cursorVisible="false"
             android:focusable="false"
             android:hint="@string/call_title"
             android:longClickable="false"

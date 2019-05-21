@@ -16,16 +16,22 @@ import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
 
 public class EditDataModel implements Parcelable {
 
+    public static final Creator<EditDataModel> CREATOR = new Creator<EditDataModel>() {
+        @Override
+        public EditDataModel createFromParcel(Parcel in) {
+            return new EditDataModel(in);
+        }
+
+        @Override
+        public EditDataModel[] newArray(int size) {
+            return new EditDataModel[size];
+        }
+    };
     private int error;
-
     private int hint;
-
     private int title;
-
     private int inputType;
-
     private int maxLenth;
-
     private int type;
 
     public EditDataModel(int error, int hint, int title, int inputType, int maxLenth, int type) {
@@ -45,19 +51,6 @@ public class EditDataModel implements Parcelable {
         maxLenth = in.readInt();
         type = in.readInt();
     }
-
-    public static final Creator<EditDataModel> CREATOR = new Creator<EditDataModel>() {
-        @Override
-        public EditDataModel createFromParcel(Parcel in) {
-            return new EditDataModel(in);
-        }
-
-        @Override
-        public EditDataModel[] newArray(int size) {
-            return new EditDataModel[size];
-        }
-    };
-
 
     public int getError() {
         return error;

@@ -2,12 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:id="@+id/cardView"
+    style="?attr/cardStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_medium"
-    style="?attr/cardStyle">
+    android:layout_margin="@dimen/spacing_medium">
 
 
     <LinearLayout
@@ -25,11 +24,11 @@
 
             <TextView
                 android:id="@+id/number"
+                style="?attr/textViewStyle"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:textAlignment="center"
                 android:textSize="17sp"
-                style="?attr/textViewStyle"
                 tools:text="1" />
 
             <TextView
@@ -52,8 +51,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/subject_hint"
                 android:layout_width="match_parent"
-                app:hintAnimationEnabled="false"
                 android:layout_height="wrap_content"
+                app:hintAnimationEnabled="false"
                 tools:hint="Предмет">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -150,8 +149,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/educator_hint"
                 android:layout_width="match_parent"
-                app:hintAnimationEnabled="false"
                 android:layout_height="wrap_content"
+                app:hintAnimationEnabled="false"
                 tools:hint="Преподаватель">
 
                 <com.google.android.material.textfield.TextInputEditText

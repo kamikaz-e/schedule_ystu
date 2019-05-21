@@ -16,7 +16,7 @@
         android:paddingStart="@dimen/spacing_normal"
         android:paddingTop="@dimen/spacing_medium"
         android:paddingEnd="@dimen/spacing_normal"
-        android:paddingBottom="@dimen/spacing_medium"/>
+        android:paddingBottom="@dimen/spacing_medium" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,6 +28,8 @@
             style="?attr/textViewStyle"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:gravity="center_vertical|center_horizontal|center"
             android:textAlignment="center"
             android:textSize="17sp"
             tools:text="1" />
@@ -35,8 +37,9 @@
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_height="24dp"
+
+            android:layout_marginStart="@dimen/spacing_normal"
             android:layout_toEndOf="@+id/number"
             android:textSize="16sp"
             tools:text="Время" />
@@ -44,12 +47,11 @@
         <TextView
             android:id="@+id/state_lesson"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_toEndOf="@+id/time"
-            android:paddingStart="15dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="24sp"
+            android:text="@string/string_empty_lesson"
             android:textSize="16sp"
-            android:text="Занятие отсутствует"
             tools:ignore="RtlSymmetry" />
     </RelativeLayout>
 

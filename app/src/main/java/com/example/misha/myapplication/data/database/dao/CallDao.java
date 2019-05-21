@@ -12,8 +12,10 @@ import java.util.ArrayList;
 
 public class CallDao extends AbsDao<Calls> {
 
+    public final static String ID = "id";
+    public final static String TIME = "time_lesson";
+    public static final String[] ALL_SET_PROPERTIES = new String[]{ID, TIME};
     private static volatile CallDao instance;
-
     private CallDao() {
     }
 
@@ -23,12 +25,6 @@ public class CallDao extends AbsDao<Calls> {
         }
         return instance;
     }
-
-    public final static String ID = "id";
-    public final static String TIME = "time_lesson";
-
-
-    public static final String[] ALL_SET_PROPERTIES = new String[]{ID, TIME};
 
     @Override
     protected String[] getAllColumns() {

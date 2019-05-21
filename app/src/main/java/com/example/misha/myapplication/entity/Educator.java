@@ -9,10 +9,20 @@ import com.google.gson.annotations.SerializedName;
 
 public class Educator implements Parcelable, SimpleItem {
 
+    public static final Creator<Educator> CREATOR = new Creator<Educator>() {
+        @Override
+        public Educator createFromParcel(Parcel in) {
+            return new Educator(in);
+        }
+
+        @Override
+        public Educator[] newArray(int size) {
+            return new Educator[size];
+        }
+    };
     @Expose
     @SerializedName("id")
     private String id;
-
     @Expose
     @SerializedName("educators")
     private String name;
@@ -32,18 +42,6 @@ public class Educator implements Parcelable, SimpleItem {
         name = in.readString();
     }
 
-    public static final Creator<Educator> CREATOR = new Creator<Educator>() {
-        @Override
-        public Educator createFromParcel(Parcel in) {
-            return new Educator(in);
-        }
-
-        @Override
-        public Educator[] newArray(int size) {
-            return new Educator[size];
-        }
-    };
-
     public Educator() {
 
     }
@@ -58,6 +56,9 @@ public class Educator implements Parcelable, SimpleItem {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getId() {
         return id;
@@ -65,10 +66,6 @@ public class Educator implements Parcelable, SimpleItem {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

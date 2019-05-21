@@ -11,30 +11,6 @@ import com.google.gson.annotations.SerializedName;
 //Todo прочитать про сериализацию и Parcelable
 public class Calls implements Parcelable, SimpleItem {
 
-    @Expose
-    @SerializedName("id")
-    private String id;
-
-    @Expose
-    @SerializedName("calls")
-    private String name;
-
-    public Calls(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-
-    public Calls(Cursor cursor) {
-        this.id = cursor.getString(0);
-        this.name = cursor.getString(1);
-    }
-
-    protected Calls(Parcel in) {
-        id = in.readString();
-        name = in.readString();
-    }
-
     public static final Creator<Calls> CREATOR = new Creator<Calls>() {
         @Override
         public Calls createFromParcel(Parcel in) {
@@ -46,6 +22,28 @@ public class Calls implements Parcelable, SimpleItem {
             return new Calls[size];
         }
     };
+    @Expose
+    @SerializedName("id")
+    private String id;
+    @Expose
+    @SerializedName("calls")
+    private String name;
+
+
+    public Calls(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Calls(Cursor cursor) {
+        this.id = cursor.getString(0);
+        this.name = cursor.getString(1);
+    }
+
+    protected Calls(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+    }
 
     public Calls() {
     }
@@ -60,6 +58,9 @@ public class Calls implements Parcelable, SimpleItem {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getId() {
         return id;
@@ -67,10 +68,6 @@ public class Calls implements Parcelable, SimpleItem {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

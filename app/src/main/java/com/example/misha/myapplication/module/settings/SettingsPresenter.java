@@ -12,7 +12,6 @@ import com.example.misha.myapplication.data.database.dao.SubjectDao;
 import com.example.misha.myapplication.data.network.request.ScheduleRequest;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.entity.Subject;
-import com.example.misha.myapplication.module.settings.theme.DialogFragmentSelectTheme;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
 
     @Override
     public void onCreateDialogSelectTheme() {
-       getView().showDialogSelectTheme();
+        getView().showDialogSelectTheme();
     }
 
     @Override

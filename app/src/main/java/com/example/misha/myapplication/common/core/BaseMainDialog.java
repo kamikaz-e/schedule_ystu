@@ -53,10 +53,6 @@ public abstract class BaseMainDialog extends BaseDialog implements BaseDialogVie
         return toolbar;
     }
 
-    public void setTitle(String title) {
-        toolbar.setTitle(title);
-    }
-
     @Override
     public void showGlobalError(String message) {
         if (getActivity() != null) {
@@ -73,6 +69,10 @@ public abstract class BaseMainDialog extends BaseDialog implements BaseDialogVie
     }
 
     public abstract String getTitle();
+
+    public void setTitle(String title) {
+        toolbar.setTitle(title);
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

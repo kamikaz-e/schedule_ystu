@@ -49,74 +49,74 @@ public class Lesson {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getSubject() {
         return subject;
-    }
-
-    public String getAudience() {
-        return audience;
-    }
-
-    public String getEducator() {
-        return educator;
-    }
-
-    public String getTypeLesson() {
-        return typeLesson;
-    }
-
-    public String getTimeLesson() {
-        return timeLesson;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public String getWeek() {
-        return week;
     }
 
     public void setSubject(String subject) {
         this.subject = subject;
     }
 
+    public String getAudience() {
+        return audience;
+    }
+
     public void setAudience(String audience) {
         this.audience = audience;
     }
 
-    public void setEducatorEdit(String educatorEdit) {
-        this.educator = educatorEdit;
+    public String getEducator() {
+        return educator;
     }
 
     public void setEducator(String educator) {
         this.educator = educator;
     }
 
-    public void setData(String subject, String audience, String educator, String typeLesson) {
-        this.subject = subject;
-        this.audience = audience;
-        this.educator = educator;
+    public String getTypeLesson() {
+        return typeLesson;
+    }
+
+    public void setTypeLesson(String typeLesson) {
         this.typeLesson = typeLesson;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
+    public String getTimeLesson() {
+        return timeLesson;
     }
 
     public void setTimeLesson(String timeLesson) {
         this.timeLesson = timeLesson;
     }
 
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getWeek() {
+        return week;
+    }
+
     public void setWeek(String week) {
         this.week = week;
     }
 
-    public void setTypeLesson(String typeLesson) {
+    public void setEducatorEdit(String educatorEdit) {
+        this.educator = educatorEdit;
+    }
+
+    public void setData(String subject, String audience, String educator, String typeLesson) {
+        this.subject = subject;
+        this.audience = audience;
+        this.educator = educator;
         this.typeLesson = typeLesson;
     }
 }

@@ -14,27 +14,27 @@ public interface PreferencesInterface {
 
     void setCallsOpened(boolean state);
 
-    void setSelectedWeekSchedule(int position);
-
     int getSelectedWeekSchedule();
 
-    void setSelectedPositionTabDays(int position);
+    void setSelectedWeekSchedule(int position);
 
     int getSelectedPositionTabDays();
 
-    void setFabOpen(boolean state);
+    void setSelectedPositionTabDays(int position);
 
     boolean getFabOpen();
 
-    void setSelectedPositionLesson(int position);
+    void setFabOpen(boolean state);
 
     int getSelectedPositionLesson();
 
-    void setSelectDate(String selectDate);
+    void setSelectedPositionLesson(int position);
 
     String getSelectDate();
 
-    void setSelectedTheme(String stringTheme);
+    void setSelectDate(String selectDate);
 
     String getSelectedTheme();
+
+    void setSelectedTheme(String stringTheme);
 }

@@ -12,8 +12,17 @@ import java.util.ArrayList;
 
 public class LessonDao extends AbsDao<Lesson> {
 
+    public final static String ID = "id";
+    public final static String WEEK = "week";
+    public final static String DAY = "day";
+    public final static String ID_SUBJECT = "id_subject";
+    public final static String ID_AUDIENCE = "id_audience";
+    public final static String ID_EDUCATOR = "id_educator";
+    public final static String ID_TYPE_LESSON = "id_typelesson";
+    public final static String TIME_LESSON = "id_time_lesson";
+    public static final String[] ALL_LESSONS_PROPERTIES = new String[]{ID, WEEK,
+            DAY, ID_SUBJECT, ID_AUDIENCE, ID_EDUCATOR, ID_TYPE_LESSON, TIME_LESSON};
     private static volatile LessonDao instance;
-
     private LessonDao() {
     }
 
@@ -23,18 +32,6 @@ public class LessonDao extends AbsDao<Lesson> {
         }
         return instance;
     }
-
-    public final static String ID = "id";
-    public final static String WEEK = "week";
-    public final static String DAY = "day";
-    public final static String ID_SUBJECT = "id_subject";
-    public final static String ID_AUDIENCE = "id_audience";
-    public final static String ID_EDUCATOR = "id_educator";
-    public final static String ID_TYPE_LESSON = "id_typelesson";
-    public final static String TIME_LESSON = "id_time_lesson";
-
-    public static final String[] ALL_LESSONS_PROPERTIES = new String[]{ID, WEEK,
-            DAY, ID_SUBJECT, ID_AUDIENCE, ID_EDUCATOR, ID_TYPE_LESSON, TIME_LESSON};
 
     @Override
     protected String[] getAllColumns() {

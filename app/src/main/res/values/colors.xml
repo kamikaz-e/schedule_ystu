@@ -26,5 +26,7 @@
     <color name="white">#FFFFFF</color>
     <color name="whiteD3">#D3D3D3</color>
     <color name="whiteEF">#efefef</color>
+    <color name="whiteE6">#e6e6e6</color>
     <color name="greyB3">#b3b3b3</color>
+    <color name="greyBF">#bfbfbf</color>
 </resources>

@@ -10,8 +10,10 @@ import com.example.misha.myapplication.entity.Subject;
 
 public class SubjectDao extends AbsDao<Subject> {
 
+    public final static String ID = "id";
+    public final static String SUBJECT = "subject";
+    public static final String[] ALL_SET_PROPERTIES = new String[]{ID, SUBJECT};
     private static volatile SubjectDao instance;
-
     private SubjectDao() {
     }
 
@@ -21,12 +23,6 @@ public class SubjectDao extends AbsDao<Subject> {
         }
         return instance;
     }
-
-    public final static String ID = "id";
-    public final static String SUBJECT = "subject";
-
-
-    public static final String[] ALL_SET_PROPERTIES = new String[]{ID, SUBJECT};
 
     @Override
     protected String[] getAllColumns() {

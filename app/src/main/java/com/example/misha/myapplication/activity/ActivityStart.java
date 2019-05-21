@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.data.preferences.Preferences;
 
 
 public class ActivityStart extends AppCompatActivity {
