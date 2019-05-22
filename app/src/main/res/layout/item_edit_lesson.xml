@@ -10,22 +10,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/spacing_normal"
-        android:paddingTop="@dimen/spacing_medium"
-        android:paddingBottom="@dimen/spacing_medium"
-        tools:ignore="RtlSymmetry">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="-3dp">
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginEnd="@dimen/spacing_medium">
+
 
             <TextView
                 android:id="@+id/timeOne"
                 style="?attr/timeOneStyle"
                 android:layout_width="48sp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:singleLine="true"
                 android:textAlignment="center"
                 android:textSize="17sp"
@@ -38,19 +38,41 @@
                 android:layout_width="48sp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/timeOne"
+                android:layout_marginTop="-2dp"
                 android:singleLine="true"
                 android:textAlignment="center"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 tools:text="@string/string_time_Two" />
 
+
+            <RelativeLayout
+                android:id="@+id/typelesson_relLay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="1dp"
+                android:layout_toEndOf="@id/timeOne">
+
+
+                <TextView
+                    android:id="@+id/typelesson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="75sp"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    tools:text="Тип занятия" />
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/menuOptions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/spacing_medium"
-                android:textAppearance="?android:textAppearanceLarge" />
+                android:paddingStart="@dimen/spacing_medium"
+                android:textAppearance="?android:textAppearanceLarge"
+                tools:ignore="RtlSymmetry" />
         </RelativeLayout>
 
 
@@ -58,7 +80,8 @@
             android:id="@+id/subject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_normal"
             android:maxLines="1"
             android:singleLine="true"
@@ -69,18 +92,22 @@
             android:id="@+id/audience_educator_relLays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium">
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_medium">
 
             <TextView
-                android:id="@+id/typelesson"
+                android:id="@+id/educator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_toStartOf="@+id/audience"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:layout_toStartOf="@id/audience"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textSize="16sp"
-                tools:text="Лабораторная работа" />
+                tools:text="Преподаватель" />
 
             <TextView
                 android:id="@+id/audience"
@@ -94,16 +121,6 @@
                 tools:text="Аудитория" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/educator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:layout_marginEnd="@dimen/spacing_normal"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textSize="16sp"
-            tools:text="Преподаватель" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

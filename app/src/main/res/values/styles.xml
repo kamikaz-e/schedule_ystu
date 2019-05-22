@@ -4,6 +4,7 @@
     <attr name="tabLayoutStyle" format="reference" />
     <attr name="timeOneStyle" format="reference" />
     <attr name="timeTwoStyle" format="reference" />
+    <attr name="typelessonStyle" format="reference" />
     <attr name="lineSpinnerItemStyle" format="reference" />
     <attr name="textViewNumberCallStyle" format="reference" />
     <attr name="floatButton" format="reference" />
@@ -15,15 +16,15 @@
         <item name="cardStyle">@style/CardViewDarkStyle</item>
         <item name="timeOneStyle">@style/TimeOneDarkStyle</item>
         <item name="timeTwoStyle">@style/TimeTwoDarkStyle</item>
-        <item name="lineSpinnerItemStyle">@style/lineSpinnerItemDarkStyle</item>
-
+        <item name="lineSpinnerItemStyle">@style/LineSpinnerItemDarkStyle</item>
+        <item name="typelessonStyle">@style/TypelessonDarkStyle</item>
         <item name="textViewNumberCallStyle">@style/TextViewNumberCallDarkStyle</item>
         <item name="tabLayoutStyle">@style/TabLayoutDarkStyle</item>
         <item name="navBottomStyle">@style/BottomNavigationViewDarkStyle</item>
         <item name="android:textAppearanceLargePopupMenu">@style/PopupMenuTextAppearanceLarge</item>
         <item name="android:textColorHint">@color/whiteD3</item>
         <item name="colorControlActivated">@color/colorAccent</item>
-        <item name="colorAccent">@color/black27</item>
+        <item name="colorAccent">@color/black38</item>
         <item name="colorControlNormal">@color/colorAccent</item>
         <item name="colorPrimary">@color/colorAccent</item>
         <item name="colorPrimaryDark">@color/black38</item>
@@ -40,6 +41,7 @@
         <item name="android:timePickerDialogTheme">@style/TimePickerDialogLightStyle</item>
         <item name="timeOneStyle">@style/TimeOneLightStyle</item>
         <item name="timeTwoStyle">@style/TimeTwoLightStyle</item>
+        <item name="typelessonStyle">@style/TypelessonLightStyle</item>
         <item name="lineSpinnerItemStyle">@style/lineSpinnerItemLightStyle</item>
         <item name="textViewNumberCallStyle">@style/TextViewNumberCallLightStyle</item>
         <item name="tabLayoutStyle">@style/TabLayoutLightStyle</item>
@@ -67,6 +69,11 @@
         <item name="tabIndicatorColor">@color/colorAccent</item>
     </style>
 
+    <style name="TypelessonDarkStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@drawable/rounded_corner_dark</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
 
     <style name="TimeOneDarkStyle" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/white</item>
@@ -81,7 +88,7 @@
         <item name="android:background">@color/black44</item>
     </style>
 
-    <style name="lineSpinnerItemDarkStyle" parent="Widget.AppCompat.TextView">
+    <style name="LineSpinnerItemDarkStyle" parent="Widget.AppCompat.TextView">
         <item name="android:background">@color/whiteD3</item>
     </style>
 
@@ -94,6 +101,12 @@
     <style name="BottomNavigationViewDarkStyle" parent="Widget.Design.BottomNavigationView">
         <item name="itemBackground">@color/black27</item>
         <item name="itemIconTint">@drawable/nav_bottom_view_dark</item>
+    </style>
+
+
+    <style name="TypelessonLightStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@drawable/rounded_corner_light</item>
+        <item name="android:textColor">@color/green</item>
     </style>
 
 

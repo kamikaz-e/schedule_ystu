@@ -28,7 +28,6 @@
                 android:layout_width="48sp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="0dp"
                 android:singleLine="true"
                 android:textAlignment="center"
                 android:textSize="17sp"
@@ -41,9 +40,10 @@
                 android:layout_width="48sp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/timeOne"
+                android:layout_marginTop="-2dp"
                 android:singleLine="true"
                 android:textAlignment="center"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 tools:text="@string/string_time_Two" />
 
 
@@ -51,26 +51,21 @@
                 android:id="@+id/typelesson_relLay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="1dp"
                 android:layout_toEndOf="@id/timeOne">
 
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
                     android:id="@+id/typelesson"
+                    style="?attr/typelessonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:checkable="false"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:inputType="textNoSuggestions"
-                    android:longClickable="false"
-                    android:maxLines="1"
                     android:minWidth="75sp"
                     android:singleLine="true"
+                    android:textAlignment="center"
                     android:textSize="16sp"
                     tools:text="Тип занятия" />
-
             </RelativeLayout>
 
         </RelativeLayout>
@@ -81,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_normal">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -110,42 +105,7 @@
 
 
         <RelativeLayout
-            android:id="@+id/audience_relLay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:layout_marginEnd="@dimen/spacing_normal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/audience_hint"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:hintAnimationEnabled="false"
-                tools:hint="Аудитория">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/audience"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/audience_hint"
-                    android:background="@null"
-                    android:checkable="false"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:inputType="textNoSuggestions"
-                    android:longClickable="false"
-                    android:maxLines="1"
-                    android:minWidth="65sp"
-                    android:singleLine="true"
-                    android:textSize="16sp"
-                    tools:text="Аудитория" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/educator_relLay"
+            android:id="@+id/educator_audience_relLays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
@@ -154,29 +114,74 @@
             android:layout_marginBottom="@dimen/spacing_medium">
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/educator_hint"
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:id="@+id/educator_relLay"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:hintAnimationEnabled="false"
-                tools:hint="Преподаватель">
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:layout_toStartOf="@+id/audience_relLay">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/educator"
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/educator_hint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:checkable="false"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:inputType="textNoSuggestions"
-                    android:longClickable="false"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textSize="16sp"
-                    tools:text="Преподаватель" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:hintAnimationEnabled="false"
+                    tools:hint="Преподаватель">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/educator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:checkable="false"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:inputType="textNoSuggestions"
+                        android:longClickable="false"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        tools:text="Преподаватель" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/audience_relLay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/audience_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:hintAnimationEnabled="false"
+                    tools:hint="Аудитория">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/audience"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/audience_hint"
+                        android:background="@null"
+                        android:checkable="false"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:inputType="textNoSuggestions"
+                        android:longClickable="false"
+                        android:maxLines="1"
+                        android:minWidth="65sp"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        tools:text="Аудитория" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </RelativeLayout>
+
         </RelativeLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
