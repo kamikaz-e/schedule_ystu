@@ -14,6 +14,7 @@ public class TypelessonDao extends AbsDao<Typelesson> {
     public final static String TYPELESSON = "typelesson";
     public static final String[] ALL_SET_PROPERTIES = new String[]{ID, TYPELESSON};
     private static volatile TypelessonDao instance;
+
     private TypelessonDao() {
     }
 

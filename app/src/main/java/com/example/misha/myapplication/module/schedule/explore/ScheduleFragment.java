@@ -144,10 +144,12 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
     @Override
     public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_empty, menu);
-        if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)){
-            menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_edit_white);}
-        if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)){
-            menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_edit_black);}
+        if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
+            menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_edit_white);
+        }
+        if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)) {
+            menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_edit_black);
+        }
 
     }
 

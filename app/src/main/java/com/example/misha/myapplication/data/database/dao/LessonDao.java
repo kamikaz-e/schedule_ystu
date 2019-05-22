@@ -23,6 +23,7 @@ public class LessonDao extends AbsDao<Lesson> {
     public static final String[] ALL_LESSONS_PROPERTIES = new String[]{ID, WEEK,
             DAY, ID_SUBJECT, ID_AUDIENCE, ID_EDUCATOR, ID_TYPE_LESSON, TIME_LESSON};
     private static volatile LessonDao instance;
+
     private LessonDao() {
     }
 

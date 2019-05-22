@@ -4,7 +4,6 @@ import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.entity.Lesson;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SchedulePagePresenter extends BaseMainPresenter<SchedulePageFragmentView> implements SchedulePagePresenterInterface {
 

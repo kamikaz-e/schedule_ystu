@@ -1,6 +1,5 @@
 package com.example.misha.myapplication.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,7 +9,6 @@ import com.example.misha.myapplication.common.core.BaseActivity;
 import com.example.misha.myapplication.data.database.DatabaseHelper;
 import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
-import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.calls.CallsFragment;
 import com.example.misha.myapplication.module.editData.EditDataFragment;
 import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;

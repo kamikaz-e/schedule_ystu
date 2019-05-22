@@ -62,10 +62,12 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
     @Override
     public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_empty, menu);
-        if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)){
-        menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_clear_white);}
-        if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)){
-            menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_clear_black);}
+        if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
+            menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_clear_white);
+        }
+        if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)) {
+            menu.findItem(R.id.btn_edit).setIcon(R.drawable.ic_clear_black);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 

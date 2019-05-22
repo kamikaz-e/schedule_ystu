@@ -108,8 +108,8 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
 
             case 1:
                 callsList = CallDao.getInstance().getAllData();
-                ((ViewHolderEmptyLesson)holder).timeEditOne.setText(callsList.get(position * 2).getName());
-                ((ViewHolderEmptyLesson)holder).timeEditTwo.setText( " - " + callsList.get((position * 2) + 1).getName());
+                ((ViewHolderEmptyLesson) holder).timeEditOne.setText(callsList.get(position * 2).getName());
+                ((ViewHolderEmptyLesson) holder).timeEditTwo.setText(" - " + callsList.get((position * 2) + 1).getName());
                 break;
         }
     }

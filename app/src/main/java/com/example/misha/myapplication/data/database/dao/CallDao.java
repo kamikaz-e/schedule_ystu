@@ -16,6 +16,7 @@ public class CallDao extends AbsDao<Calls> {
     public final static String TIME = "time_lesson";
     public static final String[] ALL_SET_PROPERTIES = new String[]{ID, TIME};
     private static volatile CallDao instance;
+
     private CallDao() {
     }
 

@@ -14,6 +14,7 @@ public class SubjectDao extends AbsDao<Subject> {
     public final static String SUBJECT = "subject";
     public static final String[] ALL_SET_PROPERTIES = new String[]{ID, SUBJECT};
     private static volatile SubjectDao instance;
+
     private SubjectDao() {
     }
 

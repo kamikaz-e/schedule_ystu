@@ -1,17 +1,11 @@
 package com.example.misha.myapplication.data.network;
 
-import com.example.misha.myapplication.data.network.request.ScheduleRequest;
-import com.example.misha.myapplication.entity.Audience;
 import com.example.misha.myapplication.entity.Subject;
 
 import java.util.ArrayList;
 
 import io.reactivex.Single;
-import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 
 public interface APIService {
     /* @FormUrlEncoded

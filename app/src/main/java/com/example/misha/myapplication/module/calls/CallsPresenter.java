@@ -39,7 +39,7 @@ public class CallsPresenter extends BaseMainPresenter<CallsFragmentView> impleme
 
     @Override
     public void onClickOneTime(int position) {
-        Preferences.getInstance().setSelectedPositionLesson(position*2);
+        Preferences.getInstance().setSelectedPositionLesson(position * 2);
         new TimePickerDialog(context, timeOne,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                 calendarTimeCalls.get(Calendar.MINUTE), true)
@@ -48,7 +48,7 @@ public class CallsPresenter extends BaseMainPresenter<CallsFragmentView> impleme
 
     @Override
     public void onClickTwoTime(int position) {
-        Preferences.getInstance().setSelectedPositionLesson(position*2+1);
+        Preferences.getInstance().setSelectedPositionLesson(position * 2 + 1);
         new TimePickerDialog(context, timeTwo,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                 calendarTimeCalls.get(Calendar.MINUTE), true)
@@ -57,7 +57,7 @@ public class CallsPresenter extends BaseMainPresenter<CallsFragmentView> impleme
 
     private void setTimeOne() {
         ArrayList<Calls> callsList = CallDao.getInstance().getAllData();
-        callsList.get(Preferences.getInstance().getSelectedPositionLesson()).setName( DateUtils.formatDateTime(context,
+        callsList.get(Preferences.getInstance().getSelectedPositionLesson()).setName(DateUtils.formatDateTime(context,
                 calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
         getView().updateView(callsList);
         CallDao.getInstance().updateItemByID(callsList.get(Preferences.getInstance().getSelectedPositionLesson()));
@@ -65,16 +65,14 @@ public class CallsPresenter extends BaseMainPresenter<CallsFragmentView> impleme
 
     private void setTimeTwo() {
         ArrayList<Calls> callsList = CallDao.getInstance().getAllData();
-        callsList.get(Preferences.getInstance().getSelectedPositionLesson()).setName( DateUtils.formatDateTime(context,
+        callsList.get(Preferences.getInstance().getSelectedPositionLesson()).setName(DateUtils.formatDateTime(context,
                 calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
         getView().updateView(callsList);
         CallDao.getInstance().updateItemByID(callsList.get(Preferences.getInstance().getSelectedPositionLesson()));
 
 
-
     }
 
 
-
-    }
+}
 

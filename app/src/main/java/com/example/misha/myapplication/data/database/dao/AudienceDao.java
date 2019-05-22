@@ -14,6 +14,7 @@ public class AudienceDao extends AbsDao<Audience> {
     public final static String AUDIENCE = "audience";
     public static final String[] ALL_SET_PROPERTIES = new String[]{ID, AUDIENCE};
     private static volatile AudienceDao instance;
+
     private AudienceDao() {
     }
 
