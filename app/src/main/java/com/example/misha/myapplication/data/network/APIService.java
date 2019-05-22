@@ -21,6 +21,6 @@ public interface APIService {
     @GET("getSubjects.php")
     Single<ArrayList<Subject>> getSubjects();
 
-   /* @POST("audiences.php")
-    Single<ArrayList<Audience>> getAudiences(@Body ScheduleRequest request);*/
+   /* @GET("getAudience.php")
+    Single<ArrayList<Audience>> getAudiences();*/
 }
