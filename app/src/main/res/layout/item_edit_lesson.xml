@@ -18,25 +18,31 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-3dp">
 
             <TextView
-                android:id="@+id/number"
-                style="?attr/textViewStyle"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:id="@+id/timeOne"
+                style="?attr/timeOneStyle"
+                android:layout_width="48sp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:textAlignment="center"
                 android:textSize="17sp"
-                tools:text="1" />
+                tools:text="@string/string_time_One" />
+
 
             <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
+                android:id="@+id/timeTwo"
+                style="?attr/timeTwoStyle"
+                android:layout_width="48sp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_medium"
-                android:layout_toEndOf="@+id/number"
-                android:textSize="16sp"
-                tools:text="Время" />
+                android:layout_below="@+id/timeOne"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                tools:text="@string/string_time_Two" />
+
 
             <ImageView
                 android:id="@+id/menuOptions"

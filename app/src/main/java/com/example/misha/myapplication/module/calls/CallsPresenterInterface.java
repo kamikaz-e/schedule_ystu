@@ -2,5 +2,7 @@ package com.example.misha.myapplication.module.calls;
 
 public interface CallsPresenterInterface {
 
-    void onClick(int position);
+    void onClickOneTime(int position);
+
+    void onClickTwoTime(int position);
 }

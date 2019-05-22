@@ -2,7 +2,8 @@
     <attr name="cardStyle" format="reference" />
     <attr name="navBottomStyle" format="reference" />
     <attr name="tabLayoutStyle" format="reference" />
-    <attr name="textViewStyle" format="reference" />
+    <attr name="timeOneStyle" format="reference" />
+    <attr name="timeTwoStyle" format="reference" />
     <attr name="lineSpinnerItemStyle" format="reference" />
     <attr name="textViewNumberCallStyle" format="reference" />
     <attr name="floatButton" format="reference" />
@@ -12,7 +13,8 @@
         <item name="windowNoTitle">true</item>
         <item name="toolbarStyle">@style/ToolBarDarkStyle</item>
         <item name="cardStyle">@style/CardViewDarkStyle</item>
-        <item name="textViewStyle">@style/TextViewDarkStyle</item>
+        <item name="timeOneStyle">@style/TimeOneDarkStyle</item>
+        <item name="timeTwoStyle">@style/TimeTwoDarkStyle</item>
         <item name="lineSpinnerItemStyle">@style/lineSpinnerItemDarkStyle</item>
 
         <item name="textViewNumberCallStyle">@style/TextViewNumberCallDarkStyle</item>
@@ -36,7 +38,8 @@
         <item name="toolbarStyle">@style/ToolBarLightStyle</item>
         <item name="cardStyle">@style/CardViewLightStyle</item>
         <item name="android:timePickerDialogTheme">@style/TimePickerDialogLightStyle</item>
-        <item name="textViewStyle">@style/TextViewLightStyle</item>
+        <item name="timeOneStyle">@style/TimeOneLightStyle</item>
+        <item name="timeTwoStyle">@style/TimeTwoLightStyle</item>
         <item name="lineSpinnerItemStyle">@style/lineSpinnerItemLightStyle</item>
         <item name="textViewNumberCallStyle">@style/TextViewNumberCallLightStyle</item>
         <item name="tabLayoutStyle">@style/TabLayoutLightStyle</item>
@@ -65,9 +68,14 @@
     </style>
 
 
-    <style name="TextViewDarkStyle" parent="Widget.AppCompat.TextView">
-        <item name="android:background">@color/black48</item>
+    <style name="TimeOneDarkStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="TimeTwoDarkStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/greyBF</item>
+    </style>
+
 
     <style name="TextViewNumberCallDarkStyle" parent="Widget.AppCompat.TextView">
         <item name="android:background">@color/black44</item>
@@ -102,6 +110,15 @@
     <style name="FloatButtonLightStyle" parent="Theme.AppCompat.Light">
         <item name="android:tint">@color/white</item>
         <item name="android:backgroundTint">@color/greyB3</item>
+    </style>
+
+
+    <style name="TimeOneLightStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black20</item>
+    </style>
+
+    <style name="TimeTwoLightStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black48</item>
     </style>
 
 

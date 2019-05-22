@@ -3,6 +3,7 @@ package com.example.misha.myapplication.module.schedule.explore.page;
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.entity.Lesson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SchedulePagePresenter extends BaseMainPresenter<SchedulePageFragmentView> implements SchedulePagePresenterInterface {
@@ -11,7 +12,7 @@ public class SchedulePagePresenter extends BaseMainPresenter<SchedulePageFragmen
 
     private int positionWeek;
 
-    private List<Lesson> lessons;
+    private ArrayList<Lesson> lessons;
 
     public SchedulePagePresenter(int day, int positionWeek) {
         this.day = day;
@@ -36,8 +37,8 @@ public class SchedulePagePresenter extends BaseMainPresenter<SchedulePageFragmen
                 .subscribe(lessons -> {
                     getView().hideProgressBar();
                     getView().hideErrorView();
-                    this.lessons = lessons;
-                    getView().updateList(lessons);
+                    this.lessons = (ArrayList<Lesson>) lessons;
+                    getView().updateList((ArrayList<Lesson>) lessons);
 
                 }, throwable -> {
                     getView().hideProgressBar();

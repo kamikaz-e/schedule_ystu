@@ -20,7 +20,13 @@ public class CallsPresenter extends BaseMainPresenter<CallsFragmentView> impleme
     private TimePickerDialog.OnTimeSetListener timeOne = (view, hourOfDay, minute) -> {
         calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendarTimeCalls.set(Calendar.MINUTE, minute);
-        setTime();
+        setTimeOne();
+    };
+
+    private TimePickerDialog.OnTimeSetListener timeTwo = (view, hourOfDay, minute) -> {
+        calendarTimeCalls.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendarTimeCalls.set(Calendar.MINUTE, minute);
+        setTimeTwo();
     };
 
     public CallsPresenter(BaseActivity context) {
@@ -32,36 +38,43 @@ public class CallsPresenter extends BaseMainPresenter<CallsFragmentView> impleme
     }
 
     @Override
-    public void onClick(int position) {
-        Preferences.getInstance().setSelectedPositionLesson(position);
-        Preferences.getInstance().setCallsOpened(true);
-
+    public void onClickOneTime(int position) {
+        Preferences.getInstance().setSelectedPositionLesson(position*2);
         new TimePickerDialog(context, timeOne,
                 calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
                 calendarTimeCalls.get(Calendar.MINUTE), true)
                 .show();
     }
 
-    private void setTime() {
-        if (Preferences.getInstance().isCallsOpened()) {
-            Preferences.getInstance().setSelectDate(DateUtils.formatDateTime(context,
-                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME) + " - ");
-        } else {
-            String selectFullTime = Preferences.getInstance().getSelectDate() + DateUtils.formatDateTime(context,
-                    calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-            ArrayList<Calls> callsList = CallDao.getInstance().getAllData();
-            callsList.get(Preferences.getInstance().getSelectedPositionLesson()).setName(selectFullTime);
-
-            getView().updateView(callsList);
-            CallDao.getInstance().updateItemByID(callsList.get(Preferences.getInstance().getSelectedPositionLesson()));
-
-        }
-        if (Preferences.getInstance().isCallsOpened()) {
-            new TimePickerDialog(context, timeOne,
-                    calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
-                    calendarTimeCalls.get(Calendar.MINUTE), true)
-                    .show();
-            Preferences.getInstance().setCallsOpened(false);
-        }
+    @Override
+    public void onClickTwoTime(int position) {
+        Preferences.getInstance().setSelectedPositionLesson(position*2+1);
+        new TimePickerDialog(context, timeTwo,
+                calendarTimeCalls.get(Calendar.HOUR_OF_DAY),
+                calendarTimeCalls.get(Calendar.MINUTE), true)
+                .show();
     }
-}
+
+    private void setTimeOne() {
+        ArrayList<Calls> callsList = CallDao.getInstance().getAllData();
+        callsList.get(Preferences.getInstance().getSelectedPositionLesson()).setName( DateUtils.formatDateTime(context,
+                calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
+        getView().updateView(callsList);
+        CallDao.getInstance().updateItemByID(callsList.get(Preferences.getInstance().getSelectedPositionLesson()));
+    }
+
+    private void setTimeTwo() {
+        ArrayList<Calls> callsList = CallDao.getInstance().getAllData();
+        callsList.get(Preferences.getInstance().getSelectedPositionLesson()).setName( DateUtils.formatDateTime(context,
+                calendarTimeCalls.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
+        getView().updateView(callsList);
+        CallDao.getInstance().updateItemByID(callsList.get(Preferences.getInstance().getSelectedPositionLesson()));
+
+
+
+    }
+
+
+
+    }
+

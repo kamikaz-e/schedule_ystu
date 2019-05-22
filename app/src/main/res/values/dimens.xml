@@ -11,6 +11,7 @@
   <dimen name="toolbar_height">56dp</dimen>
 
   <dimen name="spacing_normal">16dp</dimen>
+  <dimen name="spacing_maximum">64dp</dimen>
   <dimen name="spacing_medium">8dp</dimen>
   <dimen name="spacing_small">4dp</dimen>
 

@@ -16,6 +16,7 @@ import com.example.misha.myapplication.entity.Lesson;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SchedulePageFragment extends BaseMainFragment implements SchedulePageFragmentView {
@@ -62,7 +63,7 @@ public class SchedulePageFragment extends BaseMainFragment implements SchedulePa
         return presenter;
     }
 
-    public void updateList(List<Lesson> lessonList) {
+    public void updateList(ArrayList<Lesson> lessonList) {
         rvadapter.setLessonList(lessonList);
         rvadapter.notifyDataSetChanged();
     }

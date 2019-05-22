@@ -80,7 +80,6 @@ public class EditSchedulePagePresenter extends BaseMainPresenter<EditSchedulePag
         lessonList.get(position - 1).setAudience(lessonList.get(position).getAudience());
         lessonList.get(position - 1).setTypeLesson(lessonList.get(position).getTypeLesson());
         lessonList.get(position - 1).setEducator(lessonList.get(position).getEducator());
-        lessonList = LessonDao.getInstance().getLessonByWeekAndDay(positionWeek, day);
         getView().updateView(lessonList);
         LessonDao.getInstance().updateItemByID(lessonList.get(position - 1));
     }

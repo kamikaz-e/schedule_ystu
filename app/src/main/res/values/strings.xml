@@ -79,4 +79,6 @@
     <string name="copy_to_unevenweek">Скопировать неделю в нечетные недели?</string>
     <string name="title_select_theme">Выбор темы</string>
     <string name="string_empty_lesson">Занятие отсутствует</string>
+    <string name="string_time_One">13:10</string>
+    <string name="string_time_Two">14:00</string>
 </resources>

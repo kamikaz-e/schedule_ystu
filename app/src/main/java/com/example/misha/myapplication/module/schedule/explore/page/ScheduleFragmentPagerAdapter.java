@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.module.schedule.explore.page;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,34 +25,26 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
 
-    private List<Lesson> lessonList = new ArrayList<>();
+    private ArrayList<Lesson> lessonList = new ArrayList<>();
 
     @Override
     public int getItemViewType(int position) {
-        int code = 0;
+
         Lesson lesson = lessonList.get(position);
         Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
         Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
         Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
         Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
-
-        if (lessonList.get(position).getSubject().equals("0") || subject==null) {
-            code = 1;
+        if ((lessonList.get(position).getSubject().equals("0") || subject == null) ||
+                (lessonList.get(position).getAudience().equals("0") || audience == null) ||
+                (lessonList.get(position).getEducator().equals("0") || educator == null) ||
+                (lessonList.get(position).getTypeLesson().equals("0") || typelesson == null)) {
+            return 1;
         }
-        if (lessonList.get(position).getAudience().equals("0") || audience==null) {
-            code = 1;
-        }
-        if (lessonList.get(position).getEducator().equals("0") || educator==null) {
-            code = 1;
-        }
-        if (lessonList.get(position).getTypeLesson().equals("0") || typelesson==null) {
-            code = 1;
-        }
-        return code;
+        return 0;
     }
 
     @NotNull
@@ -69,18 +62,19 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
         return null;
     }
 
-    public void setLessonList(List<Lesson> lessonList) {
+    public void setLessonList(ArrayList<Lesson> lessonList) {
         this.lessonList = lessonList;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         switch (holder.getItemViewType()) {
             case 0:
                 Lesson lesson = lessonList.get(position);
-                Calls calls = CallDao.getInstance().getItemByID(Long.parseLong(lesson.getTimeLesson()));
-                ((ViewHolderLesson) holder).number.setText(lesson.getTimeLesson());
-                ((ViewHolderLesson) holder).timeEdit.setText(calls.getName());
+                ArrayList<Calls> callsList = CallDao.getInstance().getAllData();
+                ((ViewHolderLesson) holder).timeEditOne.setText(callsList.get(position * 2).getName());
+                ((ViewHolderLesson) holder).timeEditTwo.setText(callsList.get((position * 2) + 1).getName());
 
                 Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
                 Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
@@ -88,7 +82,7 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
                 Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
 
                 if (subject == null) {
-                  break;
+                    break;
                 } else {
                     ((ViewHolderLesson) holder).subjectHint.setHint("Предмет");
                     ((ViewHolderLesson) holder).subjectEdit.setText(subject.getName());
@@ -110,14 +104,12 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
                 } else {
                     ((ViewHolderLesson) holder).typelessonEdit.setText(typelesson.getName());
                 }
-
-
                 break;
+
             case 1:
-                lesson = lessonList.get(position);
-                calls = CallDao.getInstance().getItemByID(Long.parseLong(lesson.getTimeLesson()));
-                ((ViewHolderEmptyLesson) holder).number.setText(lesson.getTimeLesson());
-                ((ViewHolderEmptyLesson) holder).timeEdit.setText(calls.getName());
+                callsList = CallDao.getInstance().getAllData();
+                ((ViewHolderEmptyLesson)holder).timeEditOne.setText(callsList.get(position * 2).getName());
+                ((ViewHolderEmptyLesson)holder).timeEditTwo.setText( " - " + callsList.get((position * 2) + 1).getName());
                 break;
         }
     }
@@ -129,19 +121,20 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
 
     public static class ViewHolderEmptyLesson extends RecyclerView.ViewHolder {
 
-        private final TextView number;
-        private final TextView timeEdit;
+        private final TextView timeEditOne;
+        private final TextView timeEditTwo;
 
         public ViewHolderEmptyLesson(View view) {
             super(view);
-            number = view.findViewById(R.id.number);
-            timeEdit = view.findViewById(R.id.time);
+            timeEditOne = view.findViewById(R.id.timeOne);
+            timeEditTwo = view.findViewById(R.id.timeTwo);
         }
     }
 
     public class ViewHolderLesson extends RecyclerView.ViewHolder {
-        private final TextView number;
-        private final TextView timeEdit;
+
+        private final TextView timeEditOne;
+        private final TextView timeEditTwo;
         private final TextView subjectEdit;
         private final TextView audienceEdit;
         private final TextView educatorEdit;
@@ -153,8 +146,8 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
 
         public ViewHolderLesson(View view) {
             super(view);
-            number = view.findViewById(R.id.number);
-            timeEdit = view.findViewById(R.id.time);
+            timeEditOne = view.findViewById(R.id.timeOne);
+            timeEditTwo = view.findViewById(R.id.timeTwo);
             subjectEdit = view.findViewById(R.id.subject);
             audienceEdit = view.findViewById(R.id.audience);
             educatorEdit = view.findViewById(R.id.educator);

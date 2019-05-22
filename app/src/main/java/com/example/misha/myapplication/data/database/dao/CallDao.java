@@ -58,12 +58,18 @@ public class CallDao extends AbsDao<Calls> {
         if (!dd.isEmpty()) return;
         ArrayList<Calls> calls = new ArrayList<>();
 
-        calls.add(new Calls(String.valueOf(1), "8:30 - 10:00 "));
-        calls.add(new Calls(String.valueOf(2), "10:10 - 11:40 "));
-        calls.add(new Calls(String.valueOf(3), "12:20 - 13:50 "));
-        calls.add(new Calls(String.valueOf(4), "14:00 - 15:30 "));
-        calls.add(new Calls(String.valueOf(5), "15:40 - 17:10 "));
-        calls.add(new Calls(String.valueOf(6), "17:30 - 19:00 "));
+        calls.add(new Calls(String.valueOf(1), "8:30"));
+        calls.add(new Calls(String.valueOf(2), "10:00"));
+        calls.add(new Calls(String.valueOf(3), "10:10"));
+        calls.add(new Calls(String.valueOf(4), "11:40"));
+        calls.add(new Calls(String.valueOf(5), "12:20"));
+        calls.add(new Calls(String.valueOf(6), "13:50"));
+        calls.add(new Calls(String.valueOf(7), "14:00"));
+        calls.add(new Calls(String.valueOf(8), "15:30"));
+        calls.add(new Calls(String.valueOf(9), "15:40"));
+        calls.add(new Calls(String.valueOf(10), "17:10"));
+        calls.add(new Calls(String.valueOf(11), "17:30"));
+        calls.add(new Calls(String.valueOf(12), "19:00"));
 
         insertAll(calls);
     }

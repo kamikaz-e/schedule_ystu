@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.module.schedule.edit.page;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.example.misha.myapplication.entity.Lesson;
 import com.example.misha.myapplication.entity.Subject;
 import com.example.misha.myapplication.entity.Typelesson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
@@ -31,7 +33,7 @@ import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT
 public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditScheduleFragmentPagerAdapter.ViewHolder> {
 
     private List<Lesson> lessonList;
-
+    private ArrayList<Calls> callsList = new ArrayList<>();
     private EditSchedulePagePresenterInterface callback;
 
     public EditScheduleFragmentPagerAdapter(EditSchedulePagePresenterInterface editScheduleCallback) {
@@ -89,8 +91,9 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView number;
-        private final TextView timeEdit;
+
+        private final TextView timeEditOne;
+        private final TextView timeEditTwo;
         private final TextView subjectEdit;
         private final TextView audienceEdit;
         private final TextView educatorEdit;
@@ -100,8 +103,8 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
 
         public ViewHolder(View view) {
             super(view);
-            number = view.findViewById(R.id.number);
-            timeEdit = view.findViewById(R.id.time);
+            timeEditOne = view.findViewById(R.id.timeOne);
+            timeEditTwo = view.findViewById(R.id.timeTwo);
             subjectEdit = view.findViewById(R.id.subject);
             audienceEdit = view.findViewById(R.id.audience);
             educatorEdit = view.findViewById(R.id.educator);
@@ -114,12 +117,14 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
             view.setOnClickListener(this);
         }
 
+        @SuppressLint("SetTextI18n")
         private void onBindView(int position) {
 
             Lesson lesson = lessonList.get(position);
-            number.setText(lesson.getTimeLesson());
-            timeEdit.setText((lesson.getTimeLesson()));
-            Calls calls = CallDao.getInstance().getItemByID(Long.parseLong(lesson.getTimeLesson()));
+            callsList = CallDao.getInstance().getAllData();
+            timeEditOne.setText(callsList.get(position * 2).getName());
+            timeEditTwo.setText(callsList.get((position * 2) + 1).getName());
+
             Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
             Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
             Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
@@ -133,7 +138,6 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
             }
 
 
-            timeEdit.setText(calls.getName());
             if (subject == null) {
                 subjectEdit.setText(R.string.hint_subject);
             } else {

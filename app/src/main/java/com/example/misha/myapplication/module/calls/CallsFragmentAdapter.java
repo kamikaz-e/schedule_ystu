@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.module.calls;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,32 +54,39 @@ public class CallsFragmentAdapter extends RecyclerView.Adapter<CallsFragmentAdap
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final CardView cardViewCall;
         private final TextView numberCall;
-        private final TextView timeCall;
+        private final TextView call_timeOne;
+        private final TextView call_timeTwo;
 
         public ViewHolder(View view) {
             super(view);
             cardViewCall = view.findViewById(R.id.call_cardView);
             numberCall = view.findViewById(R.id.call_number);
-            timeCall = view.findViewById(R.id.call_time);
+            call_timeOne = view.findViewById(R.id.call_timeOne);
+            call_timeTwo = view.findViewById(R.id.call_timeTwo);
             cardViewCall.setOnClickListener(this);
-            timeCall.setOnClickListener(this);
+            call_timeOne.setOnClickListener(this);
+            call_timeTwo.setOnClickListener(this);
             view.setOnClickListener(this);
 
         }
 
+        @SuppressLint("SetTextI18n")
         public void onBindView(int position) {
             callsList = CallDao.getInstance().getAllData();
-            Calls calls = callsList.get(position);
-            numberCall.setText(calls.getId());
-            timeCall.setText(calls.getName());
+            numberCall.setText(callsList.get(position).getId());
+            call_timeOne.setText(callsList.get(position * 2).getName());
+            call_timeTwo.setText(" - " + callsList.get((position * 2) + 1).getName());
 
 
         }
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.call_time || v.getId() == R.id.call_cardView) {
-                itemClickListener.onClick(getAdapterPosition());
+            if (v.getId() == R.id.call_timeOne) {
+                itemClickListener.onClickOneTime(getAdapterPosition());
+            }
+            if (v.getId() == R.id.call_timeTwo) {
+                itemClickListener.onClickTwoTime(getAdapterPosition());
             }
         }
     }
