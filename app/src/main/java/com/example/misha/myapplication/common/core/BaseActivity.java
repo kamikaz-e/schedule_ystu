@@ -61,10 +61,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Root {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         compositeDisposable = new CompositeDisposable();
+        setTheme(R.style.DarkTheme);
         String nameTheme = Preferences.getInstance().getSelectedTheme();
-        if (nameTheme.equals("")) {
-            setTheme(R.style.DarkTheme);
-        }
+
         if (nameTheme.equals(DARK_THEME)) {
             setTheme(R.style.DarkTheme);
         }

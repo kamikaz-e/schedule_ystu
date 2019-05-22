@@ -90,9 +90,9 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         @SuppressLint("InflateParams") View view = li.inflate(R.layout.dialog_signin, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(view);
-        final EditText name_db = view.findViewById(R.id.name_schedule);
+        //final EditText name_db = view.findViewById(R.id.name_schedule);
         builder.setCancelable(false).
-                setPositiveButton("Загрузить", (dialog, id) -> presenter.loadSubjects(name_db.getText().toString())).
+                setPositiveButton("Загрузить", (dialog, id) -> presenter.load()).
                 setNegativeButton("Отмена", (dialog, id) -> {
                 });
         return builder.create();

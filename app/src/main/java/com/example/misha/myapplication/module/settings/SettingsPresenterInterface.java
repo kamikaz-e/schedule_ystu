@@ -16,7 +16,7 @@ public interface SettingsPresenterInterface {
 
     void onCreateDialogAbout();
 
-    void loadSubjects(String name);
+    void load();
 
-    void loadAudiences(String name, ArrayList<Subject> response);
+    void load(ArrayList<Subject> subjects);
 }

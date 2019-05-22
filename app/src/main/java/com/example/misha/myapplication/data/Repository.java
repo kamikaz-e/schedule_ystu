@@ -43,20 +43,20 @@ public class Repository implements RepositoryManager {
         return databaseInterface.getLessonsByDayWeek(week, day);
     }
 
-    @Override
+ /*   @Override
     public Single<Throwable> insertData(String nameGroup, String subjects, String audiences, String educators, String typelessons, String calls, String lessons) {
         return apiService.insertData(nameGroup, subjects, audiences, educators, typelessons, calls, lessons);
-    }
+    }*/
 
     @Override
-    public Single<ArrayList<Subject>> getSubjects(ScheduleRequest request) {
-        return apiService.getSubjects(request);
+    public Single<ArrayList<Subject>> getSubjects() {
+        return apiService.getSubjects();
     }
 
-    @Override
+   /* @Override
     public Single<ArrayList<Audience>> getAudiences(ScheduleRequest request) {
         return apiService.getAudiences(request);
-    }
+    }*/
 
     @Override
     public boolean isHintsOpened() {

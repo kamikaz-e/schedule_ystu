@@ -28,7 +28,6 @@
         <item name="android:colorBackground">@color/black38</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
-
     </style>
 
 

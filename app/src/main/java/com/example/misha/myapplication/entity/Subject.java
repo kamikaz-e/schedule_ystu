@@ -11,17 +11,7 @@ import com.google.gson.annotations.SerializedName;
 //Todo прочитать про сериализацию и Parcelable
 public class Subject implements Parcelable, SimpleItem {
 
-    public static final Creator<Subject> CREATOR = new Creator<Subject>() {
-        @Override
-        public Subject createFromParcel(Parcel in) {
-            return new Subject(in);
-        }
 
-        @Override
-        public Subject[] newArray(int size) {
-            return new Subject[size];
-        }
-    };
     @Expose
     @SerializedName("id")
     private String id;
@@ -48,6 +38,18 @@ public class Subject implements Parcelable, SimpleItem {
     public Subject() {
 
     }
+
+    public static final Creator<Subject> CREATOR = new Creator<Subject>() {
+        @Override
+        public Subject createFromParcel(Parcel in) {
+            return new Subject(in);
+        }
+
+        @Override
+        public Subject[] newArray(int size) {
+            return new Subject[size];
+        }
+    };
 
     @Override
     public String toString() {

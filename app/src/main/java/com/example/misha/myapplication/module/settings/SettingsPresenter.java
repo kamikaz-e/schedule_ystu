@@ -6,10 +6,7 @@ import android.content.Context;
 
 import com.example.misha.myapplication.common.core.BaseActivity;
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
-import com.example.misha.myapplication.data.database.dao.AudienceDao;
-import com.example.misha.myapplication.data.database.dao.EducatorDao;
 import com.example.misha.myapplication.data.database.dao.SubjectDao;
-import com.example.misha.myapplication.data.network.request.ScheduleRequest;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.entity.Subject;
 
@@ -50,13 +47,13 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
     }
 
     @Override
-    public void loadSubjects(String nameGroup) {
+    public void load() {
         getView().showProgressDialog();
         getCompositeDisposable().add(getRepositoryManager()
-                .getSubjects(new ScheduleRequest(nameGroup))
+                .getSubjects()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(response -> loadAudiences(nameGroup, response), throwable -> {
+                .subscribe(this::load, throwable -> {
                     getView().hideProgressDialog();
                     processSimpleError(throwable);
                 })
@@ -64,18 +61,15 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
     }
 
     @Override
-    public void loadAudiences(String name, ArrayList<Subject> subjects) {
+    public void load(ArrayList<Subject> subjects) {
         getCompositeDisposable().add(getRepositoryManager()
-                .getAudiences(new ScheduleRequest(name))
+                .getSubjects()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
                     getView().hideProgressDialog();
                     SubjectDao.getInstance().deleteAll();
-                    AudienceDao.getInstance().deleteAll();
-                    EducatorDao.getInstance().deleteAll();
-                    SubjectDao.getInstance().insertAll(subjects);
-                    AudienceDao.getInstance().insertAll(response);
+                    SubjectDao.getInstance().insertAll(response);
                 }, throwable -> {
                     getView().hideProgressDialog();
                     processSimpleError(throwable);
