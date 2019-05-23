@@ -34,7 +34,6 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
 
     private EditText inputItem;
     private EditDataPagePresenter presenter;
-    private EditDataFragmentPageAdapter editDataFragmentPageAdapter;
     private RecyclerView rvItems;
 
     public static EditDataFragmentPage newInstance(EditDataModel editDataModel) {
@@ -90,7 +89,7 @@ public class EditDataFragmentPage extends BaseMainFragment implements EditDataFr
     }
 
     public void updateItemsAdapter(ArrayList<SimpleItem> listItems) {
-        editDataFragmentPageAdapter = new EditDataFragmentPageAdapter(listItems, (position, view1) -> presenter.onClearClick(position));
+        EditDataFragmentPageAdapter editDataFragmentPageAdapter = new EditDataFragmentPageAdapter(listItems, (position, view1) -> presenter.onClearClick(position));
         rvItems.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         rvItems.setAdapter(editDataFragmentPageAdapter);
     }

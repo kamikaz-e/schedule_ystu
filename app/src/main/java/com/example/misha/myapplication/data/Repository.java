@@ -6,6 +6,7 @@ import com.example.misha.myapplication.data.network.APIService;
 import com.example.misha.myapplication.data.network.RetrofitClient;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.data.preferences.PreferencesInterface;
+import com.example.misha.myapplication.entity.Groups;
 import com.example.misha.myapplication.entity.Lesson;
 import com.example.misha.myapplication.entity.Subject;
 
@@ -49,6 +50,11 @@ public class Repository implements RepositoryManager {
     @Override
     public Single<ArrayList<Subject>> getSubjects() {
         return apiService.getSubjects();
+    }
+
+    @Override
+    public Single<ArrayList<Groups>> getGroups() {
+        return apiService.getGroups();
     }
 
    /* @Override

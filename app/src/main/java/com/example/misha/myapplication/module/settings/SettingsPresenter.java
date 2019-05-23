@@ -37,6 +37,11 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
     }
 
     @Override
+    public void openFragmentGroups() {
+        getView().openActivityGroups();
+    }
+
+    @Override
     public void onCreateDialogSelectTheme() {
         getView().showDialogSelectTheme();
     }

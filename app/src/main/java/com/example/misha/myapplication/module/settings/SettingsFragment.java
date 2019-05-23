@@ -19,6 +19,8 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
+import com.example.misha.myapplication.entity.Groups;
+import com.example.misha.myapplication.module.groups.ActivityGroups;
 import com.example.misha.myapplication.module.settings.theme.DialogFragmentSelectTheme;
 
 import org.jetbrains.annotations.NotNull;
@@ -55,6 +57,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        getContext().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         RelativeLayout layoutPickWeek = view.findViewById(R.id.current_date);
         RelativeLayout layoutImport = view.findViewById(R.id.import_data);
         RelativeLayout layoutAbout = view.findViewById(R.id.about);
@@ -125,6 +128,11 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         }
     }
 
+    public void openActivityGroups() {
+        Intent intent = new Intent(getContext(), ActivityGroups.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -132,7 +140,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
             presenter.onDateClicked();
         }
         if (v.getId() == R.id.import_data) {
-            presenter.onCreateDialogImport();
+            presenter.openFragmentGroups();
         }
         if (v.getId() == R.id.select_theme) {
             presenter.onCreateDialogSelectTheme();

@@ -393,4 +393,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Root {
         compositeDisposable.dispose();
         compositeDisposable = null;
     }
+
+
+
 }

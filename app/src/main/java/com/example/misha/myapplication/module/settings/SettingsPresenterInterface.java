@@ -12,6 +12,8 @@ public interface SettingsPresenterInterface {
 
     void onCreateDialogImport();
 
+    void openFragmentGroups();
+
     void onCreateDialogSelectTheme();
 
     void onCreateDialogAbout();

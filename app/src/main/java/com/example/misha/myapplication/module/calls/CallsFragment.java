@@ -41,8 +41,8 @@ public class CallsFragment extends BaseMainFragment implements CallsFragmentView
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_call_schedule, container, false);
-        RecyclerView rvCalls = view.findViewById(R.id.rv_calls);
+        View view = inflater.inflate(R.layout.recycler_view, container, false);
+        RecyclerView rvCalls = view.findViewById(R.id.rv);
         rvCalls.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvCalls.setAdapter(callsAdapter);
         return view;

@@ -75,6 +75,9 @@
         app:labelVisibilityMode="unlabeled"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:menu="@menu/menu_nav_drawer" />
+
+
+    <include layout="@layout/content_main" />
 </RelativeLayout>
 
 

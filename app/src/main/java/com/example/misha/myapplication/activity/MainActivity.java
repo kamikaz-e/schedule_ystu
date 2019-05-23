@@ -2,10 +2,12 @@ package com.example.misha.myapplication.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseActivity;
+import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.database.DatabaseHelper;
 import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.dao.LessonDao;
@@ -23,7 +25,7 @@ public class MainActivity extends BaseActivity {
 
 
       /*  if (!Preferences.getInstance().isHintsOpened()) {
-            Intent intent = new Intent(MainActivity.this, ActivityStart.class);
+            Intent intent = new Intent(MainActivity.this, ActivityGroups.class);
             startActivity(intent);
             Preferences.getInstance().setHintsOpened();
         }*/
@@ -62,6 +64,7 @@ public class MainActivity extends BaseActivity {
     protected int getLayoutId() {
         return R.layout.activity_main;
     }
+
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {

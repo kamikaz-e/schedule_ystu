@@ -43,7 +43,7 @@ public abstract class AbsDao<T> implements DaoInterface<T> {
      * Get value for specified value from cursor for int.
      *
      * @param cursor     cursor
-     * @param columnName column name
+     * @param columnName column group
      * @return int column value
      */
     protected int getInt(Cursor cursor, String columnName) {
