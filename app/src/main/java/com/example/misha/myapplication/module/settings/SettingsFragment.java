@@ -7,20 +7,22 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
-import com.example.misha.myapplication.entity.Groups;
-import com.example.misha.myapplication.module.groups.ActivityGroups;
+import com.example.misha.myapplication.module.groups.GroupsFragment;
 import com.example.misha.myapplication.module.settings.theme.DialogFragmentSelectTheme;
 
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +59,6 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        getContext().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         RelativeLayout layoutPickWeek = view.findViewById(R.id.current_date);
         RelativeLayout layoutImport = view.findViewById(R.id.import_data);
         RelativeLayout layoutAbout = view.findViewById(R.id.about);
@@ -86,6 +87,11 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_main, menu);
+    }
 
     public Dialog onCreateDialogImport() {
         LayoutInflater li = LayoutInflater.from(getContext());
@@ -128,11 +134,14 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         }
     }
 
-    public void openActivityGroups() {
-        Intent intent = new Intent(getContext(), ActivityGroups.class);
-        startActivity(intent);
-    }
+    public void openFragmentGroups() {
 
+        Fragment newFragment = new GroupsFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
     @Override
     public void onClick(View v) {

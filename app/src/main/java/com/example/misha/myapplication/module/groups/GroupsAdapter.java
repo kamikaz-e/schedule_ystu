@@ -1,6 +1,5 @@
 package com.example.misha.myapplication.module.groups;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,35 +13,18 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
 import com.example.misha.myapplication.entity.Groups;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 
 
 public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHolder>
         implements Filterable {
-    private Context context;
+
     private ArrayList<Groups> contactList;
     private ArrayList<Groups> contactListFiltered;
-    private ContactsAdapterListener listener;
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name;
-
-        public MyViewHolder(View view) {
-            super(view);
-            name = view.findViewById(R.id.item);
-
-            view.setOnClickListener(view1 -> {
-                // send selected contact in callback
-                listener.onContactSelected(contactListFiltered.get(getAdapterPosition()));
-            });
-        }
-    }
+    private SimpleItemClickListener listener;
 
 
-    public GroupsAdapter(Context context, ArrayList<Groups> contactList, ContactsAdapterListener listener) {
-        this.context = context;
+    public GroupsAdapter(ArrayList<Groups> contactList, SimpleItemClickListener listener) {
         this.listener = listener;
         this.contactList = contactList;
         this.contactListFiltered = contactList;
@@ -55,7 +37,6 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
 
         return new MyViewHolder(itemView);
     }
-
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
@@ -79,14 +60,10 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
                 } else {
                     ArrayList<Groups> filteredList = new ArrayList<>();
                     for (Groups row : contactList) {
-
-                        // name match condition. this might differ depending on your requirement
-                        // here we are looking for name or phone number match
                         if (row.getName().toLowerCase().contains(charString.toLowerCase()) || row.getName().contains(charSequence)) {
                             filteredList.add(row);
                         }
                     }
-
                     contactListFiltered = filteredList;
                 }
 
@@ -103,7 +80,21 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
         };
     }
 
-    public interface ContactsAdapterListener {
-        void onContactSelected(Groups groups);
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView name;
+
+        public MyViewHolder(View view) {
+            super(view);
+            name = view.findViewById(R.id.item);
+
+            view.setOnClickListener(view1 -> view.setOnClickListener(this));
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onItemClick(getAdapterPosition(), v);
+        }
     }
+
+
 }

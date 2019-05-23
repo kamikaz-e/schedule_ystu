@@ -38,7 +38,7 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
 
     @Override
     public void openFragmentGroups() {
-        getView().openActivityGroups();
+        getView().openFragmentGroups();
     }
 
     @Override

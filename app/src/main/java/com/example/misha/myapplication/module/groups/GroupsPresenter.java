@@ -7,13 +7,11 @@ import java.util.ArrayList;
 
 public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> implements GroupsPresenterInterface {
 
-
     private ArrayList<Groups> listGroups = new ArrayList<>();
-
 
     @Override
     public void init() {
-        getView().updateItemsAdapter(listGroups);
+        getView().updateListGroups(listGroups);
     }
 
     @Override

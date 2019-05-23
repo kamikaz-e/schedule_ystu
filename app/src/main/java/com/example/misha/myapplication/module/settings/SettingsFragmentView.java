@@ -12,7 +12,7 @@ public interface SettingsFragmentView extends BaseView {
 
     Dialog onCreateDialogImport();
 
-    void openActivityGroups();
+    void openFragmentGroups();
 
     Dialog onCreateDialogAbout();
 

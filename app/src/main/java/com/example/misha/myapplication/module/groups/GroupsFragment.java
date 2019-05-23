@@ -25,12 +25,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class GroupsFragment extends BaseMainFragment  {
+public class GroupsFragment extends BaseMainFragment implements GroupsFragmentView {
 
     private GroupsPresenter presenter;
     private RecyclerView rvGroups;
     private SearchView searchView;
-    GroupsAdapter groupsAdapter;
+    private GroupsAdapter groupsAdapter;
+
     @Override
     public void onResume() {
         super.onResume();
@@ -41,7 +42,7 @@ public class GroupsFragment extends BaseMainFragment  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new GroupsPresenter();
-
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -70,32 +71,24 @@ public class GroupsFragment extends BaseMainFragment  {
     public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
         SearchManager searchManager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
-
-        searchView = (SearchView) menu.findItem(R.id.action_search)
-                .getActionView();
-        searchView.setSearchableInfo(searchManager
-                .getSearchableInfo(getContext().getComponentName()));
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getContext().getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
-
-        // listening to search query text change
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // filter recycler view when query submitted
                 groupsAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                // filter recycler view when text is changed
                 groupsAdapter.getFilter().filter(query);
                 return false;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
     }
-
 
 
     @Override
@@ -109,7 +102,6 @@ public class GroupsFragment extends BaseMainFragment  {
 
     @Override
     public boolean onBackPressed() {
-        // close search view on back button pressed
         if (!searchView.isIconified()) {
             searchView.setIconified(true);
             return false;
@@ -119,6 +111,9 @@ public class GroupsFragment extends BaseMainFragment  {
     }
 
 
-
-
+    public void updateListGroups(ArrayList<Groups> groupsList) {
+        groupsAdapter = new GroupsAdapter(groupsList, (position, view1) -> presenter.onClickItem(position));
+        rvGroups.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        rvGroups.setAdapter(groupsAdapter);
+    }
 }

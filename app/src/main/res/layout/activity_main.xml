@@ -77,7 +77,7 @@
         app:menu="@menu/menu_nav_drawer" />
 
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/recycler_view" />
 </RelativeLayout>
 
 
