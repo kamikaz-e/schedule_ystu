@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
 import com.example.misha.myapplication.entity.Groups;
+import com.example.misha.myapplication.entity.Request;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 
 
@@ -40,8 +42,8 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final Groups groups = contactListFiltered.get(position);
-        holder.name.setText(groups.getName());
+        final Groups request = contactListFiltered.get(position);
+        holder.name.setText(request.getName());
     }
 
     @Override

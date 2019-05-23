@@ -5,6 +5,8 @@ import com.example.misha.myapplication.entity.Groups;
 
 import java.util.ArrayList;
 
+import io.reactivex.functions.Consumer;
+
 public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> implements GroupsPresenterInterface {
 
     private ArrayList<Groups> listGroups = new ArrayList<>();
@@ -13,6 +15,7 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
     public void init() {
         getView().updateListGroups(listGroups);
     }
+
 
     @Override
     public void onClickItem(int position) {
@@ -26,9 +29,18 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                 .getGroups()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(groups -> loadGroups(groups), throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
+                .subscribe(new Consumer<ArrayList<Groups>>() {
+                    @Override
+                    public void accept(ArrayList<Groups> groups) throws Exception {
+                        loadGroups(groups);
+
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        GroupsPresenter.this.getView().hideProgressDialog();
+                        GroupsPresenter.this.processSimpleError(throwable);
+                    }
                 })
         );
     }
@@ -39,13 +51,21 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                 .getGroups()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(response -> {
-                    getView().hideProgressDialog();
-                    listGroups.addAll(response);
-                    init();
-                }, throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
+                .subscribe(new Consumer<ArrayList<Groups>>() {
+                    @Override
+                    public void accept(ArrayList<Groups> groups) throws Exception {
+                        getView().hideProgressDialog();
+
+                        listGroups.addAll(groups);
+
+                        init();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getView().hideProgressDialog();
+                        processSimpleError(throwable);
+                    }
                 })
         );
     }

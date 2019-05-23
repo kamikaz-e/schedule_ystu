@@ -9,7 +9,6 @@ import com.example.misha.myapplication.common.ErrorView;
 public abstract class BaseFragment extends Fragment {
 
     private boolean collapsible = false;
-    private boolean drawerEnabled;
     private boolean toolbarEnabled = true;
 
     public void setToolbarEnabled(boolean state) {
@@ -51,7 +50,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void setDrawerEnabled(boolean drawerEnabled) {
-        this.drawerEnabled = drawerEnabled;
+        boolean drawerEnabled1 = drawerEnabled;
     }
 
     public void setCollapsible(boolean state) {
