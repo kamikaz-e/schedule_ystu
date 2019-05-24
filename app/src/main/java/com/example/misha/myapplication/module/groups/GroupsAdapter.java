@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.SimpleItemClickListener;
+import com.example.misha.myapplication.entity.Groups;
 import com.example.misha.myapplication.entity.Request;
 
 import java.util.ArrayList;
@@ -19,12 +20,12 @@ import java.util.ArrayList;
 public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHolder>
         implements Filterable {
 
-    private ArrayList<Request> contactList;
-    private ArrayList<Request> contactListFiltered;
+    private ArrayList<Groups> contactList;
+    private ArrayList<Groups> contactListFiltered;
     private SimpleItemClickListener listener;
 
 
-    public GroupsAdapter(ArrayList<Request> contactList, SimpleItemClickListener listener) {
+    public GroupsAdapter(ArrayList<Groups> contactList, SimpleItemClickListener listener) {
         this.listener = listener;
         this.contactList = contactList;
         this.contactListFiltered = contactList;
@@ -40,8 +41,8 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final Request request = contactListFiltered.get(position);
-        holder.name.setText(request.getGroup());
+        final Groups groups = contactListFiltered.get(position);
+        holder.name.setText(groups.getName());
     }
 
     @Override
@@ -58,9 +59,9 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
                 if (charString.isEmpty()) {
                     contactListFiltered = contactList;
                 } else {
-                    ArrayList<Request> filteredList = new ArrayList<>();
-                    for (Request row : contactList) {
-                        if (row.getGroup().toString().contains(charString.toLowerCase()) || row.getGroup().toString().contains(charSequence)) {
+                    ArrayList<Groups> filteredList = new ArrayList<>();
+                    for (Groups row : contactList) {
+                        if (row.getName().contains(charString.toLowerCase()) || row.getName().contains(charSequence)|| row.getName().contains(charString.toUpperCase())) {
                             filteredList.add(row);
                         }
                     }
@@ -74,7 +75,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                contactListFiltered = (ArrayList<Request>) filterResults.values;
+                contactListFiltered = (ArrayList<Groups>) filterResults.values;
                 notifyDataSetChanged();
             }
         };

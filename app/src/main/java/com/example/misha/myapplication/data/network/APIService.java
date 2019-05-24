@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.data.network;
 
+import com.example.misha.myapplication.entity.Groups;
 import com.example.misha.myapplication.entity.Request;
 import com.example.misha.myapplication.entity.Subject;
 
@@ -25,7 +26,7 @@ public interface APIService {
     Single<ArrayList<Subject>> getSubjects();
 
     @GET("getGroups.php")
-    Single<ArrayList<Request>> getGroups();
+    Single<ArrayList<Groups>> getGroups();
 
    /* @GET("getAudience.php")
     Single<ArrayList<Audience>> getAudiences();*/
