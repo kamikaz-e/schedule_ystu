@@ -4,13 +4,9 @@ import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.entity.Groups;
 import com.example.misha.myapplication.entity.Request;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
 import java.util.ArrayList;
 
 import io.reactivex.functions.Consumer;
-import io.reactivex.observers.DisposableSingleObserver;
 
 public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> implements GroupsPresenterInterface {
 
@@ -36,31 +32,32 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                 .subscribe(new Consumer<ArrayList<Request>>() {
                     @Override
                     public void accept(ArrayList<Request> groups) throws Exception {
-                        loadGroups(groups);
+                        loadGroups();
 
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        GroupsPresenter.this.getView().hideProgressDialog();
-                        GroupsPresenter.this.processSimpleError(throwable);
+                        getView().hideProgressDialog();
+                        processSimpleError(throwable);
                     }
                 })
         );
     }
 
     @Override
-    public void loadGroups(ArrayList<Request> requestArrayList) {
+    public void loadGroups() {
         getCompositeDisposable().add(getRepositoryManager()
                 .getGroups()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe((Consumer<ArrayList<Request>>) groups -> {
-                    getView().hideProgressDialog();
-
-                    listGroups.addAll(groups);
-
-                    init();
+                .subscribe(new Consumer<ArrayList<Request>>() {
+                    @Override
+                    public void accept(ArrayList<Request> groups) throws Exception {
+                        getView().hideProgressDialog();
+                        listGroups.addAll(groups);
+                        init();
+                    }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
