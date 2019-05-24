@@ -644,11 +644,11 @@ The output is:
 {"custom_naming":"first","SomeOtherField":"second"}
 ```
 
-If you have a need for custom naming policy ([see this discussion](http://groups.google.com/group/google-gson/browse_thread/thread/cb441a2d717f6892)), you can use the [@SerializedName](http://google.github.io/gson/apidocs/com/google/gson/annotations/SerializedName.html) annotation.
+If you have a need for custom naming policy ([see this discussion](http://request.google.com/group/google-gson/browse_thread/thread/cb441a2d717f6892)), you can use the [@SerializedName](http://google.github.io/gson/apidocs/com/google/gson/annotations/SerializedName.html) annotation.
 
 ### <a name="TOC-Sharing-State-Across-Custom-Serializers-and-Deserializers"></a>Sharing State Across Custom Serializers and Deserializers
 
-Sometimes you need to share state across custom serializers/deserializers ([see this discussion](http://groups.google.com/group/google-gson/browse_thread/thread/2850010691ea09fb)). You can use the following three strategies to accomplish this:
+Sometimes you need to share state across custom serializers/deserializers ([see this discussion](http://request.google.com/group/google-gson/browse_thread/thread/2850010691ea09fb)). You can use the following three strategies to accomplish this:
 
 1. Store shared state in static fields
 2. Declare the serializer/deserializer as inner classes of a parent type, and use the instance fields of parent type to store shared state

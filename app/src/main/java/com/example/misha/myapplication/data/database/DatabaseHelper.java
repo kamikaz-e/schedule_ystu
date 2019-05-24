@@ -1,10 +1,22 @@
 package com.example.misha.myapplication.data.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.misha.myapplication.entity.Lesson;
+
 import java.util.ArrayList;
+
+import static com.example.misha.myapplication.data.database.AppContentProvider.LESSONS_TABLE;
+import static com.example.misha.myapplication.data.database.dao.LessonDao.DAY;
+import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_AUDIENCE;
+import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_EDUCATOR;
+import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_SUBJECT;
+import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_TYPE_LESSON;
+import static com.example.misha.myapplication.data.database.dao.LessonDao.TIME_LESSON;
+import static com.example.misha.myapplication.data.database.dao.LessonDao.WEEK;
 
 /**
  * Class creates data base if it don't exist.
@@ -96,6 +108,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 sdb.execSQL(CREATE_TABLE_TYPELESSONS);
                 sdb.execSQL(CREATE_CALL_SCHEDULE);
                 sdb.execSQL(CREATE_TABLE_LESSONS);
+
+                sdb.beginTransaction();
+
+                try {
+
+                    ArrayList<Lesson> lessons = new ArrayList<>();
+                    for (int week = 0; week < 17; week++) {
+                        for (int day = 0; day < 6; day++) {
+                            for (int timeLesson = 1; timeLesson < 7; timeLesson++) {
+                                lessons.add(new Lesson(week, day, 0, 0, 0, 0, timeLesson));
+                                ContentValues set = new ContentValues();
+                                set.put(WEEK, week);
+                                set.put(DAY, day);
+                                set.put(ID_SUBJECT, 0);
+                                set.put(ID_AUDIENCE, 0);
+                                set.put(ID_EDUCATOR, 0);
+                                set.put(ID_TYPE_LESSON, 0);
+                                set.put(TIME_LESSON, timeLesson);
+                                sdb.insert(LESSONS_TABLE, null, set);
+                            }
+                        }
+                    }
+
+                    sdb.setTransactionSuccessful();
+                } finally {
+
+                    sdb.endTransaction();
+                }
+
             }
 
             @Override

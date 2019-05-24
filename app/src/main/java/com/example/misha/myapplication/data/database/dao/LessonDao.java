@@ -73,19 +73,7 @@ public class LessonDao extends AbsDao<Lesson> {
     }
 
 
-    public void initTable() {
-        ArrayList<Lesson> dd = getAllData();
-        if (!dd.isEmpty()) return;
-        ArrayList<Lesson> lessons = new ArrayList<>();
-        for (int week = 0; week < 17; week++) {
-            for (int day = 0; day < 6; day++) {
-                for (int timeLesson = 1; timeLesson < 7; timeLesson++) {
-                    lessons.add(new Lesson(week, day, 0, 0, 0, 0, timeLesson));
-                }
-            }
-        }
-        insertAll(lessons);
-    }
+
 
 
     public ArrayList<Lesson> getLessonByWeekAndDay(int week, int day) {

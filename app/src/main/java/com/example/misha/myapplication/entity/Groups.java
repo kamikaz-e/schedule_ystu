@@ -7,10 +7,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
-//Todo прочитать про сериализацию и Parcelable
 public class Groups implements Parcelable, SimpleItem {
-
 
     public static final Creator<Groups> CREATOR = new Creator<Groups>() {
         @Override
@@ -54,6 +51,7 @@ public class Groups implements Parcelable, SimpleItem {
         return name;
     }
 
+
     public String getName() {
         return name;
     }
@@ -80,4 +78,5 @@ public class Groups implements Parcelable, SimpleItem {
         dest.writeString(id);
         dest.writeString(name);
     }
+
 }

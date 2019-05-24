@@ -24,7 +24,7 @@ public class Audience implements Parcelable, SimpleItem {
     @SerializedName("id")
     private String id;
     @Expose
-    @SerializedName("audience")
+    @SerializedName("name_audience")
     private String name;
 
     public Audience(String id, String name) {

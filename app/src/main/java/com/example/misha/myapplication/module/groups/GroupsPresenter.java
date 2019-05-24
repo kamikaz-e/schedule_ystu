@@ -2,12 +2,19 @@ package com.example.misha.myapplication.module.groups;
 
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.entity.Groups;
+import com.example.misha.myapplication.entity.Request;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 
+import io.reactivex.functions.Consumer;
+import io.reactivex.observers.DisposableSingleObserver;
+
 public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> implements GroupsPresenterInterface {
 
-    private ArrayList<Groups> listGroups = new ArrayList<>();
+    private ArrayList<Request> listGroups = new ArrayList<>();
 
     @Override
     public void init() {
@@ -26,26 +33,40 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                 .getGroups()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(groups -> loadGroups(groups), throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
+                .subscribe(new Consumer<ArrayList<Request>>() {
+                    @Override
+                    public void accept(ArrayList<Request> groups) throws Exception {
+                        loadGroups(groups);
+
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        GroupsPresenter.this.getView().hideProgressDialog();
+                        GroupsPresenter.this.processSimpleError(throwable);
+                    }
                 })
         );
     }
 
     @Override
-    public void loadGroups(ArrayList<Groups> groups) {
+    public void loadGroups(ArrayList<Request> requestArrayList) {
         getCompositeDisposable().add(getRepositoryManager()
                 .getGroups()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(response -> {
+                .subscribe((Consumer<ArrayList<Request>>) groups -> {
                     getView().hideProgressDialog();
-                    listGroups.addAll(response);
+
+                    listGroups.addAll(groups);
+
                     init();
-                }, throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getView().hideProgressDialog();
+                        processSimpleError(throwable);
+                    }
                 })
         );
     }

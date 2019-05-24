@@ -17,7 +17,7 @@ The following is a step-by-step procedure for releasing a new version of Google-
 
 1. Update the version in the [Using Gson with Maven2 page](https://github.com/google/gson/blob/master/UserGuide.md#TOC-Gson-With-Maven)
 1. Update [Gson Changelog](https://github.com/google/gson/blob/master/CHANGELOG.md). Also, look at all bugs that were fixed and add a few lines describing what changed in the release.
-1. Create a post on the [Gson Discussion Forum](http://groups.google.com/group/google-gson)
+1. Create a post on the [Gson Discussion Forum](http://request.google.com/group/google-gson)
 1. Update the release version in [Wikipedia](http://en.wikipedia.org/wiki/GSON) and update the current "stable" release.
 
 ## Configuring a machine for deployment to Sonatype Repository
@@ -31,7 +31,7 @@ This section was borrowed heavily from [Doclava release process](http://code.goo
 
 ## Getting Maven Publishing Privileges
 
-Based on [Gson group thread](https://groups.google.com/d/topic/google-gson/DHWJHVFpIBg/discussion):
+Based on [Gson group thread](https://request.google.com/d/topic/google-gson/DHWJHVFpIBg/discussion):
 
 1. [Sign up for a Sonatype account](https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide) following instructions under (2) on that page
 1. Ask one of the existing members of the repository to create a JIRA ticket (Step 3 of above document) to add you to the publisher list.

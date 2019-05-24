@@ -6,7 +6,7 @@ import com.example.misha.myapplication.data.network.APIService;
 import com.example.misha.myapplication.data.network.RetrofitClient;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.data.preferences.PreferencesInterface;
-import com.example.misha.myapplication.entity.Groups;
+import com.example.misha.myapplication.entity.Request;
 import com.example.misha.myapplication.entity.Lesson;
 import com.example.misha.myapplication.entity.Subject;
 
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Single;
+import retrofit2.Response;
 
 public class Repository implements RepositoryManager {
 
@@ -53,7 +54,7 @@ public class Repository implements RepositoryManager {
     }
 
     @Override
-    public Single<ArrayList<Groups>> getGroups() {
+    public Single<ArrayList<Request>> getGroups() {
         return apiService.getGroups();
     }
 

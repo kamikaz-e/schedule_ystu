@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
-import com.example.misha.myapplication.entity.Groups;
+import com.example.misha.myapplication.entity.Request;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -111,8 +111,8 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
     }
 
 
-    public void updateListGroups(ArrayList<Groups> groupsList) {
-        groupsAdapter = new GroupsAdapter(groupsList, (position, view1) -> presenter.onClickItem(position));
+    public void updateListGroups(ArrayList<Request> requestList) {
+        groupsAdapter = new GroupsAdapter(requestList, (position, view1) -> presenter.onClickItem(position));
         rvGroups.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         rvGroups.setAdapter(groupsAdapter);
     }

@@ -1,10 +1,12 @@
 package com.example.misha.myapplication.data.network;
 
-import com.example.misha.myapplication.entity.Groups;
+import com.example.misha.myapplication.entity.Request;
 import com.example.misha.myapplication.entity.Subject;
 
 import java.util.ArrayList;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 
@@ -23,7 +25,7 @@ public interface APIService {
     Single<ArrayList<Subject>> getSubjects();
 
     @GET("getGroups.php")
-    Single<ArrayList<Groups>> getGroups();
+    Single<ArrayList<Request>> getGroups();
 
    /* @GET("getAudience.php")
     Single<ArrayList<Audience>> getAudiences();*/
