@@ -93,7 +93,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         inflater.inflate(R.menu.menu_main, menu);
     }
 
-    public Dialog onCreateDialogImport() {
+   /* public Dialog onCreateDialogImport() {
         LayoutInflater li = LayoutInflater.from(getContext());
         @SuppressLint("InflateParams") View view = li.inflate(R.layout.dialog_signin, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -104,7 +104,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
                 setNegativeButton("Отмена", (dialog, id) -> {
                 });
         return builder.create();
-    }
+    }*/
 
 
     public Dialog onCreateDialogAbout() {
@@ -135,7 +135,6 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
     }
 
     public void openFragmentGroups() {
-
         Fragment newFragment = new GroupsFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);

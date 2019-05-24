@@ -27,7 +27,7 @@ public class Subject implements Parcelable, SimpleItem {
     @SerializedName("id")
     private String id;
     @Expose
-    @SerializedName("subject")
+    @SerializedName("name_subject")
     private String name;
 
     public Subject(String id, String name) {

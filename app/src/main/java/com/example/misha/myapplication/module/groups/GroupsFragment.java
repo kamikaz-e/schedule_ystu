@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,12 +23,13 @@ import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.entity.Groups;
 import com.example.misha.myapplication.entity.Request;
+import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class GroupsFragment extends BaseMainFragment implements GroupsFragmentView {
+public class GroupsFragment extends BaseMainFragment implements GroupsFragmentView, GroupsAdapter.GroupssAdapterListener {
 
     private GroupsPresenter presenter;
     private RecyclerView rvGroups;
@@ -42,7 +45,7 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new GroupsPresenter();
+        presenter = new GroupsPresenter(getActivity());
         setHasOptionsMenu(true);
     }
 
@@ -58,6 +61,7 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        presenter.init();
         presenter.load();
     }
 
@@ -91,6 +95,14 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    public void openFragmentSchedule() {
+        Fragment newFragment = new ScheduleFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -113,8 +125,13 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
 
 
     public void updateListGroups(ArrayList<Groups> requestList) {
-        groupsAdapter = new GroupsAdapter(requestList, (position, view1) -> presenter.onClickItem(position));
+        groupsAdapter = new GroupsAdapter(requestList, this);
         rvGroups.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         rvGroups.setAdapter(groupsAdapter);
+    }
+
+    @Override
+    public void onItemClick(Groups contact, View v) {
+        presenter.onClickItem(contact.getName(), v);
     }
 }

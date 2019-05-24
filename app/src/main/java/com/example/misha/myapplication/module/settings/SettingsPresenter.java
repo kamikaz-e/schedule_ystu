@@ -32,11 +32,6 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
     }
 
     @Override
-    public void onCreateDialogImport() {
-        getView().onCreateDialogImport().show();
-    }
-
-    @Override
     public void openFragmentGroups() {
         getView().openFragmentGroups();
     }
@@ -51,7 +46,7 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
         getView().onCreateDialogAbout().show();
     }
 
-    @Override
+   /* @Override
     public void load() {
         getView().showProgressDialog();
         getCompositeDisposable().add(getRepositoryManager()
@@ -80,7 +75,7 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
                     processSimpleError(throwable);
                 })
         );
-    }
+    }*/
 
     public void getCurrentWeek() {
         Calendar calendar = Calendar.getInstance();

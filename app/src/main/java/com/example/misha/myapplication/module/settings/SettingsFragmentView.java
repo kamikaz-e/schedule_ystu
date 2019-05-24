@@ -10,8 +10,6 @@ public interface SettingsFragmentView extends BaseView {
 
     void hideProgressDialog();
 
-    Dialog onCreateDialogImport();
-
     void openFragmentGroups();
 
     Dialog onCreateDialogAbout();

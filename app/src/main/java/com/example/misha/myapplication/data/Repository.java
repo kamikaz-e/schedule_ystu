@@ -47,14 +47,15 @@ public class Repository implements RepositoryManager {
         return apiService.insertData(nameGroup, subjects, audiences, educators, typelessons, calls, lessons);
     }*/
 
-    @Override
-    public Single<ArrayList<Subject>> getSubjects() {
-        return apiService.getSubjects();
-    }
 
     @Override
     public Single<ArrayList<Groups>> getGroups() {
         return apiService.getGroups();
+    }
+
+    @Override
+    public Single<ArrayList<Subject>> getSubjects(String name_group) {
+        return apiService.getSubjects(name_group);
     }
 
    /* @Override

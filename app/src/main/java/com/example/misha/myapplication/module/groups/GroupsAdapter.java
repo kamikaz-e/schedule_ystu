@@ -10,9 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
-import com.example.misha.myapplication.SimpleItemClickListener;
 import com.example.misha.myapplication.entity.Groups;
-import com.example.misha.myapplication.entity.Request;
 
 import java.util.ArrayList;
 
@@ -22,10 +20,10 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
 
     private ArrayList<Groups> contactList;
     private ArrayList<Groups> contactListFiltered;
-    private SimpleItemClickListener listener;
+    private GroupssAdapterListener listener;
 
 
-    public GroupsAdapter(ArrayList<Groups> contactList, SimpleItemClickListener listener) {
+    public GroupsAdapter(ArrayList<Groups> contactList, GroupssAdapterListener listener) {
         this.listener = listener;
         this.contactList = contactList;
         this.contactListFiltered = contactList;
@@ -49,6 +47,8 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
     public int getItemCount() {
         return contactListFiltered.size();
     }
+
+
 
     @Override
     public Filter getFilter() {
@@ -77,6 +77,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 contactListFiltered = (ArrayList<Groups>) filterResults.values;
                 notifyDataSetChanged();
+
             }
         };
     }
@@ -87,15 +88,16 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
         public MyViewHolder(View view) {
             super(view);
             name = view.findViewById(R.id.item);
-
-            view.setOnClickListener(view1 -> view.setOnClickListener(this));
+            view.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            listener.onItemClick(getAdapterPosition(), v);
+            listener.onItemClick(contactListFiltered.get(getAdapterPosition()), v);
         }
     }
 
-
+    public interface GroupssAdapterListener {
+        void onItemClick(Groups contact, View v);
+    }
 }

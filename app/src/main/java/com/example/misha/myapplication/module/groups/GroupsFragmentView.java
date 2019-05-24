@@ -1,5 +1,7 @@
 package com.example.misha.myapplication.module.groups;
 
+import android.view.View;
+
 import com.example.misha.myapplication.common.core.BaseView;
 import com.example.misha.myapplication.entity.Groups;
 import com.example.misha.myapplication.entity.Request;
@@ -14,4 +16,7 @@ public interface GroupsFragmentView extends BaseView {
 
     void hideProgressDialog();
 
+    void openFragmentSchedule();
+
+    void onItemClick(Groups contact, View v);
 }
