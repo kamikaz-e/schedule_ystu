@@ -24,7 +24,7 @@ public class Educator implements Parcelable, SimpleItem {
     @SerializedName("id")
     private String id;
     @Expose
-    @SerializedName("educators")
+    @SerializedName("name_educator")
     private String name;
 
     public Educator(String id, String name) {

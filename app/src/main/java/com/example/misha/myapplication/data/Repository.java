@@ -6,9 +6,12 @@ import com.example.misha.myapplication.data.network.APIService;
 import com.example.misha.myapplication.data.network.RetrofitClient;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.data.preferences.PreferencesInterface;
+import com.example.misha.myapplication.entity.Audience;
+import com.example.misha.myapplication.entity.Educator;
 import com.example.misha.myapplication.entity.Groups;
 import com.example.misha.myapplication.entity.Lesson;
 import com.example.misha.myapplication.entity.Subject;
+import com.example.misha.myapplication.entity.Typelesson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,10 +61,26 @@ public class Repository implements RepositoryManager {
         return apiService.getSubjects(name_group);
     }
 
-   /* @Override
-    public Single<ArrayList<Audience>> getAudiences(ScheduleRequest request) {
-        return apiService.getAudiences(request);
-    }*/
+    @Override
+    public Single<ArrayList<Audience>> getAudiences(String name_group) {
+        return apiService.getAudiences(name_group);
+    }
+
+    @Override
+    public Single<ArrayList<Educator>> getEducators(String name_group) {
+        return apiService.getEducators(name_group);
+    }
+
+    @Override
+    public Single<ArrayList<Typelesson>> getTypelessons() {
+        return apiService.getTypelessons();
+    }
+
+    @Override
+    public Single<ArrayList<Lesson>> getLessons(String name_group) {
+        return apiService.getLessons(name_group);
+    }
+
 
     @Override
     public boolean isHintsOpened() {

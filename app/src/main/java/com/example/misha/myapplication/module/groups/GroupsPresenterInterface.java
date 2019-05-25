@@ -16,7 +16,7 @@ public interface GroupsPresenterInterface {
 
     void loadAfterLoadGroups(String name);
 
-    void loadSubject(String name);
+    void loadSubjects(String name);
 
 
 

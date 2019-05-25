@@ -26,7 +26,7 @@ public class Typelesson implements Parcelable, SimpleItem {
     @SerializedName("id")
     private String id;
     @Expose
-    @SerializedName("typelessons")
+    @SerializedName("name_typelesson")
     private String name;
 
 
