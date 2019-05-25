@@ -10,13 +10,14 @@ import com.example.misha.myapplication.entity.Lesson;
 import java.util.ArrayList;
 
 import static com.example.misha.myapplication.data.database.AppContentProvider.LESSONS_TABLE;
-import static com.example.misha.myapplication.data.database.dao.LessonDao.DAY;
 import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_AUDIENCE;
 import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_EDUCATOR;
 import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_SUBJECT;
 import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_TYPE_LESSON;
-import static com.example.misha.myapplication.data.database.dao.LessonDao.TIME_LESSON;
-import static com.example.misha.myapplication.data.database.dao.LessonDao.WEEK;
+import static com.example.misha.myapplication.data.database.dao.LessonDao.NUMBER_DAY;
+import static com.example.misha.myapplication.data.database.dao.LessonDao.NUMBER_LESSON;
+import static com.example.misha.myapplication.data.database.dao.LessonDao.NUMBER_WEEK;
+
 
 /**
  * Class creates data base if it don't exist.
@@ -48,14 +49,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "time_lesson VARCHAR UNIQUE ON CONFLICT IGNORE );";
     private static final String CREATE_TABLE_LESSONS = "CREATE TABLE lessons " +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "week INTEGER, day INTEGER, id_subject INTEGER," +
+            "number_week INTEGER, number_day INTEGER, number_lesson INTEGER, id_subject INTEGER," +
             " id_audience INTEGER, id_educator INTEGER, " +
-            "id_typelesson INTEGER, id_time_lesson INTEGER," +
+            "id_typelesson INTEGER," +
             "FOREIGN KEY (id_subject) REFERENCES subjects (id)  ON DELETE SET NULL, " +
             "FOREIGN KEY (id_audience) REFERENCES audiences (id)   ON DELETE SET NULL, " +
             "FOREIGN KEY (id_educator) REFERENCES educators (id)   ON DELETE SET NULL, " +
             "FOREIGN KEY (id_typelesson) REFERENCES typelessons (id)   ON DELETE SET NULL, " +
-            "FOREIGN KEY (id_time_lesson) REFERENCES calls (id))";
+            "FOREIGN KEY (number_lesson) REFERENCES calls (id))";
     /**
      * Migration list.
      */
@@ -114,18 +115,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 try {
 
                     ArrayList<Lesson> lessons = new ArrayList<>();
-                    for (int week = 0; week < 17; week++) {
-                        for (int day = 0; day < 6; day++) {
+                    for (int week = 1; week < 18; week++) {
+                        for (int day = 1; day < 7; day++) {
                             for (int timeLesson = 1; timeLesson < 7; timeLesson++) {
                                 lessons.add(new Lesson(week, day, 0, 0, 0, 0, timeLesson));
                                 ContentValues set = new ContentValues();
-                                set.put(WEEK, week);
-                                set.put(DAY, day);
+                                set.put(NUMBER_WEEK, week);
+                                set.put(NUMBER_DAY, day);
+                                set.put(NUMBER_LESSON, timeLesson);
                                 set.put(ID_SUBJECT, 0);
                                 set.put(ID_AUDIENCE, 0);
                                 set.put(ID_EDUCATOR, 0);
                                 set.put(ID_TYPE_LESSON, 0);
-                                set.put(TIME_LESSON, timeLesson);
+
                                 sdb.insert(LESSONS_TABLE, null, set);
                             }
                         }
