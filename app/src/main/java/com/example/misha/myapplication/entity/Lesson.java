@@ -9,40 +9,42 @@ public class Lesson {
     @SerializedName("id")
     private String id;
     @Expose
-    @SerializedName("week")
-    private String week;
+    @SerializedName("number_week")
+    private String number_week;
     @Expose
-    @SerializedName("day")
-    private String day;
+    @SerializedName("number_day")
+    private String number_day;
     @Expose
-    @SerializedName("subject")
-    private String subject;
+    @SerializedName("number_lesson")
+    private String number_lesson;
     @Expose
-    @SerializedName("audience")
-    private String audience;
+    @SerializedName("id_subject")
+    private String id_subject;
     @Expose
-    @SerializedName("educator")
-    private String educator;
+    @SerializedName("id_audience")
+    private String id_audience;
     @Expose
-    @SerializedName("typeLesson")
-    private String typeLesson;
+    @SerializedName("id_educator")
+    private String id_educator;
     @Expose
-    @SerializedName("timeLesson")
-    private String timeLesson;
+    @SerializedName("id_typelesson")
+    private String id_typelesson;
+
 
     public Lesson() {
 
     }
 
 
-    public Lesson(int week, int day, int subject, int audience, int educator, int typeLesson, int timeLesson) {
-        this.week = String.valueOf(week);
-        this.day = String.valueOf(day);
-        this.subject = String.valueOf(subject);
-        this.audience = String.valueOf(audience);
-        this.educator = String.valueOf(educator);
-        this.typeLesson = String.valueOf(typeLesson);
-        this.timeLesson = String.valueOf(timeLesson);
+    public Lesson(int number_week, int number_day, int number_lesson, int id_subject, int id_audience, int id_educator, int id_typelesson) {
+        this.number_week = String.valueOf(number_week);
+        this.number_day = String.valueOf(number_day);
+        this.number_lesson = String.valueOf(number_lesson);
+        this.id_subject = String.valueOf(id_subject);
+        this.id_audience = String.valueOf(id_audience);
+        this.id_educator = String.valueOf(id_educator);
+        this.id_typelesson = String.valueOf(id_typelesson);
+
     }
 
     public String getId() {
@@ -53,70 +55,70 @@ public class Lesson {
         this.id = id;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getId_subject() {
+        return id_subject;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setId_subject(String id_subject) {
+        this.id_subject = id_subject;
     }
 
-    public String getAudience() {
-        return audience;
+    public String getId_audience() {
+        return id_audience;
     }
 
-    public void setAudience(String audience) {
-        this.audience = audience;
+    public void setId_audience(String id_audience) {
+        this.id_audience = id_audience;
     }
 
-    public String getEducator() {
-        return educator;
+    public String getId_educator() {
+        return id_educator;
     }
 
-    public void setEducator(String educator) {
-        this.educator = educator;
+    public void setId_educator(String id_educator) {
+        this.id_educator = id_educator;
     }
 
-    public String getTypeLesson() {
-        return typeLesson;
+    public String getId_typelesson() {
+        return id_typelesson;
     }
 
-    public void setTypeLesson(String typeLesson) {
-        this.typeLesson = typeLesson;
+    public void setId_typelesson(String id_typelesson) {
+        this.id_typelesson = id_typelesson;
     }
 
-    public String getTimeLesson() {
-        return timeLesson;
+    public String getNumber_lesson() {
+        return number_lesson;
     }
 
-    public void setTimeLesson(String timeLesson) {
-        this.timeLesson = timeLesson;
+    public void setNumber_lesson(String number_lesson) {
+        this.number_lesson = number_lesson;
     }
 
-    public String getDay() {
-        return day;
+    public String getNumber_day() {
+        return number_day;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setNumber_day(String number_day) {
+        this.number_day = number_day;
     }
 
-    public String getWeek() {
-        return week;
+    public String getNumber_week() {
+        return number_week;
     }
 
-    public void setWeek(String week) {
-        this.week = week;
+    public void setNumber_week(String number_week) {
+        this.number_week = number_week;
     }
 
     public void setEducatorEdit(String educatorEdit) {
-        this.educator = educatorEdit;
+        this.id_educator = educatorEdit;
     }
 
     public void setData(String subject, String audience, String educator, String typeLesson) {
-        this.subject = subject;
-        this.audience = audience;
-        this.educator = educator;
-        this.typeLesson = typeLesson;
+        this.id_subject = subject;
+        this.id_audience = audience;
+        this.id_educator = educator;
+        this.id_typelesson = typeLesson;
     }
 }

@@ -75,8 +75,8 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
                 lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
 
                 for (int idRowWeek = 0; idRowWeek < 36; idRowWeek++) {
-                    lessonListWeek.get(idRowWeek).setData(lessonListWeekCurrent.get(idRowWeek).getSubject(), lessonListWeekCurrent.get(idRowWeek).getAudience(),
-                            lessonListWeekCurrent.get(idRowWeek).getEducator(), lessonListWeekCurrent.get(idRowWeek).getTypeLesson());
+                    lessonListWeek.get(idRowWeek).setData(lessonListWeekCurrent.get(idRowWeek).getId_subject(), lessonListWeekCurrent.get(idRowWeek).getId_audience(),
+                            lessonListWeekCurrent.get(idRowWeek).getId_educator(), lessonListWeekCurrent.get(idRowWeek).getId_typelesson());
                     LessonDao.getInstance().updateItemByID(lessonListWeek.get(idRowWeek));
                 }
             }
@@ -94,8 +94,8 @@ public class EditSchedulePresenter extends BaseMainPresenter<EditScheduleFragmen
                 lessonListWeek = LessonDao.getInstance().getLessonByWeek(idWeek);
 
                 for (int idRowWeek = 0; idRowWeek < 36; idRowWeek++) {
-                    lessonListWeek.get(idRowWeek).setData(lessonListWeekCurrent.get(idRowWeek).getSubject(), lessonListWeekCurrent.get(idRowWeek).getAudience(),
-                            lessonListWeekCurrent.get(idRowWeek).getEducator(), lessonListWeekCurrent.get(idRowWeek).getTypeLesson());
+                    lessonListWeek.get(idRowWeek).setData(lessonListWeekCurrent.get(idRowWeek).getId_subject(), lessonListWeekCurrent.get(idRowWeek).getId_audience(),
+                            lessonListWeekCurrent.get(idRowWeek).getId_educator(), lessonListWeekCurrent.get(idRowWeek).getId_typelesson());
                     LessonDao.getInstance().updateItemByID(lessonListWeek.get(idRowWeek));
                 }
             }

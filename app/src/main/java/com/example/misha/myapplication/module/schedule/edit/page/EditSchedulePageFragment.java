@@ -48,7 +48,7 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
     public static EditSchedulePageFragment newInstance(int selectedWeek, int position) {
         Bundle args = new Bundle();
         args.putInt(Constants.SELECTED_WEEK, selectedWeek);
-        args.putInt(Constants.DAY, position);
+        args.putInt(Constants.DAY, position + 1);
         EditSchedulePageFragment fragment = new EditSchedulePageFragment();
         fragment.setArguments(args);
         return fragment;
@@ -121,7 +121,7 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
     }
 
     public void setWeek(int selectedWeek) {
-        presenter.setWeek(selectedWeek);
+        presenter.setWeek(selectedWeek + 1);
     }
 
     @Override
@@ -140,21 +140,21 @@ public class EditSchedulePageFragment extends BaseMainFragment implements EditSc
         if (requestCode == FRAGMENT_SUBJECTS) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Subject subject = data.getParcelableExtra(ITEMS_LIST);
-            lessonList.get(lessonPosition).setSubject(subject.getId());
+            lessonList.get(lessonPosition).setId_subject(subject.getId());
             updateView(lessonList);
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
         if (requestCode == FRAGMENT_TYPELESSONS) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Typelesson typelesson = data.getParcelableExtra(ITEMS_LIST);
-            lessonList.get(lessonPosition).setTypeLesson(typelesson.getId());
+            lessonList.get(lessonPosition).setId_typelesson(typelesson.getId());
             updateView(lessonList);
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }
         if (requestCode == FRAGMENT_AUDIENCES) {
             int lessonPosition = data.getIntExtra(POSITION, 0);
             Audience audience = data.getParcelableExtra(ITEMS_LIST);
-            lessonList.get(lessonPosition).setAudience(audience.getId());
+            lessonList.get(lessonPosition).setId_audience(audience.getId());
             updateView(lessonList);
             LessonDao.getInstance().updateItemByID(lessonList.get(lessonPosition));
         }

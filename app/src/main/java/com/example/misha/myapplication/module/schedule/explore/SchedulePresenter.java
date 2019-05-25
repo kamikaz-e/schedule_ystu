@@ -46,6 +46,6 @@ public class SchedulePresenter extends BaseMainPresenter<ScheduleFragmentView> i
     public void selectDefaultWeek() {
         int currentWeek = (int) DataUtil.getCurrWeek();
         getView().selectCurrentWeek(currentWeek);
-        Preferences.getInstance().setSelectedWeekSchedule((int) DataUtil.getCurrWeek());
+        Preferences.getInstance().setSelectedWeekSchedule((int) DataUtil.getCurrWeek()-1);
     }
 }

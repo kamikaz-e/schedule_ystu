@@ -125,10 +125,10 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
             timeEditOne.setText(callsList.get(position * 2).getName());
             timeEditTwo.setText(callsList.get((position * 2) + 1).getName());
 
-            Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getSubject()));
-            Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getAudience()));
-            Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getEducator()));
-            Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getTypeLesson()));
+            Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId_subject()));
+            Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId_audience()));
+            Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId_educator()));
+            Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId_typelesson()));
 
             if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
                 textViewOptions.setImageResource(R.drawable.ic_more_vert_white);

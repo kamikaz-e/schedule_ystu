@@ -26,7 +26,7 @@ public class SchedulePageFragment extends BaseMainFragment implements SchedulePa
     public static SchedulePageFragment newInstance(int selectedWeek, int position) {
         Bundle args = new Bundle();
         args.putInt(Constants.SELECTED_WEEK, selectedWeek);
-        args.putInt(Constants.DAY, position);
+        args.putInt(Constants.DAY, position+1);
         SchedulePageFragment fragment = new SchedulePageFragment();
         fragment.setArguments(args);
         return fragment;
@@ -68,6 +68,6 @@ public class SchedulePageFragment extends BaseMainFragment implements SchedulePa
     }
 
     public void setWeek(int selectedWeek) {
-        presenter.setWeek(selectedWeek);
+        presenter.setWeek(selectedWeek+1);
     }
 }

@@ -76,30 +76,30 @@ public class EditSchedulePagePresenter extends BaseMainPresenter<EditSchedulePag
 
     @Override
     public void onCopyUpClick(int position) {
-        lessonList.get(position - 1).setSubject(lessonList.get(position).getSubject());
-        lessonList.get(position - 1).setAudience(lessonList.get(position).getAudience());
-        lessonList.get(position - 1).setTypeLesson(lessonList.get(position).getTypeLesson());
-        lessonList.get(position - 1).setEducator(lessonList.get(position).getEducator());
+        lessonList.get(position - 1).setId_subject(lessonList.get(position).getId_subject());
+        lessonList.get(position - 1).setId_audience(lessonList.get(position).getId_audience());
+        lessonList.get(position - 1).setId_typelesson(lessonList.get(position).getId_typelesson());
+        lessonList.get(position - 1).setId_educator(lessonList.get(position).getId_educator());
         getView().updateView(lessonList);
         LessonDao.getInstance().updateItemByID(lessonList.get(position - 1));
     }
 
     @Override
     public void onCopyDownClick(int position) {
-        lessonList.get(position + 1).setSubject(lessonList.get(position).getSubject());
-        lessonList.get(position + 1).setAudience(lessonList.get(position).getAudience());
-        lessonList.get(position + 1).setTypeLesson(lessonList.get(position).getTypeLesson());
-        lessonList.get(position + 1).setEducator(lessonList.get(position).getEducator());
+        lessonList.get(position + 1).setId_subject(lessonList.get(position).getId_subject());
+        lessonList.get(position + 1).setId_audience(lessonList.get(position).getId_audience());
+        lessonList.get(position + 1).setId_typelesson(lessonList.get(position).getId_typelesson());
+        lessonList.get(position + 1).setId_educator(lessonList.get(position).getId_educator());
         getView().updateView(lessonList);
         LessonDao.getInstance().updateItemByID(lessonList.get(position + 1));
     }
 
     @Override
     public void onClearLessonClick(int position) {
-        lessonList.get(position).setSubject("0");
-        lessonList.get(position).setAudience("0");
-        lessonList.get(position).setTypeLesson("0");
-        lessonList.get(position).setEducator("0");
+        lessonList.get(position).setId_subject("0");
+        lessonList.get(position).setId_audience("0");
+        lessonList.get(position).setId_typelesson("0");
+        lessonList.get(position).setId_educator("0");
         getView().updateView(lessonList);
         LessonDao.getInstance().updateItemByID(lessonList.get(position));
     }

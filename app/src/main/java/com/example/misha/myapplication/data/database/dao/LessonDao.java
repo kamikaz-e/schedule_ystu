@@ -48,13 +48,13 @@ public class LessonDao extends AbsDao<Lesson> {
     protected Lesson makeInstanceFromCursor(Cursor cursor) {
         Lesson lesson = new Lesson();
         lesson.setId(getString(cursor, ID));
-        lesson.setWeek(getString(cursor, NUMBER_WEEK));
-        lesson.setDay(getString(cursor, NUMBER_DAY));
-        lesson.setTimeLesson((getString(cursor, NUMBER_LESSON)));
-        lesson.setSubject(getString(cursor, ID_SUBJECT));
-        lesson.setAudience(getString(cursor, ID_AUDIENCE));
-        lesson.setEducator(getString(cursor, ID_EDUCATOR));
-        lesson.setTypeLesson(getString(cursor, ID_TYPE_LESSON));
+        lesson.setNumber_week(getString(cursor, NUMBER_WEEK));
+        lesson.setNumber_day(getString(cursor, NUMBER_DAY));
+        lesson.setNumber_lesson((getString(cursor, NUMBER_LESSON)));
+        lesson.setId_subject(getString(cursor, ID_SUBJECT));
+        lesson.setId_audience(getString(cursor, ID_AUDIENCE));
+        lesson.setId_educator(getString(cursor, ID_EDUCATOR));
+        lesson.setId_typelesson(getString(cursor, ID_TYPE_LESSON));
         return lesson;
     }
 
@@ -62,13 +62,13 @@ public class LessonDao extends AbsDao<Lesson> {
     protected ContentValues makeContentValuesFromInstance(Lesson instance) {
         ContentValues set = new ContentValues();
         set.put(ID, instance.getId());
-        set.put(NUMBER_WEEK, instance.getWeek());
-        set.put(NUMBER_DAY, instance.getDay());
-        set.put(NUMBER_LESSON, instance.getTimeLesson());
-        set.put(ID_SUBJECT, instance.getSubject());
-        set.put(ID_AUDIENCE, instance.getAudience());
-        set.put(ID_EDUCATOR, instance.getEducator());
-        set.put(ID_TYPE_LESSON, instance.getTypeLesson());
+        set.put(NUMBER_WEEK, instance.getNumber_week());
+        set.put(NUMBER_DAY, instance.getNumber_day());
+        set.put(NUMBER_LESSON, instance.getNumber_lesson());
+        set.put(ID_SUBJECT, instance.getId_subject());
+        set.put(ID_AUDIENCE, instance.getId_audience());
+        set.put(ID_EDUCATOR, instance.getId_educator());
+        set.put(ID_TYPE_LESSON, instance.getId_typelesson());
         return set;
     }
 
