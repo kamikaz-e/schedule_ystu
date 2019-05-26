@@ -125,22 +125,26 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
             timeEditOne.setText(callsList.get(position * 2).getName());
             timeEditTwo.setText(callsList.get((position * 2) + 1).getName());
 
-            if ((lessonList.get(position).getId_subject() == null||lessonList.get(position).getId_subject().equals("0"))) {   subjectEdit.setText(R.string.hint_subject);}
+            if (lessonList.get(position).getId_subject() == null||lessonList.get(position).getId_subject().equals("0"))
+            {   subjectEdit.setText(R.string.hint_subject);}
             else {
                 Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId_subject()));
                 subjectEdit.setText(subject.getName());
             }
-            if ((lessonList.get(position).getId_audience() == null||lessonList.get(position).getId_audience().equals("0"))) {   audienceEdit.setText(R.string.hint_audience);}
+            if (lessonList.get(position).getId_audience() == null||lessonList.get(position).getId_audience().equals("0"))
+            {   audienceEdit.setText(R.string.hint_audience);}
             else {
                 Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId_audience()));
                 audienceEdit.setText(audience.getName());
             }
-            if ((lessonList.get(position).getId_educator() == null||lessonList.get(position).getId_educator().equals("0"))) {   educatorEdit.setText(R.string.hint_educator);}
+            if (lessonList.get(position).getId_educator() == null||lessonList.get(position).getId_educator().equals("0"))
+            {   educatorEdit.setText(R.string.hint_educator);}
             else {
                 Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId_educator()));
                 educatorEdit.setText(educator.getName());
             }
-            if ((lessonList.get(position).getId_typelesson() == null||lessonList.get(position).getId_typelesson().equals("0"))) {   typeLessonEdit.setText(R.string.hint_typelesson);}
+            if (lessonList.get(position).getId_typelesson() == null||lessonList.get(position).getId_typelesson().equals("0"))
+            {   typeLessonEdit.setText(R.string.hint_typelesson);}
             else {
                 Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId_typelesson()));
                 typeLessonEdit.setText(typelesson.getName());

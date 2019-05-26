@@ -44,7 +44,7 @@
     <string name="clear_typelessons">Очистить типы предметов?</string>
     <string name="network_error">Ошибка подключения к сети</string>
     <string name="unknown_error">Произошла ошибка, попробуйте еще раз</string>
-    <string name="error_api_unexpected">Неизветсная ошибка при ответе от удаленного сервера</string>
+    <string name="error_api_unexpected">Неизвесnная ошибка при ответе от удаленного сервера</string>
     <string name="retry">Повторить</string>
     <string name="menu_settings_string">Настройки</string>
     <string name="menu_schedule_string">Расписание</string>

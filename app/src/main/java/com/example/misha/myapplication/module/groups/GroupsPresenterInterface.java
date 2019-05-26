@@ -14,8 +14,6 @@ public interface GroupsPresenterInterface {
 
     void loadGroups(ArrayList<Groups> groups);
 
-    void loadAfterLoadGroups(String name);
-
     void loadSubjects(String name);
 
 

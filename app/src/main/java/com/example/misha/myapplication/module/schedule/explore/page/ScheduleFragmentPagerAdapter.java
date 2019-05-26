@@ -32,10 +32,10 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if ((lessonList.get(position).getId_subject() == null) ||
-                (lessonList.get(position).getId_audience() == null) ||
-                (lessonList.get(position).getId_educator() == null) ||
-                (lessonList.get(position).getId_typelesson() == null)) {
+        if (lessonList.get(position).getId_subject() == null||lessonList.get(position).getId_subject().equals("0") ||
+                lessonList.get(position).getId_audience() == null||lessonList.get(position).getId_audience().equals("0") ||
+                lessonList.get(position).getId_educator() == null||lessonList.get(position).getId_educator().equals("0") ||
+                lessonList.get(position).getId_typelesson() == null||lessonList.get(position).getId_typelesson().equals("0")) {
             return 1;
         }
 
