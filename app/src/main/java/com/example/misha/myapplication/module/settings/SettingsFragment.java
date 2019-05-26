@@ -25,6 +25,7 @@ import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.groups.GroupsFragment;
 import com.example.misha.myapplication.module.search.SearchAudienceFragment;
 import com.example.misha.myapplication.module.settings.theme.DialogFragmentSelectTheme;
+import com.example.misha.myapplication.util.DataUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -60,6 +61,8 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        DataUtil.hintKeyboard(getContext());
+
         RelativeLayout layoutPickWeek = view.findViewById(R.id.current_date);
         RelativeLayout layoutImport = view.findViewById(R.id.import_data);
         RelativeLayout layoutAbout = view.findViewById(R.id.about);
@@ -93,19 +96,6 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         inflater.inflate(R.menu.menu_main, menu);
         inflater.inflate(R.menu.menu_main, menu);
     }
-
-   /* public Dialog onCreateDialogImport() {
-        LayoutInflater li = LayoutInflater.from(getContext());
-        @SuppressLint("InflateParams") View view = li.inflate(R.layout.dialog_signin, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setView(view);
-        //final EditText name_db = view.findViewById(R.id.name_schedule);
-        builder.setCancelable(false).
-                setPositiveButton("Загрузить", (dialog, id) -> presenter.load()).
-                setNegativeButton("Отмена", (dialog, id) -> {
-                });
-        return builder.create();
-    }*/
 
 
     public Dialog onCreateDialogAbout() {

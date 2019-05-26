@@ -14,5 +14,5 @@ public interface SearchAudienceFragmentView extends BaseView {
 
     void hideProgressDialog();
 
-    void updateTextViewDate();
+    void updateTextViewDate(String date);
 }

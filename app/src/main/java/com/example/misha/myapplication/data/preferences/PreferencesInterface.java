@@ -50,5 +50,8 @@ public interface PreferencesInterface {
 
     void setSelectedDay(String day);
 
+    String getSelectedDate();
+
+    void setSelectedDate(String date);
 
 }

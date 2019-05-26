@@ -12,5 +12,5 @@ public interface SearchAudiencePresenterInterface {
 
     void updateAudienceList();
 
-    String dateForTextView();
+    String dateForTextView(String text);
 }

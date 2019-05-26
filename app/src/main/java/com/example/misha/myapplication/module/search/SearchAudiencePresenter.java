@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.module.search;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.text.format.DateUtils;
@@ -31,30 +32,34 @@ public class SearchAudiencePresenter extends BaseMainPresenter<SearchAudienceFra
     @Override
     public void init() {
         int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        int currentDay = day <= 2 ? 0 : day - 2;
+        int currentDay = day <= 1 ? 0 : day - 1;
         Preferences.getInstance().setSelectedDay(String.valueOf(currentDay));
-        Preferences.getInstance().setSelectedWeek(Long.toString(DataUtil.getCurrWeek()+1));
-        getView().updateTextViewDate();
+        Preferences.getInstance().setSelectedWeek(Long.toString(DataUtil.getCurrWeek() + 1));
+        getView().updateTextViewDate("");
     }
 
     @Override
-    public void updateAudienceList(){
+    public void updateAudienceList() {
         getView().updateListAudiences(listAudiences);
     }
 
     @Override
-    public String dateForTextView(){
+    public String dateForTextView(String text) {
         String pattern = "EEEE, d MMMM";
+        @SuppressLint("SimpleDateFormat")
         DateFormat df = new SimpleDateFormat(pattern);
         Date currentDate = Calendar.getInstance().getTime();
         String date = df.format(currentDate);
-        String changeDate = date.substring(0, 1).toUpperCase() + date.substring(1);
-        return String.valueOf(changeDate);
+        if (!text.equals("")) {
+            date = text;
+        }
+        return date.substring(0, 1).toUpperCase() + date.substring(1);
     }
 
     public void onClickDate(View v) {
         getCurrentDate();
     }
+
 
     public void onLessonSelected(int selectedLesson) {
         Preferences.getInstance().setSelectedLesson(String.valueOf(selectedLesson + 1));
@@ -89,11 +94,15 @@ public class SearchAudiencePresenter extends BaseMainPresenter<SearchAudienceFra
             selectedDateCalendar.set(Calendar.MONTH, month);
             selectedDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-
             Calendar mCalendar = Calendar.getInstance();
             mCalendar.setTimeInMillis(Long.valueOf(Preferences.getInstance().getSemestStart()));
             mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
             mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+            String pattern = "EEEE, d MMMM";
+            @SuppressLint("SimpleDateFormat")
+            DateFormat df = new SimpleDateFormat(pattern);
+            String date = df.format(selectedDateCalendar.getTime());
+            getView().updateTextViewDate(date);
 
             Preferences.getInstance().setSelectedWeek(String.valueOf(DataUtil.getSelectedWeek(selectedDateCalendar.getTimeInMillis())));
             int day = selectedDateCalendar.get(Calendar.DAY_OF_WEEK);

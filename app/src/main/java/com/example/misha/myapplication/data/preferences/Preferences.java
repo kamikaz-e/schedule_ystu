@@ -153,6 +153,16 @@ public final class Preferences implements PreferencesInterface {
         mPrefs.edit().putString(SELECTED_LESSON, lesson).apply();
     }
 
+    @Override
+    public String getSelectedDate() {
+        return mPrefs.getString(SELECTED_LESSON, "");
+    }
+
+    @Override
+    public void setSelectedDate(String date) {
+        mPrefs.edit().putString(SELECTED_LESSON, date).apply();
+    }
+
 
 
 }

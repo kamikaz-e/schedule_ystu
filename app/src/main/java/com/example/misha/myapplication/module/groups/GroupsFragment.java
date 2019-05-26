@@ -22,14 +22,13 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.entity.Groups;
-import com.example.misha.myapplication.entity.Request;
 import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class GroupsFragment extends BaseMainFragment implements GroupsFragmentView, GroupsAdapter.GroupssAdapterListener {
+public class GroupsFragment extends BaseMainFragment implements GroupsFragmentView, GroupsAdapter.GroupsAdapterListener {
 
     private GroupsPresenter presenter;
     private RecyclerView rvGroups;

@@ -23,6 +23,7 @@ import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.schedule.TabDaysAdapter;
 import com.example.misha.myapplication.module.schedule.edit.EditScheduleFragment;
+import com.example.misha.myapplication.util.DataUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -72,6 +73,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
         customSpinnerAdapterWeeks = new CustomSpinnerAdapterWeeks(getContext());
         pagerAdapterTabDays = new ScheduleFragmentPagerAdapter(getChildFragmentManager());
         adapterTabDays = new TabDaysAdapter((position, view) -> presenter.onPageSelected(position));
+        DataUtil.hintKeyboard(getContext());
     }
 
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,

@@ -17,6 +17,7 @@ import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.database.AbsDao;
 import com.example.misha.myapplication.data.preferences.Preferences;
+import com.example.misha.myapplication.util.DataUtil;
 import com.google.android.material.tabs.TabLayout;
 
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +43,7 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new EditDataPresenter();
+        DataUtil.hintKeyboard(getContext());
     }
 
 

@@ -64,9 +64,11 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_audience, container, false);
+        RelativeLayout layoutSelectDate = view.findViewById(R.id.rel_date);
         rvAudiences = view.findViewById(R.id.rv);
         spinner = view.findViewById(R.id.spinner);
-        RelativeLayout layoutSelectDate = view.findViewById(R.id.rel_date);
+
+
         ImageView imageSearchAudience = view.findViewById(R.id.image_searchAudience);
         if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
             imageSearchAudience.setImageResource(R.drawable.ic_date_range_white);
@@ -119,7 +121,7 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_search) {
             return true;
@@ -146,7 +148,7 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-     presenter.onLessonSelected(position);
+        presenter.onLessonSelected(position);
     }
 
     @Override
@@ -154,9 +156,9 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
 
     }
 
-    public void updateTextViewDate(){
+    public void updateTextViewDate(String date) {
         TextView textView = getView().findViewById(R.id.text_currentDate);
-        textView.setText(presenter.dateForTextView());
+        textView.setText(presenter.dateForTextView(date));
     }
 
 

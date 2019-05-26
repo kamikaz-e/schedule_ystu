@@ -20,10 +20,10 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
 
     private ArrayList<Groups> groupsList;
     private ArrayList<Groups> groupsListFiltered;
-    private GroupssAdapterListener listener;
+    private GroupsAdapterListener listener;
 
 
-    public GroupsAdapter(ArrayList<Groups> groupsList, GroupssAdapterListener listener) {
+    public GroupsAdapter(ArrayList<Groups> groupsList, GroupsAdapterListener listener) {
         this.listener = listener;
         this.groupsList = groupsList;
         this.groupsListFiltered = groupsList;
@@ -97,7 +97,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
         }
     }
 
-    public interface GroupssAdapterListener {
+    public interface GroupsAdapterListener {
         void onItemClick(Groups group, View v);
     }
 }

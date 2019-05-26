@@ -13,6 +13,7 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.entity.Calls;
+import com.example.misha.myapplication.util.DataUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,6 +37,7 @@ public class CallsFragment extends BaseMainFragment implements CallsFragmentView
         super.onCreate(savedInstanceState);
         presenter = new CallsPresenter(getContext());
         callsAdapter = new CallsFragmentAdapter(presenter);
+        DataUtil.hintKeyboard(getContext());
     }
 
     @Override

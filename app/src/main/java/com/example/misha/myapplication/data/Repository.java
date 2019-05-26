@@ -45,11 +45,6 @@ public class Repository implements RepositoryManager {
         return databaseInterface.getLessonsByDayWeek(week, day);
     }
 
- /*   @Override
-    public Single<Throwable> insertData(String nameGroup, String subjects, String audiences, String educators, String typelessons, String calls, String lessons) {
-        return apiService.insertData(nameGroup, subjects, audiences, educators, typelessons, calls, lessons);
-    }*/
-
 
     @Override
     public Single<ArrayList<Groups>> getGroups() {
@@ -204,6 +199,16 @@ public class Repository implements RepositoryManager {
 
     @Override
     public void setSelectedDay(String day) {
+
+    }
+
+    @Override
+    public String getSelectedDate() {
+        return preferencesInterface.getSelectedDate();
+    }
+
+    @Override
+    public void setSelectedDate(String date) {
 
     }
 }
