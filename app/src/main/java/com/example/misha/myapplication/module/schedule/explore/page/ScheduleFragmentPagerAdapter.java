@@ -32,18 +32,13 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-
-        Lesson lesson = lessonList.get(position);
-        Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId_subject()));
-        Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId_audience()));
-        Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId_educator()));
-        Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId_typelesson()));
-        if ((lessonList.get(position).getId_subject().equals("0") || subject == null) ||
-                (lessonList.get(position).getId_audience().equals("0") || audience == null) ||
-                (lessonList.get(position).getId_educator().equals("0") || educator == null) ||
-                (lessonList.get(position).getId_typelesson().equals("0") || typelesson == null)) {
+        if ((lessonList.get(position).getId_subject() == null) ||
+                (lessonList.get(position).getId_audience() == null) ||
+                (lessonList.get(position).getId_educator() == null) ||
+                (lessonList.get(position).getId_typelesson() == null)) {
             return 1;
         }
+
         return 0;
     }
 

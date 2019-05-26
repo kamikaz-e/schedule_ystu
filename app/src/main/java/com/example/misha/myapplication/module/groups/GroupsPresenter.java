@@ -13,6 +13,7 @@ import com.example.misha.myapplication.data.database.dao.SubjectDao;
 import com.example.misha.myapplication.data.database.dao.TypelessonDao;
 import com.example.misha.myapplication.entity.Groups;
 import com.example.misha.myapplication.entity.Lesson;
+import com.example.misha.myapplication.entity.Typelesson;
 import com.example.misha.myapplication.util.DataUtil;
 
 import java.util.ArrayList;

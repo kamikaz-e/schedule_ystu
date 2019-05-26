@@ -47,7 +47,6 @@ public class LessonDao extends AbsDao<Lesson> {
     @Override
     protected Lesson makeInstanceFromCursor(Cursor cursor) {
         Lesson lesson = new Lesson();
-        lesson.setId(getString(cursor, ID));
         lesson.setNumber_week(getString(cursor, NUMBER_WEEK));
         lesson.setNumber_day(getString(cursor, NUMBER_DAY));
         lesson.setNumber_lesson((getString(cursor, NUMBER_LESSON)));
@@ -61,7 +60,6 @@ public class LessonDao extends AbsDao<Lesson> {
     @Override
     protected ContentValues makeContentValuesFromInstance(Lesson instance) {
         ContentValues set = new ContentValues();
-        set.put(ID, instance.getId());
         set.put(NUMBER_WEEK, instance.getNumber_week());
         set.put(NUMBER_DAY, instance.getNumber_day());
         set.put(NUMBER_LESSON, instance.getNumber_lesson());
