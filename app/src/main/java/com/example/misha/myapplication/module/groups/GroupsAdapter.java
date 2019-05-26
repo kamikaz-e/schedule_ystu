@@ -18,15 +18,15 @@ import java.util.ArrayList;
 public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHolder>
         implements Filterable {
 
-    private ArrayList<Groups> contactList;
-    private ArrayList<Groups> contactListFiltered;
+    private ArrayList<Groups> groupsList;
+    private ArrayList<Groups> groupsListFiltered;
     private GroupssAdapterListener listener;
 
 
-    public GroupsAdapter(ArrayList<Groups> contactList, GroupssAdapterListener listener) {
+    public GroupsAdapter(ArrayList<Groups> groupsList, GroupssAdapterListener listener) {
         this.listener = listener;
-        this.contactList = contactList;
-        this.contactListFiltered = contactList;
+        this.groupsList = groupsList;
+        this.groupsListFiltered = groupsList;
     }
 
     @Override
@@ -39,13 +39,13 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final Groups groups = contactListFiltered.get(position);
+        final Groups groups = groupsListFiltered.get(position);
         holder.name.setText(groups.getName());
     }
 
     @Override
     public int getItemCount() {
-        return contactListFiltered.size();
+        return groupsListFiltered.size();
     }
 
 
@@ -57,25 +57,25 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
-                    contactListFiltered = contactList;
+                    groupsListFiltered = groupsList;
                 } else {
                     ArrayList<Groups> filteredList = new ArrayList<>();
-                    for (Groups row : contactList) {
+                    for (Groups row : groupsList) {
                         if (row.getName().contains(charString.toLowerCase()) || row.getName().contains(charSequence)|| row.getName().contains(charString.toUpperCase())) {
                             filteredList.add(row);
                         }
                     }
-                    contactListFiltered = filteredList;
+                    groupsListFiltered = filteredList;
                 }
 
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = contactListFiltered;
+                filterResults.values = groupsListFiltered;
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                contactListFiltered = (ArrayList<Groups>) filterResults.values;
+                groupsListFiltered = (ArrayList<Groups>) filterResults.values;
                 notifyDataSetChanged();
 
             }
@@ -93,11 +93,11 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
 
         @Override
         public void onClick(View v) {
-            listener.onItemClick(contactListFiltered.get(getAdapterPosition()), v);
+            listener.onItemClick(groupsListFiltered.get(getAdapterPosition()), v);
         }
     }
 
     public interface GroupssAdapterListener {
-        void onItemClick(Groups contact, View v);
+        void onItemClick(Groups group, View v);
     }
 }

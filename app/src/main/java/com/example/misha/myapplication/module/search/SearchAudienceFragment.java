@@ -2,7 +2,6 @@ package com.example.misha.myapplication.module.search;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,13 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,15 +25,17 @@ import com.example.misha.myapplication.CustomSpinnerAdapterLessons;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
+import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.entity.Audience;
-import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class SearchAudienceFragment extends BaseMainFragment implements SearchAudienceFragmentView,
-        SearchAudienceAdapter.GroupsAdapterListener,AdapterView.OnItemSelectedListener {
+import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
+import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
+
+public class SearchAudienceFragment extends BaseMainFragment implements SearchAudienceFragmentView, AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private SearchAudiencePresenter presenter;
     private RecyclerView rvAudiences;
@@ -65,9 +66,16 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
         View view = inflater.inflate(R.layout.search_audience, container, false);
         rvAudiences = view.findViewById(R.id.rv);
         spinner = view.findViewById(R.id.spinner);
+        RelativeLayout layoutSelectDate = view.findViewById(R.id.rel_date);
+        ImageView imageSearchAudience = view.findViewById(R.id.image_searchAudience);
+        if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
+            imageSearchAudience.setImageResource(R.drawable.ic_date_range_white);
+        }
+        if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)) {
+            imageSearchAudience.setImageResource(R.drawable.ic_date_range_black);
+        }
         rvAudiences.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
+        layoutSelectDate.setOnClickListener(this);
 
         return view;
     }
@@ -76,6 +84,7 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        presenter.init();
     }
 
     @NonNull
@@ -108,14 +117,6 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    public void openFragmentSchedule() {
-        Fragment newFragment = new ScheduleFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, newFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -138,23 +139,30 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
 
 
     public void updateListAudiences(ArrayList<Audience> requestList) {
-        searchAudienceAdapter = new SearchAudienceAdapter(requestList, this);
+        searchAudienceAdapter = new SearchAudienceAdapter(requestList);
         rvAudiences.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         rvAudiences.setAdapter(searchAudienceAdapter);
     }
 
     @Override
-    public void onItemClick(Audience audience, View v) {
-        presenter.onClickItem(audience.getName(), v);
-    }
-
-    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getContext(), "WHat?", Toast.LENGTH_SHORT).show();
+     presenter.onLessonSelected(position);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    public void updateTextViewDate(){
+        TextView textView = getView().findViewById(R.id.text_currentDate);
+        textView.setText(presenter.dateForTextView());
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        presenter.onClickDate(v);
+    }
+
 }

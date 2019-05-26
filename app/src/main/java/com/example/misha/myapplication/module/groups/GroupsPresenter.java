@@ -71,6 +71,7 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(groups1 -> {
                     getView().hideProgressDialog();
+                    listGroups.clear();
                     listGroups.addAll(groups);
                     init();
                 }, throwable -> {

@@ -131,7 +131,7 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
     }
 
     @Override
-    public void onItemClick(Groups contact, View v) {
-        presenter.onClickItem(contact.getName(), v);
+    public void onItemClick(Groups group, View v) {
+        presenter.onClickItem(group.getName(), v);
     }
 }

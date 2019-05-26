@@ -76,8 +76,6 @@ public class CallsFragmentAdapter extends RecyclerView.Adapter<CallsFragmentAdap
             numberCall.setText(callsList.get(position).getId());
             call_timeOne.setText(callsList.get(position * 2).getName());
             call_timeTwo.setText(" - " + callsList.get((position * 2) + 1).getName());
-
-
         }
 
         @Override

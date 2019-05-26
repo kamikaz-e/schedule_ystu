@@ -1,21 +1,28 @@
 package com.example.misha.myapplication.module.search;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.text.format.DateUtils;
 import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
+import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.entity.Audience;
+import com.example.misha.myapplication.util.DataUtil;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-import io.reactivex.functions.Consumer;
+import java.util.Calendar;
+import java.util.Date;
 
 public class SearchAudiencePresenter extends BaseMainPresenter<SearchAudienceFragmentView> implements SearchAudiencePresenterInterface {
 
     private ArrayList<Audience> listAudiences = new ArrayList<>();
     private Activity context;
+
 
     public SearchAudiencePresenter(FragmentActivity context) {
         this.context = context;
@@ -23,28 +30,83 @@ public class SearchAudiencePresenter extends BaseMainPresenter<SearchAudienceFra
 
     @Override
     public void init() {
-        getView().updateListAudiences(listAudiences);
-    }
-
-    public void onClickItem(String date, View v) {
-        getView().showProgressDialog();
-        loadAudiences(date);
+        int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        int currentDay = day <= 2 ? 0 : day - 2;
+        Preferences.getInstance().setSelectedDay(String.valueOf(currentDay));
+        Preferences.getInstance().setSelectedWeek(Long.toString(DataUtil.getCurrWeek()+1));
+        getView().updateTextViewDate();
     }
 
     @Override
-    public void loadAudiences(String date) {
+    public void updateAudienceList(){
+        getView().updateListAudiences(listAudiences);
+    }
+
+    @Override
+    public String dateForTextView(){
+        String pattern = "EEEE, d MMMM";
+        DateFormat df = new SimpleDateFormat(pattern);
+        Date currentDate = Calendar.getInstance().getTime();
+        String date = df.format(currentDate);
+        String changeDate = date.substring(0, 1).toUpperCase() + date.substring(1);
+        return String.valueOf(changeDate);
+    }
+
+    public void onClickDate(View v) {
+        getCurrentDate();
+    }
+
+    public void onLessonSelected(int selectedLesson) {
+        Preferences.getInstance().setSelectedLesson(String.valueOf(selectedLesson + 1));
+        loadFreeAudienceAudiences(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay(), Preferences.getInstance().getSelectedLesson());
+    }
+
+
+    @Override
+    public void loadFreeAudienceAudiences(String week, String day, String lesson) {
+        getView().showProgressDialog();
         getCompositeDisposable().add(getRepositoryManager()
-                .getAudience(date)
+                .getFreeAudiences(week, day, lesson)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(audiences -> {
-                    listAudiences.addAll(audiences);
                     getView().hideProgressDialog();
+                    listAudiences.clear();
+                    listAudiences.addAll(audiences);
+                    updateAudienceList();
                 }, throwable -> {
                     getView().hideProgressDialog();
                     processSimpleError(throwable);
                 })
         );
+    }
+
+    public void getCurrentDate() {
+        Calendar calendar = Calendar.getInstance();
+        final Calendar selectedDateCalendar = Calendar.getInstance();
+        new DatePickerDialog(context, (view, year, month, dayOfMonth) -> {
+            selectedDateCalendar.set(Calendar.YEAR, year);
+            selectedDateCalendar.set(Calendar.MONTH, month);
+            selectedDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+
+            Calendar mCalendar = Calendar.getInstance();
+            mCalendar.setTimeInMillis(Long.valueOf(Preferences.getInstance().getSemestStart()));
+            mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
+            mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+
+            Preferences.getInstance().setSelectedWeek(String.valueOf(DataUtil.getSelectedWeek(selectedDateCalendar.getTimeInMillis())));
+            int day = selectedDateCalendar.get(Calendar.DAY_OF_WEEK);
+            int selectedDay = day <= 1 ? 0 : day - 1;
+            Preferences.getInstance().setSelectedDay(String.valueOf(selectedDay));
+            loadFreeAudienceAudiences(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay(), Preferences.getInstance().getSelectedLesson());
+
+        },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)).show();
+
+
     }
 
 }

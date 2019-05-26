@@ -4,8 +4,6 @@ public interface SettingsPresenterInterface {
 
     void onSearchAudience();
 
-    void getCurrentWeek();
-
     void onOpenFragmentGroups();
 
     void onCreateDialogSelectTheme();

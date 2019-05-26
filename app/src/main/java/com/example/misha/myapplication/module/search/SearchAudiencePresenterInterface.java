@@ -4,8 +4,13 @@ import android.view.View;
 
 public interface SearchAudiencePresenterInterface {
 
-    void onClickItem(String audience, View v);
+    void onClickDate(View v);
 
-    void loadAudiences(String date);
+    void onLessonSelected(int selectedLesson);
 
+    void loadFreeAudienceAudiences(String week, String day, String lesson);
+
+    void updateAudienceList();
+
+    String dateForTextView();
 }

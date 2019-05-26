@@ -28,7 +28,7 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
 
     @Override
     public void onSearchAudience() {
-            getView().openFragmentSearchAudience();
+        getView().openFragmentSearchAudience();
     }
 
     @Override
@@ -77,7 +77,7 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
         );
     }*/
 
-    public void getCurrentWeek() {
+   /* public void getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
         final Calendar selectedDate = Calendar.getInstance();
         new DatePickerDialog(context, (view, year, month, dayOfMonth) -> {
@@ -108,6 +108,6 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)).show();
-    }
+    }*/
 
 }

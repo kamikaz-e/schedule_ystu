@@ -19,6 +19,9 @@ public final class Preferences implements PreferencesInterface {
     private static final String PREF_KEY_SELECT_TAB_DAYS = "PREF_KEY_SELECT_TAB_DAYS";
     private static final String PREF_KEY_SELECT_LESSON = "PREF_KEY_SELECT_LESSON";
     private static final String PREF_KEY_FAB_OPEN = "PREF_KEY_FAB_OPEN";
+    private static final String SELECTED_WEEK = "SELECTED_WEEK";
+    private static final String SELECTED_DAY = "SELECTED_DAY";
+    private static final String SELECTED_LESSON = "SELECTED_LESSON";
     private static volatile Preferences instance;
     private final SharedPreferences mPrefs;
     public String SELECT_THEME = "SELECT_THEME";
@@ -46,13 +49,13 @@ public final class Preferences implements PreferencesInterface {
 
 
     @Override
-    public void setSemesterStart(long date) {
-        mPrefs.edit().putLong(PREF_KEY_SEMESTER_START, date).apply();
+    public void setSemesterStart(String date) {
+        mPrefs.edit().putString(PREF_KEY_SEMESTER_START, date).apply();
     }
 
     @Override
-    public long getSemestStart() {
-        return mPrefs.getLong(PREF_KEY_SEMESTER_START, calendar.getTimeInMillis());
+    public String getSemestStart() {
+        return mPrefs.getString(PREF_KEY_SEMESTER_START, "1549227600000");
     }
 
 
@@ -118,6 +121,38 @@ public final class Preferences implements PreferencesInterface {
     public void setSelectedTheme(String stringTheme) {
         mPrefs.edit().putString(SELECT_THEME, stringTheme).apply();
     }
+
+
+    @Override
+    public String getSelectedWeek() {
+        return mPrefs.getString(SELECTED_WEEK, "");
+    }
+
+    @Override
+    public void setSelectedWeek(String week) {
+        mPrefs.edit().putString(SELECTED_WEEK, week).apply();
+    }
+
+    @Override
+    public String getSelectedDay() {
+        return mPrefs.getString(SELECTED_DAY, "");
+    }
+
+    @Override
+    public void setSelectedDay(String day) {
+        mPrefs.edit().putString(SELECTED_DAY, day).apply();
+    }
+
+    @Override
+    public String getSelectedLesson() {
+        return mPrefs.getString(SELECTED_LESSON, "");
+    }
+
+    @Override
+    public void setSelectedLesson(String lesson) {
+        mPrefs.edit().putString(SELECTED_LESSON, lesson).apply();
+    }
+
 
 
 }

@@ -6,9 +6,9 @@ public interface PreferencesInterface {
 
     void setHintsOpened();
 
-    void setSemesterStart(long date);
+    void setSemesterStart(String date);
 
-    long getSemestStart();
+    String getSemestStart();
 
     boolean isCallsOpened();
 
@@ -37,4 +37,18 @@ public interface PreferencesInterface {
     String getSelectedTheme();
 
     void setSelectedTheme(String stringTheme);
+
+    String getSelectedLesson();
+
+    void setSelectedLesson(String lesson);
+
+    String getSelectedWeek();
+
+    void setSelectedWeek(String week);
+
+    String getSelectedDay();
+
+    void setSelectedDay(String day);
+
+
 }

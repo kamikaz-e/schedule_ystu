@@ -57,8 +57,8 @@ public class Repository implements RepositoryManager {
     }
 
     @Override
-    public Single<ArrayList<Audience>> getAudience(String date) {
-        return apiService.getAudiences(date);
+    public Single<ArrayList<Audience>> getFreeAudiences(String week, String day, String lesson) {
+        return apiService.getFreeAudiences(week, day, lesson);
     }
 
     @Override
@@ -98,12 +98,12 @@ public class Repository implements RepositoryManager {
     }
 
     @Override
-    public void setSemesterStart(long date) {
+    public void setSemesterStart(String date) {
         preferencesInterface.setSemesterStart(date);
     }
 
     @Override
-    public long getSemestStart() {
+    public String getSemestStart() {
         return preferencesInterface.getSemestStart();
     }
 
@@ -175,5 +175,35 @@ public class Repository implements RepositoryManager {
     @Override
     public void setSelectedTheme(String stringTheme) {
         preferencesInterface.setSelectedTheme(stringTheme);
+    }
+
+    @Override
+    public String getSelectedLesson() {
+        return preferencesInterface.getSelectedLesson();
+    }
+
+    @Override
+    public void setSelectedLesson(String lesson) {
+
+    }
+
+    @Override
+    public String getSelectedWeek() {
+        return preferencesInterface.getSelectedWeek();
+    }
+
+    @Override
+    public void setSelectedWeek(String week) {
+
+    }
+
+    @Override
+    public String getSelectedDay() {
+        return preferencesInterface.getSelectedDay();
+    }
+
+    @Override
+    public void setSelectedDay(String day) {
+
     }
 }

@@ -38,7 +38,7 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
     public void updateData(int selectedPos) {
         dayYear.clear();
         Calendar mCalendar = Calendar.getInstance();
-        mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
+        mCalendar.setTimeInMillis(Long.valueOf(Preferences.getInstance().getSemestStart()));
         mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
         mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         @SuppressLint("SimpleDateFormat") SimpleDateFormat mFormatDay = new SimpleDateFormat("dd EEE");

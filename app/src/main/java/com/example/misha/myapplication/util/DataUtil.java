@@ -10,10 +10,15 @@ import java.util.Calendar;
 public final class DataUtil {
 
     public static long getCurrWeek() {
-        Calendar calendar = Calendar.getInstance();
-        long selectDate = Preferences.getInstance().getSemestStart();
-        long differentBetweenDate = calendar.getTimeInMillis() - selectDate;
-        return (differentBetweenDate / (7 * 24 * 60 * 60 * 1000));
+        long selectDate = Long.valueOf(Preferences.getInstance().getSemestStart());
+        long differentBetweenDate = Calendar.getInstance().getTimeInMillis() - selectDate;
+        return differentBetweenDate / (7 * 24 * 60 * 60 * 1000);
+    }
+
+    public static int getSelectedWeek(long selectDate) {
+        long start_semestr = Long.valueOf(Preferences.getInstance().getSemestStart());
+        long differentBetweenDate = selectDate - start_semestr;
+        return (int) (differentBetweenDate / (7 * 24 * 60 * 60 * 1000)+1);
     }
 
     public static void hintKeyboard(Activity contex) {
