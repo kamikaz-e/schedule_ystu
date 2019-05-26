@@ -12,6 +12,8 @@ public interface SettingsFragmentView extends BaseView {
 
     void openFragmentGroups();
 
+    void openFragmentSearchAudience();
+
     Dialog onCreateDialogAbout();
 
     void showDialogSelectTheme();

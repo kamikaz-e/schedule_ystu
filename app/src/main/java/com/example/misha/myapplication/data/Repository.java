@@ -57,6 +57,11 @@ public class Repository implements RepositoryManager {
     }
 
     @Override
+    public Single<ArrayList<Audience>> getAudience(String date) {
+        return apiService.getAudiences(date);
+    }
+
+    @Override
     public Single<ArrayList<Subject>> getSubjects(String name_group) {
         return apiService.getSubjects(name_group);
     }

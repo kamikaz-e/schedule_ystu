@@ -20,6 +20,15 @@
         <item>17 неделя</item>
     </string-array>
 
+    <string-array name="lessons">
+        <item>1 занятие</item>
+        <item>2 занятие</item>
+        <item>3 занятие</item>
+        <item>4 занятие</item>
+        <item>5 занятие</item>
+        <item>6 занятие</item>
+    </string-array>
+
     <string name="app_name">Расписание</string>
     <string name="start_activity_title">УЧЕБНОЕ  РАСПИСАНИЕ</string>
     <string name="start_button_import_schedule">Загрузить расписание</string>
@@ -81,4 +90,5 @@
     <string name="string_empty_lesson">Занятие отсутствует</string>
     <string name="string_time_One">13:10</string>
     <string name="string_time_Two">14:00</string>
+    <string name="select_date">Выберите дату</string>
 </resources>

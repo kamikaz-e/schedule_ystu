@@ -23,6 +23,7 @@ import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.groups.GroupsFragment;
+import com.example.misha.myapplication.module.search.SearchAudienceFragment;
 import com.example.misha.myapplication.module.settings.theme.DialogFragmentSelectTheme;
 
 import org.jetbrains.annotations.NotNull;
@@ -134,6 +135,14 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         }
     }
 
+    public void openFragmentSearchAudience() {
+        Fragment newFragment = new SearchAudienceFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     public void openFragmentGroups() {
         Fragment newFragment = new GroupsFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -145,10 +154,10 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.current_date) {
-            presenter.onDateClicked();
+            presenter.onSearchAudience();
         }
         if (v.getId() == R.id.import_data) {
-            presenter.openFragmentGroups();
+            presenter.onOpenFragmentGroups();
         }
         if (v.getId() == R.id.select_theme) {
             presenter.onCreateDialogSelectTheme();

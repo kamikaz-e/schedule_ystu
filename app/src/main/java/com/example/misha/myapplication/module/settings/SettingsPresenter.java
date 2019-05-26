@@ -27,12 +27,12 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
     }
 
     @Override
-    public void onDateClicked() {
-        getCurrentWeek();
+    public void onSearchAudience() {
+            getView().openFragmentSearchAudience();
     }
 
     @Override
-    public void openFragmentGroups() {
+    public void onOpenFragmentGroups() {
         getView().openFragmentGroups();
     }
 

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import com.example.misha.myapplication.CustomSpinnerAdapter;
+import com.example.misha.myapplication.CustomSpinnerAdapterWeeks;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
@@ -37,9 +37,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
     private RecyclerView dayTabs;
     private ViewPager viewPager;
     private Spinner spinner;
-
-    private CustomSpinnerAdapter customSpinnerAdapter;
-
+    private CustomSpinnerAdapterWeeks customSpinnerAdapterWeeks;
     private SchedulePresenter presenter;
 
     @Override
@@ -47,7 +45,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
         super.onResume();
         spinner = new Spinner(getContext());
         spinner.setBackgroundColor(Color.TRANSPARENT);
-        spinner.setAdapter(customSpinnerAdapter);
+        spinner.setAdapter(customSpinnerAdapterWeeks);
         spinner.setOnItemSelectedListener(this);
         getContext().getToolbar().addView(spinner);
         getContext().setCurrentTitle(null);
@@ -71,7 +69,7 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
         super.onCreate(savedInstanceState);
         presenter = new SchedulePresenter();
         setHasOptionsMenu(true);
-        customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
+        customSpinnerAdapterWeeks = new CustomSpinnerAdapterWeeks(getContext());
         pagerAdapterTabDays = new ScheduleFragmentPagerAdapter(getChildFragmentManager());
         adapterTabDays = new TabDaysAdapter((position, view) -> presenter.onPageSelected(position));
     }

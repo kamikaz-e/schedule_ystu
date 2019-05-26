@@ -16,14 +16,14 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-public class CustomSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {
+public class CustomSpinnerAdapterWeeks extends BaseAdapter implements SpinnerAdapter {
 
 
     private final Context activity;
     private ArrayList<String> listItems;
 
 
-    public CustomSpinnerAdapter(Context context) {
+    public CustomSpinnerAdapterWeeks(Context context) {
         Calendar mCalendar = Calendar.getInstance();
         mCalendar.setTimeInMillis(Preferences.getInstance().getSemestStart());
         mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
@@ -61,7 +61,7 @@ public class CustomSpinnerAdapter extends BaseAdapter implements SpinnerAdapter 
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = View.inflate(activity, R.layout.spinner_custom, null);
+        View view = View.inflate(activity, R.layout.spinner_custom_weeks, null);
         List<String> arrayWeek = Arrays.asList(view.getResources().getStringArray(R.array.weeks));
         TextView currentNumberWeek = view.findViewById(R.id.current_daysWeekRange);
         TextView currentDaysWeekRange = view.findViewById(R.id.current_numberWeek);
@@ -73,7 +73,7 @@ public class CustomSpinnerAdapter extends BaseAdapter implements SpinnerAdapter 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
 
-        View view = View.inflate(activity, R.layout.drop_down_spinner_custom, null);
+        View view = View.inflate(activity, R.layout.drop_down_spinner_custom_weeks, null);
         List<String> arrayWeek = Arrays.asList(view.getResources().getStringArray(R.array.weeks));
         final TextView numberWeekTextView = view.findViewById(R.id.number_week_textView);
         final TextView dayRangeTextView = view.findViewById(R.id.day_range_textView);

@@ -30,6 +30,9 @@ public interface APIService {
     @GET("getGroups.php")
     Single<ArrayList<Groups>> getGroups();
 
+    @GET("getAudience.php")
+    Single<ArrayList<Audience>> getAudience(@Field("date") String date);
+
     @FormUrlEncoded
     @POST("getSubjects.php")
     Single<ArrayList<Subject>> getSubjects(@Field("group") String name_group);

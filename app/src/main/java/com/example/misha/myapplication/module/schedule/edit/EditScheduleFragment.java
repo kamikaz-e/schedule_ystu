@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import com.example.misha.myapplication.CustomSpinnerAdapter;
+import com.example.misha.myapplication.CustomSpinnerAdapterWeeks;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
@@ -40,7 +40,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
     private FloatingActionButton mainFab, evenWeekFab, unevenWeekFab;
     private Animation fabOpen, fabClose, rotateForward, rotateBackward;
     private RecyclerView dayTabs;
-    private CustomSpinnerAdapter customSpinnerAdapter;
+    private CustomSpinnerAdapterWeeks customSpinnerAdapterWeeks;
     private EditSchedulePresenter presenter;
 
 
@@ -49,7 +49,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         super.onResume();
         spinner = new Spinner(getContext());
         spinner.setBackgroundColor(Color.TRANSPARENT);
-        spinner.setAdapter(customSpinnerAdapter);
+        spinner.setAdapter(customSpinnerAdapterWeeks);
         spinner.setOnItemSelectedListener(this);
         presenter.init();
         getContext().getToolbar().addView(spinner);
@@ -71,7 +71,7 @@ public class EditScheduleFragment extends BaseMainFragment implements EditSchedu
         super.onCreate(savedInstanceState);
         presenter = new EditSchedulePresenter(getContext());
         setHasOptionsMenu(true);
-        customSpinnerAdapter = new CustomSpinnerAdapter(getContext());
+        customSpinnerAdapterWeeks = new CustomSpinnerAdapterWeeks(getContext());
         pagerAdapter = new EditScheduleFragmentPagerAdapter(getChildFragmentManager());
         adapterTabDays = new TabDaysAdapter((position, view) -> presenter.onPageSelected(position));
     }
