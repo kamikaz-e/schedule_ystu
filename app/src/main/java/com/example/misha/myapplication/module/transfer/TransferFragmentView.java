@@ -8,5 +8,5 @@ import com.example.misha.myapplication.entity.Audience;
 import java.util.ArrayList;
 
 public interface TransferFragmentView extends BaseView {
-    Dialog onCreateDialogExport();
+
 }

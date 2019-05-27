@@ -74,18 +74,6 @@ public class TransferFragment extends BaseMainFragment implements TransferFragme
         return presenter;
     }
 
-    public Dialog onCreateDialogExport() {
-        LayoutInflater li = LayoutInflater.from(getContext());
-        @SuppressLint("InflateParams") View view = li.inflate(R.layout.dialog_signin, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setView(view);
-        final EditText name_db = view.findViewById(R.id.name_schedule);
-        builder.setCancelable(false).
-                setPositiveButton("Отправить", (dialog, id) -> presenter.export_data(name_db.getText().toString())).
-                setNegativeButton("Отмена", (dialog, id) -> {
-                });
-        return builder.create();
-    }
 
     @Override
     public void onClick(View v) {

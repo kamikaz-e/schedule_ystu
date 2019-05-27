@@ -104,4 +104,6 @@
     <string name="title_groups">Выберите группу</string>
     <string name="title_edit_data">Редактор данных</string>
     <string name="title_calls">Расписание звонков</string>
+    <string name="string_send">Отправить</string>
+    <string name="share">Share</string>
 </resources>

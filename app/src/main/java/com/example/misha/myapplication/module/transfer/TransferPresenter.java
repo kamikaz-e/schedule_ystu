@@ -2,11 +2,14 @@ package com.example.misha.myapplication.module.transfer;
 
 import android.app.Activity;
 import android.os.Environment;
+import android.widget.ShareActionProvider;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.misha.myapplication.Zipping;
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
+import com.example.misha.myapplication.entity.ExportData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,7 +18,7 @@ public class TransferPresenter extends BaseMainPresenter<TransferFragmentView> i
 
 
     private Activity context;
-
+    private ShareActionProvider shareActionProvider;
 
     public TransferPresenter(FragmentActivity context) {
         this.context = context;
@@ -32,36 +35,32 @@ public class TransferPresenter extends BaseMainPresenter<TransferFragmentView> i
 
     @Override
     public void onClickExport() {
-        getView().onCreateDialogExport().show();
+        export_data();
     }
 
-    public void export_data(String nameFile) {
-        //String textToWrite = "asdsddad";
-        String fileObject = nameFile + ".txt";
+    public void export_data() {
+        String nameFile = "export.txt";
         String state = Environment.getExternalStorageState();
         if (!Environment.MEDIA_MOUNTED.equals(state)) {
             return;
         }
+        Gson gsonBuilder = new GsonBuilder().create();
+        String jsonFromJavaArrayList = gsonBuilder.toJson(new ExportData());
 
 
-        File file = new File(context.getExternalFilesDir(null), fileObject);
+        File file = new File(context.getExternalFilesDir(null), nameFile);
         FileOutputStream outputStream;
         try {
             file.createNewFile();
             outputStream = new FileOutputStream(file, true);
-            outputStream.write(.getBytes());
+            outputStream.write(jsonFromJavaArrayList.getBytes());
             outputStream.flush();
             outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String[] s = new String[1];
-        s[0] = context.getExternalFilesDir(null) + "/" + fileObject;
-        Zipping zipping = new Zipping();
-        zipping.zip(s, context.getExternalFilesDir(null) + "/" + nameFile + ".zip");
-        File file1 = new File(context.getExternalFilesDir(null) + "/" + fileObject);
-        file1.delete();
+
     }
 
 
