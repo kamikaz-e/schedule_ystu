@@ -35,7 +35,7 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
     @Override
     public void onResume() {
         super.onResume();
-        getContext().setCurrentTitle("Редактор данных");
+        getContext().setCurrentTitle(getString(R.string.title_edit_data));
     }
 
 
@@ -84,8 +84,8 @@ public class EditDataFragment extends BaseMainFragment implements EditDataFragme
 
     public Dialog onCreateDialogClear(AbsDao dao, int titleClear) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setCancelable(false).setPositiveButton("Подтвердить", (dialog, id) ->
-                presenter.onClear(dao)).setNegativeButton("Отмена", (dialog, id) -> dialog.cancel()).setTitle(titleClear);
+        builder.setCancelable(false).setPositiveButton(R.string.ack, (dialog, id) ->
+                presenter.onClear(dao)).setNegativeButton(R.string.cancel, (dialog, id) -> dialog.cancel()).setTitle(titleClear);
         return builder.create();
     }
 

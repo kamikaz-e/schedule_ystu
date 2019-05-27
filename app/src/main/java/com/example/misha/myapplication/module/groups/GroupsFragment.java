@@ -38,7 +38,7 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
     @Override
     public void onResume() {
         super.onResume();
-        getContext().setCurrentTitle("Выберите группу");
+        getContext().setCurrentTitle(getString(R.string.title_groups));
     }
 
     @Override

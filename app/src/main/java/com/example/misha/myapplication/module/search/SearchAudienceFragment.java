@@ -47,7 +47,7 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
     @Override
     public void onResume() {
         super.onResume();
-        getContext().setCurrentTitle("Выберите дату и занятие");
+        getContext().setCurrentTitle(getString(R.string.title_search_audience));
         spinner.setAdapter(customSpinnerAdapterLessons);
         spinner.setOnItemSelectedListener(this);
     }
@@ -63,7 +63,7 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.search_audience, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_audience, container, false);
         RelativeLayout layoutSelectDate = view.findViewById(R.id.rel_date);
         rvAudiences = view.findViewById(R.id.rv);
         spinner = view.findViewById(R.id.spinner);

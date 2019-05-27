@@ -6,13 +6,11 @@ import com.example.misha.myapplication.common.core.BaseView;
 
 public interface SettingsFragmentView extends BaseView {
 
-    void showProgressDialog();
-
-    void hideProgressDialog();
-
     void openFragmentGroups();
 
     void openFragmentSearchAudience();
+
+    void openFragmentTransferData();
 
     Dialog onCreateDialogAbout();
 

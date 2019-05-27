@@ -29,7 +29,7 @@ public class CallsFragment extends BaseMainFragment implements CallsFragmentView
     @Override
     public void onResume() {
         super.onResume();
-        getContext().setCurrentTitle("Расписание звонков");
+        getContext().setCurrentTitle(getString(R.string.title_calls));
     }
 
     @Override

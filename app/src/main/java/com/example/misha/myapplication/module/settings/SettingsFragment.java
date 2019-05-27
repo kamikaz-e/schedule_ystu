@@ -25,6 +25,7 @@ import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.module.groups.GroupsFragment;
 import com.example.misha.myapplication.module.search.SearchAudienceFragment;
 import com.example.misha.myapplication.module.settings.theme.DialogFragmentSelectTheme;
+import com.example.misha.myapplication.module.transfer.TransferFragment;
 import com.example.misha.myapplication.util.DataUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -47,7 +48,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new SettingsPresenter(getContext());
+        presenter = new SettingsPresenter();
     }
 
     @NonNull
@@ -67,27 +68,32 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         RelativeLayout layoutImport = view.findViewById(R.id.import_data);
         RelativeLayout layoutAbout = view.findViewById(R.id.about);
         RelativeLayout layoutSelectDate = view.findViewById(R.id.select_theme);
+        RelativeLayout layoutTransferData = view.findViewById(R.id.transfer_data);
         ImageView imageSearchAudience = view.findViewById(R.id.image_searchAudience);
         ImageView imageImport = view.findViewById(R.id.image_import);
         ImageView imageTheme = view.findViewById(R.id.image_theme);
         ImageView imageAbout = view.findViewById(R.id.image_about);
+        ImageView imageTransferData = view.findViewById(R.id.image_tranfer);
         if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
             imageSearchAudience.setImageResource(R.drawable.ic_search_white);
             imageImport.setImageResource(R.drawable.ic_import_white);
             imageTheme.setImageResource(R.drawable.ic_palette_white);
             imageAbout.setImageResource(R.drawable.ic_person_white);
+            imageTransferData.setImageResource(R.drawable.ic_send_white);
         }
         if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)) {
             imageSearchAudience.setImageResource(R.drawable.ic_search_black);
             imageImport.setImageResource(R.drawable.ic_import);
             imageTheme.setImageResource(R.drawable.ic_palette_black);
             imageAbout.setImageResource(R.drawable.ic_person_black);
+            imageTransferData.setImageResource(R.drawable.ic_send_black);
         }
 
         layoutPickWeek.setOnClickListener(this);
         layoutImport.setOnClickListener(this);
         layoutAbout.setOnClickListener(this);
         layoutSelectDate.setOnClickListener(this);
+        layoutTransferData.setOnClickListener(this);
         return view;
     }
 
@@ -100,15 +106,15 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
 
     public Dialog onCreateDialogAbout() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setPositiveButton("Профиль Вконтакте", (dialog, id) -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/mikhailvolkov1"));
+        builder.setPositiveButton((R.string.string_vk_developer), (dialog, id) -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.vk_developer)));
             startActivity(browserIntent);
         }).
-                setNeutralButton("Отмена", (dialog, id) -> dialog.cancel()).
-                setNegativeButton("Электронная почта", (dialog, id) -> {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:mikhailvolkov2014-2014@ya.ru"));
+                setNeutralButton(R.string.cancel, (dialog, id) -> dialog.cancel()).
+                setNegativeButton((R.string.string_email_developer), (dialog, id) -> {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.email_developer)));
                     startActivity(browserIntent);
-                }).setTitle("Обратная связь с разработчиком");
+                }).setTitle(R.string.feedback_developer);
         return builder.create();
     }
 
@@ -141,6 +147,14 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         transaction.commit();
     }
 
+    public void openFragmentTransferData() {
+        Fragment newFragment = new TransferFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.current_date) {
@@ -152,9 +166,13 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         if (v.getId() == R.id.select_theme) {
             presenter.onCreateDialogSelectTheme();
         }
+        if (v.getId() == R.id.transfer_data) {
+            presenter.onOpenFragmentTransferData();
+        }
         if (v.getId() == R.id.about) {
             presenter.onCreateDialogAbout();
         }
+
     }
 
 

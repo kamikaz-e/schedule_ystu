@@ -10,7 +10,6 @@ public interface SettingsPresenterInterface {
 
     void onCreateDialogAbout();
 
-  /*  void load();
+    void onOpenFragmentTransferData();
 
-    void load(ArrayList<Subject> subjects);*/
 }

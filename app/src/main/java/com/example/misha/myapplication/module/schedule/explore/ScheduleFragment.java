@@ -51,7 +51,6 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
         getContext().getToolbar().addView(spinner);
         getContext().setCurrentTitle(null);
         presenter.init();
-
     }
 
     @Override
