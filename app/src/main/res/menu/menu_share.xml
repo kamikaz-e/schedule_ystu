@@ -4,5 +4,6 @@
     <item
         android:id="@+id/menu_item_share"
         app:showAsAction="ifRoom"
-        app:actionProviderClass="android.widget.ShareActionProvider" />
+        app:actionProviderClass="android.widget.ShareActionProvider"
+        android:title= "@string/title_transfer_data"/>
 </menu>

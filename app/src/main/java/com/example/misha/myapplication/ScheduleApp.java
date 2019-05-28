@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
+import android.os.StrictMode;
 import android.widget.Toast;
 
 import androidx.annotation.ColorRes;
@@ -71,6 +72,8 @@ public class ScheduleApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
         appContext = getApplicationContext();
     }
 

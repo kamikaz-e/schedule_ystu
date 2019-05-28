@@ -1,6 +1,8 @@
 package com.example.misha.myapplication.module.transfer;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Environment;
 import android.widget.ShareActionProvider;
 
@@ -40,6 +42,7 @@ public class TransferPresenter extends BaseMainPresenter<TransferFragmentView> i
 
     public void export_data() {
         String nameFile = "export.txt";
+        String nameFiles = "New.png";
         String state = Environment.getExternalStorageState();
         if (!Environment.MEDIA_MOUNTED.equals(state)) {
             return;
@@ -59,6 +62,12 @@ public class TransferPresenter extends BaseMainPresenter<TransferFragmentView> i
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+        shareIntent.setType("text/*");
+        context.startActivity(Intent.createChooser(shareIntent,"Отправить расписание"));
+
 
 
     }
