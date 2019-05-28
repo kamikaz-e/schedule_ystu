@@ -1,22 +1,21 @@
 package com.example.misha.myapplication.module.transfer;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
+import com.example.misha.myapplication.module.schedule.explore.ScheduleFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +35,7 @@ public class TransferFragment extends BaseMainFragment implements TransferFragme
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new TransferPresenter(getActivity());
+        presenter = new TransferPresenter(getContext());
     }
 
     @Override
@@ -68,6 +67,14 @@ public class TransferFragment extends BaseMainFragment implements TransferFragme
         presenter.init();
     }
 
+    public void openFragmentSchedule() {
+        Fragment newFragment = new ScheduleFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     @NonNull
     @Override
     protected BasePresenter getSchedulePagePresenter() {
@@ -84,5 +91,4 @@ public class TransferFragment extends BaseMainFragment implements TransferFragme
             presenter.onClickExport();
         }
     }
-
 }

@@ -1,12 +1,16 @@
 package com.example.misha.myapplication.module.transfer;
 
-import android.app.Dialog;
+import android.content.Intent;
 
 import com.example.misha.myapplication.common.core.BaseView;
-import com.example.misha.myapplication.entity.Audience;
-
-import java.util.ArrayList;
 
 public interface TransferFragmentView extends BaseView {
+
+    void openFragmentSchedule();
+
+    void showProgressDialog();
+
+    void hideProgressDialog();
+
 
 }
