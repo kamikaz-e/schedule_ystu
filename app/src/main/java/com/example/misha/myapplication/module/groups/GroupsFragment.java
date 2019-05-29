@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.common.ErrorView;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.entity.Groups;
@@ -28,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class GroupsFragment extends BaseMainFragment implements GroupsFragmentView, GroupsAdapter.GroupsAdapterListener {
+public class GroupsFragment extends BaseMainFragment implements GroupsFragmentView, GroupsAdapter.GroupsAdapterListener, ErrorView.ErrorListener {
 
     private GroupsPresenter presenter;
     private RecyclerView rvGroups;
@@ -132,5 +133,10 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
     @Override
     public void onItemClick(Groups group, View v) {
         presenter.onClickItem(group.getName(), v);
+    }
+
+    @Override
+    public void onReloadData() {
+        presenter.load();
     }
 }

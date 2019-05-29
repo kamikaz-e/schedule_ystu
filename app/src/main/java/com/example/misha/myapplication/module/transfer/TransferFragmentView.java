@@ -1,7 +1,5 @@
 package com.example.misha.myapplication.module.transfer;
 
-import android.content.Intent;
-
 import com.example.misha.myapplication.common.core.BaseView;
 
 public interface TransferFragmentView extends BaseView {
@@ -11,6 +9,8 @@ public interface TransferFragmentView extends BaseView {
     void showProgressDialog();
 
     void hideProgressDialog();
+
+    void openDirectory();
 
 
 }

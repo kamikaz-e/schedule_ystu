@@ -14,4 +14,12 @@ public interface GroupsFragmentView extends BaseView {
     void hideProgressDialog();
 
     void openFragmentSchedule();
+
+    void showErrorView();
+
+    void hideErrorView();
+
+    void showProgressBar();
+
+    void hideProgressBar();
 }

@@ -51,34 +51,24 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
 
     @Override
     public void load() {
-        getView().showProgressDialog();
+        getView().showProgressBar();
         getCompositeDisposable().add(getRepositoryManager()
                 .getGroups()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(this::loadGroups, throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
+                    getView().hideProgressBar();
+                    getView().showErrorView();
+                    processGlobalError(throwable);
                 })
         );
     }
 
     @Override
     public void loadGroups(ArrayList<Groups> groups) {
-        getCompositeDisposable().add(getRepositoryManager()
-                .getGroups()
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(groups1 -> {
-                    getView().hideProgressDialog();
-                    listGroups.clear();
-                    listGroups.addAll(groups);
-                    init();
-                }, throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
-                })
-        );
+        listGroups.clear();
+        listGroups.addAll(groups);
+        init();
     }
 
 

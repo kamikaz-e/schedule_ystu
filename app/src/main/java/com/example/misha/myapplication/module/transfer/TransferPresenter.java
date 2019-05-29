@@ -1,13 +1,11 @@
 package com.example.misha.myapplication.module.transfer;
 
-import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Environment;
-
-import androidx.fragment.app.FragmentActivity;
 
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.database.AppContentProvider;
@@ -43,9 +41,9 @@ import static com.example.misha.myapplication.data.database.dao.LessonDao.NUMBER
 public class TransferPresenter extends BaseMainPresenter<TransferFragmentView> implements TransferPresenterInterface {
 
 
-    private Activity context;
+    private Context context;
 
-    public TransferPresenter(FragmentActivity context) {
+    public TransferPresenter(Context context) {
         this.context = context;
     }
 
@@ -56,7 +54,7 @@ public class TransferPresenter extends BaseMainPresenter<TransferFragmentView> i
 
     @Override
     public void onClickImport() {
-        selectFile();
+        getView().openDirectory();
     }
 
     @Override
@@ -64,15 +62,9 @@ public class TransferPresenter extends BaseMainPresenter<TransferFragmentView> i
         export_data();
     }
 
-    private void selectFile() {
 
-       /*String file;
-       getView().showProgressDialog();
-       import_data(file)*/
-        ;
-    }
-
-    private void import_data(String file) {
+    @Override
+    public void import_data(String file) {
         StringBuilder text = new StringBuilder();
         String jsonText = "";
         try {
@@ -121,21 +113,15 @@ public class TransferPresenter extends BaseMainPresenter<TransferFragmentView> i
         } finally {
             database.endTransaction();
         }
-        getView().hideProgressDialog();
+      //  getView().hideProgressDialog();
         getView().openFragmentSchedule();
     }
 
 
     private void export_data() {
         String nameFile = "export.txt";
-        String state = Environment.getExternalStorageState();
-        if (!Environment.MEDIA_MOUNTED.equals(state)) {
-            return;
-        }
         Gson gsonBuilder = new GsonBuilder().create();
         String jsonFromJavaArrayList = gsonBuilder.toJson(new ExportData());
-
-
         File file = new File(context.getExternalFilesDir(null), nameFile);
 
         PrintWriter writer = null;
