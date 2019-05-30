@@ -106,4 +106,5 @@
     <string name="title_calls">Расписание звонков</string>
     <string name="string_send">Отправить</string>
     <string name="share">Share</string>
+    <string name="search_free_Educator">Поиск преподавателя</string>
 </resources>

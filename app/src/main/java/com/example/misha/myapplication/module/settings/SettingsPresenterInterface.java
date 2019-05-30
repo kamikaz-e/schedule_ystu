@@ -12,4 +12,5 @@ public interface SettingsPresenterInterface {
 
     void onOpenFragmentTransferData();
 
+    void onSearchEducator();
 }

@@ -22,8 +22,9 @@ import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
+import com.example.misha.myapplication.module.educator.SearchEducatorFragment;
 import com.example.misha.myapplication.module.groups.GroupsFragment;
-import com.example.misha.myapplication.module.search.SearchAudienceFragment;
+import com.example.misha.myapplication.module.audience.SearchAudienceFragment;
 import com.example.misha.myapplication.module.settings.theme.DialogFragmentSelectTheme;
 import com.example.misha.myapplication.module.transfer.TransferFragment;
 import com.example.misha.myapplication.util.DataUtil;
@@ -64,7 +65,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         DataUtil.hintKeyboard(getContext());
 
-        RelativeLayout layoutPickWeek = view.findViewById(R.id.current_date);
+        RelativeLayout layoutSearchAudience = view.findViewById(R.id.search_audience);
         RelativeLayout layoutImport = view.findViewById(R.id.import_data);
         RelativeLayout layoutAbout = view.findViewById(R.id.about);
         RelativeLayout layoutSelectDate = view.findViewById(R.id.select_theme);
@@ -89,7 +90,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
             imageTransferData.setImageResource(R.drawable.ic_send_black);
         }
 
-        layoutPickWeek.setOnClickListener(this);
+        layoutSearchAudience.setOnClickListener(this);
         layoutImport.setOnClickListener(this);
         layoutAbout.setOnClickListener(this);
         layoutSelectDate.setOnClickListener(this);
@@ -139,6 +140,14 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         transaction.commit();
     }
 
+    public void openFragmentSearchEducator() {
+        Fragment newFragment = new SearchEducatorFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     public void openFragmentGroups() {
         Fragment newFragment = new GroupsFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -157,7 +166,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.current_date) {
+        if (v.getId() == R.id.search_audience) {
             presenter.onSearchAudience();
         }
         if (v.getId() == R.id.import_data) {

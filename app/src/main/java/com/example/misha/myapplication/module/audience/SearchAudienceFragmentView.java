@@ -1,8 +1,7 @@
-package com.example.misha.myapplication.module.search;
+package com.example.misha.myapplication.module.audience;
 
 import com.example.misha.myapplication.common.core.BaseView;
 import com.example.misha.myapplication.entity.Audience;
-import com.example.misha.myapplication.entity.Groups;
 
 import java.util.ArrayList;
 

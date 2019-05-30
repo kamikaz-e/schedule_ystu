@@ -10,6 +10,8 @@ public interface SettingsFragmentView extends BaseView {
 
     void openFragmentSearchAudience();
 
+    void openFragmentSearchEducator();
+
     void openFragmentTransferData();
 
     Dialog onCreateDialogAbout();

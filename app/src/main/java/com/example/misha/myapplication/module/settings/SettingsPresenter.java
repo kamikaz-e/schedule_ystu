@@ -15,6 +15,12 @@ public class SettingsPresenter extends BaseMainPresenter<SettingsFragmentView> i
     }
 
     @Override
+    public void onSearchEducator() {
+        getView().openFragmentSearchEducator();
+    }
+
+
+    @Override
     public void onOpenFragmentGroups() {
         getView().openFragmentGroups();
     }

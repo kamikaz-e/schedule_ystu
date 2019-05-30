@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.search;
+package com.example.misha.myapplication.module.educator;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -35,13 +35,13 @@ import java.util.ArrayList;
 import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
 import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
 
-public class SearchAudienceFragment extends BaseMainFragment implements SearchAudienceFragmentView, AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class SearchEducatorFragment extends BaseMainFragment implements SearchEducatorFragmentView, AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    private SearchAudiencePresenter presenter;
+    private SearchEducatorPresenter presenter;
     private RecyclerView rvAudiences;
     private SearchView searchView;
     private Spinner spinner;
-    private SearchAudienceAdapter searchAudienceAdapter;
+    private SearchEducatorAdapter searchEducatorAdapter;
     private CustomSpinnerAdapterLessons customSpinnerAdapterLessons;
 
     @Override
@@ -55,7 +55,7 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new SearchAudiencePresenter(getActivity());
+        presenter = new SearchEducatorPresenter(getActivity());
         customSpinnerAdapterLessons = new CustomSpinnerAdapterLessons(getContext());
         setHasOptionsMenu(true);
     }
@@ -106,13 +106,13 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                searchAudienceAdapter.getFilter().filter(query);
+                searchEducatorAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                searchAudienceAdapter.getFilter().filter(query);
+                searchEducatorAdapter.getFilter().filter(query);
                 return false;
             }
         });
@@ -141,9 +141,9 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
 
 
     public void updateListAudiences(ArrayList<Audience> requestList) {
-        searchAudienceAdapter = new SearchAudienceAdapter(requestList);
+        searchEducatorAdapter = new SearchEducatorAdapter(requestList);
         rvAudiences.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        rvAudiences.setAdapter(searchAudienceAdapter);
+        rvAudiences.setAdapter(searchEducatorAdapter);
     }
 
     @Override
@@ -157,7 +157,7 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
     }
 
     public void updateTextViewDate(String date) {
-        TextView textView = getView().findViewById(R.id.text_currentDate);
+        TextView textView = getView().findViewById(R.id.text_searchAudience);
         textView.setText(presenter.dateForTextView(date));
     }
 

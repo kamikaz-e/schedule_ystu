@@ -1,8 +1,8 @@
-package com.example.misha.myapplication.module.search;
+package com.example.misha.myapplication.module.educator;
 
 import android.view.View;
 
-public interface SearchAudiencePresenterInterface {
+public interface SearchEducatorPresenterInterface {
 
     void onClickDate(View v);
 

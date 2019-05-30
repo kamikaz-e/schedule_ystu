@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.search;
+package com.example.misha.myapplication.module.audience;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

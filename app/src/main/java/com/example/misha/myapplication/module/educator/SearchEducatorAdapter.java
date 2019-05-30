@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.search;
+package com.example.misha.myapplication.module.educator;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +15,14 @@ import com.example.misha.myapplication.entity.Audience;
 import java.util.ArrayList;
 
 
-public class SearchAudienceAdapter extends RecyclerView.Adapter<SearchAudienceAdapter.MyViewHolder>
+public class SearchEducatorAdapter extends RecyclerView.Adapter<SearchEducatorAdapter.MyViewHolder>
         implements Filterable {
 
     private ArrayList<Audience> audienceList;
     private ArrayList<Audience> audienceListFiltered;
 
 
-    public SearchAudienceAdapter(ArrayList<Audience> audienceList) {
+    public SearchEducatorAdapter(ArrayList<Audience> audienceList) {
         this.audienceList = audienceList;
         this.audienceListFiltered = audienceList;
     }
