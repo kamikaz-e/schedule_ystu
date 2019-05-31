@@ -65,6 +65,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         DataUtil.hintKeyboard(getContext());
 
+        RelativeLayout layoutSearchEducator = view.findViewById(R.id.search_educator);
         RelativeLayout layoutSearchAudience = view.findViewById(R.id.search_audience);
         RelativeLayout layoutImport = view.findViewById(R.id.import_data);
         RelativeLayout layoutAbout = view.findViewById(R.id.about);
@@ -89,7 +90,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
             imageAbout.setImageResource(R.drawable.ic_person_black);
             imageTransferData.setImageResource(R.drawable.ic_send_black);
         }
-
+        layoutSearchEducator.setOnClickListener(this);
         layoutSearchAudience.setOnClickListener(this);
         layoutImport.setOnClickListener(this);
         layoutAbout.setOnClickListener(this);
@@ -166,6 +167,9 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
 
     @Override
     public void onClick(View v) {
+        if (v.getId() == R.id.search_educator) {
+            presenter.onSearchEducator();
+        }
         if (v.getId() == R.id.search_audience) {
             presenter.onSearchAudience();
         }

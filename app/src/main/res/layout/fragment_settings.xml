@@ -28,7 +28,7 @@
             android:layout_margin="@dimen/spacing_normal"
             android:layout_toEndOf="@+id/image_searchEducator"
             android:paddingTop="@dimen/spacing_small"
-            android:text="@string/search_free_Educator"
+            android:text="@string/search_Educator"
             android:textSize="16sp" />
 
 
