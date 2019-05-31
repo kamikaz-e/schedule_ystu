@@ -3,6 +3,7 @@ package com.example.misha.myapplication.module.educator;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,20 +14,26 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.misha.myapplication.CustomSpinnerAdapterLessons;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.entity.Audience;
+import com.example.misha.myapplication.entity.Educator;
+import com.example.misha.myapplication.entity.Lesson;
+import com.example.misha.myapplication.entity.LessonsEducator;
+import com.example.misha.myapplication.module.audience.SearchAudienceFragment;
+import com.example.misha.myapplication.module.educator.dialog.DialogFragmentListLessons;
+import com.example.misha.myapplication.module.schedule.edit.page.dialog.DialogFragmentListItems;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,39 +42,32 @@ import java.util.ArrayList;
 import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
 import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
 
-public class SearchEducatorFragment extends BaseMainFragment implements SearchEducatorFragmentView, AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class SearchEducatorFragment extends BaseMainFragment implements SearchEducatorFragmentView, SearchEducatorAdapter.EducatorsAdapterListener, View.OnClickListener {
 
     private SearchEducatorPresenter presenter;
-    private RecyclerView rvAudiences;
+    private RecyclerView rvEducator;
     private SearchView searchView;
-    private Spinner spinner;
     private SearchEducatorAdapter searchEducatorAdapter;
-    private CustomSpinnerAdapterLessons customSpinnerAdapterLessons;
 
     @Override
     public void onResume() {
         super.onResume();
-        getContext().setCurrentTitle(getString(R.string.title_search_audience));
-        spinner.setAdapter(customSpinnerAdapterLessons);
-        spinner.setOnItemSelectedListener(this);
+        getContext().setCurrentTitle(getString(R.string.title_search_educator));
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new SearchEducatorPresenter(getActivity());
-        customSpinnerAdapterLessons = new CustomSpinnerAdapterLessons(getContext());
         setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search_audience, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_educator, container, false);
         RelativeLayout layoutSelectDate = view.findViewById(R.id.rel_date);
-        rvAudiences = view.findViewById(R.id.rv);
-        spinner = view.findViewById(R.id.spinner);
-
+        rvEducator = view.findViewById(R.id.rv_educators);
 
         ImageView imageSearchAudience = view.findViewById(R.id.image_searchAudience);
         if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
@@ -76,7 +76,7 @@ public class SearchEducatorFragment extends BaseMainFragment implements SearchEd
         if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)) {
             imageSearchAudience.setImageResource(R.drawable.ic_date_range_black);
         }
-        rvAudiences.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvEducator.setLayoutManager(new LinearLayoutManager(getActivity()));
         layoutSelectDate.setOnClickListener(this);
 
         return view;
@@ -140,21 +140,12 @@ public class SearchEducatorFragment extends BaseMainFragment implements SearchEd
     }
 
 
-    public void updateListAudiences(ArrayList<Audience> requestList) {
+    public void updateListEducators(ArrayList<Educator> requestList) {
         searchEducatorAdapter = new SearchEducatorAdapter(requestList);
-        rvAudiences.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        rvAudiences.setAdapter(searchEducatorAdapter);
+        rvEducator.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        rvEducator.setAdapter(searchEducatorAdapter);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        presenter.onLessonSelected(position);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 
     public void updateTextViewDate(String date) {
         TextView textView = getView().findViewById(R.id.text_searchAudience);
@@ -167,4 +158,18 @@ public class SearchEducatorFragment extends BaseMainFragment implements SearchEd
         presenter.onClickDate(v);
     }
 
+    @Override
+    public void showEditDialog(ArrayList<LessonsEducator> items, String nameEducator) {
+        Bundle args = new Bundle();
+        args.putParcelableArrayList(LESSON_LIST, items);
+        args.putString(NAME_EDUCATOR,nameEducator);
+        DialogFragmentListLessons dialogFragment = DialogFragmentListLessons.newInstance();
+        dialogFragment.show(getChildFragmentManager(), DialogFragmentListLessons.class.getSimpleName());
+    }
+
+
+    @Override
+    public void onItemClick(Educator educator, View v) {
+        presenter.onClickItem(educator.getName());
+    }
 }

@@ -53,7 +53,7 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_view, container, false);
-        rvGroups = view.findViewById(R.id.rv);
+        rvGroups = view.findViewById(R.id.rv_audiences);
         rvGroups.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
@@ -132,7 +132,7 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
 
     @Override
     public void onItemClick(Groups group, View v) {
-        presenter.onClickItem(group.getName(), v);
+        presenter.onClickItem(group.getName());
     }
 
     @Override

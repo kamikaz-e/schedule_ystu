@@ -44,7 +44,7 @@ public class CallsFragment extends BaseMainFragment implements CallsFragmentView
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_view, container, false);
-        RecyclerView rvCalls = view.findViewById(R.id.rv);
+        RecyclerView rvCalls = view.findViewById(R.id.rv_audiences);
         rvCalls.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvCalls.setAdapter(callsAdapter);
         return view;

@@ -65,7 +65,7 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_audience, container, false);
         RelativeLayout layoutSelectDate = view.findViewById(R.id.rel_date);
-        rvAudiences = view.findViewById(R.id.rv);
+        rvAudiences = view.findViewById(R.id.rv_audiences);
         spinner = view.findViewById(R.id.spinner);
 
 

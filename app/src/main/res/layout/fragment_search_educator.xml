@@ -18,7 +18,7 @@
 
             <RelativeLayout
                 android:id="@+id/rel_date"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -27,6 +27,7 @@
                     android:layout_width="40sp"
                     android:layout_height="45sp"
                     android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_toStartOf="@+id/text_searchAudience"
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:layout_marginBottom="@dimen/spacing_medium"
                     android:padding="@dimen/spacing_medium"
@@ -38,35 +39,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_medium"
+                    android:layout_centerInParent="true"
                     android:layout_marginTop="@dimen/spacing_normal"
                     android:layout_marginEnd="@dimen/spacing_medium"
-                    android:layout_marginBottom="@dimen/spacing_normal"
-                    android:layout_toEndOf="@+id/image_searchAudience"
                     android:paddingTop="@dimen/spacing_small"
                     android:paddingBottom="@dimen/spacing_small"
                     android:text="@string/select_date"
                     android:textSize="16sp" />
             </RelativeLayout>
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_medium"
-                android:layout_marginTop="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
-                android:layout_marginBottom="@dimen/spacing_normal"
-                android:layout_toEndOf="@id/rel_date"
-                android:layout_alignParentEnd="true"
-                android:background="@android:color/transparent"
-                android:dropDownWidth="130sp"
-                android:padding="@dimen/spacing_small" />
-
         </RelativeLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_audiences"
+            android:id="@+id/rv_educators"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/spacing_medium"

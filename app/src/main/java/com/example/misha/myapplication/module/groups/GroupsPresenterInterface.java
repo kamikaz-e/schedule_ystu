@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface GroupsPresenterInterface {
 
-    void onClickItem(String group, View v);
+    void onClickItem(String group);
 
     void load();
 

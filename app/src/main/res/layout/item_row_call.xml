@@ -29,32 +29,22 @@
                 android:textSize="16sp"
                 tools:text="1" />
 
-            <EditText
+            <TextView
                 android:id="@+id/call_timeOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="12dp"
                 android:background="@null"
-                android:checkable="false"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:longClickable="false"
                 android:textSize="17sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/call_timeTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_toEndOf="@+id/call_timeOne"
                 android:background="@null"
-                android:checkable="false"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:longClickable="false"
                 android:textSize="17sp" />
         </RelativeLayout>
 

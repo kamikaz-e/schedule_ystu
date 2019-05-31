@@ -21,8 +21,8 @@
     </string-array>
 
     <string-array name="lessons">
-        <item>1 занятие</item>
-        <item>2 занятие</item>
+        <item>Инженерно-экономический</item>
+        <item>Архитектурно-строительный</item>
         <item>3 занятие</item>
         <item>4 занятие</item>
         <item>5 занятие</item>
@@ -108,4 +108,6 @@
     <string name="share">Share</string>
     <string name="search_free_Educator">Поиск преподавателя</string>
     <string name="search_Educator">Поиск преподавателя</string>
+    <string name="title_search_educator">Выберите дату и преподавателя</string>
+    <string name="string_load_subjects">Расписание выбранной группы еще не заполнено. Попробуйте загрузить позже</string>
 </resources>

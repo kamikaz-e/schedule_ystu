@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.database.AppContentProvider;
 import com.example.misha.myapplication.data.database.DatabaseHelper;
@@ -44,8 +45,7 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
         getView().updateListGroups(listGroups);
     }
 
-    public void onClickItem(String group, View v) {
-        getView().showProgressDialog();
+    public void onClickItem(String group) {
         loadSubjects(group);
     }
 
@@ -79,17 +79,13 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(subjects -> {
                     if (subjects.isEmpty()) {
-                        getView().hideProgressDialog();
-                        Toast.makeText(context, "Расписание выбранной группы еще не заполнено. Попробуйте загрузить позже", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.string_load_subjects), Toast.LENGTH_SHORT).show();
                     } else {
                         SubjectDao.getInstance().deleteAll();
                         SubjectDao.getInstance().insertAll(subjects);
                         loadAudiences(group);
                     }
-                }, throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
-                })
+                }, this::processSimpleError)
         );
     }
 
@@ -102,10 +98,7 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     AudienceDao.getInstance().deleteAll();
                     AudienceDao.getInstance().insertAll(audiences);
                     loadEducators(group);
-                }, throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
-                })
+                }, this::processSimpleError)
         );
     }
 
@@ -118,10 +111,7 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     EducatorDao.getInstance().deleteAll();
                     EducatorDao.getInstance().insertAll(educators);
                     loadTypelessons(group);
-                }, throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
-                })
+                }, this::processSimpleError)
         );
     }
 
@@ -134,10 +124,7 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     TypelessonDao.getInstance().deleteAll();
                     TypelessonDao.getInstance().insertAll(typelessons);
                     loadLessons(group);
-                }, throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
-                })
+                }, this::processSimpleError)
         );
     }
 
@@ -148,12 +135,10 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(lessons -> {
                     LessonDao.getInstance().deleteAll();
-
                     DatabaseHelper databaseHelper = new DatabaseHelper(context);
                     SQLiteDatabase database = databaseHelper.getReadableDatabase();
                     ContentValues set;
                     database.beginTransaction();
-
                     try {
                         for (int i = 0; i < 612; i++) {
                             set = new ContentValues();
@@ -171,13 +156,9 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     } finally {
                         database.endTransaction();
                     }
-                    getView().hideProgressDialog();
                     DataUtil.hintKeyboard(context);
                     getView().openFragmentSchedule();
-                }, throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
-                })
+                }, this::processSimpleError)
         );
     }
 

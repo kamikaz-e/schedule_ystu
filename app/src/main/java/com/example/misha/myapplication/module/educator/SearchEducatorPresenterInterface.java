@@ -6,11 +6,13 @@ public interface SearchEducatorPresenterInterface {
 
     void onClickDate(View v);
 
-    void onLessonSelected(int selectedLesson);
+    void onClickItem(String group);
 
-    void loadFreeAudienceAudiences(String week, String day, String lesson);
+    void loadEducators(String week, String day);
 
-    void updateAudienceList();
+    void loadLessonsEducator (String week, String day, String educator);
+
+    void updateEducatorList();
 
     String dateForTextView(String text);
 }

@@ -9,7 +9,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
-import com.example.misha.myapplication.entity.Audience;
+import com.example.misha.myapplication.entity.Educator;
+import com.example.misha.myapplication.entity.Lesson;
+import com.example.misha.myapplication.entity.LessonsEducator;
 import com.example.misha.myapplication.util.DataUtil;
 
 import java.text.DateFormat;
@@ -18,11 +20,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import io.reactivex.functions.Consumer;
+
 public class SearchEducatorPresenter extends BaseMainPresenter<SearchEducatorFragmentView> implements SearchEducatorPresenterInterface {
 
-    private ArrayList<Audience> listAudiences = new ArrayList<>();
+    private ArrayList<Educator> educatorList = new ArrayList<>();
+    private ArrayList<LessonsEducator> lessonList = new ArrayList<>();
     private Activity context;
-
 
     public SearchEducatorPresenter(FragmentActivity context) {
         this.context = context;
@@ -38,8 +42,8 @@ public class SearchEducatorPresenter extends BaseMainPresenter<SearchEducatorFra
     }
 
     @Override
-    public void updateAudienceList() {
-        getView().updateListAudiences(listAudiences);
+    public void updateEducatorList() {
+        getView().updateListEducators(educatorList);
     }
 
     @Override
@@ -57,30 +61,50 @@ public class SearchEducatorPresenter extends BaseMainPresenter<SearchEducatorFra
 
     public void onClickDate(View v) {
         getCurrentDate();
+        getView().showProgressBar();
+        loadEducators(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay());
     }
 
+    @Override
+    public void onClickItem(String educator) {
+        loadLessonsEducator(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay(), educator);
+        getView().showEditDialog(lessonList, educator);
+    }
 
-    public void onLessonSelected(int selectedLesson) {
-        Preferences.getInstance().setSelectedLesson(String.valueOf(selectedLesson + 1));
-        loadFreeAudienceAudiences(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay(), Preferences.getInstance().getSelectedLesson());
+    @Override
+    public void loadEducators(String week, String day) {
+        getView().showProgressBar();
+        getCompositeDisposable().add(getRepositoryManager()
+                .getEducators(week, day)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(educators -> {
+                    getView().hideProgressBar();
+                    educatorList.clear();
+                    educatorList.addAll(educators);
+                    updateEducatorList();
+                }, throwable -> {
+                    getView().hideProgressBar();
+                    processSimpleError(throwable);
+                })
+        );
     }
 
 
     @Override
-    public void loadFreeAudienceAudiences(String week, String day, String lesson) {
-        getView().showProgressDialog();
+    public void loadLessonsEducator(String week, String day, String educator) {
+        getView().showProgressBar();
         getCompositeDisposable().add(getRepositoryManager()
-                .getFreeAudiences(week, day, lesson)
+                .getLessonsEducator(week, day, educator)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(audiences -> {
-                    getView().hideProgressDialog();
-                    listAudiences.clear();
-                    listAudiences.addAll(audiences);
-                    updateAudienceList();
+                .subscribe(lessons -> {
+                    SearchEducatorPresenter.this.getView().hideProgressBar();
+                    lessonList.clear();
+                    lessonList.addAll(lessons);
                 }, throwable -> {
-                    getView().hideProgressDialog();
-                    processSimpleError(throwable);
+                    SearchEducatorPresenter.this.getView().hideProgressBar();
+                    SearchEducatorPresenter.this.processSimpleError(throwable);
                 })
         );
     }
@@ -107,14 +131,9 @@ public class SearchEducatorPresenter extends BaseMainPresenter<SearchEducatorFra
             int day = selectedDateCalendar.get(Calendar.DAY_OF_WEEK);
             int selectedDay = day <= 1 ? 0 : day - 1;
             Preferences.getInstance().setSelectedDay(String.valueOf(selectedDay));
-            loadFreeAudienceAudiences(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay(), Preferences.getInstance().getSelectedLesson());
-
         },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)).show();
-
-
     }
-
 }

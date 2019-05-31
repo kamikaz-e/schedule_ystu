@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.entity.Audience;
+import com.example.misha.myapplication.entity.Educator;
 
 import java.util.ArrayList;
 
@@ -18,13 +19,13 @@ import java.util.ArrayList;
 public class SearchEducatorAdapter extends RecyclerView.Adapter<SearchEducatorAdapter.MyViewHolder>
         implements Filterable {
 
-    private ArrayList<Audience> audienceList;
-    private ArrayList<Audience> audienceListFiltered;
+    private ArrayList<Educator> educatorList;
+    private ArrayList<Educator> educatorListFiltered;
 
 
-    public SearchEducatorAdapter(ArrayList<Audience> audienceList) {
-        this.audienceList = audienceList;
-        this.audienceListFiltered = audienceList;
+    public SearchEducatorAdapter(ArrayList<Educator> educatorList) {
+        this.educatorList = educatorList;
+        this.educatorListFiltered = educatorList;
     }
 
     @Override
@@ -36,13 +37,13 @@ public class SearchEducatorAdapter extends RecyclerView.Adapter<SearchEducatorAd
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final Audience audience = audienceListFiltered.get(position);
-        holder.name.setText(audience.getName());
+        final Educator educator = educatorListFiltered.get(position);
+        holder.name.setText(educator.getName());
     }
 
     @Override
     public int getItemCount() {
-        return audienceListFiltered.size();
+        return educatorListFiltered.size();
     }
 
 
@@ -53,27 +54,26 @@ public class SearchEducatorAdapter extends RecyclerView.Adapter<SearchEducatorAd
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
-                    audienceListFiltered = audienceList;
+                    educatorListFiltered = educatorList;
                 } else {
-                    ArrayList<Audience> filteredList = new ArrayList<>();
-                    for (Audience row : audienceList) {
+                    ArrayList<Educator> filteredList = new ArrayList<>();
+                    for (Educator row : educatorList) {
                         if (row.getName().contains(charString.toLowerCase()) || row.getName().contains(charSequence) || row.getName().contains(charString.toUpperCase())) {
                             filteredList.add(row);
                         }
                     }
-                    audienceListFiltered = filteredList;
+                    educatorListFiltered = filteredList;
                 }
 
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = audienceListFiltered;
+                filterResults.values = educatorListFiltered;
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                audienceListFiltered = (ArrayList<Audience>) filterResults.values;
+                educatorListFiltered = (ArrayList<Educator>) filterResults.values;
                 notifyDataSetChanged();
-
             }
         };
     }
@@ -85,6 +85,9 @@ public class SearchEducatorAdapter extends RecyclerView.Adapter<SearchEducatorAd
             super(view);
             name = view.findViewById(R.id.item);
         }
+    }
+    public interface EducatorsAdapterListener {
+        void onItemClick(Educator educator, View v);
     }
 
 }

@@ -10,6 +10,7 @@ import com.example.misha.myapplication.entity.Audience;
 import com.example.misha.myapplication.entity.Educator;
 import com.example.misha.myapplication.entity.Groups;
 import com.example.misha.myapplication.entity.Lesson;
+import com.example.misha.myapplication.entity.LessonsEducator;
 import com.example.misha.myapplication.entity.Subject;
 import com.example.misha.myapplication.entity.Typelesson;
 
@@ -54,6 +55,16 @@ public class Repository implements RepositoryManager {
     @Override
     public Single<ArrayList<Audience>> getFreeAudiences(String week, String day, String lesson) {
         return apiService.getFreeAudiences(week, day, lesson);
+    }
+
+    @Override
+    public Single<ArrayList<Educator>> getEducators(String week, String day) {
+        return apiService.getEducators(week,day);
+    }
+
+    @Override
+    public Single<ArrayList<LessonsEducator>> getLessonsEducator(String week, String day, String educator) {
+        return apiService.getLessonsEducator(week,day,educator);
     }
 
     @Override

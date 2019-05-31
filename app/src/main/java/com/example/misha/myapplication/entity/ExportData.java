@@ -1,7 +1,5 @@
 package com.example.misha.myapplication.entity;
 
-import android.telecom.Call;
-
 import com.example.misha.myapplication.data.database.dao.AudienceDao;
 import com.example.misha.myapplication.data.database.dao.CallDao;
 import com.example.misha.myapplication.data.database.dao.EducatorDao;

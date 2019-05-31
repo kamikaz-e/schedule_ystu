@@ -9,10 +9,6 @@ public interface GroupsFragmentView extends BaseView {
 
     void updateListGroups(ArrayList<Groups> listGroups);
 
-    void showProgressDialog();
-
-    void hideProgressDialog();
-
     void openFragmentSchedule();
 
     void showErrorView();
