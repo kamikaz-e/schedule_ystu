@@ -9,9 +9,9 @@ public interface SearchAudienceFragmentView extends BaseView {
 
     void updateListAudiences(ArrayList<Audience> listGroups);
 
-    void showProgressDialog();
+    void showProgressBar();
 
-    void hideProgressDialog();
+    void hideProgressBar();
 
     void updateTextViewDate(String date);
 

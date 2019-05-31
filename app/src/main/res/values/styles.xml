@@ -60,11 +60,10 @@
 
     <style name="ToolBarDarkStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/black27</item>
-        <item name="android:textSize">10sp</item>
     </style>
 
     <style name="TitleText" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">17sp</item>
     </style>
 
     <style name="TabLayoutDarkStyle" parent="Widget.Design.TabLayout">

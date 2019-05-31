@@ -78,7 +78,6 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
         }
         rvAudiences.setLayoutManager(new LinearLayoutManager(getActivity()));
         layoutSelectDate.setOnClickListener(this);
-
         return view;
     }
 

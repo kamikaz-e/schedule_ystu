@@ -3,7 +3,6 @@ package com.example.misha.myapplication.module.groups;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
@@ -46,6 +45,7 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
     }
 
     public void onClickItem(String group) {
+        getView().showProgressBar();
         loadSubjects(group);
     }
 
@@ -85,7 +85,10 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                         SubjectDao.getInstance().insertAll(subjects);
                         loadAudiences(group);
                     }
-                }, this::processSimpleError)
+                }, throwable -> {
+                    getView().hideProgressBar();
+                    processSimpleError(throwable);
+                })
         );
     }
 
@@ -98,7 +101,10 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     AudienceDao.getInstance().deleteAll();
                     AudienceDao.getInstance().insertAll(audiences);
                     loadEducators(group);
-                }, this::processSimpleError)
+                }, throwable -> {
+                    getView().hideProgressBar();
+                    GroupsPresenter.this.processSimpleError(throwable);
+                })
         );
     }
 
@@ -111,7 +117,10 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     EducatorDao.getInstance().deleteAll();
                     EducatorDao.getInstance().insertAll(educators);
                     loadTypelessons(group);
-                }, this::processSimpleError)
+                }, throwable -> {
+                    getView().hideProgressBar();
+                    GroupsPresenter.this.processSimpleError(throwable);
+                })
         );
     }
 
@@ -124,7 +133,10 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     TypelessonDao.getInstance().deleteAll();
                     TypelessonDao.getInstance().insertAll(typelessons);
                     loadLessons(group);
-                }, this::processSimpleError)
+                }, throwable -> {
+                    getView().hideProgressBar();
+                    processSimpleError(throwable);
+                })
         );
     }
 
@@ -156,9 +168,13 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     } finally {
                         database.endTransaction();
                     }
+                    getView().hideProgressBar();
                     DataUtil.hintKeyboard(context);
                     getView().openFragmentSchedule();
-                }, this::processSimpleError)
+                }, throwable -> {
+                    getView().hideProgressBar();
+                    processSimpleError(throwable);
+                })
         );
     }
 

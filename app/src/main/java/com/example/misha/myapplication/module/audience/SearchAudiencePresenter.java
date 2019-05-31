@@ -68,18 +68,18 @@ public class SearchAudiencePresenter extends BaseMainPresenter<SearchAudienceFra
 
     @Override
     public void loadFreeAudienceAudiences(String week, String day, String lesson) {
-        getView().showProgressDialog();
+        getView().showProgressBar();
         getCompositeDisposable().add(getRepositoryManager()
                 .getFreeAudiences(week, day, lesson)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(audiences -> {
-                    getView().hideProgressDialog();
+                    getView().hideProgressBar();
                     listAudiences.clear();
                     listAudiences.addAll(audiences);
                     updateAudienceList();
                 }, throwable -> {
-                    getView().hideProgressDialog();
+                    getView().hideProgressBar();
                     processSimpleError(throwable);
                 })
         );
