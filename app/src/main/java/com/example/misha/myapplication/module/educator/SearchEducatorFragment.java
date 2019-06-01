@@ -142,7 +142,7 @@ public class SearchEducatorFragment extends BaseMainFragment implements SearchEd
 
 
     public void updateListEducators(ArrayList<Educator> requestList) {
-        searchEducatorAdapter = new SearchEducatorAdapter(requestList);
+        searchEducatorAdapter = new SearchEducatorAdapter(requestList, this);
         rvEducator.setAdapter(searchEducatorAdapter);
     }
 
@@ -163,7 +163,7 @@ public class SearchEducatorFragment extends BaseMainFragment implements SearchEd
         Bundle args = new Bundle();
         args.putParcelableArrayList(LESSON_LIST, items);
         args.putString(NAME_EDUCATOR,nameEducator);
-        DialogFragmentListLessons dialogFragment = DialogFragmentListLessons.newInstance();
+        DialogFragmentListLessons dialogFragment = DialogFragmentListLessons.newInstance(args);
         dialogFragment.show(getChildFragmentManager(), DialogFragmentListLessons.class.getSimpleName());
     }
 

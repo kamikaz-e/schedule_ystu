@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
 import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
 
-public class SearchAudienceFragment extends BaseMainFragment implements SearchAudienceFragmentView, AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class SearchAudienceFragment extends BaseMainFragment implements SearchAudienceFragmentView,   AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private SearchAudiencePresenter presenter;
     private RecyclerView rvAudiences;

@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import static com.example.misha.myapplication.Constants.FRAGMENT_CODE;
 import static com.example.misha.myapplication.module.educator.SearchEducatorFragmentView.LESSON_LIST;
 import static com.example.misha.myapplication.module.educator.SearchEducatorFragmentView.NAME_EDUCATOR;
 
@@ -33,8 +34,10 @@ public class DialogFragmentListLessons extends BaseAlertDialog implements Dialog
     private DialogFragmentPresenter presenter;
     private RecyclerView rvItems;
 
-    public static DialogFragmentListLessons newInstance() {
-        return new DialogFragmentListLessons();
+    public static DialogFragmentListLessons newInstance(Bundle args) {
+        DialogFragmentListLessons fragment = new DialogFragmentListLessons();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @NotNull
@@ -45,7 +48,8 @@ public class DialogFragmentListLessons extends BaseAlertDialog implements Dialog
 
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
-        @SuppressLint("InflateParams") View view = layoutInflater.inflate(R.layout.dialog_rv_lessons_educator, null);
+        @SuppressLint("InflateParams")
+        View view = layoutInflater.inflate(R.layout.dialog_rv_lessons_educator, null);
         TextView title_dialog = view.findViewById(R.id.dialog_textView);
         title_dialog.setText(nameEducator);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

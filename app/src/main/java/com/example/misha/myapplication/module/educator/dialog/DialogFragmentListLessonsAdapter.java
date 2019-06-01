@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.module.educator.dialog;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class DialogFragmentListLessonsAdapter extends RecyclerView.Adapter<Dialo
     @Override
     public DialogFragmentListLessonsAdapter.ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_row, parent, false);
+                .inflate(R.layout.item_row_lessons_educator, parent, false);
         return new ViewHolder(view);
     }
 
@@ -64,19 +65,17 @@ public class DialogFragmentListLessonsAdapter extends RecyclerView.Adapter<Dialo
             group = view.findViewById(R.id.group);
         }
 
+        @SuppressLint("SetTextI18n")
         private void onBindView(int position) {
             LessonsEducator item = lessonList.get(position);
             subject.setText(item.getName_subject());
             audience.setText(item.getName_audience());
             typelesson.setText(item.getName_typelesson());
-            timeOne.setText(item.getNumber_lesson());
-            timeTwo.setText(item.getName_subject());
             callsList = CallDao.getInstance().getAllData();
             group.setText(item.getName_group());
-            timeOne.setText(callsList.get(item.getNumber_lesson() * 2).getName());
-            timeTwo.setText(callsList.get((position * 2) + 1).getName());
+            timeOne.setText(callsList.get((item.getNumber_lesson() * 2)-2).getName());
+            timeTwo.setText("-"+callsList.get((item.getNumber_lesson() * 2)-1).getName());
         }
-
     }
 }
 

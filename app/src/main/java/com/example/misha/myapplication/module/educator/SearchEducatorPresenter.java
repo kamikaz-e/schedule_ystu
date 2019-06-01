@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import io.reactivex.functions.Consumer;
+
 public class SearchEducatorPresenter extends BaseMainPresenter<SearchEducatorFragmentView> implements SearchEducatorPresenterInterface {
 
     private ArrayList<Educator> educatorList = new ArrayList<>();
@@ -97,7 +99,7 @@ public class SearchEducatorPresenter extends BaseMainPresenter<SearchEducatorFra
                     SearchEducatorPresenter.this.getView().hideProgressBar();
                     lessonList.clear();
                     lessonList.addAll(lessons);
-                    getView().showLessonsDialog(lessonList,educator);
+                    SearchEducatorPresenter.this.getView().showLessonsDialog(lessonList, educator);
                 }, throwable -> {
                     SearchEducatorPresenter.this.getView().hideProgressBar();
                     SearchEducatorPresenter.this.processSimpleError(throwable);

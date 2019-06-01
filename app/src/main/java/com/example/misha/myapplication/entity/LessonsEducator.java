@@ -23,9 +23,6 @@ public class LessonsEducator implements Parcelable {
     };
 
     @Expose
-    @SerializedName("id")
-    private String id;
-    @Expose
     @SerializedName("name_subject")
     private String name_subject;
     @Expose
@@ -37,6 +34,7 @@ public class LessonsEducator implements Parcelable {
     @Expose
     @SerializedName("number_lesson")
     private int number_lesson;
+    @Expose
     @SerializedName("name_group")
     private String name_group;
 
@@ -46,7 +44,6 @@ public class LessonsEducator implements Parcelable {
     }
 
     public LessonsEducator(Cursor cursor) {
-        this.id = cursor.getString(0);
         this.name_subject = cursor.getString(1);
         this.name_audience = cursor.getString(2);
         this.name_typelesson = cursor.getString(3);
@@ -55,7 +52,6 @@ public class LessonsEducator implements Parcelable {
     }
 
     protected LessonsEducator(Parcel in) {
-        id = in.readString();
         name_subject = in.readString();
         name_audience = in.readString();
         name_typelesson = in.readString();
@@ -71,13 +67,6 @@ public class LessonsEducator implements Parcelable {
         this.name_group = name_group;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName_subject() {
         return name_subject;
@@ -127,7 +116,6 @@ public class LessonsEducator implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
         dest.writeString(name_subject);
         dest.writeString(name_audience);
         dest.writeString(name_typelesson);
