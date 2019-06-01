@@ -51,7 +51,6 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
 
     @Override
     public void load() {
-        getView().showProgressBar();
         getCompositeDisposable().add(getRepositoryManager()
                 .getGroups()
                 .subscribeOn(getSchedulerProvider().io())
@@ -79,6 +78,7 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(subjects -> {
                     if (subjects.isEmpty()) {
+                        getView().hideProgressBar();
                         Toast.makeText(context, context.getString(R.string.string_load_subjects), Toast.LENGTH_SHORT).show();
                     } else {
                         SubjectDao.getInstance().deleteAll();

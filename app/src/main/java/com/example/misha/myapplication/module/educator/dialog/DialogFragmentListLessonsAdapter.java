@@ -52,6 +52,7 @@ public class DialogFragmentListLessonsAdapter extends RecyclerView.Adapter<Dialo
         private final TextView typelesson;
         private final TextView timeOne;
         private final TextView timeTwo;
+        private final TextView group;
 
         private ViewHolder(View view) {
             super(view);
@@ -60,7 +61,7 @@ public class DialogFragmentListLessonsAdapter extends RecyclerView.Adapter<Dialo
             typelesson = view.findViewById(R.id.typelesson);
             timeOne = view.findViewById(R.id.timeOne);
             timeTwo = view.findViewById(R.id.timeTwo);
-
+            group = view.findViewById(R.id.group);
         }
 
         private void onBindView(int position) {
@@ -71,6 +72,7 @@ public class DialogFragmentListLessonsAdapter extends RecyclerView.Adapter<Dialo
             timeOne.setText(item.getNumber_lesson());
             timeTwo.setText(item.getName_subject());
             callsList = CallDao.getInstance().getAllData();
+            group.setText(item.getName_group());
             timeOne.setText(callsList.get(item.getNumber_lesson() * 2).getName());
             timeTwo.setText(callsList.get((position * 2) + 1).getName());
         }

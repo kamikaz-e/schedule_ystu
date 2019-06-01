@@ -58,8 +58,8 @@ public class Repository implements RepositoryManager {
     }
 
     @Override
-    public Single<ArrayList<Educator>> getEducators(String week, String day) {
-        return apiService.getEducators(week,day);
+    public Single<ArrayList<Educator>> getEducatorsCurrentDay(String week, String day) {
+        return apiService.getEducatorsCurrentDay(week,day);
     }
 
     @Override

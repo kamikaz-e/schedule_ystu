@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
 import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
 
-public class SearchEducatorFragment extends BaseMainFragment implements SearchEducatorFragmentView, SearchEducatorAdapter.EducatorsAdapterListener, View.OnClickListener {
+public class SearchEducatorFragment extends BaseMainFragment implements SearchEducatorFragmentView, SearchEducatorAdapter.SearchEducatorsAdapterListener, View.OnClickListener {
 
     private SearchEducatorPresenter presenter;
     private RecyclerView rvEducator;
@@ -68,6 +68,7 @@ public class SearchEducatorFragment extends BaseMainFragment implements SearchEd
         View view = inflater.inflate(R.layout.fragment_search_educator, container, false);
         RelativeLayout layoutSelectDate = view.findViewById(R.id.rel_date);
         rvEducator = view.findViewById(R.id.rv_educators);
+        rvEducator.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
 
         ImageView imageSearchAudience = view.findViewById(R.id.image_searchAudience);
         if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
@@ -142,7 +143,6 @@ public class SearchEducatorFragment extends BaseMainFragment implements SearchEd
 
     public void updateListEducators(ArrayList<Educator> requestList) {
         searchEducatorAdapter = new SearchEducatorAdapter(requestList);
-        rvEducator.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         rvEducator.setAdapter(searchEducatorAdapter);
     }
 
@@ -159,14 +159,13 @@ public class SearchEducatorFragment extends BaseMainFragment implements SearchEd
     }
 
     @Override
-    public void showEditDialog(ArrayList<LessonsEducator> items, String nameEducator) {
+    public void showLessonsDialog(ArrayList<LessonsEducator> items, String nameEducator) {
         Bundle args = new Bundle();
         args.putParcelableArrayList(LESSON_LIST, items);
         args.putString(NAME_EDUCATOR,nameEducator);
         DialogFragmentListLessons dialogFragment = DialogFragmentListLessons.newInstance();
         dialogFragment.show(getChildFragmentManager(), DialogFragmentListLessons.class.getSimpleName());
     }
-
 
     @Override
     public void onItemClick(Educator educator, View v) {

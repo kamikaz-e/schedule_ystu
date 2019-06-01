@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.misha.myapplication.R;
 import com.example.misha.myapplication.entity.Audience;
 import com.example.misha.myapplication.entity.Educator;
+import com.example.misha.myapplication.module.groups.GroupsAdapter;
 
 import java.util.ArrayList;
 
@@ -21,9 +22,11 @@ public class SearchEducatorAdapter extends RecyclerView.Adapter<SearchEducatorAd
 
     private ArrayList<Educator> educatorList;
     private ArrayList<Educator> educatorListFiltered;
+    private SearchEducatorsAdapterListener listener;
 
 
-    public SearchEducatorAdapter(ArrayList<Educator> educatorList) {
+    public SearchEducatorAdapter(ArrayList<Educator> educatorList, SearchEducatorsAdapterListener listener) {
+        this.listener = listener;
         this.educatorList = educatorList;
         this.educatorListFiltered = educatorList;
     }
@@ -78,15 +81,21 @@ public class SearchEducatorAdapter extends RecyclerView.Adapter<SearchEducatorAd
         };
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         public TextView name;
 
         public MyViewHolder(View view) {
             super(view);
             name = view.findViewById(R.id.item);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onItemClick(educatorListFiltered.get(getAdapterPosition()), v);
         }
     }
-    public interface EducatorsAdapterListener {
+    public interface SearchEducatorsAdapterListener {
         void onItemClick(Educator educator, View v);
     }
 

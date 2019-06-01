@@ -35,13 +35,14 @@ public interface APIService {
     @POST("getFreeAudiences.php")
     Single<ArrayList<Audience>> getFreeAudiences(@Field("week") String week, @Field("day") String day, @Field("lesson") String lesson );
 
-    @FormUrlEncoded
-    @POST("getEducators.php")
-    Single<ArrayList<Educator>> getEducators(@Field("week") String week, @Field("day") String day);
 
     @FormUrlEncoded
     @POST("getLessonsEducator.php")
     Single<ArrayList<LessonsEducator>> getLessonsEducator(@Field("week") String week, @Field("day") String day, @Field("educator") String educator );
+
+    @FormUrlEncoded
+    @POST("getEducatorsCurrentDay.php")
+    Single<ArrayList<Educator>> getEducatorsCurrentDay(@Field("week") String week, @Field("day") String day);
 
     @FormUrlEncoded
     @POST("getSubjects.php")

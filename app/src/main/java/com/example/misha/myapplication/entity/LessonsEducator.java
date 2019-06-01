@@ -37,6 +37,8 @@ public class LessonsEducator implements Parcelable {
     @Expose
     @SerializedName("number_lesson")
     private int number_lesson;
+    @SerializedName("name_group")
+    private String name_group;
 
 
     public LessonsEducator() {
@@ -49,6 +51,7 @@ public class LessonsEducator implements Parcelable {
         this.name_audience = cursor.getString(2);
         this.name_typelesson = cursor.getString(3);
         this.number_lesson = cursor.getInt(4);
+        this.name_group = cursor.getString(5);
     }
 
     protected LessonsEducator(Parcel in) {
@@ -57,13 +60,15 @@ public class LessonsEducator implements Parcelable {
         name_audience = in.readString();
         name_typelesson = in.readString();
         number_lesson = in.readInt();
+        name_group = in.readString();
     }
 
-    public LessonsEducator(String name_subject, String name_audience, String name_typelesson, int number_lesson) {
+    public LessonsEducator(String name_subject, String name_audience, String name_typelesson, int number_lesson, String name_group) {
         this.name_subject = String.valueOf(name_subject);
         this.name_audience = String.valueOf(name_audience);
         this.name_typelesson = String.valueOf(name_typelesson);
         this.number_lesson = number_lesson;
+        this.name_group = name_group;
     }
 
     public String getId() {
@@ -106,6 +111,14 @@ public class LessonsEducator implements Parcelable {
         this.number_lesson = number_lesson;
     }
 
+    public String getName_group() {
+        return name_group;
+    }
+
+    public void setName_group(String name_group) {
+        this.name_group = name_group;
+    }
+
 
     @Override
     public int describeContents() {
@@ -119,5 +132,6 @@ public class LessonsEducator implements Parcelable {
         dest.writeString(name_audience);
         dest.writeString(name_typelesson);
         dest.writeInt(number_lesson);
+        dest.writeString(name_group);
     }
 }

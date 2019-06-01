@@ -29,7 +29,8 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
             android:background="@null"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            tools:text="08:30"/>
 
         <TextView
             android:id="@+id/timeTwo"
@@ -38,18 +39,30 @@
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_toEndOf="@+id/timeOne"
             android:background="@null"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            tools:text="-10:00"/>
 
         <TextView
             android:id="@+id/typelesson"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:paddingEnd="30sp"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_toStartOf="@+id/group"
             android:textSize="16sp"
             tools:ignore="RtlSymmetry"
-            tools:text="Лабораторная работа" />
+            tools:text="Лабораторная работа"/>
+        <TextView
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_alignParentEnd="true"
+            android:textSize="16sp"
+            tools:ignore="RtlSymmetry"
+            tools:text="ЭИС-45"
+            />
     </RelativeLayout>
 
     <RelativeLayout

@@ -4,13 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
 import com.example.misha.myapplication.entity.Educator;
-import com.example.misha.myapplication.entity.Lesson;
 import com.example.misha.myapplication.entity.LessonsEducator;
 import com.example.misha.myapplication.util.DataUtil;
 
@@ -19,8 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
-import io.reactivex.functions.Consumer;
 
 public class SearchEducatorPresenter extends BaseMainPresenter<SearchEducatorFragmentView> implements SearchEducatorPresenterInterface {
 
@@ -61,21 +59,19 @@ public class SearchEducatorPresenter extends BaseMainPresenter<SearchEducatorFra
 
     public void onClickDate(View v) {
         getCurrentDate();
-        getView().showProgressBar();
-        loadEducators(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay());
     }
 
     @Override
     public void onClickItem(String educator) {
+        getView().showProgressBar();
         loadLessonsEducator(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay(), educator);
-        getView().showEditDialog(lessonList, educator);
     }
 
     @Override
     public void loadEducators(String week, String day) {
         getView().showProgressBar();
         getCompositeDisposable().add(getRepositoryManager()
-                .getEducators(week, day)
+                .getEducatorsCurrentDay(week, day)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(educators -> {
@@ -93,7 +89,6 @@ public class SearchEducatorPresenter extends BaseMainPresenter<SearchEducatorFra
 
     @Override
     public void loadLessonsEducator(String week, String day, String educator) {
-        getView().showProgressBar();
         getCompositeDisposable().add(getRepositoryManager()
                 .getLessonsEducator(week, day, educator)
                 .subscribeOn(getSchedulerProvider().io())
@@ -102,6 +97,7 @@ public class SearchEducatorPresenter extends BaseMainPresenter<SearchEducatorFra
                     SearchEducatorPresenter.this.getView().hideProgressBar();
                     lessonList.clear();
                     lessonList.addAll(lessons);
+                    getView().showLessonsDialog(lessonList,educator);
                 }, throwable -> {
                     SearchEducatorPresenter.this.getView().hideProgressBar();
                     SearchEducatorPresenter.this.processSimpleError(throwable);
@@ -127,10 +123,16 @@ public class SearchEducatorPresenter extends BaseMainPresenter<SearchEducatorFra
             String date = df.format(selectedDateCalendar.getTime());
             getView().updateTextViewDate(date);
 
+
             Preferences.getInstance().setSelectedWeek(String.valueOf(DataUtil.getSelectedWeek(selectedDateCalendar.getTimeInMillis())));
             int day = selectedDateCalendar.get(Calendar.DAY_OF_WEEK);
             int selectedDay = day <= 1 ? 0 : day - 1;
+            loadEducators(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay());
             Preferences.getInstance().setSelectedDay(String.valueOf(selectedDay));
+
+            getView().showProgressBar();
+            loadEducators(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay());
+
         },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),

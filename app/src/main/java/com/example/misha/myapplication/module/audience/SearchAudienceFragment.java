@@ -66,6 +66,7 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
         View view = inflater.inflate(R.layout.fragment_search_audience, container, false);
         RelativeLayout layoutSelectDate = view.findViewById(R.id.rel_date);
         rvAudiences = view.findViewById(R.id.rv_audiences);
+        rvAudiences.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         spinner = view.findViewById(R.id.spinner);
 
 
@@ -141,7 +142,6 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
 
     public void updateListAudiences(ArrayList<Audience> requestList) {
         searchAudienceAdapter = new SearchAudienceAdapter(requestList);
-        rvAudiences.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         rvAudiences.setAdapter(searchAudienceAdapter);
     }
 

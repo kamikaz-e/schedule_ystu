@@ -25,5 +25,5 @@ public interface SearchEducatorFragmentView extends BaseView {
 
     void hideErrorView();
 
-    void showEditDialog(ArrayList<LessonsEducator> items, String nameEducator);
+    void showLessonsDialog(ArrayList<LessonsEducator> items, String nameEducator);
 }
