@@ -71,12 +71,14 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         RelativeLayout layoutAbout = view.findViewById(R.id.about);
         RelativeLayout layoutSelectDate = view.findViewById(R.id.select_theme);
         RelativeLayout layoutTransferData = view.findViewById(R.id.transfer_data);
+        ImageView imageSearchEducator = view.findViewById(R.id.image_searchEducator);
         ImageView imageSearchAudience = view.findViewById(R.id.image_searchAudience);
         ImageView imageImport = view.findViewById(R.id.image_import);
         ImageView imageTheme = view.findViewById(R.id.image_theme);
         ImageView imageAbout = view.findViewById(R.id.image_about);
         ImageView imageTransferData = view.findViewById(R.id.image_tranfer);
         if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
+            imageSearchEducator.setImageResource(R.drawable.ic_school_white);
             imageSearchAudience.setImageResource(R.drawable.ic_search_white);
             imageImport.setImageResource(R.drawable.ic_import_white);
             imageTheme.setImageResource(R.drawable.ic_palette_white);
@@ -84,6 +86,7 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
             imageTransferData.setImageResource(R.drawable.ic_send_white);
         }
         if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)) {
+            imageSearchEducator.setImageResource(R.drawable.ic_school_black);
             imageSearchAudience.setImageResource(R.drawable.ic_search_black);
             imageImport.setImageResource(R.drawable.ic_import);
             imageTheme.setImageResource(R.drawable.ic_palette_black);
