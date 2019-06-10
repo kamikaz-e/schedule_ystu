@@ -83,7 +83,7 @@
             android:paddingBottom="@dimen/spacing_medium">
 
 
-            <TextView
+            <EditText
                 android:id="@+id/subject"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
@@ -91,6 +91,14 @@
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_toStartOf="@+id/audience"
+                android:background="@null"
+                android:checkable="false"
+                android:clickable="false"
+                android:focusable="false"
+                android:inputType="textNoSuggestions"
+                android:longClickable="false"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textSize="16sp"
                 tools:ignore="RtlSymmetry"
                 tools:text="Информационные системы и технологии" />

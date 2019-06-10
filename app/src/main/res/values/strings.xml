@@ -50,10 +50,10 @@
     <string name="clear_subjects">Очистить предметы?</string>
     <string name="clear_audience">Очистить аудитории?</string>
     <string name="clear_educators">Очистить преподавателей?</string>
-    <string name="clear_typelessons">Очистить типы предметов?</string>
+    <string name="clear_typelessons">Очистить типы занятий?</string>
     <string name="network_error">Ошибка подключения к сети</string>
     <string name="unknown_error">Произошла ошибка, попробуйте еще раз</string>
-    <string name="error_api_unexpected">Неизвесnная ошибка при ответе от удаленного сервера</string>
+    <string name="error_api_unexpected">Неизвестная ошибка при ответе от удаленного сервера</string>
     <string name="retry">Повторить</string>
     <string name="menu_settings_string">Настройки</string>
     <string name="menu_schedule_string">Расписание</string>
@@ -65,7 +65,7 @@
     <string name="title_subject">Добавить предмет</string>
     <string name="title_audience">Добавить аудиторию</string>
     <string name="title_educator">Добавить преподавателя</string>
-    <string name="title_typelesson">Добавить тип предмета</string>
+    <string name="title_typelesson">Добавить тип занятия</string>
 //error
     <string name="error_subject">Введите предмет</string>
     <string name="error_audience">Введите аудиторию</string>
@@ -99,7 +99,7 @@
     <string name="string_email_developer">Электронная почта</string>
     <string name="string_vk_developer">Профиль Вконтакте</string>
     <string name="vk_developer">https://vk.com/mikhailvolkov1</string>
-    <string name="email_developer">mailto:mikhailvolkov2014-2014@ya.ru</string>
+    <string name="email_developer">mailto:mikhailvolkov2014–2014@ya.ru</string>
     <string name="title_search_audience">Выберите дату и занятие</string>
     <string name="title_groups">Выберите группу</string>
     <string name="title_edit_data">Редактор данных</string>
@@ -110,4 +110,8 @@
     <string name="search_Educator">Поиск преподавателя</string>
     <string name="title_search_educator">Выберите дату и преподавателя</string>
     <string name="string_load_subjects">Расписание выбранной группы еще не заполнено. Попробуйте загрузить позже</string>
+    <string name="dialog_fragment_title_typelesson">Типы занятия</string>
+    <string name="dialog_fragment_title_educator">Преподаватели</string>
+    <string name="dialog_fragment_title_audience">Аудитории</string>
+    <string name="dialog_fragment_title_subject">Предметы</string>
 </resources>

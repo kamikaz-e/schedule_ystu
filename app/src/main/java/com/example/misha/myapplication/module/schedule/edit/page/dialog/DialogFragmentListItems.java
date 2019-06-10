@@ -1,5 +1,6 @@
 package com.example.misha.myapplication.module.schedule.edit.page.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -78,19 +79,20 @@ public class DialogFragmentListItems extends BaseAlertDialog implements DialogFr
 
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
+        @SuppressLint("InflateParams")
         View view = layoutInflater.inflate(R.layout.dialog_rv_list, null);
         TextView title_dialog = view.findViewById(R.id.dialog_textView);
         if (fragmentCode == FRAGMENT_SUBJECTS) {
-            title_dialog.setText("Предметы");
+            title_dialog.setText(getString(R.string.dialog_fragment_title_subject));
         }
         if (fragmentCode == FRAGMENT_AUDIENCES) {
-            title_dialog.setText("Аудитории");
+            title_dialog.setText(getString(R.string.dialog_fragment_title_audience));
         }
         if (fragmentCode == FRAGMENT_EDUCATORS) {
-            title_dialog.setText("Преподаватели");
+            title_dialog.setText(getString(R.string.dialog_fragment_title_educator));
         }
         if (fragmentCode == FRAGMENT_TYPELESSONS) {
-            title_dialog.setText("Тип занятий");
+            title_dialog.setText(getString(R.string.dialog_fragment_title_typelesson));
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(view);

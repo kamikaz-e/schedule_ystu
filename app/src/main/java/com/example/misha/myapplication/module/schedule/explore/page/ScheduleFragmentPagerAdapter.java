@@ -29,16 +29,32 @@ import java.util.ArrayList;
 public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
 
     private ArrayList<Lesson> lessonList = new ArrayList<>();
+    private Lesson lesson;
+    private Subject subject;
+    private Audience audience;
+    private Educator educator;
+    private Typelesson typelesson;
 
     @Override
     public int getItemViewType(int position) {
-        if (lessonList.get(position).getId_subject() == null||lessonList.get(position).getId_subject().equals("0") ||
-                lessonList.get(position).getId_audience() == null||lessonList.get(position).getId_audience().equals("0") ||
-                lessonList.get(position).getId_educator() == null||lessonList.get(position).getId_educator().equals("0") ||
-                lessonList.get(position).getId_typelesson() == null||lessonList.get(position).getId_typelesson().equals("0")) {
+        lesson = lessonList.get(position);
+        subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId_subject()));
+        audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId_audience()));
+        educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId_educator()));
+        typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId_typelesson()));
+
+        if (subject == null) {
             return 1;
         }
-
+        if (audience == null) {
+            return 1;
+        }
+        if (educator == null) {
+            return 1;
+        }
+        if (typelesson == null) {
+            return 1;
+        }
         return 0;
     }
 
@@ -66,15 +82,9 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         switch (holder.getItemViewType()) {
             case 0:
-                Lesson lesson = lessonList.get(position);
                 ArrayList<Calls> callsList = CallDao.getInstance().getAllData();
                 ((ViewHolderLesson) holder).timeEditOne.setText(callsList.get(position * 2).getName());
                 ((ViewHolderLesson) holder).timeEditTwo.setText(callsList.get((position * 2) + 1).getName());
-
-                Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId_subject()));
-                Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId_audience()));
-                Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId_educator()));
-                Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId_typelesson()));
 
                 if (subject == null) {
                     break;

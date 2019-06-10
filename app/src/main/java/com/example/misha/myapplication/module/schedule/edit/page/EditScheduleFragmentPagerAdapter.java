@@ -124,31 +124,25 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
             callsList = CallDao.getInstance().getAllData();
             timeEditOne.setText(callsList.get(position * 2).getName());
             timeEditTwo.setText(callsList.get((position * 2) + 1).getName());
+            Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId_subject()));
+            Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId_audience()));
+            Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId_educator()));
+            Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId_typelesson()));
 
-            if (lessonList.get(position).getId_subject() == null||lessonList.get(position).getId_subject().equals("0"))
-            {   subjectEdit.setText(R.string.hint_subject);}
-            else {
-                Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId_subject()));
+            if (subject == null) {
+                subjectEdit.setText(R.string.hint_subject);
+            }  else {
                 subjectEdit.setText(subject.getName());
             }
-            if (lessonList.get(position).getId_audience() == null||lessonList.get(position).getId_audience().equals("0"))
-            {   audienceEdit.setText(R.string.hint_audience);}
-            else {
-                Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId_audience()));
-                audienceEdit.setText(audience.getName());
-            }
-            if (lessonList.get(position).getId_educator() == null||lessonList.get(position).getId_educator().equals("0"))
-            {   educatorEdit.setText(R.string.hint_educator);}
-            else {
-                Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId_educator()));
-                educatorEdit.setText(educator.getName());
-            }
-            if (lessonList.get(position).getId_typelesson() == null||lessonList.get(position).getId_typelesson().equals("0"))
-            {   typeLessonEdit.setText(R.string.hint_typelesson);}
-            else {
-                Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId_typelesson()));
-                typeLessonEdit.setText(typelesson.getName());
-            }
+            if (audience == null) {
+                audienceEdit.setText(R.string.hint_audience);
+            } else { audienceEdit.setText(audience.getName());}
+            if (educator == null) {
+                educatorEdit.setText(R.string.hint_educator);
+            } else { educatorEdit.setText(educator.getName());}
+            if (typelesson == null) {
+                typeLessonEdit.setText(R.string.hint_typelesson);
+            } else {typeLessonEdit.setText(typelesson.getName());}
 
             if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
                 textViewOptions.setImageResource(R.drawable.ic_more_vert_white);
