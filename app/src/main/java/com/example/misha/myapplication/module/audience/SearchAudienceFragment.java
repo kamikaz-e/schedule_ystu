@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.misha.myapplication.CustomSpinnerAdapterLessons;
 import com.example.misha.myapplication.R;
+import com.example.misha.myapplication.common.ErrorView;
 import com.example.misha.myapplication.common.core.BaseMainFragment;
 import com.example.misha.myapplication.common.core.BasePresenter;
 import com.example.misha.myapplication.data.preferences.Preferences;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 import static com.example.misha.myapplication.data.preferences.Preferences.DARK_THEME;
 import static com.example.misha.myapplication.data.preferences.Preferences.LIGHT_THEME;
 
-public class SearchAudienceFragment extends BaseMainFragment implements SearchAudienceFragmentView,   AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class SearchAudienceFragment extends BaseMainFragment implements SearchAudienceFragmentView,   AdapterView.OnItemSelectedListener, View.OnClickListener, ErrorView.ErrorListener {
 
     private SearchAudiencePresenter presenter;
     private RecyclerView rvAudiences;
@@ -89,6 +90,10 @@ public class SearchAudienceFragment extends BaseMainFragment implements SearchAu
         presenter.init();
     }
 
+    @Override
+    public void onReloadData() {
+        presenter.loadFreeAudienceAudiences(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay(), Preferences.getInstance().getSelectedLesson());
+    }
     @NonNull
     @Override
     protected BasePresenter getSchedulePagePresenter() {

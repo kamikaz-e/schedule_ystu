@@ -65,7 +65,6 @@ public class SearchAudiencePresenter extends BaseMainPresenter<SearchAudienceFra
         loadFreeAudienceAudiences(Preferences.getInstance().getSelectedWeek(), Preferences.getInstance().getSelectedDay(), Preferences.getInstance().getSelectedLesson());
     }
 
-
     @Override
     public void loadFreeAudienceAudiences(String week, String day, String lesson) {
         getView().showProgressBar();
@@ -80,7 +79,8 @@ public class SearchAudiencePresenter extends BaseMainPresenter<SearchAudienceFra
                     updateAudienceList();
                 }, throwable -> {
                     getView().hideProgressBar();
-                    processSimpleError(throwable);
+                    getView().showErrorView();
+                    processGlobalError(throwable);
                 })
         );
     }

@@ -17,5 +17,4 @@ public interface GroupsPresenterInterface {
     void loadSubjects(String name);
 
 
-
 }

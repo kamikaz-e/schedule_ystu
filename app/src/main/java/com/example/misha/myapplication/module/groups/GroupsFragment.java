@@ -61,7 +61,6 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter.init();
         presenter.load();
     }
 

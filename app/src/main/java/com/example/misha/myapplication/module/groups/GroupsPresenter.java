@@ -21,6 +21,8 @@ import com.example.misha.myapplication.util.DataUtil;
 
 import java.util.ArrayList;
 
+import io.reactivex.functions.Consumer;
+
 import static com.example.misha.myapplication.data.database.dao.LessonDao.ID;
 import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_AUDIENCE;
 import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_EDUCATOR;
@@ -41,13 +43,15 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
 
     @Override
     public void init() {
-        getView().updateListGroups(listGroups);
+
     }
 
     public void onClickItem(String group) {
         getView().showProgressBar();
         loadSubjects(group);
     }
+
+
 
     @Override
     public void load() {
@@ -61,13 +65,14 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     processGlobalError(throwable);
                 })
         );
+
     }
 
     @Override
     public void loadGroups(ArrayList<Groups> groups) {
         listGroups.clear();
         listGroups.addAll(groups);
-        init();
+        getView().updateListGroups(listGroups);
     }
 
 
