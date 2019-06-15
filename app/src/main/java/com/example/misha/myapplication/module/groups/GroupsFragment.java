@@ -29,6 +29,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import io.reactivex.plugins.RxJavaPlugins;
+
 public class GroupsFragment extends BaseMainFragment implements GroupsFragmentView, GroupsAdapter.GroupsAdapterListener, ErrorView.ErrorListener {
 
     private GroupsPresenter presenter;
@@ -47,14 +49,16 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
         super.onCreate(savedInstanceState);
         presenter = new GroupsPresenter(getActivity());
         setHasOptionsMenu(true);
+
     }
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_view, container, false);
-        rvGroups = view.findViewById(R.id.rv_audiences);
+        rvGroups = view.findViewById(R.id.rv_groups);
         rvGroups.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvGroups.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         return view;
     }
 
@@ -125,7 +129,6 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
 
     public void updateListGroups(ArrayList<Groups> requestList) {
         groupsAdapter = new GroupsAdapter(requestList, this);
-        rvGroups.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         rvGroups.setAdapter(groupsAdapter);
     }
 
@@ -137,5 +140,6 @@ public class GroupsFragment extends BaseMainFragment implements GroupsFragmentVi
     @Override
     public void onReloadData() {
         presenter.load();
+        presenter.reloadList();
     }
 }

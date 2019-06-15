@@ -30,13 +30,13 @@ public class EditDataFragmentAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment = null;
         if (position == 0) {
-            fragment = EditDataFragmentPage.newInstance(new EditDataModel(R.string.error_subject, R.string.hint_subject, R.string.delete_subject, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 60, FRAGMENT_SUBJECTS));
+            fragment = EditDataFragmentPage.newInstance(new EditDataModel(R.string.error_subject, R.string.hint_subject, R.string.delete_subject, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 60, FRAGMENT_SUBJECTS,0, ""));
         } else if (position == 1) {
-            fragment = EditDataFragmentPage.newInstance(new EditDataModel(R.string.error_audience, R.string.hint_audience, R.string.delete_audience, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 14, FRAGMENT_AUDIENCES));
+            fragment = EditDataFragmentPage.newInstance(new EditDataModel(R.string.error_audience, R.string.hint_audience, R.string.delete_audience, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 14, FRAGMENT_AUDIENCES,0, ""));
         } else if (position == 2) {
-            fragment = EditDataFragmentPage.newInstance(new EditDataModel(R.string.error_educator, R.string.hint_educator, R.string.delete_educator, InputType.TYPE_TEXT_FLAG_CAP_WORDS, 60, FRAGMENT_EDUCATORS));
+            fragment = EditDataFragmentPage.newInstance(new EditDataModel(R.string.error_educator, R.string.hint_educator, R.string.delete_educator, InputType.TYPE_TEXT_FLAG_CAP_WORDS, 60, FRAGMENT_EDUCATORS,0, ""));
         } else if (position == 3) {
-            fragment = EditDataFragmentPage.newInstance(new EditDataModel(R.string.error_typelesson, R.string.hint_typelesson, R.string.delete_typelesson, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 20, FRAGMENT_TYPELESSONS));
+            fragment = EditDataFragmentPage.newInstance(new EditDataModel(R.string.error_typelesson, R.string.hint_typelesson, R.string.delete_typelesson, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 20, FRAGMENT_TYPELESSONS,0, ""));
         }
         return fragment;
     }

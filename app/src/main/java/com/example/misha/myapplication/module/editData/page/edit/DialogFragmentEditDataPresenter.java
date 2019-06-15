@@ -1,4 +1,4 @@
-package com.example.misha.myapplication.module.editData.page;
+package com.example.misha.myapplication.module.editData.page.edit;
 
 import com.example.misha.myapplication.common.core.BaseMainPresenter;
 import com.example.misha.myapplication.data.database.AbsDao;
@@ -16,34 +16,21 @@ import static com.example.misha.myapplication.Constants.FRAGMENT_EDUCATORS;
 import static com.example.misha.myapplication.Constants.FRAGMENT_SUBJECTS;
 import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
 
-public class EditDataPagePresenter extends BaseMainPresenter<EditDataFragmentPageView> implements EditDataPagePresenterInterface {
+public class DialogFragmentEditDataPresenter extends BaseMainPresenter<DialogFragmentEditDataView> implements DialogFragmentEditDataPresenterInterface {
 
     private final EditDataModel editDataModel;
-
+    private AbsDao absDao;
     private ArrayList<SimpleItem> listItems = new ArrayList<>();
 
-    private AbsDao absDao;
-
-
-    public EditDataPagePresenter(EditDataModel editDataModel) {
+    public DialogFragmentEditDataPresenter(EditDataModel editDataModel) {
         this.editDataModel = editDataModel;
         absDao = editDataModel.getDao();
     }
 
-    public void onClearClick(int position) {
-        getView().showEditDataDialog(listItems,position);
-    }
 
     @Override
     public void init() {
         listItems = absDao.getAllData();
-        getView().setupWidgets(editDataModel);
-        getView().updateItemsAdapter(listItems);
-    }
-
-    public ArrayList<SimpleItem> getItemList() {
-        listItems = absDao.getAllData();
-        return listItems;
     }
 
 
@@ -69,8 +56,32 @@ public class EditDataPagePresenter extends BaseMainPresenter<EditDataFragmentPag
     }
 
     @Override
-    public String getNameAt(int position) {
-        return listItems.get(position).getName();
+    public void updateItem(String itemName, int type, int position) {
+        SimpleItem item = null;
+        if (type == FRAGMENT_SUBJECTS) {
+            item = new Subject();
+        }
+        if (type == FRAGMENT_AUDIENCES) {
+            item = new Audience();
+        }
+        if (type == FRAGMENT_EDUCATORS) {
+            item = new Educator();
+        }
+        if (type == FRAGMENT_TYPELESSONS) {
+            item = new Typelesson();
+        }
+        item.setId(String.valueOf(position));
+        item.setName(itemName);
+        absDao.updateItem(item,Long.parseLong(listItems.get(position).getId()));
+        init();
     }
+
+    @Override
+    public void deleteItem(int position) {
+        absDao.deleteItemById(Long.parseLong(listItems.get(position).getId()));
+        listItems.remove(position);
+        init();
+    }
+
 
 }

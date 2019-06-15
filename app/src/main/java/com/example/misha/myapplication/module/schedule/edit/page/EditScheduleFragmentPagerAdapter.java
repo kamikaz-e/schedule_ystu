@@ -35,6 +35,10 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
     private List<Lesson> lessonList;
     private ArrayList<Calls> callsList = new ArrayList<>();
     private EditSchedulePagePresenterInterface callback;
+    private Subject subject;
+    private Audience audience;
+    private Educator educator;
+    private Typelesson typelesson;
 
     public EditScheduleFragmentPagerAdapter(EditSchedulePagePresenterInterface editScheduleCallback) {
         this.callback = editScheduleCallback;
@@ -124,10 +128,22 @@ public class EditScheduleFragmentPagerAdapter extends RecyclerView.Adapter<EditS
             callsList = CallDao.getInstance().getAllData();
             timeEditOne.setText(callsList.get(position * 2).getName());
             timeEditTwo.setText(callsList.get((position * 2) + 1).getName());
-            Subject subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId_subject()));
-            Audience audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId_audience()));
-            Educator educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId_educator()));
-            Typelesson typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId_typelesson()));
+            try {
+                subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId_subject()));
+            } catch (NumberFormatException ignored) {
+            }
+            try {
+                audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId_audience()));
+            } catch (NumberFormatException ignored) {
+            }
+            try {
+                educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId_educator()));
+            } catch (NumberFormatException ignored) {
+            }
+            try {
+                typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId_typelesson()));
+            } catch (NumberFormatException ignored) {
+            }
 
             if (subject == null) {
                 subjectEdit.setText(R.string.hint_subject);

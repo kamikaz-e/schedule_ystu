@@ -8,6 +8,7 @@
     <attr name="lineSpinnerItemStyle" format="reference" />
     <attr name="textViewNumberCallStyle" format="reference" />
     <attr name="floatButton" format="reference" />
+    <attr name="lineColorStyle" format="reference" />
 
 
     <style name="DarkTheme" parent="@style/Theme.AppCompat">
@@ -31,6 +32,7 @@
         <item name="android:colorBackground">@color/black38</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
+        <item name="lineColorStyle">@style/DarkLineColorStyle</item>
     </style>
 
 
@@ -56,10 +58,15 @@
         <item name="android:colorBackground">@color/white</item>
         <item name="android:textColor">@color/black20</item>
         <item name="android:textColorPrimary">@color/black20</item>
+        <item name="lineColorStyle">@style/LightLineColorStyle</item>
     </style>
 
     <style name="ToolBarDarkStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/black27</item>
+    </style>
+
+    <style name="DarkLineColorStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">#656565</item>
     </style>
 
     <style name="TitleText" parent="TextAppearance.AppCompat.Title">
@@ -120,7 +127,6 @@
         <item name="colorAccent">@color/greyBF</item>
         <item name="android:textColorPrimary">@color/black20</item>
         <item name="android:textColorSecondary">@color/black56</item>
-
     </style>
 
 
@@ -141,6 +147,10 @@
 
     <style name="ToolBarLightStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/whiteEF</item>
+    </style>
+
+    <style name="LightLineColorStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/greyB3</item>
     </style>
 
     <style name="TabLayoutLightStyle" parent="Widget.Design.TabLayout">

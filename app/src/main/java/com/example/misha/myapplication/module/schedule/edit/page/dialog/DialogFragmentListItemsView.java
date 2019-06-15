@@ -11,7 +11,5 @@ public interface DialogFragmentListItemsView extends BaseView {
     String FRAGMENT_CODE = "FRAGMENT_CODE";
     String POSITION = "POSITION";
 
-    void updateView(ArrayList<SimpleItem> listItems);
-
     void showAddDataDialog(ArrayList<? extends SimpleItem> items, int fragmentCode);
 }

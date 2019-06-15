@@ -49,7 +49,7 @@ public class DialogFragmentPresenter extends BaseMainPresenter<DialogFragmentLis
         updateList();
     }
 
-    public ArrayList<SimpleItem> getSubjectList() {
+    public ArrayList<SimpleItem> getItemList() {
         listItems = absDao.getAllData();
         return listItems;
     }

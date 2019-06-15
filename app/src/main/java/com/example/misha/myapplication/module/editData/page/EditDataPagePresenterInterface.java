@@ -6,7 +6,5 @@ public interface EditDataPagePresenterInterface {
 
     void insert(String itemName, int type);
 
-    void deleteItem(int position);
-
     String getNameAt(int position);
 }

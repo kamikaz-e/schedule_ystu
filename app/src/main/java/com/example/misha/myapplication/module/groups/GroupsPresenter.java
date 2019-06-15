@@ -21,8 +21,6 @@ import com.example.misha.myapplication.util.DataUtil;
 
 import java.util.ArrayList;
 
-import io.reactivex.functions.Consumer;
-
 import static com.example.misha.myapplication.data.database.dao.LessonDao.ID;
 import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_AUDIENCE;
 import static com.example.misha.myapplication.data.database.dao.LessonDao.ID_EDUCATOR;
@@ -43,7 +41,6 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
 
     @Override
     public void init() {
-
     }
 
     public void onClickItem(String group) {
@@ -51,15 +48,22 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
         loadSubjects(group);
     }
 
+    public void reloadList() {
+        getView().hideErrorView();
+    }
 
 
     @Override
     public void load() {
+        getView().showProgressBar();
         getCompositeDisposable().add(getRepositoryManager()
                 .getGroups()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(this::loadGroups, throwable -> {
+                .subscribe(groups -> {
+                    getView().hideProgressBar();
+                    loadGroups(groups);
+                }, throwable -> {
                     getView().hideProgressBar();
                     getView().showErrorView();
                     processGlobalError(throwable);
@@ -92,7 +96,8 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     }
                 }, throwable -> {
                     getView().hideProgressBar();
-                    processSimpleError(throwable);
+                    getView().showErrorView();
+                    processGlobalError(throwable);
                 })
         );
     }
@@ -108,7 +113,8 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     loadEducators(group);
                 }, throwable -> {
                     getView().hideProgressBar();
-                    GroupsPresenter.this.processSimpleError(throwable);
+                    getView().showErrorView();
+                    processGlobalError(throwable);
                 })
         );
     }
@@ -124,7 +130,8 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     loadTypelessons(group);
                 }, throwable -> {
                     getView().hideProgressBar();
-                    GroupsPresenter.this.processSimpleError(throwable);
+                    getView().showErrorView();
+                    processGlobalError(throwable);
                 })
         );
     }
@@ -140,7 +147,8 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     loadLessons(group);
                 }, throwable -> {
                     getView().hideProgressBar();
-                    processSimpleError(throwable);
+                    getView().showErrorView();
+                    processGlobalError(throwable);
                 })
         );
     }
@@ -151,6 +159,7 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(lessons -> {
+                    getView().hideProgressBar();
                     LessonDao.getInstance().deleteAll();
                     DatabaseHelper databaseHelper = new DatabaseHelper(context);
                     SQLiteDatabase database = databaseHelper.getReadableDatabase();
@@ -173,12 +182,12 @@ public class GroupsPresenter extends BaseMainPresenter<GroupsFragmentView> imple
                     } finally {
                         database.endTransaction();
                     }
-                    getView().hideProgressBar();
                     DataUtil.hintKeyboard(context);
                     getView().openFragmentSchedule();
                 }, throwable -> {
                     getView().hideProgressBar();
-                    processSimpleError(throwable);
+                    getView().showErrorView();
+                    processGlobalError(throwable);
                 })
         );
     }

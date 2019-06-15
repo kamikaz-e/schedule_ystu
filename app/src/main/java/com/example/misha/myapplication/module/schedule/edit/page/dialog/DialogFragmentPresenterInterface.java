@@ -8,7 +8,7 @@ public interface DialogFragmentPresenterInterface {
 
     void onItemClick(int fragmentCode);
 
-    ArrayList<SimpleItem> getSubjectList();
+    ArrayList<SimpleItem> getItemList();
 
 
 }

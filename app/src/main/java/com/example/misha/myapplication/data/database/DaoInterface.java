@@ -12,5 +12,7 @@ public interface DaoInterface<T> {
 
     void deleteAll();
 
+    void updateItem(T item,long id);
+
     boolean deleteItemById(long id);
 }

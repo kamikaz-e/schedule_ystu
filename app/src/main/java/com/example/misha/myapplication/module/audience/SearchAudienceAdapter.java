@@ -63,7 +63,6 @@ public class SearchAudienceAdapter extends RecyclerView.Adapter<SearchAudienceAd
                     }
                     audienceListFiltered = filteredList;
                 }
-
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = audienceListFiltered;
                 return filterResults;
@@ -73,7 +72,6 @@ public class SearchAudienceAdapter extends RecyclerView.Adapter<SearchAudienceAd
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 audienceListFiltered = (ArrayList<Audience>) filterResults.values;
                 notifyDataSetChanged();
-
             }
         };
     }

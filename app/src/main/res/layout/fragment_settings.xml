@@ -36,14 +36,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="15sp"
-            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="@dimen/spacing_normal"
             app:srcCompat="@drawable/ic_arrow_right" />
     </RelativeLayout>
 
 
     <View
+        style="?attr/lineColorStyle"
         android:layout_width="wrap_content"
         android:layout_height="1dp" />
 
@@ -78,14 +78,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="15sp"
-            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="@dimen/spacing_normal"
             app:srcCompat="@drawable/ic_arrow_right" />
     </RelativeLayout>
 
 
     <View
+        style="?attr/lineColorStyle"
         android:layout_width="wrap_content"
         android:layout_height="1dp" />
 
@@ -118,14 +118,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="15sp"
-            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="@dimen/spacing_normal"
             app:srcCompat="@drawable/ic_arrow_right" />
     </RelativeLayout>
 
 
     <View
+        style="?attr/lineColorStyle"
         android:layout_width="wrap_content"
         android:layout_height="1dp" />
 
@@ -157,14 +157,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="15sp"
-            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="@dimen/spacing_normal"
             app:srcCompat="@drawable/ic_arrow_right" />
     </RelativeLayout>
 
 
     <View
+        style="?attr/lineColorStyle"
         android:layout_width="wrap_content"
         android:layout_height="1dp" />
 
@@ -191,19 +191,17 @@
             android:text="@string/transfer"
             android:textSize="16sp" />
 
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="15sp"
-            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="@dimen/spacing_normal"
             app:srcCompat="@drawable/ic_arrow_right" />
     </RelativeLayout>
 
-
     <View
+        style="?attr/lineColorStyle"
         android:layout_width="wrap_content"
         android:layout_height="1dp" />
 
@@ -231,21 +229,18 @@
             android:text="@string/developer"
             android:textSize="16sp" />
 
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="15sp"
-            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="@dimen/spacing_normal"
             app:srcCompat="@drawable/ic_arrow_right" />
     </RelativeLayout>
 
-
     <View
+        style="?attr/lineColorStyle"
         android:layout_width="wrap_content"
         android:layout_height="1dp" />
-
 
 </LinearLayout>

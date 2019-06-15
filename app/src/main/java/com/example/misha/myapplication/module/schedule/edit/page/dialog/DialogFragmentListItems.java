@@ -48,24 +48,21 @@ public class DialogFragmentListItems extends BaseAlertDialog implements DialogFr
         return fragment;
     }
 
-    @Override
-    public void updateView(ArrayList<SimpleItem> listItems) {
-    }
 
     @Override
     public void showAddDataDialog(ArrayList<? extends SimpleItem> items, int fragmentCode) {
         DialogFragmentAddData dialogFragment = null;
         if (fragmentCode == FRAGMENT_SUBJECTS) {
-            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_subject, R.string.hint_subject, R.string.title_subject, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 60, FRAGMENT_SUBJECTS));
+            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_subject, R.string.hint_subject, R.string.title_subject, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 60, FRAGMENT_SUBJECTS, 0, ""));
         }
         if (fragmentCode == FRAGMENT_AUDIENCES) {
-            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_audience, R.string.hint_audience, R.string.title_audience, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 14, FRAGMENT_AUDIENCES));
+            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_audience, R.string.hint_audience, R.string.title_audience, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 14, FRAGMENT_AUDIENCES,0, ""));
         }
         if (fragmentCode == FRAGMENT_EDUCATORS) {
-            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_educator, R.string.hint_educator, R.string.title_educator, InputType.TYPE_TEXT_FLAG_CAP_WORDS, 60, FRAGMENT_EDUCATORS));
+            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_educator, R.string.hint_educator, R.string.title_educator, InputType.TYPE_TEXT_FLAG_CAP_WORDS, 60, FRAGMENT_EDUCATORS, 0, ""));
         }
         if (fragmentCode == FRAGMENT_TYPELESSONS) {
-            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_typelesson, R.string.hint_typelesson, R.string.title_typelesson, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 20, FRAGMENT_TYPELESSONS));
+            dialogFragment = DialogFragmentAddData.newInstance(new EditDataModel(R.string.error_typelesson, R.string.hint_typelesson, R.string.title_typelesson, InputType.TYPE_TEXT_FLAG_CAP_SENTENCES, 20, FRAGMENT_TYPELESSONS,0, ""));
         }
         dialogFragment.show(getChildFragmentManager(), DialogFragmentAddData.class.getSimpleName());
     }
@@ -107,10 +104,10 @@ public class DialogFragmentListItems extends BaseAlertDialog implements DialogFr
 
     @Override
     public void onActivityResult(int requestCode, int resultOk, Intent data) {
-        ArrayList<SimpleItem> subjectList = presenter.getSubjectList();
-        dialogFragmentListItemsAdapter.setLessonList(subjectList);
+        ArrayList<SimpleItem> itemList = presenter.getItemList();
+        dialogFragmentListItemsAdapter.setLessonList(itemList);
         dialogFragmentListItemsAdapter.notifyDataSetChanged();
-        updateItemsAdapter(subjectList);
+        updateItemsAdapter(itemList);
     }
 
     public void updateItemsAdapter(ArrayList<SimpleItem> subjectList) {

@@ -33,14 +33,18 @@ public class EditDataModel implements Parcelable {
     private int inputType;
     private int maxLenth;
     private int type;
+    private int position;
+    private String name;
 
-    public EditDataModel(int error, int hint, int title, int inputType, int maxLenth, int type) {
+    public EditDataModel(int error, int hint, int title, int inputType, int maxLenth, int type, int position, String name) {
         this.error = error;
         this.hint = hint;
         this.title = title;
         this.inputType = inputType;
         this.maxLenth = maxLenth;
         this.type = type;
+        this.position = position;
+        this.name = name;
     }
 
     protected EditDataModel(Parcel in) {
@@ -50,6 +54,8 @@ public class EditDataModel implements Parcelable {
         inputType = in.readInt();
         maxLenth = in.readInt();
         type = in.readInt();
+        position = in.readInt();
+        name = in.readString();
     }
 
     public int getError() {
@@ -76,6 +82,14 @@ public class EditDataModel implements Parcelable {
         return type;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -89,6 +103,8 @@ public class EditDataModel implements Parcelable {
         dest.writeInt(inputType);
         dest.writeInt(maxLenth);
         dest.writeInt(type);
+        dest.writeInt(position);
+        dest.writeString(name);
     }
 
     public AbsDao getDao() {

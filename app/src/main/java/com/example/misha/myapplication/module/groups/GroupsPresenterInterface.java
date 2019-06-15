@@ -16,5 +16,6 @@ public interface GroupsPresenterInterface {
 
     void loadSubjects(String name);
 
+    void reloadList();
 
 }
