@@ -26,8 +26,7 @@
         android:layout_marginTop="@dimen/spacing_small"
         android:layout_marginEnd="@dimen/spacing_medium"
         android:hint="@string/educator_edittext"
-        android:inputType="textCapSentences"
-        android:maxLength="14"
+        android:imeOptions="actionDone"
         android:paddingBottom="@dimen/spacing_normal"
         android:textSize="19sp"
         tools:text="Преподаватель" />

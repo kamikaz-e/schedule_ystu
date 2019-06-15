@@ -17,12 +17,10 @@ import static com.example.misha.myapplication.Constants.FRAGMENT_TYPELESSONS;
 
 public class DialogFragmentPresenter extends BaseMainPresenter<DialogFragmentListItemsView> implements DialogFragmentPresenterInterface {
 
-    private int fragmentCode;
     private AbsDao absDao;
     private ArrayList<SimpleItem> listItems = new ArrayList<>();
 
     public DialogFragmentPresenter(int fragmentCode) {
-        this.fragmentCode = fragmentCode;
         if (fragmentCode == FRAGMENT_SUBJECTS) {
             absDao = SubjectDao.getInstance();
         }
@@ -39,14 +37,12 @@ public class DialogFragmentPresenter extends BaseMainPresenter<DialogFragmentLis
 
     @Override
     public void init() {
-        updateList();
     }
 
 
     @Override
     public void onItemClick(int fragmentCode) {
         getView().showAddDataDialog(listItems, fragmentCode);
-        updateList();
     }
 
     public ArrayList<SimpleItem> getItemList() {
@@ -54,9 +50,5 @@ public class DialogFragmentPresenter extends BaseMainPresenter<DialogFragmentLis
         return listItems;
     }
 
-
-    public void updateList() {
-
-    }
 
 }

@@ -47,8 +47,6 @@ public class DialogFragmentEditData extends BaseAlertDialog implements TextView.
         return fragment;
     }
 
-
-
     @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
@@ -62,12 +60,12 @@ public class DialogFragmentEditData extends BaseAlertDialog implements TextView.
         inputItem = view.findViewById(R.id.dialog_editText);
         inputItem.setOnEditorActionListener(this);
         title_dialog.setText(editDataModel.getTitle());
-        inputItem.setText(editDataModel.getName());
-        inputItem.setSelection(inputItem.getText().length());
-
         inputItem.setHint(editDataModel.getHint());
         inputItem.setInputType(editDataModel.getInputType());
         inputItem.setFilters(new InputFilter[]{new InputFilter.LengthFilter(editDataModel.getMaxLenth())});
+
+        inputItem.setText(editDataModel.getName());
+        inputItem.setSelection(inputItem.getText().length());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(view);
@@ -92,6 +90,7 @@ public class DialogFragmentEditData extends BaseAlertDialog implements TextView.
             getParentFragment().onActivityResult(editDataModel.getType(), Activity.RESULT_OK, intent);
             dismiss();
         });
+
         return builder.create();
     }
 
@@ -107,8 +106,10 @@ public class DialogFragmentEditData extends BaseAlertDialog implements TextView.
                 inputItem.setError(getText(editDataModel.getError()));
                 return true;
             }
-            presenter.insert(itemName, editDataModel.getType());
-            inputItem.getText().clear();
+            presenter.updateItem(inputItem.getText().toString(),editDataModel.getType(),editDataModel.getPosition());
+            Intent intent = new Intent();
+            getParentFragment().onActivityResult(editDataModel.getType(), Activity.RESULT_OK, intent);
+            dismiss();
             return true;
         } else {
             return false;

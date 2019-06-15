@@ -70,7 +70,7 @@ public class DialogFragmentEditDataPresenter extends BaseMainPresenter<DialogFra
         if (type == FRAGMENT_TYPELESSONS) {
             item = new Typelesson();
         }
-        item.setId(String.valueOf(position));
+        item.setId(String.valueOf(listItems.get(position).getId()));
         item.setName(itemName);
         absDao.updateItem(item,Long.parseLong(listItems.get(position).getId()));
         init();

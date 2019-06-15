@@ -117,4 +117,7 @@
     <string name="dialog_button_edit">Изменить</string>
     <string name="dialog_button_delete">Удалить</string>
     <string name="title_editSubject">Редактировать предмет</string>
+    <string name="title_editAudience">Редактировать аудиторию</string>
+    <string name="title_editEducator">Редактировать преподавателя</string>
+    <string name="title_editTypelesson">Редактировать тип предмета</string>
 </resources>
