@@ -38,7 +38,6 @@ public class SchedulePagePresenter extends BaseMainPresenter<SchedulePageFragmen
                     getView().hideErrorView();
                     this.lessons = (ArrayList<Lesson>) lessons;
                     getView().updateList((ArrayList<Lesson>) lessons);
-
                 }, throwable -> {
                     getView().hideProgressBar();
                     getView().showErrorView();

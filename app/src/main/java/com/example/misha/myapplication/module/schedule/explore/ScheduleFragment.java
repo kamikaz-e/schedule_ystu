@@ -78,12 +78,11 @@ public class ScheduleFragment extends BaseMainFragment implements ScheduleFragme
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
-
         viewPager = view.findViewById(R.id.viewPager);
         viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                presenter.onPageSwiped(position);
+        presenter.onPageSwiped(position);
             }
         });
         viewPager.setAdapter(pagerAdapterTabDays);

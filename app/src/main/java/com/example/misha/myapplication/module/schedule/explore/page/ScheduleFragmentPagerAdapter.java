@@ -1,6 +1,5 @@
 package com.example.misha.myapplication.module.schedule.explore.page;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,38 +35,25 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
+        int codeViewType = 0;
         Lesson lesson = lessonList.get(position);
         try {
             subject = SubjectDao.getInstance().getItemByID(Long.parseLong(lesson.getId_subject()));
-        } catch (NumberFormatException ignored) {
-        }
-        try {
             audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId_audience()));
-        } catch (NumberFormatException ignored) {
-        }
-        try {
             educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId_educator()));
-        } catch (NumberFormatException ignored) {
-        }
-        try {
             typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId_typelesson()));
         } catch (NumberFormatException ignored) {
         }
+        if (subject == null || audience == null || educator == null || typelesson == null) {
+            codeViewType = 1;
+        }
+        if (getItemCount() == 1) {
+            codeViewType = 2;
+        }
 
-        if (subject == null) {
-            return 1;
-        }
-        if (audience == null) {
-            return 1;
-        }
-        if (educator == null) {
-            return 1;
-        }
-        if (typelesson == null) {
-            return 1;
-        }
-        return 0;
+        return codeViewType;
     }
+
 
     @NotNull
     @Override
@@ -80,6 +66,9 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
             case 1:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empty_lesson, parent, false);
                 return new ViewHolderEmptyLesson(view);
+            case 2:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empty_day, parent, false);
+                return new ViewHolderEmptyDay(view);
         }
         return null;
     }
@@ -88,7 +77,6 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
         this.lessonList = lessonList;
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         switch (holder.getItemViewType()) {
@@ -96,7 +84,6 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
                 ArrayList<Calls> callsList = CallDao.getInstance().getAllData();
                 ((ViewHolderLesson) holder).timeEditOne.setText(callsList.get(position * 2).getName());
                 ((ViewHolderLesson) holder).timeEditTwo.setText(callsList.get((position * 2) + 1).getName());
-
                 if (subject == null) {
                     break;
                 } else {
@@ -127,16 +114,30 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
                 ((ViewHolderEmptyLesson) holder).timeEditOne.setText(callsList.get(position * 2).getName());
                 ((ViewHolderEmptyLesson) holder).timeEditTwo.setText(" - " + callsList.get((position * 2) + 1).getName());
                 break;
+            case 2:
+                break;
         }
     }
 
     @Override
     public int getItemCount() {
-        return lessonList == null ? 0 : lessonList.size();
+        int number = lessonList.size();
+        if (!lessonList.isEmpty()) {
+            if ((lessonList.get(0).getId_subject().equals("0") || lessonList.get(0).getId_audience().equals("0") || lessonList.get(0).getId_educator().equals("0") || lessonList.get(0).getId_typelesson().equals("0")) &&
+                    (lessonList.get(1).getId_subject().equals("0") || lessonList.get(1).getId_audience().equals("0") || lessonList.get(1).getId_educator().equals("0") || lessonList.get(1).getId_typelesson().equals("0")) &&
+                    (lessonList.get(2).getId_subject().equals("0") || lessonList.get(2).getId_audience().equals("0") || lessonList.get(2).getId_educator().equals("0") || lessonList.get(2).getId_typelesson().equals("0")) &&
+                    (lessonList.get(3).getId_subject().equals("0") || lessonList.get(3).getId_audience().equals("0") || lessonList.get(3).getId_educator().equals("0") || lessonList.get(3).getId_typelesson().equals("0")) &&
+                    (lessonList.get(4).getId_subject().equals("0") || lessonList.get(4).getId_audience().equals("0") || lessonList.get(4).getId_educator().equals("0") || lessonList.get(4).getId_typelesson().equals("0")) &&
+                    (lessonList.get(5).getId_subject().equals("0") || lessonList.get(5).getId_audience().equals("0") || lessonList.get(5).getId_educator().equals("0") || lessonList.get(5).getId_typelesson().equals("0"))) {
+                number = 1;
+            }
+        }
+        return number;
+
     }
 
-    public static class ViewHolderEmptyLesson extends RecyclerView.ViewHolder {
 
+    public static class ViewHolderEmptyLesson extends RecyclerView.ViewHolder {
         private final TextView timeEditOne;
         private final TextView timeEditTwo;
 
@@ -144,6 +145,12 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
             super(view);
             timeEditOne = view.findViewById(R.id.timeOne);
             timeEditTwo = view.findViewById(R.id.timeTwo);
+        }
+    }
+
+    public static class ViewHolderEmptyDay extends RecyclerView.ViewHolder {
+        public ViewHolderEmptyDay(View view) {
+            super(view);
         }
     }
 

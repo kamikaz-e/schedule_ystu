@@ -84,7 +84,6 @@ public class TabDaysAdapter extends RecyclerView.Adapter<TabDaysAdapter.ViewHold
             super(view);
             view.setOnClickListener(this);
             date = view.findViewById(R.id.date);
-
         }
 
         private void onBindView(int position) {

@@ -77,6 +77,12 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
         ImageView imageTheme = view.findViewById(R.id.image_theme);
         ImageView imageAbout = view.findViewById(R.id.image_about);
         ImageView imageTransferData = view.findViewById(R.id.image_tranfer);
+        ImageView imageArrowOne = view.findViewById(R.id.arrowOne);
+        ImageView imageArrowTwo = view.findViewById(R.id.arrowTwo);
+        ImageView imageArrowThree = view.findViewById(R.id.arrowThree);
+        ImageView imageArrowFour = view.findViewById(R.id.arrowFour);
+        ImageView imageArrowFive = view.findViewById(R.id.arrowFive);
+        ImageView imageArrowSix = view.findViewById(R.id.arrowSix);
         if (Preferences.getInstance().getSelectedTheme().equals(DARK_THEME)) {
             imageSearchEducator.setImageResource(R.drawable.ic_school_white);
             imageSearchAudience.setImageResource(R.drawable.ic_search_white);
@@ -84,6 +90,12 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
             imageTheme.setImageResource(R.drawable.ic_palette_white);
             imageAbout.setImageResource(R.drawable.ic_person_white);
             imageTransferData.setImageResource(R.drawable.ic_send_white);
+            imageArrowOne.setImageResource(R.drawable.ic_arrow_white);
+            imageArrowTwo.setImageResource(R.drawable.ic_arrow_white);
+            imageArrowThree.setImageResource(R.drawable.ic_arrow_white);
+            imageArrowFour.setImageResource(R.drawable.ic_arrow_white);
+            imageArrowFive.setImageResource(R.drawable.ic_arrow_white);
+            imageArrowSix.setImageResource(R.drawable.ic_arrow_white);
         }
         if (Preferences.getInstance().getSelectedTheme().equals(LIGHT_THEME)) {
             imageSearchEducator.setImageResource(R.drawable.ic_school_black);
@@ -92,6 +104,12 @@ public class SettingsFragment extends BaseMainFragment implements SettingsFragme
             imageTheme.setImageResource(R.drawable.ic_palette_black);
             imageAbout.setImageResource(R.drawable.ic_person_black);
             imageTransferData.setImageResource(R.drawable.ic_send_black);
+            imageArrowOne.setImageResource(R.drawable.ic_arrow_black);
+            imageArrowTwo.setImageResource(R.drawable.ic_arrow_black);
+            imageArrowThree.setImageResource(R.drawable.ic_arrow_black);
+            imageArrowFour.setImageResource(R.drawable.ic_arrow_black);
+            imageArrowFive.setImageResource(R.drawable.ic_arrow_black);
+            imageArrowSix.setImageResource(R.drawable.ic_arrow_black);
         }
         layoutSearchEducator.setOnClickListener(this);
         layoutSearchAudience.setOnClickListener(this);

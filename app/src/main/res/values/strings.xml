@@ -120,4 +120,5 @@
     <string name="title_editAudience">Редактировать аудиторию</string>
     <string name="title_editEducator">Редактировать преподавателя</string>
     <string name="title_editTypelesson">Редактировать тип предмета</string>
+    <string name="string_empty_day">Занятия отсутствуют ;)</string>
 </resources>
