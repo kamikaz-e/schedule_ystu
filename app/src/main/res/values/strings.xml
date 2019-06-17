@@ -114,7 +114,7 @@
     <string name="dialog_fragment_title_educator">Преподаватели</string>
     <string name="dialog_fragment_title_audience">Аудитории</string>
     <string name="dialog_fragment_title_subject">Предметы</string>
-    <string name="dialog_button_edit">Изменить</string>
+    <string name="dialog_button_edit">Сохранить</string>
     <string name="dialog_button_delete">Удалить</string>
     <string name="title_editSubject">Редактировать предмет</string>
     <string name="title_editAudience">Редактировать аудиторию</string>

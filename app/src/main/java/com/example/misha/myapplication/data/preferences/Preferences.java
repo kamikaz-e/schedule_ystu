@@ -25,7 +25,6 @@ public final class Preferences implements PreferencesInterface {
     private static volatile Preferences instance;
     private final SharedPreferences mPrefs;
     public String SELECT_THEME = "SELECT_THEME";
-    private Calendar calendar = Calendar.getInstance();
 
     private Preferences() {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(ScheduleApp.getAppContext());

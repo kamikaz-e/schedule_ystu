@@ -29,9 +29,4 @@ public final class DataUtil {
         if (contex.getCurrentFocus() != null)
             imm.hideSoftInputFromWindow(contex.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
-
-    public static void showKeyboard(View v, Activity contex) {
-        InputMethodManager imm = (InputMethodManager) contex.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(v, InputMethodManager.SHOW_IMPLICIT);
-    }
 }

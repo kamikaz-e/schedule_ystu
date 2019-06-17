@@ -42,15 +42,13 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
             audience = AudienceDao.getInstance().getItemByID(Long.parseLong(lesson.getId_audience()));
             educator = EducatorDao.getInstance().getItemByID(Long.parseLong(lesson.getId_educator()));
             typelesson = TypelessonDao.getInstance().getItemByID(Long.parseLong(lesson.getId_typelesson()));
-        } catch (NumberFormatException ignored) {
-        }
+        } catch (NumberFormatException ignored) { }
         if (subject == null || audience == null || educator == null || typelesson == null) {
             codeViewType = 1;
         }
         if (getItemCount() == 1) {
             codeViewType = 2;
         }
-
         return codeViewType;
     }
 
@@ -114,14 +112,12 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
                 ((ViewHolderEmptyLesson) holder).timeEditOne.setText(callsList.get(position * 2).getName());
                 ((ViewHolderEmptyLesson) holder).timeEditTwo.setText(" - " + callsList.get((position * 2) + 1).getName());
                 break;
-            case 2:
-                break;
         }
     }
 
     @Override
     public int getItemCount() {
-        int number = lessonList.size();
+        int numberItem = lessonList.size();
         if (!lessonList.isEmpty()) {
             if ((lessonList.get(0).getId_subject().equals("0") || lessonList.get(0).getId_audience().equals("0") || lessonList.get(0).getId_educator().equals("0") || lessonList.get(0).getId_typelesson().equals("0")) &&
                     (lessonList.get(1).getId_subject().equals("0") || lessonList.get(1).getId_audience().equals("0") || lessonList.get(1).getId_educator().equals("0") || lessonList.get(1).getId_typelesson().equals("0")) &&
@@ -129,11 +125,10 @@ public class ScheduleFragmentPagerAdapter extends RecyclerView.Adapter {
                     (lessonList.get(3).getId_subject().equals("0") || lessonList.get(3).getId_audience().equals("0") || lessonList.get(3).getId_educator().equals("0") || lessonList.get(3).getId_typelesson().equals("0")) &&
                     (lessonList.get(4).getId_subject().equals("0") || lessonList.get(4).getId_audience().equals("0") || lessonList.get(4).getId_educator().equals("0") || lessonList.get(4).getId_typelesson().equals("0")) &&
                     (lessonList.get(5).getId_subject().equals("0") || lessonList.get(5).getId_audience().equals("0") || lessonList.get(5).getId_educator().equals("0") || lessonList.get(5).getId_typelesson().equals("0"))) {
-                number = 1;
+                numberItem = 1;
             }
         }
-        return number;
-
+        return numberItem;
     }
 
 
